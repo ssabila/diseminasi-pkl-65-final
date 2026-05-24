@@ -1,0 +1,9 @@
+/* Add specific styles for Husna's Views here */
+.view-5, .view-7 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #e91e63; /* Debug boundary */
+  margin: 1rem 0;
+}

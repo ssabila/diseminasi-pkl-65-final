@@ -1,0 +1,9 @@
+/* Add specific styles for Maul's Views here */
+.view-6, .view-8 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #9c27b0; /* Debug boundary */
+  margin: 1rem 0;
+}
