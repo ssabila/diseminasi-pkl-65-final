@@ -1,0 +1,9 @@
+/* Add specific styles for Nadia's Views here */
+.view-0, .view-4, .view-9 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ff9800; /* Debug boundary */
+  margin: 1rem 0;
+}
