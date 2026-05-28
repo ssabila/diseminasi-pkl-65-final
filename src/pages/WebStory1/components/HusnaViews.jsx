@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -66,43 +65,68 @@ function wrap(index, length) {
 }
 
 // ─────────────────────────────────────────────
-// 3. KOMPONEN CAROUSEL
+// 3. KOMPONEN CAROUSEL (Diubah ke GSAP)
 // ─────────────────────────────────────────────
 function SafariCarousel({ images, activeIndex, onSetIndex }) {
   const len = images.length;
+  const containerRef = useRef(null);
+  const isInitial = useRef(true);
+
+  useGSAP(() => {
+    const duration = isInitial.current ? 0 : 0.6;
+    isInitial.current = false;
+
+    images.forEach((_, i) => {
+      const rawDist  = i - wrap(activeIndex, len);
+      const dist     = rawDist >  len / 2 ? rawDist - len
+                    : rawDist < -len / 2 ? rawDist + len
+                    : rawDist;
+      const absDist  = Math.abs(dist);
+      const target = `.carousel-item-${i}`;
+
+      if (absDist > 2) {
+        gsap.to(target, { 
+          opacity: 0, 
+          scale: 0.6, 
+          zIndex: 0,
+          display: "none", 
+          duration 
+        });
+      } else {
+        gsap.to(target, {
+          display: "block",
+          x: dist * 180,
+          scale: 1 - absDist * 0.15,
+          zIndex: 10 - absDist,
+          opacity: 1 - absDist * 0.3,
+          duration,
+          ease: "power3.out"
+        });
+      }
+    });
+  }, { dependencies: [activeIndex, len], scope: containerRef });
 
   return (
-    <div className="ws1-husna-carousel-focus-container">
+    <div className="ws1-husna-carousel-focus-container" ref={containerRef}>
       <div className="ws1-husna-carousel-track-centered">
         {images.map((img, i) => {
           const rawDist  = i - wrap(activeIndex, len);
           const dist     = rawDist >  len / 2 ? rawDist - len
                         : rawDist < -len / 2 ? rawDist + len
                         : rawDist;
-          const absDist  = Math.abs(dist);
           const isCenter = dist === 0;
 
-          if (absDist > 2) return null;
-
           return (
-            <motion.div
+            <div
               key={i}
-              className={`ws1-husna-carousel-focus-item ${isCenter ? 'is-active' : ''}`}
-              initial={false}
-              animate={{
-                x:       dist    * 180,
-                scale:   1 - absDist * 0.15,
-                zIndex:  10 - absDist,
-                opacity: 1 - absDist * 0.3,
-              }}
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              className={`ws1-husna-carousel-focus-item carousel-item-${i} ${isCenter ? 'is-active' : ''}`}
               onClick={() => !isCenter && onSetIndex(i)}
-              style={{ cursor: isCenter ? 'default' : 'pointer' }}
+              style={{ cursor: isCenter ? 'default' : 'pointer', position: 'absolute' }}
             >
               <div className="ws1-husna-carousel-card-frame">
                 <img src={img} alt="" loading="lazy" />
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>
@@ -111,16 +135,137 @@ function SafariCarousel({ images, activeIndex, onSetIndex }) {
 }
 
 // ─────────────────────────────────────────────
-// 4. VIEW UTAMA
+// 4. KOMPONEN MODAL (Diubah ke GSAP)
+// ─────────────────────────────────────────────
+function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, paginate }) {
+  const modalRef = useRef(null);
+
+  useGSAP(() => {
+    // Entrance animation
+    gsap.fromTo(modalRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" });
+    gsap.fromTo(".ws1-husna-modal-content", 
+      { scale: 0.9, y: 30, opacity: 0 }, 
+      { scale: 1, y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.2)" }
+    );
+  }, { scope: modalRef });
+
+  const triggerClose = () => {
+    // Exit animation
+    gsap.to(modalRef.current, { opacity: 0, duration: 0.3, ease: "power2.in" });
+    gsap.to(".ws1-husna-modal-content", { 
+      scale: 0.9, y: 20, opacity: 0, duration: 0.3, ease: "power2.in", 
+      onComplete: closeHandle 
+    });
+  };
+
+  return (
+    <div className="ws1-husna-safari-modal" ref={modalRef}>
+      <div className="ws1-husna-modal-backdrop" onClick={triggerClose} />
+
+      <div className="ws1-husna-modal-content">
+        <button className="ws1-husna-modal-close" onClick={triggerClose}>✕</button>
+
+        <div className="ws1-husna-focus-slider-wrapper">
+          <div className="ws1-husna-main-display-area">
+            {selected.type === "video_gallery" ? (() => {
+                const activeVideo = selected.videos[wrap(activeIndex, selected.videos.length)];
+                if (activeVideo.source === "youtube") {
+                  return (
+                    <div className="ws1-husna-modal-video-frame" key={`yt-${activeVideo.id}`}>
+                      <iframe
+                        src={`https://www.youtube.com/embed/${activeVideo.id}?rel=0`}
+                        title="YouTube video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  );
+                } else if (activeVideo.source === "reels") {
+                  return (
+                    <div className="ws1-husna-modal-reels-frame" key={`ig-${activeVideo.id}`}>
+                      <iframe
+                        src={`https://www.instagram.com/p/${activeVideo.id}/embed/?hidecaption=true`}
+                        title="Instagram Reels"
+                        frameBorder="0"
+                        scrolling="no"
+                        allowTransparency="true"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  );
+                }
+              })() : (
+                <SafariCarousel
+                  images={selected.images}
+                  activeIndex={activeIndex}
+                  onSetIndex={setActiveIndex}
+                />
+              )}
+          </div>
+        </div>
+
+        {/* Navigasi & Info */}
+        <div className="ws1-husna-modal-bottom-section">
+          {((selected.type === "gallery" && selected.images.length > 1) || 
+            (selected.type === "video_gallery" && selected.videos.length > 1)) && (
+            <div className="ws1-husna-elegant-nav">
+              <button className="ws1-husna-nav-minimal" onClick={() => paginate(-1)}>
+                <span className="ws1-husna-nav-icon">←</span> PREV
+              </button>
+              <div className="ws1-husna-nav-counter">
+                <span>
+                  {selected.type === "video_gallery" 
+                    ? wrap(activeIndex, selected.videos.length) + 1 
+                    : wrap(activeIndex, selected.images.length) + 1}
+                </span> / 
+                {selected.type === "video_gallery" ? selected.videos.length : selected.images.length}
+              </div>
+              <button className="ws1-husna-nav-minimal" onClick={() => paginate(1)}>
+                NEXT <span className="ws1-husna-nav-icon">→</span>
+              </button>
+            </div>
+          )}
+
+          <div className="ws1-husna-modal-info">
+            <h3>{selected.title}</h3>
+            <p>
+              {selected.type === "video_gallery" 
+                ? selected.videos[wrap(activeIndex, selected.videos.length)].caption 
+                : selected.caption}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// 5. VIEW UTAMA
 // ─────────────────────────────────────────────
 export const View5 = () => {
   const containerRef = useRef(null);
   const [selected, setSelected]       = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // IMPLEMENTASI GSAP
+  // IMPLEMENTASI GSAP ENTRY ANIMATIONS 
   useGSAP(() => {
-    animateView5(containerRef);
+    // Basic entrance animations for bento tiles can be added here
+    gsap.fromTo(".ws1-husna-bento-tile", 
+      { opacity: 0, y: 40 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        stagger: 0.1, 
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+        }
+      }
+    );
   }, { scope: containerRef }); 
 
   useEffect(() => {
@@ -141,7 +286,6 @@ export const View5 = () => {
 
   return (
     <section ref={containerRef} className="ws1-husna-view-5-horizontal" id="flatlay">
-      {/* <GrainOverlay /> */}
 
       <div className="ws1-husna-view-inner-h">
         <header className="ws1-husna-v5-header-h">
@@ -218,99 +362,15 @@ export const View5 = () => {
       </div>
 
       {/* ── Modal Interaktif ── */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            className="ws1-husna-safari-modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="ws1-husna-modal-backdrop" onClick={closeHandle} />
-
-            <motion.div
-              className="ws1-husna-modal-content"
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9 }}
-            >
-              <button className="ws1-husna-modal-close" onClick={closeHandle}>✕</button>
-
-              <div className="ws1-husna-focus-slider-wrapper">
-                <div className="ws1-husna-main-display-area">
-                  {selected.type === "video_gallery" ? (() => {
-                      const activeVideo = selected.videos[wrap(activeIndex, selected.videos.length)];
-                      if (activeVideo.source === "youtube") {
-                        return (
-                          <div className="ws1-husna-modal-video-frame" key={`yt-${activeVideo.id}`}>
-                            <iframe
-                              src={`https://www.youtube.com/embed/${activeVideo.id}?rel=0`}
-                              title="YouTube video"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              allowFullScreen
-                            ></iframe>
-                          </div>
-                        );
-                      } else if (activeVideo.source === "reels") {
-                        return (
-                          <div className="ws1-husna-modal-reels-frame" key={`ig-${activeVideo.id}`}>
-                            <iframe
-                              src={`https://www.instagram.com/p/${activeVideo.id}/embed/?hidecaption=true`}
-                              title="Instagram Reels"
-                              frameBorder="0"
-                              scrolling="no"
-                              allowTransparency="true"
-                              allowFullScreen
-                            ></iframe>
-                          </div>
-                        );
-                      }
-                    })() : (
-                      <SafariCarousel
-                        images={selected.images}
-                        activeIndex={activeIndex}
-                        onSetIndex={setActiveIndex}
-                      />
-                    )}
-                </div>
-              </div>
-
-              {/* Navigasi & Info */}
-              <div className="ws1-husna-modal-bottom-section">
-                {((selected.type === "gallery" && selected.images.length > 1) || 
-                  (selected.type === "video_gallery" && selected.videos.length > 1)) && (
-                  <div className="ws1-husna-elegant-nav">
-                    <button className="ws1-husna-nav-minimal" onClick={() => paginate(-1)}>
-                      <span className="ws1-husna-nav-icon">←</span> PREV
-                    </button>
-                    <div className="ws1-husna-nav-counter">
-                      <span>
-                        {selected.type === "video_gallery" 
-                          ? wrap(activeIndex, selected.videos.length) + 1 
-                          : wrap(activeIndex, selected.images.length) + 1}
-                      </span> / 
-                      {selected.type === "video_gallery" ? selected.videos.length : selected.images.length}
-                    </div>
-                    <button className="ws1-husna-nav-minimal" onClick={() => paginate(1)}>
-                      NEXT <span className="ws1-husna-nav-icon">→</span>
-                    </button>
-                  </div>
-                )}
-
-                <div className="ws1-husna-modal-info">
-                  <h3>{selected.title}</h3>
-                  <p>
-                    {selected.type === "video_gallery" 
-                      ? selected.videos[wrap(activeIndex, selected.videos.length)].caption 
-                      : selected.caption}
-                  </p>
-                </div>
-              </div>
-
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {selected && (
+        <InteractiveModal 
+          selected={selected} 
+          activeIndex={activeIndex} 
+          setActiveIndex={setActiveIndex} 
+          closeHandle={closeHandle} 
+          paginate={paginate} 
+        />
+      )}
     </section>
   );
 };
