@@ -1,0 +1,1568 @@
+{
+  "ringkasan_dataset": {
+    "total_desa_infra": 928,
+    "total_provinsi_infra": 3,
+    "total_kab_kota_infra": 48,
+    "total_rt_keluarga": 115462,
+    "total_art_keluarga": 188902,
+    "total_fasilitas_gabungan": 2739,
+    "total_petugas_unik": 401,
+    "total_kunjungan": 1039
+  },
+  "cakupan_geografis_infra": {
+    "desa_per_provinsi": {
+      "Aceh": 556,
+      "Sumatera Utara": 292,
+      "Sumatera Barat": 80
+    },
+    "kab_kota_per_provinsi": {
+      "Aceh": 18,
+      "Sumatera Barat": 11,
+      "Sumatera Utara": 19
+    },
+    "provinsi_terbanyak_desa": "Aceh",
+    "provinsi_tersedikit_desa": "Sumatera Barat"
+  },
+  "status_penugasan_infra": {
+    "APPROVED BY Pengawas": {
+      "n": 916,
+      "pct": 98.71
+    },
+    "APPROVED BY Admin Kabupaten": {
+      "n": 12,
+      "pct": 1.29
+    }
+  },
+  "status_penugasan_keluarga": {
+    "APPROVED BY Pengawas": {
+      "n": 110918,
+      "pct": 96.06
+    },
+    "APPROVED BY Admin Kabupaten": {
+      "n": 4456,
+      "pct": 3.86
+    },
+    "SUBMITTED BY Pencacah": {
+      "n": 62,
+      "pct": 0.05
+    },
+    "REJECTED BY Pengawas": {
+      "n": 25,
+      "pct": 0.02
+    },
+    "REVOKED BY Pengawas": {
+      "n": 1,
+      "pct": 0.0
+    }
+  },
+  "fasilitas_infrastruktur": {
+    "total_per_kategori": {
+      "Sosial/Ibadah": 1106,
+      "Pendidikan": 785,
+      "Kesehatan": 607,
+      "Ekonomi": 241
+    },
+    "total_prelist_vs_tambahan": {
+      "tambahan": 1465,
+      "prelist": 1274
+    },
+    "kondisi_per_kategori": {
+      "Ekonomi": {
+        "Baik": {
+          "n": 167,
+          "pct": 78.04
+        },
+        "Rusak Berat": {
+          "n": 10,
+          "pct": 4.67
+        },
+        "Rusak Ringan": {
+          "n": 27,
+          "pct": 12.62
+        },
+        "Rusak Sedang": {
+          "n": 10,
+          "pct": 4.67
+        },
+        "total": 214
+      },
+      "Kesehatan": {
+        "Baik": {
+          "n": 394,
+          "pct": 79.76
+        },
+        "Rusak Berat": {
+          "n": 11,
+          "pct": 2.23
+        },
+        "Rusak Ringan": {
+          "n": 74,
+          "pct": 14.98
+        },
+        "Rusak Sedang": {
+          "n": 15,
+          "pct": 3.04
+        },
+        "total": 494
+      },
+      "Pendidikan": {
+        "Baik": {
+          "n": 461,
+          "pct": 62.81
+        },
+        "Rusak Berat": {
+          "n": 46,
+          "pct": 6.27
+        },
+        "Rusak Ringan": {
+          "n": 167,
+          "pct": 22.75
+        },
+        "Rusak Sedang": {
+          "n": 60,
+          "pct": 8.17
+        },
+        "total": 734
+      },
+      "Sosial/Ibadah": {
+        "Baik": {
+          "n": 857,
+          "pct": 77.49
+        },
+        "Rusak Berat": {
+          "n": 55,
+          "pct": 4.97
+        },
+        "Rusak Ringan": {
+          "n": 144,
+          "pct": 13.02
+        },
+        "Rusak Sedang": {
+          "n": 50,
+          "pct": 4.52
+        },
+        "total": 1106
+      }
+    },
+    "top_15_jenis": {
+      "B. Surau/Langgar/Musala": 352,
+      "Masjid": 306,
+      "Sd - Negeri": 215,
+      "Praktik Mandiri Bidan": 174,
+      "Gereja Kristen": 170,
+      "Surau/Langgar/Musala": 167,
+      "Tk - Swasta": 137,
+      "Poskesdes": 115,
+      "Polindes": 95,
+      "Lainnya": 82,
+      "Pos Pendidikan Anak Usia Dini (Paud) - Swasta": 79,
+      "Apotek": 67,
+      "Kelompok Pertokoan": 63,
+      "Minimarket/Swalayan/Supermarket": 60,
+      "Puskesmas Pembantu": 60
+    },
+    "jumlah_per_provinsi_per_kategori": {
+      "Aceh": {
+        "Ekonomi": 118,
+        "Kesehatan": 303,
+        "Pendidikan": 331,
+        "Sosial/Ibadah": 390
+      },
+      "Sumatera Barat": {
+        "Ekonomi": 33,
+        "Kesehatan": 106,
+        "Pendidikan": 160,
+        "Sosial/Ibadah": 333
+      },
+      "Sumatera Utara": {
+        "Ekonomi": 90,
+        "Kesehatan": 198,
+        "Pendidikan": 294,
+        "Sosial/Ibadah": 383
+      }
+    },
+    "gps_coverage": {
+      "gps_ada": 2548,
+      "gps_missing": 191,
+      "pct_coverage": 93.03
+    },
+    "statistik_per_desa": {
+      "pendidikan": {
+        "mean": 0.77,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 17.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "desa_nol_fasilitas": 739,
+        "pct_desa_nol": 79.63,
+        "desa_outlier_atas": 189,
+        "desa_max_fasilitas": "Guguak Malalo"
+      },
+      "kesehatan": {
+        "mean": 0.51,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 11.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "desa_nol_fasilitas": 723,
+        "pct_desa_nol": 77.91,
+        "desa_outlier_atas": 205,
+        "desa_max_fasilitas": "Guguak Malalo"
+      },
+      "ekonomi": {
+        "mean": 0.22,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 13.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "desa_nol_fasilitas": 854,
+        "pct_desa_nol": 92.03,
+        "desa_outlier_atas": 74,
+        "desa_max_fasilitas": "Tualang Baru"
+      },
+      "sosial": {
+        "mean": 1.14,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 58.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "desa_nol_fasilitas": 712,
+        "pct_desa_nol": 76.72,
+        "desa_outlier_atas": 216,
+        "desa_max_fasilitas": "Guguak Malalo"
+      }
+    }
+  },
+  "rumah_tangga": {
+    "hasil_cek": {
+      "1. Ditemukan dan tinggal di sini": {
+        "n": 50887,
+        "pct": 44.07
+      },
+      "4. Ditemukan dan keluarga tidak terdampak bencana": {
+        "n": 25520,
+        "pct": 22.1
+      },
+      "2. Tidak ditemukan/pindah --> STOP": {
+        "n": 24410,
+        "pct": 21.14
+      },
+      "4. Ditemukan dan keluarga tidak terdampak bencana --> STOP": {
+        "n": 9974,
+        "pct": 8.64
+      },
+      "5. Ditemukan dan seluruh keluarga mengungsi di desa lain --> STOP": {
+        "n": 2780,
+        "pct": 2.41
+      },
+      "3. Seluruh anggota keluarga meninggal --> STOP": {
+        "n": 1891,
+        "pct": 1.64
+      }
+    },
+    "status_hunian": {
+      "1. Rumah Tinggal Sendiri": {
+        "n": 43361,
+        "pct": 37.55
+      },
+      "2. Rumah Tinggal Keluarga Besar": {
+        "n": 3963,
+        "pct": 3.43
+      },
+      "3. Pengungsian": {
+        "n": 1769,
+        "pct": 1.53
+      },
+      "4. Rumah Tumpangan": {
+        "n": 941,
+        "pct": 0.81
+      },
+      "7. Lainnya": {
+        "n": 449,
+        "pct": 0.39
+      },
+      "6. Huntara": {
+        "n": 284,
+        "pct": 0.25
+      },
+      "5. Fasilitas Umum": {
+        "n": 120,
+        "pct": 0.1
+      }
+    },
+    "kondisi_bangunan": {
+      "3. Bangunan ada, terdampak, dan perlu perbaikan": {
+        "n": 16774,
+        "pct": 14.53
+      },
+      "2. Bangunan ada, terdampak, tetapi tidak perlu perbaikan": {
+        "n": 16276,
+        "pct": 14.1
+      },
+      "1. Bangunan ada dan tidak terdampak": {
+        "n": 15038,
+        "pct": 13.02
+      },
+      "5. Bangunan hilang<b> --> Lanjut ke Rincian 10</b>": {
+        "n": 1473,
+        "pct": 1.28
+      },
+      "4. Bangunan rusak dan tidak dapat diperbaiki<b> --> Lanjut ke Rincian 10</b>": {
+        "n": 1326,
+        "pct": 1.15
+      }
+    },
+    "status_kepemilikan": {
+      "1. Milik sendiri": {
+        "n": 34433,
+        "pct": 29.82
+      },
+      "3. Bebas sewa": {
+        "n": 5345,
+        "pct": 4.63
+      },
+      "2. Kontrak/sewa": {
+        "n": 3165,
+        "pct": 2.74
+      },
+      "4. Dinas": {
+        "n": 242,
+        "pct": 0.21
+      },
+      "Rumah orang tua": {
+        "n": 13,
+        "pct": 0.01
+      },
+      "Milik orang tua": {
+        "n": 11,
+        "pct": 0.01
+      },
+      "Rumah mertua": {
+        "n": 6,
+        "pct": 0.01
+      },
+      "Rumah Orang Tua": {
+        "n": 5,
+        "pct": 0.0
+      },
+      "Milik Orang Tua": {
+        "n": 4,
+        "pct": 0.0
+      },
+      "Tinggal bersama mertua": {
+        "n": 4,
+        "pct": 0.0
+      },
+      "RUMAH KELUARGA BESAR": {
+        "n": 4,
+        "pct": 0.0
+      },
+      "KPR": {
+        "n": 3,
+        "pct": 0.0
+      },
+      "Tinggal bersama orang tua": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Gadai": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "RUMAH ORANG TUA": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Punya orang tua": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Rumah Bantuan": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "RUMAH KELUARGA (MILIK ORANG TUA YANG SUDAH MENINGGAL)": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Tinggal dirumah orang tua": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Rumah Anak": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Rumah bibi": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Rumah Orangtua": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "rumah orang tua": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Rumah Orang tua": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Rumah orang Tua": {
+        "n": 2,
+        "pct": 0.0
+      },
+      "Tinggal bersama orang tua beda KK dari sebelum bencana": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal sama keluarga": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "RUMAH MERTUA": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "menompang di Rumah adik": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Menompang dirumah orang Tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal bersama ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Bapak ini berpindah-pindah antar rumah keluarga, terakhir disitu": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik keluarga ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Menumpang dengan orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Pemberian dr orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal/menumpang bersama orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal dirumah milik saudara": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "di atas parit": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Ikut tinggal dengan famili di kontrakan famili": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Hibah": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Kantor kepala pertanian yang tidak digunakan": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah marbot": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "rumah anak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah keluarga": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "NUMPANG RUMAH KELUARGA": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah milik orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal bersama anak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal di rumah mertua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal dengan org tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Numpang dengan orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "PENINGGALAN ORANG TUA": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "tinggal di sekolah": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah keluarga besar": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah orang tua(tinggal bersama orang tua)": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Punya keluarga ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "RUMAH KELUARGA BESAR ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah Asrama Pesantren": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah Saudara": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah nya berbagi": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah keluarga besar (pusako tinggi)": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik yayasan pesantren": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik Gereja": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah anak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik anak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Numpang orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Bantuan": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Ruma orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Diberikan dengan syarat dibersihkan": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah nenek": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tanah tower listrik ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal di rumah orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal Bersama Orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Numpang di rumah keluarga": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Warungnya numpang tanah PU": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "menumpang di rumah adik": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah milik Asnawi. Keterangan responden: rumah dari baitul mal, dari dayah": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Menumpang dengan Orangtua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "RUMAH KELUARGA (Orang tua)": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Menupang rumah orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal dengan keluarga": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Ikut orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tanah orang ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah kakak ipar": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal Bersama Orang Tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "PUNYA ORANG TUA": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah tinggal bersama orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Sudah beli (membeli setengah dari saudara) tapi belum pecah surat": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Punya Orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "RUMAH PUSAKO": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik ibu ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Pukesmas/ fasilitas umum": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "GADAI": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal dengan orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "punya adek mama": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "warisan orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal sama bapak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik Adik": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah milik orang tua ibu rosita": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Ikut tinggal dengan anak di rumah kontrakan anak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik Anak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tanah kontrak ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Di rumah orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah kakak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Satu rumah dengan Nur'aini": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "milik yayasan darus sa`adah": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Pinjam pakai": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah Keluarga Besar": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Asrama Pesantren PPM Babussalam": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah orang tua ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "rumah anak kandung": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah orangtuanya ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal dengan orang tua ": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "RUMAH ORANGTUA": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Numpang sama orangtua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "TANAH MENYEWA, BANGUNAN MILIK PRIBADI": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "MASIH PUNYA IBU": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Milik keluarga Besar": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Memakai rumah orang lain": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "MILIK KAKAK (SUDAH DITINGGALI LAMA)": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Tinggal dengan anak": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Rumah atas nama orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "menompang sama orang tua": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "Perumahan sekolah": {
+        "n": 1,
+        "pct": 0.0
+      },
+      "MASI MILIK ORTU": {
+        "n": 1,
+        "pct": 0.0
+      }
+    },
+    "bahan_lantai": {
+      "6. Semen/bata merah": {
+        "n": 25520,
+        "pct": 22.1
+      },
+      "2. Keramik": {
+        "n": 16896,
+        "pct": 14.63
+      },
+      "5. Kayu/papan": {
+        "n": 3732,
+        "pct": 3.23
+      },
+      "4. Ubin/tegel/teraso": {
+        "n": 601,
+        "pct": 0.52
+      },
+      "8. Tanah<b> --> lanjut ke Rincian 8a</b>": {
+        "n": 564,
+        "pct": 0.49
+      },
+      "1. Marmer/granit": {
+        "n": 516,
+        "pct": 0.45
+      },
+      "3. Parket/vinil/karpet ": {
+        "n": 223,
+        "pct": 0.19
+      },
+      " 9. Lainnya<b> --> lanjut ke Rincian 8a</b>": {
+        "n": 21,
+        "pct": 0.02
+      },
+      "7. Bambu<b> --> lanjut ke Rincian 8a</b>": {
+        "n": 15,
+        "pct": 0.01
+      }
+    },
+    "bahan_dinding": {
+      "1. Tembok": {
+        "n": 28624,
+        "pct": 24.79
+      },
+      "3. Kayu/papan/gipsum/GRC/calciboard ": {
+        "n": 18233,
+        "pct": 15.79
+      },
+      "5. Batang kayu": {
+        "n": 523,
+        "pct": 0.45
+      },
+      "4. Anyaman bambu": {
+        "n": 344,
+        "pct": 0.3
+      },
+      "2. Plesteran anyaman bambu/kawat": {
+        "n": 225,
+        "pct": 0.19
+      },
+      "7. Lainnya</b> --> lanjut ke Rincian 9a</b>": {
+        "n": 111,
+        "pct": 0.1
+      },
+      "6. Bambu<b> --> lanjut ke Rincian 9a</b>": {
+        "n": 28,
+        "pct": 0.02
+      }
+    },
+    "bahan_atap": {
+      "3. Seng": {
+        "n": 45427,
+        "pct": 39.34
+      },
+      "4. Asbes": {
+        "n": 810,
+        "pct": 0.7
+      },
+      "1. Beton": {
+        "n": 713,
+        "pct": 0.62
+      },
+      "2. Genteng": {
+        "n": 549,
+        "pct": 0.48
+      },
+      "7. Jerami/ijuk/daun-daunan/rumbia<b> --> lanjut ke Rincian 10</b>": {
+        "n": 384,
+        "pct": 0.33
+      },
+      "6. Kayu/sirap": {
+        "n": 125,
+        "pct": 0.11
+      },
+      "8. Lainnya<b> --> lanjut ke Rincian 10</b>": {
+        "n": 68,
+        "pct": 0.06
+      },
+      "5. Bambu<b> --> lanjut ke Rincian 10</b>": {
+        "n": 12,
+        "pct": 0.01
+      }
+    },
+    "fasilitas_mck": {
+      "1. Ada, digunakan oleh anggota keluarga dalam satu rumah": {
+        "n": 38291,
+        "pct": 33.16
+      },
+      "5. Tidak ada": {
+        "n": 5724,
+        "pct": 4.96
+      },
+      "2. Ada, digunakan bersama oleh anggota keluarga dari beberapa rumah": {
+        "n": 2945,
+        "pct": 2.55
+      },
+      "4. Tidak, di MCK umum/siapapun menggunakan": {
+        "n": 2438,
+        "pct": 2.11
+      },
+      "3. Tidak, di MCK komunal": {
+        "n": 1489,
+        "pct": 1.29
+      }
+    },
+    "sumber_air": {
+      "02. Air isi ulang": {
+        "n": 16329,
+        "pct": 14.14
+      },
+      "07. Mata air terlindung": {
+        "n": 10795,
+        "pct": 9.35
+      },
+      "04. Sumur bor/pompa": {
+        "n": 5442,
+        "pct": 4.71
+      },
+      "03. Leding": {
+        "n": 4953,
+        "pct": 4.29
+      },
+      "05. Sumur terlindung": {
+        "n": 4816,
+        "pct": 4.17
+      },
+      "08. Mata air tak terlindung": {
+        "n": 2496,
+        "pct": 2.16
+      },
+      "11. Lainnya": {
+        "n": 2087,
+        "pct": 1.81
+      },
+      "09. Air permukaan (sungai/danau/waduk/kolam/irigasi)": {
+        "n": 1506,
+        "pct": 1.3
+      },
+      "01. Air kemasan bermerek": {
+        "n": 1217,
+        "pct": 1.05
+      },
+      "06. Sumur tak terlindung": {
+        "n": 796,
+        "pct": 0.69
+      },
+      "10. Air hujan": {
+        "n": 450,
+        "pct": 0.39
+      }
+    },
+    "sumber_listrik": {
+      "1. Listrik PLN": {
+        "n": 50155,
+        "pct": 43.44
+      },
+      "3. Bukan listrik": {
+        "n": 374,
+        "pct": 0.32
+      },
+      "2. Listrik Non PLN": {
+        "n": 358,
+        "pct": 0.31
+      }
+    },
+    "kepemilikan_aset_perbandingan_bencana": {
+      "lahan": {
+        "pct_memiliki_sebelum_bencana": 90.74,
+        "pct_memiliki_sesudah_bencana": 81.79,
+        "selisih_pct": -8.95,
+        "interpretasi": "turun"
+      },
+      "hewan": {
+        "pct_memiliki_sebelum_bencana": 4.81,
+        "pct_memiliki_sesudah_bencana": 4.25,
+        "selisih_pct": -0.56,
+        "interpretasi": "turun"
+      },
+      "kendaraan": {
+        "pct_memiliki_sebelum_bencana": 68.53,
+        "pct_memiliki_sesudah_bencana": 53.22,
+        "selisih_pct": -15.31,
+        "interpretasi": "turun"
+      },
+      "laptop": {
+        "pct_memiliki_sebelum_bencana": 21.7,
+        "pct_memiliki_sesudah_bencana": 19.1,
+        "selisih_pct": -2.6,
+        "interpretasi": "turun"
+      },
+      "tv": {
+        "pct_memiliki_sebelum_bencana": 13.66,
+        "pct_memiliki_sesudah_bencana": 9.85,
+        "selisih_pct": -3.81,
+        "interpretasi": "turun"
+      },
+      "hp": {
+        "pct_memiliki_sebelum_bencana": 75.56,
+        "pct_memiliki_sesudah_bencana": 69.16,
+        "selisih_pct": -6.4,
+        "interpretasi": "turun"
+      },
+      "kulkas": {
+        "pct_memiliki_sebelum_bencana": 10.67,
+        "pct_memiliki_sesudah_bencana": 100.0,
+        "selisih_pct": 89.33,
+        "interpretasi": "naik"
+      },
+      "usaha": {
+        "pct_memiliki_sebelum_bencana": 40.29,
+        "pct_memiliki_sesudah_bencana": 26.21,
+        "selisih_pct": -14.08,
+        "interpretasi": "turun"
+      },
+      "tabungan": {
+        "pct_memiliki_sebelum_bencana": 15.63,
+        "pct_memiliki_sesudah_bencana": 8.74,
+        "selisih_pct": -6.89,
+        "interpretasi": "turun"
+      },
+      "kprs": {
+        "pct_memiliki_sebelum_bencana": 15.3,
+        "pct_memiliki_sesudah_bencana": 11.52,
+        "selisih_pct": -3.78,
+        "interpretasi": "turun"
+      }
+    },
+    "bantuan_diterima": {
+      "makanan": {
+        "n_menerima": 46958,
+        "pct": 41.35
+      },
+      "pakaian": {
+        "n_menerima": 20342,
+        "pct": 17.91
+      },
+      "perbaikan_rumah": {
+        "n_menerima": 603,
+        "pct": 0.53
+      },
+      "pengobatan": {
+        "n_menerima": 23789,
+        "pct": 20.95
+      },
+      "uang_tunai": {
+        "n_menerima": 6431,
+        "pct": 5.66
+      },
+      "lainnya": {
+        "n_menerima": 4792,
+        "pct": 4.22
+      }
+    }
+  },
+  "anggota_keluarga": {
+    "status_pasca_bencana": {
+      "01": {
+        "label": "Penghuni tetap sejak sebelum bencana",
+        "n": 155246,
+        "pct": 82.18
+      },
+      "02": {
+        "label": "Pengungsi di rumah ini",
+        "n": 10085,
+        "pct": 5.34
+      },
+      "03": {
+        "label": "Mengungsi ke tempat lain",
+        "n": 2679,
+        "pct": 1.42
+      },
+      "04": {
+        "label": "Tidak tinggal bersama/pindah",
+        "n": 13874,
+        "pct": 7.34
+      },
+      "05": {
+        "label": "Anggota keluarga baru (lahir pasca bencana)",
+        "n": 3146,
+        "pct": 1.67
+      },
+      "06": {
+        "label": "Meninggal akibat bencana",
+        "n": 102,
+        "pct": 0.05
+      },
+      "07": {
+        "label": "Meninggal (bukan akibat bencana)",
+        "n": 1666,
+        "pct": 0.88
+      },
+      "08": {
+        "label": "Hilang akibat bencana",
+        "n": 9,
+        "pct": 0.0
+      },
+      "09": {
+        "label": "Hilang (bukan akibat bencana)",
+        "n": 44,
+        "pct": 0.02
+      },
+      "10": {
+        "label": "Sudah pisah KK",
+        "n": 2051,
+        "pct": 1.09
+      }
+    },
+    "ringkasan_dampak_kritis": {
+      "meninggal_akibat_bencana": 102,
+      "hilang_akibat_bencana": 9,
+      "mengungsi_ke_tempat_lain": 2679,
+      "total_terdampak_kritis": 2790,
+      "pct_meninggal_bencana": 0.05,
+      "pct_hilang_bencana": 0.0,
+      "pct_mengungsi": 1.42
+    },
+    "distribusi_jenis_kelamin": {
+      "1. Laki-Laki": {
+        "n": 92957,
+        "pct": 50.24
+      },
+      "2. Perempuan": {
+        "n": 92073,
+        "pct": 49.76
+      }
+    },
+    "hubungan_dengan_kk": {
+      "3. Anak": {
+        "n": 95565,
+        "pct": 50.59
+      },
+      "1. Kepala Keluarga": {
+        "n": 50886,
+        "pct": 26.94
+      },
+      "2. Istri/Suami": {
+        "n": 35988,
+        "pct": 19.05
+      },
+      "8. Famili": {
+        "n": 1134,
+        "pct": 0.6
+      },
+      "5. Cucu": {
+        "n": 847,
+        "pct": 0.45
+      },
+      "4. Menantu": {
+        "n": 187,
+        "pct": 0.1
+      },
+      "6. Orang Tua": {
+        "n": 181,
+        "pct": 0.1
+      },
+      "9. Lainnya": {
+        "n": 164,
+        "pct": 0.09
+      },
+      "7. Mertua": {
+        "n": 78,
+        "pct": 0.04
+      }
+    },
+    "korban_kritis_per_provinsi": {
+      "Aceh": {
+        "meninggal_bencana": 44,
+        "hilang_bencana": 2,
+        "total": 46
+      },
+      "Sumatera Barat": {
+        "meninggal_bencana": 4,
+        "hilang_bencana": 3,
+        "total": 7
+      },
+      "Sumatera Utara": {
+        "meninggal_bencana": 54,
+        "hilang_bencana": 4,
+        "total": 58
+      }
+    },
+    "keluhan_kesehatan": {
+      "batuk": {
+        "n_ya": 75555,
+        "pct": 40.0
+      },
+      "pilek": {
+        "n_ya": 68930,
+        "pct": 36.49
+      },
+      "panas": {
+        "n_ya": 68291,
+        "pct": 36.15
+      },
+      "pusing": {
+        "n_ya": 42067,
+        "pct": 22.27
+      },
+      "penyakit_kulit": {
+        "n_ya": 35483,
+        "pct": 18.78
+      },
+      "diare": {
+        "n_ya": 17739,
+        "pct": 9.39
+      },
+      "rematik": {
+        "n_ya": 10657,
+        "pct": 5.64
+      },
+      "hipertensi": {
+        "n_ya": 10061,
+        "pct": 5.33
+      },
+      "cedera_otot": {
+        "n_ya": 4875,
+        "pct": 2.58
+      },
+      "penyakit_kronis": {
+        "n_ya": 4476,
+        "pct": 2.37
+      },
+      "malaria": {
+        "n_ya": 891,
+        "pct": 0.47
+      },
+      "patah_tulang": {
+        "n_ya": 554,
+        "pct": 0.29
+      }
+    },
+    "disabilitas": {
+      "disabilitas_fisik": {
+        "n_ya": 2899,
+        "pct": 1.53
+      },
+      "disabilitas_mental": {
+        "n_ya": 4333,
+        "pct": 2.29
+      },
+      "disabilitas_intelektual": {
+        "n_ya": 897,
+        "pct": 0.47
+      },
+      "disabilitas_sensorik_netra": {
+        "n_ya": 2102,
+        "pct": 1.11
+      },
+      "disabilitas_sensorik_rungu": {
+        "n_ya": 1289,
+        "pct": 0.68
+      },
+      "disabilitas_sensorik_wicara": {
+        "n_ya": 844,
+        "pct": 0.45
+      }
+    },
+    "top_15_profesi_sebelum_bencana": {
+      "[107] PETANI/PEKEBUN": 19874,
+      "[064] PEDAGANG": 8905,
+      "[155] LAINNYA": 7358,
+      "[020] BURUH PERTANIAN/KEHUTANAN": 7141,
+      "[034] GURU": 3875,
+      "[016] BURUH BANGUNAN": 3461,
+      "[057] NELAYAN": 2850,
+      "[017] BURUH INDUSTRI": 2723,
+      "[123] SOPIR": 1907,
+      "[998] TIDAK BEKERJA": 1821,
+      "[072] PELAYAN TOKO": 1655,
+      "[071] PELAYAN RESTORAN/ WARUNG MAKAN": 1166,
+      "[111] ASN FUNGSIONAL UMUM": 1072,
+      "[015] BURUH ANGKUT BARANG": 974,
+      "[132] TUKANG BANGUNAN": 952
+    },
+    "partisipasi_sekolah": {
+      "2. Tidak bersekolah lagi": {
+        "n": 116631,
+        "pct": 61.74
+      },
+      "1. Masih sekolah": {
+        "n": 50309,
+        "pct": 26.63
+      },
+      "0. Tidak/belum pernah sekolah": {
+        "n": 4672,
+        "pct": 2.47
+      }
+    }
+  },
+  "operasional_survei": {
+    "beban_petugas": {
+      "total_petugas_unik": 401,
+      "rata_rata_desa_per_petugas": 4.1,
+      "median_desa_per_petugas": 4.0,
+      "maks_desa_per_petugas": 16,
+      "petugas_1_desa": 103,
+      "petugas_lebih5_desa": 91
+    },
+    "kunjungan": {
+      "rentang_tanggal": {
+        "awal": "2025-01-16",
+        "akhir": "2026-02-28",
+        "durasi_hari": 408
+      },
+      "hari_terbanyak_kunjungan": "2026-01-16",
+      "maks_kunjungan_per_hari": 160,
+      "rata_kunjungan_per_hari": 33.52,
+      "kunjungan_per_desa": {
+        "mean": 1.12,
+        "median": 1.0,
+        "max": 10,
+        "desa_lebih3_kunjungan": 4
+      },
+      "flag_tgl_anomali": 2
+    },
+    "top_10_jabatan_pejabat": {
+      "Kepala Desa": 254,
+      "Sekretaris Desa": 204,
+      "Perangkat Desa": 44,
+      "Lurah": 36,
+      "Kepala Dusun": 26,
+      "Sekertaris Desa": 12,
+      "Sekretaris Nagari": 11,
+      "Sekdes": 11,
+      "Wali Nagari": 10,
+      "Kepala Sekolah": 9
+    }
+  },
+  "kualitas_data": {
+    "linkage_art_root": {
+      "art_tanpa_rt_induk": 0,
+      "rt_tanpa_art": 64575,
+      "rt_yang_match_dg_art": 50887,
+      "pct_rt_match": 44.07
+    },
+    "flag_anomali": {
+      "infra_belum_approved": 12,
+      "rt_stop_interview": 64575
+    },
+    "missing_value_summary": {
+      "root_infra": {
+        "total_baris": 928,
+        "total_kolom": 255,
+        "pct_missing_overall": 23.09,
+        "kolom_missing_gt50pct": 78,
+        "kolom_missing_gt80pct": 3
+      },
+      "root_keluarga": {
+        "total_baris": 115462,
+        "total_kolom": 101,
+        "pct_missing_overall": 38.0,
+        "kolom_missing_gt50pct": 57,
+        "kolom_missing_gt80pct": 8
+      },
+      "art_roster": {
+        "total_baris": 188902,
+        "total_kolom": 126,
+        "pct_missing_overall": 29.64,
+        "kolom_missing_gt50pct": 40,
+        "kolom_missing_gt80pct": 26
+      }
+    }
+  },
+  "narasi_4_babak": {
+    "babak_1_the_hook": {
+      "tema": "Skala Bencana",
+      "judul": "Kehidupan yang Berhenti Tiba-Tiba",
+      "pesan_utama": "Bencana ini tidak hanya menghantam satu titik, melainkan menyapu 928 desa. Kehidupan 115,462 keluarga yang mencakup 188,902 jiwa berubah drastis dalam sekejap.",
+      "data_pendukung": {
+        "total_desa_terdampak": 928,
+        "total_keluarga": 115462,
+        "total_jiwa": 188902
+      }
+    },
+    "babak_2_the_environment": {
+      "tema": "Kelumpuhan Kota",
+      "judul": "Runtuhnya Tiang Penyangga Kehidupan",
+      "pesan_utama": "Ruang publik lumpuh. Sebanyak 26 fasilitas kesehatan rusak parah saat warga paling membutuhkannya. Aktivitas belajar terhenti dengan 106 sekolah rusak, dan perputaran ekonomi mandek karena 20 fasilitas ekonomi hancur.",
+      "data_pendukung": {
+        "faskes_lumpuh": 26,
+        "sekolah_lumpuh": 106,
+        "ekonomi_lumpuh": 20
+      }
+    },
+    "babak_3_the_human_face": {
+      "tema": "Wajah Kemanusiaan",
+      "judul": "Angka yang Memiliki Nama dan Tangisan",
+      "pesan_utama": "Di balik data infrastruktur, ada kepiluan manusia. 102 jiwa meninggal dunia dan 9 orang masih hilang. Lebih dari itu, 2,679 orang harus kehilangan tempat bernaung dan menjadi pengungsi.",
+      "data_pendukung": {
+        "korban_meninggal": 102,
+        "korban_hilang": 9,
+        "warga_mengungsi": 2679
+      }
+    },
+    "babak_4_the_call_to_action": {
+      "tema": "Urgensi dan Kebutuhan",
+      "judul": "Apa yang Harus Kita Lakukan Sekarang?",
+      "pesan_utama": "Dengan 1.42% warga menjadi pengungsi dan tingginya ancaman 'batuk', prioritas darurat saat ini adalah penyediaan tenda medis darurat, logistik hunian sementara bagi 2,679 pengungsi, serta pencarian korban hilang. Waktu adalah nyawa.",
+      "rekomendasi_prioritas": [
+        "Penyediaan tenda medis dan obat-obatan merespons rusaknya faskes dan tingginya keluhan penyakit.",
+        "Logistik dasar & Hunian sementara merespons tingginya angka pengungsi.",
+        "Operasi SAR untuk warga yang masih berstatus hilang."
+      ]
+    }
+  },
+  "key_findings": [
+    {
+      "id": "KF-01",
+      "tema": "Skala dan cakupan survei",
+      "temuan": "Survei mencakup 928 desa di 3 provinsi (Aceh, Sumut, Sumbar) dengan total 115,462 RT dan 188,902 jiwa.",
+      "angka_kunci": {
+        "desa": 928,
+        "rt": 115462,
+        "jiwa": 188902
+      }
+    },
+    {
+      "id": "KF-02",
+      "tema": "Korban jiwa pasca-bencana",
+      "temuan": "Teridentifikasi 102 jiwa meninggal akibat bencana dan 9 jiwa hilang akibat bencana.",
+      "angka_kunci": {
+        "meninggal_akibat_bencana": 102,
+        "hilang_akibat_bencana": 9,
+        "mengungsi_ke_tempat_lain": 2679,
+        "total_terdampak_kritis": 2790,
+        "pct_meninggal_bencana": 0.05,
+        "pct_hilang_bencana": 0.0,
+        "pct_mengungsi": 1.42
+      },
+      "flag": "KRITIS"
+    },
+    {
+      "id": "KF-03",
+      "tema": "Desa tanpa fasilitas ekonomi",
+      "temuan": "854 desa (92.03%) tidak memiliki fasilitas ekonomi tercatat — indikator kerentanan ekonomi lokal.",
+      "angka_kunci": {
+        "desa_nol_ekonomi": 854
+      }
+    },
+    {
+      "id": "KF-04",
+      "tema": "Dominasi fasilitas sosial/ibadah",
+      "temuan": "Fasilitas sosial/ibadah adalah kategori terbanyak (1,106 unit), didominasi surau/musala dan masjid — konsisten dengan profil wilayah Aceh dan Sumut.",
+      "angka_kunci": {
+        "total_sosial_ibadah": 1106
+      }
+    },
+    {
+      "id": "KF-05",
+      "tema": "Penurunan kepemilikan aset pasca-bencana",
+      "temuan": "Hampir semua jenis aset mengalami penurunan kepemilikan sesudah bencana. Aset paling terdampak terlihat dari selisih persentase sebelum vs sesudah bencana.",
+      "angka_kunci": {
+        "lahan": -8.95,
+        "hewan": -0.56,
+        "kendaraan": -15.31,
+        "laptop": -2.6,
+        "tv": -3.81,
+        "hp": -6.4,
+        "kulkas": 89.33,
+        "usaha": -14.08,
+        "tabungan": -6.89,
+        "kprs": -3.78
+      }
+    },
+    {
+      "id": "KF-06",
+      "tema": "Keluhan kesehatan paling umum",
+      "temuan": "Keluhan terbanyak adalah panas, batuk, dan pilek — penyakit infeksi saluran pernapasan atas yang umum di pengungsian.",
+      "angka_kunci": {
+        "batuk": 40.0,
+        "pilek": 36.49,
+        "panas": 36.15,
+        "pusing": 22.27,
+        "penyakit_kulit": 18.78
+      }
+    },
+    {
+      "id": "KF-07",
+      "tema": "RT yang tidak bisa ditemui",
+      "temuan": "64575 RT (55.93%) dikategorikan stop interview — pindah, meninggal semua, atau tidak terdampak. Ini bukan error data, melainkan kondisi lapangan.",
+      "angka_kunci": {
+        "rt_stop": 64575
+      }
+    },
+    {
+      "id": "KF-08",
+      "tema": "Ketimpangan beban petugas",
+      "temuan": "1 petugas menangani maksimum 16 desa, sementara rata-rata hanya 4.1 desa per petugas.",
+      "angka_kunci": {
+        "total_petugas_unik": 401,
+        "rata_rata_desa_per_petugas": 4.1,
+        "median_desa_per_petugas": 4.0,
+        "maks_desa_per_petugas": 16,
+        "petugas_1_desa": 103,
+        "petugas_lebih5_desa": 91
+      }
+    },
+    {
+      "id": "KF-09",
+      "tema": "GPS coverage fasilitas",
+      "temuan": "93.03% fasilitas memiliki data GPS. Sisanya tidak bisa dipetakan untuk analisis spasial.",
+      "angka_kunci": {
+        "gps_ada": 2548,
+        "gps_missing": 191,
+        "pct_coverage": 93.03
+      }
+    },
+    {
+      "id": "KF-10",
+      "tema": "Fasilitas tambahan lebih dari prelist",
+      "temuan": "Dari 1274 prelist dan 1465 tambahan — penemuan lapangan mengindikasikan master list belum mutakhir.",
+      "angka_kunci": {
+        "prelist": 1274,
+        "tambahan": 1465
+      }
+    }
+  ],
+  "_metadata": {
+    "generated_by": "clean_data_kotor.py + insight_extractor.py",
+    "sumber_data": "FASIH BPS 2026 — Data Infra & Data Keluarga",
+    "provinsi": [
+      "Aceh",
+      "Sumatera Utara",
+      "Sumatera Barat"
+    ],
+    "total_file_input": 14,
+    "catatan": "Semua persentase dihitung dari total baris per tabel masing-masing."
+  }
+}
