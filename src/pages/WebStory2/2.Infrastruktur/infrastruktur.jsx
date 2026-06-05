@@ -2,25 +2,33 @@
  * infrastruktur.jsx — Babak 2: Infrastruktur
  *
  * Scene 1: Kelumpuhan Kota — "Jejak Infrastruktur: Ruang Publik yang Lumpuh"
- *   Bar chart kondisi fasilitas per kategori (Baik/Rusak Ringan/Sedang/Berat)
+ * Peta Interaktif (Leaflet), Bar chart (Recharts), & Scrollytelling Galeri Gambar
  *
  * Scene 2: Kelumpuhan Desa — "Detail Hingga Sudut Desa"
- *   Kartu desa per provinsi (Aceh → Sumut → Sumbar) dengan gradasi warna kerusakan
+ * Kartu desa per provinsi (Aceh → Sumut → Sumbar) dengan gradasi warna kerusakan
  *
  * Scene 3: Narasi Layanan Dasar — "Saat Kota Kehilangan Denyutnya"
- *   Ikon animasi layanan dasar: listrik, air, sanitasi
+ * Ikon animasi layanan dasar: listrik, air, sanitasi
  *
  * Scene 4: Zona Prioritas — "Menentukan Zona Prioritas Pemulihan"
- *   Top 15 kabupaten terparah (horizontal bar + badge)
+ * Top 15 kabupaten terparah (horizontal bar + badge)
  *
  * Transisi 2→3 — "Aceh, Sumatera Utara, Sumatera Barat: Siapa Paling Terdampak?"
- *   3 kartu provinsi dengan angka kunci
+ * 3 kartu provinsi dengan angka kunci
  *
  * Data: insight.json → fasilitas_infrastruktur, keluarga, ringkasan_dataset
  */
 
 import React, { useEffect, useRef, useState } from 'react';
 import insights from '../insight.json';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { MapContainer, TileLayer, CircleMarker, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ─────────────────────────────────────────
    Warna kondisi fasilitas
@@ -57,31 +65,80 @@ function useInView(threshold = 0.2) {
 }
 
 /* ─────────────────────────────────────────
-   Scene 1: Kelumpuhan Kota
+   Utility Peta: Menggerakkan Kamera Peta (FlyTo)
+───────────────────────────────────────────*/
+function MapFlyToUpdater({ center, zoom }) {
+  const map = useMap();
+  useEffect(() => {
+    if (center) {
+      map.flyTo(center, zoom, { duration: 1.5, easeLinearity: 0.25 });
+    }
+  }, [center, zoom, map]);
+  return null;
+}
+
+/* ─────────────────────────────────────────
+   Scene 1: Kelumpuhan Kota (Interaktif Map + Chart)
 ───────────────────────────────────────────*/
 function SceneKelumpuhanKota() {
-  const [chartRef, started] = useInView(0.2);
+  const containerRef = useRef(null);
+  const [activeLocation, setActiveLocation] = useState(0);
 
+  // 1. Ekstrak Data untuk Bar Chart Recharts
   const kondisiPerKat = insights?.fasilitas_infrastruktur?.kondisi_per_kategori || {};
-  const kategori = Object.keys(kondisiPerKat);
-  const kondisiKeys = ['Baik', 'Rusak Ringan', 'Rusak Sedang', 'Rusak Berat'];
+  let totalBaik = 0, totalRingan = 0, totalSedang = 0, totalBerat = 0;
+  
+  Object.values(kondisiPerKat).forEach(kat => {
+    totalBaik += kat['Baik']?.n || 0;
+    totalRingan += kat['Rusak Ringan']?.n || 0;
+    totalSedang += kat['Rusak Sedang']?.n || 0;
+    totalBerat += kat['Rusak Berat']?.n || 0;
+  });
+
+  const chartData = [
+    { name: 'Baik', jumlah: totalBaik, fill: '#81C784' },
+    { name: 'Ringan', jumlah: totalRingan, fill: '#FFD54F' },
+    { name: 'Sedang', jumlah: totalSedang, fill: '#FFB74D' },
+    { name: 'Berat', jumlah: totalBerat, fill: '#e74c3c' },
+  ];
+
+  // 2. Data Koordinat Peta (Berurutan sesuai foto)
+  const MAP_LOCATIONS = [
+    { name: 'Padang Panjang', coords: [-0.4607, 100.4022], zoom: 12, color: '#81C784' }, // Baik
+    { name: 'Pidie Jaya', coords: [5.0760, 96.2238], zoom: 12, color: '#FFD54F' },       // Ringan
+    { name: 'Sibolga', coords: [1.7348, 98.7845], zoom: 13, color: '#FFB74D' },          // Sedang
+    { name: 'Agam', coords: [-0.2646, 100.0210], zoom: 13, color: '#e74c3c' }            // Berat
+  ];
+
+  // 3. Pemicu GSAP ScrollTrigger
+  useGSAP(() => {
+    const steps = gsap.utils.toArray('.scroll-step');
+    steps.forEach((step, i) => {
+      ScrollTrigger.create({
+        trigger: step,
+        start: 'top 50%',
+        end: 'bottom 50%',
+        onEnter: () => setActiveLocation(i),
+        onEnterBack: () => setActiveLocation(i),
+      });
+    });
+  }, { scope: containerRef });
 
   return (
-    <section style={{
-      background: 'linear-gradient(180deg, #0d1a10 0%, #15173d 100%)',
-      padding: '7rem 2rem',
-      overflow: 'hidden',
-    }}>
-      <div style={{
-        maxWidth: 1100,
-        margin: '0 auto',
-        display: 'flex',
-        gap: '4rem',
-        alignItems: 'flex-start',
-        flexWrap: 'wrap',
-      }}>
-        {/* Kiri — Narasi */}
-        <div style={{ flex: '1 1 320px', maxWidth: 480 }}>
+    <section ref={containerRef} style={{ background: '#15173D', position: 'relative', padding: '4rem 0' }}>
+      
+      <div style={{ display: 'flex', flexDirection: 'row', padding: '0 2rem', gap: '4rem', maxWidth: '1200px', margin: '0 auto' }}>
+        
+        {/* --- SISI KIRI: STICKY (Map & Chart) --- */}
+        <div style={{
+          flex: '1',
+          position: 'sticky',
+          top: '5vh',
+          height: '90vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}>
           <span className="lato-bold" style={{
             fontSize: '0.78rem', letterSpacing: '0.22em',
             textTransform: 'uppercase', color: 'var(--green)',
@@ -89,120 +146,130 @@ function SceneKelumpuhanKota() {
           }}>
             Babak 2 · Scene 1
           </span>
-          <h2 className="playfair-display" style={{
-            fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-            color: '#fff',
-            lineHeight: 1.2,
-            marginBottom: '1.5rem',
-          }}>
-            Jejak Infrastruktur:<br />
-            <span style={{ color: 'var(--green)' }}>Ruang Publik yang Lumpuh</span>
+          <h2 className="playfair-display" style={{ fontSize: '2.5rem', color: '#E5D9B6', marginBottom: '1rem', lineHeight: 1.2 }}>
+            Jejak Infrastruktur:<br/>Ruang Publik yang Lumpuh
           </h2>
-          <p className="lato-regular" style={{
-            fontSize: '1.05rem', lineHeight: 1.88,
-            color: 'var(--beige)', opacity: 0.9,
-            marginBottom: '1.5rem',
-          }}>
-            Di balik angka besar itu tampak jejak kerusakan yang langsung memukul
-            kehidupan sehari-hari. Sekolah yang ramai kini berhenti beroperasi.
-            Puskesmas tak lagi bisa dijangkau.
-          </p>
-          <p className="lato-regular" style={{
-            fontSize: '1rem', lineHeight: 1.85,
-            color: 'var(--beige)', opacity: 0.7,
-          }}>
-            Perbandingan kondisi fasilitas publik yang tercatat saat pendataan —
-            dari yang masih berdiri kokoh hingga yang sudah rata dengan tanah.
+          <p className="lato-regular" style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+            Di balik angka besar itu tampak jejak kerusakan yang langsung memukul kehidupan sehari-hari. Gulir layar untuk memantau titik kerusakan dari yang teringan hingga terberat di lapangan.
           </p>
 
-          {/* Legenda kondisi */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: '2rem' }}>
-            {kondisiKeys.map(k => (
-              <div key={k} style={{
-                display: 'flex', alignItems: 'center', gap: '0.4rem',
-                padding: '0.3rem 0.7rem',
-                borderRadius: 12,
-                background: `${KONDISI_COLOR[k]}18`,
-                border: `1px solid ${KONDISI_COLOR[k]}33`,
-              }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: KONDISI_COLOR[k], display: 'inline-block' }} />
-                <span className="lato-regular" style={{ fontSize: '0.75rem', color: KONDISI_COLOR[k] }}>{k}</span>
-              </div>
-            ))}
+          {/* Peta Interaktif Leaflet */}
+          <div style={{ position: 'relative', width: '100%', height: '320px', marginBottom: '1.5rem', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(229, 217, 182, 0.2)', zIndex: 1 }}>
+            <MapContainer 
+              center={MAP_LOCATIONS[0].coords} 
+              zoom={10} 
+              zoomControl={false} 
+              scrollWheelZoom={false} 
+              style={{ width: '100%', height: '100%' }}
+            >
+              <TileLayer
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                attribution="Tiles &copy; Esri"
+                className="grayscale-map"
+              />
+              <MapFlyToUpdater center={MAP_LOCATIONS[activeLocation].coords} zoom={MAP_LOCATIONS[activeLocation].zoom} />
+              
+              {MAP_LOCATIONS.map((loc, index) => (
+                <CircleMarker 
+                  key={index}
+                  center={loc.coords}
+                  radius={index === activeLocation ? 12 : 6}
+                  pathOptions={{ 
+                    color: loc.color, 
+                    fillColor: loc.color, 
+                    fillOpacity: index === activeLocation ? 0.8 : 0.4,
+                    weight: index === activeLocation ? 3 : 1
+                  }}
+                />
+              ))}
+            </MapContainer>
+            
+            <style>{`
+              .grayscale-map {
+                filter: grayscale(100%) contrast(125%) brightness(50%) !important;
+              }
+            `}</style>
+          </div>
+
+          {/* Bar Chart menggunakan Recharts */}
+          <div style={{ width: '100%', height: '200px', background: 'rgba(0,0,0,0.3)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(229, 217, 182, 0.1)' }}>
+            <h4 className="lato-bold" style={{ color: '#E5D9B6', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '1px' }}>
+              Agregat Fasilitas Terdampak
+            </h4>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 30, left: 0, bottom: 0 }}>
+                <XAxis type="number" hide />
+                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 12, fontFamily: 'Lato' }} width={60} />
+                <Tooltip 
+                  cursor={{ fill: 'rgba(255,255,255,0.05)' }} 
+                  contentStyle={{ background: '#1C1F4A', border: '1px solid rgba(229, 217, 182, 0.2)', borderRadius: '8px', color: '#fff' }} 
+                  itemStyle={{ color: '#fff', fontFamily: 'Lato', fontWeight: 'bold' }}
+                />
+                <Bar dataKey="jumlah" radius={[0, 6, 6, 0]} barSize={16} animationDuration={1500}>
+                  {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
-        {/* Kanan — Grouped bar chart per kategori */}
-        <div ref={chartRef} style={{
-          flex: '1 1 340px',
-          background: 'rgba(0,0,0,0.3)',
-          borderRadius: 20,
-          border: '1px solid rgba(255,255,255,0.08)',
-          padding: '2.5rem',
-        }}>
-          <div className="lato-bold" style={{
-            fontSize: '0.78rem', letterSpacing: '0.15em',
-            textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
-            marginBottom: '2rem',
-          }}>
-            Kondisi Fasilitas Pasca Bencana (%)
+        {/* --- SISI KANAN: SCROLL STEPS (Foto Before-After) --- */}
+        <div style={{ flex: '1', paddingBottom: '10vh' }}>
+          
+          {/* STEP 1: BAIK */}
+          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(129, 199, 132, 0.3)', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
+              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(129, 199, 132, 0.2)' }}>
+                <h4 className="playfair-display" style={{ color: '#81C784', fontSize: '1.8rem', margin: 0 }}>Fasilitas Kategori Baik</h4>
+                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Padang Panjang, Sumatera Barat. Struktur utama selamat, namun akses sekitar terhambat material longsor.</p>
+              </div>
+              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
+                <img src="/assets/pkl2_1.webp" alt="Baik" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
+            </div>
           </div>
 
-          {kategori.length === 0 ? (
-            <div className="lato-regular" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.88rem' }}>
-              Data akan tersedia setelah insight.json dihasilkan.
+          {/* STEP 2: RUSAK RINGAN */}
+          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 213, 79, 0.3)', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
+              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(255, 213, 79, 0.2)' }}>
+                <h4 className="playfair-display" style={{ color: '#FFD54F', fontSize: '1.8rem', margin: 0 }}>Rusak Ringan</h4>
+                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Kabupaten Pidie Jaya, Aceh. Jembatan vital penghubung desa terputus, mengganggu laju logistik.</p>
+              </div>
+              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
+                <img src="/assets/pkl4_1.webp" alt="Rusak Ringan" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
             </div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              {kategori.map(kat => {
-                const data = kondisiPerKat[kat];
-                const total = data.total || 1;
-                const color = KAT_COLOR[kat] || '#aaa';
-                return (
-                  <div key={kat}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
-                      <span className="lato-bold" style={{ fontSize: '0.88rem', color }}>
-                        {kat}
-                      </span>
-                      <span className="lato-regular" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
-                        {total} fasilitas
-                      </span>
-                    </div>
-                    {/* Stacked bar */}
-                    <div style={{ display: 'flex', height: 14, borderRadius: 7, overflow: 'hidden', background: 'rgba(255,255,255,0.06)' }}>
-                      {kondisiKeys.map(kond => {
-                        const n = data[kond]?.n || 0;
-                        const pct = (n / total) * 100;
-                        return pct > 0 ? (
-                          <div key={kond} style={{
-                            height: '100%',
-                            width: started ? `${pct}%` : '0%',
-                            background: KONDISI_COLOR[kond],
-                            transition: `width 1.2s cubic-bezier(0.4,0,0.2,1) ${kondisiKeys.indexOf(kond) * 0.15}s`,
-                          }} title={`${kond}: ${data[kond]?.pct?.toFixed(1)}%`} />
-                        ) : null;
-                      })}
-                    </div>
-                    {/* Labels */}
-                    <div style={{ display: 'flex', gap: '0.6rem', marginTop: '0.4rem', flexWrap: 'wrap' }}>
-                      {kondisiKeys.map(kond => {
-                        const pct = data[kond]?.pct;
-                        if (!pct || pct < 0.5) return null;
-                        return (
-                          <span key={kond} className="lato-regular" style={{
-                            fontSize: '0.68rem',
-                            color: KONDISI_COLOR[kond],
-                          }}>
-                            {kond}: {pct.toFixed(1)}%
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
+          </div>
+
+          {/* STEP 3: RUSAK SEDANG */}
+          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 183, 77, 0.3)', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
+              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(255, 183, 77, 0.2)' }}>
+                <h4 className="playfair-display" style={{ color: '#FFB74D', fontSize: '1.8rem', margin: 0 }}>Rusak Sedang</h4>
+                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Kota Sibolga, Sumatera Utara. Longsor mulai menyentuh dan merusak sebagian rumah-rumah warga di perbukitan.</p>
+              </div>
+              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
+                <img src="/assets/pkl3_1.webp" alt="Rusak Sedang" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
             </div>
-          )}
+          </div>
+
+          {/* STEP 4: RUSAK BERAT */}
+          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(231, 76, 60, 0.5)', boxShadow: '0 0 25px rgba(231,76,60,0.3)' }}>
+              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(231, 76, 60, 0.2)' }}>
+                <h4 className="playfair-display" style={{ color: '#e74c3c', fontSize: '1.8rem', margin: 0, fontWeight: 'bold' }}>Rusak Berat</h4>
+                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Palembayan, Agam, Sumatera Barat. Kehancuran total; fasilitas sosial dan pemukiman rata dengan tanah tersapu banjir bandang.</p>
+              </div>
+              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
+                <img src="/assets/pkl1.webp" alt="Rusak Berat" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

@@ -19,6 +19,7 @@
     "react-dom": "^19.2.6",
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.15.1",
+    "recharts": "^3.8.1",
     "sass": "^1.100.0",
     "split-type": "^0.3.4",
     "tailwindcss": "^4.3.0"
