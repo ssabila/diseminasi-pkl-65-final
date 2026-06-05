@@ -1,0 +1,61 @@
+View,Tahap/Bagian,Headline (Narasi Utama),Subteks / Isi,Visual & Interaksi,Data/Materi Pendukung,Keterangan/Penjelasan Detail Isi Content,-,Link Referensi Website,Screenshot Webpage Referensi
+,"Babak 1: Intro
+
+(Scene 1: Opening)",Saat Alam Berubah Menjadi Amarah,"Bencana bukan sekadar deretan angka di atas kertas laporan. Dalam sekejap, realitas ribuan nyawa berganti rupa. Ini adalah rekam jejak dari mereka yang bertahan di balik puing-puing kehancuran. Mengungkap fakta di lapangan untuk sebuah upaya pemulihan yang tepat sasaran.",Overlay: Peta 3 provinsi dengan titik-titik lokasi yang menyala.,"metadata.judul, metadata.deskripsi","Bagian ini bisa dibuka dengan layar yang agak gelap, lalu pelan-pelan muncul potongan aktivitas pendataan di lapangan dalam warna hitam putih. Visualnya bisa fokus ke momen sederhana tapi kuat, misalnya petugas lagi nulis data, ngobrol sama warga, atau warga berdiri di depan rumah yang terdampak. Transisinya dibuat agak pelan supaya penonton sempat “masuk” ke suasana lapangan dulu. Setelah itu baru muncul judul “Hasil Pendataan R3P” sebagai penanda kalau di bagian ini mulai masuk ke hasil temuan di lapangan.
+Waktu halaman mulai discroll, visual bisa berubah ke peta tiga provinsi terdampak yang muncul dari layar gelap. Titik-titik lokasi pendataan muncul satu per satu, bukan langsung muncul semua, biar kerasa prosesnya. Semakin discroll, titiknya makin banyak dan kelihatan kalau pendataan dilakukan di wilayah yang luas. Setiap titik itu pengennya terasa kayak mewakili kondisi nyata masyarakat, jadi penonton bisa ngerasa kalau data yang ditampilkan nanti bukan cuma angka, tapi berasal dari situasi yang benar-benar terjadi di lapangan.",Menggunakan font Playfair Display ukuran besar untuk headline untuk membangun mood serius dan emosional di awal cerita.,child-deprivation.pages.dev (Seksi Hero Cover),
+,"Babak 1: Intro
+
+(Scene 2: Skala Dampak)","Skala Besar, Dampak Nyata","Kami menelusuri 15 Kabupaten/Kota, memetakan ribuan objek terdampak dari ujung Aceh hingga Sumatera Barat. Ratusan ribu jiwa telah memberikan suaranya. Mereka bukan sekadar statistik; mereka adalah saksi hidup dari ruang hidup yang mendadak hilang dalam satu malam.","Waktu di-scroll, visual berubah ke Peta 3 Provinsi. Titik-titik lokasi koordinat menyala satu per satu secara bergantian. Kotak Big Numbers statistik global menyala dengan efek angka menghitung cepat (counter dari 0).","metadata.total_keluarga_disurvei, metadata.total_desa_disurvei, df_kel[lokasi_latitude]",Menunjukkan skala masifnya pergerakan tim R3P di lapangan dan luasnya cakupan data survei sebelum masuk ke masalah inti. Angka sorotan pakai warna var(--green).,,child-deprivation.pages.dev (Seksi Big Numbers & Alur),
+,"Babak 2: Infra
+
+(Scene 1: Kelumpuhan Kota)",Jejak Infrastruktur: Ruang Publik yang Lumpuh,"Di balik angka-angka besar hasil pendataan, tampak jejak kerusakan infrastruktur yang langsung memukul kehidupan sehari-hari warga. Sekolah yang sebelumnya ramai kini berhenti beroperasi karena ruang kelas hancur, merenggut hak belajar ribuan siswa.","Layout Split-Screen (50% kiri teks, 50% kanan grafik). GSAP mengunci area kanan (pin: true), sementara teks cerita kiri terus di-scroll. Grafik batang (Recharts) bertransisi halus memunculkan kategori.","infrastruktur.kategori_kerusakan_detail (Data Pendidikan, Kesehatan, Ekonomi)","Menampilkan perbandingan fasilitas publik sebelum (prelist) vs sesudah bencana (ditemukan). Fokus pada persentase kelumpuhan gedung sekolah, puskesmas, dan pasar.",,child-deprivation.pages.dev (Layout Sticky Side-by-Side),
+,"Babak 2: Infra
+
+(Scene 3: Kelumpuhan Desa)",Detail Hingga Sudut Desa,Kerusakan rumah dan fasilitas di level terkecil (Desa/Kelurahan).,Peta titik (dot map) yang bisa di-zoom hingga level kelurahan.,Data kerusakan per desa/kelurahan.,"Keterangan:
+
+- Setelah peta sebaran kabupaten/kota, scroll memunculkan provinsi pertama yang difokuskan: Aceh.
+
+Judul yang muncul: ""Aceh: Dampak Bencana Hingga Tingkat Desa""
+
+- Scroll berikutnya menampilkan peta Provinsi Aceh yang kemudian di-zoom ke kabupaten terdampak, lalu berlanjut hingga level kecamatan dan desa/kelurahan.
+
+- Scroll lanjutan menampilkan peta desa/kelurahan dengan gradasi warna tingkat kerusakan rumah akibat bencana.
+
+- Interaksi klik desa/kelurahan menampilkan popup berisi:
+
+  * Nama desa/kelurahan
+  * Jumlah rumah rusak
+  * Persentase kerusakan
+
+- Scene penutup Aceh menampilkan visual potret hunian/fasilitas desa beserta ikon rumah untuk pers3ntase kerusakan
+
+Teks penutup:
+“Cerita serupa juga terjadi di provinsi lain.”
+
+- Transisi scroll selanjutnya otomatis berpindah ke provinsi kedua:
+
+  Judul muncul: “Sumatera Utara: Dampak Bencana Hingga Tingkat Desa”
+  (alur visual dan interaksi sama dengan Aceh)
+
+- Scroll berikutnya berpindah ke provinsi ketiga:
+
+  Judul muncul: “Sumatera Barat: Dampak Bencana Hingga Tingkat Desa”
+  (alur visual dan interaksi sama dengan Aceh dan Sumatera Utara)",https://scrollytelling-amcross.vercel.app/,,
+,"Babak 2: Infra
+
+(Scene 2: Zona Prioritas)",Menentukan Zona Prioritas Pemulihan,"Tidak semua wilayah menanggung luka yang sama. Melalui pemetaan titik kerusakan, kami merumuskan Indeks Risiko Bencana. Di zona-zona inilah denyut nadi pemulihan harus dipompa paling kencang. Tidak boleh ada kebijakan yang salah sasaran ketika waktu terus berjalan.",Peta berubah menjadi gaya arsitektural gelap dengan garis putih tipis. Muncul Heatmap (Peta Panas) merah. Area risiko tertinggi (Top 15 Kabupaten) berkedip-kedip halus (pulsing animation).,infrastruktur.peringkat_kabupaten_terparah,Visualisasi spasial tingkat kabupaten/kota untuk membantu pengambil kebijakan melihat wilayah mana yang membutuhkan bantuan rekonstruksi fisik paling darurat.,,news.sky.com / brexit,
+,"Babak 3: Keluarga
+
+(Scene 1: Sudut Desa)",Detail Hingga Sudut Desa: Kehilangan Tempat Bernaung,"Dari tingkat provinsi, mari melihat lebih dekat. Setiap angka persentase ini adalah cerminan dari atap yang runtuh dan dinding yang rubuh di ratusan desa. Kami memetakan agregasi wilayah untuk memastikan tidak ada jengkal tanah yang terlewatkan.","Scroll memicu efek Zoom-In Map otomatis dari level Provinsi masuk ke level batas Desa. Warna wilayah desa bergradasi sesuai keparahan. Klik desa memunculkan popup: Nama Desa, Jumlah Rumah Rusak, % Kerusakan.",df_kel['bangunan_hancur'] di-agregasi per df_kel['desa'],"Alur perpindahan wilayah dibuat bertahap dari Aceh, lalu Sumatera Utara, dan berakhir di Sumatera Barat. Setiap akhir provinsi diberi teks jembatan: ""Cerita serupa juga terjadi di provinsi lain.""",,scrollytelling-amcross.vercel.app,
+,"Babak 3: Keluarga
+
+(Scene 2: Potret Hunian)",Bertahan di Titik Nadir Keterbatasan,"Kehilangan rumah berarti kehilangan martabat dasar. Ribuan keluarga kini terpaksa hidup berdesakan di hunian darurat, terputus dari akses WC layak dan air minum bersih. Ditambah lagi, aset penopang hidup—hewan ternak, kendaraan, hingga lahan—lenyap.","Background bertransisi halus dari var(--navy) ke var(--beige). Muncul Carousel Horizontal potret rumah warga yang rusak berat dengan overlay bar/arc tipis persentase kerusakan sosial (sanitasi, listrik, air).","keluarga.status_bangunan, keluarga.kualitas_hidup, keluarga.aset_yang_hilang",Mengubah fokus dari data makro (peta wilayah) menjadi data mikro (kondisi rumah tangga). Menyoroti hilangnya modal ekonomi pengungsi secara gamblang.,,nbcnews.com / highways-inequality,
+,"Babak 3: Keluarga
+
+(Scene 3: Indovidu dan keluarga)",Kondisi Individu & Keluarga,"Profil kesehatan, pekerjaan, dan bantuan yang diterima.",Diagram donat (donut chart) status pekerjaan/bantuan.,"Data terpilah: Bumil, Lansia, Balita.","Untuk profil kesehatan ini bisa ditunjukkan dari kumulatif dari 1 KK yang terkena penyakit sesuai pertanyaan yang ada di FASIH. Nanti ditotalkan untuk 1 kabupaten misalkan, kebanyakan itu sakit apa aja sih yang diderita kemarin (termasuk kondisi fisik/mental sebelum dan sesudah bencana). Untuk pekerjaan ini bisa dibuat dari sebelum dan sesudah bencana. Jadi kita bisa tau kondisi pekerjaan sebelum dan sesudah bencana itu gimana (sebelum bencana mungkin banyak yg jadi petani, setelah bencana banyak yg jadi buruh misalkan). Untuk yang bantuan, tinggal dibuat donut chart nya, biar tau bantuan apa saja yang sudah masuk di kabupaten/kota tersebut.",,,
+,"Babak 4: Kebutuhan
+
+(Scene 1: Jeritan Bantuan)",Kebutuhan Mendesak,Air bersih dan akses kesehatan menjadi prioritas utama warga.,Bubble Chart: Visualisasi kata-kata (WordCloud) kebutuhan warga.,,"Visualisasi ini akan menampilkan Bubble Chart interaktif yang berfungsi sebagai WordCloud. Setiap gelembung mewakili kategori kebutuhan warga (misalnya: ""Air Bersih"", ""Alat Kesehatan"", ""Tenda""). Ukuran gelembung bersifat proporsional terhadap frekuensi temuan di lapangan; semakin banyak warga yang membutuhkan, semakin besar gelembungnya. Saat pengguna melakukan hover (mengarahkan kursor), gelembung akan sedikit membesar dan menampilkan angka persentase atau jumlah responden secara detail.",https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/,informationisbeautiful.net,
+,"Babak 4: Kebutuhan
+
+(Scene 2: Outro Penutup)",Di Balik Angka,"""Kami hanya ingin segera kembali normal."" – Suara dari Huntara.",Portrait: Foto close-up warga dengan kutipan teks yang muncul perlahan.,,"Setelah audiens terpapar oleh deretan statistik mengenai kerusakan infrastruktur dan luas area terdampak, narasi akan beralih ke bagian paling intim berjudul ""Di Balik Angka"", yang berfungsi sebagai detak jantung emosional dari seluruh laporan diseminasi ini. Visual di bagian ini didominasi oleh foto portrait close-up warga yang tinggal di hunian sementara (huntara), di mana fokus tajam pada ekspresi wajah sengaja dipilih untuk membangkitkan empati mendalam bagi pembaca. Seiring dengan gerakan gulir yang lambat, teks kutipan yang berbunyi ""Kami hanya ingin segera kembali normal"" muncul perlahan kata demi kata di samping foto tersebut, seolah memberikan suara nyata bagi ribuan individu di balik tabel data. Penjelasan di bagian ini menekankan bahwa setiap variabel data mengenai kebutuhan air bersih, akses kesehatan, atau tingkat kerusakan rumah bukan sekadar angka teknis, melainkan representasi dari kebutuhan mendesak keluarga dan kelompok rentan seperti lansia, ibu hamil, serta balita yang tengah bertahan di tengah keterbatasan. Bagian ini menjadi pengingat kuat bagi pengambil kebijakan bahwa setiap titik data adalah manusia yang sedang menunggu harapan untuk pulih melalui perencanaan rehabilitasi yang berbasis bukti.",From ruins to renewal: Gaza's farmers seek to restore harvests after conflict | World Food Programme https://www.unicef.org/stories/10-emergencies-need-more-support-2026,unicef.org / stories,
