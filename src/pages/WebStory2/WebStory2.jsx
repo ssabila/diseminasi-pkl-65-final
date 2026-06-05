@@ -144,35 +144,14 @@ const WebStory2 = () => {
     <div
       ref={container}
       style={{
-        backgroundColor: 'var(--navy)', // Menggunakan warna tema global
-        color: 'var(--beige)',
-        minHeight: '100vh',
+        backgroundColor: 'var(--navy)', // #050510
+        color: '#fff',
         fontFamily: 'var(--font-content)',
-        overflowX: 'hidden', // Mencegah horizontal scroll bocor
       }}
     >
       <ScrollProgress />
 
-      {/* Header Navigasi Atas */}
-      <div style={{
-        position: 'fixed',
-        top: 0, left: 0, right: 0,
-        zIndex: 9990,
-        padding: '0.75rem 2rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        background: 'rgba(21, 23, 61, 0.5)', // Warna var(--navy) transparan
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
-      }}>
-        <span className="playfair-display" style={{ fontSize: '0.9rem', letterSpacing: '0.1em', color: 'var(--green)' }}>
-          Web Story · R3P
-        </span>
-        <Link to="/" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: '0.85rem' }}>
-          ← Beranda
-        </Link>
-      </div>
+
 
       {/* 
          Setiap babak dibungkus minHeight 100vh agar memenuhi layar.
