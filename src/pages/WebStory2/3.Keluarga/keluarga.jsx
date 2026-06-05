@@ -21,6 +21,23 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import insights from '../insight.json';
+import {
+  MapContainer,
+  GeoJSON,
+  Marker,
+  Popup,
+  useMap
+} from "react-leaflet";
+import { ImageOverlay } from "react-leaflet";
+
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+import dataProvinsiIndo from "../../../assets/maps/Administrasi_Provinsi.json";
+import mapSumatera from "../../../assets/maps/map_sumatera.svg";
+import mapAceh from "../../../assets/maps/provinsi_aceh.svg";
+import mapSumut from "../../../assets/maps/provinsi_sumut.svg";
+import mapSumbar from "../../../assets/maps/provinsi_sumbar.svg";
 
 /* ─────────────────────────────────────────
    Utility: IntersectionObserver hook
@@ -111,125 +128,317 @@ function DonutChart({ segments, size = 180, thickness = 36, title }) {
 /* ─────────────────────────────────────────
    Split Bar — status bangunan
 ───────────────────────────────────────────*/
-function SplitBar({ label, pct, color, show }) {
-  return (
-    <div style={{ marginBottom: '1.2rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
-        <span className="lato-regular" style={{ fontSize: '0.88rem', color: 'var(--beige)' }}>{label}</span>
-        <span className="lato-bold" style={{ fontSize: '0.88rem', color }}>{pct?.toFixed(1)}%</span>
-      </div>
-      <div style={{ height: 10, background: 'rgba(255,255,255,0.07)', borderRadius: 5, overflow: 'hidden' }}>
-        <div style={{
-          height: '100%',
-          width: show ? `${Math.min(pct, 100)}%` : '0%',
-          background: `linear-gradient(90deg, ${color}88, ${color})`,
-          borderRadius: 5,
-          transition: 'width 1s ease',
-        }} />
-      </div>
-    </div>
-  );
-}
-
 /* ─────────────────────────────────────────
-   Scene 1: Kehilangan Tempat Bernaung
+   Scene 1: Detail Hingga Sudut Desa
 ───────────────────────────────────────────*/
+
 function SceneSudutDesa() {
-  const [ref, visible] = useInView(0.1);
+  const [selectedProvinsi, setSelectedProvinsi] = useState("SEMUA");
+  const [mapRef, setMapRef] = useState(null);
 
-  const perKabAll = Object.values(insights?.keluarga?.per_kabupaten || {}).flat();
-  const topKab = [...perKabAll]
-    .sort((a, b) => (b.pct_bangunan_rusak || 0) - (a.pct_bangunan_rusak || 0))
-    .slice(0, 6);
+  // Memfilter data provinsi se-Indonesia agar hanya memproses Pulau Sumatera
+  const geojsonSumatera = {
+    ...dataProvinsiIndo,
+    features: dataProvinsiIndo.features.filter((feature) => {
+      const namaProv = (
+        feature.properties.nmprov || 
+        feature.properties.PROVINSI || 
+        ""
+      ).toUpperCase();
 
+      // Jika ada provinsi yang di-klik, saring agar hanya menampilkan provinsi tersebut saja
+      if (selectedProvinsi !== "SEMUA") {
+        return namaProv.includes(selectedProvinsi);
+      }
+
+      // Kondisi awal: Tampilkan semua provinsi yang berada di Pulau Sumatera
+      const daftarSumatera = [
+        "ACEH", "SUMATERA UTARA", "SUMATERA BARAT", "RIAU", "KEPULAUAN RIAU",
+        "JAMBI", "BENGKULU", "SUMATERA SELATAN", "LAMPUNG", "KEPULAUAN BANGKA BELITUNG"
+      ];
+      return daftarSumatera.some((prov) => namaProv.includes(prov));
+    }),
+  };
+  
   return (
-    <section style={{
-      background: 'linear-gradient(160deg, #15173d 0%, #0d1a10 100%)',
-      padding: '7rem 2rem',
-    }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-        <span className="lato-bold" style={{
-          fontSize: '0.78rem', letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: 'var(--green)',
-          display: 'block', marginBottom: '1rem',
-        }}>
-          Babak 3 · Scene 1
-        </span>
-        <h2 className="playfair-display" style={{
-          fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-          color: '#fff', lineHeight: 1.2, marginBottom: '1rem',
-        }}>
-          Detail Hingga Sudut Desa:{' '}
-          <span style={{ color: 'var(--green)' }}>Kehilangan Tempat Bernaung</span>
-        </h2>
-        <p className="lato-regular" style={{
-          fontSize: '1.05rem', lineHeight: 1.88,
-          color: 'var(--beige)', opacity: 0.85,
-          maxWidth: 640, marginBottom: '3.5rem',
-        }}>
-          Dari level provinsi, mari melihat lebih dekat. Setiap persentase ini adalah
-          cerminan atap yang runtuh dan dinding yang rubuh di ratusan desa.
-        </p>
+    <>
+      {/* OPENING (Sesuai aslinya, tidak diganggu gugat) */}
+      <section
+        style={{
+          minHeight: "100vh",
+          background: "#E5D9B6",
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: "2rem",
+        }}
+      >
+        {/* gradasi biru atas */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-25vh",
+            left: "-30%",
+            width: "150%",
+            height: "50vh",
+            background: "#15173D",
+            borderRadius: "50%",
+            filter: "blur(100px)",
+            pointerEvents: "none",
+          }}
+        />
 
-        <div ref={ref} style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
-          gap: '1.2rem',
-        }}>
-          {topKab.length === 0 ? (
-            <div className="lato-regular" style={{
-              padding: '1.5rem', borderRadius: 12,
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: 'rgba(255,255,255,0.35)', fontSize: '0.9rem',
-              gridColumn: '1/-1',
-            }}>
-              💡 Data kerusakan bangunan akan muncul setelah insight.json dihasilkan.
-            </div>
-          ) : (
-            topKab.map((kab, i) => {
-              const pct = kab.pct_bangunan_rusak || 0;
-              const color = pct > 60 ? '#e74c3c' : pct > 30 ? '#FFB74D' : '#81C784';
-              return (
-                <div key={kab.kabupaten} style={{
-                  padding: '1.5rem',
-                  background: 'rgba(0,0,0,0.3)',
-                  borderRadius: 14,
-                  border: `1px solid ${color}2a`,
-                  borderTop: `3px solid ${color}`,
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(20px)',
-                  transition: `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`,
-                }}>
-                  <div className="lato-bold" style={{ fontSize: '1rem', color: '#fff', marginBottom: '0.25rem' }}>
-                    {kab.kabupaten}
-                  </div>
-                  <div className="lato-regular" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem' }}>
-                    {kab.provinsi}
-                  </div>
-                  <div style={{ position: 'relative', height: 8, background: 'rgba(255,255,255,0.08)', borderRadius: 4, overflow: 'hidden', marginBottom: '0.5rem' }}>
-                    <div style={{
-                      height: '100%',
-                      width: visible ? `${Math.min(pct, 100)}%` : '0%',
-                      background: `linear-gradient(90deg, ${color}88, ${color})`,
-                      borderRadius: 4,
-                      transition: `width 0.9s ease ${i * 0.1}s`,
-                    }} />
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span className="lato-regular" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)' }}>
-                      {(kab.bangunan_rusak || 0).toLocaleString('id-ID')} KK rusak
-                    </span>
-                    <span className="lato-bold" style={{ fontSize: '0.92rem', color }}>
-                      {pct.toFixed(1)}%
-                    </span>
-                  </div>
-                </div>
-              );
-            })
-          )}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            maxWidth: "1000px",
+            textAlign: "center",
+          }}
+        >
+          {/* TANDA KUTIP ATAS KIRI */}
+          <div
+            style={{
+              fontSize: "6rem",
+              lineHeight: 1,
+              textAlign: "left",
+              marginBottom: "-2rem",
+              fontFamily: "Playfair Display",
+              color: "#15173D", 
+            }}
+          >
+            “ 
+          </div>
+
+          <h2
+            className="playfair-display"
+            style={{
+              fontSize: "clamp(1.8rem,2vw,3rem)", 
+              fontStyle: "italic",
+              fontWeight: 500,
+              color: "#111",
+              lineHeight: 1.15,
+              margin: "0 auto",
+              maxWidth: "850px",
+            }}
+          >
+            Dari tingkat desa hingga provinsi, setiap angka
+            <br />
+            adalah cerminan ruang hidup yang terdampak.
+            <br />
+            Kami memetakan agregasi wilayah untuk
+            <br />
+            memastikan tidak ada jengkal tanah yang
+            <br />
+            terlewatkan dalam rencana pemulihan.
+          </h2>
+
+          {/* TANDA KUTIP BAWAH KANAN */}
+          <div
+            style={{
+              fontSize: "6rem",
+              lineHeight: 1,
+              textAlign: "right",
+              marginTop: "-1rem",
+              fontFamily: "Playfair Display",
+              color: "#15173D",
+            }}
+          >
+            ”
+          </div>
+        
+          <div
+            style={{
+              fontSize: "6rem",
+              lineHeight: 1,
+              textAlign: "right",
+              marginTop: "-1rem",
+              fontFamily: "Playfair Display",
+            }}
+          >
+            ❞
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* FRAME PETA */}
+      <section
+        style={{
+          height: "100vh",
+          width: "100%",
+          background: "#15173D",
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+        }}
+      >
+        {/* 1. GLOW CAHAYA KREM DI KIRI */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "-30%",
+            width: "60vw",
+            height: "150vh",
+            background: "radial-gradient(ellipse, rgba(229, 217, 182, 1) 0%, rgba(229, 217, 182, 0) 100%)",
+            filter: "blur(100px)",
+            transform: "translateY(-50%)",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        />
+
+        {/* 2. AREA PETA LEAFLET */}
+        <MapContainer
+          // Koordinat diatur ke kanan atas agar pulau Sumatera otomatis terdorong pas di KIRI BAWAH
+          center={[2.4, 96.5]} 
+          zoom={7}
+          zoomControl={false}
+          scrollWheelZoom={false} 
+          dragging={false}        
+          doubleClickZoom={false}
+          touchZoom={false}
+          ref={setMapRef}         
+          style={{
+            height: "100vh",
+            width: "100%",
+            background: "transparent",
+            zIndex: 2,
+          }}
+        >
+          <GeoJSON
+            key={selectedProvinsi}
+            data={geojsonSumatera}
+            style={(feature) => {
+              const namaProv = (feature.properties.nmprov || feature.properties.PROVINSI || "").toUpperCase();
+              
+              // HANYA 3 provinsi ini yang aktif interaksinya
+              const bisaDiKlik = ["ACEH", "SUMATERA UTARA", "SUMATERA BARAT"].some(prov => namaProv.includes(prov));
+
+              return {
+                fillColor: "#E5D9B6",
+                fillOpacity: 1,
+                color: "#15173D",
+                weight: 1.5,
+                interactive: bisaDiKlik, 
+              };
+            }}
+            onEachFeature={(feature, layer) => {
+              const namaProv = (feature.properties.nmprov || feature.properties.PROVINSI || "").toUpperCase();
+              
+              layer.on({
+                click: (e) => {
+                  let targetProv = "ACEH";
+                  if (namaProv.includes("UTARA")) targetProv = "SUMATERA UTARA";
+                  if (namaProv.includes("BARAT")) targetProv = "SUMATERA BARAT";
+                  
+                  const map = e.target._map;
+                  // Memberikan ruang padding agar saat dizoom provinsi tidak terlalu mepet screen
+                  map.fitBounds(e.target.getBounds(), { paddingBottomRight: [300, 50], paddingTopLeft: [50, 50] });
+
+                  setSelectedProvinsi(targetProv);
+                },
+                mouseover: (e) => {
+                  e.target.setStyle({ fillColor: "#D4C59E" });
+                },
+                mouseout: (e) => {
+                  e.target.setStyle({ fillColor: "#E5D9B6" });
+                }
+              });
+            }}
+          />
+
+          <style>
+            {`
+              .leaflet-container { background: transparent !important; }
+              .label-text-provinsi {
+                color: #000000;
+                font-family: 'Playfair Display', serif;
+                font-weight: 800;
+                font-style: italic;
+                font-size: 1.3rem;
+                text-align: center;
+                white-space: nowrap;
+              }
+            `}
+          </style>
+
+          {/* Kondisional Label Teks Provinsi */}
+          {(selectedProvinsi === "SEMUA" || selectedProvinsi.includes("ACEH")) && (
+            <Marker position={[4.4, 96.6]} icon={L.divIcon({ className: "dummy-class", html: `<div class="label-text-provinsi">Aceh</div>`, iconSize: [80, 25] })} />
+          )}
+          {(selectedProvinsi === "SEMUA" || selectedProvinsi.includes("UTARA")) && (
+            <Marker position={[2.3, 99.2]} icon={L.divIcon({ className: "dummy-class", html: `<div class="label-text-provinsi">Sumatra<br/>Utara</div>`, iconSize: [120, 50] })} />
+          )}
+          {(selectedProvinsi === "SEMUA" || selectedProvinsi.includes("BARAT")) && (
+            <Marker position={[-0.9, 100.5]} icon={L.divIcon({ className: "dummy-class", html: `<div class="label-text-provinsi">Sumatra<br/>Barat</div>`, iconSize: [120, 50] })} />
+          )}
+
+          {/* Tombol kembali */}
+          {selectedProvinsi !== "SEMUA" && (
+            <div style={{ position: "absolute", bottom: "40px", left: "40px", zIndex: 1000 }}>
+              <button 
+                onClick={() => {
+                  setSelectedProvinsi("SEMUA");
+                  // Reset kembali ke posisi awal di sudut kiri bawah
+                  if (mapRef) mapRef.setView([4.5, 104.5], 6); 
+                }}
+                style={{
+                  padding: "12px 24px",
+                  background: "#E5D9B6",
+                  color: "#15173D",
+                  border: "none",
+                  borderRadius: "8px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  boxShadow: "0px 4px 15px rgba(0,0,0,0.3)"
+                }}
+              >
+                ← Kembali ke Peta Sumatra
+              </button>
+            </div>
+          )}
+        </MapContainer>
+
+        {/* 3. TULISAN DI POJOK KANAN ATAS */}
+        <div
+          style={{
+            position: "absolute",
+            top: "80px",
+            right: "80px",
+            zIndex: 10,
+            textAlign: "right",
+            pointerEvents: "none",
+          }}
+        >
+          <h2
+            className="playfair-display"
+            style={{
+              color: "#E5D9B6",
+              fontSize: "2rem",
+              fontStyle: "italic",
+              fontWeight: "500",
+              margin: "0 0 10px 0",
+            }}
+          >
+            Dari Kecamatan hingga Provinsi
+          </h2>
+          <p
+            style={{
+              color: "rgba(229, 217, 182, 0.7)",
+              fontSize: "0.875rem",
+              margin: 0,
+              maxWidth: "500px",
+              lineHeight: "1.8",
+            }}
+          >
+            Perbandingan skala dampak antar wilayah tugas berdasarkan hasil pendataan keluarga terdampak bencana.
+          </p>
+        </div>
+      </section>
+    </>
   );
 }
 
