@@ -11,7 +11,6 @@
  */
 
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
