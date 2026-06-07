@@ -15,18 +15,18 @@ import imgCard from '../assets/images/ws1-maul-card-v0.png';
 import imgCharger from '../assets/images/ws1-maul-charger-v0.png';
 
 // ==================== ASET VIEW 8 ====================
-import imgPidieJaya from '../assets/images/1-Pidie Jaya.png';
-import imgAcehTengah from '../assets/images/2-Aceh Tengah.png';
-import imgBenerMeriah from '../assets/images/3-Bener Meriah.png';
-import imgGayoLues from '../assets/images/4-Gayo Lues.png';
-import imgAcehUtara from '../assets/images/5-Aceh Utara.png';
-import imgAcehTimur from '../assets/images/6-Aceh Timur.png';
-import imgAcehTamiang from '../assets/images/7-Aceh Tamiang.png';
-import imgTapanuliTengah from '../assets/images/8-Tapanuli Tengah.png';
-import imgKotaSibolga from '../assets/images/9-Kota Sibolga.png';
+import imgPidieJaya from '../assets/images/1-Pidie Jaya.webp';
+import imgAcehTengah from '../assets/images/2-Aceh Tengah.webp';
+import imgBenerMeriah from '../assets/images/3-Bener Meriah.webp';
+import imgGayoLues from '../assets/images/4-Gayo Lues.webp';
+import imgAcehUtara from '../assets/images/5-Aceh Utara.webp';
+import imgAcehTimur from '../assets/images/6-Aceh Timur.webp';
+import imgAcehTamiang from '../assets/images/7-Aceh Tamiang.webp';
+import imgTapanuliTengah from '../assets/images/8-Tapanuli Tengah.webp';
+import imgKotaSibolga from '../assets/images/9-Kota Sibolga.webp';
 // 10 - Tapanuli Utara kosong
-import imgTapanuliSelatan from '../assets/images/11-Tapanuli Selatan.png';
-import imgMandailingNatal from '../assets/images/12-Mandailing Natal.png';
+import imgTapanuliSelatan from '../assets/images/11-Tapanuli Selatan.webp';
+import imgMandailingNatal from '../assets/images/12-Mandailing Natal.webp';
 import imgAgam from '../assets/images/13-Agam.png';
 // 14 - Padang Pariaman kosong
 import imgTanahDatar from '../assets/images/15-Tanah Datar.png';

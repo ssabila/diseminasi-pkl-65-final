@@ -1,0 +1,72 @@
+/* WebStory1 Global Storytelling Styles */
+.webstory1-wrapper {
+  position: relative;
+  overflow: hidden; /* Prevent horizontal scroll from bridges or elements */
+}
+
+/* =========================================
+   THE GOLDEN THREAD (Global Progress Line)
+========================================= */
+.ws1-golden-thread {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 999;
+  pointer-events: none;
+}
+
+.ws1-golden-thread-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #d97706, #e91e63, #d97706);
+  transform-origin: top;
+  transform: scaleY(0);
+  box-shadow: 0 0 15px rgba(233, 30, 99, 0.8), 0 0 30px rgba(217, 119, 6, 0.6);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .ws1-golden-thread {
+    left: 10px;
+  }
+}
+
+/* =========================================
+   NARRATIVE BRIDGES
+========================================= */
+.ws1-narrative-bridge {
+  position: relative;
+  width: 100%;
+  height: 120vh; /* Extra height for scroll space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--navy, #0B1120); /* Deep dark background */
+  z-index: 10;
+  margin: -1px 0; /* Fix subtle gaps */
+}
+
+.ws1-nb-content {
+  position: sticky;
+  top: 40vh; /* Stick to middle of viewport */
+  text-align: center;
+  padding: 0 2rem;
+  max-width: 800px;
+}
+
+.ws1-nb-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #E5D9B6;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.4;
+  opacity: 0; /* Managed by GSAP */
+  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}

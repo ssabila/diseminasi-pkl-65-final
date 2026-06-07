@@ -11,7 +11,7 @@
 ════════════════════════════════════════════════════════════════ */
 
 .ws1-husna-view-5-horizontal {
-  background-color: var(--navy);
+  background: radial-gradient(circle at 50% 0%, #1a2238 0%, #0d1525 50%, #070b14 100%);
   min-height: 100vh;
   position: relative;
   overflow: hidden;
