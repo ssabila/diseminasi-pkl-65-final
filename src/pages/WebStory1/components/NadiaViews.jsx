@@ -6,8 +6,6 @@ import './NadiaViews.css';
 
 // View 4 Assets
 import imgSumatera from '../assets/images/view-4/ws1-nadia-sumatera-v4.png';
-import imgPesawat from '../assets/images/view-4/ws1-nadia-pesawat-v4.png';
-import imgArrow from '../assets/images/view-4/ws1-nadia-arrow-v4.png';
 import imgPoint from '../assets/images/view-4/ws1-nadia-point-v4.png';
 
 // View 0/Global Hero Asset
@@ -222,10 +220,7 @@ export const View0 = () => {
       <GrainOverlay />
       
       <div className="j-cover-content" ref={contentRef}>
-        <div className="j-cover-badge-row gsap-fade-badge gsap-hidden-up">
-          <span className="j-badge">PKL ANGKATAN 65</span>
-          <span className="j-badge">POLSTAT STIS</span>
-        </div>
+
         <div ref={titleGroupRef}>
           <h1 className="j-cover-headline gsap-fade-headline gsap-hidden-up">
             {headline1}<br />
@@ -263,12 +258,7 @@ export const View0 = () => {
   );
 };
 
-// ─── Data Provinsi ───────────────────────────────────────────
-const provinsiData = [
-  { id: 'aceh',   label: 'Aceh',           mhs: '270 Mhs',  pml: '29 PML',  cssClass: 'loc-aceh',   planeCls: 'plane-aceh',   pathCls: 'path-aceh' },
-  { id: 'sumut',  label: 'Sumatera Utara', mhs: '210 Mhs',  pml: '21 PML',  cssClass: 'loc-sumut',  planeCls: 'plane-sumut',  pathCls: 'path-sumut' },
-  { id: 'sumbar', label: 'Sumatera Barat', mhs: '30 Mhs',   pml: '2 PML',   cssClass: 'loc-sumbar', planeCls: 'plane-sumbar', pathCls: 'path-sumbar' },
-];
+
 
 // ─── Briefing image stack photos (Unsplash) ──────────────────
 const briefingPhotos = [
@@ -305,50 +295,29 @@ export const View4 = () => {
       scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true },
     });
 
-    // ── 2. PETA SUMATERA ANIMATION (GSAP Original) ───────────────
-    // Animate the map revealing itself
+    // ── 2. PETA SUMATERA ───────────────────────────────────────
+    // Heading fade in
+    gsap.fromTo('.v4-map-heading', { opacity: 0, y: 30 }, {
+      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: mapRef.current, start: 'top 80%', toggleActions: 'play none none none' },
+    });
+
+    // Map reveal with clip-path
     gsap.fromTo('.v4-map-sumatera', 
       { clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 },
       { 
-        clipPath: 'inset(0% 0% 0% 0%)', 
-        opacity: 1, 
-        duration: 1.5, 
-        ease: 'power3.inOut',
-        scrollTrigger: {
-          trigger: mapRef.current,
-          start: 'top 50%',
-          toggleActions: 'play none none none'
-        }
+        clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, 
+        duration: 1.5, ease: 'power3.inOut',
+        scrollTrigger: { trigger: mapRef.current, start: 'top 50%', toggleActions: 'play none none none' }
       }
     );
 
-    // Timeline for pins and paths and planes
-    const mapTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: mapRef.current,
-        start: 'top 40%',
-        toggleActions: 'play none none none'
+    // Pin pop-up stagger
+    gsap.fromTo('.v4-loc-pin',
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.7)', stagger: 0.25,
+        scrollTrigger: { trigger: mapRef.current, start: 'top 40%', toggleActions: 'play none none none' }
       }
-    });
-
-    // 2.a. Pop up the location pins
-    mapTL.fromTo('.v4-loc-pin',
-      { scale: 0, opacity: 0, y: 20 },
-      { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)', stagger: 0.2 }
-    );
-
-    // 2.b. Draw the path arrows (fade and slightly translate)
-    mapTL.fromTo('.v4-path-arrow',
-      { opacity: 0, scale: 0.8 },
-      { opacity: 0.6, scale: 1, duration: 0.5, stagger: 0.2 },
-      "-=0.4"
-    );
-
-    // 2.c. Fly the planes in
-    mapTL.fromTo('.v4-plane',
-      { opacity: 0, x: (i) => i === 0 ? 100 : -100, y: (i) => i === 0 ? -100 : 50 },
-      { opacity: 1, x: 0, y: 0, duration: 1.5, ease: 'power2.out', stagger: 0.2 },
-      "-=0.6"
     );
 
     // ── 3. BRIEFING TERAKHIR: Interactive Card Stack ───────────────
@@ -535,8 +504,6 @@ export const View4 = () => {
                 onMouseLeave={() => setActiveProvince(null)}
                 onClick={() => setActiveProvince(activeProvince === i ? null : i)}
               >
-                <img src={imgArrow} className={`v4-path-arrow path-${prov.id}`} alt="" />
-                <img src={imgPesawat} className={`v4-plane plane-${prov.id}`} alt="Pesawat" />
                 <img src={imgPoint} className="v4-loc-pin" alt="Pin" />
                 
                 {/* Tooltip Hover Info */}
@@ -593,10 +560,85 @@ export const View4 = () => {
 };
 
 export const View9 = () => {
+  const closingRef = useRef(null);
+
+  useGSAP(() => {
+    // Kicker fade in
+    gsap.fromTo('.v9-kicker', { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: closingRef.current, start: 'top 70%', toggleActions: 'play none none none' },
+    });
+    // Headline reveal
+    gsap.fromTo('.v9-headline', { opacity: 0, y: 40 }, {
+      opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', delay: 0.2,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 65%', toggleActions: 'play none none none' },
+    });
+    // Closing paragraph
+    gsap.fromTo('.v9-closing-text', { opacity: 0 }, {
+      opacity: 1, duration: 1, delay: 0.5,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 60%', toggleActions: 'play none none none' },
+    });
+    // Decorative line grow
+    gsap.fromTo('.v9-line', { scaleX: 0 }, {
+      scaleX: 1, duration: 1.2, ease: 'power3.inOut', delay: 0.3,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 60%', toggleActions: 'play none none none' },
+    });
+    // Stats counter fade in stagger
+    gsap.fromTo('.v9-stat', { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out', delay: 0.6,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 55%', toggleActions: 'play none none none' },
+    });
+    // Footer credits
+    gsap.fromTo('.v9-credits', { opacity: 0 }, {
+      opacity: 1, duration: 1.5, delay: 1,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 50%', toggleActions: 'play none none none' },
+    });
+  }, { scope: closingRef });
+
   return (
-    <section className="webstory-view ws1-nadia-view9">
-      <h2>View 9 (Closing Visual) - Nadia</h2>
-      {/* TODO: Add closing visual content and animations here */}
+    <section className="ws1-nadia-view9" ref={closingRef}>
+      <GrainOverlay />
+      
+      {/* Decorative floating orbs */}
+      <div className="v9-orb v9-orb-1" aria-hidden="true" />
+      <div className="v9-orb v9-orb-2" aria-hidden="true" />
+
+      <div className="v9-content">
+        <p className="v9-kicker">PENUTUP</p>
+        <div className="v9-line" />
+        <h2 className="v9-headline">
+          Data Dikumpulkan,<br />
+          <span className="v9-hl-accent">Harapan Direkam</span>
+        </h2>
+        <p className="v9-closing-text">
+          510 mahasiswa. 3 provinsi. 15 kabupaten/kota.<br />
+          Dari mengetuk pintu hingga merekam harapan — sebuah misi kemanusiaan
+          yang tak akan terlupakan.
+        </p>
+
+        <div className="v9-stats-row">
+          <div className="v9-stat">
+            <span className="v9-stat-num">510</span>
+            <span className="v9-stat-label">Mahasiswa</span>
+          </div>
+          <div className="v9-stat">
+            <span className="v9-stat-num">3</span>
+            <span className="v9-stat-label">Provinsi</span>
+          </div>
+          <div className="v9-stat">
+            <span className="v9-stat-num">15</span>
+            <span className="v9-stat-label">Kabupaten/Kota</span>
+          </div>
+          <div className="v9-stat">
+            <span className="v9-stat-num">52</span>
+            <span className="v9-stat-label">PML</span>
+          </div>
+        </div>
+
+        <p className="v9-credits">
+          PKL Angkatan 65 · Politeknik Statistika STIS · 2026
+        </p>
+      </div>
     </section>
   );
 };

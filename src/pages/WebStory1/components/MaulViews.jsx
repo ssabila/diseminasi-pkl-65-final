@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import './MaulViews.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // ==================== ASET VIEW 6 ====================
 import imgFasih from '../assets/images/ws1-maul-fasih-v0.png';
@@ -29,11 +34,11 @@ import imgTanahDatar from '../assets/images/15-Tanah Datar.png';
 // ==================== DATA VIEW 6 ====================
 const amunisiList = [
   { id: 1, src: imgCard, title: "ID Card", desc: "Tanda pengenal resmi petugas PKL R3P STIS" },
-  { id: 2, src: imgFasih, title: "Smartphone + FASIH", desc: "Alat pencatat data realtime ke server BPS. GPS aktif untuk verifikasi lokasi responden" },
-  { id: 3, src: imgPb, title: "Powerbank + charger", desc: "Menjaga smartphone menyala seharian" },
-  { id: 4, src: imgJas, title: "Jas Hujan", desc: "Pelindung tubuh saat cuaca tidak menentu di lapangan" },
+  { id: 2, src: imgFasih, title: "Smartphone + FASIH", desc: "Alat pencatat data realtime ke server BPS" },
+  { id: 3, src: imgPb, title: "Powerbank", desc: "Menjaga smartphone menyala seharian" },
+  { id: 4, src: imgJas, title: "Jas Hujan", desc: "Pelindung tubuh saat cuaca tidak menentu" },
   { id: 5, src: imgCharger, title: "Kabel Data", desc: "Menghubungkan perangkat dan transfer data" },
-  { id: 6, src: imgBoots, title: "Sepatu Boots", desc: "Pelindung medan lumpur. Melindungi kaki saat melewati medan berlumpur & banjir" }
+  { id: 6, src: imgBoots, title: "Sepatu Boots", desc: "Pelindung kaki untuk medan lumpur dan banjir" }
 ];
 
 // ==================== DATA VIEW 8 ====================
@@ -57,10 +62,28 @@ const pklLocations = [
 
 // ==================== KOMPONEN VIEW 6 ====================
 export const View6 = () => {
+  const sectionRef = useRef(null);
   const [activeItem, setActiveItem] = useState(null);
 
+  useGSAP(() => {
+    // Header entrance
+    gsap.fromTo('.ws1-maul-header h2', { opacity: 0, y: 40 }, {
+      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', toggleActions: 'play none none none' },
+    });
+    gsap.fromTo('.ws1-maul-header p', { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.2,
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', toggleActions: 'play none none none' },
+    });
+    // Grid items stagger in
+    gsap.fromTo('.ws1-maul-icon-wrapper', { opacity: 0, y: 30, scale: 0.9 }, {
+      opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '.ws1-maul-icon-grid', start: 'top 70%', toggleActions: 'play none none none' },
+    });
+  }, { scope: sectionRef });
+
   return (
-    <section className="ws1-maul-view6">
+    <section className="ws1-maul-view6" ref={sectionRef}>
       <div className="ws1-maul-header">
         <h2 className="playfair-display">
           Amunisi <span className="ws1-maul-text-orange">Tempur</span>
@@ -81,12 +104,10 @@ export const View6 = () => {
             <div className="ws1-maul-icon-item">
               <img src={item.src} alt={item.title} />
             </div>
-            {activeItem === item.id && (
-              <div className="ws1-maul-text-container">
-                <div className="ws1-maul-pill-title lato-bold">{item.title}</div>
-                <div className="ws1-maul-desc-text lato-regular">{item.desc}</div>
-              </div>
-            )}
+            <div className={`ws1-maul-text-container ${activeItem === item.id ? 'show' : ''}`}>
+              <div className="ws1-maul-pill-title lato-bold">{item.title}</div>
+              <div className="ws1-maul-desc-text lato-regular">{item.desc}</div>
+            </div>
           </div>
         ))}
       </div>
@@ -96,6 +117,7 @@ export const View6 = () => {
 
 // ==================== KOMPONEN VIEW 8 ====================
 export const View8 = () => {
+  const sectionRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAuto, setIsAuto] = useState(false);
 
@@ -109,6 +131,24 @@ export const View8 = () => {
     return () => clearInterval(interval); 
   }, [isAuto]);
 
+  useGSAP(() => {
+    // Header entrance
+    gsap.fromTo('.ws1-maul-v8-header', { opacity: 0, y: 30 }, {
+      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', toggleActions: 'play none none none' },
+    });
+    // Center display scale up
+    gsap.fromTo('.ws1-maul-center-display', { opacity: 0, scale: 0.7 }, {
+      opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', toggleActions: 'play none none none' },
+    });
+    // Orbit items stagger
+    gsap.fromTo('.ws1-maul-orbit-item', { opacity: 0, scale: 0 }, {
+      opacity: 1, scale: 1, duration: 0.5, stagger: 0.06, ease: 'back.out(1.7)',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', toggleActions: 'play none none none' },
+    });
+  }, { scope: sectionRef });
+
   const handlePrev = () => {
     setActiveIndex((prev) => (prev === 0 ? pklLocations.length - 1 : prev - 1));
   };
@@ -118,7 +158,7 @@ export const View8 = () => {
   };
 
   return (
-    <section className="ws1-maul-view8">
+    <section className="ws1-maul-view8" ref={sectionRef}>
       
       <div className="ws1-maul-v8-header">
         <h2 className="playfair-display">
@@ -180,7 +220,6 @@ export const View8 = () => {
             <div 
               key={loc.id}
               className={`ws1-maul-orbit-item ${activeIndex === index ? 'active' : ''}`}
-              /* PERHATIAN: Ini baris yang paling penting agar foto tidak lari ke tengah */
               style={{ '--x': `${x}px`, '--y': `${y}px` }}
               onClick={() => {
                 setActiveIndex(index);
@@ -200,4 +239,4 @@ export const View8 = () => {
 
     </section>
   );
-};
+};
