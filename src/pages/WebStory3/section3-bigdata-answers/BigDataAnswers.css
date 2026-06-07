@@ -1,0 +1,8 @@
+/* Section 3 — BigDataAnswers */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-bigdataanswers {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}

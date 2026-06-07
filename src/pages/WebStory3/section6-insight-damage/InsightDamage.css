@@ -1,0 +1,8 @@
+/* Section 6 — InsightDamage */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-insightdamage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}

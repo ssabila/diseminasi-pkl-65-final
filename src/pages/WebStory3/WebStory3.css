@@ -1,0 +1,14 @@
+/* WebStory3 — CSS scope halaman */
+/* Variabel global tersedia via src/index.css */
+
+.webstory3 {
+  background-color: var(--navy);
+  color: var(--off-white);
+  overflow-x: hidden;
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}

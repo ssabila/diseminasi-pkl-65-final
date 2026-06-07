@@ -1,0 +1,8 @@
+/* Section 1 — Opening */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-opening {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
