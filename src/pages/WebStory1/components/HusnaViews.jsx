@@ -185,7 +185,7 @@ export const View5 = () => {
           {/* Tile 01 */}
           <div className="ws1-husna-bento-tile ws1-husna-tile-wawancara" onClick={() => setSelected(SCRAPBOOK_DATA[0])}>
             <div className="ws1-husna-bento-img-wrap">
-              <img src="src\pages\WebStory1\assets\images\husna-view-5\thumbnail1.png" alt="Wawancara" />
+              <img src="src\pages\WebStory1\assets\images\husna-view-5\thumbnail1.webp" alt="Wawancara" />
               <div className="ws1-husna-bento-img-overlay" />
             </div>
             <div className="ws1-husna-bento-body">
@@ -203,7 +203,7 @@ export const View5 = () => {
           {/* Tile 02 */}
           <div className="ws1-husna-bento-tile ws1-husna-tile-kondisi" onClick={() => setSelected(SCRAPBOOK_DATA[1])}>
             <div className="ws1-husna-bento-img-wrap">
-              <img src="src\pages\WebStory1\assets\images\husna-view-5\thumbnail2.png" alt="Kondisi Lapangan" />
+              <img src="src\pages\WebStory1\assets\images\husna-view-5\thumbnail2.webp" alt="Kondisi Lapangan" />
               <div className="ws1-husna-bento-img-overlay" />
             </div>
             <div className="ws1-husna-bento-body">
@@ -221,7 +221,7 @@ export const View5 = () => {
           {/* Tile 03 (Video) */}
           <div className="ws1-husna-bento-tile ws1-husna-tile-video" onClick={() => setSelected(SCRAPBOOK_DATA[2])}>
             <div className="ws1-husna-bento-img-wrap">
-              <img src="src\pages\WebStory1\assets\images\husna-view-5\thumbnail3.png" alt="Momen Utama" />
+              <img src="src\pages\WebStory1\assets\images\husna-view-5\thumbnail3.webp" alt="Momen Utama" />
               <div className="ws1-husna-bento-img-overlay" />
               <div className="ws1-husna-bento-play">
                 <div className="ws1-husna-bento-play-ring">
