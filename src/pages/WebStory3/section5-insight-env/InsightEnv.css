@@ -1,0 +1,8 @@
+/* Section 5 — InsightEnv */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-insightenv {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}

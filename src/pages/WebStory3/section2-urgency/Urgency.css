@@ -1,0 +1,8 @@
+/* Section 2 — Urgency */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-urgency {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}

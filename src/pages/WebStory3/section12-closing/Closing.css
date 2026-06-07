@@ -1,0 +1,8 @@
+/* Section 12 — Closing */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-closing {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}

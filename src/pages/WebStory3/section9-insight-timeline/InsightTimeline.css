@@ -1,0 +1,8 @@
+/* Section 9 — InsightTimeline */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-insighttimeline {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
