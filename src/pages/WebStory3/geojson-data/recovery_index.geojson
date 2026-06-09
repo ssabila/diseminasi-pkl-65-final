@@ -1,0 +1,365 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Aceh Utara",
+        "recovery_pct": 0.42,
+        "hari_pemulihan": 180,
+        "status": "sedang"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.72432247949723,
+              4.3
+            ],
+            [
+              97.1,
+              4.3
+            ],
+            [
+              97.1,
+              4.6
+            ],
+            [
+              96.7,
+              4.6
+            ],
+            [
+              96.70800417128784,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Aceh Timur",
+        "recovery_pct": 0.55,
+        "hari_pemulihan": 145,
+        "status": "sedang"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.22362123527407,
+              2.9
+            ],
+            [
+              97.7,
+              2.9
+            ],
+            [
+              97.7,
+              3.4
+            ],
+            [
+              97.2,
+              3.4
+            ],
+            [
+              97.20324286879209,
+              2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Langkat",
+        "recovery_pct": 0.38,
+        "hari_pemulihan": 210,
+        "status": "kritis"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.32616500348718,
+              3.3
+            ],
+            [
+              98.8,
+              3.3
+            ],
+            [
+              98.8,
+              3.8
+            ],
+            [
+              98.3,
+              3.8
+            ],
+            [
+              98.32575779754013,
+              3.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Deli Serdang",
+        "recovery_pct": 0.62,
+        "hari_pemulihan": 120,
+        "status": "baik"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.80667301152637,
+              3.3
+            ],
+            [
+              99.2,
+              3.3
+            ],
+            [
+              99.2,
+              3.8
+            ],
+            [
+              98.8,
+              3.8
+            ],
+            [
+              98.82449759816791,
+              3.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Tapanuli Utara",
+        "recovery_pct": 0.33,
+        "hari_pemulihan": 240,
+        "status": "kritis"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.71380909704037,
+              2.8
+            ],
+            [
+              99.2,
+              2.8
+            ],
+            [
+              99.2,
+              3.3
+            ],
+            [
+              98.7,
+              3.3
+            ],
+            [
+              98.70915572602016,
+              2.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Mandailing Natal",
+        "recovery_pct": 0.28,
+        "hari_pemulihan": 280,
+        "status": "kritis"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.22386036497458,
+              1.2
+            ],
+            [
+              99.8,
+              1.2
+            ],
+            [
+              99.8,
+              1.8
+            ],
+            [
+              99.2,
+              1.8
+            ],
+            [
+              99.20682786462224,
+              1.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Pasaman Barat",
+        "recovery_pct": 0.45,
+        "hari_pemulihan": 170,
+        "status": "sedang"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.70070993304104,
+              -0.1
+            ],
+            [
+              100.2,
+              -0.1
+            ],
+            [
+              100.2,
+              0.5
+            ],
+            [
+              99.7,
+              0.5
+            ],
+            [
+              99.70579389364984,
+              -0.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Padang Pariaman",
+        "recovery_pct": 0.51,
+        "hari_pemulihan": 150,
+        "status": "sedang"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.90984785853594,
+              -0.8
+            ],
+            [
+              100.4,
+              -0.8
+            ],
+            [
+              100.4,
+              -0.2
+            ],
+            [
+              99.9,
+              -0.2
+            ],
+            [
+              99.92593058826091,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Agam",
+        "recovery_pct": 0.67,
+        "hari_pemulihan": 100,
+        "status": "baik"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.12900667312144,
+              -1.3
+            ],
+            [
+              100.6,
+              -1.3
+            ],
+            [
+              100.6,
+              -0.7
+            ],
+            [
+              100.1,
+              -0.7
+            ],
+            [
+              100.10837374978165,
+              -1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Solok",
+        "recovery_pct": 0.73,
+        "hari_pemulihan": 85,
+        "status": "baik"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.31924445215823,
+              -1.8
+            ],
+            [
+              100.8,
+              -1.8
+            ],
+            [
+              100.8,
+              -1.2
+            ],
+            [
+              100.3,
+              -1.2
+            ],
+            [
+              100.3119903515308,
+              -1.8
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

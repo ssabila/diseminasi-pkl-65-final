@@ -2,12 +2,14 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { animateUrgency } from './section2-urgency/animation';
 
+// 1. DAFTARKAN PLUGIN DI PALING ATAS
+gsap.registerPlugin(ScrollTrigger);
+
 export const animateWebStory3 = (container, map) => {
   if (!container || !map) return;
 
-  // 1. MASTER TIMELINE / GLOBAL ANIMATIONS
+  // 2. MASTER TIMELINE / GLOBAL ANIMATIONS
   // Proxy object to animate Mapbox properties smoothly via GSAP
-  // Start values will be dynamically updated in onEnter
   const mapProxy = { zoom: map.getZoom(), lng: map.getCenter().lng, lat: map.getCenter().lat };
 
   // Section 1 to Section 2 Global Transition (Background Map)
@@ -45,8 +47,8 @@ export const animateWebStory3 = (container, map) => {
 
   // Animate Mapbox Camera (Zoom into Indonesia)
   mapTransitionTl.to(mapProxy, {
-    zoom: 3.0, // Sedikit diperkecil agar Indonesia terlihat penuh
-    lng: 113,  // Digeser ke barat (Kalimantan) agar Sumatera lebih ke tengah dan terlihat
+    zoom: 3.0,
+    lng: 113,
     lat: -2,
     duration: 1,
     ease: 'power2.inOut',
@@ -60,10 +62,15 @@ export const animateWebStory3 = (container, map) => {
     }
   }, 0);
 
-  // 2. DELEGATE SECTION ANIMATIONS
-  // Panggil animasi spesifik untuk masing-masing section
+  // 3. DELEGATE SECTION ANIMATIONS
   const section2Node = container.querySelector('#section2-urgency');
   if (section2Node) {
     animateUrgency(section2Node);
   }
+}; // Penutup fungsi animateWebStory3 yang benar
+
+// Jika kamu butuh fungsi orchestrator tambahan untuk scope, 
+// buat secara terpisah DI LUAR fungsi pertama seperti ini:
+export const animateWebStory3Scope = (scope) => {
+  // Global effects can be added here jika diperlukan
 };
