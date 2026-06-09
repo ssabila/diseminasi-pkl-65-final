@@ -1,25 +1,37 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useGSAP } from '@gsap/react';
-import { animateWebStory1 } from './animations';
+import React from 'react';
+import { View0, View4, View9 } from './components/NadiaViews';
+import { View1, View2, View3 } from './components/SanchaViews';
+import { View5, View7 } from './components/HusnaViews';
+import { View6, View8 } from './components/MaulViews';
 
-const WebStory1 = () => {
-  const container = useRef(null);
-
-  useGSAP(() => {
-    animateWebStory1(container.current);
-  }, { scope: container });
-
+export default function WebStory1() {
   return (
-    <div ref={container} style={{ minHeight: '100vh', padding: '2rem' }}>
-      <h1>Web Story 1</h1>
-      <p className="animated-text">Ini adalah bagian Web Story 1.</p>
+    <div className="webstory1-wrapper">
+      {/* View 0: Cover (Nadia) */}
+      <View0 />
       
-      <div style={{ marginTop: '2rem' }}>
-        <Link to="/">Kembali ke Landing Page</Link>
-      </div>
+      {/* View 1, 2, 3: Sancha */}
+      <View1 />
+      <View2 />
+      <View3 />
+      
+      {/* View 4: Deployment (Nadia) */}
+      <View4 />
+      
+      {/* View 5: Inti Lapangan (Husna) */}
+      <View5 />
+      
+      {/* View 6: Amunisi Tempur (Maul) */}
+      <View6 />
+      
+      {/* View 7: Tantangan/Parallax (Husna) */}
+      <View7 />
+      
+      {/* View 8: Sehat dan Solid (Maul) */}
+      <View8 />
+      
+      {/* View 9: Closing Visual (Nadia) */}
+      <View9 />
     </div>
   );
-};
-
-export default WebStory1;
+}

@@ -1,0 +1,9 @@
+/* Add specific styles for Sancha's Views here */
+.view-1, .view-2, .view-3 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #4caf50; /* Debug boundary */
+  margin: 1rem 0;
+}

@@ -1,8 +1,171 @@
 /* Section 2 — Urgency */
-/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
 
 .section-urgency {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  /* Center content vertically */
+  z-index: 10;
+}
+
+.urgency-content {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+}
+
+/* Kiri: Teks */
+.urgency-text-container {
+  width: 45%;
+  text-align: left;
+  color: var(--off-white);
+  /* Use margin-top if needed, but flex align-items handles it */
+}
+
+.urgency-title {
+  font-family: var(--font-title);
+  font-size: 5rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #e67e22;
+  /* Sama seperti judul section 1 */
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+  /* Memaksa teks agar selalu 1 baris */
+}
+
+/* Scroll Prompt & Arrow */
+.urgency-scroll {
+  margin-top: 3rem;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.2rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 4px solid #e67e22;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.urgency-scroll p {
+  font-family: var(--font-content);
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--off-white);
+  opacity: 0.9;
+}
+
+.scroll-arrow {
+  font-size: 1.5rem;
+  color: #e67e22;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(10px);
+  }
+
+  60% {
+    transform: translateY(5px);
+  }
+}
+
+/* Kanan: Stack Container */
+.urgency-stack-container {
+  width: 50%;
+  height: 80vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* Layer Base Styles */
+.stack-layer {
+  position: absolute;
+  width: 90%;
+  object-fit: contain;
+  /* Tambahkan sedikit drop shadow agar terlihat 3D dan melayang */
+  filter: drop-shadow(0 15px 10px rgba(0, 0, 0, 0.4));
+}
+
+/* Z-Index logic and precise positioning matching the reference */
+.layer-base {
+  z-index: 1;
+  top: 58%;
+  left: 36%;
+}
+
+.layer-ndvi {
+  z-index: 2;
+  top: 42%;
+  left: 37%;
+}
+
+.layer-ndbi {
+  z-index: 3;
+  top: 35%;
+  left: 38%;
+}
+
+.layer-ndwi {
+  z-index: 4;
+  top: 25%;
+  left: 40%;
+}
+
+.layer-lst {
+  z-index: 5;
+  top: 20%;
+  left: 41%;
+}
+
+.layer-co {
+  z-index: 6;
+  top: 10%;
+  left: 43%;
+}
+
+.layer-so2 {
+  z-index: 7;
+  top: 1%;
+  left: 44%;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .urgency-content {
+    flex-direction: column;
+    padding-top: 15vh;
+  }
+
+  .urgency-text-container {
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+
+  .urgency-stack-container {
+    width: 100%;
+    height: 50vh;
+  }
 }
