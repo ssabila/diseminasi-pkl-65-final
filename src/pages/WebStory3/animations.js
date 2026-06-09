@@ -1,10 +1,69 @@
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { animateUrgency } from './section2-urgency/animation';
 
-export const animateWebStory3 = (scope) => {
-  gsap.from('.animated-text', {
-    scale: 0.8,
-    opacity: 0,
-    duration: 1,
-    ease: 'back.out(1.7)'
+export const animateWebStory3 = (container, map) => {
+  if (!container || !map) return;
+
+  // 1. MASTER TIMELINE / GLOBAL ANIMATIONS
+  // Proxy object to animate Mapbox properties smoothly via GSAP
+  // Start values will be dynamically updated in onEnter
+  const mapProxy = { zoom: map.getZoom(), lng: map.getCenter().lng, lat: map.getCenter().lat };
+
+  // Section 1 to Section 2 Global Transition (Background Map)
+  const mapTransitionTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#section2-urgency',
+      start: 'top bottom', // Start when Section 2 enters the bottom of the screen
+      end: 'top top',      // End when Section 2 hits the top of the screen
+      scrub: 1,            // Smooth scrubbing
+      onEnter: () => {
+        if (map) {
+          map.isSpinning = false;
+          // Ambil posisi globe tepat saat user mulai scroll agar transisi mulus
+          const currentCenter = map.getCenter();
+          mapProxy.lng = currentCenter.lng;
+          mapProxy.lat = currentCenter.lat;
+          mapProxy.zoom = map.getZoom();
+          // Invalidate timeline agar GSAP menghitung ulang titik awal animasi dari posisi proxy terbaru
+          mapTransitionTl.invalidate();
+        }
+      },
+      onLeaveBack: () => { if (map) map.isSpinning = true; }
+    }
   });
+
+  // Animate Globe Container (Move to center and fade opacity)
+  mapTransitionTl.to('#global-map-container', {
+    right: '50%',
+    xPercent: 50,
+    yPercent: -50,
+    opacity: 0.7,
+    duration: 1,
+    ease: 'power2.inOut'
+  }, 0);
+
+  // Animate Mapbox Camera (Zoom into Indonesia)
+  mapTransitionTl.to(mapProxy, {
+    zoom: 3.0, // Sedikit diperkecil agar Indonesia terlihat penuh
+    lng: 113,  // Digeser ke barat (Kalimantan) agar Sumatera lebih ke tengah dan terlihat
+    lat: -2,
+    duration: 1,
+    ease: 'power2.inOut',
+    onUpdate: () => {
+      if (map && map.jumpTo) {
+        map.jumpTo({
+          zoom: mapProxy.zoom,
+          center: [mapProxy.lng, mapProxy.lat]
+        });
+      }
+    }
+  }, 0);
+
+  // 2. DELEGATE SECTION ANIMATIONS
+  // Panggil animasi spesifik untuk masing-masing section
+  const section2Node = container.querySelector('#section2-urgency');
+  if (section2Node) {
+    animateUrgency(section2Node);
+  }
 };
