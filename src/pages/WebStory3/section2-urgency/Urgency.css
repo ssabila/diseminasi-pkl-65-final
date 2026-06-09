@@ -4,6 +4,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  margin-top: 25vh;
   display: flex;
   align-items: center;
   /* Center content vertically */
@@ -41,14 +42,24 @@
   /* Memaksa teks agar selalu 1 baris */
 }
 
-/* Scroll Prompt & Arrow */
+/* Scroll Prompt & Arrow Wrapper */
+.urgency-scroll-wrapper {
+  position: absolute;
+  bottom: -5vh;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+}
+
 .urgency-scroll {
-  margin-top: 3rem;
+  /* Hilangkan margin-top karena sekarang sudah di-wrapper */
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
-  padding: 0.2rem 1.5rem;
+  padding: 0rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-left: 4px solid #e67e22;
   border-radius: 8px;

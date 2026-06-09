@@ -64,10 +64,7 @@ export default function Urgency() {
             />
           </div>
 
-          <div className="urgency-scroll">
-            <p>Lalu, <span style={{ fontWeight: '600', color: '#e67e22' }}><b>apa yang bisa kita pelajari</b></span> dari data-data tersebut?</p>
-            <div className="scroll-arrow">↓</div>
-          </div>
+
         </div>
 
         {/* Kanan: Stack Gambar */}
@@ -81,7 +78,14 @@ export default function Urgency() {
             />
           ))}
         </div>
+      </div>
 
+      {/* Scroll Prompt ditaruh di luar agar bisa persis di tengah halaman bawah */}
+      <div className="urgency-scroll-wrapper">
+        <div className="urgency-scroll">
+          <p>Lalu, <span style={{ fontWeight: '600', color: '#e67e22' }}><b>apa yang bisa kita pelajari</b></span> dari data-data tersebut?</p>
+          <div className="scroll-arrow">↓</div>
+        </div>
       </div>
     </section>
   );

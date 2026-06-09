@@ -17,6 +17,11 @@ import InsightRecovery from './section10-insight-recovery/InsightRecovery';
 import ModuleMenu from './section11-module-menu/ModuleMenu';
 import Closing from './section12-closing/Closing';
 import { SharedMapProvider } from './SharedMapProvider';
+import MapBackground from './components/MapBackground';
+import { animateWebStory3 } from './animations';
+import { useGSAP } from '@gsap/react';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,10 +56,13 @@ class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
+=======
+>>>>>>> Stashed changes
 
 const WebStory3 = () => {
   const container = useRef(null);
 
+<<<<<<< Updated upstream
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -77,25 +85,44 @@ const WebStory3 = () => {
     };
   }, []);
 
+  useGSAP(() => {
+    if (!mapInstance) return;
+
+    // We pass the container and the map instance to the animation file
+    animateWebStory3(container.current, mapInstance);
+  }, { scope: container, dependencies: [mapInstance] });
+
   return (
     <ErrorBoundary>
-      <div ref={container} className="webstory3">
-        <Opening />
-        <Urgency />
-        <BigDataAnswers />
-        <GlobeTransition />
+      <div ref={container} className="webstory3-container webstory3" style={{ position: 'relative' }}>
+        {/* Sticky background layer for Sections 1-4 */}
+        <MapBackground onMapLoad={setMapInstance} />
 
-        <SharedMapProvider>
-          <InsightEnv />
-          <InsightDamage />
-          <InsightNTL />
-          <InsightVulnerability />
-          <InsightTimeline />
-        </SharedMapProvider>
+        <div className="webstory3-sections" style={{ position: 'relative', zIndex: 10 }}>
+          <Opening />
+          <Urgency />
+          <BigDataAnswers />
+          <GlobeTransition />
 
-        <InsightRecovery />
-        <ModuleMenu />
-        <Closing />
+          <SharedMapProvider>
+            <InsightEnv />
+            <InsightDamage />
+            <InsightNTL />
+            <InsightVulnerability />
+            <InsightTimeline />
+          </SharedMapProvider>
+
+          <InsightRecovery />
+          <ModuleMenu />
+          <Closing />
+
+          {/* Tombol kembali sementara untuk navigasi */}
+          <div style={{ position: 'relative', zIndex: 99, padding: '2rem', textAlign: 'center', height: '50vh' }}>
+            <Link to="/" style={{ color: 'var(--off-white)', textDecoration: 'underline' }}>
+              Kembali ke Landing Page
+            </Link>
+          </div>
+        </div>
       </div>
     </ErrorBoundary>
   );
