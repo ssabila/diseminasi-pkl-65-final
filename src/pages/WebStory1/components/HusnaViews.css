@@ -26,13 +26,40 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--pad-x);
+  padding: 0 5%;
   z-index: 5;
 }
 
 .ws1-husna-v5-header-h {
   margin-bottom: 40px;
   text-align: left;
+}
+
+/* ── Headlines & Kickers (Biar teksnya kelihatan!) ── */
+.ws1-husna-headline {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.ws1-husna-headline-beige { font-style:italic; color: var(--beige); }
+.ws1-husna-headline em { font-style: italic; color: #E67E22; }
+
+
+.ws1-husna-kicker {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.ws1-husna-kicker-beige {
+  color: var(--beige);
+  background: rgba(229, 217, 182, 0.15);
+  border: 1px solid rgba(229, 217, 182, 0.3);
 }
 
 /* ── Bento Grid ── */
@@ -100,6 +127,8 @@
   background: linear-gradient(to top, rgba(13, 21, 37, 0.65) 0%, transparent 55%);
 }
 
+/* ── Play Button (Tile Video) ── */
+
 .ws1-husna-bento-play {
   position: absolute;
   inset: 0;
@@ -130,7 +159,7 @@
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-left: 17px solid var(--orange);
+  border-left: 17px solid #E67E22;
   margin-left: 4px;
 }
 
@@ -141,7 +170,7 @@
   background: rgba(21, 23, 61, 0.8);
   border: 1px solid rgba(230, 126, 34, 0.3);
   border-radius: 20px;
-  color: var(--orange);
+  color: #E67E22;
   font-size: 0.52rem;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -157,7 +186,7 @@
 .ws1-husna-bento-num {
   font-size: 0.55rem;
   letter-spacing: 3.5px;
-  color: var(--orange);
+  color: #E67E22;
   text-transform: uppercase;
   font-family: var(--font-content);
   font-weight: 400;
@@ -166,17 +195,17 @@
 }
 
 .ws1-husna-bento-title {
-  font-family: var(--font-h);
+  font-family: var(--font-content);
+  font-style: italic;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--beige);
+  color: #E67E22;
   letter-spacing: 0.2px;
   margin-bottom: 3px;
 }
 
 .ws1-husna-tile-video .ws1-husna-bento-title {
   font-size: 1.15rem;
-  font-style: italic;
   font-weight: 400;
 }
 
@@ -280,7 +309,7 @@
   width: 100%;
   max-height: 90vh;
   border-radius: 4px;
-  padding: 30px;
+  padding: 20px;
   z-index: 5;
   overflow-y: auto;
   display: flex;
@@ -349,12 +378,14 @@
   color: var(--navy);
   font-style: italic;
   font-size: 1.5rem;
+  margin: 5px;
 }
 
 .ws1-husna-modal-info p {
   color: var(--navy);
   line-height: 1.5;
   font-size: 0.95rem;
+  margin: 5px;
 }
 
 /* ── Modal: Carousel (Fan-Stack) ── */
@@ -428,27 +459,31 @@
   align-items: center;
   justify-content: center;
   gap: 40px;
-  margin-top: 10px;
+  margin-top: 50px;
   padding-top: 10px;
   border-top: 1px solid rgba(21, 23, 61, 0.1);
   width: 100%;
   max-width: 400px;
 }
 
+.ws1-husna-elegant-nav.nav-video-mode {
+  margin-top: 10px; /* Margin Video Mode */
+}
+
 .ws1-husna-nav-minimal {
   background: none;
   border: none;
-  font-family: var(--font-content);
+  color: var(--navy);
+  opacity: 0.8;
+  font-family: var(--font-title);
   font-size: 0.75rem;
   letter-spacing: 2px;
   font-weight: 700;
-  color: var(--navy);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
   transition: all 0.3s ease;
-  opacity: 0.6;
 }
 
 .ws1-husna-nav-minimal:hover {
@@ -466,13 +501,15 @@
 }
 
 .ws1-husna-nav-counter {
-  font-family: var(--font-h);
+  font-family: var(--font-content);
   font-size: 0.9rem;
   color: var(--navy);
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .ws1-husna-nav-counter span {
   color: var(--orange);
   font-weight: 700;
 }
+
+
