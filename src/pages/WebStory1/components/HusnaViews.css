@@ -476,3 +476,110 @@
   color: var(--orange);
   font-weight: 700;
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+  VIEW 7 — INTI LAPANGAN: "MENGETUK PINTU, MEREKAM HARAPAN"
+════════════════════════════════════════════════════════════════ */
+
+.ws1-husna-view-7-accordion {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--beige); 
+  padding: 50px 0px;
+  position: relative;
+}
+
+.ws1-husna-v7-accordion-header {
+  position: relative; 
+  z-index: 2;
+  text-align: center; 
+  margin-bottom: 30px;
+}
+
+.ws1-husna-accordion-container {
+  display: flex;
+  height: 400px; 
+  width: 90%; 
+  max-width: 1400px;
+  margin: 0 auto; 
+  gap: 12px; 
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.ws1-husna-accordion-panel {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  /* Animasi flex di-handle oleh Framer Motion di JSX */
+}
+
+.ws1-husna-panel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s ease;
+}
+
+.ws1-husna-accordion-panel.is-active .ws1-husna-panel-bg {
+  transform: scale(1.05);
+}
+
+.ws1-husna-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(21, 23, 61, 0.8) 0%, 
+    rgba(21, 23, 61, 0.3) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  transition: opacity 0.5s;
+}
+
+.ws1-husna-accordion-panel.is-active .ws1-husna-panel-overlay {
+  opacity: 0.85;
+}
+
+.ws1-husna-panel-content {
+  position: relative;
+  z-index: 10;
+  padding: 20px 40px;
+  width: 100%;
+  color: var(--beige); 
+}
+
+.ws1-husna-panel-quote {
+  font-family: var(--font-title); 
+  font-style: italic;
+  border-left: 3px solid var(--green);
+  padding-left: 15px;
+  font-size: 1.1rem;
+  max-width: 100%;
+  margin: 0;
+}
+
+.ws1-husna-panel-name-vertical {
+  position: absolute;
+  top: 75% !important; 
+  left: 50% !important;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) !important;
+  width: max-content;
+  font-family: var(--font-title); 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--beige);
+  z-index: 20;
+  pointer-events: none;
+}
