@@ -2,70 +2,56 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { motion, AnimatePresence } from 'framer-motion'; 
+import { animateView5, animateView7 } from '../animations'; 
+
 import './HusnaViews.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
-// ─────────────────────────────────────────────
-// 1. DATA 
-// ─────────────────────────────────────────────
-const SCRAPBOOK_DATA = [
+// ═══════════════════════════════════════════════════════════════════════════════
+// VIEW 7 DATA (Versi Profesional)
+// ═══════════════════════════════════════════════════════════════════════════════
+const PROVINSI_DATA = [
   {
-    id: "wawancara",
-    title: "Wawancara",
-    num: "01",
-    images: [
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800",
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
-    ],
-    caption: "Mendengar suara yang menanti pemulihan.",
-    type: "gallery"
+    id: "v7b1",
+    name: "Aceh",
+    img: "https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?q=80&w=1000", 
+    kicker: "Tantangan",
+    heading: "Melawan",
+    headingAccent: "Medan",
+    body: "Menjangkau wilayah terdampak bencana menuntut adaptasi terhadap akses jalan darurat dan kendala sinyal. Tim memastikan setiap responden tetap terdata dengan baik.",
+    quote: '"Data pemulihan pascabencana ini krusial untuk perencanaan kebijakan yang tepat sasaran."',
   },
   {
-    id: "kondisi",
-    title: "Kondisi Lapangan",
-    num: "02",
-    images: [
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800",
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800",
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
-    ],
-    caption: "Merekam realitas infrastruktur pasca bencana.",
-    type: "gallery"
+    id: "v7b2",
+    name: "Sumatera Utara",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    kicker: "Lapangan",
+    heading: "Setiap",
+    headingAccent: "Langkah",
+    body: "Variasi topografi dari pesisir hingga pegunungan mengharuskan pergerakan tim yang efisien. Minimasi non-sampling error menjadi fokus utama di setiap rute perjalanan.",
+    quote: '"Tantangan fisik di lapangan tidak boleh menurunkan standar objektivitas sebuah data statistik."',
   },
   {
-    id: "momen",
-    title: "Momen Utama",
-    num: "03",
-    videos: [
-      {id: "hcqIrxQ54Uk", source: "youtube", caption: "Di Balik Pendataan Pascabencana Aceh Tengah"},
-      {id: "wNxD4448jas", source: "youtube", caption: "Di Balik Pendataan Pascabencana Tapanuli Utara"},
-      {id: "Vd4LgunRcPo", source: "youtube", caption: "Di Balik Pendataan Pascabencana Sumatera Barat"},
-      {id: "DUBIBhUEiA0", source: "reels", caption: "Mendata di Pidie Jaya"}
-    ],
-    type: "video_gallery"
+    id: "v7b3",
+    name: "Sumatera Barat",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    kicker: "Dedikasi",
+    heading: "Tetap",
+    headingAccent: "Bergerak",
+    body: "Pengumpulan data primer secara masif membutuhkan manajemen waktu dan tenaga yang solid. Konsistensi metodologi dijaga ketat pada setiap tahapan pencacahan.",
+    quote: '"Angka yang kami kumpulkan adalah potret riil kondisi sosial-ekonomi masyarakat saat ini."',
   },
 ];
 
 // ─────────────────────────────────────────────
-// 2. HELPER: wrap index agar infinite
+// HELPER: wrap index agar infinite
 // ─────────────────────────────────────────────
 function wrap(index, length) {
   return ((index % length) + length) % length;
 }
 
 // ─────────────────────────────────────────────
-// 3. KOMPONEN CAROUSEL (Diubah ke GSAP)
+// KOMPONEN CAROUSEL (GSAP)
 // ─────────────────────────────────────────────
 function SafariCarousel({ images, activeIndex, onSetIndex }) {
   const len = images.length;
@@ -135,13 +121,12 @@ function SafariCarousel({ images, activeIndex, onSetIndex }) {
 }
 
 // ─────────────────────────────────────────────
-// 4. KOMPONEN MODAL (Diubah ke GSAP)
+// KOMPONEN MODAL (GSAP)
 // ─────────────────────────────────────────────
 function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, paginate }) {
   const modalRef = useRef(null);
 
   useGSAP(() => {
-    // Entrance animation
     gsap.fromTo(modalRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" });
     gsap.fromTo(".ws1-husna-modal-content", 
       { scale: 0.9, y: 30, opacity: 0 }, 
@@ -150,7 +135,6 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
   }, { scope: modalRef });
 
   const triggerClose = () => {
-    // Exit animation
     gsap.to(modalRef.current, { opacity: 0, duration: 0.3, ease: "power2.in" });
     gsap.to(".ws1-husna-modal-content", { 
       scale: 0.9, y: 20, opacity: 0, duration: 0.3, ease: "power2.in", 
@@ -208,7 +192,7 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
         <div className="ws1-husna-modal-bottom-section">
           {((selected.type === "gallery" && selected.images.length > 1) || 
             (selected.type === "video_gallery" && selected.videos.length > 1)) && (
-            <div className="ws1-husna-elegant-nav">
+            <div className={`ws1-husna-elegant-nav ${selected.type === "video_gallery" ? "nav-video-mode" : ""}`}>
               <button className="ws1-husna-nav-minimal" onClick={() => paginate(-1)}>
                 <span className="ws1-husna-nav-icon">←</span> PREV
               </button>
@@ -242,16 +226,14 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
 }
 
 // ─────────────────────────────────────────────
-// 5. VIEW UTAMA
+// VIEW 5: INTI LAPANGAN (BENTO GRID)
 // ─────────────────────────────────────────────
 export const View5 = () => {
   const containerRef = useRef(null);
-  const [selected, setSelected]       = useState(null);
+  const [selected, setSelected] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // IMPLEMENTASI GSAP ENTRY ANIMATIONS 
   useGSAP(() => {
-    // Basic entrance animations for bento tiles can be added here
     gsap.fromTo(".ws1-husna-bento-tile", 
       { opacity: 0, y: 40 },
       { 
@@ -286,19 +268,16 @@ export const View5 = () => {
 
   return (
     <section ref={containerRef} className="ws1-husna-view-5-horizontal" id="flatlay">
-
       <div className="ws1-husna-view-inner-h">
         <header className="ws1-husna-v5-header-h">
-          <span className="ws1-husna-kicker-beige lato-regular">Tahap 5 · Inti Lapangan</span>
-          <h2>
+          <span className="ws1-husna-kicker ws1-husna-kicker-beige lato-regular">Tahap 5 · Inti Lapangan</span>
+          <h2 className="ws1-husna-headline ws1-husna-headline-beige">
             Mengetuk Pintu, <em className="ws1-husna-accent-orange">Merekam Harapan</em>
           </h2>
         </header>
 
-        {/* ── Bento Grid ── */}
         <div className="ws1-husna-bento-grid">
           
-          {/* Tile 01 */}
           <div className="ws1-husna-bento-tile ws1-husna-tile-wawancara" onClick={() => setSelected(SCRAPBOOK_DATA[0])}>
             <div className="ws1-husna-bento-img-wrap">
               <img src={SCRAPBOOK_DATA[0].images[0]} alt="Wawancara" />
@@ -316,7 +295,6 @@ export const View5 = () => {
             <div className="ws1-husna-bento-hover-bar" />
           </div>
 
-          {/* Tile 02 */}
           <div className="ws1-husna-bento-tile ws1-husna-tile-kondisi" onClick={() => setSelected(SCRAPBOOK_DATA[1])}>
             <div className="ws1-husna-bento-img-wrap">
               <img src={SCRAPBOOK_DATA[1].images[0]} alt="Kondisi Lapangan" />
@@ -334,7 +312,6 @@ export const View5 = () => {
             <div className="ws1-husna-bento-hover-bar" />
           </div>
 
-          {/* Tile 03 (Video) */}
           <div className="ws1-husna-bento-tile ws1-husna-tile-video" onClick={() => setSelected(SCRAPBOOK_DATA[2])}>
             <div className="ws1-husna-bento-img-wrap">
               <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Momen Utama" />
@@ -361,7 +338,6 @@ export const View5 = () => {
         </div>
       </div>
 
-      {/* ── Modal Interaktif ── */}
       {selected && (
         <InteractiveModal 
           selected={selected} 
@@ -375,12 +351,69 @@ export const View5 = () => {
   );
 };
 
-
+// ─────────────────────────────────────────────
+// VIEW 7: MELAWAN MEDAN (ACCORDION)
+// ─────────────────────────────────────────────
 export const View7 = () => {
+  const containerRef = useRef(null);
+  const [hovered, setHovered] = useState(0);
+
+  useGSAP(() => {
+    animateView7(containerRef);
+  }, { scope: containerRef });
+
   return (
-    <section className="webstory-view view-7">
-      <h2>View 7 (Tantangan/Parallax) - Husna</h2>
-      {/* TODO: Add tantangan content and animations here */}
+    <section ref={containerRef} className="ws1-husna-view-7-accordion" id="field">
+      <div className="ws1-husna-v7-accordion-header">
+        <span className="ws1-husna-kicker ws1-husna-kicker-green lato-regular">Tahap 7 · Tantangan</span>
+        <h2 className="ws1-husna-headline ws1-husna-headline-navy">Melawan
+          <em className="ws1-text-orange"> Medan</em> 
+        </h2>
+      </div>
+
+      <div className="ws1-husna-accordion-container">
+        {PROVINSI_DATA.map((prov, i) => {
+          const isActive = hovered === i;
+
+          return (
+            <motion.div
+              key={prov.id}
+              className={`ws1-husna-accordion-panel ${isActive ? 'is-active' : ''}`}
+              onMouseEnter={() => setHovered(i)}
+              animate={{ flex: isActive ? 2.5 : 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            >
+              <div 
+                className="ws1-husna-panel-bg" 
+                style={{ backgroundImage: `url(${prov.img})` }} 
+              />
+              <div className="ws1-husna-panel-overlay" />
+
+              <AnimatePresence>
+                {!isActive && (
+                  <motion.div 
+                    key="collapsed-name"
+                    className="ws1-husna-panel-name-vertical"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.6 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    {prov.name}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="ws1-husna-panel-content">
+                {isActive && (
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                    <blockquote className="ws1-husna-panel-quote">{prov.body}</blockquote>
+                  </motion.div>
+                )}
+              </div>    
+            </motion.div>
+          );
+        })}
+      </div>
     </section>
   );
 };
