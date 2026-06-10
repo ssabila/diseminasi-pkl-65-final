@@ -22,3 +22,24 @@ export const animateView5 = (containerRef) => {
     }
   });
 };
+
+export const animateView7 = (containerRef) => {
+  gsap.fromTo('.ws1-husna-accordion-panel', 
+    { 
+      y: 80, 
+      opacity: 0 
+    },
+    {
+      y: 0, 
+      opacity: 1,
+      duration: 1,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%", 
+        toggleActions: "play none none reverse",
+      }
+    }
+  );
+};
