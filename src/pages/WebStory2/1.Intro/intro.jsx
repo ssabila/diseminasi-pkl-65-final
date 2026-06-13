@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import insights from '../insight.json';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './intro.css';
 
 import Particles from './Particles';
 import ScrollReveal from './ScrollReveal';
@@ -244,6 +245,76 @@ const HEADLINE_WORDS = [
 const SEKTOR_R_STROKE = 30; // radius lingkaran stroke SVG sektor
 
 /* ─────────────────────────────────────────
+   Cula.tech Style Data Engine Panel
+───────────────────────────────────────────*/
+function CulaDataPanel() {
+  const _ds = insights?.ringkasan_dataset || {};
+  const totalKK = _ds.total_rt_keluarga || 115462;
+  const totalDesa = _ds.total_desa_infra || 928;
+  const totalART = _ds.total_art_keluarga || 188902;
+
+  return (
+    <div style={{
+      width: '100%', maxWidth: '360px', background: 'rgba(15, 20, 25, 0.65)',
+      backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+      borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.1)',
+      padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem',
+      boxShadow: '0 20px 40px rgba(0,0,0,0.5)', color: '#fff',
+      pointerEvents: 'auto'
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ fontSize: '1.05rem', fontWeight: 600, color: '#E5D9B6', fontFamily: 'sans-serif' }}>
+          R3P Data Engine
+        </div>
+        <div style={{ background: 'rgba(98,129,65,0.2)', color: '#8aaf5a', padding: '3px 8px', borderRadius: '20px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '1px' }}>
+          LIVE
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '1rem' }}>📍</span>
+          <span className="lato-regular" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Cakupan Wilayah</span>
+        </div>
+        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>{totalDesa} Desa</div>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '1rem' }}>👨👩👧👦</span>
+          <span className="lato-regular" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Keluarga Disurvei</span>
+        </div>
+        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>{totalKK.toLocaleString('id-ID')} KK</div>
+      </div>
+
+      <div style={{ borderLeft: '2px dashed rgba(255,255,255,0.2)', marginLeft: '1.2rem', paddingLeft: '1.2rem', paddingBottom: '0.2rem', paddingTop: '0.2rem' }}>
+        <div className="lato-light" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.2rem' }}>Total Jiwa Terdampak</div>
+        <div className="lato-bold" style={{ fontSize: '1rem', color: '#E5D9B6' }}>+ {totalART.toLocaleString('id-ID')} Jiwa</div>
+      </div>
+
+      <div className="lato-bold" style={{ fontSize: '0.65rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>
+        DATA POINTS COLLECTED
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.4rem' }}>
+          <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.7)' }}>✓ Sosial/Ibadah</span>
+          <span className="lato-bold" style={{ background: 'rgba(239, 135, 34, 0.15)', color: '#EF8722', padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>1.106 Unit</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.4rem' }}>
+          <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.7)' }}>✓ Pendidikan</span>
+          <span className="lato-bold" style={{ background: 'rgba(98, 129, 65, 0.15)', color: '#628141', padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>785 Unit</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem' }}>
+          <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.7)' }}>✓ Kesehatan</span>
+          <span className="lato-bold" style={{ background: 'rgba(79, 195, 247, 0.15)', color: '#4FC3F7', padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>607 Unit</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────
    ChoroplethMapbox — peta Mapbox satelit (muted) FULL-SCREEN untuk Scene 2.
    • Provinsi target di-tint warna tingkat kerusakan (fill-opacity 0→penuh saat scroll).
    • Titik kab/kota neon (halo + core) menyala satu per satu mengikuti progress.
@@ -312,7 +383,7 @@ function ChoroplethMapbox({ apiRef }) {
           style: 'mapbox://styles/mapbox/satellite-v9',
           projection: 'mercator',
           bounds: CHORO_BOUNDS,
-          fitBoundsOptions: { padding: { top: 64, bottom: 64, left: 48, right: 48 } },
+          fitBoundsOptions: { padding: { top: 64, bottom: 64, left: 48, right: 480 } },
           // Statis: matikan semua interaksi kamera agar tidak membajak scroll halaman.
           scrollZoom: false, dragPan: false, dragRotate: false, boxZoom: false,
           doubleClickZoom: false, touchZoomRotate: false, touchPitch: false, keyboard: false,
@@ -371,9 +442,15 @@ function ChoroplethMapbox({ apiRef }) {
           el.className = 's2c-prov-label';
           el.style.opacity = '0';
           el.innerHTML = `
-            <div class="s2c-prov-name">${t.label}</div>
-            <div class="s2c-prov-row"><span class="s2c-prov-dot" style="background:${t.color}"></span>${t.tingkat}</div>
-            <div class="s2c-prov-desa">${Number(t.desa).toLocaleString('id-ID')} desa terdampak</div>`;
+            <div style="position: relative; display: flex; align-items: center; pointer-events: none;">
+              <div style="width: 14px; height: 14px; background-color: ${t.color}; border-radius: 50%; box-shadow: 0 0 15px ${t.color}, inset 0 0 4px rgba(255,255,255,0.8); z-index: 2; border: 2px solid rgba(255,255,255,0.9);"></div>
+              <div style="width: 40px; height: 2px; background-color: rgba(255,255,255,0.7); z-index: 1; margin-left: -2px;"></div>
+              <div style="background: rgba(15, 20, 25, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 6px 14px; border-radius: 6px; font-family: 'Lato', sans-serif; font-size: 11px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 4px; white-space: nowrap;">
+                <div style="font-weight: 800; color: ${t.color}; display: flex; align-items: center; gap: 6px;"><span style="font-size: 14px;">✓</span> ${t.label.toUpperCase()}</div>
+                <div style="font-weight: 300; font-size: 10px; color: rgba(255,255,255,0.7);">${t.tingkat} • ${Number(t.desa).toLocaleString('id-ID')} Desa</div>
+              </div>
+            </div>
+          `;
           const marker = new mapboxgl.Marker({ element: el, anchor: 'center' }).setLngLat(cfg.lngLat).addTo(map);
           return { marker, el, appear: cfg.appear };
         });
@@ -829,32 +906,21 @@ function SkalaDampakScene() {
       {/* ── Peta Sebaran Kerusakan (Mapbox satelit muted, FULL-SCREEN) ── */}
       <section className="s2-choro">
         <div className="s2c-sticky">
-          {/* Peta full-screen (mengisi seluruh viewport, seperti Scene 1) */}
           <ChoroplethMapbox apiRef={mapApiRef} />
 
-          {/* Judul overlay di atas peta */}
-          <div className="s2c-head">
-            <h3 className="playfair-display">Peta Sebaran Kerusakan</h3>
-          </div>
-
-          {/* Legend "Tingkat Kerusakan" + makna titik */}
-          <div className="s2c-legend">
-            <span className="s2c-legend-title playfair-display">Tingkat Kerusakan</span>
-            {[
-              { label: 'Rusak Parah', color: '#EF8722' },
-              { label: 'Rusak Sedang', color: '#E5D9B6' },
-              { label: 'Rusak Ringan', color: '#628141' },
-            ].map((row) => (
-              <div key={row.label} className="s2c-legend-row">
-                <span className="s2c-legend-dot" style={{ background: row.color }} />
-                <span className="lato-light">{row.label}</span>
-              </div>
-            ))}
-            <div className="s2c-legend-sep" />
-            <div className="s2c-legend-row">
-              <span className="s2c-legend-point" />
-              <span className="lato-light">Titik pendataan kab/kota</span>
-            </div>
+          {/* Panel Data Cula.tech — Posisi Kanan Atas (Area Lautan Kosong) */}
+          <div className="s2c-head" style={{
+            position: 'absolute',
+            top: '12%',         // Taruh di atas
+            right: '5%',        // Taruh di kanan (Area Selat Malaka yang kosong)
+            bottom: 'auto',     // WAJIB: Matikan CSS bawaan
+            left: 'auto',       // WAJIB: Matikan CSS bawaan
+            transform: 'none',  // WAJIB: Matikan efek center dari CSS bawaan
+            width: 'auto',      // WAJIB: Cegah elemen melebar 100%
+            zIndex: 20,
+            textAlign: 'left'
+          }}>
+            <CulaDataPanel />
           </div>
         </div>
       </section>
@@ -1026,13 +1092,6 @@ function MapboxGlobe({ phase }) {
 
   return (
     <>
-      <style>{`
-        /* Sembunyikan Logo & Atribusi Mapbox sesuai permintaan */
-        .mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib {
-          display: none !important;
-        }
-      `}</style>
-
       {mapError && (
         <div style={{
           position: 'absolute', top: 20, left: 20, zIndex: 100,
@@ -1143,6 +1202,7 @@ function ProgressDots({ phase }) {
 export default function BabakIntro() {
   const [phase, setPhase] = useState('spin');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const scrollProgressRef = useRef(0);
 
   const wrapperRef = useRef(null);
 
@@ -1169,6 +1229,7 @@ export default function BabakIntro() {
         const key = found ? found.key : SCROLL_PHASES[SCROLL_PHASES.length - 1].key;
         setPhase(key);
         setScrollProgress(p);
+        scrollProgressRef.current = p;
       },
     });
     return () => ST.kill();
@@ -1238,7 +1299,7 @@ export default function BabakIntro() {
       gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
     }
     const moveCursor = (e) => {
-      if (cursorRef.current) {
+      if (cursorRef.current && scrollProgressRef.current < 0.95) {
         gsap.to(cursorRef.current, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "none" });
       }
     };
@@ -1293,30 +1354,6 @@ export default function BabakIntro() {
 
   return (
     <>
-      <style>{`
-        .title-text-1 {
-          font-family: 'Playfair Display', serif;
-          font-size: 60px;
-          font-weight: 400;
-          font-style: italic;
-          text-align: center;
-          color: #FFF;
-          line-height: normal;
-          text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-        .title-text-2 {
-          font-family: 'Playfair Display', serif;
-          font-size: 60px;
-          font-weight: 400;
-          font-style: italic;
-          text-align: center;
-          color: #FFF;
-          line-height: normal;
-          margin-bottom: 2rem;
-          text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-      `}</style>
-
       {/* Custom Cursor */}
       <div ref={cursorRef} style={{
         position: 'fixed', top: 0, left: 0, zIndex: 99999, pointerEvents: 'none',
@@ -1435,244 +1472,25 @@ export default function BabakIntro() {
         </div>
       </div>
 
-      {/* SCENE 2: CINEMATIC IMAGE REVEAL */}
-      {/* Tambahkan marginTop: '-100vh' di sini agar transisi menyambung instan! */}
-      <div ref={s2WrapperRef} style={{ height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', backgroundColor: '#050505', marginTop: '-100vh', zIndex: 1 }}>
-
-        {/* Container Gambar (Posisi Absolut Full Screen tapi akan di-masking oleh GSAP) */}
+      {/* SCENE TRANSISI: FOTO ZOOM IN & TEKS */}
+      <div ref={s2WrapperRef} style={{ height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', backgroundColor: '#0a0a0a' }}>
         <div ref={s2ImageRef} style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
           <img ref={s2ImageInnerRef} src={imgPendataan} alt="Pendataan Lapangan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-
-          {/* Overlay gradien gelap agar teks di kanan terbaca */}
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }} />
         </div>
 
-        {/* Teks Narasi di Sisi KANAN (Beat 0) */}
-        <div ref={s2TextRef} style={{
-          position: 'absolute', bottom: '15%', right: '8%',
-          width: 'min(450px, 86vw)', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 10
-        }}>
-
-          <h2 className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 3vw, 3.5rem)', fontWeight: 400, fontStyle: 'italic', color: '#E5D9B6', lineHeight: 1.1, margin: 0 }}>
+        {/* Teks diikat mutlak ke kanan bawah */}
+        <div ref={s2TextRef} style={{ position: 'absolute', bottom: '15%', right: '8%', width: '450px', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 10 }}>
+          <h2 className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 3vw, 3.5rem)', color: '#E5D9B6', margin: 0, fontStyle: 'italic', lineHeight: 1.1 }}>
             Memetakan yang hilang
           </h2>
-
-          <p className="lato-light" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, fontWeight: 300, margin: 0 }}>
+          <p className="lato-light" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, margin: 0 }}>
             Sebelum bicara pemulihan, kami harus tahu seberapa luas yang hancur. Maka kami turun ke lapangan.
           </p>
         </div>
       </div>
 
-      {/* ════════ SCENE 2 — SKALA BESAR, DAMPAK NYATA ════════
-          Bridge narasi → stage pinned (kartu terisi mengikuti scroll) → Sektor */}
       <SkalaDampakScene />
-
-      <style>{`
-        .stars-bg {
-          background-image: 
-            radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
-            radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
-            radial-gradient(1.5px 1.5px at 50px 160px, #ddd, rgba(0,0,0,0)),
-            radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
-            radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
-            radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
-          background-repeat: repeat;
-          background-size: 200px 200px;
-          animation: twinkle 4s infinite alternate;
-        }
-        @keyframes twinkle {
-          0% { opacity: 0.6; }
-          100% { opacity: 1; }
-        }
-        /* Sembunyikan Logo & Atribusi Mapbox sesuai permintaan */
-        .mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib {
-          display: none !important;
-        }
-
-        @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
-        @keyframes fadeSlideUp { 
-          from { opacity: 0; transform: translateY(20px); } 
-          to { opacity: 1; transform: translateY(0); } 
-        }
-
-        .custom-inversa-marker {
-          width: 0;
-          height: 0;
-          position: relative;
-        }
-        .inversa-pulse {
-          position: absolute;
-          top: -70px;
-          left: -70px;
-          width: 140px;
-          height: 140px;
-          background-color: rgba(255, 77, 77, 0.15); /* Merah transparan */
-          border-radius: 50%;
-          animation: mapboxPulse 2s ease-out infinite;
-          pointer-events: none;
-        }
-        .inversa-dot {
-          position: absolute;
-          top: -4px;
-          left: -4px;
-          width: 8px;
-          height: 8px;
-          background-color: #FF4D4D; /* Merah solid */
-          border-radius: 50%;
-          box-shadow: 0 0 12px rgba(146, 4, 4, 1);
-        }
-
-        @keyframes mapboxPulse {
-          0% { transform: scale(0.3); opacity: 1; }
-          100% { transform: scale(1); opacity: 0; }
-        }
-        /* ── Scene 2: "Skala Besar, Dampak Nyata" ── */
-        .s2-bridge-wrap { margin: 0; max-width: 760px; }
-        .s2-bridge-text {
-          font-family: 'Playfair Display', serif;
-          font-style: italic;
-          font-weight: 500;
-          font-size: clamp(1.7rem, 3.6vw, 2.7rem);
-          line-height: 1.35;
-          color: #F5F5F5;
-          text-align: center;
-          margin: 0;
-        }
-        .s2-cards { --s2-cardmax: clamp(280px, 44vh, 420px); }
-        .s2-card {
-          position: relative;
-          width: clamp(150px, 21vw, 238px);
-          height: calc(var(--s2-cardmax) * var(--h));
-          flex-shrink: 0;
-          border-radius: 18px;
-          background: rgba(255,255,255,0.07);
-          overflow: hidden;
-          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        @media (hover: hover) {
-          .s2-card:hover { transform: translateY(-6px); }
-        }
-        .s2-fill {
-          position: absolute; inset: 0;
-          background: #E5D9B6;
-          transform: scaleY(0);
-          will-change: transform;
-        }
-        .s2-body {
-          position: absolute; inset: 0;
-          display: flex; flex-direction: column;
-          align-items: center; justify-content: center;
-          gap: 0.55rem; padding: 1.4rem 0.9rem;
-          text-align: center; pointer-events: none;
-        }
-
-        /* ── Scene 2: Peta Sebaran Kerusakan (Mapbox satelit, FULL-SCREEN) ── */
-        .s2-choro { position: relative; height: 240vh; }
-        .s2c-sticky {
-          position: sticky; top: 0; height: 100vh; width: 100%;
-          overflow: hidden; background: #0a0b1d;
-        }
-        /* Peta mengisi seluruh viewport */
-        .s2c-map-shell { position: absolute; inset: 0; z-index: 1; }
-        .s2c-map {
-          position: absolute; inset: 0;
-          filter: grayscale(40%) brightness(0.72) contrast(1.04) saturate(0.98);
-        }
-        .s2c-map-grade {
-          position: absolute; inset: 0; pointer-events: none;
-          background:
-            radial-gradient(ellipse at center, transparent 52%, rgba(10,11,29,0.58) 100%),
-            linear-gradient(180deg, rgba(21,23,61,0.16), rgba(10,11,29,0.3));
-        }
-        .s2c-map-grad-edge {
-          position: absolute; inset: 0; pointer-events: none;
-          background: linear-gradient(180deg, rgba(10,11,29,0.66) 0%, transparent 26%, transparent 82%, rgba(10,11,29,0.42) 100%);
-        }
-        /* Judul overlay di atas peta */
-        .s2c-head {
-          position: absolute; top: clamp(3.5rem, 8vh, 6rem); left: 50%;
-          transform: translateX(-50%); width: min(680px, 88vw); text-align: center;
-          z-index: 5; opacity: 0; pointer-events: none;
-        }
-        .s2c-head h3 {
-          font-style: italic; font-weight: 600; color: #E5D9B6;
-          font-size: clamp(1.7rem, 3.4vw, 2.7rem); margin: 0; line-height: 1.14;
-          text-shadow: 0 4px 20px rgba(0,0,0,0.7);
-        }
-        .s2c-head p {
-          margin: 0.7rem 0 0; font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-          color: rgba(245,245,245,0.82); line-height: 1.6;
-          text-shadow: 0 2px 12px rgba(0,0,0,0.8);
-        }
-        /* Legend overlay */
-        .s2c-legend {
-          position: absolute; top: 16px; right: 16px; z-index: 5;
-          display: flex; flex-direction: column; gap: 0.5rem;
-          padding: 0.9rem 1.05rem; border-radius: 12px;
-          background: rgba(13,15,38,0.72); backdrop-filter: blur(6px);
-          border: 1px solid rgba(229,217,182,0.2); opacity: 0; pointer-events: none;
-        }
-        .s2c-legend-title { font-style: italic; font-size: 1rem; color: #E5D9B6; margin-bottom: 0.15rem; }
-        .s2c-legend-row { display: flex; align-items: center; gap: 0.55rem; font-size: 0.8rem; color: rgba(245,245,245,0.82); }
-        .s2c-legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
-        .s2c-legend-point {
-          width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-          background: #FFEAC6; box-shadow: 0 0 8px 2px rgba(230,126,34,0.95);
-        }
-        .s2c-legend-sep { height: 1px; background: rgba(229,217,182,0.18); margin: 0.15rem 0; }
-        /* Label provinsi (auto-muncul saat scroll) — Marker HTML di atas peta */
-        .s2c-prov-label {
-          pointer-events: none; white-space: nowrap;
-          padding: 0.5rem 0.85rem; border-radius: 11px; text-align: left;
-          background: rgba(13,15,38,0.7); backdrop-filter: blur(3px);
-          border: 1px solid rgba(229,217,182,0.24);
-          box-shadow: 0 12px 34px rgba(0,0,0,0.5);
-        }
-        .s2c-prov-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #E5D9B6; line-height: 1.1; }
-        .s2c-prov-row { display: flex; align-items: center; gap: 0.42rem; margin-top: 0.28rem; font-size: 0.8rem; color: rgba(245,245,245,0.92); }
-        .s2c-prov-dot { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
-        .s2c-prov-desa { font-size: 0.72rem; color: rgba(229,217,182,0.82); margin-top: 0.18rem; }
-
-        /* ── Scene 2: Penutup alur data (shine kiri→kanan) ── */
-        .s2-flow {
-          display: flex; flex-direction: column; align-items: center; justify-content: center;
-          gap: 1.3rem; padding: 10vh clamp(1.25rem, 5vw, 3rem) 14vh; text-align: center;
-        }
-        .s2-flow-track {
-          position: relative; display: flex; align-items: center; flex-wrap: wrap;
-          justify-content: center; gap: clamp(0.6rem, 2vw, 1.4rem); overflow: hidden; padding: 0.4rem 0.2rem;
-        }
-        .s2-flow-step {
-          font-size: clamp(0.85rem, 1.6vw, 1.1rem); letter-spacing: 0.14em; text-transform: uppercase;
-          color: rgba(245,245,245,0.78); padding: 0.5rem 1rem; border-radius: 999px;
-          border: 1px solid rgba(229,217,182,0.28); background: rgba(229,217,182,0.05); opacity: 0;
-        }
-        .s2-flow-arrow { color: #E67E22; font-size: 1.2rem; opacity: 0; }
-        .s2-flow-shine {
-          position: absolute; top: 0; bottom: 0; width: 26%; pointer-events: none; opacity: 0;
-          background: linear-gradient(90deg, transparent, rgba(230,126,34,0.18) 45%, rgba(255,224,181,0.32) 50%, rgba(230,126,34,0.18) 55%, transparent);
-          filter: blur(2px);
-        }
-        .s2-flow-cap {
-          margin: 0; max-width: 560px; font-style: italic;
-          font-size: clamp(0.9rem, 1.3vw, 1.05rem); color: rgba(245,245,245,0.55); line-height: 1.7;
-        }
-
-        @media (max-width: 767px) {
-          .s2-cards { flex-wrap: wrap; gap: 0.8rem !important; }
-          .s2-card { width: calc(50% - 0.4rem); height: 168px; }
-          .s2-baseline { display: none; }
-          .s2-stage { height: auto !important; padding-top: 14vh !important; padding-bottom: 12vh !important; }
-          .s2-choro { height: 210vh; }
-          .s2c-head { top: 2.4rem; width: 92vw; }
-          .s2c-legend { top: auto; bottom: 14px; right: 10px; padding: 0.6rem 0.75rem; gap: 0.35rem; }
-          .s2c-legend-title { font-size: 0.85rem; }
-          .s2c-legend-row { font-size: 0.7rem; }
-          .s2c-prov-label { padding: 0.4rem 0.65rem; }
-          .s2c-prov-name { font-size: 0.95rem; }
-          .s2c-prov-row { font-size: 0.72rem; }
-        }
-      `}</style>
     </>
   );
 }
