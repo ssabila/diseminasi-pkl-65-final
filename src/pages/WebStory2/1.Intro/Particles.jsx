@@ -222,6 +222,8 @@ const Particles = ({
       if (container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }
+      const ext = gl.getExtension('WEBGL_lose_context');
+      if (ext) ext.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [

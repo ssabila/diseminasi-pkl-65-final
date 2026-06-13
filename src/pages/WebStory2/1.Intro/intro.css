@@ -1,0 +1,236 @@
+/* Sembunyikan Logo & Atribusi Mapbox sesuai permintaan */
+.mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib {
+  display: none !important;
+}
+
+.title-text-1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  color: #FFF;
+  line-height: normal;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.title-text-2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  color: #FFF;
+  line-height: normal;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.stars-bg {
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 50px 160px, #ddd, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: twinkle 4s infinite alternate;
+}
+@keyframes twinkle {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+@keyframes fadeSlideUp { 
+  from { opacity: 0; transform: translateY(20px); } 
+  to { opacity: 1; transform: translateY(0); } 
+}
+
+.custom-inversa-marker {
+  width: 0;
+  height: 0;
+  position: relative;
+}
+.inversa-pulse {
+  position: absolute;
+  top: -70px;
+  left: -70px;
+  width: 140px;
+  height: 140px;
+  background-color: rgba(255, 77, 77, 0.15); /* Merah transparan */
+  border-radius: 50%;
+  animation: mapboxPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+.inversa-dot {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background-color: #FF4D4D; /* Merah solid */
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(146, 4, 4, 1);
+}
+
+@keyframes mapboxPulse {
+  0% { transform: scale(0.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+/* ── Scene 2: "Skala Besar, Dampak Nyata" ── */
+.s2-bridge-wrap { margin: 0; max-width: 760px; }
+.s2-bridge-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+  line-height: 1.35;
+  color: #F5F5F5;
+  text-align: center;
+  margin: 0;
+}
+.s2-cards { --s2-cardmax: clamp(280px, 44vh, 420px); }
+.s2-card {
+  position: relative;
+  width: clamp(150px, 21vw, 238px);
+  height: calc(var(--s2-cardmax) * var(--h));
+  flex-shrink: 0;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.07);
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .s2-card:hover { transform: translateY(-6px); }
+}
+.s2-fill {
+  position: absolute; inset: 0;
+  background: #E5D9B6;
+  transform: scaleY(0);
+  will-change: transform;
+}
+.s2-body {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.55rem; padding: 1.4rem 0.9rem;
+  text-align: center; pointer-events: none;
+}
+
+/* ── Scene 2: Peta Sebaran Kerusakan (Mapbox satelit, FULL-SCREEN) ── */
+.s2-choro { position: relative; height: 240vh; }
+.s2c-sticky {
+  position: sticky; top: 0; height: 100vh; width: 100%;
+  overflow: hidden; background: #0a0b1d;
+}
+/* Peta mengisi seluruh viewport */
+.s2c-map-shell { position: absolute; inset: 0; z-index: 1; }
+.s2c-map {
+  position: absolute; inset: 0;
+  filter: grayscale(40%) brightness(0.72) contrast(1.04) saturate(0.98);
+}
+.s2c-map-grade {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 52%, rgba(10,11,29,0.58) 100%),
+    linear-gradient(180deg, rgba(21,23,61,0.16), rgba(10,11,29,0.3));
+}
+.s2c-map-grad-edge {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,11,29,0.66) 0%, transparent 26%, transparent 82%, rgba(10,11,29,0.42) 100%);
+}
+/* Judul overlay di atas peta */
+.s2c-head {
+  position: absolute; top: clamp(3.5rem, 8vh, 6rem); left: 50%;
+  transform: translateX(-50%); width: min(680px, 88vw); text-align: center;
+  z-index: 5; opacity: 0; pointer-events: none;
+}
+.s2c-head h3 {
+  font-style: italic; font-weight: 600; color: #E5D9B6;
+  font-size: clamp(1.7rem, 3.4vw, 2.7rem); margin: 0; line-height: 1.14;
+}
+/* Legend di pojok bawah */
+.s2c-legend {
+  position: absolute; bottom: clamp(1.5rem, 4vh, 2.5rem); left: clamp(1.25rem, 5vw, 3rem);
+  z-index: 5; background: rgba(10,11,29,0.68); backdrop-filter: blur(8px);
+  padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);
+  display: flex; flex-direction: column; gap: 0.6rem; opacity: 0;
+}
+.s2c-legend-title {
+  font-style: italic; font-size: 0.95rem; color: #E5D9B6; margin-bottom: 0.2rem;
+}
+.s2c-legend-row {
+  display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: rgba(245,245,245,0.7);
+}
+.s2c-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.s2c-legend-sep { height: 1px; background: rgba(255,255,255,0.1); margin: 0.2rem 0; }
+.s2c-legend-point {
+  width: 6px; height: 6px; border-radius: 50%; background: #FFEAC6;
+  box-shadow: 0 0 0 2px #E67E22, 0 0 8px rgba(230,126,34,0.8); margin: 0 2px;
+}
+
+/* Label Provinsi di dalam Peta */
+.s2c-prov-label {
+  pointer-events: none; display: flex; flex-direction: column; gap: 0.3rem;
+  transform: translate(-50%, -50%); transition: opacity 0.5s ease;
+}
+.s2c-prov-name {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 600;
+  font-size: clamp(1.2rem, 2vw, 1.6rem); color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+}
+.s2c-prov-row {
+  display: flex; align-items: center; gap: 0.4rem; font-family: 'Lato', sans-serif;
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #E5D9B6;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.s2c-prov-dot { width: 6px; height: 6px; border-radius: 50%; box-shadow: 0 0 6px rgba(0,0,0,0.5); }
+.s2c-prov-desa {
+  font-family: 'Lato', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+/* ── Alur Data ── */
+.s2-flow {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 8vh clamp(1rem, 4vw, 2rem) 16vh; overflow: hidden; position: relative;
+}
+.s2-flow-track {
+  display: flex; align-items: center; gap: clamp(0.5rem, 1.5vw, 1.2rem); position: relative;
+  background: rgba(255,255,255,0.03); padding: 0.8rem 1.6rem; border-radius: 40px; border: 1px solid rgba(255,255,255,0.05);
+}
+.s2-flow-step {
+  font-size: clamp(0.7rem, 1.2vw, 0.88rem); text-transform: uppercase; letter-spacing: 0.1em; color: #E5D9B6;
+}
+.s2-flow-arrow {
+  font-size: 1.2rem; color: rgba(229,217,182,0.3);
+}
+.s2-flow-shine {
+  position: absolute; top: 0; left: 0; width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(229,217,182,0.15), transparent);
+  transform: skewX(-20deg); pointer-events: none;
+}
+.s2-flow-cap {
+  margin-top: 1.6rem; font-size: 0.95rem; color: rgba(245,245,245,0.5); font-style: italic;
+}
+
+.s2c-head p {
+  margin: 0.7rem 0 0; font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  color: rgba(245,245,245,0.82); line-height: 1.6;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+}
+@media (max-width: 767px) {
+  .s2-cards { flex-wrap: wrap; gap: 0.8rem !important; }
+  .s2-card { width: calc(50% - 0.4rem); height: 168px; }
+  .s2-baseline { display: none; }
+  .s2-stage { height: auto !important; padding-top: 14vh !important; padding-bottom: 12vh !important; }
+  .s2-choro { height: 210vh; }
+  .s2c-head { top: 2.4rem; width: 92vw; }
+  .s2c-legend { top: auto; bottom: 14px; right: 10px; padding: 0.6rem 0.75rem; gap: 0.35rem; }
+  .s2c-legend-title { font-size: 0.85rem; }
+  .s2c-legend-row { font-size: 0.7rem; }
+  .s2c-prov-label { padding: 0.4rem 0.65rem; }
+  .s2c-prov-name { font-size: 0.95rem; }
+  .s2c-prov-row { font-size: 0.72rem; }
+}
