@@ -739,73 +739,160 @@ function SceneIndividu() {
 }
 
 /* ─────────────────────────────────────────
-   Transisi Babak 3→4: Ada Kehilangan yang
-   Tak Bisa Dibangun Kembali
+   Transisi Babak 3→4 — versi diperbaiki
+   Fix: animasi tidak terpotong, ada bridge
+   ke Babak Kebutuhan
 ───────────────────────────────────────────*/
 function TransisiBabak34() {
-  const [ref, visible] = useInView(0.3);
+  // Gunakan threshold lebih rendah agar trigger lebih awal
+  const [refAngka, visibleAngka] = useInView(0.05);
+  const [refJudul, visibleJudul] = useInView(0.1);
+  const [refBridge, visibleBridge] = useInView(0.15);
 
   const meninggal = insights?.rumah_tangga?.hasil_cek?.['3. Seluruh anggota keluarga meninggal --> STOP']?.n || 0;
 
   return (
-    <section style={{
-      background: '#020208',
-      padding: '9rem 2rem',
-      minHeight: '80vh',
-      display: 'flex',
-      alignItems: 'center',
-    }}>
-      <div ref={ref} style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center' }}>
-        {/* Angka besar */}
-        {meninggal > 0 && (
-          <div className="playfair-display" style={{
-            fontSize: 'clamp(4rem, 10vw, 8rem)',
-            fontWeight: 700,
-            color: visible ? '#e74c3c' : 'transparent',
-            lineHeight: 1,
-            marginBottom: '1rem',
-            transition: 'color 1.5s ease',
-            textShadow: visible ? '0 0 60px rgba(231,76,60,0.3)' : 'none',
+    <>
+      {/* ── PANEL 1: Emotional Beat ─────────────────── */}
+      <section style={{
+        background: '#020208',
+        // minHeight 100vh agar konten tidak terpotong scroll
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '8rem 2rem',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Glow merah di belakang — subtle */}
+        <div style={{
+          position: 'absolute',
+          top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '60vw', height: '60vw',
+          background: 'radial-gradient(circle, rgba(231,76,60,0.06) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div ref={refAngka} style={{ textAlign: 'center', maxWidth: 700, position: 'relative', zIndex: 2 }}>
+          {/* Garis dekoratif atas */}
+          <div style={{
+            width: visibleAngka ? 60 : 0,
+            height: 1,
+            background: 'rgba(231,76,60,0.4)',
+            margin: '0 auto 2.5rem',
+            transition: 'width 1s ease',
+          }} />
+
+          {/* Angka besar */}
+          {meninggal > 0 && (
+            <div className="playfair-display" style={{
+              fontSize: 'clamp(5rem, 13vw, 10rem)',
+              fontWeight: 700,
+              color: '#e74c3c',
+              lineHeight: 1,
+              marginBottom: '0.5rem',
+              // Gunakan opacity bukan color transparent — lebih smooth & tidak terpotong
+              opacity: visibleAngka ? 1 : 0,
+              transform: visibleAngka ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 1.5s ease, transform 1.5s ease',
+              textShadow: '0 0 80px rgba(231,76,60,0.25)',
+            }}>
+              {meninggal.toLocaleString('id-ID')}
+            </div>
+          )}
+
+          <div className="lato-bold" style={{
+            fontSize: '0.78rem', letterSpacing: '0.28em',
+            textTransform: 'uppercase',
+            color: 'rgba(231,76,60,0.65)',
+            marginBottom: '3rem',
+            opacity: visibleAngka ? 1 : 0,
+            transition: 'opacity 1.5s ease 0.4s',
           }}>
-            {meninggal.toLocaleString('id-ID')}
+            keluarga meninggal dunia
           </div>
-        )}
 
-        <div className="lato-bold" style={{
-          fontSize: '0.8rem', letterSpacing: '0.25em',
-          textTransform: 'uppercase',
-          color: visible ? 'rgba(231,76,60,0.6)' : 'transparent',
-          marginBottom: '2.5rem',
-          transition: 'color 1.5s ease 0.5s',
-        }}>
-          keluarga meninggal dunia
+          <h2 ref={refJudul} className="playfair-display" style={{
+            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+            color: '#fff',
+            lineHeight: 1.3,
+            marginBottom: '1.5rem',
+            // Pakai opacity + translateY, bukan color transparent
+            opacity: visibleJudul ? 1 : 0,
+            transform: visibleJudul ? 'translateY(0)' : 'translateY(16px)',
+            transition: 'opacity 1.2s ease, transform 1.2s ease',
+          }}>
+            Ada Kehilangan yang Tak Bisa<br />
+            <span style={{ color: '#e74c3c' }}>Dibangun Kembali</span>
+          </h2>
+
+          <p className="lato-regular" style={{
+            fontSize: '1.05rem',
+            lineHeight: 1.85,
+            color: 'var(--beige)',
+            maxWidth: 520,
+            margin: '0 auto 3.5rem',
+            opacity: visibleJudul ? 0.75 : 0,
+            transition: 'opacity 1.5s ease 0.5s',
+          }}>
+            Tidak semua kehilangan dapat digantikan melalui proses pemulihan fisik.
+            Di balik statistik rekonstruksi, ada duka yang tidak bisa diukur.
+          </p>
+
+          {/* Garis dekoratif bawah */}
+          <div style={{
+            width: visibleJudul ? 60 : 0,
+            height: 1,
+            background: 'rgba(231,76,60,0.3)',
+            margin: '0 auto',
+            transition: 'width 1.2s ease 0.8s',
+          }} />
         </div>
+      </section>
 
-        <h2 className="playfair-display" style={{
-          fontSize: 'clamp(1.6rem, 4vw, 2.8rem)',
-          color: visible ? '#fff' : 'transparent',
-          lineHeight: 1.3,
-          marginBottom: '1.5rem',
-          transition: 'color 1.2s ease 0.3s',
-        }}>
-          Ada Kehilangan yang Tak Bisa<br />
-          <span style={{ color: '#e74c3c' }}>Dibangun Kembali</span>
-        </h2>
+      {/* ── PANEL 2: Bridge ke Babak Kebutuhan ──────── */}
+      <section ref={refBridge} style={{
+      background: 'linear-gradient(180deg, #020208 0%, #0d0f2b 40%, #15173D 100%)',
+      // Kurangi dari 60vh → 40vh, hilangkan padding berlebih
+      minHeight: '40vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '3rem 2rem',
+      textAlign: 'center',
+      position: 'relative',
+      }}>
 
-        <p className="lato-regular" style={{
-          fontSize: '1.05rem',
-          lineHeight: 1.85,
-          color: 'var(--beige)',
-          opacity: visible ? 0.75 : 0,
-          transition: 'opacity 1.5s ease 0.8s',
-          maxWidth: 560,
-          margin: '0 auto',
-        }}>
-          Tidak semua kehilangan dapat digantikan melalui proses pemulihan fisik.
-          Di balik statistik rekonstruksi, ada duka yang tidak bisa diukur.
-        </p>
-      </div>
-    </section>
+      <h3 className="playfair-display" style={{
+        fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+        color: 'rgba(255,255,255,0.85)',
+        lineHeight: 1.35,
+        maxWidth: 600,
+        opacity: visibleBridge ? 1 : 0,
+        transform: visibleBridge ? 'translateY(0)' : 'translateY(12px)',
+        transition: 'opacity 1.2s ease 0.4s, transform 1.2s ease 0.4s',
+      }}>
+        Lalu, apa yang masih<br />
+        <span style={{ color: '#E67E22', fontStyle: 'italic' }}>mereka butuhkan?</span>
+      </h3>
+
+      <p className="lato-regular" style={{
+        fontSize: '1.15rem',
+        lineHeight: 1.8,
+        color: 'rgba(229,217,182,0.5)',
+        maxWidth: 460,
+        marginTop: '1rem',
+        opacity: visibleBridge ? 0.8 : 0,
+        transition: 'opacity 1.2s ease 0.7s',
+      }}>
+        Di tengah duka yang belum usai, kebutuhan mendesak terus datang.
+      </p>
+      </section>
+    </>
   );
 }
 
