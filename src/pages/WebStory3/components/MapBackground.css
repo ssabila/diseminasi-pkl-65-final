@@ -5,43 +5,25 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  /* z-index: 2 agar berada di atas SharedMapProvider (z-index: 0) untuk section 1-4 */
+  z-index: 2;
   pointer-events: none;
-  /* Let user scroll easily without map interfering */
   background-color: var(--navy);
   overflow: hidden;
 }
 
-.map-stars {
+/* Full-screen canvas — posisi globe dikontrol via map.setPadding() */
+.map-container {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: var(--star-overlay-opacity, 0.2);
-  z-index: 1;
-}
-
-/* Initially match Opening.css position (off-center right) */
-.map-container {
-  position: absolute;
-  top: 50%;
-  right: -40vh;
-  /* Initial position for Section 1 */
-  transform: translateY(-50%);
-  width: 140vh;
-  /* Initial size for Section 1 */
-  height: 140vh;
   z-index: 5;
 }
 
 .mapbox-globe {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
   background: transparent;
 }
 

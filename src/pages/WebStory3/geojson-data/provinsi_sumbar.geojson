@@ -1,0 +1,52 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Sumatera Barat",
+        "provinsi": "Sumbar",
+        "kode": "ID-SB"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.0,
+              1.0
+            ],
+            [
+              100.8,
+              1.2
+            ],
+            [
+              101.2,
+              0.0
+            ],
+            [
+              100.8,
+              -1.0
+            ],
+            [
+              100.0,
+              -1.5
+            ],
+            [
+              99.2,
+              -0.8
+            ],
+            [
+              98.8,
+              0.2
+            ],
+            [
+              99.0,
+              1.0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

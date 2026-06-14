@@ -6,17 +6,17 @@ import Stack from '../components/Stack';
 
 // Import assets
 import baseLayer from './assets/base-layer.png';
-import ndviImg from './assets/NDVI.png';
-import ndbiImg from './assets/NDBI.png';
-import ndwiImg from './assets/NDWI.png';
-import lstImg from './assets/LST.png';
-import coImg from './assets/CO.png';
-import so2Img from './assets/SO2.png';
+import ndviImg from './assets/NDVI.webp';
+import ndbiImg from './assets/NDBI.webp';
+import ndwiImg from './assets/NDWI.webp';
+import lstImg from './assets/LST.webp';
+import coImg from './assets/CO.webp';
+import so2Img from './assets/SO2.webp';
 
-import h1 from '../../../assets/images/huntara-15.JPG';
-import h2 from '../../../assets/images/huntara-16.jpg';
-import h3 from '../../../assets/images/huntara-18.jpg';
-import h4 from '../../../assets/images/huntara-13.jpg';
+import h1 from '../../../assets/images/huntara-15.webp';
+import h2 from '../../../assets/images/huntara-16.webp';
+import h3 from '../../../assets/images/huntara-18.webp';
+import h4 from '../../../assets/images/huntara-13.webp';
 
 /**
  * Section 2 — Mengapa Big Data?
@@ -64,10 +64,7 @@ export default function Urgency() {
             />
           </div>
 
-          <div className="urgency-scroll">
-            <p>Lalu, <span style={{ fontWeight: '600', color: '#e67e22' }}><b>apa yang bisa kita pelajari</b></span> dari data-data tersebut?</p>
-            <div className="scroll-arrow">↓</div>
-          </div>
+
         </div>
 
         {/* Kanan: Stack Gambar */}
@@ -81,7 +78,14 @@ export default function Urgency() {
             />
           ))}
         </div>
+      </div>
 
+      {/* Scroll Prompt ditaruh di luar agar bisa persis di tengah halaman bawah */}
+      <div className="urgency-scroll-wrapper">
+        <div className="urgency-scroll">
+          <p>Lalu, <span style={{ fontWeight: '600', color: '#e67e22' }}><b>apa yang bisa kita pelajari</b></span> dari data-data tersebut?</p>
+          <div className="scroll-arrow">↓</div>
+        </div>
       </div>
     </section>
   );
