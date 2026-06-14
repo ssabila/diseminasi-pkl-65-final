@@ -79,7 +79,7 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-weight: 900;
-  font-size: clamp(4.2rem, 11vw, 9.5rem);
+  font-size: clamp(2.5rem, 11vw, 9.5rem); /* Reduced minimum for mobile */
   color: #E5D9B6;
   line-height: 0.92;
   letter-spacing: -0.04em;
@@ -159,6 +159,17 @@
 
 .ws1-nadia-view0 .gsap-hidden {
   opacity: 0;
+}
+
+/* Gradient Fade for Transition to View 1 */
+.ws1-nadia-view0::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 150px;
+  background: linear-gradient(transparent, #15173D);
+  z-index: 15;
+  pointer-events: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -281,15 +292,10 @@
 /* Location Container (Percentage based) */
 .ws1-nadia-view4 .v4-map-loc {
   position: absolute;
-  /* Centered exactly on the percentage coordinate */
   transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 5;
   cursor: pointer;
+  padding: 15px; /* Increase tap hitbox */
 }
 
 /* Pin */
@@ -389,7 +395,7 @@
 .ws1-nadia-view4 .v4-briefing-section {
   width: 100%;
   min-height: 100vh;
-  background: #15173D;
+  background: #ebdcb2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -407,7 +413,7 @@
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 900;
-  color: #E5D9B6;
+  color: #0f172a; /* Changed to dark navy for contrast */
   margin: 0 0 16px 0;
 }
 .ws1-nadia-view4 .v4-briefing-title em {
@@ -416,7 +422,7 @@
 }
 .ws1-nadia-view4 .v4-briefing-subtitle {
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  color: rgba(229,217,182,0.6);
+  color: #475569; /* Changed to dark slate for contrast */
   font-weight: 300;
   margin: 0;
 }
@@ -516,6 +522,7 @@
   color: #E5D9B6;
   margin: 0 0 16px 0;
 }
+
 .ws1-nadia-view4 .v4-bsc-desc {
   font-size: 0.9rem;
   line-height: 1.7;
@@ -523,11 +530,28 @@
   font-weight: 300;
   margin: 0 0 24px 0;
 }
+
 .ws1-nadia-view4 .v4-bsc-line {
   width: 40px;
   height: 3px;
   background: #E67E22;
   border-radius: 2px;
+}
+
+.v4-stack-hint {
+  text-align: center;
+  color: #E67E22;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 30px;
+  opacity: 0.7;
+  animation: pulse-hint 2s infinite ease-in-out;
+}
+
+@keyframes pulse-hint {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(3px); }
 }
 
 /* Responsive */
@@ -538,13 +562,19 @@
   .ws1-nadia-view4 .v4-alloc-card { flex: 1 1 100%; max-width: 100%; }
   
   /* Briefing */
-  .ws1-nadia-view4 .v4-briefing-stack-container { height: 500px; }
+  .ws1-nadia-view4 .v4-briefing-stack-container { height: 550px; } /* Slightly taller for vertical layout */
   .ws1-nadia-view4 .v4-brief-stack-card { flex-direction: column; }
   .ws1-nadia-view4 .v4-bsc-left { flex: 0 0 200px; }
-  .ws1-nadia-view4 .v4-bsc-right { padding: 24px; }
-  .ws1-nadia-view4 .v4-bsc-title { font-size: 1.6rem; }
-  .ws1-nadia-view4 .v4-bsc-desc { font-size: 0.8rem; }
-  .ws1-nadia-view4 .v4-bsc-pagination { top: 20px; right: 20px; }
+  .ws1-nadia-view4 .v4-bsc-right { padding: 24px; flex: 1; }
+  .ws1-nadia-view4 .v4-bsc-title { font-size: 1.4rem; margin-bottom: 8px; }
+  .ws1-nadia-view4 .v4-bsc-desc { font-size: 0.85rem; margin-bottom: 16px; }
+  .ws1-nadia-view4 .v4-bsc-pagination { top: 20px; right: 20px; font-size: 0.65rem; }
+  .ws1-nadia-view4 .v4-bsc-header-row { margin-bottom: 12px; }
+}
+
+@media (max-width: 480px) {
+  .ws1-nadia-view4 .v4-briefing-stack-container { height: 600px; }
+  .ws1-nadia-view4 .v4-bsc-left { flex: 0 0 160px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -632,7 +662,7 @@
 /* Headline */
 .ws1-nadia-view9 .v9-headline {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(2.2rem, 7vw, 5.5rem); /* Reduced minimum */
   font-weight: 900;
   font-style: italic;
   line-height: 1.1;
@@ -650,7 +680,7 @@
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   font-weight: 300;
   color: rgba(229,217,182,0.65);
-  line-height: 1.9;
+  line-height: 2.0;
   margin-bottom: 48px;
   opacity: 0;
 }

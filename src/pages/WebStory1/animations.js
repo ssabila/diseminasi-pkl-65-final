@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 
-export const animateWebStory1 = (scope) => {
+export const animateWebStory1 = () => {
   gsap.from('.animated-text', {
     y: 50,
     opacity: 0,

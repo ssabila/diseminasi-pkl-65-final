@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -7,12 +7,12 @@ import './MaulViews.css';
 gsap.registerPlugin(ScrollTrigger);
 
 // ==================== ASET VIEW 6 ====================
-import imgFasih from '../assets/images/ws1-maul-fasih-v0.png';
-import imgJas from '../assets/images/ws1-maul-jas-v0.png';
-import imgPb from '../assets/images/ws1-maul-pb-v0.png';
-import imgBoots from '../assets/images/ws1-maul-booth-v0.png';
-import imgCard from '../assets/images/ws1-maul-card-v0.png';
-import imgCharger from '../assets/images/ws1-maul-charger-v0.png';
+import imgFasih from '../assets/images/ws1-maul-fasih-v0.webp';
+import imgJas from '../assets/images/ws1-maul-jas-v0.webp';
+import imgPb from '../assets/images/ws1-maul-pb-v0.webp';
+import imgBoots from '../assets/images/ws1-maul-booth-v0.webp';
+import imgCard from '../assets/images/ws1-maul-card-v0.webp';
+import imgCharger from '../assets/images/ws1-maul-charger-v0.webp';
 
 // ==================== ASET VIEW 8 ====================
 import imgPidieJaya from '../assets/images/1-Pidie Jaya.webp';
@@ -27,9 +27,9 @@ import imgKotaSibolga from '../assets/images/9-Kota Sibolga.webp';
 // 10 - Tapanuli Utara kosong
 import imgTapanuliSelatan from '../assets/images/11-Tapanuli Selatan.webp';
 import imgMandailingNatal from '../assets/images/12-Mandailing Natal.webp';
-import imgAgam from '../assets/images/13-Agam.png';
+import imgAgam from '../assets/images/13-Agam.webp';
 // 14 - Padang Pariaman kosong
-import imgTanahDatar from '../assets/images/15-Tanah Datar.png';
+import imgTanahDatar from '../assets/images/15-Tanah Datar.webp';
 
 // ==================== DATA VIEW 6 ====================
 const amunisiList = [
@@ -64,6 +64,17 @@ const pklLocations = [
 export const View6 = () => {
   const sectionRef = useRef(null);
   const [activeItem, setActiveItem] = useState(null);
+
+  // Click outside to close
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.ws1-maul-icon-item')) {
+        setActiveItem(null);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
 
   useGSAP(() => {
     // Header entrance
@@ -120,6 +131,25 @@ export const View8 = () => {
   const sectionRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAuto, setIsAuto] = useState(false);
+  const [orbitRadius, setOrbitRadius] = useState(290);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width <= 480) {
+        setOrbitRadius(130);
+      } else if (width <= 768) {
+        setOrbitRadius(150);
+      } else if (width <= 1024) {
+        setOrbitRadius(240);
+      } else {
+        setOrbitRadius(290);
+      }
+    };
+    handleResize(); // Init
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let interval;
@@ -157,6 +187,18 @@ export const View8 = () => {
     setActiveIndex((prev) => (prev + 1) % pklLocations.length);
   };
 
+  const selectLocation = (index) => {
+    setActiveIndex(index);
+    setIsAuto(false);
+  };
+
+  const handleLocationKeyDown = (event, index) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      selectLocation(index);
+    }
+  };
+
   return (
     <section className="ws1-maul-view8" ref={sectionRef}>
       
@@ -167,14 +209,15 @@ export const View8 = () => {
         </h2>
         
         <div className="ws1-maul-controls">
-          <button className="ws1-maul-btn-round" onClick={handlePrev}>&lt;</button>
+          <button className="ws1-maul-btn-round" onClick={handlePrev} aria-label="Lokasi sebelumnya">&lt;</button>
           <button 
             className={`ws1-maul-btn-pill ${isAuto ? 'active' : ''}`} 
             onClick={() => setIsAuto(!isAuto)}
+            aria-label={isAuto ? 'Matikan putar otomatis' : 'Nyalakan putar otomatis'}
           >
             {isAuto ? 'Auto Off' : 'Auto On'}
           </button>
-          <button className="ws1-maul-btn-round" onClick={handleNext}>&gt;</button>
+          <button className="ws1-maul-btn-round" onClick={handleNext} aria-label="Lokasi berikutnya">&gt;</button>
         </div>
       </div>
 
@@ -209,7 +252,7 @@ export const View8 = () => {
 
         {/* LINGKARAN ORBIT (GALERI) */}
         {pklLocations.map((loc, index) => {
-          const radius = 290; 
+          const radius = orbitRadius; 
           const angle = (index / pklLocations.length) * -360; 
           
           const rad = ((angle - 90) * Math.PI) / 180; 
@@ -221,11 +264,12 @@ export const View8 = () => {
               key={loc.id}
               className={`ws1-maul-orbit-item ${activeIndex === index ? 'active' : ''}`}
               style={{ '--x': `${x}px`, '--y': `${y}px` }}
-              onClick={() => {
-                setActiveIndex(index);
-                setIsAuto(false); 
-              }}
+              onClick={() => selectLocation(index)}
+              onKeyDown={(event) => handleLocationKeyDown(event, index)}
+              role="button"
+              tabIndex={0}
               title={loc.name}
+              aria-label={`Tampilkan ${loc.name}`}
             >
               {loc.img ? (
                 <img src={loc.img} alt={loc.name} />
@@ -239,4 +283,4 @@ export const View8 = () => {
 
     </section>
   );
-};
+};

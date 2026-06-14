@@ -1,9 +1,368 @@
 /* Add specific styles for Sancha's Views here */
-.view-1, .view-2, .view-3 {
+
+/* =========================================
+   VIEW 1: TIMELINE (SANCHA)
+========================================= */
+.ws1-sancha-view1 {
+  background-color: var(--navy); /* Matches other views */
+  min-height: 150vh; /* Tall enough for scrolling */
+  position: relative;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Cinematic Glows */
+.ws1-sancha-view1 .j-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+.ws1-sancha-v1-glow {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ws1-sancha-v1-glow.top-left {
+  top: -10vw;
+  left: -10vw;
+  background: rgba(217, 119, 6, 0.15); /* Orange glow */
+}
+
+.ws1-sancha-v1-glow.bottom-right {
+  bottom: 10vw;
+  right: -10vw;
+  background: rgba(233, 30, 99, 0.12); /* Pinkish glow for depth */
+}
+
+.ws1-sancha-tl-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 150px; /* Space between nodes */
+  padding-top: 50px;
+  z-index: 5;
+}
+
+.ws1-sancha-tl-svg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100%;
+  z-index: 0;
+}
+
+.ws1-sancha-tl-path {
+  fill: none;
+  stroke: #d97706; /* Orange timeline */
+  stroke-width: 2.5;
+}
+
+.ws1-sancha-tl-card-wrap {
+  position: relative;
+  width: 45%;
+  z-index: 10;
+}
+
+.ws1-sancha-tl-card-wrap.left {
+  align-self: flex-start;
+  text-align: right;
+  padding-right: 40px;
+}
+
+.ws1-sancha-tl-card-wrap.right {
+  align-self: flex-end;
+  text-align: left;
+  padding-left: 40px;
+}
+
+.ws1-sancha-tl-card {
+  background: rgba(255, 255, 255, 0.03); /* Frosted Glass */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid #d97706; /* Strong accent border */
+  color: #E5D9B6; /* Cream text */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.02);
+  display: inline-block;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.ws1-sancha-tl-card-wrap.left .ws1-sancha-tl-card {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 3px solid #d97706; /* Right accent for left cards */
+}
+
+.ws1-sancha-tl-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(217, 119, 6, 0.05);
+  border-color: rgba(217, 119, 6, 0.4);
+}
+
+.ws1-sancha-tl-date {
+  color: #d97706; /* Orange date */
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ws1-sancha-tl-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-family: 'Playfair Display', serif; /* Elegant serif title */
+  letter-spacing: 0.5px;
+}
+
+.ws1-sancha-tl-desc {
+  font-size: 0.95rem;
+  color: rgba(229, 217, 182, 0.75); /* Cream with opacity */
+  line-height: 1.6;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 15px #d97706, 0 0 30px rgba(217,119,6,0.6); }
+  50% { box-shadow: 0 0 25px #d97706, 0 0 45px rgba(217,119,6,0.9); }
+}
+
+.ws1-sancha-tl-dot {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background-color: #d97706;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 15px #d97706, 0 0 30px rgba(217,119,6,0.6); /* Glowing dot */
+  border: 3px solid var(--navy); /* Knockout center effect */
+  animation: dot-pulse 3s infinite ease-in-out;
+}
+
+.ws1-sancha-tl-card-wrap.left .ws1-sancha-tl-dot {
+  right: -6px; /* Align to center line */
+}
+
+.ws1-sancha-tl-card-wrap.right .ws1-sancha-tl-dot {
+  left: -6px; /* Align to center line */
+}
+
+/* =========================================
+   VIEW 2: DITEMPA SEBELUM DITERJUNKAN
+========================================= */
+.ws1-sancha-view2 {
+  background-color: #ebdcb2; /* Cream background from Sehat dan Solid */
+  min-height: 100vh;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ws1-sancha-v2-container {
+  width: 100%;
+  max-width: 1300px; /* Reduced from 1400px to perfectly frame 4 cards */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ws1-sancha-v2-header {
+  padding: 0 20px;
+  margin-bottom: 50px;
+  text-align: center; /* Centered layout */
+}
+
+.ws1-sancha-v2-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Slightly larger */
+  color: #0f172a; 
+  margin: 0;
+  text-align: center; /* Centered layout */
+}
+
+.ws1-sancha-v2-orange {
+  color: #d97706; 
+  font-style: italic;
+}
+
+.ws1-sancha-v2-gallery {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 20px; /* Tighter gap so 4 cards fit easily */
+  width: 100%;
+  padding: 0 20px 40px 20px; /* Cleaned up padding */
+  align-items: center;
+}
+
+.ws1-sancha-v2-doc {
+  width: 280px; /* Adjusted size to fit 4 cards nicely without scrolling */
+  height: 380px; 
+  background-color: #f5eedc;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0,0,0,0.05);
+  flex-shrink: 0; /* Prevent shrinking */
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.ws1-sancha-v2-doc:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+}
+
+.ws1-sancha-v2-doc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.ws1-sancha-v2-doc.placeholder {
+  background-color: rgba(0,0,0,0.05);
+  border: 2px dashed rgba(0,0,0,0.2);
+}
+
+.ws1-sancha-v2-doc-inner {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ws1-sancha-v2-doc-inner p {
+  color: #d97706;
+  font-size: 0.9rem;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+/* =========================================
+   VIEW 3: BRIEFING PIMPINAN QUOTE
+========================================= */
+.ws1-sancha-view3 {
+  background: linear-gradient(to bottom, #ebdcb2 0%, var(--navy) 100%); /* Transition back to navy */
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #4caf50; /* Debug boundary */
-  margin: 1rem 0;
+  position: relative;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.ws1-sancha-v3-content {
+  z-index: 2;
+  max-width: 800px;
+}
+
+.ws1-sancha-v3-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: #E5D9B6;
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.ws1-sancha-v3-word {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+.ws1-sancha-v3-author {
+  color: #d97706;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+@media (max-width: 768px) {
+  /* View 1: Timeline */
+  .ws1-sancha-tl-svg {
+    left: 20px; /* Move timeline line to the left edge */
+    transform: none;
+  }
+  
+  .ws1-sancha-tl-card-wrap {
+    width: calc(100% - 50px);
+    align-self: flex-end !important; /* Force all cards to the right */
+    text-align: left !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  .ws1-sancha-tl-card-wrap.left,
+  .ws1-sancha-tl-card-wrap.right {
+    margin-left: auto;
+  }
+
+  .ws1-sancha-tl-dot {
+    left: -46px !important; /* Move dots to align with the left-aligned SVG line */
+    right: auto !important;
+  }
+  
+  .ws1-sancha-tl-container {
+    gap: 80px; /* Reduce gap between cards */
+  }
+  
+  /* View 2: Ditempa Sebelum Diterjunkan */
+  .ws1-sancha-view2 {
+    padding: 60px 10px;
+  }
+  .ws1-sancha-v2-header {
+    margin-bottom: 30px;
+  }
+  .ws1-sancha-v2-gallery {
+    gap: 15px;
+    padding: 0 10px 20px 10px;
+  }
+  .ws1-sancha-v2-doc {
+    width: 100%;
+    max-width: 300px; /* Ensure cards don't overflow on very small screens */
+    height: auto;
+    aspect-ratio: 3/4; /* Keep the portrait shape */
+  }
+  
+  /* View 3: Quote */
+  .ws1-sancha-view3 {
+    padding: 40px 15px;
+    min-height: 60vh;
+  }
 }

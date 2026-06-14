@@ -1,8 +1,34 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './HusnaViews.css';
+
+// Import Husna View 5 Assets
+import thumb1 from '../assets/images/husna-view-5/thumbnail1.webp';
+import thumb2 from '../assets/images/husna-view-5/thumbnail2.webp';
+import thumb3 from '../assets/images/husna-view-5/thumbnail3.webp';
+
+import aceh1 from '../assets/images/husna-view-5/ws1-husna-view5-aceh1.webp';
+import aceh2 from '../assets/images/husna-view-5/ws1-husna-view5-aceh2.webp';
+import aceh21 from '../assets/images/husna-view-5/ws1-husna-view5-aceh21.webp';
+import aceh22 from '../assets/images/husna-view-5/ws1-husna-view5-aceh22.webp';
+import aceh23 from '../assets/images/husna-view-5/ws1-husna-view5-aceh23.webp';
+import aceh3 from '../assets/images/husna-view-5/ws1-husna-view5-aceh3.webp';
+import aceh4 from '../assets/images/husna-view-5/ws1-husna-view5-aceh4.webp';
+
+import sumbar1 from '../assets/images/husna-view-5/ws1-husna-view5-sumbar1.webp';
+import sumbar2 from '../assets/images/husna-view-5/ws1-husna-view5-sumbar2.webp';
+import sumbar21 from '../assets/images/husna-view-5/ws1-husna-view5-sumbar21.webp';
+import sumbar22 from '../assets/images/husna-view-5/ws1-husna-view5-sumbar22.webp';
+import sumbar23 from '../assets/images/husna-view-5/ws1-husna-view5-sumbar23.webp';
+
+import sumut1 from '../assets/images/husna-view-5/ws1-husna-view5-sumut1.webp';
+import sumut2 from '../assets/images/husna-view-5/ws1-husna-view5-sumut2.webp';
+import sumut21 from '../assets/images/husna-view-5/ws1-husna-view5-sumut21.webp';
+import sumut22 from '../assets/images/husna-view-5/ws1-husna-view5-sumut22.webp';
+import sumut3 from '../assets/images/husna-view-5/ws1-husna-view5-sumut3.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,13 +41,8 @@ const SCRAPBOOK_DATA = [
     title: "Wawancara",
     num: "01",
     images: [
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800",
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
+      thumb1,
+      aceh1, aceh2, aceh3, aceh4, sumbar1, sumbar2, sumut1, sumut3
     ],
     caption: "Mendengar suara yang menanti pemulihan.",
     type: "gallery"
@@ -31,14 +52,8 @@ const SCRAPBOOK_DATA = [
     title: "Kondisi Lapangan",
     num: "02",
     images: [
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800",
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800",
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
+      thumb2,
+      aceh21, aceh22, aceh23, sumbar21, sumbar22, sumbar23, sumut2, sumut21, sumut22
     ],
     caption: "Merekam realitas infrastruktur pasca bencana.",
     type: "gallery"
@@ -53,7 +68,41 @@ const SCRAPBOOK_DATA = [
       {id: "Vd4LgunRcPo", source: "youtube", caption: "Di Balik Pendataan Pascabencana Sumatera Barat"},
       {id: "DUBIBhUEiA0", source: "reels", caption: "Mendata di Pidie Jaya"}
     ],
+    caption: "Momen puncak penuh haru dan tawa.",
     type: "video_gallery"
+  },
+];
+
+const PROVINSI_DATA = [
+  {
+    id: "v7b1",
+    name: "Aceh",
+    img: "https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?q=80&w=1000", 
+    kicker: "Tantangan",
+    heading: "Melawan",
+    headingAccent: "Medan",
+    body: "Menjangkau wilayah terdampak bencana menuntut adaptasi terhadap akses jalan darurat dan kendala sinyal. Tim memastikan setiap responden tetap terdata dengan baik.",
+    quote: '"Data pemulihan pascabencana ini krusial untuk perencanaan kebijakan yang tepat sasaran."',
+  },
+  {
+    id: "v7b2",
+    name: "Sumatera Utara",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    kicker: "Lapangan",
+    heading: "Setiap",
+    headingAccent: "Langkah",
+    body: "Variasi topografi dari pesisir hingga pegunungan mengharuskan pergerakan tim yang efisien. Minimasi non-sampling error menjadi fokus utama di setiap rute perjalanan.",
+    quote: '"Tantangan fisik di lapangan tidak boleh menurunkan standar objektivitas sebuah data statistik."',
+  },
+  {
+    id: "v7b3",
+    name: "Sumatera Barat",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    kicker: "Dedikasi",
+    heading: "Tetap",
+    headingAccent: "Bergerak",
+    body: "Pengumpulan data primer secara masif membutuhkan manajemen waktu dan tenaga yang solid. Konsistensi metodologi dijaga ketat pada setiap tahapan pencacahan.",
+    quote: '"Angka yang kami kumpulkan adalah potret riil kondisi sosial-ekonomi masyarakat saat ini."',
   },
 ];
 
@@ -163,7 +212,7 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
       <div className="ws1-husna-modal-backdrop" onClick={triggerClose} />
 
       <div className="ws1-husna-modal-content">
-        <button className="ws1-husna-modal-close" onClick={triggerClose}>✕</button>
+        <button className="ws1-husna-modal-close" onClick={triggerClose} aria-label="Tutup galeri">x</button>
 
         <div className="ws1-husna-focus-slider-wrapper">
           <div className="ws1-husna-main-display-area">
@@ -175,6 +224,7 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
                       <iframe
                         src={`https://www.youtube.com/embed/${activeVideo.id}?rel=0`}
                         title="YouTube video"
+                        loading="lazy"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
                       ></iframe>
@@ -186,6 +236,7 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
                       <iframe
                         src={`https://www.instagram.com/p/${activeVideo.id}/embed/?hidecaption=true`}
                         title="Instagram Reels"
+                        loading="lazy"
                         frameBorder="0"
                         scrolling="no"
                         allowTransparency="true"
@@ -209,7 +260,7 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
           {((selected.type === "gallery" && selected.images.length > 1) || 
             (selected.type === "video_gallery" && selected.videos.length > 1)) && (
             <div className="ws1-husna-elegant-nav">
-              <button className="ws1-husna-nav-minimal" onClick={() => paginate(-1)}>
+              <button className="ws1-husna-nav-minimal" onClick={() => paginate(-1)} aria-label="Konten sebelumnya">
                 <span className="ws1-husna-nav-icon">←</span> PREV
               </button>
               <div className="ws1-husna-nav-counter">
@@ -220,7 +271,7 @@ function InteractiveModal({ selected, activeIndex, setActiveIndex, closeHandle, 
                 </span> / 
                 {selected.type === "video_gallery" ? selected.videos.length : selected.images.length}
               </div>
-              <button className="ws1-husna-nav-minimal" onClick={() => paginate(1)}>
+              <button className="ws1-husna-nav-minimal" onClick={() => paginate(1)} aria-label="Konten berikutnya">
                 NEXT <span className="ws1-husna-nav-icon">→</span>
               </button>
             </div>
@@ -269,14 +320,25 @@ export const View5 = () => {
   }, { scope: containerRef }); 
 
   useEffect(() => {
-    if (selected?.images) {
-      setActiveIndex(Math.floor(selected.images.length / 2));
-    }
-    ScrollTrigger.refresh();
+    if (!selected) return undefined;
+    const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(frame);
   }, [selected]);
 
   const paginate = (direction) => {
     setActiveIndex((prev) => prev + direction);
+  };
+
+  const openScrapbook = (item) => {
+    setActiveIndex(item.images ? Math.floor(item.images.length / 2) : 0);
+    setSelected(item);
+  };
+
+  const handleTileKeyDown = (event, item) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openScrapbook(item);
+    }
   };
 
   const closeHandle = () => {
@@ -289,7 +351,6 @@ export const View5 = () => {
 
       <div className="ws1-husna-view-inner-h">
         <header className="ws1-husna-v5-header-h">
-          <span className="ws1-husna-kicker-beige lato-regular">Tahap 5 · Inti Lapangan</span>
           <h2>
             Mengetuk Pintu, <em className="ws1-husna-accent-orange">Merekam Harapan</em>
           </h2>
@@ -299,7 +360,13 @@ export const View5 = () => {
         <div className="ws1-husna-bento-grid">
           
           {/* Tile 01 */}
-          <div className="ws1-husna-bento-tile ws1-husna-tile-wawancara" onClick={() => setSelected(SCRAPBOOK_DATA[0])}>
+          <div
+            className="ws1-husna-bento-tile ws1-husna-tile-wawancara"
+            onClick={() => openScrapbook(SCRAPBOOK_DATA[0])}
+            onKeyDown={(event) => handleTileKeyDown(event, SCRAPBOOK_DATA[0])}
+            role="button"
+            tabIndex={0}
+          >
             <div className="ws1-husna-bento-img-wrap">
               <img src={SCRAPBOOK_DATA[0].images[0]} alt="Wawancara" />
               <div className="ws1-husna-bento-img-overlay" />
@@ -317,7 +384,13 @@ export const View5 = () => {
           </div>
 
           {/* Tile 02 */}
-          <div className="ws1-husna-bento-tile ws1-husna-tile-kondisi" onClick={() => setSelected(SCRAPBOOK_DATA[1])}>
+          <div
+            className="ws1-husna-bento-tile ws1-husna-tile-kondisi"
+            onClick={() => openScrapbook(SCRAPBOOK_DATA[1])}
+            onKeyDown={(event) => handleTileKeyDown(event, SCRAPBOOK_DATA[1])}
+            role="button"
+            tabIndex={0}
+          >
             <div className="ws1-husna-bento-img-wrap">
               <img src={SCRAPBOOK_DATA[1].images[0]} alt="Kondisi Lapangan" />
               <div className="ws1-husna-bento-img-overlay" />
@@ -335,9 +408,15 @@ export const View5 = () => {
           </div>
 
           {/* Tile 03 (Video) */}
-          <div className="ws1-husna-bento-tile ws1-husna-tile-video" onClick={() => setSelected(SCRAPBOOK_DATA[2])}>
+          <div
+            className="ws1-husna-bento-tile ws1-husna-tile-video"
+            onClick={() => openScrapbook(SCRAPBOOK_DATA[2])}
+            onKeyDown={(event) => handleTileKeyDown(event, SCRAPBOOK_DATA[2])}
+            role="button"
+            tabIndex={0}
+          >
             <div className="ws1-husna-bento-img-wrap">
-              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Momen Utama" />
+              <img src={thumb3} alt="Momen Utama" />
               <div className="ws1-husna-bento-img-overlay" />
               <div className="ws1-husna-bento-play">
                 <div className="ws1-husna-bento-play-ring">
@@ -377,10 +456,82 @@ export const View5 = () => {
 
 
 export const View7 = () => {
+  const containerRef = useRef(null);
+  const [hovered, setHovered] = useState(0);
+
+  useGSAP(() => {
+    gsap.fromTo('.ws1-husna-accordion-panel', 
+      { 
+        y: 80, 
+        opacity: 0 
+      },
+      {
+        y: 0, 
+        opacity: 1,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%", 
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+  }, { scope: containerRef });
+
   return (
-    <section className="webstory-view view-7">
-      <h2>View 7 (Tantangan/Parallax) - Husna</h2>
-      {/* TODO: Add tantangan content and animations here */}
+    <section ref={containerRef} className="ws1-husna-view-7-accordion" id="field">
+      <div className="ws1-husna-v7-accordion-header">
+        <span className="ws1-husna-kicker ws1-husna-kicker-green lato-regular">Tahap 7 · Tantangan</span>
+        <h2 className="ws1-husna-headline ws1-husna-headline-navy">Melawan
+          <em className="ws1-text-orange"> Medan</em> 
+        </h2>
+      </div>
+
+      <div className="ws1-husna-accordion-container">
+        {PROVINSI_DATA.map((prov, i) => {
+          const isActive = hovered === i;
+
+          return (
+            <motion.div
+              key={prov.id}
+              className={`ws1-husna-accordion-panel ${isActive ? 'is-active' : ''}`}
+              onMouseEnter={() => setHovered(i)}
+              animate={{ flex: isActive ? 2.5 : 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            >
+              <div 
+                className="ws1-husna-panel-bg" 
+                style={{ backgroundImage: `url(${prov.img})` }} 
+              />
+              <div className="ws1-husna-panel-overlay" />
+
+              <AnimatePresence>
+                {!isActive && (
+                  <motion.div 
+                    key="collapsed-name"
+                    className="ws1-husna-panel-name-vertical"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.6 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    {prov.name}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="ws1-husna-panel-content">
+                {isActive && (
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                    <blockquote className="ws1-husna-panel-quote">{prov.body}</blockquote>
+                  </motion.div>
+                )}
+              </div>    
+            </motion.div>
+          );
+        })}
+      </div>
     </section>
   );
 };

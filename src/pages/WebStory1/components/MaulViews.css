@@ -67,8 +67,8 @@
 }
 
 .ws1-maul-icon-wrapper:hover .ws1-maul-icon-item {
-  transform: scale(1.05);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(217, 119, 6, 0.5);
 }
 
 .ws1-maul-icon-item img {
@@ -188,11 +188,18 @@
   color: white;
 }
 
+.ws1-maul-btn-round:focus-visible,
+.ws1-maul-btn-pill:focus-visible,
+.ws1-maul-orbit-item:focus-visible {
+  outline: 2px solid #d97706;
+  outline-offset: 4px;
+}
+
 /* --- Area Galeri --- */
 .ws1-maul-gallery-container {
   position: relative;
-  width: 700px;
-  height: 700px;
+  width: min(700px, 92vw);
+  height: min(700px, 92vw);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -318,4 +325,100 @@
 @keyframes spinIn {
   0% { transform: rotate(-5deg); opacity: 0; }
   100% { transform: rotate(0deg); opacity: 1; }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (MAUL VIEWS)
+========================================= */
+@media (max-width: 1024px) {
+  .ws1-maul-icon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 5rem;
+  }
+
+  .ws1-maul-gallery-container {
+    width: min(620px, 92vw);
+    height: min(620px, 92vw);
+  }
+
+  .ws1-maul-center-display {
+    width: 380px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* View 6 */
+  .ws1-maul-header h2 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  .ws1-maul-header p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  .ws1-maul-icon-grid {
+    grid-template-columns: 1fr;
+    row-gap: 4rem;
+  }
+  .ws1-maul-icon-item {
+    width: 120px;
+    height: 120px;
+  }
+  .ws1-maul-text-container {
+    top: 130px;
+    width: 280px;
+  }
+  
+  /* View 8 */
+  .ws1-maul-view8 {
+    padding: 3.5rem 1rem;
+  }
+  .ws1-maul-v8-header h2 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+  }
+  .ws1-maul-controls {
+    gap: 0.7rem;
+  }
+  .ws1-maul-gallery-container {
+    width: min(380px, 96vw);
+    height: min(380px, 96vw);
+    margin-top: 0.5rem;
+  }
+  .ws1-maul-center-display {
+    width: 280px;
+    height: 280px;
+    border-width: 6px;
+  }
+  .ws1-maul-svg-text {
+    font-size: 24px;
+  }
+  .ws1-maul-orbit-item {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-maul-gallery-container {
+    width: min(330px, 96vw);
+    height: min(330px, 96vw);
+  }
+
+  .ws1-maul-center-display {
+    width: 230px;
+    height: 230px;
+  }
+
+  .ws1-maul-svg-text {
+    font-size: 20px;
+  }
+
+  .ws1-maul-orbit-item {
+    width: 52px;
+    height: 52px;
+  }
+
+  .ws1-maul-orbit-item.active {
+    transform: translate(var(--x), var(--y)) scale(1.25) !important;
+  }
 }

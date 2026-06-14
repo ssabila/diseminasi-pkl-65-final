@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
@@ -6,10 +6,14 @@ import './NadiaViews.css';
 
 // View 4 Assets
 import imgSumatera from '../assets/images/view-4/ws1-nadia-sumatera-v4.png';
-import imgPoint from '../assets/images/view-4/ws1-nadia-point-v4.png';
+import imgPoint from '../assets/images/view-4/ws1-nadia-point-v4.svg';
 
 // View 0/Global Hero Asset
 import imgHero from '../assets/images/view-0/ws1-hero.webp';
+import briefingPhoto1 from '../assets/images/view-2/v2-card-1.webp';
+import briefingPhoto2 from '../assets/images/view-2/v2-card-2.webp';
+import briefingPhoto3 from '../assets/images/view-2/v2-card-3.webp';
+import briefingPhoto4 from '../assets/images/view-2/v2-card-4.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,7 +113,7 @@ export const View0 = () => {
     // and content Y movement
     gsap.to(photoRef.current, {
       scale: 1.1,
-      opacity: 0,
+      // opacity: 0 removed so the hero photo stays visible while scrolling away
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
@@ -178,11 +182,9 @@ export const View0 = () => {
 
     // Initial entrance animations
     const tl = gsap.timeline();
-    tl.to(".gsap-fade-badge", { opacity: 1, y: 0, duration: 0.9, delay: 0.5, ease: "power3.out" }, 0)
-      .to(".gsap-fade-headline", { opacity: 1, y: 0, duration: 1.1, delay: 0.8, ease: "power3.out" }, 0)
+    tl.to(".gsap-fade-headline", { opacity: 1, y: 0, duration: 1.1, delay: 0.8, ease: "power3.out" }, 0)
       .to(".gsap-fade-subline", { opacity: 1, y: 0, duration: 1.0, delay: 1.1, ease: "power3.out" }, 0)
       .to(".gsap-fade-desc", { opacity: 1, duration: 0.8, delay: 1.5 }, 0)
-      .to(".gsap-fade-chip", { opacity: 1, y: 0, duration: 0.65, stagger: 0.09, delay: 1.8, ease: "power3.out" }, 0)
       .to(".gsap-scroll-cue", { opacity: 1, y: 0, duration: 0.9, delay: 2.3, ease: "power3.out" }, 0)
       .to(".gsap-cover-caption", { opacity: 1, duration: 1.2, delay: 2.5 }, 0);
       
@@ -262,10 +264,10 @@ export const View0 = () => {
 
 // ─── Briefing image stack photos (Unsplash) ──────────────────
 const briefingPhotos = [
-  'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&fit=crop',
-  'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&fit=crop',
-  'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&fit=crop',
-  'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&fit=crop',
+  briefingPhoto1,
+  briefingPhoto2,
+  briefingPhoto3,
+  briefingPhoto4,
 ];
 
 export const View4 = () => {
@@ -321,8 +323,8 @@ export const View4 = () => {
     );
 
     // ── 3. BRIEFING TERAKHIR: Interactive Card Stack ───────────────
-    const briefCards = gsap.utils.toArray('.v4-brief-stack-card');
-    const container = document.querySelector('.v4-briefing-stack-container');
+    const container = briefingRef.current?.querySelector('.v4-briefing-stack-container');
+    const briefCards = gsap.utils.toArray('.v4-brief-stack-card', briefingRef.current);
     
     // stack array holds card indexes from FRONT (0) to BACK (last)
     let stack = [];
@@ -420,6 +422,13 @@ export const View4 = () => {
       container.style.cursor = 'pointer';
     }
 
+    return () => {
+      if (container) {
+        container.removeEventListener('click', handleStackClick);
+        container.style.cursor = '';
+      }
+    };
+
   }, { scope: sectionRef });
 
   const briefingCardsData = [
@@ -429,7 +438,7 @@ export const View4 = () => {
       date: "19 Jan 2026",
       title: "Instruksi Final",
       desc: "Kepala BPS Provinsi menyampaikan arahan teknis terakhir sebelum penerjunan. Standar wawancara, protokol entry data, dan prosedur verifikasi lapangan diulangi satu per satu.",
-      locLabel: "📍 BPS PROVINSI ACEH",
+      locLabel: "BPS PROVINSI ACEH",
       img: briefingPhotos[0]
     },
     {
@@ -438,7 +447,7 @@ export const View4 = () => {
       date: "21 Jan 2026",
       title: "Koordinasi Lapangan",
       desc: "Memastikan kesiapan seluruh tim di lapangan dengan menyelaraskan SOP dan penanganan masalah teknis yang sering ditemui selama pendataan R3P.",
-      locLabel: "📍 BPS PROVINSI SUMUT",
+      locLabel: "BPS PROVINSI SUMUT",
       img: briefingPhotos[1]
     },
     {
@@ -447,7 +456,7 @@ export const View4 = () => {
       date: "22 Jan 2026",
       title: "Review Kuesioner",
       desc: "Sesi tanya jawab mendalam mengenai konsep dan definisi operasional kuesioner R3P untuk meminimalisir kesalahan interpretasi data di lapangan.",
-      locLabel: "📍 BPS PROVINSI SUMBAR",
+      locLabel: "BPS PROVINSI SUMBAR",
       img: briefingPhotos[2]
     },
     {
@@ -456,7 +465,7 @@ export const View4 = () => {
       date: "25 Jan 2026",
       title: "Pelepasan Bersama",
       desc: "Apel siaga dan pelepasan resmi seluruh mahasiswa PKL oleh pimpinan, mengobarkan semangat untuk mengumpulkan data yang akurat dan berkualitas.",
-      locLabel: "📍 KAMPUS STIS",
+      locLabel: "KAMPUS STIS",
       img: briefingPhotos[3] || briefingPhotos[0]
     }
   ];
@@ -468,7 +477,7 @@ export const View4 = () => {
       <div className="v4-hero" ref={heroRef}>
         <div className="v4-hero-bg">
           <img
-            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&fit=crop&crop=top"
+            src={imgHero}
             alt="Briefing Keberangkatan"
           />
         </div>
@@ -535,7 +544,7 @@ export const View4 = () => {
               <div className="v4-bsc-left">
                 <img src={card.img} alt={card.title} />
                 <div className="v4-bsc-loc-overlay">
-                  <span className="v4-bsc-loc-icon">📍</span> {card.locLabel}
+                  <span className="v4-bsc-loc-icon">LOKASI</span> {card.locLabel}
                 </div>
               </div>
               <div className="v4-bsc-right">
@@ -553,8 +562,8 @@ export const View4 = () => {
             </div>
           ))}
         </div>
+        <p className="v4-stack-hint">Tap to flip cards ↺</p>
       </div>
-
     </section>
   );
 };
@@ -588,6 +597,21 @@ export const View9 = () => {
       opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out', delay: 0.6,
       scrollTrigger: { trigger: closingRef.current, start: 'top 55%', toggleActions: 'play none none none' },
     });
+    // Stats counter count-up
+    gsap.utils.toArray('.v9-stat-num').forEach((el) => {
+      const targetVal = parseInt(el.getAttribute('data-target'), 10);
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: targetVal,
+        duration: 2.5,
+        ease: 'power3.out',
+        delay: 0.6,
+        scrollTrigger: { trigger: closingRef.current, start: 'top 55%', toggleActions: 'play none none none' },
+        onUpdate: () => {
+          el.innerText = Math.floor(obj.val);
+        }
+      });
+    });
     // Footer credits
     gsap.fromTo('.v9-credits', { opacity: 0 }, {
       opacity: 1, duration: 1.5, delay: 1,
@@ -618,19 +642,19 @@ export const View9 = () => {
 
         <div className="v9-stats-row">
           <div className="v9-stat">
-            <span className="v9-stat-num">510</span>
+            <span className="v9-stat-num" data-target="510">0</span>
             <span className="v9-stat-label">Mahasiswa</span>
           </div>
           <div className="v9-stat">
-            <span className="v9-stat-num">3</span>
+            <span className="v9-stat-num" data-target="3">0</span>
             <span className="v9-stat-label">Provinsi</span>
           </div>
           <div className="v9-stat">
-            <span className="v9-stat-num">15</span>
+            <span className="v9-stat-num" data-target="15">0</span>
             <span className="v9-stat-label">Kabupaten/Kota</span>
           </div>
           <div className="v9-stat">
-            <span className="v9-stat-num">52</span>
+            <span className="v9-stat-num" data-target="52">0</span>
             <span className="v9-stat-label">PML</span>
           </div>
         </div>
