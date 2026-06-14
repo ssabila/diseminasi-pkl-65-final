@@ -1,0 +1,238 @@
+/* WebStory1 Global Storytelling Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body.ws1-story-scrollbars-hidden {
+  scrollbar-width: none; /* Firefox */
+}
+
+body.ws1-story-scrollbars-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.webstory1-wrapper {
+  position: relative;
+  overflow: hidden; /* Prevent horizontal scroll from bridges or elements */
+  cursor: default;
+}
+
+/* Global Subtle Image Scale on Hover */
+.webstory1-wrapper img {
+  transition: transform 0.8s ease;
+}
+.webstory1-wrapper img:hover {
+  transform: scale(1.03);
+}
+
+/* =========================================
+   THE GOLDEN THREAD (Global Progress Line)
+========================================= */
+.ws1-golden-thread {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 999;
+  pointer-events: none;
+}
+
+.ws1-golden-thread-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #d97706, #e91e63, #d97706);
+  transform-origin: top;
+  transform: scaleY(0);
+  box-shadow: 0 0 15px rgba(233, 30, 99, 0.8), 0 0 30px rgba(217, 119, 6, 0.6);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .ws1-golden-thread {
+    left: 15px; /* Shift closer to edge */
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-golden-thread {
+    display: none; /* Hide golden thread on very small screens to avoid clipping text */
+  }
+  .ws1-nb-content {
+    padding: 0 1rem; /* Smaller padding */
+  }
+}
+
+/* =========================================
+   NARRATIVE BRIDGES
+========================================= */
+.ws1-narrative-bridge {
+  position: relative;
+  width: 100%;
+  height: 120vh; /* Extra height for scroll space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--navy, #0B1120); /* Deep dark background */
+  z-index: 10;
+  margin: -1px 0; /* Fix subtle gaps */
+}
+
+/* =========================================
+   CHAPTER TRACKER
+========================================= */
+.ws1-chapter-tracker {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  pointer-events: none; /* Let clicks pass through */
+}
+
+.ws1-chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.ws1-chapter-item.active {
+  opacity: 1;
+}
+
+.ws1-chapter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E5D9B6;
+  transition: all 0.3s ease;
+}
+
+.ws1-chapter-item.active .ws1-chapter-dot {
+  background: #E67E22;
+  box-shadow: 0 0 10px rgba(230,126,34,0.8);
+  transform: scale(1.5);
+}
+
+.ws1-chapter-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #E5D9B6;
+  text-transform: uppercase;
+  font-weight: 700;
+  transform: translateX(-10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.ws1-chapter-item.active .ws1-chapter-label {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .ws1-chapter-tracker {
+    left: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ws1-chapter-tracker {
+    display: none;
+  }
+}
+
+/* =========================================
+   CUSTOM CURSOR & AUDIO
+========================================= */
+.ws1-custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(229, 217, 182, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%); /* Start centered on mouse */
+  mix-blend-mode: difference;
+}
+
+@media (max-width: 768px) {
+  .ws1-custom-cursor {
+    display: none;
+  }
+}
+
+.ws1-audio-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(21, 23, 61, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(229, 217, 182, 0.2);
+  color: #E5D9B6;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.ws1-audio-toggle:hover {
+  background: rgba(230, 126, 34, 0.3);
+  border-color: #E67E22;
+  transform: scale(1.1);
+}
+
+.ws1-audio-toggle:focus-visible {
+  outline: 2px solid #E67E22;
+  outline-offset: 4px;
+}
+
+/* Hide default cursor on wrapper if not mobile */
+@media (min-width: 769px) {
+  .webstory1-wrapper {
+    cursor: none !important;
+  }
+  .webstory1-wrapper * {
+    cursor: none !important;
+  }
+}
+
+.ws1-nb-content {
+  position: sticky;
+  top: 40vh; /* Stick to middle of viewport */
+  text-align: center;
+  padding: 0 2rem;
+  max-width: 800px;
+}
+
+.ws1-nb-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #E5D9B6;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.4;
+  opacity: 0; /* Managed by GSAP */
+  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
