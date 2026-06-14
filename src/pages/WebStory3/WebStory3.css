@@ -12,7 +12,8 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  /* Jangan gunakan overflow: hidden — akan memotong card yang dekat tepi section */
+  overflow: visible;
 }
 
 /* ─── Shared Insight Layout (sections 5-10) ─── */

@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import mapboxgl from 'mapbox-gl';
 import './InsightEnv.css';
-import { useSharedMap } from '../SharedMapProvider';
+import { useSharedMap } from '../MapContext';
 
 gsap.registerPlugin(ScrollTrigger);
 

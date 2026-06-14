@@ -49,15 +49,17 @@ export const SharedMapProvider = ({ children }) => {
         It sits behind the content and won't scroll away! 
       */}
       <div 
+        id="shared-map-bg"
         style={{ 
           position: 'fixed', 
           top: 0, 
           left: 0, 
           width: '100vw', 
           height: '100vh', 
-          zIndex: 0, // Keeps map behind the text cards
-          pointerEvents: 'none', // Prevents map from intercepting user scrolls
-          background: '#050614' // Base space color
+          zIndex: 0,
+          pointerEvents: 'none',
+          background: '#050614',
+          opacity: 0, // Mulai tersembunyi, fade-in diatur oleh GSAP di animations.js
         }}
       >
         <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />

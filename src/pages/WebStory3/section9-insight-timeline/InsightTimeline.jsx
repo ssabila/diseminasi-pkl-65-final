@@ -9,7 +9,7 @@ import tlPuncak from '../geojson-data/timeline_puncak.geojson?url';
 import tlSurut from '../geojson-data/timeline_surut.geojson?url';
 import tlSinyal from '../geojson-data/timeline_sinyal.geojson?url';
 import tlPemulihan from '../geojson-data/timeline_pemulihan.geojson?url';
-import { useSharedMap } from '../SharedMapProvider';
+import { useSharedMap } from '../MapContext';
 
 gsap.registerPlugin(ScrollTrigger);
 

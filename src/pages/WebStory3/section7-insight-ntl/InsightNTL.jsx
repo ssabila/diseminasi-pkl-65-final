@@ -6,7 +6,7 @@ import './InsightNTL.css';
 
 import ntlSebelumData from '../geojson-data/ntl_sebelum_grid.geojson?url';
 import ntlSesudahData from '../geojson-data/ntl_sesudah_grid.geojson?url';
-import { useSharedMap } from '../SharedMapProvider';
+import { useSharedMap } from '../MapContext';
 
 gsap.registerPlugin(ScrollTrigger);
 

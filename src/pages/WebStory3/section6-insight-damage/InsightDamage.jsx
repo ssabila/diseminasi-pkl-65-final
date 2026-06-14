@@ -6,7 +6,7 @@ import './InsightDamage.css';
 
 import areaBanjirData from '../geojson-data/area_banjir.geojson?url';
 import titikLongsorData from '../geojson-data/titik_longsor.geojson?url';
-import { useSharedMap } from '../SharedMapProvider';
+import { useSharedMap } from '../MapContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
