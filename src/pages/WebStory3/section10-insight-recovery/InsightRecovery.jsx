@@ -9,7 +9,6 @@ export default function InsightRecovery() {
 
   return (
     <section ref={sectionRef} id="section10-insightrecovery" className="section section-insightrecovery">
-      {/* TODO: isi layout section ini */}
       <p style={{ color: 'var(--off-white)', textAlign: 'center' }}>
         Section 10: InsightRecovery
       </p>
