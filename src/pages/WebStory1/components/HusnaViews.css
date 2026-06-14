@@ -1,11 +1,9 @@
-/* Add specific styles for Husna's Views here */
+/* Husna Views */
 .view-5, .view-7 {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #e91e63; /* Debug boundary */
-  margin: 1rem 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -13,7 +11,7 @@
 ════════════════════════════════════════════════════════════════ */
 
 .ws1-husna-view-5-horizontal {
-  background-color: var(--navy);
+  background: radial-gradient(circle at 50% 0%, #1a2238 0%, #0d1525 50%, #070b14 100%);
   min-height: 100vh;
   position: relative;
   overflow: hidden;
@@ -33,6 +31,20 @@
 .ws1-husna-v5-header-h {
   margin-bottom: 40px;
   text-align: left;
+}
+
+.ws1-husna-v5-header-h h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: #F8F9FA;
+  margin: 0;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.ws1-husna-accent-orange {
+  color: #E67E22;
+  font-style: italic;
 }
 
 /* ── Bento Grid ── */
@@ -57,6 +69,8 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+  transform: translateZ(0); /* Hardware Acceleration */
+  will-change: transform, box-shadow;
 }
 
 .ws1-husna-bento-tile:hover {
@@ -87,6 +101,8 @@
   object-fit: cover;
   filter: brightness(0.78) saturate(0.72);
   transition: filter 0.45s ease, transform 0.45s ease;
+  transform: translateZ(0); /* Hardware Acceleration */
+  will-change: transform, filter;
 }
 
 .ws1-husna-bento-tile:hover .ws1-husna-bento-img-wrap img {
@@ -475,4 +491,140 @@
 .ws1-husna-nav-counter span {
   color: var(--orange);
   font-weight: 700;
+}
+
+.ws1-husna-headline {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.ws1-husna-headline-beige { font-style:italic; color: var(--beige); }
+.ws1-husna-headline em { font-style: italic; color: #E67E22; }
+
+
+.ws1-husna-kicker {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.ws1-husna-kicker-beige {
+  color: var(--beige);
+  background: rgba(229, 217, 182, 0.15);
+  border: 1px solid rgba(229, 217, 182, 0.3);
+}
+
+.ws1-husna-kicker-green {
+  color: var(--green);
+  background: rgba(46, 204, 113, 0.15);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+  VIEW 7 — MELAWAN MEDAN (EXPANDING ACCORDION)
+════════════════════════════════════════════════════════════════ */
+
+.ws1-husna-view-7-accordion {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--beige);
+  padding: 50px 0px;
+  position: relative;
+}
+
+.ws1-husna-v7-accordion-header {
+  position: relative; 
+  z-index: 2;
+  text-align: center; 
+}
+
+.ws1-husna-accordion-container {
+  display: flex;
+  height: 400px; 
+  width: 90%; 
+  max-width: 1400px;
+  margin: 0 auto; 
+  gap: 12px; 
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.ws1-husna-accordion-panel {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+}
+
+.ws1-husna-panel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s ease;
+}
+
+.ws1-husna-accordion-panel.is-active .ws1-husna-panel-bg {
+  transform: scale(1.05);
+}
+
+.ws1-husna-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(21, 23, 61, 0.8) 0%,
+    rgba(21, 23, 61, 0.3) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  transition: opacity 0.5s;
+}
+
+.ws1-husna-accordion-panel.is-active .ws1-husna-panel-overlay {
+  opacity: 0.85;
+}
+
+.ws1-husna-panel-content {
+  position: relative;
+  z-index: 10;
+  padding: 20px 40px;
+  width: 100%;
+  color: var(--beige); 
+}
+
+.ws1-husna-panel-quote {
+  font-family: var(--font-title); 
+  font-style: italic;
+  border-left: 3px solid #E67E22;
+  padding-left: 15px;
+  font-size: 1.1rem;
+  max-width: 100%;
+  margin: 0; 
+}
+
+.ws1-husna-panel-name-vertical {
+  position: absolute;
+  top: 75% !important; 
+  left: 50% !important;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) !important;
+  width: max-content;
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--beige);
+  z-index: 20;
+  pointer-events: none;
 }
