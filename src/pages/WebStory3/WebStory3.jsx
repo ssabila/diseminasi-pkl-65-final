@@ -67,7 +67,9 @@ const WebStory3 = () => {
     return () => {
       lenis.destroy();
       gsap.ticker.remove(tickerFn);
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      ScrollTrigger.getAll()
+        .filter(st => container.current?.contains(st.trigger))
+        .forEach(st => st.kill());
     };
   }, []);
 
