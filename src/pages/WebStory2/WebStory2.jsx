@@ -1,15 +1,3 @@
-/**
- * WebStory2.jsx — Halaman Utama Web Story 2: Hasil Pendataan R3P
- *
- * Menggabungkan 4 babak:
- *   1. BabakIntro        — Babak 1: Intro & Skala Dampak
- *   2. BabakInfrastruktur — Babak 2: Infrastruktur (3 scene)
- *   3. BabakKeluarga     — Babak 3: Keluarga (3 scene)
- *   4. BabakKebutuhan    — Babak 4: Kebutuhan & Outro
- *
- * Animasi scroll detail (pinning, zoom) diatur di dalam MASING-MASING komponen babak.
- */
-
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
