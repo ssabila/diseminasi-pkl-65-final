@@ -1,0 +1,33 @@
+/* MapBackground.css */
+.map-background-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* z-index: 2 agar berada di atas SharedMapProvider (z-index: 0) untuk section 1-4 */
+  z-index: 2;
+  pointer-events: none;
+  background-color: var(--navy);
+  overflow: hidden;
+}
+
+/* Full-screen canvas — posisi globe dikontrol via map.setPadding() */
+.map-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+.mapbox-globe {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.mapbox-globe .mapboxgl-canvas-container,
+.mapbox-globe canvas {
+  background: transparent !important;
+}

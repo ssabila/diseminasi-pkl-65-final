@@ -1,0 +1,52 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Sumatera Utara",
+        "provinsi": "Sumut",
+        "kode": "ID-SU"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.5,
+              3.8
+            ],
+            [
+              99.8,
+              4.0
+            ],
+            [
+              100.2,
+              2.8
+            ],
+            [
+              99.8,
+              2.0
+            ],
+            [
+              99.0,
+              1.5
+            ],
+            [
+              98.0,
+              1.8
+            ],
+            [
+              97.5,
+              2.5
+            ],
+            [
+              97.5,
+              3.8
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
