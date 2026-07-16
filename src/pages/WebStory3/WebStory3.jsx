@@ -20,7 +20,7 @@ import MapBackground from './components/MapBackground';
 import { MapContext } from './MapContext';
 import { animateWebStory3 } from './animations';
 import { useGSAP } from '@gsap/react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,6 +56,89 @@ const WebStory3 = () => {
   const container = useRef(null);
   const [mapInstance, setMapInstance] = useState(null);
   const [mapReady, setMapReady] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isNavigatingRef = useRef(false);
+  const suppressDownScrollUntilRef = useRef(0);
+
+  useEffect(() => {
+    const target = location.state?.scrollTarget ?? 'top';
+    let raf2 = null;
+
+    const scrollToTarget = () => {
+      if (target === 'bottom') {
+        window.scrollTo({ top: document.documentElement.scrollHeight, left: 0, behavior: 'auto' });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    };
+
+    const raf1 = requestAnimationFrame(() => {
+      scrollToTarget();
+      raf2 = requestAnimationFrame(scrollToTarget);
+    });
+
+    const timeoutId = window.setTimeout(scrollToTarget, 150);
+
+    if (target === 'top') {
+      suppressDownScrollUntilRef.current = performance.now() + 700;
+    }
+
+    return () => {
+      cancelAnimationFrame(raf1);
+      if (raf2) cancelAnimationFrame(raf2);
+      window.clearTimeout(timeoutId);
+    };
+  }, [location.key, location.state]);
+
+  useEffect(() => {
+    let touchStartY = 0;
+
+    const isSuppressed = () => performance.now() < suppressDownScrollUntilRef.current;
+
+    const onWheelCapture = (event) => {
+      if (!isSuppressed()) return;
+      if (event.deltaY > 0) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    };
+
+    const onKeyDownCapture = (event) => {
+      if (!isSuppressed()) return;
+      const downKeys = ['ArrowDown', 'PageDown', ' ', 'End'];
+      if (downKeys.includes(event.key)) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    };
+
+    const onTouchStartCapture = (event) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchMoveCapture = (event) => {
+      if (!isSuppressed()) return;
+      const currentY = event.touches[0]?.clientY ?? touchStartY;
+      const swipeDelta = touchStartY - currentY;
+      if (swipeDelta > 0) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    };
+
+    window.addEventListener('wheel', onWheelCapture, { passive: false });
+    window.addEventListener('keydown', onKeyDownCapture);
+    window.addEventListener('touchstart', onTouchStartCapture, { passive: true });
+    window.addEventListener('touchmove', onTouchMoveCapture, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', onWheelCapture);
+      window.removeEventListener('keydown', onKeyDownCapture);
+      window.removeEventListener('touchstart', onTouchStartCapture);
+      window.removeEventListener('touchmove', onTouchMoveCapture);
+    };
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -82,6 +165,50 @@ const WebStory3 = () => {
     if (!mapInstance) return;
     animateWebStory3(container.current, mapInstance);
   }, { scope: container, dependencies: [mapInstance] });
+
+  useEffect(() => {
+    const threshold = 24;
+    let touchStartY = 0;
+
+    const isAtTop = () => window.scrollY <= threshold;
+
+    const goToPreviousStory = () => {
+      if (isNavigatingRef.current) return;
+      isNavigatingRef.current = true;
+      navigate('/web-story-2', { state: { scrollTarget: 'bottom' } });
+    };
+
+    const onWheel = (event) => {
+      if (event.deltaY < 0 && isAtTop()) goToPreviousStory();
+    };
+
+    const onKeyDown = (event) => {
+      const upKeys = ['ArrowUp', 'PageUp', 'Home'];
+      if (upKeys.includes(event.key) && isAtTop()) goToPreviousStory();
+    };
+
+    const onTouchStart = (event) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchEnd = (event) => {
+      const touchEndY = event.changedTouches[0]?.clientY ?? touchStartY;
+      const swipeDelta = touchStartY - touchEndY;
+      if (swipeDelta < -20 && isAtTop()) goToPreviousStory();
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: true });
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [navigate]);
 
   return (
     <ErrorBoundary>

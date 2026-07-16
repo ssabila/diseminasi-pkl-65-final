@@ -14,6 +14,7 @@ import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import BabakIntro from './1.Intro/intro';
 import BabakInfrastruktur from './2.Infrastruktur/infrastruktur';
@@ -121,6 +122,27 @@ function BabakNav({ active }) {
 const WebStory2 = () => {
   const container = useRef(null);
   const [activeBabak, setActiveBabak] = React.useState('babak-1');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isNavigatingRef = useRef(false);
+
+  React.useEffect(() => {
+    const target = location.state?.scrollTarget ?? 'top';
+    const scrollToTarget = () => {
+      if (target === 'bottom') {
+        window.scrollTo({ top: document.documentElement.scrollHeight, left: 0, behavior: 'auto' });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    };
+
+    const raf1 = requestAnimationFrame(() => {
+      scrollToTarget();
+      requestAnimationFrame(scrollToTarget);
+    });
+
+    return () => cancelAnimationFrame(raf1);
+  }, [location.key, location.state]);
 
   // Deteksi Babak aktif saat di-scroll
   React.useEffect(() => {
@@ -138,6 +160,63 @@ const WebStory2 = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  React.useEffect(() => {
+    const threshold = 24;
+    let touchStartY = 0;
+
+    const isAtTop = () => window.scrollY <= threshold;
+    const isAtBottom = () => (
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - threshold
+    );
+
+    const goToNextStory = () => {
+      if (isNavigatingRef.current) return;
+      isNavigatingRef.current = true;
+      navigate('/web-story-3', { state: { scrollTarget: 'top' } });
+    };
+
+    const goToPreviousStory = () => {
+      if (isNavigatingRef.current) return;
+      isNavigatingRef.current = true;
+      navigate('/web-story-1', { state: { scrollTarget: 'bottom' } });
+    };
+
+    const onWheel = (event) => {
+      if (event.deltaY > 0 && isAtBottom()) goToNextStory();
+      if (event.deltaY < 0 && isAtTop()) goToPreviousStory();
+    };
+
+    const onKeyDown = (event) => {
+      const downKeys = ['ArrowDown', 'PageDown', ' ', 'End'];
+      const upKeys = ['ArrowUp', 'PageUp', 'Home'];
+      if (downKeys.includes(event.key) && isAtBottom()) goToNextStory();
+      if (upKeys.includes(event.key) && isAtTop()) goToPreviousStory();
+    };
+
+    const onTouchStart = (event) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchEnd = (event) => {
+      const touchEndY = event.changedTouches[0]?.clientY ?? touchStartY;
+      const swipeDelta = touchStartY - touchEndY;
+      if (swipeDelta > 20 && isAtBottom()) goToNextStory();
+      if (swipeDelta < -20 && isAtTop()) goToPreviousStory();
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: true });
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [navigate]);
 
   return (
     <div

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './WebStory1.css';
 
 import { View0, View4, View9 } from './components/NadiaViews';
@@ -14,6 +15,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function WebStory1() {
   const containerRef = useRef(null);
   const [activeChapter, setActiveChapter] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isNavigatingRef = useRef(false);
   
   // Audio & Cursor
   const cursorRef = useRef(null);
@@ -24,6 +28,72 @@ export default function WebStory1() {
     document.body.classList.add('ws1-story-scrollbars-hidden');
     return () => document.body.classList.remove('ws1-story-scrollbars-hidden');
   }, []);
+
+  useEffect(() => {
+    const target = location.state?.scrollTarget ?? 'top';
+    const scrollToTarget = () => {
+      if (target === 'bottom') {
+        window.scrollTo({ top: document.documentElement.scrollHeight, left: 0, behavior: 'auto' });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    };
+
+    const raf1 = requestAnimationFrame(() => {
+      scrollToTarget();
+      requestAnimationFrame(scrollToTarget);
+    });
+
+    return () => cancelAnimationFrame(raf1);
+  }, [location.key, location.state]);
+
+  useEffect(() => {
+    const threshold = 24;
+    let touchStartY = 0;
+
+    const isAtBottom = () => (
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - threshold
+    );
+
+    const goToNextStory = () => {
+      if (isNavigatingRef.current) return;
+      isNavigatingRef.current = true;
+      navigate('/web-story-2', { state: { scrollTarget: 'top' } });
+    };
+
+    const onWheel = (event) => {
+      if (event.deltaY <= 0) return;
+      if (isAtBottom()) goToNextStory();
+    };
+
+    const onKeyDown = (event) => {
+      const downKeys = ['ArrowDown', 'PageDown', ' ', 'End'];
+      if (!downKeys.includes(event.key)) return;
+      if (isAtBottom()) goToNextStory();
+    };
+
+    const onTouchStart = (event) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchEnd = (event) => {
+      const touchEndY = event.changedTouches[0]?.clientY ?? touchStartY;
+      const swipeDelta = touchStartY - touchEndY;
+      if (swipeDelta > 20 && isAtBottom()) goToNextStory();
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: true });
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [navigate]);
 
   useGSAP(() => {
     // 1. Golden Thread Animation
