@@ -1,10 +1,9 @@
-/* Add specific styles for Husna's Views here */
 .view-5, .view-7 {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #e91e63; /* Debug boundary */
+  border: 2px dashed #e91e63;
   margin: 1rem 0;
 }
 
@@ -26,7 +25,7 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 0 var(--pad-x, 5%);
   z-index: 5;
 }
 
@@ -35,7 +34,7 @@
   text-align: left;
 }
 
-/* ── Headlines & Kickers (Biar teksnya kelihatan!) ── */
+/* ── Headlines & Kickers ── */
 .ws1-husna-headline {
   margin-top: 0;
   margin-bottom: 16px;
