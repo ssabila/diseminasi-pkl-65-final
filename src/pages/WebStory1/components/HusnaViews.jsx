@@ -69,7 +69,6 @@ export const View7 = () => {
   return (
     <section ref={containerRef} className="ws1-husna-view-7-accordion" id="field">
       <div className="ws1-husna-v7-accordion-header">
-        <span className="ws1-husna-kicker ws1-husna-kicker-green lato-regular">Tahap 7 · Tantangan</span>
         <h2 className="ws1-husna-headline ws1-husna-headline-navy">Melawan
           <em className="ws1-text-orange"> Medan</em> 
         </h2>
