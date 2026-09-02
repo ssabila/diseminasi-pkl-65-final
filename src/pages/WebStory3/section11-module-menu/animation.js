@@ -13,15 +13,14 @@ export function animateModuleMenu(containerRef) {
     scrollTrigger: {
       trigger: containerRef.current,
       start: 'top top',
-      end: '+=100%',
+      end: '+=900%',
       scrub: true,
       pin: true,
     },
   });
 
-  // TODO: tambahkan animasi GSAP di sini
-  // Contoh:
-  // tl.fromTo('.section-modulemenu .judul', { opacity: 0, y: 60 }, { opacity: 1, y: 0 });
+  // Animation is handled internally by the component's useGSAP hook
+  // This function is kept for orchestrator compatibility
 
   return tl;
 }

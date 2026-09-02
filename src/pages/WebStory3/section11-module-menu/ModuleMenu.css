@@ -1,8 +1,293 @@
-/* Section 11 — ModuleMenu */
-/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+/* Section 11 — ModuleMenu / Overview 8 Modul */
+/* Reference: webstorydesign.lovable.app (module slider section) */
 
 .section-modulemenu {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  background: var(--navy);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Ambient background glow ─── */
+.module-bg-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(230, 126, 34, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Section Header ─── */
+.module-section-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.module-section-label {
+  display: block;
+  font-family: var(--font-content);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(229, 217, 182, 0.6);
+  margin-bottom: 1rem;
+}
+
+.module-section-title {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--off-white);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.module-accent {
+  color: var(--orange);
+}
+
+.module-section-hint {
+  font-family: var(--font-content);
+  font-size: 0.85rem;
+  color: rgba(245, 245, 245, 0.4);
+  margin-top: 1.5rem;
+  letter-spacing: 1px;
+}
+
+/* ─── Cards Viewport ─── */
+.module-cards-viewport {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  padding: 0 1.5rem;
+  pointer-events: none;
+}
+
+/* ─── Module Card (outer wrapper) ─── */
+.module-card {
+  position: absolute;
+  width: 90vw;
+  max-width: 1100px;
+  pointer-events: auto;
+  will-change: transform, opacity;
+}
+
+/* ─── Card Grid (12-col: 7 visual + 5 info) ─── */
+.module-card-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* ─── Card Visual (left side) ─── */
+.module-card-visual {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+  /* Glassmorphic border */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.module-card-svg-icon {
+  width: 10rem;
+  height: 10rem;
+  color: rgba(229, 217, 182, 0.85);
+  z-index: 2;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+}
+
+/* Decorative grid overlay on visual */
+.module-card-grid-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(white 1px, transparent 1px),
+    linear-gradient(90deg, white 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Decorative dots (top-left, like reference) */
+.module-card-dots {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 6px;
+  z-index: 3;
+}
+
+.module-card-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-ember { background-color: rgba(230, 126, 34, 0.8); }
+.dot-leaf { background-color: rgba(98, 129, 65, 0.7); }
+.dot-sand { background-color: rgba(229, 217, 182, 0.7); }
+
+/* Module number label (bottom-right) */
+.module-card-num {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(229, 217, 182, 0.7);
+  z-index: 3;
+}
+
+/* ─── Card Info (right side) ─── */
+.module-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.module-card-counter {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  margin: 0 0 0.75rem;
+}
+
+.module-card-title {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  color: var(--off-white);
+  margin: 0;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.module-card-desc {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(229, 217, 182, 0.75);
+  margin: 1.25rem 0 0;
+  text-wrap: balance;
+}
+
+/* ─── "Lihat Modul" Button — pill shape with glow (matching reference) ─── */
+.module-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2rem;
+  padding: 12px 20px;
+  border: 1px solid rgba(229, 217, 182, 0.3);
+  border-radius: 9999px; /* pill shape */
+  background: transparent;
+  color: rgba(229, 217, 182, 0.9);
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  align-self: flex-start;
+}
+
+.module-card-btn:hover {
+  background: rgba(229, 217, 182, 0.95);
+  color: var(--navy);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 0 24px 4px rgba(255, 255, 255, 0.35),
+    0 0 60px 12px rgba(255, 255, 255, 0.15);
+}
+
+.module-card-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.5s ease;
+}
+
+.module-card-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* ─── Starfield ─── */
+.section-modulemenu .starfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-modulemenu .star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: menuTwinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+}
+
+@keyframes menuTwinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.7; }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .module-card {
+    width: 92vw;
+  }
+
+  .module-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .module-card-visual {
+    aspect-ratio: 16 / 9;
+  }
+
+  .module-card-svg-icon {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .module-card-title {
+    font-size: 1.3rem;
+  }
+
+  .module-card-desc {
+    font-size: 0.82rem;
+  }
+
+  .module-section-title {
+    font-size: 2rem;
+  }
 }
