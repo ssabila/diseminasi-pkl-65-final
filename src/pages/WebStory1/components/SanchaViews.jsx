@@ -15,65 +15,51 @@ gsap.registerPlugin(ScrollTrigger);
 const timelineData = [
   { 
     id: 1,
-    step: "01", 
-    date: "12 JAN 2026",
-    tag: "Pengarahan Umum",
-    location: "Aula Utama Politeknik Statistika STIS", 
-    title: "Pembekalan & Pengarahan", 
-    desc: "Pembukaan resmi program R3P 2026 dan penyelarasan visi strategis pengumpulan data pemulihan pascabencana secara menyeluruh.",
-    icon: (
-      <svg className="ws1-sancha-tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-      </svg>
-    )
+    step: "01",
+    day: "12",
+    month: "JAN",
+    year: "2026",
+    code: "DISPATCH // 01",
+    phase: "PENGARAHAN STRATEGIS",
+    location: "Aula Utama Politeknik Statistika STIS, Jakarta", 
+    title: "Pembekalan & Penyatuan Visi Misi", 
+    desc: "Pembukaan resmi program R3P 2026 dan penyelarasan metodologi pengumpulan data pemulihan pascabencana secara menyeluruh sebelum tim diterjunkan."
   },
   { 
     id: 2,
-    step: "02", 
-    date: "13 JAN 2026",
-    tag: "Simulasi CAPI & FASIH",
-    location: "Laboratorium Komputasi Statistik", 
-    title: "Pelatihan Teknis Lapangan", 
-    desc: "Uji coba instrumen CAPI serta simulasi pencatatan data terpadu menggunakan sistem aplikasi FASIH secara intensif dan adaptif.",
-    icon: (
-      <svg className="ws1-sancha-tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-        <line x1="12" y1="18" x2="12.01" y2="18"/>
-      </svg>
-    )
+    step: "02",
+    day: "13",
+    month: "JAN",
+    year: "2026",
+    code: "DISPATCH // 02",
+    phase: "SIMULASI INSTRUMEN",
+    location: "Laboratorium Komputasi Statistik STIS", 
+    title: "Pelatihan Teknis Lapangan & CAPI", 
+    desc: "Uji coba komprehensif instrumen CAPI serta simulasi pencatatan data terpadu menggunakan aplikasi FASIH pada berbagai skenario kondisi darurat."
   },
   { 
     id: 3,
-    step: "03", 
-    date: "14 JAN 2026",
-    tag: "Manajemen Regu",
-    location: "Ruang Rapat Koordinasi PKL", 
-    title: "Konsolidasi & Pemetaan Wilayah", 
-    desc: "Distribusi kelompok kerja taktis per kabupaten sasaran serta pemantapan strategi mitigasi rute geografis yang rawan dan terisolasi.",
-    icon: (
-      <svg className="ws1-sancha-tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-    )
+    step: "03",
+    day: "14",
+    month: "JAN",
+    year: "2026",
+    code: "DISPATCH // 03",
+    phase: "MITIGASI TAKTIS",
+    location: "Ruang Koordinasi Wilayah PKL 65", 
+    title: "Konsolidasi & Pemetaan Jalur Rawan", 
+    desc: "Distribusi kelompok kerja taktis per kabupaten sasaran serta perumusan strategi mitigasi rute transportasi darat yang rusak dan terisolasi."
   },
   { 
     id: 4,
-    step: "04", 
-    date: "15 JAN 2026",
-    tag: "Apel Keberangkatan",
-    location: "Plaza Utama Kampus STIS", 
-    title: "Pelepasan Resmi Menuju Sumatera", 
-    desc: "Apel siaga pelepasan resmi kontingen peneliti menuju lokasi titik terdampak gempa dan banjir di Aceh, Sumut, dan Sumbar.",
-    icon: (
-      <svg className="ws1-sancha-tl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="22" y1="2" x2="11" y2="13"/>
-        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-      </svg>
-    )
+    step: "04",
+    day: "15",
+    month: "JAN",
+    year: "2026",
+    code: "DISPATCH // 04",
+    phase: "APEL SIAGA",
+    location: "Plaza Utama Kampus STIS, Jakarta", 
+    title: "Pelepasan Resmi Kontingen Peneliti", 
+    desc: "Apel siaga pelepasan resmi kontingen peneliti menuju lokasi titik terdampak gempa bumi dan banjir bandang di Aceh, Sumatera Utara, dan Sumatera Barat."
   }
 ];
 
@@ -187,40 +173,41 @@ export const View1 = () => {
                 <div className="ws1-sancha-tl-node-wrap">
                   <div className="ws1-sancha-tl-node">
                     <span className="ws1-sancha-tl-node-num">{item.step}</span>
-                    <div className="ws1-sancha-tl-node-ping" />
                   </div>
                 </div>
 
                 {/* Garis cabang konektor */}
                 <div className="ws1-sancha-tl-connector" />
 
-                {/* Kartu timeline */}
+                {/* Kartu timeline bergaya Editorial Dispatch */}
                 <div className="ws1-sancha-tl-card-wrap">
                   <div className="ws1-sancha-tl-card">
-                    {/* Watermark nomor step */}
-                    <div className="ws1-sancha-tl-watermark">{item.step}</div>
-
-                    <div className="ws1-sancha-tl-card-top">
-                      <div className="ws1-sancha-tl-badge-group">
-                        <span className="ws1-sancha-tl-tag">{item.tag}</span>
-                        <span className="ws1-sancha-tl-date">{item.date}</span>
+                    {/* Header Editorial Dispatch */}
+                    <div className="ws1-sancha-dispatch-header">
+                      <div className="ws1-sancha-dispatch-date-block">
+                        <span className="ws1-sancha-dispatch-day">{item.day}</span>
+                        <div className="ws1-sancha-dispatch-date-sub">
+                          <span className="ws1-sancha-dispatch-month">{item.month}</span>
+                          <span className="ws1-sancha-dispatch-year">{item.year}</span>
+                        </div>
                       </div>
-                      <div className="ws1-sancha-tl-icon-box">
-                        {item.icon}
+                      <div className="ws1-sancha-dispatch-meta">
+                        <span className="ws1-sancha-dispatch-code">{item.code}</span>
+                        <span className="ws1-sancha-dispatch-phase">{item.phase}</span>
                       </div>
                     </div>
 
-                    <h3 className="ws1-sancha-tl-title">{item.title}</h3>
-                    <p className="ws1-sancha-tl-desc">{item.desc}</p>
+                    {/* Garis batas editorial tipis */}
+                    <div className="ws1-sancha-dispatch-rule" />
 
-                    <div className="ws1-sancha-tl-card-footer">
-                      <span className="ws1-sancha-tl-location">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                          <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        {item.location}
-                      </span>
+                    {/* Judul & Deskripsi Naratif */}
+                    <h3 className="ws1-sancha-dispatch-title">{item.title}</h3>
+                    <p className="ws1-sancha-dispatch-desc">{item.desc}</p>
+
+                    {/* Footer Catatan Ekspedisi */}
+                    <div className="ws1-sancha-dispatch-footer">
+                      <span className="ws1-sancha-dispatch-loc-label">LOKASI PERSIAPAN</span>
+                      <span className="ws1-sancha-dispatch-loc-val">{item.location}</span>
                     </div>
                   </div>
                 </div>
