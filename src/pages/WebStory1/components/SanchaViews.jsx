@@ -15,48 +15,36 @@ gsap.registerPlugin(ScrollTrigger);
 const timelineData = [
   { 
     id: 1,
-    step: "01",
-    day: "12",
-    month: "JAN",
+    date: "12 JAN",
     year: "2026",
-    code: "DISPATCH // 01",
-    phase: "PENGARAHAN STRATEGIS",
+    phase: "HARI KE-1 · PENYELARASAN METODOLOGI",
     location: "Aula Utama Politeknik Statistika STIS, Jakarta", 
-    title: "Pembekalan & Penyatuan Visi Misi", 
+    title: "Pembekalan & Penyatuan Visi", 
     desc: "Pembukaan resmi program R3P 2026 dan penyelarasan metodologi pengumpulan data pemulihan pascabencana secara menyeluruh sebelum tim diterjunkan."
   },
   { 
     id: 2,
-    step: "02",
-    day: "13",
-    month: "JAN",
+    date: "13 JAN",
     year: "2026",
-    code: "DISPATCH // 02",
-    phase: "SIMULASI INSTRUMEN",
+    phase: "HARI KE-2 · SIMULASI SISTEM CAPI",
     location: "Laboratorium Komputasi Statistik STIS", 
     title: "Pelatihan Teknis Lapangan & CAPI", 
     desc: "Uji coba komprehensif instrumen CAPI serta simulasi pencatatan data terpadu menggunakan aplikasi FASIH pada berbagai skenario kondisi darurat."
   },
   { 
     id: 3,
-    step: "03",
-    day: "14",
-    month: "JAN",
+    date: "14 JAN",
     year: "2026",
-    code: "DISPATCH // 03",
-    phase: "MITIGASI TAKTIS",
+    phase: "HARI KE-3 · MITIGASI JALUR LAPANGAN",
     location: "Ruang Koordinasi Wilayah PKL 65", 
     title: "Konsolidasi & Pemetaan Jalur Rawan", 
     desc: "Distribusi kelompok kerja taktis per kabupaten sasaran serta perumusan strategi mitigasi rute transportasi darat yang rusak dan terisolasi."
   },
   { 
     id: 4,
-    step: "04",
-    day: "15",
-    month: "JAN",
+    date: "15 JAN",
     year: "2026",
-    code: "DISPATCH // 04",
-    phase: "APEL SIAGA",
+    phase: "HARI KE-4 · PEMBERANGKATAN MISI",
     location: "Plaza Utama Kampus STIS, Jakarta", 
     title: "Pelepasan Resmi Kontingen Peneliti", 
     desc: "Apel siaga pelepasan resmi kontingen peneliti menuju lokasi titik terdampak gempa bumi dan banjir bandang di Aceh, Sumatera Utara, dan Sumatera Barat."
@@ -98,26 +86,26 @@ export const View1 = () => {
       }
     );
 
-    // 3. Staggered row entrance: Node -> Connector -> Card (Instant, no delay)
-    gsap.utils.toArray('.ws1-sancha-tl-row').forEach((row, i) => {
+    // 3. Staggered row entrance: Pin -> Branch -> Typographic Block (No delay, cardless)
+    gsap.utils.toArray('.ws1-sancha-tl-entry').forEach((entry, i) => {
       const isLeft = i % 2 === 0;
-      const card = row.querySelector('.ws1-sancha-tl-card');
-      const node = row.querySelector('.ws1-sancha-tl-node');
-      const conn = row.querySelector('.ws1-sancha-tl-connector');
+      const block = entry.querySelector('.ws1-sancha-tl-block');
+      const pin = entry.querySelector('.ws1-sancha-tl-pin');
+      const branch = entry.querySelector('.ws1-sancha-tl-branch');
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: row,
+          trigger: entry,
           start: 'top 84%',
           toggleActions: 'play none none reverse'
         }
       });
 
-      tl.fromTo(node, 
-        { scale: 0, opacity: 0 }, 
-        { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(2)' }
+      tl.fromTo(pin, 
+        { scale: 0, opacity: 0, rotation: 0 }, 
+        { scale: 1, opacity: 1, rotation: 45, duration: 0.35, ease: 'back.out(2)' }
       )
-      .fromTo(conn,
+      .fromTo(branch,
         { scaleX: 0, opacity: 0 },
         { 
           scaleX: 1, 
@@ -128,9 +116,9 @@ export const View1 = () => {
         },
         '-=0.15'
       )
-      .fromTo(card, 
-        { opacity: 0, x: isLeft ? -40 : 40, y: 15 }, 
-        { opacity: 1, x: 0, y: 0, duration: 0.45, ease: 'power3.out' }, 
+      .fromTo(block, 
+        { opacity: 0, x: isLeft ? -35 : 35, y: 10 }, 
+        { opacity: 1, x: 0, y: 0, duration: 0.5, ease: 'power3.out' }, 
         '-=0.2'
       );
     });
@@ -138,20 +126,15 @@ export const View1 = () => {
 
   return (
     <section className="ws1-sancha-view1" ref={sectionRef} id="timeline">
-      {/* Background ambient lighting */}
-      <div className="ws1-sancha-v1-glow top-glow" />
-      <div className="ws1-sancha-v1-glow bottom-glow" />
+      {/* Background cartography grid overlay matching View 0 */}
+      <div className="ws1-sancha-v1-grid" />
 
       <div className="ws1-sancha-v1-inner">
-        {/* Section Header */}
+        {/* Section Header (Clean, without kicker and subhead) */}
         <header className="ws1-sancha-v1-header">
-          <span className="ws1-sancha-kicker">Tahap 1 · Pra-Pemberangkatan</span>
           <h2 className="ws1-sancha-headline">
             Menempa Kesiapan, <em className="ws1-sancha-accent-orange">Mengunci Komitmen</em>
           </h2>
-          <p className="ws1-sancha-subhead">
-            Empat hari krusial persiapan teknis, taktis, dan mental sebelum armada peneliti diterjunkan langsung ke wilayah terdampak bencana Sumatera.
-          </p>
         </header>
 
         {/* Timeline Container */}
@@ -167,49 +150,31 @@ export const View1 = () => {
             return (
               <div 
                 key={item.id} 
-                className={`ws1-sancha-tl-row ${isLeft ? 'is-left' : 'is-right'}`}
+                className={`ws1-sancha-tl-entry ${isLeft ? 'is-left' : 'is-right'}`}
               >
-                {/* Node di poros tengah */}
-                <div className="ws1-sancha-tl-node-wrap">
-                  <div className="ws1-sancha-tl-node">
-                    <span className="ws1-sancha-tl-node-num">{item.step}</span>
-                  </div>
+                {/* Pin Kotak di Poros Tengah (Persis Referensi) */}
+                <div className="ws1-sancha-tl-pin-wrap">
+                  <div className="ws1-sancha-tl-pin" />
                 </div>
 
                 {/* Garis cabang konektor */}
-                <div className="ws1-sancha-tl-connector" />
+                <div className="ws1-sancha-tl-branch" />
 
-                {/* Kartu timeline bergaya Editorial Dispatch */}
-                <div className="ws1-sancha-tl-card-wrap">
-                  <div className="ws1-sancha-tl-card">
-                    {/* Header Editorial Dispatch */}
-                    <div className="ws1-sancha-dispatch-header">
-                      <div className="ws1-sancha-dispatch-date-block">
-                        <span className="ws1-sancha-dispatch-day">{item.day}</span>
-                        <div className="ws1-sancha-dispatch-date-sub">
-                          <span className="ws1-sancha-dispatch-month">{item.month}</span>
-                          <span className="ws1-sancha-dispatch-year">{item.year}</span>
-                        </div>
-                      </div>
-                      <div className="ws1-sancha-dispatch-meta">
-                        <span className="ws1-sancha-dispatch-code">{item.code}</span>
-                        <span className="ws1-sancha-dispatch-phase">{item.phase}</span>
-                      </div>
-                    </div>
-
-                    {/* Garis batas editorial tipis */}
-                    <div className="ws1-sancha-dispatch-rule" />
-
-                    {/* Judul & Deskripsi Naratif */}
-                    <h3 className="ws1-sancha-dispatch-title">{item.title}</h3>
-                    <p className="ws1-sancha-dispatch-desc">{item.desc}</p>
-
-                    {/* Footer Catatan Ekspedisi */}
-                    <div className="ws1-sancha-dispatch-footer">
-                      <span className="ws1-sancha-dispatch-loc-label">LOKASI PERSIAPAN</span>
-                      <span className="ws1-sancha-dispatch-loc-val">{item.location}</span>
-                    </div>
+                {/* Blok Tipografi Murni Tanpa Card */}
+                <div className="ws1-sancha-tl-block">
+                  {/* Tanggal Besar & Tegas */}
+                  <div className="ws1-sancha-tl-date-row">
+                    <span className="ws1-sancha-tl-huge-date">{item.date}</span>
+                    <span className="ws1-sancha-tl-phase-label">{item.phase}</span>
                   </div>
+
+                  {/* Garis Aksen Oranye (Persis Foto Referensi) */}
+                  <div className="ws1-sancha-tl-orange-line" />
+
+                  {/* Judul & Deskripsi Narasi */}
+                  <h3 className="ws1-sancha-tl-heading">{item.title}</h3>
+                  <p className="ws1-sancha-tl-narrative">{item.desc}</p>
+                  <span className="ws1-sancha-tl-venue">{item.location}</span>
                 </div>
               </div>
             );
