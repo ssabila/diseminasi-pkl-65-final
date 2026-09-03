@@ -202,28 +202,29 @@
   align-items: flex-start;
 }
 
-/* Huge Bold Year / Date (Matching reference photo) */
+/* Huge Bold Year / Date (Grand Design: Lato Black) */
 .ws1-sancha-tl-huge-date {
-  font-family: var(--font-title);
-  font-size: clamp(3rem, 5.5vw, 4.4rem);
-  font-weight: 800;
-  color: #ffffff;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  font-family: var(--font-content);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 900;
+  color: var(--off-white);
+  line-height: 1;
+  letter-spacing: 0.02em;
   display: block;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .ws1-sancha-tl-entry:hover .ws1-sancha-tl-huge-date {
-  text-shadow: 0 0 25px rgba(230, 126, 34, 0.3);
+  color: #ffffff;
+  text-shadow: 0 0 25px rgba(230, 126, 34, 0.35);
 }
 
 .ws1-sancha-tl-phase-label {
   font-family: var(--font-content);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
-  color: rgba(229, 217, 182, 0.65);
+  letter-spacing: 0.15em;
+  color: var(--orange);
   text-transform: uppercase;
 }
 
@@ -233,7 +234,7 @@
   max-width: 320px;
   height: 2px;
   background: var(--orange);
-  margin: 14px 0 16px;
+  margin: 12px 0 16px;
   box-shadow: 0 0 10px rgba(230, 126, 34, 0.4);
   transition: max-width 0.4s ease, box-shadow 0.4s ease;
 }
@@ -251,24 +252,24 @@
   box-shadow: 0 0 16px rgba(230, 126, 34, 0.8);
 }
 
-/* Title & Narrative Typography */
+/* Title & Narrative Typography (Grand Design) */
 .ws1-sancha-tl-heading {
   font-family: var(--font-title);
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--off-white);
   margin: 0 0 10px;
-  line-height: 1.3;
+  line-height: 1.35;
   letter-spacing: -0.01em;
 }
 
 .ws1-sancha-tl-narrative {
   font-family: var(--font-content);
-  font-size: 0.96rem;
+  font-size: 0.95rem;
   color: rgba(229, 217, 182, 0.85);
-  line-height: 1.72;
+  line-height: 1.7;
   margin: 0 0 12px;
-  font-weight: 300;
+  font-weight: 400;
   max-width: 380px;
 }
 
@@ -282,11 +283,12 @@
 
 .ws1-sancha-tl-venue {
   font-family: var(--font-content);
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   color: var(--beige);
-  letter-spacing: 0.1em;
-  opacity: 0.65;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
   display: block;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
