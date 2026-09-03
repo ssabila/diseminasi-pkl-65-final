@@ -427,7 +427,7 @@
 /* Location Container (Percentage based) */
 .ws1-nadia-view4 .v4-map-loc {
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -85%);
   z-index: 5;
   cursor: pointer;
   width: 40px;

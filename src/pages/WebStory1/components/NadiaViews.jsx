@@ -55,17 +55,17 @@ const GrainOverlay = () => <div className="j-grain" aria-hidden="true" />;
 const PROVINCES = [
   { 
     id: 'aceh', name: 'Aceh', 
-    x: '25%', y: '20%',
+    x: '17%', y: '22%',
     mhs: 270, pml: 29
   },
   { 
     id: 'sumut', name: 'Sumatera Utara', 
-    x: '38%', y: '35%',
+    x: '30%', y: '28%',
     mhs: 210, pml: 21
   },
   { 
     id: 'sumbar', name: 'Sumatera Barat', 
-    x: '45%', y: '65%',
+    x: '38.5%', y: '47%',
     mhs: 30, pml: 2
   },
 ];
