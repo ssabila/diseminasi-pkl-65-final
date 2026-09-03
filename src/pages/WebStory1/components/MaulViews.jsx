@@ -14,7 +14,6 @@ import imgBoots from '../assets/images/ws1-maul-booth-v0.webp';
 import imgCard from '../assets/images/ws1-maul-card-v0.webp';
 import imgCharger from '../assets/images/ws1-maul-charger-v0.webp';
 import maskot1 from '../assets/images/ws1-maskot_1.webp';
-import maskot2 from '../assets/images/ws1-maskot_2.webp';
 
 // ==================== ASET VIEW 8 ====================
 import imgPidieJaya from '../assets/images/1-Pidie Jaya.webp';
@@ -33,87 +32,45 @@ import imgTanahDatar from '../assets/images/15-Tanah Datar.webp';
 
 // ==================== DATA VIEW 6 ====================
 const amunisiItems = [
-  {
-    id: 1,
-    name: "ID Card & Badge",
-    icon: imgCard,
-    role: "Identitas Resmi",
-    story: "Tanda pengenal di dada, senyum tulus menyapa setiap pintu yang kami ketuk."
-  },
-  {
-    id: 2,
-    name: "Smartphone + FASIH",
-    icon: imgFasih,
-    role: "Pencatat Digital",
-    story: "Merekam denyut kehidupan dan kisah warga ke dalam data yang presisi."
-  },
-  {
-    id: 3,
-    name: "Powerbank Taktis",
-    icon: imgPb,
-    role: "Penyambung Nyawa",
-    story: "Menjaga gawai tetap hidup saat menyusuri desa pelosok yang minim listrik."
-  },
-  {
-    id: 4,
-    name: "Jas Hujan",
-    icon: imgJas,
-    role: "Sahabat Cuaca",
-    story: "Pelindung setia saat langit Sumatera menurunkan hujan deras tanpa aba-aba."
-  },
-  {
-    id: 5,
-    name: "Kabel Data",
-    icon: imgCharger,
-    role: "Jembatan Posko",
-    story: "Menyambungkan rekaman ikhtiar harian untuk diserahkan ke posko saat senja."
-  },
-  {
-    id: 6,
-    name: "Sepatu Boots",
-    icon: imgBoots,
-    role: "Mobilitas Medan",
-    story: "Menjaga langkah kaki tetap tegak menembus bebatuan terjal dan kubangan lumpur."
-  }
+  { id: 'card', name: 'ID Card & Badge', icon: imgCard },
+  { id: 'fasih', name: 'Smartphone FASIH', icon: imgFasih },
+  { id: 'pb', name: 'Powerbank', icon: imgPb },
+  { id: 'jas', name: 'Jas Hujan', icon: imgJas },
+  { id: 'charger', name: 'Kabel Data', icon: imgCharger },
+  { id: 'boots', name: 'Sepatu Boots', icon: imgBoots },
 ];
 
-// ==================== KOMPONEN VIEW 6 (MASKOT & BEKAL TEMPUR) ====================
+// ==================== KOMPONEN VIEW 6 (SINGLE MASKOT & ORBITAL AMUNISI) ====================
 export const View6 = () => {
   const sectionRef = useRef(null);
-  const [activeItem, setActiveItem] = useState(amunisiItems[0]);
+  const [hoveredId, setHoveredId] = useState(null);
 
   useGSAP(() => {
     // Header entrance
     gsap.fromTo('.ws1-amunisi-header', 
-      { opacity: 0, y: 25 }, 
+      { opacity: 0, y: 30 }, 
       { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } }
     );
 
-    // Mascots entrance
-    gsap.fromTo('.ws1-amunisi-mascot',
-      { opacity: 0, scale: 0.88, y: 30 },
-      { opacity: 1, scale: 1, y: 0, duration: 1, stagger: 0.15, ease: 'back.out(1.4)', scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' } }
+    // Mascot entrance
+    gsap.fromTo('.ws1-amunisi-mascot-single',
+      { opacity: 0, scale: 0.8, y: 40 },
+      { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'back.out(1.5)', scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' } }
     );
 
-    // Gear tokens entrance
-    gsap.fromTo('.ws1-gear-token',
-      { opacity: 0, scale: 0.85, y: 20 },
+    // Gear orbs entrance
+    gsap.fromTo('.ws1-orbit-node',
+      { opacity: 0, scale: 0.4 },
       {
-        opacity: 1, scale: 1, y: 0,
-        duration: 0.6,
-        stagger: 0.07,
-        ease: 'power3.out',
+        opacity: 1, scale: 1,
+        duration: 0.8,
+        stagger: 0.08,
+        ease: 'back.out(1.8)',
         scrollTrigger: {
-          trigger: '.ws1-amunisi-tokens-wrap',
-          start: 'top 85%',
+          trigger: '.ws1-amunisi-constellation',
+          start: 'top 75%',
         }
       }
-    );
-
-    // Storybox entrance
-    gsap.fromTo('.ws1-amunisi-storybox',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
     );
 
   }, { scope: sectionRef });
@@ -123,67 +80,66 @@ export const View6 = () => {
       <div className="ws1-maul-grid-overlay" />
       
       <div className="ws1-amunisi-stage">
-        {/* Header Bersahaja & Hangat */}
+        {/* Header Bersih */}
         <div className="ws1-amunisi-header">
-          <span className="ws1-amunisi-kicker">BEKAL SAHABAT LAPANGAN</span>
+          <span className="ws1-amunisi-kicker">PERLENGKAPAN LAPANGAN</span>
           <h2 className="ws1-amunisi-title">
             Amunisi <span className="ws1-amunisi-accent">Tempur</span>
           </h2>
           <p className="ws1-amunisi-subtitle">
-            Enam kawan setia di dalam tas ransel kami sebelum melangkah menyapa warga.
+            Enam bekal penting penjaga kelancaran data di medan penugasan.
           </p>
         </div>
 
-        {/* Maskot PKL 65 Berdampingan */}
-        <div className="ws1-amunisi-mascot-center">
-          <div className="ws1-amunisi-pedestal-glow" />
-          <div className="ws1-amunisi-mascot-duo">
-            <div className="ws1-mascot-wrap mascot-1-wrap">
-              <img src={maskot1} alt="Maskot PKL 65" className="ws1-amunisi-mascot mascot-img-1" />
-            </div>
-            <div className="ws1-mascot-wrap mascot-2-wrap">
-              <img src={maskot2} alt="Maskot PKL 65" className="ws1-amunisi-mascot mascot-img-2" />
-            </div>
-          </div>
-        </div>
+        {/* Constellation Stage: Mascot Center + Orbiting Gear Logos */}
+        <div className="ws1-amunisi-constellation">
+          {/* Subtle Concentric Glowing Radar Rings */}
+          <div className="ws1-orbit-ring ring-outer" />
+          <div className="ws1-orbit-ring ring-mid" />
 
-        {/* 6 Gear Tokens: Bersih, Minimalis & Interaktif */}
-        <div className="ws1-amunisi-tokens-wrap">
-          {amunisiItems.map((item) => {
-            const isSelected = activeItem.id === item.id;
-            return (
-              <button
+          {/* Left Wing Gear (3 items) */}
+          <div className="ws1-orbit-wing wing-left">
+            {amunisiItems.slice(0, 3).map((item) => (
+              <div 
                 key={item.id}
-                type="button"
-                className={`ws1-gear-token ${isSelected ? 'is-selected' : ''}`}
-                onClick={() => setActiveItem(item)}
-                onMouseEnter={() => setActiveItem(item)}
+                className={`ws1-orbit-node node-${item.id} ${hoveredId === item.id ? 'is-hovered' : ''}`}
+                onMouseEnter={() => setHoveredId(item.id)}
+                onMouseLeave={() => setHoveredId(null)}
               >
-                <div className="ws1-gear-token-circle">
+                <div className="ws1-orbit-icon-wrap">
+                  <div className="ws1-orbit-icon-glow" />
                   <img src={item.icon} alt={item.name} loading="lazy" />
                 </div>
-                <span className="ws1-gear-token-name">{item.name}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Catatan Tulus dari Lapangan (Storybox) */}
-        <div className="ws1-amunisi-storybox">
-          <div className="ws1-storybox-tag">
-            <span className="ws1-storybox-pill">{activeItem.role}</span>
+                <span className="ws1-orbit-label">{item.name}</span>
+              </div>
+            ))}
           </div>
-          <p className="ws1-storybox-text">“{activeItem.story}”</p>
-          
-          <div className="ws1-storybox-nav">
-            {amunisiItems.map((it) => (
-              <button
-                key={it.id}
-                type="button"
-                className={`ws1-storybox-dot ${activeItem.id === it.id ? 'active' : ''}`}
-                onClick={() => setActiveItem(it)}
-                aria-label={it.name}
-              />
+
+          {/* Center Mascot (Single, Waving Explorer Mascot) */}
+          <div className="ws1-orbit-center-mascot">
+            <div className="ws1-mascot-pedestal-glow" />
+            <img 
+              src={maskot1} 
+              alt="Maskot Penjelajah PKL 65" 
+              className="ws1-amunisi-mascot-single"
+            />
+          </div>
+
+          {/* Right Wing Gear (3 items) */}
+          <div className="ws1-orbit-wing wing-right">
+            {amunisiItems.slice(3, 6).map((item) => (
+              <div 
+                key={item.id}
+                className={`ws1-orbit-node node-${item.id} ${hoveredId === item.id ? 'is-hovered' : ''}`}
+                onMouseEnter={() => setHoveredId(item.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
+                <div className="ws1-orbit-icon-wrap">
+                  <div className="ws1-orbit-icon-glow" />
+                  <img src={item.icon} alt={item.name} loading="lazy" />
+                </div>
+                <span className="ws1-orbit-label">{item.name}</span>
+              </div>
             ))}
           </div>
         </div>
