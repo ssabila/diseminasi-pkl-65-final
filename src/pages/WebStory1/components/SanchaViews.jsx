@@ -20,51 +20,51 @@ const timelineData = [
     id: 1,
     date: "12 JAN",
     year: "2026",
-    phase: "HARI KE-1 · PEMBEKALAN DASAR",
-    title: "Pelatihan Hari Pertama", 
-    location: "Ruang Kelas dan Auditorium Polstat STIS",
-    coordinate: "JAKARTA PUSAT · 6°13'S 106°52'E",
-    desc: "Penyelarasan konsep metodologi, pemahaman instrumen survei, dan pembekalan materi komprehensif bagi seluruh kontingen di ruang kelas serta auditorium kampus."
+    phase: "SENIN, 12 JANUARI 2026",
+    title: "Pelatihan Day 1", 
+    location: "Ruang Kelas Polstat STIS",
+    coordinate: "KAMPUS POLSTAT STIS · JAKARTA",
+    desc: "Penyelarasan konsep metodologi, instrumen survei, dan pembekalan materi komprehensif bagi seluruh kontingen di ruang kelas Polstat STIS."
   },
   { 
     id: 2,
     date: "13 JAN",
     year: "2026",
-    phase: "HARI KE-2 · SIMULASI CAPI & TEKNIS",
-    title: "Pelatihan Hari Kedua", 
-    location: "Ruang Kelas dan Auditorium Polstat STIS",
-    coordinate: "JAKARTA PUSAT · 6°13'S 106°52'E",
-    desc: "Pendalaman teknis penggunaan aplikasi CAPI FASIH, uji coba skenario lapangan darurat bencana, dan pemantapan koordinasi tim pencacah."
+    phase: "SELASA, 13 JANUARI 2026",
+    title: "Pelatihan Day 2", 
+    location: "Ruang Kelas Polstat STIS",
+    coordinate: "KAMPUS POLSTAT STIS · JAKARTA",
+    desc: "Pendalaman teknis pengoperasian aplikasi CAPI FASIH serta simulasi skenario pendataan bencana di ruang kelas Polstat STIS."
   },
   { 
     id: 3,
-    date: "14 JAN",
+    date: "13 JAN",
     year: "2026",
-    phase: "HARI KE-3 · PENGARAHAN & PELEPASAN",
+    phase: "SELASA, 13 JANUARI 2026",
     title: "Pelepasan dengan Kepala BPS RI", 
     location: "Auditorium Polstat STIS",
-    coordinate: "AUDITORIUM STIS · 6°13'S 106°52'E",
-    desc: "Prosesi apel pelepasan resmi dan pengarahan langsung oleh Kepala BPS RI guna meneguhkan integritas, profesionalitas, serta keselamatan peneliti di daerah bencana."
+    coordinate: "AUDITORIUM POLSTAT STIS",
+    desc: "Apel pelepasan resmi kontingen peneliti dan pengarahan langsung oleh Kepala BPS RI guna memantapkan kesiapan mental dan integritas."
   },
   { 
     id: 4,
-    date: "15 JAN",
+    date: "14–15 JAN",
     year: "2026",
-    phase: "HARI KE-4 · MOBILISASI KONTINGEN",
-    title: "Pemberangkatan ke Lapangan", 
-    location: "Bandara Halim, Bandara Soekarno Hatta",
-    coordinate: "HLP & CGK AIRPORT · 6°07'S 106°39'E",
-    desc: "Armada peneliti diberangkatkan serentak melalui Bandara Halim Perdanakusuma dan Bandara Internasional Soekarno-Hatta menuju pulau Sumatera."
+    phase: "RABU, 14 JAN – KAMIS, 15 JAN 2026",
+    title: "Pemberangkatan Day 1 & Day 2", 
+    location: "Polstat STIS dan Bandara Soekarno Hatta",
+    coordinate: "STIS & BANDARA SOEKARNO-HATTA",
+    desc: "Mobilisasi kontingen peneliti dari kampus Polstat STIS menuju Bandara Soekarno Hatta untuk diterbangkan langsung ke wilayah Sumatera."
   },
   { 
     id: 5,
-    date: "16 JAN",
+    date: "15 JAN – 3 FEB",
     year: "2026",
-    phase: "HARI KE-5 · PENGUMPULAN DATA LAPANGAN",
+    phase: "15 JANUARI – 3 FEBRUARI 2026",
     title: "Pelaksanaan Pendataan", 
-    location: "Aceh, Sumatera Utara, Sumatera Barat",
-    coordinate: "KORIDOR SUMATERA · 5°33'N — 0°57'S",
-    desc: "Pelaksanaan pendataan langsung secara terpadu di wilayah terdampak bencana alam di 3 provinsi: Aceh, Sumatera Utara, dan Sumatera Barat."
+    location: "Aceh, Sumatera Utara, dan Sumatera Barat",
+    coordinate: "KORIDOR WILAYAH BENCANA SUMATERA",
+    desc: "Pelaksanaan pengumpulan data pemulihan pascabencana alam secara intensif dan terpadu di wilayah terdampak di Aceh, Sumatera Utara, dan Sumatera Barat."
   }
 ];
 
@@ -311,43 +311,35 @@ export const View3 = () => {
   const quoteRef = useRef(null);
 
   useGSAP(() => {
-    // Pin the section
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top top',
-      end: () => window.innerWidth < 768 ? '+=100%' : '+=150%', // Pin for 150% of viewport height (100% on mobile)
-      pin: true,
-      pinSpacing: true,
+    // Single unified pinned timeline to eliminate stuttering and whitespace gap
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: () => window.innerWidth < 768 ? '+=80%' : '+=100%',
+        pin: true,
+        pinSpacing: true,
+        scrub: 0.5,
+      }
     });
 
-    // Reveal words one by one as we scroll through the pinned section
-    gsap.fromTo('.ws1-sancha-v3-word', 
-      { opacity: 0.15, y: 15 }, 
+    // Reveal quote words smoothly
+    tl.fromTo('.ws1-sancha-v3-word', 
+      { opacity: 0.15, y: 10 }, 
       {
         opacity: 1, y: 0, 
-        stagger: 0.1,
-        ease: 'none',
-        scrollTrigger: { 
-          trigger: sectionRef.current, 
-          start: 'top top',
-          end: () => window.innerWidth < 768 ? '+=70%' : '+=100%', 
-          scrub: true 
-        }
+        stagger: 0.06,
+        ease: 'none'
       }
-    );
-
-    // Fade in author at the end
-    gsap.fromTo('.ws1-sancha-v3-author', 
-      { opacity: 0, y: 20 }, 
+    )
+    // Fade in author seamlessly without dead space
+    .fromTo('.ws1-sancha-v3-author', 
+      { opacity: 0, y: 15 }, 
       {
         opacity: 1, y: 0,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: () => window.innerWidth < 768 ? '+=70%' : '+=100%', 
-          end: () => window.innerWidth < 768 ? '+=90%' : '+=130%',
-          scrub: true
-        }
-      }
+        ease: 'power1.out'
+      },
+      '-=0.15'
     );
 
   }, { scope: sectionRef });

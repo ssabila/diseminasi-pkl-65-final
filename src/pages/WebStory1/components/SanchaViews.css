@@ -386,19 +386,40 @@
   text-transform: uppercase;
 }
 
-/* ── Responsive for Tablet & Mobile ── */
+/* ── Responsive for Tablet & Mobile (All Devices) ── */
 @media (max-width: 768px) {
   .ws1-sancha-view1 {
-    padding: 90px 0 70px;
+    padding: 80px 0 60px;
+  }
+
+  .ws1-sancha-sumatra-corner {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ws1-sancha-sumatra-corner.corner-tl {
+    top: 14px;
+    left: 14px;
+  }
+
+  .ws1-sancha-sumatra-corner.corner-tr {
+    top: 14px;
+    right: 14px;
   }
 
   .ws1-sancha-v1-header {
-    margin-bottom: 60px;
-    text-align: left;
+    margin-bottom: 50px;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .ws1-sancha-headline {
+    font-size: clamp(1.9rem, 6vw, 2.8rem);
   }
 
   .ws1-sancha-tl-container {
-    gap: 50px;
+    gap: 48px;
+    padding: 10px 0;
   }
 
   .ws1-sancha-tl-spine {
@@ -408,7 +429,7 @@
 
   .ws1-sancha-tl-entry {
     justify-content: flex-start !important;
-    padding-left: 54px;
+    padding-left: 52px;
   }
 
   .ws1-sancha-tl-pin-wrap {
@@ -423,7 +444,7 @@
 
   .ws1-sancha-tl-branch {
     left: 20px !important;
-    width: 34px !important;
+    width: 32px !important;
     background: linear-gradient(to right, var(--orange), rgba(230, 126, 34, 0.3)) !important;
   }
 
@@ -439,22 +460,79 @@
   }
 
   .ws1-sancha-tl-huge-date {
-    font-size: 2.8rem;
+    font-size: clamp(1.4rem, 5.5vw, 2rem) !important;
+    line-height: 1.15;
+  }
+
+  .ws1-sancha-tl-phase-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
   }
 
   .ws1-sancha-tl-orange-line {
     margin-left: 0 !important;
     margin-right: auto !important;
+    max-width: 260px;
+  }
+
+  .ws1-sancha-tl-diamond {
+    left: 0 !important;
+    right: auto !important;
   }
 
   .ws1-sancha-tl-heading {
-    font-size: 1.18rem;
+    font-size: 1.2rem;
   }
 
   .ws1-sancha-tl-narrative {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.65;
     margin-left: 0 !important;
     margin-right: auto !important;
+    max-width: 100%;
+  }
+
+  .ws1-sancha-tl-meta-block {
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-sancha-view1 {
+    padding: 70px 0 50px;
+  }
+
+  .ws1-sancha-tl-container {
+    gap: 40px;
+  }
+
+  .ws1-sancha-tl-spine {
+    left: 16px;
+  }
+
+  .ws1-sancha-tl-pin-wrap {
+    left: 16px;
+  }
+
+  .ws1-sancha-tl-entry {
+    padding-left: 44px;
+  }
+
+  .ws1-sancha-tl-branch {
+    left: 16px !important;
+    width: 26px !important;
+  }
+
+  .ws1-sancha-tl-huge-date {
+    font-size: 1.35rem !important;
+  }
+
+  .ws1-sancha-tl-heading {
+    font-size: 1.1rem;
+  }
+
+  .ws1-sancha-tl-narrative {
+    font-size: 0.84rem;
   }
 }
 
