@@ -31,32 +31,51 @@ import imgTanahDatar from '../assets/images/15-Tanah Datar.webp';
 
 // ==================== DATA VIEW 6 ====================
 const amunisiList = [
-  { id: 1, src: imgCard, title: "ID Card", desc: "Tanda pengenal resmi petugas PKL R3P STIS" },
-  { id: 2, src: imgFasih, title: "Smartphone + FASIH", desc: "Alat pencatat data realtime ke server BPS" },
-  { id: 3, src: imgPb, title: "Powerbank", desc: "Menjaga smartphone menyala seharian" },
-  { id: 4, src: imgJas, title: "Jas Hujan", desc: "Pelindung tubuh saat cuaca tidak menentu" },
-  { id: 5, src: imgCharger, title: "Kabel Data", desc: "Menghubungkan perangkat dan transfer data" },
-  { id: 6, src: imgBoots, title: "Sepatu Boots", desc: "Pelindung kaki untuk medan lumpur dan banjir" }
+  { 
+    id: 1, 
+    tag: "IDENTITAS RESMI",
+    src: imgCard, 
+    title: "ID Card & Badge", 
+    desc: "Tanda pengenal resmi verifikasi petugas pendata PKL 65 STIS di hadapan responden dan aparat setempat." 
+  },
+  { 
+    id: 2, 
+    tag: "DIGITAL CAPI",
+    src: imgFasih, 
+    title: "Smartphone + FASIH", 
+    desc: "Perangkat pencatat data digital real-time ke server BPS lengkap dengan geotagging GPS akurat." 
+  },
+  { 
+    id: 3, 
+    tag: "ENERGI CADANGAN",
+    src: imgPb, 
+    title: "Powerbank Kapasitas Tinggi", 
+    desc: "Menjamin kelangsungan daya gawai survei seharian penuh di pelosok tanpa pasokan listrik stabil." 
+  },
+  { 
+    id: 4, 
+    tag: "PROTEKSI CUACA",
+    src: imgJas, 
+    title: "Jas Hujan Lapangan", 
+    desc: "Perlindungan primer tubuh dan gawai elektronik saat menghadapi hujan lebat dan cuaca ekstrem Sumatera." 
+  },
+  { 
+    id: 5, 
+    tag: "KONEKTIVITAS",
+    src: imgCharger, 
+    title: "Kabel Data & Fast Charge", 
+    desc: "Sinkronisasi data cepat dan pengisian daya darurat lintas posko saat kembali dari lapangan." 
+  },
+  { 
+    id: 6, 
+    tag: "MOBILITAS MEDAN",
+    src: imgBoots, 
+    title: "Sepatu Boots Taktis", 
+    desc: "Proteksi mobilitas fisik menembus medan berlumpur, genangan air banjir, dan jalur terisolasi." 
+  }
 ];
 
-// ==================== DATA VIEW 8 (null locations removed) ====================
-const pklLocations = [
-  { id: 1, name: "Pidie Jaya", img: imgPidieJaya },
-  { id: 2, name: "Aceh Tengah", img: imgAcehTengah },
-  { id: 3, name: "Bener Meriah", img: imgBenerMeriah },
-  { id: 4, name: "Gayo Lues", img: imgGayoLues },
-  { id: 5, name: "Aceh Utara", img: imgAcehUtara },
-  { id: 6, name: "Aceh Timur", img: imgAcehTimur },
-  { id: 7, name: "Aceh Tamiang", img: imgAcehTamiang },
-  { id: 8, name: "Tapanuli Tengah", img: imgTapanuliTengah },
-  { id: 9, name: "Kota Sibolga", img: imgKotaSibolga },
-  { id: 11, name: "Tapanuli Selatan", img: imgTapanuliSelatan },
-  { id: 12, name: "Mandailing Natal", img: imgMandailingNatal },
-  { id: 13, name: "Agam", img: imgAgam },
-  { id: 15, name: "Tanah Datar", img: imgTanahDatar }
-];
-
-// ==================== KOMPONEN VIEW 6 (REDESIGNED) ====================
+// ==================== KOMPONEN VIEW 6 (TACTICAL GEAR GRID) ====================
 export const View6 = () => {
   const sectionRef = useRef(null);
 
@@ -64,64 +83,61 @@ export const View6 = () => {
     // Header entrance
     gsap.fromTo('.ws1-maul-header', 
       { opacity: 0, y: 30 }, 
-      { opacity: 1, y: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } }
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } }
     );
 
-    // Knolling items scatter/entrance
-    gsap.fromTo('.ws1-maul-knoll-item',
-      { opacity: 0, scale: 0, rotation: () => gsap.utils.random(-45, 45), y: 100 },
+    // Gear cards stagger entrance
+    gsap.fromTo('.ws1-maul-gear-card',
+      { opacity: 0, y: 35, scale: 0.96 },
       {
-        opacity: 1, scale: 1, rotation: 0, y: 0,
-        duration: 1.2,
-        stagger: 0.1,
-        ease: 'back.out(1.2)',
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.ws1-maul-knoll-container',
-          start: 'top 75%',
+          trigger: '.ws1-maul-gear-grid',
+          start: 'top 80%',
         }
       }
     );
-    
-    // Continuous floating effect
-    gsap.to('.ws1-maul-knoll-item', {
-      y: () => gsap.utils.random(-15, 15),
-      x: () => gsap.utils.random(-10, 10),
-      rotation: () => gsap.utils.random(-5, 5),
-      duration: () => gsap.utils.random(3, 5),
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-    });
 
   }, { scope: sectionRef });
 
   return (
     <section className="ws1-maul-view6" ref={sectionRef}>
-      <div className="ws1-maul-header">
-        <h2>
-          Amunisi <span className="ws1-maul-text-orange">Tempur</span>
-        </h2>
-        <p>
-          Perlengkapan wajib sebelum turun ke lapangan.
-        </p>
-      </div>
+      <div className="ws1-maul-grid-overlay" />
+      
+      <div className="ws1-maul-inner">
+        <div className="ws1-maul-header">
+          <span className="ws1-maul-kicker">STANDAR OPERASIONAL · PKL 65</span>
+          <h2 className="ws1-maul-title">
+            Amunisi <span className="ws1-maul-text-orange">Tempur</span>
+          </h2>
+          <p className="ws1-maul-subtitle">
+            Enam perlengkapan wajib bagi setiap petugas sebelum diterjunkan langsung ke wilayah bencana.
+          </p>
+        </div>
 
-      <div className="ws1-maul-knoll-container">
-        {amunisiList.map((item) => (
-          <div key={item.id} className={`ws1-maul-knoll-item knoll-item-${item.id}`}>
-            <img src={item.src} alt={item.title} loading="lazy" />
-            
-            {/* The detail pointer that shows on hover */}
-            <div className="knoll-detail">
-              <div className="knoll-line"></div>
-              <div className="knoll-info">
-                <span className="knoll-num">0{item.id}</span>
-                <h4>{item.title}</h4>
-                <p>{item.desc}</p>
+        <div className="ws1-maul-gear-grid">
+          {amunisiList.map((item) => (
+            <div key={item.id} className="ws1-maul-gear-card">
+              <div className="ws1-maul-gear-card-top">
+                <span className="ws1-maul-gear-tag">{item.tag}</span>
+                <span className="ws1-maul-gear-num">0{item.id}</span>
+              </div>
+              
+              <div className="ws1-maul-gear-img-wrap">
+                <div className="ws1-maul-gear-glow" />
+                <img src={item.src} alt={item.title} loading="lazy" />
+              </div>
+
+              <div className="ws1-maul-gear-info">
+                <h3 className="ws1-maul-gear-title">{item.title}</h3>
+                <p className="ws1-maul-gear-desc">{item.desc}</p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
