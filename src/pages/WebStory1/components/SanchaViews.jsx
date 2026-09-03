@@ -4,6 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import './SanchaViews.css';
 
+// Import View 4 Map of Sumatera for Watermark
+import imgSumatera from '../assets/images/view-4/ws1-nadia-sumatera-v4.png';
+
 // Import View 2 Assets
 import imgCard1 from '../assets/images/view-2/v2-card-1.webp';
 import imgCard2 from '../assets/images/view-2/v2-card-2.webp';
@@ -17,37 +20,51 @@ const timelineData = [
     id: 1,
     date: "12 JAN",
     year: "2026",
-    phase: "HARI KE-1 · PENYELARASAN METODOLOGI",
-    location: "Aula Utama Politeknik Statistika STIS, Jakarta", 
-    title: "Pembekalan & Penyatuan Visi", 
-    desc: "Pembukaan resmi program R3P 2026 dan penyelarasan metodologi pengumpulan data pemulihan pascabencana secara menyeluruh sebelum tim diterjunkan."
+    phase: "HARI KE-1 · PEMBEKALAN DASAR",
+    title: "Pelatihan Hari Pertama", 
+    location: "Ruang Kelas dan Auditorium Polstat STIS",
+    coordinate: "JAKARTA PUSAT · 6°13'S 106°52'E",
+    desc: "Penyelarasan konsep metodologi, pemahaman instrumen survei, dan pembekalan materi komprehensif bagi seluruh kontingen di ruang kelas serta auditorium kampus."
   },
   { 
     id: 2,
     date: "13 JAN",
     year: "2026",
-    phase: "HARI KE-2 · SIMULASI SISTEM CAPI",
-    location: "Laboratorium Komputasi Statistik STIS", 
-    title: "Pelatihan Teknis Lapangan & CAPI", 
-    desc: "Uji coba komprehensif instrumen CAPI serta simulasi pencatatan data terpadu menggunakan aplikasi FASIH pada berbagai skenario kondisi darurat."
+    phase: "HARI KE-2 · SIMULASI CAPI & TEKNIS",
+    title: "Pelatihan Hari Kedua", 
+    location: "Ruang Kelas dan Auditorium Polstat STIS",
+    coordinate: "JAKARTA PUSAT · 6°13'S 106°52'E",
+    desc: "Pendalaman teknis penggunaan aplikasi CAPI FASIH, uji coba skenario lapangan darurat bencana, dan pemantapan koordinasi tim pencacah."
   },
   { 
     id: 3,
     date: "14 JAN",
     year: "2026",
-    phase: "HARI KE-3 · MITIGASI JALUR LAPANGAN",
-    location: "Ruang Koordinasi Wilayah PKL 65", 
-    title: "Konsolidasi & Pemetaan Jalur Rawan", 
-    desc: "Distribusi kelompok kerja taktis per kabupaten sasaran serta perumusan strategi mitigasi rute transportasi darat yang rusak dan terisolasi."
+    phase: "HARI KE-3 · PENGARAHAN & PELEPASAN",
+    title: "Pelepasan dengan Kepala BPS RI", 
+    location: "Auditorium Polstat STIS",
+    coordinate: "AUDITORIUM STIS · 6°13'S 106°52'E",
+    desc: "Prosesi apel pelepasan resmi dan pengarahan langsung oleh Kepala BPS RI guna meneguhkan integritas, profesionalitas, serta keselamatan peneliti di daerah bencana."
   },
   { 
     id: 4,
     date: "15 JAN",
     year: "2026",
-    phase: "HARI KE-4 · PEMBERANGKATAN MISI",
-    location: "Plaza Utama Kampus STIS, Jakarta", 
-    title: "Pelepasan Resmi Kontingen Peneliti", 
-    desc: "Apel siaga pelepasan resmi kontingen peneliti menuju lokasi titik terdampak gempa bumi dan banjir bandang di Aceh, Sumatera Utara, dan Sumatera Barat."
+    phase: "HARI KE-4 · MOBILISASI KONTINGEN",
+    title: "Pemberangkatan ke Lapangan", 
+    location: "Bandara Halim, Bandara Soekarno Hatta",
+    coordinate: "HLP & CGK AIRPORT · 6°07'S 106°39'E",
+    desc: "Armada peneliti diberangkatkan serentak melalui Bandara Halim Perdanakusuma dan Bandara Internasional Soekarno-Hatta menuju pulau Sumatera."
+  },
+  { 
+    id: 5,
+    date: "16 JAN",
+    year: "2026",
+    phase: "HARI KE-5 · PENGUMPULAN DATA LAPANGAN",
+    title: "Pelaksanaan Pendataan", 
+    location: "Aceh, Sumatera Utara, Sumatera Barat",
+    coordinate: "KORIDOR SUMATERA · 5°33'N — 0°57'S",
+    desc: "Pelaksanaan pendataan langsung secara terpadu di wilayah terdampak bencana alam di 3 provinsi: Aceh, Sumatera Utara, dan Sumatera Barat."
   }
 ];
 
@@ -129,9 +146,47 @@ export const View1 = () => {
       {/* Background cartography grid overlay matching View 0 */}
       <div className="ws1-sancha-v1-grid" />
 
+      {/* Siluet Peta Pulau Sumatera sebagai Watermark Ekspedisi */}
+      <div className="ws1-sancha-v1-map-watermark" aria-hidden="true">
+        <img src={imgSumatera} alt="Peta Sumatera" className="ws1-sancha-v1-map-img" />
+      </div>
+
+      {/* Ornamen Sudut Songket Khas Sumatera (Pucuk Rebung) */}
+      <div className="ws1-sancha-sumatra-corner corner-tl" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 80 80" fill="none">
+          <path d="M0 0 L80 0 M0 0 L0 80" stroke="var(--gold)" strokeWidth="2" opacity="0.6"/>
+          <path d="M6 6 L68 6 M6 6 L6 68" stroke="var(--beige)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4"/>
+          <polygon points="10,10 24,10 10,24" fill="var(--orange)" opacity="0.5"/>
+          <polygon points="28,10 42,10 10,42 10,28" fill="var(--gold)" opacity="0.3"/>
+          <path d="M0 20 L20 0 M0 36 L36 0 M0 52 L52 0" stroke="var(--gold)" strokeWidth="1" opacity="0.4"/>
+        </svg>
+      </div>
+      <div className="ws1-sancha-sumatra-corner corner-tr" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 80 80" fill="none">
+          <path d="M0 0 L80 0 M0 0 L0 80" stroke="var(--gold)" strokeWidth="2" opacity="0.6"/>
+          <path d="M6 6 L68 6 M6 6 L6 68" stroke="var(--beige)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4"/>
+          <polygon points="10,10 24,10 10,24" fill="var(--orange)" opacity="0.5"/>
+          <polygon points="28,10 42,10 10,42 10,28" fill="var(--gold)" opacity="0.3"/>
+          <path d="M0 20 L20 0 M0 36 L36 0 M0 52 L52 0" stroke="var(--gold)" strokeWidth="1" opacity="0.4"/>
+        </svg>
+      </div>
+
       <div className="ws1-sancha-v1-inner">
-        {/* Section Header (Clean, without kicker and subhead) */}
+        {/* Section Header dengan Emblem Pinto Aceh / Bungong Jeumpa */}
         <header className="ws1-sancha-v1-header">
+          {/* Ornamen Motif Khas Aceh (Pinto Aceh / Bungong Jeumpa) */}
+          <div className="ws1-sancha-aceh-crest" aria-hidden="true">
+            <svg width="54" height="36" viewBox="0 0 60 40" fill="none">
+              <path d="M30 2 L43 17 L30 32 L17 17 Z" stroke="var(--gold)" strokeWidth="1.5" fill="rgba(212, 168, 85, 0.12)"/>
+              <path d="M30 8 L37 17 L30 26 L23 17 Z" stroke="var(--orange)" strokeWidth="1" fill="none"/>
+              <circle cx="30" cy="17" r="2.5" fill="var(--orange)"/>
+              <path d="M17 17 C11 13 5 17 2 21 C8 23 13 21 17 17 Z" fill="rgba(230, 126, 34, 0.25)" stroke="var(--orange)" strokeWidth="1"/>
+              <path d="M43 17 C49 13 55 17 58 21 C52 23 47 21 43 17 Z" fill="rgba(230, 126, 34, 0.25)" stroke="var(--orange)" strokeWidth="1"/>
+              <path d="M30 32 L30 39 M25 36 L35 36" stroke="var(--gold)" strokeWidth="1.2"/>
+              <path d="M14 30 L8 38 M46 30 L52 38" stroke="rgba(229, 217, 182, 0.4)" strokeWidth="1"/>
+            </svg>
+          </div>
+
           <h2 className="ws1-sancha-headline">
             Menempa Kesiapan, <em className="ws1-sancha-accent-orange">Mengunci Komitmen</em>
           </h2>
@@ -168,13 +223,20 @@ export const View1 = () => {
                     <span className="ws1-sancha-tl-phase-label">{item.phase}</span>
                   </div>
 
-                  {/* Garis Aksen Oranye (Persis Foto Referensi) */}
-                  <div className="ws1-sancha-tl-orange-line" />
+                  {/* Garis Aksen Oranye dengan detail motif Songket */}
+                  <div className="ws1-sancha-tl-orange-line">
+                    <span className="ws1-sancha-tl-diamond" />
+                  </div>
 
                   {/* Judul & Deskripsi Narasi */}
                   <h3 className="ws1-sancha-tl-heading">{item.title}</h3>
                   <p className="ws1-sancha-tl-narrative">{item.desc}</p>
-                  <span className="ws1-sancha-tl-venue">{item.location}</span>
+                  
+                  {/* Venue & Koordinat Ekspedisi Sumatera */}
+                  <div className="ws1-sancha-tl-meta-block">
+                    <span className="ws1-sancha-tl-venue">{item.location}</span>
+                    <span className="ws1-sancha-tl-coord">{item.coordinate}</span>
+                  </div>
                 </div>
               </div>
             );

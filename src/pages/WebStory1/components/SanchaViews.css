@@ -29,6 +29,46 @@
   pointer-events: none;
 }
 
+/* Watermark Peta Siluet Sumatera */
+.ws1-sancha-v1-map-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  width: 580px;
+  max-width: 85vw;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+}
+
+.ws1-sancha-v1-map-img {
+  width: 100%;
+  height: auto;
+  filter: invert(1) brightness(1.6) sepia(70%) hue-rotate(335deg);
+}
+
+/* Ornamen Sudut Songket Khas Sumatera (Pucuk Rebung) */
+.ws1-sancha-sumatra-corner {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.ws1-sancha-sumatra-corner.corner-tl {
+  top: 24px;
+  left: 24px;
+}
+
+.ws1-sancha-sumatra-corner.corner-tr {
+  top: 24px;
+  right: 24px;
+  transform: scaleX(-1);
+}
+
 .ws1-sancha-v1-inner {
   width: 100%;
   max-width: 1100px;
@@ -38,11 +78,20 @@
   z-index: 5;
 }
 
-/* ── Section Header (Minimal & Elegant) ── */
+/* ── Section Header dengan Motif Khas Aceh ── */
 .ws1-sancha-v1-header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 90px;
+  margin: 0 auto 80px;
+}
+
+/* Emblem Motif Khas Aceh (Pinto Aceh / Bungong Jeumpa) */
+.ws1-sancha-aceh-crest {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 12px rgba(230, 126, 34, 0.35));
 }
 
 .ws1-sancha-headline {
@@ -228,7 +277,7 @@
   text-transform: uppercase;
 }
 
-/* Crisp Orange Accent Line Underneath (Matching reference photo) */
+/* Crisp Orange Accent Line Underneath dengan Motif Songket Diamond */
 .ws1-sancha-tl-orange-line {
   width: 100%;
   max-width: 320px;
@@ -236,15 +285,35 @@
   background: var(--orange);
   margin: 12px 0 16px;
   box-shadow: 0 0 10px rgba(230, 126, 34, 0.4);
+  position: relative;
   transition: max-width 0.4s ease, box-shadow 0.4s ease;
+}
+
+.ws1-sancha-tl-diamond {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border: 1px solid var(--orange);
+  transform: translateY(-50%) rotate(45deg);
+  box-shadow: 0 0 6px var(--orange);
 }
 
 .ws1-sancha-tl-entry.is-left .ws1-sancha-tl-orange-line {
   margin-left: auto;
 }
 
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-diamond {
+  right: 0;
+}
+
 .ws1-sancha-tl-entry.is-right .ws1-sancha-tl-orange-line {
   margin-right: auto;
+}
+
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-diamond {
+  left: 0;
 }
 
 .ws1-sancha-tl-entry:hover .ws1-sancha-tl-orange-line {
@@ -268,7 +337,7 @@
   font-size: 0.95rem;
   color: rgba(229, 217, 182, 0.85);
   line-height: 1.7;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-weight: 400;
   max-width: 380px;
 }
@@ -281,14 +350,39 @@
   margin-right: auto;
 }
 
+/* Meta Block: Venue & Geographic Coordinates */
+.ws1-sancha-tl-meta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-meta-block {
+  align-items: flex-end;
+}
+
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-meta-block {
+  align-items: flex-start;
+}
+
 .ws1-sancha-tl-venue {
   font-family: var(--font-content);
   font-size: 0.76rem;
   color: var(--beige);
   letter-spacing: 0.08em;
-  opacity: 0.7;
+  opacity: 0.75;
   display: block;
   font-weight: 400;
+  text-transform: uppercase;
+}
+
+.ws1-sancha-tl-coord {
+  font-family: var(--font-content);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--orange);
+  opacity: 0.9;
   text-transform: uppercase;
 }
 
