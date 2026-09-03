@@ -24,11 +24,9 @@ import imgAcehTimur from '../assets/images/6-Aceh Timur.webp';
 import imgAcehTamiang from '../assets/images/7-Aceh Tamiang.webp';
 import imgTapanuliTengah from '../assets/images/8-Tapanuli Tengah.webp';
 import imgKotaSibolga from '../assets/images/9-Kota Sibolga.webp';
-// 10 - Tapanuli Utara kosong
 import imgTapanuliSelatan from '../assets/images/11-Tapanuli Selatan.webp';
 import imgMandailingNatal from '../assets/images/12-Mandailing Natal.webp';
 import imgAgam from '../assets/images/13-Agam.webp';
-// 14 - Padang Pariaman kosong
 import imgTanahDatar from '../assets/images/15-Tanah Datar.webp';
 
 // ==================== DATA VIEW 6 ====================
@@ -41,7 +39,7 @@ const amunisiList = [
   { id: 6, src: imgBoots, title: "Sepatu Boots", desc: "Pelindung kaki untuk medan lumpur dan banjir" }
 ];
 
-// ==================== DATA VIEW 8 ====================
+// ==================== DATA VIEW 8 (null locations removed) ====================
 const pklLocations = [
   { id: 1, name: "Pidie Jaya", img: imgPidieJaya },
   { id: 2, name: "Aceh Tengah", img: imgAcehTengah },
@@ -52,72 +50,75 @@ const pklLocations = [
   { id: 7, name: "Aceh Tamiang", img: imgAcehTamiang },
   { id: 8, name: "Tapanuli Tengah", img: imgTapanuliTengah },
   { id: 9, name: "Kota Sibolga", img: imgKotaSibolga },
-  { id: 10, name: "Tapanuli Utara", img: null },
   { id: 11, name: "Tapanuli Selatan", img: imgTapanuliSelatan },
   { id: 12, name: "Mandailing Natal", img: imgMandailingNatal },
   { id: 13, name: "Agam", img: imgAgam },
-  { id: 14, name: "Padang Pariaman", img: null },
   { id: 15, name: "Tanah Datar", img: imgTanahDatar }
 ];
 
-// ==================== KOMPONEN VIEW 6 ====================
+// ==================== KOMPONEN VIEW 6 (REDESIGNED) ====================
 export const View6 = () => {
   const sectionRef = useRef(null);
-  const [activeItem, setActiveItem] = useState(null);
-
-  // Click outside to close
-  useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (!e.target.closest('.ws1-maul-icon-item')) {
-        setActiveItem(null);
-      }
-    };
-    document.addEventListener('click', handleOutsideClick);
-    return () => document.removeEventListener('click', handleOutsideClick);
-  }, []);
 
   useGSAP(() => {
     // Header entrance
-    gsap.fromTo('.ws1-maul-header h2', { opacity: 0, y: 40 }, {
-      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', toggleActions: 'play none none none' },
+    gsap.fromTo('.ws1-maul-header', 
+      { opacity: 0, y: 30 }, 
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } }
+    );
+
+    // Knolling items scatter/entrance
+    gsap.fromTo('.ws1-maul-knoll-item',
+      { opacity: 0, scale: 0, rotation: () => gsap.utils.random(-45, 45), y: 100 },
+      {
+        opacity: 1, scale: 1, rotation: 0, y: 0,
+        duration: 1.2,
+        stagger: 0.1,
+        ease: 'back.out(1.2)',
+        scrollTrigger: {
+          trigger: '.ws1-maul-knoll-container',
+          start: 'top 75%',
+        }
+      }
+    );
+    
+    // Continuous floating effect
+    gsap.to('.ws1-maul-knoll-item', {
+      y: () => gsap.utils.random(-15, 15),
+      x: () => gsap.utils.random(-10, 10),
+      rotation: () => gsap.utils.random(-5, 5),
+      duration: () => gsap.utils.random(3, 5),
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
     });
-    gsap.fromTo('.ws1-maul-header p', { opacity: 0, y: 20 }, {
-      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.2,
-      scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', toggleActions: 'play none none none' },
-    });
-    // Grid items stagger in
-    gsap.fromTo('.ws1-maul-icon-wrapper', { opacity: 0, y: 30, scale: 0.9 }, {
-      opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12, ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: '.ws1-maul-icon-grid', start: 'top 70%', toggleActions: 'play none none none' },
-    });
+
   }, { scope: sectionRef });
 
   return (
     <section className="ws1-maul-view6" ref={sectionRef}>
       <div className="ws1-maul-header">
-        <h2 className="playfair-display">
+        <h2>
           Amunisi <span className="ws1-maul-text-orange">Tempur</span>
         </h2>
-        <p className="lato-regular">
-          Jas hujan, sepatu boots, dan aplikasi digital siap di tangan.
+        <p>
+          Perlengkapan wajib sebelum turun ke lapangan.
         </p>
       </div>
 
-      <div className="ws1-maul-icon-grid">
+      <div className="ws1-maul-knoll-container">
         {amunisiList.map((item) => (
-          <div 
-            key={item.id} 
-            className="ws1-maul-icon-wrapper"
-            onMouseEnter={() => setActiveItem(item.id)}
-            onMouseLeave={() => setActiveItem(null)}
-          >
-            <div className="ws1-maul-icon-item">
-              <img src={item.src} alt={item.title} />
-            </div>
-            <div className={`ws1-maul-text-container ${activeItem === item.id ? 'show' : ''}`}>
-              <div className="ws1-maul-pill-title lato-bold">{item.title}</div>
-              <div className="ws1-maul-desc-text lato-regular">{item.desc}</div>
+          <div key={item.id} className={`ws1-maul-knoll-item knoll-item-${item.id}`}>
+            <img src={item.src} alt={item.title} loading="lazy" />
+            
+            {/* The detail pointer that shows on hover */}
+            <div className="knoll-detail">
+              <div className="knoll-line"></div>
+              <div className="knoll-info">
+                <span className="knoll-num">0{item.id}</span>
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </div>
             </div>
           </div>
         ))}
@@ -146,7 +147,7 @@ export const View8 = () => {
         setOrbitRadius(290);
       }
     };
-    handleResize(); // Init
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -156,26 +157,26 @@ export const View8 = () => {
     if (isAuto) {
       interval = setInterval(() => {
         setActiveIndex((prev) => (prev + 1) % pklLocations.length);
-      }, 2000); 
+      }, 2000);
     }
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [isAuto]);
 
   useGSAP(() => {
     // Header entrance
-    gsap.fromTo('.ws1-maul-v8-header', { opacity: 0, y: 30 }, {
-      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', toggleActions: 'play none none none' },
+    gsap.fromTo('.ws1-maul-v8-header', { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', toggleActions: 'play none none reverse' },
     });
     // Center display scale up
-    gsap.fromTo('.ws1-maul-center-display', { opacity: 0, scale: 0.7 }, {
-      opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', toggleActions: 'play none none none' },
+    gsap.fromTo('.ws1-maul-center-display', { opacity: 0, scale: 0.8 }, {
+      opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', toggleActions: 'play none none reverse' },
     });
     // Orbit items stagger
     gsap.fromTo('.ws1-maul-orbit-item', { opacity: 0, scale: 0 }, {
-      opacity: 1, scale: 1, duration: 0.5, stagger: 0.06, ease: 'back.out(1.7)',
-      scrollTrigger: { trigger: sectionRef.current, start: 'top 55%', toggleActions: 'play none none none' },
+      opacity: 1, scale: 1, duration: 0.4, stagger: 0.04, ease: 'back.out(1.7)',
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', toggleActions: 'play none none reverse' },
     });
   }, { scope: sectionRef });
 
@@ -201,17 +202,17 @@ export const View8 = () => {
 
   return (
     <section className="ws1-maul-view8" ref={sectionRef}>
-      
+
       <div className="ws1-maul-v8-header">
-        <h2 className="playfair-display">
+        <h2>
           <span className="ws1-maul-text-navy">Sehat & </span>
           <span className="ws1-maul-text-orange">Solid</span>
         </h2>
-        
+
         <div className="ws1-maul-controls">
           <button className="ws1-maul-btn-round" onClick={handlePrev} aria-label="Lokasi sebelumnya">&lt;</button>
-          <button 
-            className={`ws1-maul-btn-pill ${isAuto ? 'active' : ''}`} 
+          <button
+            className={`ws1-maul-btn-pill ${isAuto ? 'active' : ''}`}
             onClick={() => setIsAuto(!isAuto)}
             aria-label={isAuto ? 'Matikan putar otomatis' : 'Nyalakan putar otomatis'}
           >
@@ -222,21 +223,15 @@ export const View8 = () => {
       </div>
 
       <div className="ws1-maul-gallery-container">
-        
+
         {/* LAYAR UTAMA (LINGKARAN BESAR) */}
         <div className="ws1-maul-center-display">
-          {pklLocations[activeIndex].img ? (
-            <img 
-              src={pklLocations[activeIndex].img} 
-              alt={pklLocations[activeIndex].name} 
-              className="ws1-maul-center-img"
-              key={activeIndex} 
-            />
-          ) : (
-            <div className="ws1-maul-placeholder-center-large">
-              {pklLocations[activeIndex].id}
-            </div>
-          )}
+          <img
+            src={pklLocations[activeIndex].img}
+            alt={pklLocations[activeIndex].name}
+            className="ws1-maul-center-img"
+            key={activeIndex}
+          />
 
           <div className="ws1-maul-center-overlay"></div>
 
@@ -252,15 +247,15 @@ export const View8 = () => {
 
         {/* LINGKARAN ORBIT (GALERI) */}
         {pklLocations.map((loc, index) => {
-          const radius = orbitRadius; 
-          const angle = (index / pklLocations.length) * -360; 
-          
-          const rad = ((angle - 90) * Math.PI) / 180; 
+          const radius = orbitRadius;
+          const angle = (index / pklLocations.length) * -360;
+
+          const rad = ((angle - 90) * Math.PI) / 180;
           const x = Math.cos(rad) * radius;
           const y = Math.sin(rad) * radius;
 
           return (
-            <div 
+            <div
               key={loc.id}
               className={`ws1-maul-orbit-item ${activeIndex === index ? 'active' : ''}`}
               style={{ '--x': `${x}px`, '--y': `${y}px` }}
@@ -271,11 +266,7 @@ export const View8 = () => {
               title={loc.name}
               aria-label={`Tampilkan ${loc.name}`}
             >
-              {loc.img ? (
-                <img src={loc.img} alt={loc.name} />
-              ) : (
-                <div className="ws1-maul-placeholder-orbit">{loc.id}</div>
-              )}
+              <img src={loc.img} alt={loc.name} loading="lazy" />
             </div>
           );
         })}

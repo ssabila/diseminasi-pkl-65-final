@@ -30,6 +30,11 @@ import sumut21 from '../assets/images/husna-view-5/ws1-husna-view5-sumut21.webp'
 import sumut22 from '../assets/images/husna-view-5/ws1-husna-view5-sumut22.webp';
 import sumut3 from '../assets/images/husna-view-5/ws1-husna-view5-sumut3.webp';
 
+// Import View 7 local images (replacing Unsplash)
+import imgPidieJaya from '../assets/images/1-Pidie Jaya.webp';
+import imgTapanuliTengah from '../assets/images/8-Tapanuli Tengah.webp';
+import imgAgam from '../assets/images/13-Agam.webp';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // ─────────────────────────────────────────────
@@ -77,7 +82,7 @@ const PROVINSI_DATA = [
   {
     id: "v7b1",
     name: "Aceh",
-    img: "https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?q=80&w=1000", 
+    img: imgPidieJaya,
     kicker: "Tantangan",
     heading: "Melawan",
     headingAccent: "Medan",
@@ -87,7 +92,7 @@ const PROVINSI_DATA = [
   {
     id: "v7b2",
     name: "Sumatera Utara",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    img: imgTapanuliTengah,
     kicker: "Lapangan",
     heading: "Setiap",
     headingAccent: "Langkah",
@@ -97,7 +102,7 @@ const PROVINSI_DATA = [
   {
     id: "v7b3",
     name: "Sumatera Barat",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    img: imgAgam,
     kicker: "Dedikasi",
     heading: "Tetap",
     headingAccent: "Bergerak",
@@ -302,18 +307,18 @@ export const View5 = () => {
 
   // IMPLEMENTASI GSAP ENTRY ANIMATIONS 
   useGSAP(() => {
-    // Basic entrance animations for bento tiles can be added here
+    // Basic entrance animations for bento tiles
     gsap.fromTo(".ws1-husna-bento-tile", 
-      { opacity: 0, y: 40 },
+      { opacity: 0, y: 30 },
       { 
         opacity: 1, 
         y: 0, 
-        stagger: 0.1, 
-        duration: 0.8,
+        stagger: 0.08, 
+        duration: 0.6,
         ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 70%",
+          start: "top 88%",
         }
       }
     );
@@ -462,18 +467,18 @@ export const View7 = () => {
   useGSAP(() => {
     gsap.fromTo('.ws1-husna-accordion-panel', 
       { 
-        y: 80, 
+        y: 40, 
         opacity: 0 
       },
       {
         y: 0, 
         opacity: 1,
-        duration: 1,
-        stagger: 0.15,
+        duration: 0.6,
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%", 
+          start: "top 88%", 
           toggleActions: "play none none reverse",
         }
       }

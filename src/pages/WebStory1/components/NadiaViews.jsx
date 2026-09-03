@@ -90,41 +90,12 @@ function RotatingScrollCue() {
 
 export const View0 = () => {
   const containerRef = useRef(null);
-
-  // Parallax elements
-  const photoRef = useRef(null);
-  const titleGroupRef = useRef(null);
-  const subGroupRef = useRef(null);
   const contentRef = useRef(null);
-  const benangRef = useRef(null);
-
-  const [scrambleTrigger, setScrambleTrigger] = useState(false);
-  
-  useEffect(() => {
-    const t = setTimeout(() => setScrambleTrigger(true), 900);
-    return () => clearTimeout(t);
-  }, []);
-  const headline1 = useTextScramble("Misi R3P", scrambleTrigger);
-  const headline2 = useTextScramble("2026", scrambleTrigger);
-
 
   useGSAP(() => {
-    // Scroll progress implementations for hero image opacity & scale
-    // and content Y movement
-    gsap.to(photoRef.current, {
-      scale: 1.1,
-      // opacity: 0 removed so the hero photo stays visible while scrolling away
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "start start",
-        end: "end start",
-        scrub: true,
-      }
-    });
-
+    // Parallax content on scroll
     gsap.to(contentRef.current, {
-      yPercent: 28, // mapping from 0% to 28%
+      yPercent: 20,
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
@@ -134,127 +105,112 @@ export const View0 = () => {
       }
     });
 
-    // Animate path stroke (benang)
-    if (benangRef.current) {
-      const benangLen = benangRef.current.getTotalLength();
-      gsap.set(benangRef.current, { strokeDasharray: benangLen, strokeDashoffset: benangLen });
-      
-      gsap.to(benangRef.current, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "start start",
-          end: "end 10%",
-          scrub: true,
-        }
-      });
-    }
-
-    // QuickTo for mouse parallax
-    // mouseX and mouseY from -1 to 1 mapped to pixels
-    const photoX = gsap.quickTo(photoRef.current, "x", { duration: 0.5, ease: "power3" });
-    const photoY = gsap.quickTo(photoRef.current, "y", { duration: 0.5, ease: "power3" });
-    
-    const titleX = gsap.quickTo(titleGroupRef.current, "x", { duration: 0.6, ease: "power3" });
-    const titleY = gsap.quickTo(titleGroupRef.current, "y", { duration: 0.6, ease: "power3" });
-    
-    const subX = gsap.quickTo(subGroupRef.current, "x", { duration: 0.4, ease: "power3" });
-    const subY = gsap.quickTo(subGroupRef.current, "y", { duration: 0.4, ease: "power3" });
-
-    const handleMouseMove = (e) => {
-      // Mapping to -1 to 1 ranges
-      const mX = (e.clientX / window.innerWidth - 0.5) * 2;
-      const mY = (e.clientY / window.innerHeight - 0.5) * 2;
-
-      // Applying multipliers
-      photoX(mX * 12);
-      photoY(mY * 8);
-
-      titleX(mX * -20);
-      titleY(mY * -14);
-
-      subX(mX * -9);
-      subY(mY * -6);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    // Initial entrance animations
-    const tl = gsap.timeline();
-    tl.to(".gsap-fade-headline", { opacity: 1, y: 0, duration: 1.1, delay: 0.8, ease: "power3.out" }, 0)
-      .to(".gsap-fade-subline", { opacity: 1, y: 0, duration: 1.0, delay: 1.1, ease: "power3.out" }, 0)
-      .to(".gsap-fade-desc", { opacity: 1, duration: 0.8, delay: 1.5 }, 0)
-      .to(".gsap-scroll-cue", { opacity: 1, y: 0, duration: 0.9, delay: 2.3, ease: "power3.out" }, 0)
-      .to(".gsap-cover-caption", { opacity: 1, duration: 1.2, delay: 2.5 }, 0);
-      
-    // Looping animations
-    gsap.to(".gsap-scroll-ring", {
-      rotate: 360,
-      duration: 16,
-      ease: "linear",
-      repeat: -1,
-      transformOrigin: "center"
+    // Mountains parallax (back layer moves slower)
+    gsap.to(".v0-mountain-back", {
+      yPercent: -15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "start start",
+        end: "end start",
+        scrub: true,
+      }
     });
 
-    gsap.to(".gsap-scroll-wheel", {
-      y: 6,
-      opacity: 0.3,
-      duration: 1.7,
-      yoyo: true,
-      repeat: -1,
-      ease: "power1.inOut"
-    });
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    // Cinematic entrance timeline
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.fromTo(".v0-ambient-glow", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 2 }, 0)
+      .fromTo(".v0-grid-overlay", { opacity: 0 }, { opacity: 0.8, duration: 1.5 }, 0.3)
+      .to(".gsap-fade-headline", { opacity: 1, y: 0, duration: 0.8 }, 0.5)
+      .to(".gsap-fade-subline", { opacity: 1, y: 0, duration: 0.7 }, 0.8)
+      .fromTo(".j-cover-frame", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 0.8)
+      .fromTo(".v0-mountains", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" }, 0.6);
 
   }, { scope: containerRef });
 
   return (
     <section className="webstory-view ws1-nadia-view0" ref={containerRef} id="cover">
-      <div className="j-cover-photo" ref={photoRef}>
-        <img src={imgHero} alt="Tim R3P 2026" />
-      </div>
-      <div className="j-cover-overlay-grad" />
-      <div className="j-cover-overlay-vig" />
       <GrainOverlay />
-      
-      <div className="j-cover-content" ref={contentRef}>
 
-        <div ref={titleGroupRef}>
-          <h1 className="j-cover-headline gsap-fade-headline gsap-hidden-up">
-            {headline1}<br />
-            <span className="j-cover-hl-accent">{headline2}</span>
-          </h1>
-        </div>
-        <div ref={subGroupRef}>
-          <p className="j-cover-subline gsap-fade-subline gsap-hidden-up">Sebuah Perjalanan Kemanusiaan</p>
-          <p className="j-cover-descriptor gsap-fade-desc gsap-hidden">RENCANA REHABILITASI REKONSTRUKSI PASCABENCANA SUMATERA</p>
-        </div>
+      {/* Layer 0: Background Hero Image with transparency */}
+      <div 
+        className="v0-hero-bg" 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `url(${imgHero})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.3,
+          zIndex: 0
+        }} 
+      />
+
+      {/* Layer 1: Warm ambient glow */}
+      <div className="v0-ambient-glow" aria-hidden="true" style={{ zIndex: 1 }} />
+
+      {/* Layer 2: Cartographic grid */}
+      <div className="v0-grid-overlay" aria-hidden="true" style={{ zIndex: 1 }} />
+
+      {/* Layer 3: Floating ember particles */}
+      <div className="v0-particles" aria-hidden="true">
+        <div className="v0-particle p1" />
+        <div className="v0-particle p2" />
+        <div className="v0-particle p3" />
+        <div className="v0-particle p4" />
+        <div className="v0-particle p5" />
       </div>
-      
-      <div className="j-benang-wrap" aria-hidden="true">
-        <svg viewBox="0 0 24 120" className="j-benang-svg" overflow="visible">
-          <defs>
-            <filter id="bGlow">
-              <feGaussianBlur stdDeviation="2.5" result="blur" />
-              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
-          </defs>
-          <path d="M12,0 C12,30 4,45 8,65 C12,85 20,95 12,120" stroke="rgba(230,126,34,0.2)" strokeWidth="1.5" fill="none" />
-          <path d="M12,0 C12,30 4,45 8,65 C12,85 20,95 12,120" stroke="#E67E22" strokeWidth="2" fill="none" strokeLinecap="round" style={{ filter: "url(#bGlow)" }} ref={benangRef} />
-          <circle r="4" fill="#E67E22" filter="url(#bGlow)">
-            <animateMotion dur="2.5s" repeatCount="indefinite" path="M12,0 C12,30 4,45 8,65 C12,85 20,95 12,120" />
-          </circle>
+
+      {/* Layer 4: Songket frame */}
+      <div className="j-cover-frame" aria-hidden="true" style={{opacity: 0}}>
+        <svg className="j-frame-corner corner-tl" viewBox="0 0 100 100" fill="none">
+          <path d="M0,0 L100,0 M0,0 L0,100" stroke="var(--gold)" strokeWidth="3"/>
+          <path d="M8,8 L85,8 M8,8 L8,85" stroke="var(--gold)" strokeWidth="1" strokeDasharray="2 2"/>
+          <polygon points="12,12 28,12 12,28" fill="var(--gold)" opacity="0.3"/>
+          <path d="M0,25 L25,0 M0,45 L45,0 M0,65 L65,0" stroke="var(--gold)" strokeWidth="1"/>
+        </svg>
+        <svg className="j-frame-corner corner-tr" viewBox="0 0 100 100" fill="none">
+          <path d="M0,0 L100,0 M0,0 L0,100" stroke="var(--gold)" strokeWidth="3"/>
+          <path d="M8,8 L85,8 M8,8 L8,85" stroke="var(--gold)" strokeWidth="1" strokeDasharray="2 2"/>
+          <polygon points="12,12 28,12 12,28" fill="var(--gold)" opacity="0.3"/>
+          <path d="M0,25 L25,0 M0,45 L45,0 M0,65 L65,0" stroke="var(--gold)" strokeWidth="1"/>
+        </svg>
+        <svg className="j-frame-corner corner-bl" viewBox="0 0 100 100" fill="none">
+          <path d="M0,0 L100,0 M0,0 L0,100" stroke="var(--gold)" strokeWidth="3"/>
+          <path d="M8,8 L85,8 M8,8 L8,85" stroke="var(--gold)" strokeWidth="1" strokeDasharray="2 2"/>
+          <polygon points="12,12 28,12 12,28" fill="var(--gold)" opacity="0.3"/>
+          <path d="M0,25 L25,0 M0,45 L45,0 M0,65 L65,0" stroke="var(--gold)" strokeWidth="1"/>
+        </svg>
+        <svg className="j-frame-corner corner-br" viewBox="0 0 100 100" fill="none">
+          <path d="M0,0 L100,0 M0,0 L0,100" stroke="var(--gold)" strokeWidth="3"/>
+          <path d="M8,8 L85,8 M8,8 L8,85" stroke="var(--gold)" strokeWidth="1" strokeDasharray="2 2"/>
+          <polygon points="12,12 28,12 12,28" fill="var(--gold)" opacity="0.3"/>
+          <path d="M0,25 L25,0 M0,45 L45,0 M0,65 L65,0" stroke="var(--gold)" strokeWidth="1"/>
         </svg>
       </div>
-      
-      <RotatingScrollCue />
-      
-      <div className="j-cover-caption gsap-cover-caption gsap-hidden">
-        Angkatan 65 · 14 Jan – 2 Feb 2026 · Sumatera
+
+      {/* Layer 5: Main content */}
+      <div className="j-cover-content" ref={contentRef} style={{ zIndex: 2, position: 'relative' }}>
+        <h1 className="j-cover-headline gsap-fade-headline gsap-hidden-up">
+          Misi R3P<br />
+          <span className="j-cover-hl-accent">2026</span>
+        </h1>
+        <p className="j-cover-subline gsap-fade-subline gsap-hidden-up" style={{ marginBottom: '8px', fontSize: '1.2em', fontWeight: '500' }}>
+          Rencana Rehabilitasi Rekonstruksi Pascabencana
+        </p>
+        <p className="j-cover-subline gsap-fade-subline gsap-hidden-up" style={{ opacity: 0.85, fontSize: '0.95em' }}>
+          Sebuah Perjalanan Kemanusiaan
+        </p>
+      </div>
+
+      {/* Layer 6: Mountain silhouettes */}
+      <div className="v0-mountains" aria-hidden="true">
+        <svg className="v0-mountain-svg" viewBox="0 0 1440 250" preserveAspectRatio="none">
+          {/* Back range — lighter, further */}
+          <path className="v0-mountain-back" d="M0,250 L0,180 Q120,80 240,140 Q360,60 480,120 Q600,40 720,100 Q840,30 960,110 Q1080,50 1200,130 Q1320,70 1440,160 L1440,250 Z" />
+          {/* Front range — darker, closer */}
+          <path className="v0-mountain-front" d="M0,250 L0,200 Q180,130 360,180 Q540,100 720,160 Q900,90 1080,170 Q1260,120 1440,190 L1440,250 Z" />
+        </svg>
       </div>
     </section>
   );
@@ -279,17 +235,17 @@ export const View4 = () => {
 
   useGSAP(() => {
     // ── 1. HERO: Teks masuk dari bawah ─────────────────────────
-    gsap.fromTo('.v4-hero-eyebrow', { opacity: 0, y: 24 }, {
-      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: heroRef.current, start: 'top 80%', toggleActions: 'play none none none' },
+    gsap.fromTo('.v4-hero-eyebrow', { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: heroRef.current, start: 'top 90%', toggleActions: 'play none none reverse' },
     });
-    gsap.fromTo('.v4-hero-title', { opacity: 0, y: 36 }, {
-      opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: 0.15,
-      scrollTrigger: { trigger: heroRef.current, start: 'top 78%', toggleActions: 'play none none none' },
+    gsap.fromTo('.v4-hero-title', { opacity: 0, y: 24 }, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.1,
+      scrollTrigger: { trigger: heroRef.current, start: 'top 90%', toggleActions: 'play none none reverse' },
     });
-    gsap.fromTo('.v4-hero-desc', { opacity: 0, y: 20 }, {
-      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.35,
-      scrollTrigger: { trigger: heroRef.current, start: 'top 75%', toggleActions: 'play none none none' },
+    gsap.fromTo('.v4-hero-desc', { opacity: 0, y: 16 }, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.2,
+      scrollTrigger: { trigger: heroRef.current, start: 'top 90%', toggleActions: 'play none none reverse' },
     });
     // Parallax foto bg on scroll
     gsap.to('.v4-hero-bg img', {
@@ -299,9 +255,9 @@ export const View4 = () => {
 
     // ── 2. PETA SUMATERA ───────────────────────────────────────
     // Heading fade in
-    gsap.fromTo('.v4-map-heading', { opacity: 0, y: 30 }, {
-      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: mapRef.current, start: 'top 80%', toggleActions: 'play none none none' },
+    gsap.fromTo('.v4-map-heading', { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: mapRef.current, start: 'top 85%', toggleActions: 'play none none reverse' },
     });
 
     // Map reveal with clip-path
@@ -309,16 +265,16 @@ export const View4 = () => {
       { clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 },
       { 
         clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, 
-        duration: 1.5, ease: 'power3.inOut',
-        scrollTrigger: { trigger: mapRef.current, start: 'top 50%', toggleActions: 'play none none none' }
+        duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: mapRef.current, start: 'top 80%', toggleActions: 'play none none reverse' }
       }
     );
 
     // Pin pop-up stagger
     gsap.fromTo('.v4-loc-pin',
       { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.7)', stagger: 0.25,
-        scrollTrigger: { trigger: mapRef.current, start: 'top 40%', toggleActions: 'play none none none' }
+      { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)', stagger: 0.1,
+        scrollTrigger: { trigger: mapRef.current, start: 'top 75%', toggleActions: 'play none none reverse' }
       }
     );
 
@@ -348,13 +304,13 @@ export const View4 = () => {
         const stackPos = stack.indexOf(i);
         return 1 - (stackPos * 0.2); 
       },
-      duration: 1,
-      stagger: 0.15,
+      duration: 0.6,
+      stagger: 0.08,
       ease: 'back.out(1.2)',
       scrollTrigger: {
         trigger: briefingRef.current,
-        start: 'top 60%',
-        toggleActions: 'play none none none',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
       }
     });
 
@@ -489,42 +445,70 @@ export const View4 = () => {
             <span className="v4-accent">Satu Semangat</span>
           </h2>
           <p className="v4-hero-desc">
-            Sebanyak 510 mahasiswa Politeknik Statistika STIS dilepas untuk
-            melaksanakan Pendataan R3P di Provinsi Aceh, Sumatera Utara,
+            510 mahasiswa STIS diterjunkan ke Aceh, Sumatera Utara,
             dan Sumatera Barat.
           </p>
         </div>
       </div>
 
-      {/* ── Section B: Peta Sumatera & Alokasi (Stand Out Layout) ── */}
+      {/* ── Section B: Peta Sumatera & Alokasi (Interactive Dashboard) ── */}
       <div className="v4-map-section" ref={mapRef}>
         <h3 className="v4-map-heading v4-anim-fade">Peta Alokasi Petugas</h3>
         
         <div className="v4-map-layout-standout">
+          {/* Map display */}
           <div className="v4-map-wrapper">
             <img src={imgSumatera} className="v4-map-sumatera" alt="Peta Sumatera" />
             
             {PROVINCES.map((prov, i) => (
               <div 
                 key={prov.id} 
-                className="v4-map-loc"
+                className={`v4-map-loc ${activeProvince === i ? 'active' : ''}`}
                 style={{ left: prov.x, top: prov.y }}
                 onMouseEnter={() => setActiveProvince(i)}
                 onMouseLeave={() => setActiveProvince(null)}
                 onClick={() => setActiveProvince(activeProvince === i ? null : i)}
               >
                 <img src={imgPoint} className="v4-loc-pin" alt="Pin" />
-                
-                {/* Tooltip Hover Info */}
-                <div className={`v4-alloc-tooltip tooltip-${prov.id} ${activeProvince === i ? 'active' : ''}`}>
-                  <h4>{prov.name}</h4>
-                  <div className="v4-tooltip-stats">
-                    <p><span>{prov.mhs}</span> Mahasiswa</p>
-                    <p className="v4-pml-text"><span>{prov.pml}</span> PML</p>
-                  </div>
-                </div>
               </div>
             ))}
+          </div>
+
+          {/* Interactive details dashboard */}
+          <div className="v4-map-dashboard">
+            <div className="v4-dashboard-inner">
+              <span className="v4-db-kicker">
+                {activeProvince !== null ? 'PROVINSI TERPILIH' : 'KOMANDO PUSAT'}
+              </span>
+              <h4 className="v4-db-title">
+                {activeProvince !== null ? PROVINCES[activeProvince].name : 'R3P Sumatra 2026'}
+              </h4>
+              <div className="v4-db-divider" />
+              
+              <div className="v4-db-stats-grid">
+                <div className="v4-db-stat-box">
+                  <span className="v4-db-stat-num">
+                    {activeProvince !== null ? PROVINCES[activeProvince].mhs : '510'}
+                  </span>
+                  <span className="v4-db-stat-label">Mahasiswa</span>
+                </div>
+                <div className="v4-db-stat-box">
+                  <span className="v4-db-stat-num">
+                    {activeProvince !== null ? PROVINCES[activeProvince].pml : '52'}
+                  </span>
+                  <span className="v4-db-stat-label">PML</span>
+                </div>
+              </div>
+
+              <div className="v4-db-footer">
+                <p>
+                  {activeProvince !== null 
+                    ? `Misi pendataan terfokus di wilayah ${PROVINCES[activeProvince].name} dengan pendampingan melekat oleh supervisor PML.`
+                    : 'Arahkan kursor atau ketuk pin provinsi di peta untuk memfilter data alokasi petugas secara langsung.'
+                  }
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -573,40 +557,40 @@ export const View9 = () => {
 
   useGSAP(() => {
     // Kicker fade in
-    gsap.fromTo('.v9-kicker', { opacity: 0, y: 20 }, {
-      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: closingRef.current, start: 'top 70%', toggleActions: 'play none none none' },
+    gsap.fromTo('.v9-kicker', { opacity: 0, y: 15 }, {
+      opacity: 1, y: 0, duration: 0.5, ease: 'power3.out',
+      scrollTrigger: { trigger: closingRef.current, start: 'top 85%', toggleActions: 'play none none reverse' },
     });
     // Headline reveal
-    gsap.fromTo('.v9-headline', { opacity: 0, y: 40 }, {
-      opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', delay: 0.2,
-      scrollTrigger: { trigger: closingRef.current, start: 'top 65%', toggleActions: 'play none none none' },
+    gsap.fromTo('.v9-headline', { opacity: 0, y: 25 }, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.1,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 85%', toggleActions: 'play none none reverse' },
     });
     // Closing paragraph
     gsap.fromTo('.v9-closing-text', { opacity: 0 }, {
-      opacity: 1, duration: 1, delay: 0.5,
-      scrollTrigger: { trigger: closingRef.current, start: 'top 60%', toggleActions: 'play none none none' },
+      opacity: 1, duration: 0.6, delay: 0.2,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 80%', toggleActions: 'play none none reverse' },
     });
     // Decorative line grow
     gsap.fromTo('.v9-line', { scaleX: 0 }, {
-      scaleX: 1, duration: 1.2, ease: 'power3.inOut', delay: 0.3,
-      scrollTrigger: { trigger: closingRef.current, start: 'top 60%', toggleActions: 'play none none none' },
+      scaleX: 1, duration: 0.6, ease: 'power3.inOut', delay: 0.15,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 80%', toggleActions: 'play none none reverse' },
     });
     // Stats counter fade in stagger
-    gsap.fromTo('.v9-stat', { opacity: 0, y: 20 }, {
-      opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out', delay: 0.6,
-      scrollTrigger: { trigger: closingRef.current, start: 'top 55%', toggleActions: 'play none none none' },
+    gsap.fromTo('.v9-stat', { opacity: 0, y: 15 }, {
+      opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out', delay: 0.25,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 80%', toggleActions: 'play none none reverse' },
     });
-    // Stats counter count-up
+    // Stats counter count-up (faster 1.2s instead of 2.5s)
     gsap.utils.toArray('.v9-stat-num').forEach((el) => {
       const targetVal = parseInt(el.getAttribute('data-target'), 10);
       const obj = { val: 0 };
       gsap.to(obj, {
         val: targetVal,
-        duration: 2.5,
+        duration: 1.2,
         ease: 'power3.out',
-        delay: 0.6,
-        scrollTrigger: { trigger: closingRef.current, start: 'top 55%', toggleActions: 'play none none none' },
+        delay: 0.25,
+        scrollTrigger: { trigger: closingRef.current, start: 'top 80%', toggleActions: 'play none none reverse' },
         onUpdate: () => {
           el.innerText = Math.floor(obj.val);
         }
@@ -614,8 +598,8 @@ export const View9 = () => {
     });
     // Footer credits
     gsap.fromTo('.v9-credits', { opacity: 0 }, {
-      opacity: 1, duration: 1.5, delay: 1,
-      scrollTrigger: { trigger: closingRef.current, start: 'top 50%', toggleActions: 'play none none none' },
+      opacity: 1, duration: 0.8, delay: 0.4,
+      scrollTrigger: { trigger: closingRef.current, start: 'top 70%', toggleActions: 'play none none reverse' },
     });
   }, { scope: closingRef });
 
@@ -635,9 +619,7 @@ export const View9 = () => {
           <span className="v9-hl-accent">Harapan Direkam</span>
         </h2>
         <p className="v9-closing-text">
-          510 mahasiswa. 3 provinsi. 15 kabupaten/kota.<br />
-          Dari mengetuk pintu hingga merekam harapan — sebuah misi kemanusiaan
-          yang tak akan terlupakan.
+          510 mahasiswa. 3 provinsi. 15 kabupaten/kota.
         </p>
 
         <div className="v9-stats-row">

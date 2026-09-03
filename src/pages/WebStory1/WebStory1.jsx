@@ -10,6 +10,9 @@ import { View1, View2, View3 } from './components/SanchaViews';
 import { View5, View7 } from './components/HusnaViews';
 import { View6, View8 } from './components/MaulViews';
 
+// Audio Asset
+import bgmAudio from './assets/images/audio/bgm.mp3';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WebStory1() {
@@ -109,6 +112,14 @@ export default function WebStory1() {
       }
     });
 
+    // Phase Bridge fade-in
+    gsap.utils.toArray('.ws1-phase-bridge-inner').forEach((el) => {
+      gsap.fromTo(el, { opacity: 0, y: 20 }, {
+        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none reverse' },
+      });
+    });
+
     // Chapter Triggers for Storytelling Navigation
     const chapters = [
       { selector: '.ws1-nadia-view0', id: 0 },
@@ -191,9 +202,9 @@ export default function WebStory1() {
       {/* ── AUDIO BGM ── */}
       <audio 
         ref={audioRef} 
-        src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" 
+        src={bgmAudio} 
         loop 
-        preload="none"
+        preload="auto"
       />
       <button
         className={`ws1-audio-toggle ${isPlaying ? 'playing' : ''}`}
@@ -201,7 +212,19 @@ export default function WebStory1() {
         title={isPlaying ? 'Matikan audio' : 'Nyalakan audio'}
         aria-label={isPlaying ? 'Matikan audio latar' : 'Nyalakan audio latar'}
       >
-        {isPlaying ? 'ON' : 'OFF'}
+        {isPlaying ? (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+          </svg>
+        ) : (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+          </svg>
+        )}
       </button>
 
       {/* ── THE GOLDEN THREAD ── */}
@@ -241,6 +264,14 @@ export default function WebStory1() {
       <View2 />
       <View3 />
 
+      {/* ── Phase Bridge: Persiapan → Lapangan ── */}
+      <div className="ws1-phase-bridge ws1-phase-bridge-prep-to-field">
+        <div className="ws1-phase-bridge-inner">
+          <p>· · ·</p>
+          <div className="ws1-phase-bridge-line" />
+        </div>
+      </div>
+
       {/* View 4: Deployment (Nadia) */}
       <View4 />
       
@@ -255,6 +286,14 @@ export default function WebStory1() {
 
       {/* View 8: Sehat dan Solid (Maul) */}
       <View8 />
+
+      {/* ── Phase Bridge: Lapangan → Penutup ── */}
+      <div className="ws1-phase-bridge ws1-phase-bridge-prep-to-field">
+        <div className="ws1-phase-bridge-inner">
+          <p>· · ·</p>
+          <div className="ws1-phase-bridge-line" />
+        </div>
+      </div>
       
       {/* View 9: Closing Visual (Nadia) */}
       <View9 />

@@ -1,134 +1,228 @@
-/* ===================== VIEW 6 UTAMA ===================== */
+/* ===================== VIEW 6: AMUNISI TEMPUR (REDESIGNED) ===================== */
 .ws1-maul-view6 {
-  background: radial-gradient(circle at -20% 50%, rgba(217,119,6,0.15) 0%, transparent 50%),
-              radial-gradient(circle at 120% 50%, rgba(233,30,99,0.1) 0%, transparent 50%),
-              #0d1525;
+  background: radial-gradient(ellipse at 20% 50%, rgba(230, 126, 34, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(233, 30, 99, 0.05) 0%, transparent 50%),
+              var(--navy-deep);
   color: var(--beige);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
+  padding: 5rem var(--pad-x);
   text-align: center;
   position: relative;
+  overflow: hidden;
 }
 
-/* ===================== TIPOGRAFI ===================== */
+/* Grain texture overlay */
+.ws1-maul-view6::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HEADER ── */
+.ws1-maul-header {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 3.5rem;
+}
+
 .ws1-maul-header h2 {
-  font-size: 4.5rem; 
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
   color: var(--beige);
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+  font-weight: 900;
 }
 
 .ws1-maul-text-orange {
-  color: #d97706; 
+  color: var(--orange);
   font-style: italic;
+  text-shadow: 0 0 40px rgba(230, 126, 34, 0.3);
 }
 
 .ws1-maul-header p {
-  font-size: 1.2rem;
-  margin-bottom: 4rem;
-  opacity: 0.9;
-  letter-spacing: 0.5px;
+  font-family: var(--font-content);
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  margin-bottom: 0;
+  opacity: 0.6;
+  letter-spacing: 0.03em;
+  font-weight: 300;
 }
 
-/* ===================== GRID LAYOUT ===================== */
-.ws1-maul-icon-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 9rem; 
-  column-gap: 2rem;
-  max-width: 1000px;
+/* ── EQUIPMENT SHOWCASE KNOLLING ── */
+.ws1-maul-knoll-container {
+  position: relative;
   width: 100%;
+  max-width: 1100px;
+  height: 65vh;
+  min-height: 500px;
+  margin-top: 2rem;
+  z-index: 2;
 }
 
-.ws1-maul-icon-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative; 
-}
-
-/* ===================== LINGKARAN ORANYE (CSS) ===================== */
-.ws1-maul-icon-item {
-  width: 160px; 
-  height: 160px;
-  background-color: #b45f1b; 
-  border-radius: 50%; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 2; 
-}
-
-.ws1-maul-icon-wrapper:hover .ws1-maul-icon-item {
-  transform: scale(1.08);
-  box-shadow: 0 12px 25px rgba(217, 119, 6, 0.5);
-}
-
-.ws1-maul-icon-item img {
-  width: 65%; 
-  height: 65%; 
-  object-fit: contain; 
-}
-
-/* ===================== KOTAK TEKS POP-UP ===================== */
-.ws1-maul-text-container {
+.ws1-maul-knoll-item {
   position: absolute;
-  top: 175px; 
-  width: 320px; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 10; 
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: crosshair;
+  transform: translate(-50%, -50%);
+}
+
+.ws1-maul-knoll-item img {
+  width: 100%;
+  max-width: 160px;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.5));
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), filter 0.4s ease;
+}
+
+.ws1-maul-knoll-item:hover img {
+  transform: scale(1.15) translateY(-10px) !important;
+  filter: drop-shadow(0 25px 35px rgba(230, 126, 34, 0.4));
+  z-index: 20;
+}
+
+/* Specific Knolling Layout Positions (Percentages for responsiveness) */
+.knoll-item-1 { top: 20%; left: 25%; }
+.knoll-item-1 img { max-width: 140px; transform: rotate(-12deg); }
+.knoll-item-2 { top: 35%; left: 50%; }
+.knoll-item-2 img { max-width: 120px; transform: rotate(6deg); }
+.knoll-item-3 { top: 75%; left: 35%; }
+.knoll-item-3 img { max-width: 110px; transform: rotate(-10deg); }
+.knoll-item-4 { top: 60%; left: 70%; }
+.knoll-item-4 img { max-width: 190px; transform: rotate(15deg); }
+.knoll-item-5 { top: 20%; left: 75%; }
+.knoll-item-5 img { max-width: 130px; transform: rotate(-25deg); }
+.knoll-item-6 { top: 85%; left: 60%; }
+.knoll-item-6 img { max-width: 160px; transform: rotate(5deg); }
+
+/* Detail tooltip (Hidden by default, shown on hover) */
+.knoll-detail {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 260px;
   pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%) translateX(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
 }
 
-.ws1-maul-text-container.show {
+.knoll-item-4 .knoll-detail,
+.knoll-item-5 .knoll-detail,
+.knoll-item-6 .knoll-detail {
+  /* flip to left side for right items */
+  left: auto;
+  right: 100%;
+  flex-direction: row-reverse;
+  transform: translateY(-50%) translateX(10px);
+}
+
+.ws1-maul-knoll-item:hover .knoll-detail {
   opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  transform: translateY(-50%) translateX(15px);
+}
+.knoll-item-4:hover .knoll-detail,
+.knoll-item-5:hover .knoll-detail,
+.knoll-item-6:hover .knoll-detail {
+  transform: translateY(-50%) translateX(-15px);
 }
 
-/* TRIK CSS KHUSUS BARIS BAWAH */
-.ws1-maul-icon-wrapper:nth-child(n+4) .ws1-maul-text-container {
-  top: auto; 
-  bottom: 175px; 
+.knoll-line {
+  width: 40px;
+  height: 1px;
+  background: rgba(230, 126, 34, 0.6);
+  position: relative;
+}
+.knoll-line::before {
+  content: '';
+  position: absolute;
+  left: 0; top: -3px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 10px var(--orange);
+}
+.knoll-item-4 .knoll-line::before,
+.knoll-item-5 .knoll-line::before,
+.knoll-item-6 .knoll-line::before {
+  left: auto; right: 0;
 }
 
-.ws1-maul-pill-title {
-  background-color: var(--off-white, #ffffff);
-  color: var(--navy);
-  padding: 0.4rem 1.5rem;
-  border-radius: 30px;
+.knoll-info {
+  background: rgba(13, 21, 37, 0.7); /* navy-deep */
+  border-left: 2px solid var(--orange);
+  backdrop-filter: blur(12px);
+  padding: 18px;
+  text-align: left;
+}
+
+.knoll-item-4 .knoll-info,
+.knoll-item-5 .knoll-info,
+.knoll-item-6 .knoll-info {
+  text-align: right;
+  border-left: none;
+  border-right: 2px solid var(--orange);
+}
+
+.knoll-num {
+  font-family: var(--font-content);
+  font-size: 0.7rem;
+  color: var(--orange);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.knoll-info h4 {
+  font-family: var(--font-title);
+  color: var(--beige);
   font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin: 0 0 6px 0;
 }
 
-.ws1-maul-desc-text {
-  color: #d97706; 
-  font-size: 1.1rem;
-  line-height: 1.4;
-  text-align: center;
+.knoll-info p {
+  font-family: var(--font-content);
+  color: rgba(229, 217, 182, 0.75);
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.5;
 }
 
+/* Adjustments for mobile */
+@media (max-width: 768px) {
+  .ws1-maul-knoll-container { height: 80vh; }
+  .knoll-detail { width: 180px; }
+  .knoll-line { width: 20px; }
+  .knoll-info { padding: 12px; }
+  .ws1-maul-knoll-item img { max-width: 100px !important; }
+  
+  .knoll-item-1 { top: 15%; left: 30%; }
+  .knoll-item-2 { top: 30%; left: 70%; }
+  .knoll-item-3 { top: 50%; left: 25%; }
+  .knoll-item-4 { top: 65%; left: 70%; }
+  .knoll-item-5 { top: 85%; left: 35%; }
+  .knoll-item-6 { top: 85%; left: 75%; }
+}
 
 /* =========================================
    VIEW 8: SEHAT DAN SOLID
 ========================================= */
 .ws1-maul-view8 {
-  background: radial-gradient(circle at 50% 120%, #f7d299 0%, #ebdcb2 40%, #d4c194 100%);
+  background: radial-gradient(circle at 50% 120%, #f7d299 0%, var(--cream-bg) 40%, #d4c194 100%);
   background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E'),
-                    radial-gradient(circle at 50% 120%, #f7d299 0%, #ebdcb2 40%, #d4c194 100%);
+                    radial-gradient(circle at 50% 120%, #f7d299 0%, var(--cream-bg) 40%, #d4c194 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -146,7 +240,8 @@
 }
 
 .ws1-maul-v8-header h2 {
-  font-size: 4rem;
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 8vw, 4rem);
   margin-bottom: 1.5rem;
 }
 
@@ -164,12 +259,13 @@
 
 .ws1-maul-btn-round, .ws1-maul-btn-pill {
   background-color: #f7d299;
-  color: #d97706;
+  color: var(--orange);
   border: none;
   cursor: pointer;
+  font-family: var(--font-content);
   font-size: 1.1rem;
   font-weight: bold;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .ws1-maul-btn-round {
@@ -184,14 +280,14 @@
 }
 
 .ws1-maul-btn-round:hover, .ws1-maul-btn-pill:hover, .ws1-maul-btn-pill.active {
-  background-color: #d97706;
+  background-color: var(--orange);
   color: white;
 }
 
 .ws1-maul-btn-round:focus-visible,
 .ws1-maul-btn-pill:focus-visible,
 .ws1-maul-orbit-item:focus-visible {
-  outline: 2px solid #d97706;
+  outline: 2px solid var(--orange);
   outline-offset: 4px;
 }
 
@@ -209,20 +305,19 @@
 /* --- Tampilan Pusat (Lingkaran Raksasa) --- */
 .ws1-maul-center-display {
   position: relative;
-  width: 440px; 
+  width: 440px;
   height: 440px;
   border-radius: 50%;
   background-color: var(--navy);
-  border: 8px solid white; 
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  border: 8px solid white;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 5;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-/* Foto Full Size */
 .ws1-maul-center-img {
   width: 100%;
   height: 100%;
@@ -230,63 +325,62 @@
   position: absolute;
   top: 0; left: 0;
   z-index: 1;
-  animation: fadeIn 0.4s ease forwards;
+  animation: v8-fadeIn 0.4s ease forwards;
 }
 
-/* Gradient Gelap Tipis di Atas */
 .ws1-maul-center-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 40%);
   z-index: 2;
   pointer-events: none;
 }
 
-/* Teks Melengkung di Tengah */
 .ws1-maul-curved-text-svg {
   position: absolute;
-  top: -15px; 
+  top: -15px;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 3;
   pointer-events: none;
-  animation: spinIn 0.5s ease;
+  animation: v8-spinIn 0.5s ease;
 }
 
 .ws1-maul-svg-text {
-  font-family: 'Playfair Display', serif; 
+  font-family: var(--font-title);
   font-size: 34px;
   font-weight: bold;
-  fill: #ffffff; 
+  fill: #ffffff;
   letter-spacing: 2px;
-  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)); 
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.8));
 }
 
-/* Angka raksasa jika foto belum ada */
 .ws1-maul-placeholder-center-large {
-  font-size: 8rem;
-  color: rgba(255,255,255,0.2);
+  font-family: var(--font-title);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.15);
   z-index: 1;
+  font-style: italic;
 }
 
-/* --- Lingkaran Orbit (Diperbaiki) --- */
+/* --- Lingkaran Orbit --- */
 .ws1-maul-orbit-item {
   position: absolute;
   width: 85px;
   height: 85px;
   border-radius: 50%;
   background-color: var(--navy);
-  border: 1px solid rgba(0,0,0,0.05); 
+  border: 2px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
-  /* PERHATIAN: Memanggil variabel --x dan --y agar diam di tempat */
   transform: translate(var(--x), var(--y)) scale(1);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
   z-index: 2;
   overflow: hidden;
 }
@@ -298,31 +392,31 @@
 }
 
 .ws1-maul-placeholder-orbit {
-  color: white;
+  color: rgba(255, 255, 255, 0.4);
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
+  font-family: var(--font-content);
 }
 
-/* EFEK TIMBUL SAAT AKTIF */
 .ws1-maul-orbit-item.active {
-  /* PERHATIAN: Tetap memanggil var(--x) dan var(--y) saat membesar */
-  transform: translate(var(--x), var(--y)) scale(1.4) !important; 
-  border: 4px solid #d97706 !important; 
-  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4); 
+  transform: translate(var(--x), var(--y)) scale(1.35);
+  border: 3px solid var(--orange);
+  box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
   z-index: 10;
 }
 
-.ws1-maul-orbit-item:hover {
-  transform: translate(var(--x), var(--y)) scale(1.1);
+.ws1-maul-orbit-item:hover:not(.active) {
+  transform: translate(var(--x), var(--y)) scale(1.12);
+  border-color: rgba(230, 126, 34, 0.3);
 }
 
-/* --- Animasi --- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+/* --- Animations --- */
+@keyframes v8-fadeIn {
+  from { opacity: 0; transform: scale(1.05); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-@keyframes spinIn {
+@keyframes v8-spinIn {
   0% { transform: rotate(-5deg); opacity: 0; }
   100% { transform: rotate(0deg); opacity: 1; }
 }
@@ -330,12 +424,51 @@
 /* =========================================
    RESPONSIVE DESIGN (MAUL VIEWS)
 ========================================= */
+
+/* View 6 Responsive */
 @media (max-width: 1024px) {
-  .ws1-maul-icon-grid {
+  .ws1-maul-equip-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ws1-maul-equip-grid {
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 5rem;
+    gap: 14px;
   }
 
+  .ws1-maul-equip-img {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-maul-view6 {
+    padding: 3rem 1rem;
+  }
+
+  .ws1-maul-equip-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .ws1-maul-equip-body {
+    padding: 12px 14px 16px;
+  }
+
+  .ws1-maul-equip-title {
+    font-size: 0.95rem;
+  }
+
+  .ws1-maul-equip-desc {
+    font-size: 0.72rem;
+  }
+}
+
+/* View 8 Responsive */
+@media (max-width: 1024px) {
   .ws1-maul-gallery-container {
     width: min(620px, 92vw);
     height: min(620px, 92vw);
@@ -348,50 +481,30 @@
 }
 
 @media (max-width: 768px) {
-  /* View 6 */
-  .ws1-maul-header h2 {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-  .ws1-maul-header p {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-  .ws1-maul-icon-grid {
-    grid-template-columns: 1fr;
-    row-gap: 4rem;
-  }
-  .ws1-maul-icon-item {
-    width: 120px;
-    height: 120px;
-  }
-  .ws1-maul-text-container {
-    top: 130px;
-    width: 280px;
-  }
-  
-  /* View 8 */
   .ws1-maul-view8 {
     padding: 3.5rem 1rem;
   }
-  .ws1-maul-v8-header h2 {
-    font-size: clamp(2.2rem, 10vw, 3.2rem);
-  }
+
   .ws1-maul-controls {
     gap: 0.7rem;
   }
+
   .ws1-maul-gallery-container {
     width: min(380px, 96vw);
     height: min(380px, 96vw);
     margin-top: 0.5rem;
   }
+
   .ws1-maul-center-display {
     width: 280px;
     height: 280px;
     border-width: 6px;
   }
+
   .ws1-maul-svg-text {
     font-size: 24px;
   }
+
   .ws1-maul-orbit-item {
     width: 60px;
     height: 60px;
@@ -419,6 +532,6 @@
   }
 
   .ws1-maul-orbit-item.active {
-    transform: translate(var(--x), var(--y)) scale(1.25) !important;
+    transform: translate(var(--x), var(--y)) scale(1.25);
   }
 }

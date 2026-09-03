@@ -16,134 +16,266 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   VIEW 0 — GRAND COVER
-   Deep navy · Parallax · Playfair italic headline
+   VIEW 0 — GRAND COVER (CINEMATIC OVERHAUL)
+   Deep Navy · Layered Parallax · Cartography Grid · Floating Embers
+   Traditional Sumatran Frame & Sunset Glow
 ════════════════════════════════════════════════════════════════ */
 .ws1-nadia-view0 {
-  width: 100%; height: 100vh;
+  width: 100%; 
+  height: 100vh;
   min-height: 640px;
   overflow: hidden;
-  display: flex; align-items: center;
-  background: #15173D; /* navy */
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
   position: relative;
   font-family: 'Lato', system-ui, sans-serif;
-  color: #E5D9B6; /* cream */
+  color: var(--beige);
+  text-align: center;
 }
 
-.ws1-nadia-view0 .j-cover-photo {
-  position: absolute; inset: -8%;
-  will-change: transform; transform-origin: center;
-}
-.ws1-nadia-view0 .j-cover-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 30%;
-}
-
-/* Layered dark overlays */
-.ws1-nadia-view0 .j-cover-overlay-grad {
-  position: absolute; inset: 0; z-index: 2;
-  background: linear-gradient(
-    108deg,
-    rgba(21,23,61,0.97) 0%,
-    rgba(21,23,61,0.85) 38%,
-    rgba(21,23,61,0.5)  65%,
-    rgba(21,23,61,0.2)  100%
-  );
-}
-.ws1-nadia-view0 .j-cover-overlay-vig {
-  position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 55% at 50% 100%, rgba(21,23,61,0.88) 0%, transparent 70%),
-    radial-gradient(ellipse 28% 100% at 0% 50%, rgba(21,23,61,0.65) 0%, transparent 55%);
+/* ── 1. BACKGROUND GLOW & CARTOGRAPHY GRID ── */
+.ws1-nadia-view0 .v0-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(230, 126, 34, 0.12) 0%, rgba(212, 168, 85, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(40px);
 }
 
-/* Main content */
+.ws1-nadia-view0 .v0-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center;
+  opacity: 0.8;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── 2. FLOATING EMBERS / DUST PARTICLES ── */
+.ws1-nadia-view0 .v0-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ws1-nadia-view0 .v0-particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(230, 126, 34, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: float-upward 8s infinite linear;
+}
+
+/* Particle animation variations */
+.ws1-nadia-view0 .p1 { width: 6px; height: 6px; left: 15%; bottom: -10px; animation-delay: 0s; animation-duration: 9s; }
+.ws1-nadia-view0 .p2 { width: 4px; height: 4px; left: 35%; bottom: -10px; animation-delay: 2s; animation-duration: 7s; }
+.ws1-nadia-view0 .p3 { width: 8px; height: 8px; left: 55%; bottom: -10px; animation-delay: 4s; animation-duration: 11s; }
+.ws1-nadia-view0 .p4 { width: 5px; height: 5px; left: 75%; bottom: -10px; animation-delay: 1.5s; animation-duration: 8s; }
+.ws1-nadia-view0 .p5 { width: 7px; height: 7px; left: 88%; bottom: -10px; animation-delay: 3s; animation-duration: 10s; }
+
+@keyframes float-upward {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(40px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ── 3. PARALLAX SUMATRAN MOUNTAINS ── */
+.ws1-nadia-view0 .v0-mountains {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 250px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.ws1-nadia-view0 .v0-mountain-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ws1-nadia-view0 .v0-mountain-back {
+  fill: #0c0d20;
+  opacity: 0.65;
+}
+
+.ws1-nadia-view0 .v0-mountain-front {
+  fill: #060712;
+}
+
+/* ── 4. GEOMETRIC SONGSKET FRAME ── */
+.ws1-nadia-view0 .j-cover-frame {
+  position: absolute;
+  inset: clamp(16px, 3vw, 36px);
+  border: 1px solid rgba(212, 168, 85, 0.18);
+  pointer-events: none;
+  z-index: 15;
+  transition: all 0.3s ease;
+}
+
+.ws1-nadia-view0 .j-frame-corner {
+  position: absolute;
+  width: clamp(45px, 6vw, 75px);
+  height: clamp(45px, 6vw, 75px);
+  stroke: var(--gold);
+  opacity: 0.85;
+  transition: opacity 0.5s ease;
+}
+
+.ws1-nadia-view0 .j-frame-corner.corner-tl { top: -1px; left: -1px; }
+.ws1-nadia-view0 .j-frame-corner.corner-tr { top: -1px; right: -1px; transform: rotate(90deg); }
+.ws1-nadia-view0 .j-frame-corner.corner-bl { bottom: -1px; left: -1px; transform: rotate(-90deg); }
+.ws1-nadia-view0 .j-frame-corner.corner-br { bottom: -1px; right: -1px; transform: rotate(180deg); }
+
+/* ── 5. CENTERED TYPOGRAPHY ── */
 .ws1-nadia-view0 .j-cover-content {
-  position: relative; z-index: 10;
+  position: relative; 
+  z-index: 10;
   padding: 0 clamp(24px, 6vw, 96px);
-  max-width: 880px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   will-change: transform;
 }
 
-/* Badge row */
-.ws1-nadia-view0 .j-cover-badge-row { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
-.ws1-nadia-view0 .j-badge {
-  font-family: 'Lato', system-ui, sans-serif; font-weight: 400;
-  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: #E67E22; background: rgba(230,126,34,0.12);
-  border: 1px solid rgba(230,126,34,0.3);
-  padding: 5px 14px; border-radius: 20px;
+.ws1-nadia-view0 .v0-kicker {
+  font-family: var(--font-content);
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  color: var(--orange);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
-/* Main headline — Playfair Display italic, large */
+
 .ws1-nadia-view0 .j-cover-headline {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
+  font-family: var(--font-title);
+  font-style: normal;
   font-weight: 900;
-  font-size: clamp(2.5rem, 11vw, 9.5rem); /* Reduced minimum for mobile */
-  color: #E5D9B6;
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-  margin-bottom: 12px;
-  will-change: transform;
-  text-shadow: 0 4px 32px rgba(0,0,0,0.28);
+  font-size: clamp(3rem, 9vw, 6.8rem);
+  color: var(--beige);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  text-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
 }
+
 .ws1-nadia-view0 .j-cover-hl-accent {
-  color: #E67E22;
-  text-shadow: 0 0 50px rgba(230,126,34,0.4), 0 4px 32px rgba(0,0,0,0.28);
+  color: var(--orange);
+  font-style: italic;
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(230,126,34,0.15));
 }
 
-/* Subline — Lato Light */
 .ws1-nadia-view0 .j-cover-subline {
-  font-family: 'Lato', system-ui, sans-serif; font-weight: 300;
-  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
-  color: rgba(229,217,182,0.82);
-  letter-spacing: 0.04em;
-  margin-top: 20px; margin-bottom: 8px;
-  will-change: transform;
+  font-family: var(--font-title);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  color: #E5D9B6;
+  letter-spacing: 0.05em;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
+
 .ws1-nadia-view0 .j-cover-descriptor {
-  font-family: 'Lato', system-ui, sans-serif; font-weight: 300;
-  font-size: clamp(0.6rem, 1vw, 0.72rem);
-  color: rgba(229,217,182,0.38);
-  letter-spacing: 0.16em; text-transform: uppercase;
-  margin-bottom: 40px;
+  font-family: var(--font-content);
+  font-weight: 400;
+  font-size: clamp(0.65rem, 1.2vw, 0.78rem);
+  color: rgba(229, 217, 182, 0.4);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-top: 16px;
+  margin-bottom: 0px;
+  max-width: 600px;
 }
 
-/* Benang merah */
-.ws1-nadia-view0 .j-benang-wrap {
-  position: absolute; bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 24px; height: 130px;
-  z-index: 12; pointer-events: none; overflow: visible;
-}
-.ws1-nadia-view0 .j-benang-svg { width: 100%; height: 100%; overflow: visible; }
-
-/* Rotating scroll cue */
+/* ── 6. INTERACTIVE SCROLL CUE ── */
 .ws1-nadia-view0 .j-scroll-cue {
-  position: absolute; bottom: 38px; right: clamp(22px, 5vw, 80px);
-  z-index: 20; width: 96px; height: 96px;
-  display: flex; align-items: center; justify-content: center;
+  position: absolute; 
+  bottom: 80px; 
+  left: 50%;
+  transform: translateX(-50%) !important;
+  z-index: 20; 
+  width: 96px; 
+  height: 96px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
-.ws1-nadia-view0 .j-scroll-cue-ring { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.ws1-nadia-view0 .j-scroll-cue-ring { 
+  position: absolute; 
+  inset: 0; 
+  width: 100%; 
+  height: 100%; 
+}
+
 .ws1-nadia-view0 .j-scroll-mouse {
-  width: 20px; height: 32px;
-  border: 1.5px solid rgba(229,217,182,0.42);
-  border-radius: 11px; position: relative;
-  display: flex; justify-content: center; padding-top: 5px;
+  width: 18px; 
+  height: 28px;
+  border: 1.5px solid rgba(229, 217, 182, 0.35);
+  border-radius: 10px; 
+  position: relative;
+  display: flex; 
+  justify-content: center; 
+  padding-top: 4px;
 }
+
 .ws1-nadia-view0 .j-scroll-wheel {
-  width: 3px; height: 7px;
-  background: #E67E22; border-radius: 2px;
+  width: 2.5px; 
+  height: 6px;
+  background: var(--orange); 
+  border-radius: 2px;
   will-change: transform, opacity;
 }
 
-/* Documentary caption */
 .ws1-nadia-view0 .j-cover-caption {
-  position: absolute; bottom: 26px; left: clamp(24px, 6vw, 96px);
+  position: absolute; 
+  bottom: 40px; 
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 12;
-  font-family: 'Lato', system-ui, sans-serif; font-weight: 300;
-  font-size: 0.6rem; color: rgba(229,217,182,0.3);
-  letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: var(--font-content);
+  font-weight: 400;
+  font-size: 0.6rem; 
+  color: rgba(229, 217, 182, 0.35);
+  letter-spacing: 0.18em; 
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* GSAP Hidden Initial States for Animations */
@@ -271,21 +403,24 @@
 
 .ws1-nadia-view4 .v4-map-layout-standout {
   width: 100%;
+  max-width: 1100px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: clamp(24px, 4vw, 60px);
 }
 
 /* Map Wrapper — Responsive relative container */
 .ws1-nadia-view4 .v4-map-wrapper {
   position: relative;
-  width: 100%;
-  max-width: 800px;
+  flex: 1.2;
+  max-width: 600px;
 }
 .ws1-nadia-view4 .v4-map-sumatera {
   width: 100%;
   display: block;
-  filter: drop-shadow(0 0 40px rgba(230,126,34,0.25));
+  filter: drop-shadow(0 0 40px rgba(230, 126, 34, 0.15));
   will-change: clip-path;
 }
 
@@ -295,100 +430,119 @@
   transform: translate(-50%, -50%);
   z-index: 5;
   cursor: pointer;
-  padding: 15px; /* Increase tap hitbox */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Pin */
 .ws1-nadia-view4 .v4-loc-pin {
-  position: absolute;
-  width: 32px;
-  filter: drop-shadow(0 4px 8px rgba(230,126,34,0.6));
+  width: 28px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(230, 126, 34, 0.5));
   transform-origin: bottom center;
-  /* Shift up so the tip is at the exact center (0,0) */
-  bottom: 0;
-  left: -16px;
   will-change: transform, opacity;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .ws1-nadia-view4 .v4-map-loc:hover .v4-loc-pin,
 .ws1-nadia-view4 .v4-map-loc.active .v4-loc-pin {
-  transform: scale(1.2);
+  transform: scale(1.4) translateY(-3px);
+  filter: drop-shadow(0 8px 16px var(--orange)) drop-shadow(0 0 20px rgba(230, 126, 34, 0.6));
 }
 
-/* Pin Pulse Animation */
-@keyframes pin-pulse {
-  0%, 100% { filter: drop-shadow(0 4px 8px rgba(230,126,34,0.6)); }
-  50% { filter: drop-shadow(0 4px 16px rgba(230,126,34,0.9)) drop-shadow(0 0 24px rgba(230,126,34,0.4)); }
-}
-
-.ws1-nadia-view4 .v4-loc-pin {
-  animation: pin-pulse 2.5s ease-in-out infinite;
-}
-
-/* Tooltip (Glassmorphism) Minimalist */
-.ws1-nadia-view4 .v4-alloc-tooltip {
-  position: absolute;
-  background: rgba(21, 23, 61, 0.6);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(229,217,182,0.2);
-  border-radius: 12px;
-  padding: 12px 16px;
-  width: max-content;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+/* Interactive details dashboard */
+.ws1-nadia-view4 .v4-map-dashboard {
+  flex: 0.8;
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
   text-align: left;
-  border-left: 3px solid #E67E22;
-  will-change: transform, opacity;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(10px) scale(0.95);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 50;
-}
-/* Show tooltip on hover or when active */
-.ws1-nadia-view4 .v4-map-loc:hover .v4-alloc-tooltip,
-.ws1-nadia-view4 .v4-map-loc.active .v4-alloc-tooltip {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  border-left: 3px solid var(--orange);
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
-.ws1-nadia-view4 .tooltip-aceh   { bottom: 40px; left: -10px; }
-.ws1-nadia-view4 .tooltip-sumut  { bottom: 40px; left: 20px; }
-.ws1-nadia-view4 .tooltip-sumbar { bottom: 40px; right: 20px; }
-
-.ws1-nadia-view4 .v4-alloc-tooltip h4 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 1.3rem; 
-  color: #E5D9B6;
-  margin: 0 0 8px 0;
-  letter-spacing: 0.05em;
-}
-
-.ws1-nadia-view4 .v4-tooltip-stats {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.ws1-nadia-view4 .v4-alloc-tooltip p {
-  font-family: 'Lato', sans-serif;
-  margin: 0;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.7);
+.ws1-nadia-view4 .v4-dashboard-inner {
   display: flex;
   flex-direction: column;
 }
 
-.ws1-nadia-view4 .v4-alloc-tooltip p span {
-  font-size: 1.1rem;
+.ws1-nadia-view4 .v4-db-kicker {
+  font-family: var(--font-content);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--orange);
   font-weight: 700;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  margin-bottom: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
-.ws1-nadia-view4 .v4-alloc-tooltip p.v4-pml-text span {
-  color: #E67E22;
+.ws1-nadia-view4 .v4-db-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--beige);
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+  transition: color 0.3s ease;
+}
+
+.ws1-nadia-view4 .v4-db-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(230, 126, 34, 0.3), transparent);
+  margin-bottom: 24px;
+}
+
+.ws1-nadia-view4 .v4-db-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ws1-nadia-view4 .v4-db-stat-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ws1-nadia-view4 .v4-db-stat-num {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.ws1-nadia-view4 .v4-db-stat-label {
+  font-family: var(--font-content);
+  font-size: 0.72rem;
+  color: rgba(229, 217, 182, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ws1-nadia-view4 .v4-db-footer p {
+  font-family: var(--font-content);
+  font-size: 0.8rem;
+  color: rgba(229, 217, 182, 0.55);
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 300;
 }
 
 /* ── C. BRIEFING TERAKHIR SECTION ── */

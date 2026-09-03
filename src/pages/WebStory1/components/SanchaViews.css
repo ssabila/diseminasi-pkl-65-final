@@ -5,7 +5,7 @@
 ========================================= */
 .ws1-sancha-view1 {
   background-color: var(--navy); /* Matches other views */
-  min-height: 150vh; /* Tall enough for scrolling */
+  min-height: 100vh;
   position: relative;
   padding: 100px 0;
   display: flex;
@@ -13,39 +13,7 @@
   overflow: hidden;
 }
 
-/* Cinematic Glows */
-.ws1-sancha-view1 .j-grain {
-  position: absolute;
-  inset: 0;
-  z-index: 9990;
-  pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: overlay;
-}
 
-.ws1-sancha-v1-glow {
-  position: absolute;
-  width: 40vw;
-  height: 40vw;
-  border-radius: 50%;
-  filter: blur(120px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.ws1-sancha-v1-glow.top-left {
-  top: -10vw;
-  left: -10vw;
-  background: rgba(217, 119, 6, 0.15); /* Orange glow */
-}
-
-.ws1-sancha-v1-glow.bottom-right {
-  bottom: 10vw;
-  right: -10vw;
-  background: rgba(233, 30, 99, 0.12); /* Pinkish glow for depth */
-}
 
 .ws1-sancha-tl-container {
   position: relative;
@@ -70,7 +38,7 @@
 
 .ws1-sancha-tl-path {
   fill: none;
-  stroke: #d97706; /* Orange timeline */
+  stroke: var(--orange);
   stroke-width: 2.5;
 }
 
@@ -97,7 +65,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 3px solid #d97706; /* Strong accent border */
+  border-left: 3px solid var(--orange); /* Strong accent border */
   color: #E5D9B6; /* Cream text */
   padding: 30px;
   border-radius: 12px;
@@ -108,7 +76,7 @@
 
 .ws1-sancha-tl-card-wrap.left .ws1-sancha-tl-card {
   border-left: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: 3px solid #d97706; /* Right accent for left cards */
+  border-right: 3px solid var(--orange); /* Right accent for left cards */
 }
 
 .ws1-sancha-tl-card:hover {
@@ -117,8 +85,23 @@
   border-color: rgba(217, 119, 6, 0.4);
 }
 
+.ws1-sancha-tl-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.ws1-sancha-tl-icon {
+  width: 22px;
+  height: 22px;
+  stroke: var(--orange);
+  opacity: 0.85;
+}
+
 .ws1-sancha-tl-date {
-  color: #d97706; /* Orange date */
+  color: var(--orange);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -131,7 +114,7 @@
   font-weight: 700;
   margin-bottom: 12px;
   color: #ffffff;
-  font-family: 'Playfair Display', serif; /* Elegant serif title */
+  font-family: var(--font-title);
   letter-spacing: 0.5px;
 }
 
@@ -142,8 +125,8 @@
 }
 
 @keyframes dot-pulse {
-  0%, 100% { box-shadow: 0 0 15px #d97706, 0 0 30px rgba(217,119,6,0.6); }
-  50% { box-shadow: 0 0 25px #d97706, 0 0 45px rgba(217,119,6,0.9); }
+  0%, 100% { box-shadow: 0 0 15px var(--orange), 0 0 30px rgba(230, 126, 34, 0.6); }
+  50% { box-shadow: 0 0 25px var(--orange), 0 0 45px rgba(230, 126, 34, 0.9); }
 }
 
 .ws1-sancha-tl-dot {
@@ -151,10 +134,10 @@
   top: 50%;
   width: 16px;
   height: 16px;
-  background-color: #d97706;
+  background-color: var(--orange);
   border-radius: 50%;
   transform: translateY(-50%);
-  box-shadow: 0 0 15px #d97706, 0 0 30px rgba(217,119,6,0.6); /* Glowing dot */
+  box-shadow: 0 0 15px var(--orange), 0 0 30px rgba(230, 126, 34, 0.6);
   border: 3px solid var(--navy); /* Knockout center effect */
   animation: dot-pulse 3s infinite ease-in-out;
 }
@@ -171,7 +154,7 @@
    VIEW 2: DITEMPA SEBELUM DITERJUNKAN
 ========================================= */
 .ws1-sancha-view2 {
-  background-color: #ebdcb2; /* Cream background from Sehat dan Solid */
+  background-color: var(--cream-bg);
   min-height: 100vh;
   padding: 100px 20px;
   display: flex;
@@ -183,7 +166,7 @@
 
 .ws1-sancha-v2-container {
   width: 100%;
-  max-width: 1300px; /* Reduced from 1400px to perfectly frame 4 cards */
+  max-width: 1240px; /* Reduced from 1400px to perfectly frame 4 cards */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -191,7 +174,7 @@
 
 .ws1-sancha-v2-header {
   padding: 0 20px;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   text-align: center; /* Centered layout */
 }
 
@@ -204,7 +187,7 @@
 }
 
 .ws1-sancha-v2-orange {
-  color: #d97706; 
+  color: var(--orange);
   font-style: italic;
 }
 
@@ -212,68 +195,98 @@
   display: flex;
   flex-wrap: wrap; 
   justify-content: center; 
-  gap: 20px; /* Tighter gap so 4 cards fit easily */
+  gap: 30px; /* Tighter gap so 4 cards fit easily */
   width: 100%;
   padding: 0 20px 40px 20px; /* Cleaned up padding */
   align-items: center;
 }
 
 .ws1-sancha-v2-doc {
-  width: 280px; /* Adjusted size to fit 4 cards nicely without scrolling */
-  height: 380px; 
-  background-color: #f5eedc;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  width: 250px;
+  height: auto;
+  background-color: #ffffff; /* Real paper background */
+  padding: 14px 14px 22px 14px;
+  border-radius: 2px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 2px 5px rgba(0, 0, 0, 0.03);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(0,0,0,0.05);
-  flex-shrink: 0; /* Prevent shrinking */
-  overflow: hidden;
+  justify-content: flex-start;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
   position: relative;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.4s ease;
 }
 
 .ws1-sancha-v2-doc:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+  transform: translateY(-12px) scale(1.03) rotate(0deg) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.16);
+  z-index: 10;
+}
+
+.ws1-sancha-v2-img-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .ws1-sancha-v2-doc img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
-.ws1-sancha-v2-doc.placeholder {
-  background-color: rgba(0,0,0,0.05);
-  border: 2px dashed rgba(0,0,0,0.2);
-}
-
-.ws1-sancha-v2-doc-inner {
+.ws1-sancha-v2-caption {
   width: 100%;
-  height: 100%;
-  border: 1px dashed rgba(0,0,0,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  margin-top: 14px;
+  text-align: center;
 }
 
-.ws1-sancha-v2-doc-inner p {
-  color: #d97706;
-  font-size: 0.9rem;
-  font-weight: bold;
-  opacity: 0.7;
+.ws1-sancha-v2-caption .v2-caption-text {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+.ws1-sancha-v2-caption .v2-caption-date {
+  font-family: var(--font-content);
+  font-size: 0.68rem;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Washi tape detail */
+.ws1-sancha-v2-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 80px;
+  height: 22px;
+  background-color: rgba(229, 217, 182, 0.45);
+  border-left: 1px dashed rgba(0, 0, 0, 0.06);
+  border-right: 1px dashed rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  z-index: 5;
+}
+
+
 
 /* =========================================
    VIEW 3: BRIEFING PIMPINAN QUOTE
 ========================================= */
 .ws1-sancha-view3 {
-  background: linear-gradient(to bottom, #ebdcb2 0%, var(--navy) 100%); /* Transition back to navy */
+  background: linear-gradient(to bottom, var(--cream-bg) 0%, var(--navy) 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -303,7 +316,7 @@
 }
 
 .ws1-sancha-v3-author {
-  color: #d97706;
+  color: var(--orange);
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 2px;
