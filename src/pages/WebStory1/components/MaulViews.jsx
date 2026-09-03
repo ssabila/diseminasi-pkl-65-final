@@ -13,6 +13,7 @@ import imgPb from '../assets/images/ws1-maul-pb-v0.webp';
 import imgBoots from '../assets/images/ws1-maul-booth-v0.webp';
 import imgCard from '../assets/images/ws1-maul-card-v0.webp';
 import imgCharger from '../assets/images/ws1-maul-charger-v0.webp';
+import imgPetugas from '../assets/images/ws1-maul-petugas-v6.webp';
 
 // ==================== ASET VIEW 8 ====================
 import imgPidieJaya from '../assets/images/1-Pidie Jaya.webp';
@@ -30,54 +31,58 @@ import imgAgam from '../assets/images/13-Agam.webp';
 import imgTanahDatar from '../assets/images/15-Tanah Datar.webp';
 
 // ==================== DATA VIEW 6 ====================
-const amunisiList = [
+const amunisiLeft = [
   { 
     id: 1, 
     tag: "IDENTITAS RESMI",
     src: imgCard, 
     title: "ID Card & Badge", 
-    desc: "Tanda pengenal resmi verifikasi petugas pendata PKL 65 STIS di hadapan responden dan aparat setempat." 
+    desc: "Tanda pengenal resmi verifikasi petugas pendata di hadapan responden dan posko." 
   },
   { 
     id: 2, 
     tag: "DIGITAL CAPI",
     src: imgFasih, 
     title: "Smartphone + FASIH", 
-    desc: "Perangkat pencatat data digital real-time ke server BPS lengkap dengan geotagging GPS akurat." 
+    desc: "Aplikasi pengumpul data real-time dengan perekaman geotagging GPS akurat." 
   },
   { 
     id: 3, 
     tag: "ENERGI CADANGAN",
     src: imgPb, 
-    title: "Powerbank Kapasitas Tinggi", 
-    desc: "Menjamin kelangsungan daya gawai survei seharian penuh di pelosok tanpa pasokan listrik stabil." 
-  },
+    title: "Powerbank Taktis", 
+    desc: "Daya cadangan menjaga gawai tetap aktif seharian di desa pelosok tanpa listrik." 
+  }
+];
+
+const amunisiRight = [
   { 
     id: 4, 
     tag: "PROTEKSI CUACA",
     src: imgJas, 
     title: "Jas Hujan Lapangan", 
-    desc: "Perlindungan primer tubuh dan gawai elektronik saat menghadapi hujan lebat dan cuaca ekstrem Sumatera." 
+    desc: "Perlindungan primer tubuh dan gawai dari hujan lebat serta cuaca ekstrem." 
   },
   { 
     id: 5, 
     tag: "KONEKTIVITAS",
     src: imgCharger, 
-    title: "Kabel Data & Fast Charge", 
-    desc: "Sinkronisasi data cepat dan pengisian daya darurat lintas posko saat kembali dari lapangan." 
+    title: "Kabel & Fast Charge", 
+    desc: "Sinkronisasi data cepat dan pengisian daya darurat lintas posko posko." 
   },
   { 
     id: 6, 
     tag: "MOBILITAS MEDAN",
     src: imgBoots, 
     title: "Sepatu Boots Taktis", 
-    desc: "Proteksi mobilitas fisik menembus medan berlumpur, genangan air banjir, dan jalur terisolasi." 
+    desc: "Proteksi mobilitas fisik menembus jalur lumpur, genangan banjir, dan bebatuan." 
   }
 ];
 
-// ==================== KOMPONEN VIEW 6 (TACTICAL GEAR GRID) ====================
+// ==================== KOMPONEN VIEW 6 (STUDENT HERO & LOADOUT) ====================
 export const View6 = () => {
   const sectionRef = useRef(null);
+  const [activeItem, setActiveItem] = useState(null);
 
   useGSAP(() => {
     // Header entrance
@@ -86,19 +91,21 @@ export const View6 = () => {
       { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } }
     );
 
-    // Gear cards stagger entrance
-    gsap.fromTo('.ws1-maul-gear-card',
-      { opacity: 0, y: 35, scale: 0.96 },
-      {
-        opacity: 1, y: 0, scale: 1,
-        duration: 0.7,
-        stagger: 0.08,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.ws1-maul-gear-grid',
-          start: 'top 80%',
-        }
-      }
+    // Center character entrance
+    gsap.fromTo('.ws1-maul-char-wrap',
+      { opacity: 0, scale: 0.92, y: 40 },
+      { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' } }
+    );
+
+    // Side gear cards entrance
+    gsap.fromTo('.ws1-maul-gear-card-left',
+      { opacity: 0, x: -30 },
+      { opacity: 1, x: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.ws1-maul-showcase', start: 'top 75%' } }
+    );
+
+    gsap.fromTo('.ws1-maul-gear-card-right',
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.ws1-maul-showcase', start: 'top 75%' } }
     );
 
   }, { scope: sectionRef });
@@ -109,34 +116,83 @@ export const View6 = () => {
       
       <div className="ws1-maul-inner">
         <div className="ws1-maul-header">
-          <span className="ws1-maul-kicker">STANDAR OPERASIONAL · PKL 65</span>
+          <span className="ws1-maul-kicker">PERLENGKAPAN TUGAS · PKL 65</span>
           <h2 className="ws1-maul-title">
             Amunisi <span className="ws1-maul-text-orange">Tempur</span>
           </h2>
           <p className="ws1-maul-subtitle">
-            Enam perlengkapan wajib bagi setiap petugas sebelum diterjunkan langsung ke wilayah bencana.
+            Kesiapan lengkap armada petugas sebelum menembus zona terdampak bencana di pulau Sumatera.
           </p>
         </div>
 
-        <div className="ws1-maul-gear-grid">
-          {amunisiList.map((item) => (
-            <div key={item.id} className="ws1-maul-gear-card">
-              <div className="ws1-maul-gear-card-top">
-                <span className="ws1-maul-gear-tag">{item.tag}</span>
-                <span className="ws1-maul-gear-num">0{item.id}</span>
+        <div className="ws1-maul-showcase">
+          {/* Kolom Kiri: 3 Perlengkapan */}
+          <div className="ws1-maul-flank ws1-maul-flank-left">
+            {amunisiLeft.map((item) => (
+              <div 
+                key={item.id} 
+                className={`ws1-maul-gear-card ws1-maul-gear-card-left ${activeItem === item.id ? 'is-active' : ''}`}
+                onMouseEnter={() => setActiveItem(item.id)}
+                onMouseLeave={() => setActiveItem(null)}
+              >
+                <div className="ws1-maul-gear-card-header">
+                  <span className="ws1-maul-gear-tag">{item.tag}</span>
+                  <span className="ws1-maul-gear-num">0{item.id}</span>
+                </div>
+                <div className="ws1-maul-gear-body">
+                  <div className="ws1-maul-gear-thumb">
+                    <img src={item.src} alt={item.title} loading="lazy" />
+                  </div>
+                  <div className="ws1-maul-gear-text">
+                    <h4 className="ws1-maul-gear-title">{item.title}</h4>
+                    <p className="ws1-maul-gear-desc">{item.desc}</p>
+                  </div>
+                </div>
               </div>
-              
-              <div className="ws1-maul-gear-img-wrap">
-                <div className="ws1-maul-gear-glow" />
-                <img src={item.src} alt={item.title} loading="lazy" />
-              </div>
+            ))}
+          </div>
 
-              <div className="ws1-maul-gear-info">
-                <h3 className="ws1-maul-gear-title">{item.title}</h3>
-                <p className="ws1-maul-gear-desc">{item.desc}</p>
+          {/* Kolom Tengah: Karakter Mahasiswa Jaket PKL */}
+          <div className="ws1-maul-center-stage">
+            <div className="ws1-maul-char-wrap">
+              <div className="ws1-maul-char-halo" />
+              <img 
+                src={imgPetugas} 
+                alt="Petugas Lapangan PKL 65" 
+                className="ws1-maul-char-img"
+              />
+              <div className="ws1-maul-char-badge">
+                <span className="char-badge-dot" />
+                <span className="char-badge-text">PETUGAS LAPANGAN · SIAP PENUGASAN</span>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Kolom Kanan: 3 Perlengkapan */}
+          <div className="ws1-maul-flank ws1-maul-flank-right">
+            {amunisiRight.map((item) => (
+              <div 
+                key={item.id} 
+                className={`ws1-maul-gear-card ws1-maul-gear-card-right ${activeItem === item.id ? 'is-active' : ''}`}
+                onMouseEnter={() => setActiveItem(item.id)}
+                onMouseLeave={() => setActiveItem(null)}
+              >
+                <div className="ws1-maul-gear-card-header">
+                  <span className="ws1-maul-gear-tag">{item.tag}</span>
+                  <span className="ws1-maul-gear-num">0{item.id}</span>
+                </div>
+                <div className="ws1-maul-gear-body">
+                  <div className="ws1-maul-gear-thumb">
+                    <img src={item.src} alt={item.title} loading="lazy" />
+                  </div>
+                  <div className="ws1-maul-gear-text">
+                    <h4 className="ws1-maul-gear-title">{item.title}</h4>
+                    <p className="ws1-maul-gear-desc">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
