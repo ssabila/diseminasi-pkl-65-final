@@ -179,7 +179,7 @@ const Landing = () => {
 
             <circle cx="-82" cy="590" r="8" className="map-pin origin" /> {/* JKT (Merah) */}
             <circle cx="-470" cy="130" r="6" className="map-pin dest" />  {/* Aceh */}
-            <circle cx="-370" cy="250" r="6" className="map-pin dest" /> {/* Sumut */}
+            <circle cx="-370" cy="290" r="6" className="map-pin dest" /> {/* Sumut */}
             <circle cx="-310" cy="360" r="6" className="map-pin dest" /> {/* Sumbar */}
 
             
