@@ -12,7 +12,7 @@ import imgJas from '../assets/images/ws1-maul-jas-v0.webp';
 import imgPb from '../assets/images/ws1-maul-pb-v0.webp';
 import imgBoots from '../assets/images/ws1-maul-booth-v0.webp';
 import imgCard from '../assets/images/ws1-maul-card-v0.webp';
-import imgCharger from '../assets/images/ws1-maul-charger-v0.webp';
+import imgJaket from '../assets/images/ws1-maul-jaket-v0.webp';
 import maskot1 from '../assets/images/ws1-maskot_1.webp';
 
 // ==================== ASET VIEW 8 ====================
@@ -34,9 +34,9 @@ import imgTanahDatar from '../assets/images/15-Tanah Datar.webp';
 const amunisiItems = [
   { id: 'card', name: 'ID Card & Badge', icon: imgCard },
   { id: 'fasih', name: 'Smartphone FASIH', icon: imgFasih },
-  { id: 'pb', name: 'Powerbank', icon: imgPb },
+  { id: 'pb', name: 'Powerbank Taktis', icon: imgPb },
   { id: 'jas', name: 'Jas Hujan', icon: imgJas },
-  { id: 'charger', name: 'Kabel Data', icon: imgCharger },
+  { id: 'jaket', name: 'Jaket Lapangan', icon: imgJaket },
   { id: 'boots', name: 'Sepatu Boots', icon: imgBoots },
 ];
 

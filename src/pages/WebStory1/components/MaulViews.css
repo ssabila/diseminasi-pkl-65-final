@@ -257,7 +257,7 @@
   .node-pb { transform: translateX(-15px); }
 
   .node-jas { transform: translateX(15px); }
-  .node-charger { transform: translateX(40px); }
+  .node-jaket { transform: translateX(40px); }
   .node-boots { transform: translateX(15px); }
 
   .ws1-orbit-node:hover {
@@ -265,67 +265,67 @@
   }
 }
 
-/* Icon Wrap (Circle with Gear PNG) */
+/* Icon Wrap (Luminous, High-Contrast Circle that makes Line-Art Pop) */
 .ws1-orbit-icon-wrap {
-  width: 76px;
-  height: 76px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(230, 126, 34, 0.22) 0%, rgba(18, 21, 59, 0.85) 75%);
-  border: 1.5px solid rgba(229, 217, 182, 0.25);
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.96) 0%, rgba(248, 245, 235, 0.92) 65%, rgba(229, 217, 182, 0.85) 100%);
+  border: 2.5px solid var(--orange);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   flex-shrink: 0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45), 0 0 16px rgba(230, 126, 34, 0.15);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(230, 126, 34, 0.35);
   transition: all 0.35s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .ws1-orbit-node:hover .ws1-orbit-icon-wrap,
 .ws1-orbit-node.is-hovered .ws1-orbit-icon-wrap {
-  border-color: var(--orange);
-  background: radial-gradient(circle, rgba(230, 126, 34, 0.45) 0%, rgba(18, 21, 59, 0.95) 75%);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(230, 126, 34, 0.6);
-  transform: scale(1.08);
+  border-color: #fff;
+  background: radial-gradient(circle at 50% 35%, #ffffff 0%, rgba(255, 250, 240, 0.98) 70%, rgba(240, 230, 205, 0.95) 100%);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 35px rgba(230, 126, 34, 0.8);
+  transform: scale(1.12);
 }
 
 .ws1-orbit-icon-wrap img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 65px;
+  max-height: 65px;
   object-fit: contain;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
   transition: transform 0.35s ease;
 }
 
 .ws1-orbit-node:hover .ws1-orbit-icon-wrap img {
-  transform: scale(1.12);
+  transform: scale(1.1);
 }
 
 /* Pill Label */
 .ws1-orbit-label {
   font-family: var(--font-content);
-  font-size: 0.84rem;
-  font-weight: 700;
-  color: var(--beige);
-  letter-spacing: 0.07em;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--off-white);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(18, 21, 59, 0.75);
+  background: rgba(13, 17, 45, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: 20px;
-  border: 1px solid rgba(229, 217, 182, 0.18);
+  border: 1px solid rgba(229, 217, 182, 0.25);
   white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
   transition: all 0.35s ease;
 }
 
 .ws1-orbit-node:hover .ws1-orbit-label,
 .ws1-orbit-node.is-hovered .ws1-orbit-label {
   color: #fff;
-  border-color: rgba(230, 126, 34, 0.65);
-  background: rgba(230, 126, 34, 0.25);
-  box-shadow: 0 0 16px rgba(230, 126, 34, 0.35);
+  border-color: var(--orange);
+  background: rgba(230, 126, 34, 0.3);
+  box-shadow: 0 0 18px rgba(230, 126, 34, 0.45);
 }
 
 /* ── Responsive Tablet & Mobile ── */
@@ -350,23 +350,23 @@
   }
 
   .ws1-orbit-wing {
-    width: 220px;
+    width: 230px;
     gap: 24px;
   }
 
   .ws1-orbit-icon-wrap {
-    width: 64px;
-    height: 64px;
+    width: 78px;
+    height: 78px;
   }
 
   .ws1-orbit-icon-wrap img {
-    max-width: 42px;
-    max-height: 42px;
+    max-width: 52px;
+    max-height: 52px;
   }
 
   .ws1-orbit-label {
-    font-size: 0.76rem;
-    padding: 5px 10px;
+    font-size: 0.78rem;
+    padding: 5px 12px;
   }
 }
 
