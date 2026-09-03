@@ -143,6 +143,23 @@ export const View6 = () => {
   );
 };
 
+// ==================== DATA VIEW 8 ====================
+const pklLocations = [
+  { id: 1, name: "Pidie Jaya", img: imgPidieJaya },
+  { id: 2, name: "Aceh Tengah", img: imgAcehTengah },
+  { id: 3, name: "Bener Meriah", img: imgBenerMeriah },
+  { id: 4, name: "Gayo Lues", img: imgGayoLues },
+  { id: 5, name: "Aceh Utara", img: imgAcehUtara },
+  { id: 6, name: "Aceh Timur", img: imgAcehTimur },
+  { id: 7, name: "Aceh Tamiang", img: imgAcehTamiang },
+  { id: 8, name: "Tapanuli Tengah", img: imgTapanuliTengah },
+  { id: 9, name: "Kota Sibolga", img: imgKotaSibolga },
+  { id: 11, name: "Tapanuli Selatan", img: imgTapanuliSelatan },
+  { id: 12, name: "Mandailing Natal", img: imgMandailingNatal },
+  { id: 13, name: "Agam", img: imgAgam },
+  { id: 15, name: "Tanah Datar", img: imgTanahDatar }
+];
+
 // ==================== KOMPONEN VIEW 8 ====================
 export const View8 = () => {
   const sectionRef = useRef(null);
