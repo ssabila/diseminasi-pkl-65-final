@@ -30,10 +30,10 @@ import sumut21 from '../assets/images/husna-view-5/ws1-husna-view5-sumut21.webp'
 import sumut22 from '../assets/images/husna-view-5/ws1-husna-view5-sumut22.webp';
 import sumut3 from '../assets/images/husna-view-5/ws1-husna-view5-sumut3.webp';
 
-// Import View 7 local images (replacing Unsplash)
-import imgPidieJaya from '../assets/images/1-Pidie Jaya.webp';
-import imgTapanuliTengah from '../assets/images/8-Tapanuli Tengah.webp';
-import imgAgam from '../assets/images/13-Agam.webp';
+// Import View 7 assets from Husna
+import imgAceh from '../assets/images/husna-view-7/ws1-husna-view7-aceh.webp';
+import imgSumut from '../assets/images/husna-view-7/ws1-husna-view7-sumut.webp';
+import imgSumbar from '../assets/images/husna-view-7/ws1-husna-view7-sumbar.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,32 +82,29 @@ const PROVINSI_DATA = [
   {
     id: "v7b1",
     name: "Aceh",
-    img: imgPidieJaya,
+    img: imgAceh,
     kicker: "Tantangan",
     heading: "Melawan",
     headingAccent: "Medan",
-    body: "Menjangkau wilayah terdampak bencana menuntut adaptasi terhadap akses jalan darurat dan kendala sinyal. Tim memastikan setiap responden tetap terdata dengan baik.",
-    quote: '"Data pemulihan pascabencana ini krusial untuk perencanaan kebijakan yang tepat sasaran."',
+    body: "Sulitnya mengakses wilayah terdampak akibat rusaknya infrastruktur tidak menghalangi pelaksanaan proses pendataan R3P.",
   },
   {
     id: "v7b2",
     name: "Sumatera Utara",
-    img: imgTapanuliTengah,
+    img: imgSumut,
     kicker: "Lapangan",
     heading: "Setiap",
     headingAccent: "Langkah",
-    body: "Variasi topografi dari pesisir hingga pegunungan mengharuskan pergerakan tim yang efisien. Minimasi non-sampling error menjadi fokus utama di setiap rute perjalanan.",
-    quote: '"Tantangan fisik di lapangan tidak boleh menurunkan standar objektivitas sebuah data statistik."',
+    body: "Perjalanan panjang menuju lokasi bencana tidak menyurutkan komitmen dan semangat tim pendata.",
   },
   {
     id: "v7b3",
     name: "Sumatera Barat",
-    img: imgAgam,
+    img: imgSumbar,
     kicker: "Dedikasi",
     heading: "Tetap",
     headingAccent: "Bergerak",
-    body: "Pengumpulan data primer secara masif membutuhkan manajemen waktu dan tenaga yang solid. Konsistensi metodologi dijaga ketat pada setiap tahapan pencacahan.",
-    quote: '"Angka yang kami kumpulkan adalah potret riil kondisi sosial-ekonomi masyarakat saat ini."',
+    body: "Medan geografis yang terjal dan ekstrem harus dilalui demi keakuratan dan kelengkapan data.",
   },
 ];
 
