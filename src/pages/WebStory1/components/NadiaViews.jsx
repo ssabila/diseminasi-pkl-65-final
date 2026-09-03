@@ -517,9 +517,6 @@ export const View4 = () => {
       <div className="v4-briefing-section" ref={briefingRef}>
         <div className="v4-briefing-header">
           <h3 className="v4-briefing-title">Briefing <em>Terakhir</em></h3>
-          <p className="v4-briefing-subtitle">
-            Satu meja, tiga provinsi, satu standar - sebelum kaki melangkah ke lapangan
-          </p>
         </div>
         
         <div className="v4-briefing-stack-container">
