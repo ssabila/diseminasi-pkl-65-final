@@ -286,13 +286,13 @@ export const View4 = () => {
     let stack = [];
     for(let i = briefCards.length - 1; i >= 0; i--) stack.push(i);
 
-    // Initial setup
+    // Initial setup with elegant, spacious deck offsets (preventing header collision)
     stack.forEach((cardIndex, stackPos) => {
       const card = briefCards[cardIndex];
       gsap.set(card, {
-        y: stackPos * -30,       
-        x: stackPos * 30,        
-        scale: 1 - (stackPos * 0.05), 
+        y: stackPos * -14,       
+        x: stackPos * 16,        
+        scale: 1 - (stackPos * 0.035), 
         zIndex: briefCards.length - stackPos,           
         opacity: 0,              
       });
@@ -302,7 +302,7 @@ export const View4 = () => {
     gsap.to(briefCards, {
       opacity: (i) => {
         const stackPos = stack.indexOf(i);
-        return 1 - (stackPos * 0.2); 
+        return 1 - (stackPos * 0.18); 
       },
       duration: 0.6,
       stagger: 0.08,
@@ -323,10 +323,10 @@ export const View4 = () => {
       
       // 1. Animate front card flying away and fading out
       gsap.to(frontCard, {
-        y: -150, 
-        x: -50, 
+        y: -120, 
+        x: -40, 
         opacity: 0, 
-        scale: 1.05, 
+        scale: 1.04, 
         duration: 0.4, 
         ease: 'power2.in',
         onComplete: () => {
@@ -336,17 +336,17 @@ export const View4 = () => {
           // Set it to a hidden position behind the stack so it can slide in
           const backPos = stack.length - 1;
           gsap.set(frontCard, { 
-            y: backPos * -30 + 50, 
-            x: backPos * 30 + 50, 
-            scale: 1 - (backPos * 0.05), 
+            y: backPos * -14 + 35, 
+            x: backPos * 16 + 35, 
+            scale: 1 - (backPos * 0.035), 
             zIndex: 0 
           });
           
           // Animate the former front card settling into the back
           gsap.to(frontCard, {
-            y: backPos * -30,
-            x: backPos * 30,
-            opacity: 1 - (backPos * 0.2),
+            y: backPos * -14,
+            x: backPos * 16,
+            opacity: 1 - (backPos * 0.18),
             duration: 0.5,
             ease: 'power2.out'
           });
@@ -361,11 +361,11 @@ export const View4 = () => {
         if (cardIndex !== frontCardIndex) {
           const card = briefCards[cardIndex];
           gsap.to(card, {
-            y: stackPos * -30, 
-            x: stackPos * 30, 
-            scale: 1 - (stackPos * 0.05), 
+            y: stackPos * -14, 
+            x: stackPos * 16, 
+            scale: 1 - (stackPos * 0.035), 
             zIndex: briefCards.length - stackPos, 
-            opacity: 1 - (stackPos * 0.2), 
+            opacity: 1 - (stackPos * 0.18), 
             duration: 0.6, 
             ease: 'power2.out'
           });

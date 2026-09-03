@@ -554,39 +554,43 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100px clamp(20px, 5vw, 60px);
+  padding: 100px clamp(24px, 5vw, 60px) 110px;
   box-sizing: border-box;
 }
 
 /* Header */
 .ws1-nadia-view4 .v4-briefing-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
+  max-width: 760px;
 }
 .ws1-nadia-view4 .v4-briefing-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-family: var(--font-title);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
   font-weight: 900;
-  color: #0f172a; /* Changed to dark navy for contrast */
-  margin: 0 0 16px 0;
+  color: #15173d; /* Grand design navy */
+  margin: 0 0 14px 0;
+  letter-spacing: -0.01em;
 }
 .ws1-nadia-view4 .v4-briefing-title em {
-  color: #E67E22;
+  color: var(--orange);
   font-style: italic;
 }
 .ws1-nadia-view4 .v4-briefing-subtitle {
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  color: #475569; /* Changed to dark slate for contrast */
-  font-weight: 300;
+  font-family: var(--font-content);
+  font-size: clamp(0.92rem, 1.4vw, 1.08rem);
+  color: #4a5568; /* Slate contrast */
+  font-weight: 400;
+  line-height: 1.65;
   margin: 0;
 }
 
-/* Stack Container */
+/* Stack Container (Spacious & Balanced) */
 .ws1-nadia-view4 .v4-briefing-stack-container {
   position: relative;
   width: 100%;
-  max-width: 860px;
-  height: 380px;
+  max-width: 920px;
+  height: 420px;
   margin: 0 auto;
 }
 
@@ -596,17 +600,18 @@
   width: 100%;
   height: 100%;
   display: flex;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.22), 0 8px 20px rgba(0, 0, 0, 0.12);
   will-change: transform, opacity;
-  border: 1px solid rgba(255,255,255,0.05);
-  background: #101230;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #12153b;
+  transition: box-shadow 0.3s ease;
 }
 
 /* Left Image Pane */
 .ws1-nadia-view4 .v4-bsc-left {
-  flex: 0 0 45%;
+  flex: 0 0 46%;
   position: relative;
 }
 .ws1-nadia-view4 .v4-bsc-left img {
@@ -616,23 +621,25 @@
 }
 .ws1-nadia-view4 .v4-bsc-loc-overlay {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  background: rgba(16, 18, 48, 0.85);
+  bottom: 18px;
+  left: 18px;
+  background: rgba(18, 21, 59, 0.88);
   backdrop-filter: blur(8px);
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  color: #E67E22;
-  font-weight: 600;
-  border: 1px solid rgba(230, 126, 34, 0.3);
+  font-family: var(--font-content);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  font-weight: 700;
+  border: 1px solid rgba(230, 126, 34, 0.35);
+  text-transform: uppercase;
 }
 
 /* Right Content Pane */
 .ws1-nadia-view4 .v4-bsc-right {
   flex: 1;
-  padding: 40px;
+  padding: 38px 44px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -641,70 +648,82 @@
 .ws1-nadia-view4 .v4-bsc-header-row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 .ws1-nadia-view4 .v4-bsc-pill {
   background: rgba(230, 126, 34, 0.15);
-  color: #E67E22;
-  padding: 4px 12px;
+  color: var(--orange);
+  padding: 5px 14px;
   border-radius: 20px;
-  font-size: 0.65rem;
+  font-family: var(--font-content);
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  border: 1px solid rgba(230, 126, 34, 0.3);
+  border: 1px solid rgba(230, 126, 34, 0.35);
+  text-transform: uppercase;
 }
 .ws1-nadia-view4 .v4-bsc-date {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
+  font-family: var(--font-content);
+  font-size: 0.78rem;
+  color: rgba(229, 217, 182, 0.55);
   letter-spacing: 0.05em;
+  font-weight: 400;
 }
 .ws1-nadia-view4 .v4-bsc-pagination {
   position: absolute;
   top: 32px;
-  right: 32px;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.3);
-  letter-spacing: 0.1em;
+  right: 36px;
+  font-family: var(--font-content);
+  font-size: 0.78rem;
+  color: rgba(229, 217, 182, 0.35);
+  letter-spacing: 0.12em;
+  font-weight: 700;
 }
 
 .ws1-nadia-view4 .v4-bsc-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
   font-weight: 700;
   font-style: italic;
-  color: #E5D9B6;
-  margin: 0 0 16px 0;
+  color: var(--beige);
+  margin: 0 0 14px 0;
+  line-height: 1.25;
 }
 
 .ws1-nadia-view4 .v4-bsc-desc {
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.6);
+  font-family: var(--font-content);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.72);
   font-weight: 300;
-  margin: 0 0 24px 0;
+  margin: 0 0 20px 0;
+  max-width: 440px;
 }
 
 .ws1-nadia-view4 .v4-bsc-line {
-  width: 40px;
+  width: 48px;
   height: 3px;
-  background: #E67E22;
+  background: var(--orange);
   border-radius: 2px;
+  box-shadow: 0 0 8px rgba(230, 126, 34, 0.5);
 }
 
 .v4-stack-hint {
   text-align: center;
-  color: #E67E22;
+  color: var(--orange);
+  font-family: var(--font-content);
   font-size: 0.75rem;
-  letter-spacing: 2px;
+  letter-spacing: 0.16em;
+  font-weight: 700;
   text-transform: uppercase;
-  margin-top: 30px;
-  opacity: 0.7;
+  margin-top: 34px;
+  opacity: 0.85;
   animation: pulse-hint 2s infinite ease-in-out;
 }
 
 @keyframes pulse-hint {
-  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  0%, 100% { opacity: 0.5; transform: translateY(0); }
   50% { opacity: 1; transform: translateY(3px); }
 }
 
