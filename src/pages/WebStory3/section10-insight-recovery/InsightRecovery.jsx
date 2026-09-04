@@ -93,7 +93,24 @@ export default function InsightRecovery() {
 
     // Fade out pixels when leaving section
     if (pixels.length > 0) {
-      tl.to(pixels, { opacity: 0, scale: 0.5, duration: 0.15 }, 0.85);
+      tl.to(pixels, { opacity: 0, scale: 0.5, duration: 0.15 }, 0.82);
+    }
+
+    // Slide-up exit: all visible content slides up and fades out
+    // Creates a smooth transition to section 11 (ModuleMenu)
+    const contentElements = [
+      s.querySelector('.recovery-layout'),
+      s.querySelector('.ndvi-grid-overlay'),
+    ].filter(Boolean);
+
+    if (contentElements.length > 0) {
+      tl.to(contentElements, {
+        y: -60,
+        opacity: 0,
+        duration: 0.12,
+        ease: 'power2.in',
+        stagger: 0.02,
+      }, 0.88);
     }
 
   }, [mapReady, map]);

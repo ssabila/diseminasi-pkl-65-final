@@ -1,6 +1,9 @@
-/* Section 12 — Closing (Scattered Photos + Quotes) */
-/* Reference: webstorydesign.lovable.app (closing section) */
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  Section 12 — Closing (Scattered Photos + Quotes)                  */
+/*  Reference: webstorydesign.lovable.app (closing section)           */
+/* ═══════════════════════════════════════════════════════════════════ */
 
+/* ─── Section Container ─── */
 .section-closing {
   position: relative;
   width: 100%;
@@ -12,199 +15,44 @@
   justify-content: center;
 }
 
-/* ─── Ambient background ─── */
+/* ─── Ambient Background Glow ─── */
 .closing-ambient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(230, 126, 34, 0.08) 0%, transparent 55%);
+  background:
+    radial-gradient(ellipse at 40% 35%, rgba(230, 126, 34, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 65% 70%, rgba(98, 129, 65, 0.04) 0%, transparent 45%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* ─── "Penutup" label ─── */
+/* ─── Vignette (darkened edges for depth) ─── */
+.closing-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(10, 12, 36, 0.55) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── "Penutup" Label ─── */
 .closing-label {
   position: absolute;
-  top: 2rem;
+  top: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-content);
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.45em;
   text-transform: uppercase;
-  color: rgba(229, 217, 182, 0.6);
+  color: rgba(229, 217, 182, 0.5);
   z-index: 10;
   margin: 0;
 }
 
-/* ─── Scattered Photo Collage ─── */
-.closing-photos-container {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-}
-
-.closing-photos-scattered {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  height: 560px;
-  margin: 3rem auto 0;
-}
-
-@media (min-height: 700px) {
-  .closing-photos-scattered {
-    height: 640px;
-  }
-}
-
-/* ─── Individual Photo Card (absolute positioned, rotated) ─── */
-.closing-photo-card {
-  position: absolute;
-  aspect-ratio: 4 / 5;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.closing-photo-card:hover {
-  transform: rotate(0deg) scale(1.05) !important;
-  box-shadow: 0 25px 70px -20px rgba(0, 0, 0, 0.8);
-  z-index: 10 !important;
-}
-
-.closing-photo-img {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-.closing-photo-text {
-  font-family: var(--font-content);
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 4px 12px;
-  border-radius: 6px;
-  backdrop-filter: blur(6px);
-}
-
-/* ─── Hover Glow (radial highlight, like reference) ─── */
-.closing-photo-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.55), transparent 65%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 2;
-}
-
-.closing-photo-card:hover .closing-photo-glow {
-  opacity: 1;
-}
-
-/* Inner ring (white glow border, like reference) */
-.closing-photo-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* ─── Quote Container ─── */
-.closing-quote-container {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 4;
-  padding: 2rem 5vw;
-  pointer-events: none;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-}
-
-/* ─── Quote Heading (large, with colored spans) ─── */
-.closing-quote-heading {
-  font-family: var(--font-title);
-  font-style: italic;
-  font-size: clamp(1.8rem, 4vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.15;
-  margin: 0;
-  text-wrap: balance;
-}
-
-.cq-white {
-  color: var(--off-white);
-  display: inline;
-  transition: color 0.5s ease;
-  cursor: default;
-}
-
-.cq-white:hover {
-  color: var(--beige);
-}
-
-.cq-dim {
-  color: rgba(229, 217, 182, 0.6);
-}
-
-.cq-ember {
-  color: var(--orange);
-  display: inline;
-  transition: color 0.5s ease;
-  cursor: default;
-}
-
-.cq-ember:hover {
-  color: var(--beige);
-}
-
-/* ─── Quote Paragraph ─── */
-.closing-quote-paragraph {
-  font-family: var(--font-content);
-  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-  line-height: 1.7;
-  color: rgba(229, 217, 182, 0.75);
-  max-width: 640px;
-  margin: 2.5rem auto 0;
-  text-wrap: balance;
-}
-
-/* ─── Attribution ─── */
-.closing-attribution {
-  font-family: var(--font-content);
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: rgba(229, 217, 182, 0.4);
-  letter-spacing: 0.4em;
-  margin-top: 3rem;
-  text-transform: uppercase;
-}
-
 /* ─── Starfield ─── */
-.section-closing .starfield {
+.section-closing .closing-starfield {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -212,7 +60,7 @@
   z-index: 1;
 }
 
-.section-closing .star {
+.section-closing .closing-starfield .star {
   position: absolute;
   width: 2px;
   height: 2px;
@@ -222,40 +70,331 @@
 }
 
 @keyframes closingTwinkle {
-  0%, 100% { opacity: 0.15; }
-  50% { opacity: 0.65; }
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.55; }
 }
 
-/* ─── Responsive ─── */
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  PHASE 1 — SCATTERED PHOTO COLLAGE                                */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+.closing-photos-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.closing-photos-scattered {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+}
+
+@media (min-height: 800px) {
+  .closing-photos-scattered {
+    height: 680px;
+  }
+}
+
+/* ─── Photo Card (absolute positioned, with tilt) ─── */
+.closing-photo-card {
+  position: absolute;
+  aspect-ratio: 4 / 5;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transform: rotate(var(--card-rotate, 0deg));
+  box-shadow:
+    0 20px 50px -15px rgba(0, 0, 0, 0.7),
+    0 8px 20px -8px rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.5s ease;
+  will-change: transform;
+}
+
+.closing-photo-card:hover {
+  transform: rotate(0deg) scale(1.08) translateY(-8px) !important;
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.25),
+    0 0 40px 8px rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  z-index: 20 !important;
+}
+
+/* ─── Photo Image Container ─── */
+.closing-photo-img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.closing-photo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.closing-photo-card:hover .closing-photo-image {
+  transform: scale(1.06);
+}
+
+/* ─── Placeholder (until real photos are added) ─── */
+.closing-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(145deg,
+      rgba(20, 24, 58, 0.95),
+      rgba(30, 35, 75, 0.9));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.closing-photo-placeholder-label {
+  font-family: var(--font-content);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(229, 217, 182, 0.6);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ─── Dynamic Spotlight Glow (follows cursor) ─── */
+.closing-photo-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--glow-x, 30%) var(--glow-y, 25%),
+    rgba(255, 255, 255, 0.45),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  mix-blend-mode: soft-light;
+}
+
+.closing-photo-card:hover .closing-photo-glow {
+  opacity: 1;
+}
+
+/* ─── White Border Ring (highlight on hover) ─── */
+.closing-photo-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 3;
+  border: 1.5px solid transparent;
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.closing-photo-card:hover .closing-photo-ring {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    inset 0 0 20px 2px rgba(255, 255, 255, 0.08),
+    0 0 30px 6px rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Corner Shine Accent ─── */
+.closing-photo-shine {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 50%;
+  height: 50%;
+  pointer-events: none;
+  z-index: 4;
+  background: radial-gradient(
+    circle at 100% 0%,
+    rgba(255, 255, 255, 0.3),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 0 10px 0 0;
+}
+
+.closing-photo-card:hover .closing-photo-shine {
+  opacity: 1;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  PHASE 2 — QUOTE SECTION                                          */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+.closing-quote-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  padding: 2rem 5vw;
+  pointer-events: none;
+  text-align: center;
+  max-width: 950px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+/* ─── Quote Heading ─── */
+.closing-quote-heading {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 4.5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* Styled spans for heading */
+.cq-italic {
+  font-style: italic;
+}
+
+.cq-bold {
+  font-weight: 700;
+  font-style: italic;
+}
+
+.cq-white {
+  color: var(--off-white);
+  display: inline;
+  transition: color 0.5s ease, text-shadow 0.5s ease;
+  cursor: default;
+}
+
+.cq-white:hover {
+  text-shadow: 0 0 20px rgba(229, 217, 182, 0.3);
+}
+
+.cq-dim {
+  color: rgba(229, 217, 182, 0.5);
+  display: inline;
+}
+
+.cq-accent {
+  color: var(--orange);
+  display: inline;
+  transition: color 0.5s ease, text-shadow 0.5s ease;
+  cursor: default;
+}
+
+.cq-accent:hover {
+  text-shadow: 0 0 20px rgba(230, 126, 34, 0.4);
+}
+
+/* ─── Quote Paragraph ─── */
+.closing-quote-paragraph {
+  font-family: var(--font-content);
+  font-size: clamp(0.88rem, 1.2vw, 1.05rem);
+  line-height: 1.8;
+  color: rgba(229, 217, 182, 0.7);
+  max-width: 640px;
+  margin: 2.5rem auto 0;
+  text-wrap: balance;
+}
+
+/* ─── Attribution ─── */
+.closing-attribution {
+  font-family: var(--font-content);
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: rgba(229, 217, 182, 0.35);
+  letter-spacing: 0.45em;
+  margin-top: 3.5rem;
+  text-transform: uppercase;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  RESPONSIVE                                                        */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1100px) {
+  .closing-photos-scattered {
+    max-width: 90vw;
+    height: 550px;
+  }
+}
+
 @media (max-width: 900px) {
   .closing-photos-scattered {
-    height: 400px;
-    max-width: 90vw;
+    max-width: 92vw;
+    height: 420px;
   }
 
   .closing-photo-card {
-    width: 120px !important;
+    width: 140px !important;
   }
 
   .closing-quote-heading {
-    font-size: 1.5rem;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
   }
 
   .closing-quote-paragraph {
     font-size: 0.85rem;
+    max-width: 90vw;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .closing-photos-scattered {
-    height: 320px;
+    height: 360px;
   }
 
   .closing-photo-card {
-    width: 100px !important;
+    width: 110px !important;
   }
 
   .closing-quote-heading {
     font-size: 1.2rem;
+  }
+
+  .closing-quote-paragraph {
+    font-size: 0.8rem;
+  }
+
+  .closing-label {
+    top: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .closing-photos-scattered {
+    height: 300px;
+  }
+
+  .closing-photo-card {
+    width: 90px !important;
+  }
+
+  .closing-quote-heading {
+    font-size: 1.05rem;
   }
 }
