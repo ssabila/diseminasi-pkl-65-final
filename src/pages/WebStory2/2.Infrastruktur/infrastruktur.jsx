@@ -1,12 +1,3 @@
-/**
- * infrastruktur.jsx — Babak 2: Infrastruktur
- * REVISI DESAIN: editorial data-storytelling, palet navy (#12143A) / cream (#F7F1E3)
- * bergantian per-section, transisi wave/gradient halus, tipografi sebagai hierarchy
- * utama (tanpa border tebal, outline, atau neon). Playfair Display Italic (display)
- * + Lato (body). Seluruh data, import, asset, dan animasi dari versi sebelumnya
- * dipertahankan.
- */
-
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import insights from '../insight.json';
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
@@ -17,11 +8,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─────────────────────────────────────────────────────────────────
-   GLOBAL STYLES — DESIGN TOKENS
-   Navy (dasar gelap) dan Cream (dasar terang) bergantian per section.
-   Aksen warna dilembutkan (tanpa neon) agar terasa editorial & premium.
-───────────────────────────────────────────────────────────────── */
 const GLOBAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&family=Lato:wght@300;400;700&display=swap');
 
