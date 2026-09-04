@@ -1,8 +1,438 @@
-/* Section 11 — ModuleMenu */
-/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+/* Section 11 — ModuleMenu / Overview 8 Modul */
+/* Reference: webstorydesign.lovable.app (module slider section) */
 
+/* ─── Section Container ─── */
 .section-modulemenu {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  background: var(--navy);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Ambient Background Glow ─── */
+.module-bg-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(230, 126, 34, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(98, 129, 65, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Subtle Grid Lines on Background ─── */
+.module-bg-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(229, 217, 182, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 217, 182, 0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  SECTION HEADER — Persistent during slider scroll      */
+/* ═══════════════════════════════════════════════════════ */
+.module-section-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2.5rem 3.5rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Left side: label + title */
+.module-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.module-section-label {
+  display: block;
+  font-family: var(--font-content);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(229, 217, 182, 0.5);
+}
+
+.module-section-title {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--off-white);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.module-accent {
+  color: var(--orange);
+}
+
+/* Right side: scroll hint */
+.module-section-hint {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 0.78rem;
+  color: rgba(229, 217, 182, 0.45);
+  letter-spacing: 0.5px;
+  text-align: right;
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  MODULE CARDS VIEWPORT                                 */
+/* ═══════════════════════════════════════════════════════ */
+.module-cards-viewport {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+/* ─── Module Card (outer wrapper, stacked absolutely) ─── */
+.module-card {
+  position: absolute;
+  width: 88vw;
+  max-width: 1080px;
+  pointer-events: auto;
+  will-change: transform, opacity;
+}
+
+/* ─── Card Grid (2 columns: 7 visual + 5 info) ─── */
+.module-card-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  CARD VISUAL — Left Side                              */
+/* ═══════════════════════════════════════════════════════ */
+.module-card-visual {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg,
+    rgba(20, 22, 55, 0.9),
+    rgba(28, 32, 72, 0.85));
+  box-shadow:
+    0 30px 80px -30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  /* Glassmorphic border */
+  border: 1px solid rgba(229, 217, 182, 0.12);
+}
+
+/* SVG Icon */
+.module-card-svg-icon {
+  width: 9rem;
+  height: 9rem;
+  color: rgba(229, 217, 182, 0.7);
+  z-index: 2;
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.3));
+  transition: color 0.4s ease;
+}
+
+.module-card:hover .module-card-svg-icon {
+  color: rgba(229, 217, 182, 0.9);
+}
+
+/* Decorative grid overlay on visual */
+.module-card-grid-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(229, 217, 182, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 217, 182, 0.4) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Decorative dots (top-left, like macOS window buttons) */
+.module-card-dots {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 6px;
+  z-index: 3;
+}
+
+.module-card-dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.dot-ember  { background-color: rgba(230, 126, 34, 0.85); }
+.dot-leaf   { background-color: rgba(98, 129, 65, 0.75); }
+.dot-sand   { background-color: rgba(229, 217, 182, 0.7); }
+
+/* Module number label (bottom-right of visual) */
+.module-card-num {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  font-family: var(--font-content);
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(229, 217, 182, 0.55);
+  z-index: 3;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  CARD INFO — Right Side                                */
+/* ═══════════════════════════════════════════════════════ */
+.module-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.module-card-counter {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  margin: 0 0 0.75rem;
+}
+
+.module-card-title {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  color: var(--off-white);
+  margin: 0;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.module-card-desc {
+  font-family: var(--font-content);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(229, 217, 182, 0.7);
+  margin: 1.2rem 0 0;
+  text-wrap: balance;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  "LIHAT MODUL" BUTTON — Pill with white glow hover     */
+/* ═══════════════════════════════════════════════════════ */
+.module-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2rem;
+  padding: 13px 24px;
+  border: 1px solid rgba(229, 217, 182, 0.28);
+  border-radius: 9999px;
+  background: transparent;
+  color: rgba(229, 217, 182, 0.85);
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition:
+    background 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    color 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.45s ease,
+    box-shadow 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle inner light on default state */
+.module-card-btn::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+  opacity: 1;
+}
+
+.module-card-btn:hover {
+  background: rgba(229, 217, 182, 0.92);
+  color: var(--navy);
+  border-color: rgba(229, 217, 182, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 0 20px 3px rgba(255, 255, 255, 0.3),
+    0 0 50px 10px rgba(255, 255, 255, 0.12),
+    0 0 80px 20px rgba(255, 255, 255, 0.06);
+}
+
+.module-card-btn:hover::before {
+  opacity: 0;
+}
+
+.module-card-btn svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.module-card-btn:hover svg {
+  transform: translate(3px, -3px);
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  STARFIELD                                             */
+/* ═══════════════════════════════════════════════════════ */
+.section-modulemenu .starfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-modulemenu .star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: menuTwinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+}
+
+@keyframes menuTwinkle {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.55; }
+}
+
+/* ─── Horizontal divider line (bottom of section) ─── */
+.module-bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(229, 217, 182, 0.12) 20%,
+    rgba(229, 217, 182, 0.12) 80%,
+    transparent
+  );
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/*  RESPONSIVE                                            */
+/* ═══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .module-card {
+    width: 92vw;
+  }
+
+  .module-card-grid {
+    gap: 2rem;
+  }
+
+  .module-card-svg-icon {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .module-section-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .module-section-hint {
+    text-align: left;
+    max-width: none;
+    font-size: 0.7rem;
+  }
+
+  .module-card {
+    width: 92vw;
+  }
+
+  .module-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .module-card-visual {
+    aspect-ratio: 16 / 9;
+  }
+
+  .module-card-svg-icon {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .module-card-title {
+    font-size: 1.3rem;
+  }
+
+  .module-card-desc {
+    font-size: 0.82rem;
+  }
+
+  .module-section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .module-section-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .module-card {
+    width: 95vw;
+  }
+
+  .module-card-grid {
+    gap: 1rem;
+  }
+
+  .module-card-btn {
+    padding: 10px 18px;
+    font-size: 0.82rem;
+  }
 }
