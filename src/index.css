@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   /* Theme Colors */
   --navy: #15173d;
@@ -11,6 +13,7 @@
   --font-title: "Playfair Display", serif;
   --font-content: "Lato", sans-serif;
 }
+
 
 html,
 body {

@@ -1,3 +1,4 @@
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -173,6 +174,7 @@
     border: 5px solid transparent;
   }
 
+
   &::before {
     left: 0;
     border-left-color: var(--border);
@@ -180,5 +182,151 @@
   &::after {
     right: 0;
     border-right-color: var(--border);
+  }
+}
+
+/* Masukkan di index.css atau file CSS utama kamu */
+.leaflet-container {
+  background: transparent !important;
+}
+
+.leaflet-tile-container img {
+  /* Opsional: Membuat gambar tile menjadi dark/transparan jika menggunakan tile standar */
+  mix-blend-mode: multiply; 
+}
+
+.cloud-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0) 36%),
+    linear-gradient(180deg, #dceeff 0%, #eef7ff 48%, #d7ecff 100%);
+  pointer-events: all;
+}
+
+.cloud-loader__sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(212, 168, 85, 0.2), transparent 18%),
+    radial-gradient(circle at 74% 66%, rgba(98, 129, 65, 0.16), transparent 22%);
+  opacity: 0.8;
+}
+
+.cloud-loader__panel {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 58vh;
+  transition:
+    transform 1.15s cubic-bezier(0.8, 0, 0.18, 1),
+    opacity 0.9s ease;
+}
+
+.cloud-loader__panel--top {
+  top: -5vh;
+}
+
+.cloud-loader__panel--bottom {
+  bottom: -5vh;
+  transform: rotate(180deg);
+}
+
+.cloud-loader__cloud {
+  position: absolute;
+  left: var(--cloud-left);
+  top: calc((var(--cloud-row) * 28%) - 4%);
+  width: clamp(360px, 40vw, 760px);
+  max-width: none;
+  opacity: 0.94;
+  filter: drop-shadow(0 18px 22px rgba(36, 58, 90, 0.16));
+  animation: cloudLoaderDrift 1.5s ease-out var(--cloud-delay) both;
+}
+
+.cloud-loader__panel--bottom .cloud-loader__cloud {
+  transform: rotate(180deg);
+}
+
+.cloud-loader__label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: var(--navy);
+  font-family: var(--font-content);
+  font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.72;
+  animation: cloudLoaderPulse 1.05s ease-in-out infinite alternate;
+}
+
+.cloud-loader--leaving {
+  pointer-events: none;
+}
+
+.cloud-loader--leaving .cloud-loader__panel--top {
+  transform: translate3d(0, -110%, 0);
+  opacity: 0.92;
+}
+
+.cloud-loader--leaving .cloud-loader__panel--bottom {
+  transform: rotate(180deg) translate3d(0, -110%, 0);
+  opacity: 0.92;
+}
+
+.cloud-loader--leaving .cloud-loader__sky,
+.cloud-loader--leaving .cloud-loader__label {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@keyframes cloudLoaderDrift {
+  from {
+    opacity: 0.86;
+    transform: translate3d(-4vw, 1.5vh, 0) scale(0.96);
+  }
+
+  to {
+    opacity: 0.98;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes cloudLoaderPulse {
+  from {
+    opacity: 0.45;
+  }
+
+  to {
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 768px) {
+  .cloud-loader__panel {
+    height: 62vh;
+  }
+
+  .cloud-loader__cloud {
+    width: clamp(280px, 72vw, 520px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-loader,
+  .cloud-loader__panel,
+  .cloud-loader__cloud,
+  .cloud-loader__label {
+    animation: none;
+    transition-duration: 0.01ms;
+  }
+
+  .cloud-loader__cloud {
+    opacity: 0.98;
   }
 }
