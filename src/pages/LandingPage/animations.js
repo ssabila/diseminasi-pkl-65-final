@@ -125,29 +125,45 @@ export const heroSectionAnimation = (element, tl = gsap.timeline(), onStateChang
 /* ── Section 2: Stat row ─────────────────────────────────────── */
 export const statsSectionAnimation = (element, onStateChange) => {
     if (!element) return () => { };
+
+    let mm = gsap.matchMedia();
+
     const ctx = gsap.context(() => {
         revealOnScroll(element);
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: element,
-                start: 'top 10%',
-                scrub: true,
-                pin: true,
-                pinSpacing: false,
-                end: '+=150%',
-                onToggle: (self) => {
-                    onStateChange(self.isActive);
-                },
-            }
-        })
-        tl
-            .to(element, {}, 0.3)
-            .to(element, {
-                opacity: 0,
-                ease: 'back.out',
-            },'<')
+
+        mm.add({
+            isMobile: "(max-width: 768px)",
+            isDesktop: "(min-width: 769px)",
+        }, (context) => {
+            let { isMobile } = context.conditions;
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element,
+                    start: isMobile ? 'top 15%' : 'top 25%',
+                    scrub: 1,
+                    pin: true,
+                    pinSpacing: false,
+                    end: '+=250%',
+                    onToggle: (self) => {
+                        onStateChange(self.isActive);
+                    },
+                }
+            });
+
+            tl.to(element, {})
+                .to(element, {
+                    opacity: 0,
+                    ease: 'back.out',
+                    duration: 0.4,
+                }, '>');
+        });
     }, element);
-    return () => ctx.revert();
+
+    return () => {
+        mm.revert();
+        ctx.revert();
+    };
 };
 
 /* ── Section 3: Mandate ──────────────────────────────────────── */
@@ -163,23 +179,28 @@ export const mandateSectionAnimation = (element) => {
 export const quoteSectionAnimation = (element) => {
     if (!element) return () => { };
     const ctx = gsap.context(() => {
-        revealOnScroll(element);
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: element,
-                start: 'top 25%',       // Mulai pin saat elemen berada di 25% viewport
-                end: '+=200%',          // Total durasi scroll yang panjang (2x tinggi layar)
-                scrub: true,            // Animasi mengikuti gerakan scroll
-                pin: true,              // Kunci posisi elemen
+                start: 'top 25%',
+                end: '+=200%',
+                scrub: true,
+                pin: true,
                 pinSpacing: true,
             }
         });
 
-        tl.fromTo(element,
+        tl.fromTo('.bg-quotes-title',
             { opacity: 0 },
-            { opacity: 1, ease: 'none', duration: 0.5 }
+            { opacity: 1, ease: 'none' }
         )
-            .to({}, { duration: 1.5 });
+            .fromTo('.quotes-display', { opacity: 0 }, { opacity: 1, ease: 'none' }, '>')
+            .to(element,{})
+            .to([element.querySelectorAll('.quote-text, .quote-sub, .quote-meta')], {
+                color: '#000000',
+                opacity:0,
+                ease: 'none'
+            }, '<')
 
     }, element);
     return () => ctx.revert();

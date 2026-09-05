@@ -1,20 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-const PROVINCE_CONFIGS = {
-    aceh: {
-        color: "var(--green)",
-        targetConfig: { points: "465,40 400,100 200,100", cx: 465, cy: 40 }
-    },
-    sumut: {
-        color: "var(--gold)",
-        targetConfig: { points: "414,-35 310,100 200,100", cx: 414, cy: -35 }
-    },
-    sumbar: {
-        color: "#c2703d",
-        targetConfig: { points: "327,-60 250,100 200,100", cx: 327, cy: -60 }
-    }
-};
-
 export default function LeaderLine({
     show = true,
     region = "",
@@ -166,3 +151,18 @@ export function LeafletLeaderLinesWrapper({ show }) {
         </div>
     );
 }
+
+const PROVINCE_CONFIGS = {
+    aceh: {
+        color: "var(--green)",
+        targetConfig: { points: "465,40 400,100 200,100", cx: 465, cy: 40 }
+    },
+    sumut: {
+        color: "var(--gold)",
+        targetConfig: { points: "414,-35 310,100 200,100", cx: 414, cy: -35 }
+    },
+    sumbar: {
+        color: "#c2703d",
+        targetConfig: { points: "327,-60 250,100 200,100", cx: 327, cy: -60 }
+    }
+};

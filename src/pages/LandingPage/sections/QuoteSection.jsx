@@ -13,13 +13,13 @@ export default function QuoteSection() {
     return (
         <section
             ref={sectionRef}
-            className="border-t border-[var(--beige)]/[0.07] py-[clamp(60px,9vh,110px)] px-[5%] text-left relative overflow-hidden bg-[linear-gradient(135deg,rgba(98,129,65,0.04)_0%,transparent_60%)]"
+            className="quote-section-trigger border-[var(--beige)]/[0.07] py-[clamp(60px,9vh,110px)] px-[5%] text-left relative"
         >
-            <div className="absolute right-[5%] top-1/2 -translate-y-1/2 font-[family-name:var(--font-title)] text-[clamp(180px,22vw,300px)] font-black leading-none text-[var(--beige)]/[0.1] select-none pointer-events-none tracking-[-0.05em]">
+            <div className="bg-quotes-title absolute right-[5%] top-1/2 -translate-y-1/2 font-[family-name:var(--font-title)] text-[clamp(180px,22vw,300px)] font-black leading-none text-[var(--beige)]/[0.1] select-none pointer-events-none tracking-[-0.05em]">
                 PKL 65
             </div>
 
-            <div data-reveal className="opacity-0 max-w-[700px]">
+            <div data-reveal className="quotes-display opacity-0 max-w-[700px]">
                 <Kicker>Membawa Satu Semboyan</Kicker>
                 <blockquote className="font-[family-name:var(--font-title)] italic text-[clamp(20px,2.8vw,38px)] leading-[1.38] font-normal text-[var(--beige)] mb-[clamp(20px,3vh,32px)]">
                     "Sekali Bergerak Selamanya Berdampak."

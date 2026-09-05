@@ -2,7 +2,6 @@ import { useLayoutEffect, useRef } from "react";
 import Kicker from "../components/Kicker";
 import { portalsSectionAnimation } from "../animations";
 import { DestinationCard } from "../components/DestinationCard";
-import planeTrail from "../../../assets/images/plane-trail.png";
 import plane from "../../../assets/images/plane.png";
 import planeMobile from "../../../assets/images/plane-mobile.png";
 
@@ -18,8 +17,11 @@ export default function PortalsSection() {
         <section
             ref={sectionRef}
             id="portal"
-            className="relative h-[200vh] md:h-[140vh] flex flex-col justify-between lg:justify-end"
+            className="relative flex flex-col justify-between lg:justify-end"
         >
+            <div className="plane-transition-trigger -translate-y-50 z-[999] w-full h-20">
+
+            </div>
             <BackGround />
             <Content />
         </section>
@@ -28,7 +30,7 @@ export default function PortalsSection() {
 
 const BackGround = () => {
     return (
-        <div className="sticky h-screen w-screen inset-0 overflow-hidden pointer-events-none z-20">
+        <div className="absolute top-0 left-0 h-full w-full overflow-clip pointer-events-none z-10">
             {/* Gambar Background Plane Trail */}
             <div className='clouds absolute top-0 left-0 w-screen h-screen z-20 opacity-70 pointer-events-none rotate-0 md:rotate-0 translate-x-[50vw] md:translate-x-0'>
                 <img className='cloudLoader1 absolute scale-200 translate-y-[50vh] top-0 left-0 w-full h-full' src='assets/cloud1.png'></img>
@@ -66,7 +68,7 @@ const BackGround = () => {
 };
 const Content = () => {
     return (
-        <div className="absolute w-full h-screen top-0 left-0 flex flex-col md:flex-col p-4 gap-3 md:p-20 z-40">
+        <div className="w-full flex flex-col md:flex-col p-4 gap-3 md:p-20 z-40">
             <div
                 className="z-40 pt-12 lg:pt-0"
                 data-reveal

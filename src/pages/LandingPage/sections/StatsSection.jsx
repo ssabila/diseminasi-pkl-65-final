@@ -5,7 +5,7 @@ import CountUp from "../components/CountUp";
 const stats = [
   { n: "3", unit: "Provinsi", sub: "Aceh · Sumut · Sumbar" },
   { n: "510", unit: "Mahasiswa STIS", sub: "Turut serta dalam pendataan" },
-  { n: "48", unit: "Hari Lapangan", sub: "14 Jan – 02 Feb 2026" },
+  { n: "19", unit: "Hari Lapangan", sub: "14 Jan – 02 Feb 2026" },
 ];
 
 export default function StatsSection() {
