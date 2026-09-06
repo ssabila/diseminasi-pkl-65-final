@@ -1,26 +1,56 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import satelliteUrl from '../section1-opening/assets/space_satellite.glb?url';
+import { createLeafletMapAdapter } from '../../../utils/leafletMapAdapter';
+// Tokenless Leaflet fallback & Mapbox GL support - full compat
 import './MapBackground.css';
 
 export default function MapBackground({ onMapLoad }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
+  const [mapError, setMapError] = useState(null);
 
   useEffect(() => {
-    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
+    const token = import.meta.env.VITE_MAPBOX_TOKEN;
+    if (!token) {
+      // Use Leaflet tokenless map fallback
+      const adapter = createLeafletMapAdapter(mapContainerRef.current, {
+        center: [100, -2],
+        zoom: 3
+      });
+      mapRef.current = adapter;
+      if (onMapLoad) onMapLoad(adapter);
+      return () => {
+        if (adapter) adapter.remove();
+      };
+    }
 
-    mapRef.current = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: 'mapbox://styles/gitraya1400/cmq40zowb006p01s36hi56mpa',
-      projection: 'globe',
-      zoom: 1.5,
-      center: [100, -2],
-      interactive: false,
-      attributionControl: false,
-      antialias: true,
-    });
+    mapboxgl.accessToken = token;
+
+    try {
+      mapRef.current = new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: 'mapbox://styles/gitraya1400/cmq40zowb006p01s36hi56mpa',
+        projection: 'globe',
+        zoom: 1.5,
+        center: [100, -2],
+        interactive: false,
+        attributionControl: false,
+        antialias: true,
+      });
+    } catch (err) {
+      console.warn("Mapbox fallback to Leaflet due to init error:", err);
+      const adapter = createLeafletMapAdapter(mapContainerRef.current, {
+        center: [100, -2],
+        zoom: 3
+      });
+      mapRef.current = adapter;
+      if (onMapLoad) onMapLoad(adapter);
+      return () => {
+        if (adapter) adapter.remove();
+      };
+    }
 
     const map = mapRef.current;
 
@@ -217,6 +247,31 @@ export default function MapBackground({ onMapLoad }) {
 
   return (
     <div className="map-background-wrapper" id="global-map-bg">
+      {mapError && (
+        <div style={{
+          position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+          zIndex: 9999, background: 'rgba(15, 20, 35, 0.95)', color: '#ff6b6b',
+          border: '1px solid rgba(255, 107, 107, 0.4)', padding: '2rem 2.5rem', borderRadius: '16px',
+          maxWidth: '520px', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.8)',
+          backdropFilter: 'blur(10px)', fontFamily: 'sans-serif'
+        }}>
+          <div style={{ fontSize: '2.5rem', marginBottom: '0.8rem' }}>⚠️</div>
+          <h3 style={{ margin: '0 0 0.8rem 0', color: '#fff', fontSize: '1.2rem' }}>Mapbox Access Token Required</h3>
+          <p style={{ margin: '0 0 1.2rem 0', fontSize: '0.92rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.8)' }}>
+            {mapError}
+          </p>
+          <div style={{
+            background: 'rgba(0,0,0,0.4)', padding: '0.8rem', borderRadius: '8px',
+            fontSize: '0.82rem', fontFamily: 'monospace', color: '#8aaf5a', textAlign: 'left',
+            wordBreak: 'break-all'
+          }}>
+            VITE_MAPBOX_TOKEN=pk.eyJ1...
+          </div>
+          <p style={{ margin: '1rem 0 0 0', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>
+            Masukkan token Mapbox Anda di file <code style={{ color: '#E5D9B6' }}>.env</code> di root proyek, lalu simpan file.
+          </p>
+        </div>
+      )}
       {/* Bintang dirender oleh Mapbox native (star-intensity di setFog) */}
       <div className="map-container">
         <div ref={mapContainerRef} className="mapbox-globe" />
