@@ -1,7 +1,8 @@
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from '../../utils/gsapConfig';
 
 function revealOnScroll(root) {
-    const items = root.querySelectorAll('[data-reveal]');
+    const items = Array.from(root.querySelectorAll('[data-reveal]'));
     items.forEach((el) => {
         const from = el.dataset.from || 'bottom';
         const delay = parseFloat(el.dataset.delay || '0');
@@ -32,7 +33,7 @@ function revealOnScroll(root) {
 export const heroSectionAnimation = (element, tl = gsap.timeline(), onStateChange) => {
     if (!element) return tl;
     const ctx = gsap.context(() => {
-        tl.fromTo('.hero-topbar', { opacity: 0, duration: 1 }, { opacity: 1, duration: 1, x: 0 }, '>0.2')
+        tl
             .fromTo('.hero-kicker', { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: 0.9 }, '<0.2')
             .fromTo('.hero-title', { autoAlpha: 0, y: 36 }, { autoAlpha: 1, y: 0, duration: 0.9 }, '<0.18')
             .fromTo('.hero-subtitle', { autoAlpha: 0, y: 24 }, { autoAlpha: 0.85, y: 0, duration: 0.9 }, '<0.17')
@@ -41,7 +42,6 @@ export const heroSectionAnimation = (element, tl = gsap.timeline(), onStateChang
             .fromTo('.hero-map', { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: 0.9 }, '<-0.5')
             .fromTo('.hero-scroll-cue', { autoAlpha: 0 }, { autoAlpha: 0.38, duration: 1 }, '>');
 
-        // 2. Responsive Check: Animasi Scroll-Expand HANYA aktif di layar Desktop (min-width: 1024px)
         const mm = gsap.matchMedia();
 
         mm.add('(min-width: 1024px)', () => {
@@ -49,9 +49,9 @@ export const heroSectionAnimation = (element, tl = gsap.timeline(), onStateChang
                 scrollTrigger: {
                     trigger: element,
                     start: 'top top',
-                    end: '+=200%',        // Jarak scroll untuk menyelesaikan pelebaran peta
-                    scrub: 1,            // Animasi mengikuti gerakan scroll mouse secara halus
-                    pin: true,           // Pin section1 selama animasi berlangsung
+                    end: '+=200%',
+                    scrub: 1,
+                    pin: true,
                     anticipatePin: 1,
                     onUpdate: (self) => {
                         const isExpanded = self.progress >= 0.7;
@@ -63,23 +63,22 @@ export const heroSectionAnimation = (element, tl = gsap.timeline(), onStateChang
                 },
 
             });
-
+            gsap.set('.hero-topbar', { autoAlpha: 1, y: -20 });
             const topBarTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: '.hero-topbar',
                     start: '5% top',
                     end: '90vh top',
                     scrub: 1,
-                    // Tambahkan invalidateOnRefresh agar posisi kalkulasi ulang dengan benar saat reload
                     invalidateOnRefresh: true,
                 }
             })
-            topBarTl.to('.hero-topbar', {
-                autoAlpha: 0,
-                y: -20,
-                ease: 'none'
-            }, 0);
+            topBarTl
+                .to('.hero-topbar', { autoAlpha: 0, y: -20, ease: 'none' }, 0);
 
+            if (!window.matchMedia('(min-width: 1024px)').matches) {
+                gsap.fromTo('.hero-topbar', { opacity: 0 }, { opacity: 1, duration: 1 }, '>0.2');
+            }
             scrollTl
                 // A. Fade out & geser konten teks ke kiri
                 .to('.hero-content-left', { autoAlpha: 0, x: -60, duration: 1.5, ease: 'none' }, 0)
@@ -144,7 +143,7 @@ export const statsSectionAnimation = (element, onStateChange) => {
                     scrub: 1,
                     pin: true,
                     pinSpacing: false,
-                    end: '+=250%',
+                    end: isMobile ? '+=150%' : '+=250%',
                     onToggle: (self) => {
                         onStateChange(self.isActive);
                     },
@@ -157,6 +156,15 @@ export const statsSectionAnimation = (element, onStateChange) => {
                     ease: 'back.out',
                     duration: 0.4,
                 }, '>');
+
+            ScrollTrigger.create({
+                trigger: element,
+                start: isMobile ? 'top 15%' : 'top 75%', // titik toggle sendiri
+                end: '+=250%', // samakan end biar durasi "aktif"-nya konsisten dgn pin
+                onToggle: (self) => {
+                    onStateChange(self.isActive);
+                },
+            });
         });
     }, element);
 
@@ -178,83 +186,102 @@ export const mandateSectionAnimation = (element) => {
 /* ── Section 4: Editorial pull quote ─────────────────────────── */
 export const quoteSectionAnimation = (element) => {
     if (!element) return () => { };
-    const ctx = gsap.context(() => {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: element,
-                start: 'top 25%',
-                end: '+=200%',
-                scrub: true,
-                pin: true,
-                pinSpacing: true,
-            }
-        });
+    const mm = gsap.matchMedia()
 
-        tl.fromTo('.bg-quotes-title',
-            { opacity: 0 },
-            { opacity: 1, ease: 'none' }
-        )
-            .fromTo('.quotes-display', { opacity: 0 }, { opacity: 1, ease: 'none' }, '>')
-            .to(element,{})
-            .to([element.querySelectorAll('.quote-text, .quote-sub, .quote-meta')], {
-                color: '#000000',
-                opacity:0,
-                ease: 'none'
-            }, '<')
+    const ctx = gsap.context(() => {
+        mm.add({
+            isMobile: "(max-width: 768px)",
+            isDesktop: "(min-width: 769px)",
+        }, (context) => {
+            let { isMobile } = context.conditions;
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top 25%',
+                    end: isMobile ? '+=150%' : '+=200%',
+                    scrub: true,
+                    pin: true,
+                    pinSpacing: true,
+                }
+            });
+
+            tl.fromTo('.bg-quotes-title',
+                { opacity: 0 },
+                { opacity: 1, ease: 'none' }
+            )
+                .fromTo('.quotes-display', { opacity: 0 }, { opacity: 1, ease: 'none' }, 1)
+                .to(element, {})
+                .to([element.querySelectorAll('.quote-text, .quote-sub, .quote-meta')], {
+                    opacity: 0,
+                    ease: 'none'
+                }, '<')
+        })
+
 
     }, element);
-    return () => ctx.revert();
+    return () => {
+        ctx.revert();
+        mm.revert();
+    };
 };
 
 /* ── Section 5: Dashboard portals ────────────────────────────── */
 export const portalsSectionAnimation = (element) => {
     if (!element) return () => { };
+    const mm = gsap.matchMedia()
     const ctx = gsap.context(() => {
-        const tl = gsap.timeline()
-        tl.to('.cloudLoader1', {
-            x: '300px',
-            duration: 8,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-        }, '<')
-            .to('.cloudLoader2', {
-                x: '-300px',
-                duration: 10,
+        mm.add({
+            isMobile: "(max-width: 768px)",
+            isDesktop: "(min-width: 769px)",
+        }, (context) => {
+            let { isMobile } = context.conditions;
+            const tl = gsap.timeline()
+            tl.to('.cloudLoader1', {
+                translateX: isMobile ? '100px' : '300px',
+                duration: 8,
                 repeat: -1,
                 yoyo: true,
                 ease: 'sine.inOut',
             }, '<')
-            .to('.plane', {
-                y: '-40px',
-                rotation: '5deg',
-                duration: 3,
-                repeat: -1,
-                yoyo: true,
-                ease: 'power1.inOut',
-            }, 0)
-            .to('.plane', {
-                x: '-20px',
-                rotation: '5deg',
-                duration: 3,
-                repeat: -1,
-                yoyo: true,
-                ease: 'power1.inOut',
-            }, 0)
-            .to('.plane', {
-                y: '0px',
-                rotation: '5deg',
-                duration: 3,
-                repeat: -1,
-                yoyo: true,
-                ease: 'power1.inOut',
-            }, 0)
+                .to('.cloudLoader2', {
+                    translateX: isMobile ? '100px' : '-300px',
+                    duration: 10,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'sine.inOut',
+                }, '<')
+                .to('.plane', {
+                    y: '-40px',
+                    rotation: '5deg',
+                    duration: 3,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'power1.inOut',
+                }, 0)
+                .to('.plane', {
+                    x: '-20px',
+                    rotation: '5deg',
+                    duration: 3,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'power1.inOut',
+                }, 0)
+                .to('.plane', {
+                    y: '0px',
+                    rotation: '5deg',
+                    duration: 3,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'power1.inOut',
+                }, 0)
 
-        revealOnScroll(element);
+            revealOnScroll(element);
+
+        })
 
     }, element);
 
-    return () => ctx.revert();
+    return () => { ctx.revert(); mm.revert() };
 };
 
 /* ── Section 6: Footer ───────────────────────────────────────── */

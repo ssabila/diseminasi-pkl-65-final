@@ -145,7 +145,7 @@ export function DestinationCard({
                 />
             </div>
 
-            {/* ── GARIS PERFORASI / SOBEKAN ── */}
+            {/* ── GARIS SOBEKAN ── */}
             <div className="relative h-px my-0 z-50">
                 <div
                     style={{ display: torn ? 'none' : 'block' }}

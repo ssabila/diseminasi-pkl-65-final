@@ -17,9 +17,9 @@ export default function PortalsSection() {
         <section
             ref={sectionRef}
             id="portal"
-            className="relative flex flex-col justify-between lg:justify-end"
+            className="relative flex flex-col lg:justify-end"
         >
-            <div className="plane-transition-trigger -translate-y-50 z-[999] w-full h-20">
+            <div className="plane-transition-trigger  -translate-y-[20vh] z-[999] w-full h-20 absolute top-0 left-0">
 
             </div>
             <BackGround />
@@ -30,17 +30,17 @@ export default function PortalsSection() {
 
 const BackGround = () => {
     return (
-        <div className="absolute top-0 left-0 h-full w-full overflow-clip pointer-events-none z-10">
+        <div className="absolute top-0 left-0 h-full overflow-y-hidden w-full overflow-x-clip pointer-events-none z-10">
             {/* Gambar Background Plane Trail */}
-            <div className='clouds absolute top-0 left-0 w-screen h-screen z-20 opacity-70 pointer-events-none rotate-0 md:rotate-0 translate-x-[50vw] md:translate-x-0'>
-                <img className='cloudLoader1 absolute scale-200 translate-y-[50vh] top-0 left-0 w-full h-full' src='assets/cloud1.png'></img>
-                <img className='cloudLoader2 absolute scale-200 -translate-y-[40vh] top-0 left-0 w-full h-full' src='assets/cloud2.png'></img>
+            <div className='clouds absolute top-0 left-0 w-screen h-full z-20 opacity-70 pointer-events-none rotate-0 md:rotate-0 md:translate-x-0'>
+                <img className='cloudLoader1 absolute scale-200 translate-y-[50vh] top-0 left-0 w-[calc(100vw+600px)] h-full' src='assets/cloud1.png'></img>
+                <img className='cloudLoader2 absolute scale-200 -translate-y-[40vh]  top-0 left-0 w-[calc(100vw+300px)] md:w-full h-full' src='assets/cloud2.png'></img>
             </div>
             <div
                 className="plane absolute inset-0 bg-no-repeat z-20"
             >
                 <img src={plane} className="hidden md:block w-full h-full" />
-                <img src={planeMobile} className="block md:hidden w-full h-full" />
+                <img src={planeMobile} className="block md:hidden h-auto translate-y-12 -translate-x-5 object-contain max-w-full" />
             </div>
 
             {/* Gradient Overlay 1 */}
@@ -68,7 +68,8 @@ const BackGround = () => {
 };
 const Content = () => {
     return (
-        <div className="w-full flex flex-col md:flex-col p-4 gap-3 md:p-20 z-40">
+        <div className="w-full flex flex-col p-4 gap-3 md:p-20 z-40">
+            
             <div
                 className="z-40 pt-12 lg:pt-0"
                 data-reveal
@@ -85,16 +86,14 @@ const Content = () => {
                         <span className="not-italic text-[var(--gold)]">Satu Misi.</span>
                     </h2>
                     <p className="text-[clamp(13px,1.2vw,16px)] text-[rgba(243,234,210,0.6)] font-light max-w-[460px] leading-[1.7] m-0">
-                        Pilih wilayah riset untuk menelusuri data rehabilitasi dan rekonstruksi
-                        pascabencana yang dikumpulkan langsung dari lapangan.
+                        Pilih riset untuk menelusuri data yang dikumpulkan selama R3P sekaligus cerita yang terkandung di dalamnya.
                     </p>
                 </div>
             </div>
 
             {/* Three destination cards (Grid 1 kolom di mobile, 3 kolom di desktop) */}
             <div
-                id="riset-cards-grid"
-                className="relative  h-full z-20 grid grid-cols-1 lg:grid-cols-3 items-end px-0 lg:px-[5%] pb-6 lg:pb-[clamp(48px,7vh,80px)] gap-4 lg:gap-[clamp(12px,1.5vw,20px)]"
+                className="relative w-full h-full z-20 flex flex-col md:flex-row gap-4 md:gap-24"
             >
                 {DESTINATION_ITEMS.map((r) => (
                     <div

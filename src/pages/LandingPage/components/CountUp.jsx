@@ -18,10 +18,8 @@ export default function CountUp({
     const hasAnimated = useRef(false);
 
     useEffect(() => {
-        // Jangan lakukan apa-apa jika sudah pernah selesai
         if (hasAnimated.current) return;
 
-        // Hanya mulai ketika trigger true
         if (!trigger) return;
 
         const from = reverse ? targetNumber : startNumber;

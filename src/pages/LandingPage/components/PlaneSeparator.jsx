@@ -46,9 +46,6 @@ export default function PlaneSeparator() {
                     model.rotation.y = Math.PI * 1.3;
                     model.rotation.z = Math.PI / 3;
                     model.rotation.x = Math.PI / 4;
-                    model.position.y = -50
-                    model.position.x = 90
-                    model.position.z = 20
 
                     scene.add(model);
                     mm.add({
@@ -56,6 +53,7 @@ export default function PlaneSeparator() {
                         isDesktop: "(min-width: 769px)",
                     }, (context) => {
                         let { isMobile } = context.conditions;
+                        gsap.set('#portal', { autoAlpha: 0, duration: 2 }, 0)
 
                         gsap.timeline({
                             scrollTrigger: {
@@ -65,7 +63,6 @@ export default function PlaneSeparator() {
                                 scrub: 2,
                             },
                         })
-                            .to('#portal', { autoAlpha: 0 }, 0)
                             .to(camera.position, {
                                 y: 20, x: 0, z: 0,
                                 duration: 100,
@@ -74,24 +71,26 @@ export default function PlaneSeparator() {
                                 z: Math.PI,
                                 duration: 100,
                             }, 0)
-                            .to(model.position, {
-                                x: -70,
-                                y: 60,
-                                z: -10,
-                                duration: 100,
-                            }, 0)
-                            .to(['.quote-section-trigger','.bg-quotes-title','quotes-display'],{autoAlpha:0,duration:20},10)
+                            .fromTo(model.position,
+                                { x: isMobile ? 35 : 90, y: isMobile ? -90 : -50, z: isMobile ? 7 : 20 },
+                                {
+                                    x: -70,
+                                    y: isMobile ? 90 : 60,
+                                    z: -20,
+                                    duration: 100,
+                                }, 0)
+                            .to(['.quote-section-trigger', '.bg-quotes-title', 'quotes-display'], { autoAlpha: 0, duration: 20, 'ease': 'sine.out' }, 25)
                             .fromTo(['.cloudTransition1', '.cloudTransition2'], {
                                 opacity: 0,
                             }, {
                                 opacity: 1,
-                                duration: isMobile ? 10 : 40,
-                            }, 10)
-                            .to('#portal', { autoAlpha: 1, duration: 20, ease: 'none' })
+                                duration: isMobile ? 10 : 20,
+                            }, isMobile ? 20 : 15)
+                            .to('#portal', { autoAlpha: 1, duration: 5, ease: 'none' }, isMobile ? 73 : 60)
                             .to(['.cloudTransition1', '.cloudTransition2'], {
                                 opacity: 0,
-                                duration: isMobile ? 10 : 40
-                            }, isMobile ? 50 : 90)
+                                duration: isMobile ? 10 : 20
+                            }, isMobile ? 70 : 60)
                     });
 
                 },
@@ -118,6 +117,7 @@ export default function PlaneSeparator() {
         return () => {
             window.removeEventListener("resize", handleResize);
             ctx.revert();
+            mm.revert();
             cancelAnimationFrame(animationFrameId);
             if (container) container.innerHTML = "";
             renderer.dispose();

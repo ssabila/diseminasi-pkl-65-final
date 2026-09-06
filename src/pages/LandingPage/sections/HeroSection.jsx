@@ -3,13 +3,20 @@ import PillButton from "../components/PillButton";
 import LeafletMap from "../components/LeafletMap";
 import { heroSectionAnimation } from "../animations";
 import { masterTL } from "../LandingPage";
+import ScrollCue from "../components/ScrollCue";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function HeroSection() {
   const sectionRef = useRef(null);
   const [showLeaderLines, setShowLeaderLines] = useState(false)
   useLayoutEffect(() => {
     const cleanUp = heroSectionAnimation(sectionRef.current, masterTL, setShowLeaderLines);
-    return cleanUp;
+    const handleLoad = () => ScrollTrigger.refresh();
+    window.addEventListener('load', handleLoad);
+    return () => {
+      cleanUp();
+      window.removeEventListener('load', handleLoad);
+    };
   }, []);
 
   return (
@@ -17,14 +24,6 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative min-h-screen bg-gradient-to-br from-[#0f172a] to-[var(--navy)] overflow-hidden flex flex-col justify-center px-[5%]"
     >
-      <style>{`
-        @keyframes scrollLine {
-          0%   { transform:scaleY(0); transform-origin:top; opacity:0; }
-          30%  { transform:scaleY(1); transform-origin:top; opacity:1; }
-          70%  { transform:scaleY(1); transform-origin:bottom; opacity:1; }
-          100% { transform:scaleY(0); transform-origin:bottom; opacity:0; }
-        }
-      `}</style>
       {/* Subtle grain texture */}
       <div
         className="absolute inset-0 pointer-events-none opacity-60 z-10"
@@ -37,7 +36,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_55%_70%_at_15%_55%,rgba(98,129,65,0.07)_0%,transparent_65%)] z-10" />
 
       {/* ── Top bar ── */}
-      <div className="hero-topbar absolute top-0 left-0 right-0 py-[clamp(18px,3.5vh,32px)] px-[5%] flex items-center justify-between border-b border-[var(--beige)]/[0.07] z-20">
+      <div className="hero-topbar absolute md:top-5 top-0 left-0 right-0 py-[clamp(18px,3.5vh,32px)] px-[5%] flex items-center justify-between border-b border-[var(--beige)]/[0.07] z-20">
         <div className="flex flex-col gap-[3px]">
           <span className="font-[family-name:var(--font-title)] text-[clamp(12px,1.4vw,14px)] tracking-[0.05em] text-[var(--gold)]">
             Politeknik Statistika STIS
@@ -106,14 +105,7 @@ export default function HeroSection() {
           <LeafletMap showLeaderLines={showLeaderLines} />
         </div>
       </div>
-
-      {/* Scroll cue */}
-      <div className="hero-scroll-cue opacity-0 absolute md:bottom-[clamp(20px,3.5vh,40px)] md:left-[5%] bottom-[43vh] left-5 flex items-center gap-2.5 z-30">
-        <div className="w-[1px] h-10 bg-[var(--beige)] animate-[scrollLine_2.2s_ease-in-out_infinite]" />
-        <span className="text-[9px] tracking-[0.2em] uppercase text-[var(--beige)] font-light">
-          Scroll
-        </span>
-      </div>
+      <ScrollCue />
     </section>
   );
 }
