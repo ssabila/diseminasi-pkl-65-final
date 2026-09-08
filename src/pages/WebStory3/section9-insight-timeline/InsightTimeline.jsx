@@ -66,7 +66,7 @@ export default function InsightTimeline() {
     if (!layersAdded || !map) return;
 
     const s = sectionRef.current;
-    
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: s,
@@ -74,13 +74,14 @@ export default function InsightTimeline() {
         end: '+=400%', // Long pin for 5 stages
         scrub: 0.5,
         pin: true,
+        refreshPriority: 40,
       },
     });
 
     // Fade IN first stage map layer right at the beginning
     tl.to({}, {
       duration: 0.05,
-      onUpdate: function() {
+      onUpdate: function () {
         const progress = this.progress();
         if (map.getLayer(`tl-sebelum-layer`)) {
           map.setPaintProperty(`tl-sebelum-layer`, 'circle-opacity', progress * 0.8);
@@ -89,7 +90,7 @@ export default function InsightTimeline() {
     });
 
     // Content fade in
-    tl.fromTo(s.querySelector('.insight-content'), 
+    tl.fromTo(s.querySelector('.insight-content'),
       { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.1 });
 
     // Iterate through stages to create crossfades
@@ -99,15 +100,15 @@ export default function InsightTimeline() {
 
     TIMELINE_STAGES.forEach((stage, idx) => {
       if (idx === 0) return; // Skip first as it's the starting state
-      
+
       const prevStage = TIMELINE_STAGES[idx - 1];
 
       // At each step, fade out previous layer, fade in current layer
       tl.to({}, {
         duration: stepDuration,
-        onUpdate: function() {
+        onUpdate: function () {
           const progress = this.progress();
-          
+
           // Crossfade Map Layers
           if (map.getLayer(`tl-${prevStage.id}-layer`)) {
             map.setPaintProperty(`tl-${prevStage.id}-layer`, 'circle-opacity', (1 - progress) * 0.8);
@@ -115,7 +116,7 @@ export default function InsightTimeline() {
           if (map.getLayer(`tl-${stage.id}-layer`)) {
             map.setPaintProperty(`tl-${stage.id}-layer`, 'circle-opacity', progress * 0.8);
           }
-          
+
           // Update Active Text State via DOM to avoid React re-renders during scroll
           const newIdx = progress > 0.5 ? idx : idx - 1;
           if (newIdx !== currentActiveIdx) {
@@ -134,7 +135,7 @@ export default function InsightTimeline() {
     // Fade OUT the final layer when exiting the entire timeline section!
     tl.to({}, {
       duration: 0.1,
-      onUpdate: function() {
+      onUpdate: function () {
         const progress = this.progress();
         const lastStage = TIMELINE_STAGES[TIMELINE_STAGES.length - 1];
         if (map.getLayer(`tl-${lastStage.id}-layer`)) {
@@ -160,11 +161,11 @@ export default function InsightTimeline() {
         <div className="insight-content tl-content">
           <span className="insight-subtitle">Section 8: Modul 7</span>
           <h2 className="insight-title">Perjalanan<br />Bencana</h2>
-          
+
           <div className="tl-stages-container">
             {TIMELINE_STAGES.map((stage, idx) => (
-              <div 
-                key={stage.id} 
+              <div
+                key={stage.id}
                 ref={el => stagesRef.current[idx] = el}
                 className={`tl-stage ${idx === 0 ? 'active' : ''}`}
               >

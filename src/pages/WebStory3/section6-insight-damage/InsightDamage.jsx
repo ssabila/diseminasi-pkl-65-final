@@ -75,7 +75,7 @@ export default function InsightDamage() {
         }
       });
     }
-    
+
     // Add Longsor Layer
     if (!map.getLayer('longsor-layer')) {
       map.addLayer({
@@ -114,12 +114,13 @@ export default function InsightDamage() {
         end: '+=180%',
         scrub: 0.8,
         pin: true,
+        refreshPriority: 70,
       },
     });
 
     // Content fade-in (no map to fade in anymore, it's global)
     tl.fromTo(s.querySelector('.insight-title'),
-        { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.2 }, 0.1)
+      { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.2 }, 0.1)
       .fromTo(s.querySelector('.insight-subtitle'),
         { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.15 }, 0.12);
 
@@ -197,7 +198,7 @@ export default function InsightDamage() {
 
       <div className="insight-layout">
         {/* We REMOVED the insight-map div so the background MapProvider map shows through! */}
-        
+
         <div className="insight-content">
           <span className="insight-subtitle">Section 5: Modul 3</span>
           <h2 className="insight-title">Seberapa Luas<br />Dampaknya?</h2>

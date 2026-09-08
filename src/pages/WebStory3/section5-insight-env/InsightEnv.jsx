@@ -10,10 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ENV_ITEMS = [
   { lng: 98.39, lat: 3.17, label: 'Gunung Api', color: '#ef4444' },     // Mt. Sinabung
-  { lng: 99.0,  lat: 2.5,  label: 'Curah Hujan', color: '#3b82f6' },     // Toba Rainfall
-  { lng: 98.7,  lat: 2.7,  label: 'Badan Air', color: '#06b6d4' },       // Lake Toba
-  { lng: 97.8,  lat: 3.8,  label: 'Topografi', color: '#a3a3a3' },       // Highlands
-  { lng: 96.2,  lat: 5.0,  label: 'Rawan Banjir', color: '#2563eb' },     // Pidie Jaya
+  { lng: 99.0, lat: 2.5, label: 'Curah Hujan', color: '#3b82f6' },     // Toba Rainfall
+  { lng: 98.7, lat: 2.7, label: 'Badan Air', color: '#06b6d4' },       // Lake Toba
+  { lng: 97.8, lat: 3.8, label: 'Topografi', color: '#a3a3a3' },       // Highlands
+  { lng: 96.2, lat: 5.0, label: 'Rawan Banjir', color: '#2563eb' },     // Pidie Jaya
   { lng: 100.6, lat: -0.8, label: 'Rawan Longsor', color: '#f97316' },    // Solok
 ];
 
@@ -67,6 +67,7 @@ export default function InsightEnv() {
         end: '+=150%',
         scrub: 0.8,
         pin: true,
+        refreshPriority: 80,
       },
     });
 
@@ -92,10 +93,10 @@ export default function InsightEnv() {
 
     tl.fromTo(s.querySelector('.insight-subtitle'),
       { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, 0.1)
-    .fromTo(s.querySelector('.insight-title'),
-      { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25 }, 0.15)
-    .fromTo(s.querySelector('.insight-narrative'),
-      { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, 0.25);
+      .fromTo(s.querySelector('.insight-title'),
+        { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25 }, 0.15)
+      .fromTo(s.querySelector('.insight-narrative'),
+        { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, 0.25);
 
     // Staggered reveal of Mapbox markers
     markersRef.current.forEach((el, i) => {

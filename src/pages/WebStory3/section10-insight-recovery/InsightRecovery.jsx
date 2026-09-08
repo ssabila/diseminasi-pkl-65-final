@@ -62,6 +62,7 @@ export default function InsightRecovery() {
         end: '+=200%',
         scrub: 0.8,
         pin: true,
+        refreshPriority: 30,
       },
     });
 
