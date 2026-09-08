@@ -7,7 +7,9 @@ export default function PillButton({ children, href, primary, onClick }) {
       href={href}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      onClick={(e) => onClick(e)}
+      onClick={(e) => {
+        onClick(e)
+      }}
       style={{
         backgroundColor: primary ? (hov ? "transparent" : "var(--beige)") : (hov ? "var(--beige)" : "transparent"),
         color: primary ? (hov ? "var(--beige)" : "var(--navy)") : (hov ? "var(--navy)" : "var(--beige)"),

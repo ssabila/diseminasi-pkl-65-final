@@ -17,7 +17,7 @@ export default function PortalsSection() {
         <section
             ref={sectionRef}
             id="portal"
-            className="relative min-h-screen flex flex-col lg:justify-center"
+            className="relative  min-h-screen flex flex-col lg:justify-center"
         >
             <div className="plane-transition-trigger  -translate-y-[20vh] z-[999] w-full h-20 absolute top-0 left-0">
 
@@ -33,8 +33,8 @@ const BackGround = () => {
         <div className="absolute top-0 left-0 h-full overflow-y-hidden w-full overflow-x-clip pointer-events-none z-10">
             {/* Gambar Background Plane Trail */}
             <div className='clouds absolute top-0 left-0 w-screen h-full z-20 opacity-70 pointer-events-none rotate-0 md:rotate-0 md:translate-x-0'>
-                <img className='cloudLoader1 absolute scale-200 translate-y-[50vh] top-0 left-0 w-[calc(100vw+600px)] h-full' src='assets/cloud1.png'></img>
-                <img className='cloudLoader2 absolute scale-200 -translate-y-[40vh]  top-0 left-0 w-[calc(100vw+300px)] md:w-full h-full' src='assets/cloud2.png'></img>
+                <img className='cloudLoader1 absolute scale-200 translate-y-[90vh] md:translate-y-[40vh] top-0 left-0 w-[calc(100vw+1000px)] h-full object-cover' src='assets/cloud1.png'></img>
+                <img className='cloudLoader2 absolute scale-200 -translate-y-[90vh] md:-translate-y-[50vh]  top-0 left-0 w-[calc(100vw+1000px)] md:w-full h-full object-cover' src='assets/cloud2.png'></img>
             </div>
             <div
                 className="plane absolute inset-0 bg-no-repeat z-20"
@@ -68,7 +68,7 @@ const BackGround = () => {
 };
 const Content = () => {
     return (
-        <div className="w-full flex flex-col p-4 gap-3 md:p-20 z-40">
+        <div className="w-full flex h-full flex-col p-4 gap-3 md:p-20 z-30">
             
             <div
                 className="z-40 pt-12 lg:pt-0"
@@ -93,7 +93,7 @@ const Content = () => {
 
             {/* Three destination cards (Grid 1 kolom di mobile, 3 kolom di desktop) */}
             <div
-                className="relative w-full h-full z-20 flex flex-col md:flex-row gap-4 md:gap-24"
+                className="relative w-full h-full z-20 flex flex-col md:flex-row gap-4 md:gap-24 justify-between"
             >
                 {DESTINATION_ITEMS.map((r) => (
                     <div

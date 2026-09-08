@@ -198,7 +198,7 @@ export const quoteSectionAnimation = (element) => {
                 scrollTrigger: {
                     trigger: element,
                     start: 'top 25%',
-                    end: isMobile ? '+=150%' : '+=200%',
+                    end: isMobile ? '+=150%' : '+=500%',
                     scrub: true,
                     pin: true,
                     pinSpacing: true,
@@ -209,7 +209,7 @@ export const quoteSectionAnimation = (element) => {
                 { opacity: 0 },
                 { opacity: 1, ease: 'none' }
             )
-                .fromTo('.quotes-display', { opacity: 0 }, { opacity: 1, ease: 'none' }, 1)
+                .fromTo('.quotes-display', { opacity: 0 }, { opacity: 1, ease: 'none' }, 0)
                 .to(element, {})
                 .to([element.querySelectorAll('.quote-text, .quote-sub, .quote-meta')], {
                     opacity: 0,
@@ -236,16 +236,17 @@ export const portalsSectionAnimation = (element) => {
         }, (context) => {
             let { isMobile } = context.conditions;
             const tl = gsap.timeline()
+            gsap.set(['.cloudLoader1','.cloudLoader2'],{translateX:'-100px'})
             tl.to('.cloudLoader1', {
-                translateX: isMobile ? '100px' : '300px',
-                duration: 8,
+                translateX: isMobile ? '190px' : '300px',
+                duration: isMobile ? 7 : 8,
                 repeat: -1,
                 yoyo: true,
                 ease: 'sine.inOut',
             }, '<')
                 .to('.cloudLoader2', {
-                    translateX: isMobile ? '100px' : '-300px',
-                    duration: 10,
+                    translateX: isMobile ? '190px' : '-300px',
+                    duration: isMobile ? 5 : 10,
                     repeat: -1,
                     yoyo: true,
                     ease: 'sine.inOut',

@@ -53,7 +53,7 @@ export default function PlaneSeparator() {
                         isDesktop: "(min-width: 769px)",
                     }, (context) => {
                         let { isMobile } = context.conditions;
-                        gsap.set('#portal', { autoAlpha: 0, duration: 2 }, 0)
+                        gsap.set('#portal', { autoAlpha: 0 })
 
                         gsap.timeline({
                             scrollTrigger: {
@@ -72,7 +72,7 @@ export default function PlaneSeparator() {
                                 duration: 100,
                             }, 0)
                             .fromTo(model.position,
-                                { x: isMobile ? 35 : 90, y: isMobile ? -90 : -50, z: isMobile ? 7 : 20 },
+                                { x: isMobile ? 35 : 92, y: isMobile ? -90 : -50, z: isMobile ? 7 : 20 },
                                 {
                                     x: -70,
                                     y: isMobile ? 90 : 60,
@@ -86,7 +86,7 @@ export default function PlaneSeparator() {
                                 opacity: 1,
                                 duration: isMobile ? 10 : 20,
                             }, isMobile ? 20 : 15)
-                            .to('#portal', { autoAlpha: 1, duration: 5, ease: 'none' }, isMobile ? 73 : 60)
+                            .to('#portal', { autoAlpha: 1, duration: 5, ease: 'none' }, isMobile ? 73 : 80)
                             .to(['.cloudTransition1', '.cloudTransition2'], {
                                 opacity: 0,
                                 duration: isMobile ? 10 : 20
@@ -137,8 +137,8 @@ export default function PlaneSeparator() {
             </div>
             <div className="absolute top-0 left-0 w-screen h-full z-50">
                 <div className="sticky top-0 left-0 w-screen h-screen flex items-center justify-center">
-                    <img className='cloudTransition1 opacity-0 scale-205 w-full h-full absolute top-0 left-0' src='assets/cloud1.png'></img>
-                    <img className='cloudTransition2 opacity-0 scale-205 w-full h-full absolute top-0 left-0' src='assets/cloud2.png'></img>
+                    <img className='cloudTransition1 opacity-0 scale-205 w-full h-full absolute top-0 left-0 object-cover' src='assets/cloud1.png'></img>
+                    <img className='cloudTransition2 opacity-0 scale-205 w-full h-full absolute top-0 left-0 object-cover' src='assets/cloud2.png'></img>
                     <div className='bg-cloud-plane-transition opacity-0 scale-205 w-full h-full absolute top-0 left-0'></div>
                 </div>
             </div>

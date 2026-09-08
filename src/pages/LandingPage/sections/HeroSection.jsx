@@ -80,11 +80,20 @@ export default function HeroSection() {
 
         {/* CTA buttons */}
         <div className="hero-cta opacity-0 flex flex-wrap gap-3.5">
-          <PillButton href="#portal" primary onClick={(e) => scrollToSection(e, "#portal")}>
+          <PillButton href="#portal" primary
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: "smooth"
+              });
+            }}
+
+          >
             Mulai Perjalanan
           </PillButton>
 
-          <PillButton href="#mandate" onClick={(e) => scrollToSection(e, "#mandate")}>
+          <PillButton href="#mandate">
             Apa yang kami kerjakan?
           </PillButton>
         </div>
