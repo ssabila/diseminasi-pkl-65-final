@@ -66,10 +66,14 @@ function FlightPathDefs() {
       grad.setAttribute("x2", "100%"); grad.setAttribute("y2", "0%");
 
       const start = document.createElementNS(NS, "stop");
-      start.setAttribute("offset", "0%"); start.setAttribute("stop-color", color); start.setAttribute("stop-opacity", "0");
+      start.setAttribute("offset", "0%");
+      start.setAttribute("stop-color", color);
+      start.setAttribute("stop-opacity", "0");
 
       const end = document.createElementNS(NS, "stop");
-      end.setAttribute("offset", "100%"); end.setAttribute("stop-color", color); end.setAttribute("stop-opacity", "0.9");
+      end.setAttribute("offset", "100%");
+      end.setAttribute("stop-color", color);
+      end.setAttribute("stop-opacity", "0.9");
 
       grad.appendChild(start);
       grad.appendChild(end);
@@ -93,7 +97,7 @@ function FlightPaths() {
   return (
     <>
       <FlightPathDefs />
-      
+
       <CircleMarker center={JAKARTA} radius={5} pathOptions={{ color: "#e5343b", fillColor: "#e5343b", fillOpacity: 1, weight: 0, className: "origin-dot" }} interactive={false} />
       <CircleMarker center={JAKARTA} radius={9} pathOptions={{ color: "#e5343b", fillOpacity: 0, weight: 1.5, opacity: 0.4 }} interactive={false} />
       <Tooltip permanent direction="right" offset={[10, 0]} className="route-label origin-label">Jakarta</Tooltip>

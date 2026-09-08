@@ -91,13 +91,12 @@ export default function HeroSection() {
       </div>
 
       {/* ── Map panel — right side ── */}
-      <div className="hero-map opacity-0 absolute bg-[#0d0e28] top-0 right-0 w-[55vw] h-full overflow-hidden max-lg:relative max-lg:w-full max-lg:h-[40vh] max-lg:opacity-25 z-30">
-        <div className="hero-map-title m-5 absolute top-0 z-40 w-full hidden">
-          <h2 className="font-[family-name:var(--font-title)] text-center italic text-[clamp(28px,3.5vw,50px)] leading-[1.15] !text-[var(--beige)] mb-[clamp(20px,3vh,32px)]">
-            510 Total Mahasiswa<br />
-            <span className="not-italic text-[var(--gold)]">Mengemban Tugas Penting</span>
-          </h2>
-        </div>
+      <div className="hero-map opacity-0 absolute bg-[#0d0e28] top-0 right-0 w-[55%] h-full overflow-hidden max-lg:relative max-lg:w-full max-lg:h-[40vh] max-lg:opacity-25 z-30">        <div className="hero-map-title m-5 absolute top-0 z-40 w-full hidden">
+        <h2 className="font-[family-name:var(--font-title)] text-center italic text-[clamp(28px,3.5vw,50px)] leading-[1.15] !text-[var(--beige)] mb-[clamp(20px,3vh,32px)]">
+          510 Total Mahasiswa<br />
+          <span className="not-italic text-[var(--gold)]">Mengemban Tugas Penting</span>
+        </h2>
+      </div>
         <div className="hero-map-gradient absolute inset-0 bg-gradient-to-r from-[#0f172a] via-transparent to-transparent z-10 max-lg:hidden pointer-events-none" />
 
         {/* Canvas fixed di ukuran final, anchored kanan */}

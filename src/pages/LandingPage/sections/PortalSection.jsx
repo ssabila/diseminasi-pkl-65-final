@@ -17,7 +17,7 @@ export default function PortalsSection() {
         <section
             ref={sectionRef}
             id="portal"
-            className="relative flex flex-col lg:justify-end"
+            className="relative min-h-screen flex flex-col lg:justify-center"
         >
             <div className="plane-transition-trigger  -translate-y-[20vh] z-[999] w-full h-20 absolute top-0 left-0">
 
