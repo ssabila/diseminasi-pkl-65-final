@@ -1,3 +1,7 @@
+/* ─────────────────────────────────────────────────────────────────
+   FILE INFRA BARU
+───────────────────────────────────────────────────────────────── */
+
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import insights from '../insight.json';
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
