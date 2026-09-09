@@ -34,6 +34,10 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+import imgHuntara05 from '../../../assets/images/huntara-05.webp';
+import imgHuntara08 from '../../../assets/images/huntara-08.webp';
+import imgHuntara10 from '../../../assets/images/huntara-10.webp';
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -255,7 +259,7 @@ function SceneSudutDesa() {
   const isIntro = currentStep.type === "intro";
 
   const createCustomIcon = (isActive) => {
-    const color = "#FF2A2A";
+    const color = "#E67E22";
     const htmlString = `
       <div class="custom-pin-wrapper ${isActive ? 'active-pin' : ''}">
         <div class="pin-head" style="background-color: ${color}; box-shadow: 0 0 16px 4px rgba(255,42,42,0.8); border: 2px solid #FFF;"></div>
@@ -343,10 +347,10 @@ function SceneSudutDesa() {
                 <div ref={quote1Ref} style={{ fontSize: "8rem", lineHeight: 0.5, textAlign: "left", fontFamily: "'Playfair Display', serif", color: "#E5D9B6" }}>“</div>
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.8rem, 2.5vw, 3.2rem)", fontStyle: "italic", fontWeight: 500, color: "#E5D9B6", lineHeight: 1.3, margin: "1.5rem auto", maxWidth: "850px" }}>
                   <div ref={el => textLineRefs.current[0] = el}>Dari tingkat desa hingga provinsi, setiap angka</div>
-                  <div ref={el => textLineRefs.current[1] = el} style={{ color: "#FFD36E", fontSize: "1.05em", margin: "0.5rem 0 1rem" }}>adalah cerminan ruang hidup yang terdampak.</div>
+                  <div ref={el => textLineRefs.current[1] = el} style={{ color: "#E67E22", fontSize: "1.05em", margin: "0.5rem 0 1rem" }}>adalah cerminan ruang hidup yang terdampak.</div>
                   <div ref={el => textLineRefs.current[2] = el}>Kami memetakan agregasi wilayah untuk</div>
                   <div ref={el => textLineRefs.current[3] = el}>memastikan tidak ada jengkal tanah</div>
-                  <div ref={el => textLineRefs.current[4] = el} style={{ color: "#FFD36E", fontSize: "1.05em", marginTop: "0.5rem" }}>yang terlewatkan dalam rencana pemulihan.</div>
+                  <div ref={el => textLineRefs.current[4] = el} style={{ color: "#E67E22", fontSize: "1.05em", marginTop: "0.5rem" }}>yang terlewatkan dalam rencana pemulihan.</div>
                 </h2>
                 <div ref={quote2Ref} style={{ fontSize: "8rem", lineHeight: 0.5, textAlign: "right", fontFamily: "'Playfair Display', serif", color: "#E5D9B6" }}>”</div>
               </div>
@@ -440,7 +444,7 @@ function SceneSudutDesa() {
               }}>
                 {isIntro ? (
                   <div style={{ animation: "fadeInUp 0.6s ease forwards" }}>
-                    <div style={{ color: "#FFD36E", letterSpacing: ".25em", textTransform: "uppercase", fontSize: ".85rem", marginBottom: "1rem", fontFamily: "Lato", fontWeight: 700 }}>
+                    <div style={{ color: "#E67E22", letterSpacing: ".25em", textTransform: "uppercase", fontSize: ".85rem", marginBottom: "1rem", fontFamily: "Lato", fontWeight: 700 }}>
                       Garis Depan Dampak Bencana
                     </div>
                     <h2 style={{ color: "#E5D9B6", fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "2.8rem", lineHeight: 1.2, marginBottom: "1.5rem" }}>
@@ -452,7 +456,7 @@ function SceneSudutDesa() {
                   </div>
                 ) : (
                   <div key={activeProvIndex} style={{ animation: "fadeInUp 0.6s ease forwards" }}>
-                    <div style={{ color: "#FFD36E", letterSpacing: ".25em", textTransform: "uppercase", fontSize: ".85rem", marginBottom: "1rem", fontFamily: "Lato", fontWeight: 700 }}>
+                    <div style={{ color: "#E67E22", letterSpacing: ".25em", textTransform: "uppercase", fontSize: ".85rem", marginBottom: "1rem", fontFamily: "Lato", fontWeight: 700 }}>
                       {provinsiStory[activeProvIndex]?.provinsi}
                     </div>
                     <h2 style={{ color: "#E5D9B6", fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "3rem", lineHeight: 1.1, marginBottom: "1rem" }}>
@@ -558,29 +562,33 @@ function ScenePotretHunianNarasi() {
       value: `${pctTanpaAir.toFixed(1)}%`, 
       label: 'Krisis Air Bersih', 
       desc: 'Keluarga bertahan hidup menggunakan air permukaan atau sumber yang sama sekali tidak terlindung.',
-      accent: '#4FC3F7', 
-      bgColor: 'radial-gradient(circle at 0% 50%, rgba(79, 195, 247, 0.15) 0%, transparent 60%)'
+      accent: '#628141', 
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(98, 129, 65, 0.15) 0%, transparent 60%)',
+      image: imgHuntara05
     },
     { 
       value: `${pctTanpaListrik.toFixed(2)}%`, 
       label: 'Tanpa Listrik', 
       desc: 'Keluarga hidup dalam kegelapan tanpa akses ke jaringan listrik pasca terjadinya bencana.',
-      accent: '#FFD36E', 
-      bgColor: 'radial-gradient(circle at 0% 50%, rgba(0, 0, 0, 0.8) 0%, transparent 80%)'
+      accent: '#E67E22', 
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(230, 126, 34, 0.12) 0%, transparent 60%)',
+      image: imgHuntara08
     },
     { 
       value: `${pctTanpaSanitasi.toFixed(1)}%`, 
       label: 'Tanpa Sanitasi', 
       desc: 'Tidak memiliki akses fasilitas MCK sama sekali, membuat kelompok rentan terancam wabah.',
-      accent: '#81C784', 
-      bgColor: 'radial-gradient(circle at 0% 50%, rgba(129, 199, 132, 0.15) 0%, transparent 60%)'
+      accent: '#E5D9B6', 
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(229, 217, 182, 0.1) 0%, transparent 60%)',
+      image: imgHuntara10
     },
     { 
       value: pctKRTPerempuan, 
       label: 'KRT Perempuan', 
       desc: 'Keluarga dengan Kepala Rumah Tangga perempuan (Menunggu agregasi data lapangan).',
-      accent: '#CE93D8', 
-      bgColor: 'radial-gradient(circle at 0% 50%, rgba(206, 147, 216, 0.15) 0%, transparent 60%)'
+      accent: '#FFFFFF', 
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 60%)',
+      image: null
     }
   ];
 
@@ -590,12 +598,12 @@ function ScenePotretHunianNarasi() {
   useEffect(() => {
     let ctx = gsap.context(() => {
       cardsData.forEach((card, index) => {
-        // Fade in animation for text blocks
         gsap.fromTo(`.card-narrative-${index}`, 
-          { opacity: 0, y: 50 },
+          { opacity: 0, y: 50, filter: 'blur(8px)' },
           { 
             opacity: 1, 
-            y: 0, 
+            y: 0,
+            filter: 'blur(0px)',
             duration: 1,
             ease: "power2.out",
             scrollTrigger: {
@@ -605,9 +613,24 @@ function ScenePotretHunianNarasi() {
               toggleActions: "play reverse play reverse",
               onEnter: () => {
                 gsap.to(bgOverlayRef.current, { background: card.bgColor, duration: 0.8 });
+                // Fade in corresponding background image
+                if (card.image) {
+                  document.querySelectorAll('[class^="card-bg-image"]').forEach(el => {
+                    gsap.to(el, { opacity: 0, duration: 0.6 });
+                  });
+                  const imgEl = containerRef.current?.querySelector(`.card-bg-image-${index}`);
+                  if (imgEl) gsap.to(imgEl, { opacity: 1, duration: 0.8 });
+                }
               },
               onEnterBack: () => {
                 gsap.to(bgOverlayRef.current, { background: card.bgColor, duration: 0.8 });
+                if (card.image) {
+                  document.querySelectorAll('[class^="card-bg-image"]').forEach(el => {
+                    gsap.to(el, { opacity: 0, duration: 0.6 });
+                  });
+                  const imgEl = containerRef.current?.querySelector(`.card-bg-image-${index}`);
+                  if (imgEl) gsap.to(imgEl, { opacity: 1, duration: 0.8 });
+                }
               }
             }
           }
@@ -631,6 +654,19 @@ function ScenePotretHunianNarasi() {
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
         transition: 'background 0.8s ease'
       }} />
+
+      {/* Background images that change per card */}
+      {cardsData.map((card, i) => card.image && (
+        <div key={i} className={`card-bg-image-${i}`} style={{
+          position: 'absolute', inset: 0, zIndex: 0,
+          opacity: 0, transition: 'opacity 0.8s ease',
+        }}>
+          <img src={card.image} alt="" style={{
+            width: '100%', height: '100%', objectFit: 'cover',
+            filter: 'grayscale(0.4) brightness(0.2)',
+          }} />
+        </div>
+      ))}
 
       {/* Grid Side-by-Side Layout */}
       <div style={{
@@ -698,16 +734,16 @@ function ScenePotretHunianNarasi() {
                 display: 'flex', width: '100%', height: '24px', borderRadius: '4px', overflow: 'hidden', 
                 background: 'rgba(255,255,255,0.05)', marginBottom: '2rem'
               }}>
-                <div style={{ width: visible ? `${pctMasih}%` : '0%', background: '#3A4B5C', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s' }} />
+                <div style={{ width: visible ? `${pctMasih}%` : '0%', background: '#15173D', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s' }} />
                 <div style={{ width: visible ? `${pctRusak}%` : '0%', background: '#E67E22', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s' }} />
-                <div style={{ width: visible ? `${pctHilang}%` : '0%', background: '#FF2A2A', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s' }} />
+                <div style={{ width: visible ? `${pctHilang}%` : '0%', background: '#E67E22', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s' }} />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {[
-                  { pct: pctMasih, color: '#3A4B5C', label: 'Masih Ada (Utuh/Ringan)', n: nMasihAda },
+                  { pct: pctMasih, color: '#15173D', label: 'Masih Ada (Utuh/Ringan)', n: nMasihAda },
                   { pct: pctRusak, color: '#E67E22', label: 'Rusak (Perlu Perbaikan)', n: nRusak },
-                  { pct: pctHilang, color: '#FF2A2A', label: 'Hilang / Rusak Total', n: nHilang },
+                  { pct: pctHilang, color: '#E67E22', label: 'Hilang / Rusak Total', n: nHilang },
                 ].map(item => (
                   <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                     <span style={{ width: 12, height: 12, borderRadius: '2px', background: item.color }} />
@@ -771,38 +807,13 @@ function ScenePotretHunianNarasi() {
 /* ─────────────────────────────────────────
    Scene 3: Potret Hunian Visual
 ───────────────────────────────────────────*/
-const HuntaraIcon = ({ color }) => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-    <polyline points="9 22 9 12 15 12 15 22"/>
-  </svg>
-);
-const FasumIcon = ({ color }) => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="1"/>
-    <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
-  </svg>
-);
-const PengungsiIcon = ({ color }) => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-    <circle cx="9" cy="7" r="4"/>
-    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-    <path d="M16 3.13a4 4 0 010 7.75"/>
-  </svg>
-);
-const TumpanganIcon = ({ color }) => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-    <path d="M9 21V13h6v8"/>
-  </svg>
-);
+/* Icons removed — minimalist typography only */
 
 const STATUS_HUNIAN_TARGET = [
-  { key: '6. Huntara',         label: 'Huntara',         color: '#e74c3c', Icon: HuntaraIcon },
-  { key: '5. Fasilitas Umum',  label: 'Fasilitas Umum',  color: '#FFB74D', Icon: FasumIcon },
-  { key: '3. Pengungsian',     label: 'Pengungsian',     color: '#FF8A65', Icon: PengungsiIcon },
-  { key: '4. Rumah Tumpangan', label: 'Rumah Tumpangan', color: '#CE93D8', Icon: TumpanganIcon },
+  { key: '6. Huntara',         label: 'Huntara',         color: '#E67E22' },
+  { key: '5. Fasilitas Umum',  label: 'Fasilitas Umum',  color: '#628141' },
+  { key: '3. Pengungsian',     label: 'Pengungsian',     color: '#E5D9B6' },
+  { key: '4. Rumah Tumpangan', label: 'Rumah Tumpangan', color: '#FFFFFF' },
 ];
 
 function ScenePotretHunianVisual() {
@@ -853,8 +864,8 @@ function ScenePotretHunianVisual() {
                 transform: visible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
                 transition: `opacity 0.5s ease ${i * 0.12}s, transform 0.5s ease ${i * 0.12}s`,
               }}>
-                <div style={{ marginBottom: '0.8rem', color: status.color, display: 'flex', justifyContent: 'center' }}>
-                  <status.Icon color={status.color} />
+                <div style={{ marginBottom: '0.8rem', display: 'flex', justifyContent: 'center' }}>
+                  <span className="playfair-display" style={{ fontSize: '1.2rem', fontStyle: 'italic', color: status.color, opacity: 0.6 }}>{status.label.charAt(0)}</span>
                 </div>
                 <div style={{
                   fontFamily: "'Playfair Display', serif",
@@ -878,12 +889,9 @@ function ScenePotretHunianVisual() {
                     alignItems: 'center',
                     gap: '0.4rem'
                   }}>
-                    <div style={{ display: 'flex', gap: '2px', opacity: 0.8 }}>
-                      {Array.from({ length: 10 }).map((_, idx) => (
-                        <svg key={idx} width="12" height="12" viewBox="0 0 24 24" fill={idx < Math.round(data.pct / 10) ? status.color : "rgba(255,255,255,0.1)"} xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" />
-                        </svg>
-                      ))}
+                    {/* Thin progress bar instead of person icons */}
+                    <div style={{ width: '80%', height: 3, borderRadius: 2, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                      <div style={{ width: `${data.pct}%`, height: '100%', background: status.color, borderRadius: 2 }} />
                     </div>
                     <div style={{
                       fontFamily: "'Lato', sans-serif", fontWeight: 300,
@@ -933,14 +941,14 @@ function SceneIndividu() {
   const genderSegments = Object.entries(jenisKelamin).map(([key, val], i) => ({
     label: key.replace(/[0-9.]/g, '').trim(),
     value: val.n,
-    color: i === 0 ? '#4FC3F7' : '#CE93D8'
+    color: i === 0 ? '#628141' : '#E67E22'
   }));
 
   // Bantuan
   const bantuanSegments = Object.entries(bantuanDiterima).map(([key, val], i) => ({
     label: key.replace(/_/g, ' ').toUpperCase(),
     value: val.n_menerima,
-    color: ['#81C784','#4FC3F7','#FFB74D','#e74c3c','#CE93D8','#FF8A65'][i % 6],
+    color: ['#628141','#E67E22','#E5D9B6','#FFFFFF','#628141','#E67E22'][i % 6],
   }));
 
   // Keluhan Kesehatan
@@ -968,7 +976,7 @@ function SceneIndividu() {
           color: '#E5D9B6', lineHeight: 1.2, marginBottom: '1rem',
         }}>
           Kondisi Individu &{' '}
-          <span style={{ color: '#CE93D8', fontStyle: 'normal' }}>Keluarga</span>
+          <span style={{ color: '#E67E22', fontStyle: 'normal' }}>Keluarga</span>
         </h2>
         <p style={{
           fontFamily: "'Lato', sans-serif", fontWeight: 300,
@@ -1013,32 +1021,9 @@ function SceneIndividu() {
               Kelompok Rentan
             </div>
             {[
-              { label: 'Ibu Hamil', val: totalBumil, color: '#FF8A65',
-                renderIcon: () => (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8A65" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="7" r="4"/>
-                    <path d="M5.5 21v-1.5a6.5 6.5 0 0 1 4-6"/>
-                    <ellipse cx="12" cy="17" rx="3.5" ry="4.5"/>
-                  </svg>
-                )
-              },
-              { label: 'Lansia', val: totalLansia, color: '#CE93D8',
-                renderIcon: () => (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CE93D8" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="7" r="4"/>
-                    <path d="M5.5 21v-2a5.5 5.5 0 0 1 11 0v2"/>
-                    <line x1="9" y1="17" x2="10" y2="21"/>
-                  </svg>
-                )
-              },
-              { label: 'Balita', val: totalBalita, color: '#FFD54F',
-                renderIcon: () => (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD54F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="8" r="3.5"/>
-                    <path d="M8.5 21v-1a4 4 0 0 1 7 0v1"/>
-                  </svg>
-                )
-              },
+              { label: 'Ibu Hamil', val: totalBumil, color: '#E67E22' },
+              { label: 'Lansia', val: totalLansia, color: '#628141' },
+              { label: 'Balita', val: totalBalita, color: '#E5D9B6' },
             ].map(item => (
               <div key={item.label} style={{
                 display: 'flex', alignItems: 'center', gap: '1rem',
@@ -1046,9 +1031,6 @@ function SceneIndividu() {
                 borderRadius: 10, marginBottom: '0.6rem',
                 border: `1px solid ${item.color}18`,
               }}>
-                <span style={{ marginRight: '0.5rem', display: 'flex', alignItems: 'center' }}>
-                  {item.renderIcon()}
-                </span>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '0.85rem', color: '#E5D9B6' }}>{item.label}</div>
                 </div>
@@ -1087,10 +1069,10 @@ function SceneIndividu() {
                     <div style={{ flex: 1, height: 8, background: 'rgba(255,255,255,0.08)', borderRadius: 4, overflow: 'hidden' }}>
                       <div style={{
                         height: '100%', width: `${(cnt / maxKeluhan) * 100}%`,
-                        background: 'linear-gradient(90deg, #e74c3c88, #e74c3c)', borderRadius: 4,
+                        background: 'linear-gradient(90deg, #E67E2288, #E67E22)', borderRadius: 4,
                       }} />
                     </div>
-                    <span style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '0.8rem', color: '#e74c3c', width: 60, textAlign: 'right' }}>
+                    <span style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '0.8rem', color: '#E67E22', width: 60, textAlign: 'right' }}>
                       {cnt.toLocaleString('id-ID')}
                     </span>
                   </div>
@@ -1138,7 +1120,7 @@ function TransisiBabak34() {
           top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '60vw', height: '60vw',
-          background: 'radial-gradient(circle, rgba(231,76,60,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(229,217,182,0.06) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
 
@@ -1147,7 +1129,7 @@ function TransisiBabak34() {
           <div style={{
             width: visibleAngka ? 60 : 0,
             height: 1,
-            background: 'rgba(231,76,60,0.4)',
+            background: 'rgba(229,217,182,0.4)',
             margin: '0 auto 2.5rem',
             transition: 'width 1s ease',
           }} />
@@ -1157,14 +1139,15 @@ function TransisiBabak34() {
             <div className="playfair-display" style={{
               fontSize: 'clamp(5rem, 13vw, 10rem)',
               fontWeight: 700,
-              color: '#e74c3c',
+              fontStyle: 'italic',
+              color: '#E5D9B6',
               lineHeight: 1,
               marginBottom: '0.5rem',
               // Gunakan opacity bukan color transparent — lebih smooth & tidak terpotong
               opacity: visibleAngka ? 1 : 0,
               transform: visibleAngka ? 'translateY(0)' : 'translateY(20px)',
               transition: 'opacity 1.5s ease, transform 1.5s ease',
-              textShadow: '0 0 80px rgba(231,76,60,0.25)',
+              textShadow: '0 0 80px rgba(229,217,182,0.25)',
             }}>
               {meninggal.toLocaleString('id-ID')}
             </div>
@@ -1173,7 +1156,7 @@ function TransisiBabak34() {
           <div className="lato-bold" style={{
             fontSize: '0.78rem', letterSpacing: '0.28em',
             textTransform: 'uppercase',
-            color: 'rgba(231,76,60,0.65)',
+            color: 'rgba(229,217,182,0.65)',
             marginBottom: '3rem',
             opacity: visibleAngka ? 1 : 0,
             transition: 'opacity 1.5s ease 0.4s',
@@ -1192,7 +1175,7 @@ function TransisiBabak34() {
             transition: 'opacity 1.2s ease, transform 1.2s ease',
           }}>
             Ada Kehilangan yang Tak Bisa<br />
-            <span style={{ color: '#e74c3c' }}>Dibangun Kembali</span>
+            <span style={{ color: '#E5D9B6' }}>Dibangun Kembali</span>
           </h2>
 
           <p className="lato-regular" style={{
@@ -1212,7 +1195,7 @@ function TransisiBabak34() {
           <div style={{
             width: visibleJudul ? 60 : 0,
             height: 1,
-            background: 'rgba(231,76,60,0.3)',
+            background: 'rgba(229,217,182,0.3)',
             margin: '0 auto',
             transition: 'width 1.2s ease 0.8s',
           }} />

@@ -120,11 +120,11 @@ function GrainOverlay({ opacity = 0.05 }) {
 ───────────────────────────────────────────*/
 const BUBBLE_CONFIG = {
   r38a: { color: '#E67E22', label: 'Makanan' },
-  r38b: { color: '#5FB0E0', label: 'Pakaian' },
-  r38c: { color: '#E5D9B6', label: 'Perbaikan Rumah' },
-  r38d: { color: '#7FBF6A', label: 'Pengobatan' },
-  r38e: { color: '#628141', label: 'Uang Tunai' },
-  r38f: { color: '#C98A4B', label: 'Lainnya' },
+  r38b: { color: '#E5D9B6', label: 'Pakaian' },
+  r38c: { color: '#FFFFFF', label: 'Perbaikan Rumah' },
+  r38d: { color: '#628141', label: 'Pengobatan' },
+  r38e: { color: '#E67E22', label: 'Uang Tunai' },
+  r38f: { color: '#628141', label: 'Lainnya' },
 };
 
 /* ─────────────────────────────────────────
@@ -549,7 +549,7 @@ function SceneJeritanBantuan() {
             <div>
               <div className="playfair-display" style={{
                 fontSize: 'clamp(2.6rem, 7vw, 4.2rem)',
-                fontWeight: 700, color: '#7FBF6A',
+                fontWeight: 700, color: '#628141',
                 lineHeight: 1, letterSpacing: '-0.02em',
                 fontVariantNumeric: 'tabular-nums',
               }}>
@@ -575,7 +575,7 @@ function SceneJeritanBantuan() {
               <div style={{
                 position: 'absolute', inset: 0,
                 width: introVisible ? `${pctSudahGlobal}%` : '0%',
-                background: 'linear-gradient(90deg, rgba(127,191,106,0.6), #7FBF6A)',
+                background: 'linear-gradient(90deg, rgba(127,191,106,0.6), #628141)',
                 borderRadius: 3,
                 transition: 'width 1.8s cubic-bezier(0.34, 1.2, 0.64, 1) 0.3s',
                 boxShadow: '0 0 14px rgba(127,191,106,0.55)',
@@ -593,57 +593,70 @@ function SceneJeritanBantuan() {
 
         </div>
 
-        {/* ── Kolom kanan: ringkasan kebutuhan tanpa ilustrasi bubble ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.2rem', marginTop: '0' }}>
+        {/* ── Kolom kanan: minimalist typography list with thin progress bars ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0', marginTop: '0' }}>
           <div style={{
-            padding: '1.5rem 1.25rem',
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(229,217,182,0.08)',
-            borderRadius: 18,
-            boxShadow: 'inset 0 0 30px rgba(0,0,0,0.2)',
+            padding: '0',
           }}>
             <div className="lato-bold" style={{
               fontSize: '0.68rem', letterSpacing: '0.2em',
               textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)',
-              marginBottom: '1rem',
+              marginBottom: '2rem',
             }}>
-              Status Penerimaan Bantuan
+              Kebutuhan Mendesak
             </div>
             {!hasData ? (
-              <div className="lato-regular" style={{ color: 'rgba(255,255,255,0.28)', fontSize: '0.85rem' }}>
+              <div className="lato-light" style={{ color: 'rgba(255,255,255,0.28)', fontSize: '0.85rem' }}>
                 Menunggu data dari insight.json…
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                {bubbleData.map((item) => {
-                  const cfg = BUBBLE_CONFIG[item.col] || { color: '#aaa', icon: '•', label: item.col };
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.2rem' }}>
+                {bubbleData.sort((a, b) => (b.belum || 0) - (a.belum || 0)).map((item) => {
+                  const cfg = BUBBLE_CONFIG[item.col] || { color: '#E5D9B6', label: item.col };
                   const pct = item.pct_sudah || 0;
+                  const total = (item.sudah || 0) + (item.belum || 0);
 
                   return (
-                    <div key={item.col} style={{
-                      display: 'grid',
-                      gridTemplateColumns: '1fr auto',
-                      gap: '0.5rem 1rem',
-                      alignItems: 'center',
-                      padding: '0.7rem 0.8rem',
-                      borderRadius: 10,
-                      background: `${cfg.color}12`,
-                      border: `1px solid ${cfg.color}20`,
-                    }}>
-                      <span className="lato-regular" style={{ fontSize: '0.82rem', color: '#fff' }}>
-                        <span style={{ opacity: 0.8, marginRight: '0.6rem' }}>{cfg.icon}</span>
-                        {cfg.label || item.nama}
-                      </span>
-                      <span className="lato-bold" style={{ fontSize: '0.72rem', color: cfg.color }}>
-                        {pct.toFixed(1)}% sudah
-                      </span>
-                      <div style={{ gridColumn: '1 / -1', height: 6, borderRadius: 999, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                    <div key={item.col}>
+                      {/* Label row */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.6rem' }}>
+                        <span className="playfair-display" style={{
+                          fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                          fontStyle: 'italic', fontWeight: 700,
+                          color: cfg.color,
+                        }}>
+                          {cfg.label || item.nama}
+                        </span>
+                        <span className="lato-light" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
+                          {(item.belum || 0).toLocaleString('id-ID')} KK belum
+                        </span>
+                      </div>
+
+                      {/* Thin progress bar */}
+                      <div style={{
+                        width: '100%', height: 3, borderRadius: 2,
+                        background: 'rgba(255,255,255,0.06)',
+                        overflow: 'hidden',
+                      }}>
                         <div style={{
                           height: '100%',
                           width: `${Math.min(Math.max(pct, 0), 100)}%`,
-                          background: `linear-gradient(90deg, ${cfg.color}88, ${cfg.color})`,
-                          borderRadius: 999,
+                          background: cfg.color,
+                          borderRadius: 2,
+                          transition: 'width 1.5s cubic-bezier(0.22, 1, 0.36, 1)',
                         }} />
+                      </div>
+
+                      {/* Stats row */}
+                      <div style={{ display: 'flex', gap: '1.5rem', marginTop: '0.5rem' }}>
+                        <span className="lato-light" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.35)' }}>
+                          {pct.toFixed(1)}% tersalurkan
+                        </span>
+                        {total > 0 && (
+                          <span className="lato-light" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.25)' }}>
+                            {total.toLocaleString('id-ID')} total KK
+                          </span>
+                        )}
                       </div>
                     </div>
                   );
@@ -1103,9 +1116,9 @@ function SceneDiBalikAngka() {
               borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem',
             }}>
               {[
-                { val: totalKK.toLocaleString('id-ID'), label: 'Keluarga di Huntara', color: '#7FBF6A' },
-                { val: totalDesa.toLocaleString('id-ID'), label: 'Lokasi Huntara', color: '#FF8A65' },
-                { val: '3', label: 'Provinsi Bencana', color: '#4FC3F7' },
+                { val: totalKK.toLocaleString('id-ID'), label: 'Keluarga di Huntara', color: '#628141' },
+                { val: totalDesa.toLocaleString('id-ID'), label: 'Lokasi Huntara', color: '#E67E22' },
+                { val: '3', label: 'Provinsi Bencana', color: '#FFFFFF' },
               ].map(s => (
                 <div key={s.label}>
                   <div className="playfair-display" style={{
@@ -1161,9 +1174,9 @@ function SceneAjakan() {
   };
 
   const STATS = [
-    { val: '401',   label: 'Petugas Lapangan',   color: '#7FBF6A', desc: 'turun ke lapangan langsung' },
+    { val: '401',   label: 'Petugas Lapangan',   color: '#628141', desc: 'turun ke lapangan langsung' },
     { val: '1.039', label: 'Kunjungan Lapangan',  color: '#E67E22', desc: 'titik data terverifikasi' },
-    { val: '3',     label: 'Provinsi Terdampak',  color: '#5FB0E0', desc: 'Aceh · Sumut · Sumbar' },
+    { val: '3',     label: 'Provinsi Terdampak',  color: '#E5D9B6', desc: 'Aceh · Sumut · Sumbar' },
     { val: '6',     label: 'Jenis Kebutuhan',     color: '#E5D9B6', desc: 'dipetakan per keluarga' },
   ];
 

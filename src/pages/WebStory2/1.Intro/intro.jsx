@@ -1,5 +1,14 @@
 /**
- * intro.jsx — Babak 1: Intro (Mapbox 3D Globe Scrollytelling)
+ * intro.jsx — Babak 1: Intro (Refactored)
+ * 
+ * Changes:
+ * - Smooth panning (no zoom in/out) for map transitions
+ * - Single sticky map container with floating text overlay
+ * - Crossfade peta→foto transition (blur + opacity)
+ * - Blur-to-focus text reveal for bridge text
+ * - Asymmetric Bento grid with maskot peeking
+ * - ALL icons removed — typography-only design
+ * - Color palette: #15173D, #E5D9B6, #628141, #E67E22, #FFFFFF only
  */
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -25,7 +34,6 @@ import sumateraGeo from '../../../assets/maps/sumatera_provinsi.json';
 gsap.registerPlugin(ScrollTrigger);
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
-
 
 /* ─────────────────────────────────────────
    Koordinat Kabupaten/Kota per Provinsi
@@ -94,20 +102,9 @@ const PROV_CONFIG = {
 };
 
 const PHASE_MAP = {
-  // FRAME 1 (Figma Paling Kiri) & FRAME 4 (Paling Kanan): 
-  // Globe mengecil dan geser ke pojok kiri bawah layar.
-  // Triknya: Kita set titik tengahnya (lng) jauh ke timur (140) supaya buminya terdorong ke kiri.
   spin: { lat: -10, lng: 150, zoom: 1.2, pitch: 0, label: null },
-
-  // FRAME 2 (Figma Tengah Kiri): 
-  // Globe membesar dan fokus ke peta Indonesia rata.
   world: { lat: -2, lng: 118, zoom: 3.8, pitch: 0, label: null },
-
-  // FRAME 3 (Figma Tengah Kanan): 
-  // Zoom lebih dalam ke Sumatera dan kamera mulai miring 45 derajat (3D effect).
   sumatera: { lat: 1.5, lng: 99.5, zoom: 5.5, pitch: 45, label: null },
-
-  // Masuk ke level Provinsi
   aceh: { lat: 4.5, lng: 96.5, zoom: 6.8, pitch: 30, label: 'Aceh' },
   sumut: { lat: 2.5, lng: 98.8, zoom: 6.8, pitch: 30, label: 'Sumatera Utara' },
   sumbar: { lat: -0.5, lng: 100.4, zoom: 6.8, pitch: 30, label: 'Sumatera Barat' },
@@ -125,76 +122,61 @@ const SCROLL_PHASES = [
 ];
 
 /* ─────────────────────────────────────────
-   Scene 2 — Data kartu "Skala Besar, Dampak Nyata" (angka NYATA dari insight.json)
+   Scene 2 — Data kartu "Skala Besar, Dampak Nyata"
 ───────────────────────────────────────────*/
 const _ds = insights?.ringkasan_dataset || {};
-// Rumah terdampak = seluruh kondisi_bangunan KECUALI kategori "tidak terdampak"
 const _kb = insights?.rumah_tangga?.kondisi_bangunan || {};
 const _kbTotal = Object.values(_kb).reduce((s, v) => s + (v?.n || 0), 0);
 const _kbTidak = Object.entries(_kb).find(([k]) => /tidak terdampak/i.test(k))?.[1]?.n || 0;
 const RUMAH_TERDAMPAK = (_kbTotal ? _kbTotal - _kbTidak : 0) || 35849;
 
-// 4 kartu sesuai mockup referensi (tinggi 'h' menurun untuk irama bar)
 const STAT_CARDS = [
   { 
-    key: 'wilayah', label: 'Wilayah Terdampak', value: _ds.total_desa_infra || 928, unit: 'desa', h: 100, 
-    color: '#EF8722', // Orange
+    key: 'wilayah', label: 'Wilayah Terdampak', value: _ds.total_desa_infra || 928, unit: 'desa', 
+    color: '#E67E22',
     microcopy: 'Tersebar di 3 Provinsi',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
   },
   { 
-    key: 'warga', label: 'Warga Terdampak', value: _ds.total_art_keluarga || 188902, unit: 'jiwa', h: 92, 
-    color: '#E74C3C', // Red
+    key: 'warga', label: 'Warga Terdampak', value: _ds.total_art_keluarga || 188902, unit: 'jiwa', 
+    color: '#E5D9B6',
     microcopy: 'Kehilangan akses ke kehidupan normal',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
   },
   { 
-    key: 'rumah', label: 'Rumah Terdampak', value: RUMAH_TERDAMPAK, unit: 'bangunan', h: 84, 
-    color: '#4FC3F7', // Blue
+    key: 'rumah', label: 'Rumah Terdampak', value: RUMAH_TERDAMPAK, unit: 'bangunan', 
+    color: '#FFFFFF',
     microcopy: 'Berbagai tingkat kerusakan, tak lagi layak huni',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
   },
   { 
-    key: 'fasilitas', label: 'Fasilitas Umum', value: _ds.total_fasilitas_gabungan || 2739, unit: 'unit', h: 76, 
-    color: '#628141', // Green
+    key: 'fasilitas', label: 'Fasilitas Umum', value: _ds.total_fasilitas_gabungan || 2739, unit: 'unit', 
+    color: '#628141',
     microcopy: 'Pendidikan, kesehatan, hingga rumah ibadah',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16"/><path d="M4 18h16"/><path d="M14 2h-4a2 2 0 0 0-2 2v14h8V4a2 2 0 0 0-2-2Z"/><path d="M8 2h8"/><path d="M9 18V6"/><path d="M15 18V6"/><path d="M12 18V6"/></svg>
   },
 ];
 
-// Cakupan pendataan (materi storyline: total keluarga disurvei + kab/kota ditelusuri)
 const CAKUPAN = {
   kab: Object.values(insights?.cakupan_geografis_infra?.kab_kota_per_provinsi || {}).reduce((s, v) => s + v, 0) || 48,
   keluarga: _ds.total_rt_keluarga || 115462,
 };
 
-// Sektor infrastruktur yang didata
 const SEKTOR_DATA = [
-  { key: 'pendidikan', label: 'Pendidikan', value: _ds.total_fasilitas?.pendidikan || 824, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg> },
-  { key: 'kesehatan', label: 'Kesehatan', value: _ds.total_fasilitas?.kesehatan || 342, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> },
-  { key: 'ekonomi', label: 'Ekonomi', value: _ds.total_fasilitas?.ekonomi || 591, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> },
-  { key: 'sosial', label: 'Sosial', value: _ds.total_fasilitas?.sosial || 982, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
+  { key: 'pendidikan', label: 'Pendidikan', value: _ds.total_fasilitas?.pendidikan || 824 },
+  { key: 'kesehatan', label: 'Kesehatan', value: _ds.total_fasilitas?.kesehatan || 342 },
+  { key: 'ekonomi', label: 'Ekonomi', value: _ds.total_fasilitas?.ekonomi || 591 },
+  { key: 'sosial', label: 'Sosial', value: _ds.total_fasilitas?.sosial || 982 },
 ];
 
 /* ─────────────────────────────────────────
-   Peta Choropleth Kerusakan (Mapbox) — geometri dari GeoJSON BPS
-   (sumatera_provinsi.json). Tingkat kerusakan diturunkan dari jumlah desa
-   terdampak per provinsi. Dasar peta = satelit muted + titik kab/kota neon
-   yang menyala bertahap (mandat guideline: SATELLITE + grayscale + glow).
+   Choropleth Data
 ───────────────────────────────────────────*/
 const _desaPerProv = insights?.cakupan_geografis_infra?.desa_per_provinsi || {};
 const CHORO_TARGETS = {
-  'ACEH': { label: 'Aceh', desa: _desaPerProv['Aceh'] || 556, color: '#EF8722', tingkat: 'Rusak Parah' },
+  'ACEH': { label: 'Aceh', desa: _desaPerProv['Aceh'] || 556, color: '#E67E22', tingkat: 'Rusak Parah' },
   'SUMATERA UTARA': { label: 'Sumatera Utara', desa: _desaPerProv['Sumatera Utara'] || 292, color: '#E5D9B6', tingkat: 'Rusak Sedang' },
   'SUMATERA BARAT': { label: 'Sumatera Barat', desa: _desaPerProv['Sumatera Barat'] || 80, color: '#628141', tingkat: 'Rusak Ringan' },
 };
-const CHORO_ORDER = ['ACEH', 'SUMATERA UTARA', 'SUMATERA BARAT'];
 
-// Titik data neon (Safety Orange) — guideline hal. 9
 const KAB_GLOW = '#E67E22';
 
-// FeatureCollection provinsi Sumatera untuk layer fill tint Mapbox.
-// Tiap provinsi → MultiPolygon (tiap ring jadi polygon terpisah; data sudah didecimasi tanpa hole).
 const SUMATERA_FC = {
   type: 'FeatureCollection',
   features: sumateraGeo.provinces.map((p) => ({
@@ -208,7 +190,6 @@ const SUMATERA_FC = {
   })),
 };
 
-// Titik kab/kota, diurutkan Aceh → Sumut → Sumbar agar bisa "menyala satu per satu".
 const _GROUP_TO_PROV = { ACEH: 'ACEH', SUMUT: 'SUMATERA UTARA', SUMBAR: 'SUMATERA BARAT' };
 const KAB_FEATURES = (() => {
   const feats = [];
@@ -229,7 +210,6 @@ const KAB_FEATURES = (() => {
 const KAB_FC = { type: 'FeatureCollection', features: KAB_FEATURES };
 const KAB_TOTAL = KAB_FEATURES.length;
 
-// Bounds 3 provinsi target untuk fitBounds kamera (statis — user tidak memilih "kamera terbang").
 const CHORO_BOUNDS = (() => {
   let minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
   for (const p of sumateraGeo.provinces) {
@@ -244,33 +224,23 @@ const CHORO_BOUNDS = (() => {
   return [[minLon, minLat], [maxLon, maxLat]];
 })();
 
-// Label provinsi yang muncul OTOMATIS saat scroll (bukan klik). `appear` = ambang
-// progress [mulai, selesai] kemunculan label, selaras dengan urutan titik menyala.
 const CHORO_LABELS = [
   { key: 'ACEH', lngLat: [96.95, 4.30], appear: [0.10, 0.30] },
   { key: 'SUMATERA UTARA', lngLat: [99.30, 2.10], appear: [0.40, 0.60] },
   { key: 'SUMATERA BARAT', lngLat: [100.60, -0.70], appear: [0.64, 0.84] },
 ];
 
-/* ─────────────────────────────────────────
-   SCENE 2 — "Skala Besar, Dampak Nyata"
-   Bridge narasi (ScrollReveal) → stage pinned: 4 kartu terisi beige
-   mengikuti scroll (scrub) → Sektor Infrastruktur (SVG stroke-draw).
-   Semua motion transform/opacity-only; pin hanya di desktop.
-───────────────────────────────────────────*/
 const fmtID = (n) => Math.round(n).toLocaleString('id-ID');
 
 const HEADLINE_WORDS = [
   { text: 'Skala', color: '#E5D9B6' },
   { text: 'Besar', color: '#E5D9B6' },
-  { text: 'Dampak', color: '#EF8722' },
-  { text: 'Nyata', color: '#EF8722' },
+  { text: 'Dampak', color: '#E67E22' },
+  { text: 'Nyata', color: '#E67E22' },
 ];
 
-const SEKTOR_R_STROKE = 30; // radius lingkaran stroke SVG sektor
-
 /* ─────────────────────────────────────────
-   Cula.tech Style Data Engine Panel
+   CulaDataPanel — Minimalist, no icons
 ───────────────────────────────────────────*/
 function CulaDataPanel() {
   const _ds = insights?.ringkasan_dataset || {};
@@ -280,48 +250,36 @@ function CulaDataPanel() {
 
   return (
     <div style={{
-      width: '100%', maxWidth: '360px', background: 'rgba(15, 20, 25, 0.65)',
-      backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
-      borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.1)',
-      padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem',
+      width: '100%', maxWidth: '360px', 
+      background: 'rgba(21, 23, 61, 0.75)',
+      backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+      borderRadius: '16px', border: '1px solid rgba(229, 217, 182, 0.1)',
+      padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem',
       boxShadow: '0 20px 40px rgba(0,0,0,0.5)', color: '#fff',
       pointerEvents: 'auto'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: '1.05rem', fontWeight: 600, color: '#E5D9B6', fontFamily: 'sans-serif' }}>
+        <div className="playfair-display" style={{ fontSize: '1.05rem', fontWeight: 600, color: '#E5D9B6', fontStyle: 'italic' }}>
           R3P Data Engine
         </div>
-        <div style={{ background: 'rgba(98,129,65,0.2)', color: '#8aaf5a', padding: '3px 8px', borderRadius: '20px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '1px' }}>
+        <div style={{ background: 'rgba(98,129,65,0.2)', color: '#628141', padding: '3px 8px', borderRadius: '20px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '1px' }}>
           LIVE
         </div>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-          </svg>
-          <span className="lato-regular" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Cakupan Wilayah</span>
-        </div>
+        <span className="lato-light" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Cakupan Wilayah</span>
         <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>{totalDesa} Desa</div>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-          </svg>
-          <span className="lato-regular" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Keluarga Disurvei</span>
-        </div>
-        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <span className="lato-light" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Keluarga Disurvei</span>
+        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>
           {totalKK.toLocaleString('id-ID')}
-          <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-          </svg>
         </div>
       </div>
 
-      <div style={{ borderLeft: '2px dashed rgba(255,255,255,0.2)', marginLeft: '1.2rem', paddingLeft: '1.2rem', paddingBottom: '0.2rem', paddingTop: '0.2rem' }}>
+      <div style={{ borderLeft: '2px dashed rgba(229,217,182,0.2)', marginLeft: '1.2rem', paddingLeft: '1.2rem', paddingBottom: '0.2rem', paddingTop: '0.2rem' }}>
         <div className="lato-light" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.2rem' }}>Total Jiwa Terdampak</div>
         <div className="lato-bold" style={{ fontSize: '1rem', color: '#E5D9B6' }}>+ {totalART.toLocaleString('id-ID')} Jiwa</div>
       </div>
@@ -331,31 +289,23 @@ function CulaDataPanel() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.4rem' }}>
-          <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.7)' }}>✓ Sosial/Ibadah</span>
-          <span className="lato-bold" style={{ background: 'rgba(239, 135, 34, 0.15)', color: '#EF8722', padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>1.106 Unit</span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.4rem' }}>
-          <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.7)' }}>✓ Pendidikan</span>
-          <span className="lato-bold" style={{ background: 'rgba(98, 129, 65, 0.15)', color: '#628141', padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>785 Unit</span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem' }}>
-          <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.7)' }}>✓ Kesehatan</span>
-          <span className="lato-bold" style={{ background: 'rgba(79, 195, 247, 0.15)', color: '#4FC3F7', padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>607 Unit</span>
-        </div>
+        {[
+          { label: 'Sosial/Ibadah', val: '1.106 Unit', color: '#E67E22' },
+          { label: 'Pendidikan', val: '785 Unit', color: '#628141' },
+          { label: 'Kesehatan', val: '607 Unit', color: '#E5D9B6' },
+        ].map((item, i) => (
+          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.05)' : 'none', paddingBottom: i < 2 ? '0.4rem' : 0 }}>
+            <span className="lato-light" style={{ color: 'rgba(255,255,255,0.7)' }}>{item.label}</span>
+            <span className="lato-bold" style={{ background: `${item.color}22`, color: item.color, padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>{item.val}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
 /* ─────────────────────────────────────────
-   ChoroplethMapbox — peta Mapbox satelit (muted) FULL-SCREEN untuk Scene 2.
-   • Provinsi target di-tint warna tingkat kerusakan (fill-opacity 0→penuh saat scroll).
-   • Titik kab/kota neon (halo + core) menyala satu per satu mengikuti progress.
-   • Label tiap provinsi (nama + tingkat + jumlah desa) muncul OTOMATIS saat scroll
-     (tanpa klik), mengikuti urutan titik menyala.
-   Di-drive imperatif lewat `apiRef.current.reveal(progress)` agar mulus saat scrub
-   (tanpa re-render React). Map di-init lazy saat section mendekati viewport.
+   ChoroplethMapbox — full-screen satellite map for Scene 2
 ───────────────────────────────────────────*/
 function ChoroplethMapbox({ apiRef }) {
   const mapContainer = useRef(null);
@@ -371,14 +321,12 @@ function ChoroplethMapbox({ apiRef }) {
     let ro = null;
     const st = stateRef.current;
 
-    // Terapkan progress reveal ke layer (dipanggil GSAP tiap frame scrub)
     const applyReveal = (progress) => {
       const p = Math.max(0, Math.min(1, progress));
       st.lastP = p;
       const m = mapRef.current;
       if (!m || !st.ready) return;
 
-      // Titik menyala bertahap: idx 0..litCount-1
       const litCount = Math.round(p * KAB_TOTAL);
       if (litCount !== st.litCount) {
         st.litCount = litCount;
@@ -389,7 +337,6 @@ function ChoroplethMapbox({ apiRef }) {
         m.setPaintProperty('kab-core', 'circle-stroke-opacity', onCore);
       }
 
-      // Tint provinsi "tumbuh" bertahap: Aceh dulu → Sumut → Sumbar
       const seg = (lo, hi) => Math.max(0, Math.min(1, (p - lo) / (hi - lo)));
       const FILL = 0.72;
       m.setPaintProperty('prov-fill', 'fill-opacity', [
@@ -400,7 +347,6 @@ function ChoroplethMapbox({ apiRef }) {
         0,
       ]);
 
-      // Label provinsi muncul otomatis (fade) mengikuti progress — bukan klik
       const labels = labelsRef.current;
       if (labels) {
         for (const lb of labels) {
@@ -414,11 +360,9 @@ function ChoroplethMapbox({ apiRef }) {
       try {
         map = new mapboxgl.Map({
           container: el,
-          style: 'mapbox://styles/mapbox/satellite-v9',
-          projection: 'mercator',
+          style: 'mapbox://styles/mapbox/dark-v11',
           bounds: CHORO_BOUNDS,
           fitBoundsOptions: { padding: { top: 64, bottom: 64, left: 48, right: 480 } },
-          // Statis: matikan semua interaksi kamera agar tidak membajak scroll halaman.
           scrollZoom: false, dragPan: false, dragRotate: false, boxZoom: false,
           doubleClickZoom: false, touchZoomRotate: false, touchPitch: false, keyboard: false,
           attributionControl: false,
@@ -429,7 +373,6 @@ function ChoroplethMapbox({ apiRef }) {
       }
       mapRef.current = map;
 
-      // API imperatif diekspos lebih awal supaya progress sebelum 'load' tak hilang.
       apiRef.current = {
         reveal: applyReveal,
         resize: () => mapRef.current && mapRef.current.resize(),
@@ -439,13 +382,11 @@ function ChoroplethMapbox({ apiRef }) {
         map.addSource('sumatera', { type: 'geojson', data: SUMATERA_FC });
         map.addSource('kab', { type: 'geojson', data: KAB_FC });
 
-        // Tint provinsi target (di atas satelit)
         map.addLayer({
           id: 'prov-fill', type: 'fill', source: 'sumatera',
           filter: ['==', ['get', 'target'], 1],
           paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0 },
         });
-        // Garis batas provinsi (target tebal, konteks tipis)
         map.addLayer({
           id: 'prov-line', type: 'line', source: 'sumatera',
           paint: {
@@ -453,23 +394,21 @@ function ChoroplethMapbox({ apiRef }) {
             'line-width': ['case', ['==', ['get', 'target'], 1], 1.4, 0.5],
           },
         });
-        // Halo glow titik (lebih tebal agar jelas)
+        // Minimalist solid dots — no glow effect
         map.addLayer({
           id: 'kab-glow', type: 'circle', source: 'kab',
-          paint: { 'circle-radius': 19, 'circle-color': KAB_GLOW, 'circle-blur': 0.85, 'circle-opacity': 0 },
+          paint: { 'circle-radius': 10, 'circle-color': '#E67E22', 'circle-blur': 0, 'circle-opacity': 0 },
         });
-        // Core titik
+        // Core dots — solid minimalist
         map.addLayer({
           id: 'kab-core', type: 'circle', source: 'kab',
           paint: {
-            'circle-radius': 5.5, 'circle-color': '#FFEAC6',
-            'circle-stroke-color': KAB_GLOW, 'circle-stroke-width': 2,
+            'circle-radius': 5, 'circle-color': '#E67E22',
+            'circle-stroke-color': 'rgba(229,217,182,0.4)', 'circle-stroke-width': 1.5,
             'circle-opacity': 0, 'circle-stroke-opacity': 0,
           },
         });
 
-        // Label provinsi (nama + tingkat + jumlah desa) muncul OTOMATIS saat scroll.
-        // Pakai Marker HTML (pointer-events: none) supaya tracking ke koordinat & tak menghalangi.
         labelsRef.current = CHORO_LABELS.map((cfg) => {
           const t = CHORO_TARGETS[cfg.key];
           const el = document.createElement('div');
@@ -479,9 +418,9 @@ function ChoroplethMapbox({ apiRef }) {
             <div style="position: relative; display: flex; align-items: center; pointer-events: none;">
               <div style="width: 14px; height: 14px; background-color: ${t.color}; border-radius: 50%; box-shadow: 0 0 15px ${t.color}, inset 0 0 4px rgba(255,255,255,0.8); z-index: 2; border: 2px solid rgba(255,255,255,0.9);"></div>
               <div style="width: 40px; height: 2px; background-color: rgba(255,255,255,0.7); z-index: 1; margin-left: -2px;"></div>
-              <div style="background: rgba(15, 20, 25, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 6px 14px; border-radius: 6px; font-family: 'Lato', sans-serif; font-size: 11px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 4px; white-space: nowrap;">
-                <div style="font-weight: 800; color: ${t.color}; display: flex; align-items: center; gap: 6px;"><span style="font-size: 14px;">✓</span> ${t.label.toUpperCase()}</div>
-                <div style="font-weight: 300; font-size: 10px; color: rgba(255,255,255,0.7);">${t.tingkat} • ${Number(t.desa).toLocaleString('id-ID')} Desa</div>
+              <div style="background: rgba(21, 23, 61, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(229,217,182,0.15); color: #fff; padding: 6px 14px; border-radius: 6px; font-family: 'Lato', sans-serif; font-size: 11px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 4px; white-space: nowrap;">
+                <div style="font-weight: 800; color: ${t.color}; display: flex; align-items: center; gap: 6px;">${t.label.toUpperCase()}</div>
+                <div style="font-weight: 300; font-size: 10px; color: rgba(255,255,255,0.7);">${t.tingkat} · ${Number(t.desa).toLocaleString('id-ID')} Desa</div>
               </div>
             </div>
           `;
@@ -490,8 +429,7 @@ function ChoroplethMapbox({ apiRef }) {
         });
 
         st.ready = true;
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        applyReveal(reduce ? 1 : st.lastP);
+        applyReveal(st.lastP);
       });
 
       map.on('error', (e) => console.warn('[ChoroplethMapbox]', e.error?.message || e));
@@ -500,7 +438,6 @@ function ChoroplethMapbox({ apiRef }) {
       ro.observe(el);
     };
 
-    // Lazy-init: baru buat peta saat section mendekati viewport (hemat WebGL context kedua).
     const io = new IntersectionObserver((entries) => {
       if (entries.some((en) => en.isIntersecting)) {
         io.disconnect();
@@ -528,6 +465,9 @@ function ChoroplethMapbox({ apiRef }) {
   );
 }
 
+/* ─────────────────────────────────────────
+   HuntaraGallery — Horizontal scroll gallery
+───────────────────────────────────────────*/
 const HUNTARA_IMAGES = [
   { src: imgHuntara03, caption: "Sisa-sisa bangunan yang tersapu oleh derasnya aliran sungai." },
   { src: imgHuntara14, caption: "Fasilitas umum dan bangunan warga hancur tak bersisa." },
@@ -541,7 +481,6 @@ function HuntaraGallery() {
   useEffect(() => {
     let ctx = gsap.context(() => {
       const track = trackRef.current;
-      
       const totalWidth = track.scrollWidth;
       const amountToScroll = totalWidth - window.innerWidth;
 
@@ -558,7 +497,6 @@ function HuntaraGallery() {
         }
       });
 
-      // Parallax effect for images
       gsap.utils.toArray('.huntara-img').forEach((img) => {
         gsap.fromTo(img, 
           { x: '-15%' },
@@ -574,78 +512,42 @@ function HuntaraGallery() {
           }
         );
       });
-
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
   return (
     <section ref={containerRef} style={{ 
-      height: '100vh', 
-      width: '100%', 
-      background: 'linear-gradient(135deg, #E5D9B6 0%, #D4C59D 100%)', // Beige textured background
-      overflow: 'hidden',
-      position: 'relative',
-      zIndex: 5
+      height: '100vh', width: '100%', 
+      background: '#15173D',
+      overflow: 'hidden', position: 'relative', zIndex: 5
     }}>
-      {/* Texture overlay to break monotony */}
-      <div style={{
-        position: 'absolute', inset: 0, opacity: 0.15, pointerEvents: 'none',
-        backgroundImage: `radial-gradient(#15173D 1px, transparent 1px)`,
-        backgroundSize: '20px 20px'
-      }} />
-
       <div ref={trackRef} style={{
-        display: 'flex',
-        alignItems: 'center',
-        height: '100%',
-        width: 'fit-content',
-        paddingLeft: '5vw',
-        paddingRight: '15vw',
-        gap: '8vw'
+        display: 'flex', alignItems: 'center', height: '100%',
+        width: 'fit-content', paddingLeft: '5vw', paddingRight: '15vw', gap: '8vw'
       }}>
-        <div style={{
-          width: '35vw',
-          paddingLeft: '5vw',
-          color: '#15173D', 
-          flexShrink: 0
-        }}>
-          <h3 className="playfair-display" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.8rem)', fontStyle: 'italic', margin: 0, opacity: 0.9 }}>
+        <div style={{ width: '35vw', paddingLeft: '5vw', color: '#E5D9B6', flexShrink: 0 }}>
+          <h3 className="playfair-display" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.8rem)', fontStyle: 'italic', margin: 0 }}>
             Bencana ini tidak berhenti di satu titik.
           </h3>
-          <p className="lato-regular" style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.15rem)', maxWidth: '480px', opacity: 0.8, marginTop: '1.2rem', lineHeight: 1.6 }}>
+          <p className="lato-light" style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.15rem)', maxWidth: '480px', opacity: 0.6, marginTop: '1.2rem', lineHeight: 1.6 }}>
             Dari jembatan yang terputus hingga bangunan yang rata dengan tanah. Ini bukan sekadar angka, melainkan realitas hilangnya ruang hidup dalam sekejap mata.
           </p>
         </div>
 
         {HUNTARA_IMAGES.map((item, idx) => (
           <div key={idx} style={{
-            width: 'min(70vw, 800px)',
-            height: '65vh',
-            position: 'relative',
-            overflow: 'hidden',
-            borderRadius: '12px',
+            width: 'min(70vw, 800px)', height: '65vh', position: 'relative',
+            overflow: 'hidden', borderRadius: '12px',
             boxShadow: '0 30px 60px rgba(21, 23, 61, 0.4)'
           }}>
-            <img 
-              className="huntara-img"
-              src={item.src} 
-              alt={item.caption}
-              style={{
-                width: '130%', // Make it wider for parallax
-                height: '100%',
-                objectFit: 'cover',
-                position: 'absolute',
-                top: 0
-              }}
+            <img className="huntara-img" src={item.src} alt={item.caption}
+              style={{ width: '130%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0 }}
             />
-            {/* Caption overlay */}
             <div style={{
-              position: 'absolute',
-              bottom: 0, left: 0, right: 0,
+              position: 'absolute', bottom: 0, left: 0, right: 0,
               background: 'linear-gradient(to top, rgba(21, 23, 61, 0.9), transparent)',
-              padding: '3rem 2rem 1.5rem',
-              color: '#E5D9B6',
+              padding: '3rem 2rem 1.5rem', color: '#E5D9B6',
             }}>
               <p className="lato-light" style={{ margin: 0, fontSize: 'clamp(0.95rem, 1.2vw, 1.15rem)', letterSpacing: '0.5px' }}>
                 {item.caption}
@@ -658,6 +560,9 @@ function HuntaraGallery() {
   );
 }
 
+/* ─────────────────────────────────────────
+   SkalaDampakScene — Bento grid with maskot
+───────────────────────────────────────────*/
 function SkalaDampakScene() {
   const rootRef = useRef(null);
   const stageRef = useRef(null);
@@ -671,79 +576,47 @@ function SkalaDampakScene() {
     if (!root || !stage) return;
 
     const q = gsap.utils.selector(root);
-    const circ = 2 * Math.PI * SEKTOR_R_STROKE;
     const mm = gsap.matchMedia();
 
-    // Keadaan akhir tanpa animasi (prefers-reduced-motion)
-    const setFinalState = () => {
-      gsap.set(q('.s2-baseline'), { scaleX: 1 });
-      gsap.set(q('.s2-mask-inner'), { yPercent: 0 });
-      gsap.set(q('.s2-pill, .s2-sub, .s2-sektor-head, .s2-sektor-label'), { opacity: 1, y: 0 });
-      gsap.set(q('.s2-card'), { opacity: 1, y: 0, filter: 'blur(0px)' });
-      gsap.set(q('.s2-card-icon, .s2-card-num, .s2-card-desc'), { opacity: 1, y: 0 });
-      gsap.set(q('.s2-sektor-circle'), { strokeDasharray: circ, strokeDashoffset: 0 });
-      gsap.set(q('.s2-sektor-fill'), { opacity: 0.92, scale: 1, transformOrigin: '50% 50%' });
-      gsap.set(q('.s2-cakupan-eyebrow, .s2-cakupan-line, .s2-cakupan-gloss'), { opacity: 1, y: 0 });
-      gsap.set(q('.s2c-head, .s2c-legend'), { opacity: 1, y: 0 });
-      gsap.set(q('.s2-flow-step, .s2-flow-arrow'), { opacity: 1, y: 0 });
-      numRefs.current.forEach((el, i) => { if (el) el.textContent = fmtID(STAT_CARDS[i].value); });
-      if (ckpRefs.current.kab) ckpRefs.current.kab.textContent = fmtID(CAKUPAN.kab);
-      if (ckpRefs.current.kel) ckpRefs.current.kel.textContent = fmtID(CAKUPAN.keluarga);
-      mapApiRef.current?.reveal(1);
-    };
-
-    // Pill + headline (mask per kata) + subteks — sekali jalan, bukan scrub
     const buildIntro = () => {
       gsap.timeline({
         scrollTrigger: { trigger: stage, start: 'top 72%', once: true },
         defaults: { ease: 'power3.out' },
       })
-        .fromTo(q('.s2-pill'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7 })
         .fromTo(q('.s2-mask-inner'),
           { yPercent: 112 },
-          { yPercent: 0, duration: 0.95, ease: 'expo.out', stagger: 0.085 }, 0.12)
-        .fromTo(q('.s2-sub'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, 0.55);
+          { yPercent: 0, duration: 0.95, ease: 'expo.out', stagger: 0.085 }, 0.12);
     };
 
-    // Koreografi kartu: baseline → fill naik → angka & teks menyusul (per kartu)
     const buildCards = (tl) => {
-      // Hilangkan baseline scaleX jika tidak diperlukan lagi di Bento Grid, 
-      // tetapi biarkan jika masih ada elemen visual pemisah.
-      tl.fromTo(q('.s2-baseline'),
-        { scaleX: 0, transformOrigin: '0% 50%' },
-        { scaleX: 1, duration: 0.5, ease: 'power1.inOut' }, 0);
-
       STAT_CARDS.forEach((card, i) => {
-        const at = 0.22 + i * 0.15; // Lebih rapat jarak stagger antar kartu
+        const at = 0.15 + i * 0.18;
         const counter = { v: 0 };
         const numEl = () => numRefs.current[i];
 
-        // 1. Entry animasi kartu: Fade In, Slide Up 20px, Blur to Focus
+        // Fade-blur entrance
         tl.fromTo(q(`.s2-card-${i}`),
-          { opacity: 0, y: 40, filter: 'blur(10px)' },
-          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' }, at);
+          { opacity: 0, y: 50, filter: 'blur(12px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, ease: 'power3.out' }, at);
 
-        // 2. Konten dalam kartu muncul berurutan perlahan
-        tl.fromTo(q(`.s2-card-icon-${i}`), { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, at + 0.3);
-        tl.fromTo(q(`.s2-card-num-${i}`), { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, at + 0.45);
-        tl.fromTo(q(`.s2-card-desc-${i}`), { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, at + 0.6);
-
-        // Counter updates along with the number slide up
         tl.to(counter, {
-          v: card.value, duration: 0.9, ease: 'power2.out',
+          v: card.value, duration: 1.2, ease: 'power2.out',
           onUpdate: () => { const el = numEl(); if (el) el.textContent = fmtID(counter.v); },
-        }, at + 0.45);
+        }, at + 0.3);
       });
+
+      // Sektor cards
+      SEKTOR_DATA.forEach((s, i) => {
+        const at = 0.15 + (STAT_CARDS.length + i) * 0.18;
+        tl.fromTo(q(`.s2-sektor-${i}`),
+          { opacity: 0, y: 50, filter: 'blur(12px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, ease: 'power3.out' }, at);
+      });
+
       return tl;
     };
 
-    // Tunda pembuatan trigger sampai SEMUA pin di atasnya sudah ada — pin foto
-    // s2Wrapper dibuat oleh efek parent yang berjalan SETELAH efek child ini,
-    // dan pin-spacer-nya menggeser layout ±150vh; trigger yang dibuat lebih
-    // awal akan menyimpan posisi start yang basi.
     const setup = () => {
-      // Posisi awal kata headline DIATUR GSAP (bukan CSS/inline) — translateY
-      // persen dari CSS di-bake jadi px oleh GSAP dan merusak animasi yPercent.
       gsap.set(q('.s2-mask-inner'), { yPercent: 112 });
 
       mm.add(
@@ -754,96 +627,63 @@ function SkalaDampakScene() {
         },
         (ctx) => {
           const { isDesktop, reduced } = ctx.conditions;
-          if (reduced) { setFinalState(); return; }
+          if (reduced) return;
 
-          // Hairline penunjuk arah di bridge — menggambar turun mengikuti scroll
-          gsap.fromTo(q('.s2-bridge-line'),
-            { scaleY: 0, transformOrigin: '50% 0%' },
-            {
-              scaleY: 1, ease: 'none',
-              scrollTrigger: { trigger: q('.s2-bridge')[0], start: 'center 62%', end: 'bottom 30%', scrub: 1.5 },
-            });
 
-          // ── Cakupan Pendataan: 48 kab/kota + 115.462 keluarga (counter sekali jalan) ──
+          // Cakupan counter
           const cak = gsap.timeline({
             scrollTrigger: { trigger: q('.s2-cakupan')[0], start: 'top 70%', once: true },
             defaults: { ease: 'power3.out' },
           });
-          cak.fromTo(q('.s2-cakupan-eyebrow'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6 })
-            .fromTo(q('.s2-cakupan-line'), { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.85, stagger: 0.2 }, 0.12)
-            .fromTo(q('.s2-cakupan-gloss'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7 }, 0.85);
+          cak.fromTo(q('.s2-cakupan-eyebrow'), { opacity: 0, y: 12, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6 })
+            .fromTo(q('.s2-cakupan-line'), { opacity: 0, y: 22, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.85, stagger: 0.2 }, 0.12)
+            .fromTo(q('.s2-cakupan-gloss'), { opacity: 0, y: 14, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7 }, 0.85);
           const oKab = { v: 0 };
           const oKel = { v: 0 };
-          cak.to(oKab, {
-            v: CAKUPAN.kab, duration: 0.4, ease: 'power1.out',
-            onUpdate: () => { if (ckpRefs.current.kab) ckpRefs.current.kab.textContent = fmtID(oKab.v); },
-          }, 0.15);
-          cak.to(oKel, {
-            v: CAKUPAN.keluarga, duration: 0.5, ease: 'power1.out',
-            onUpdate: () => { if (ckpRefs.current.kel) ckpRefs.current.kel.textContent = fmtID(oKel.v); },
-          }, 0.3);
+          cak.to(oKab, { v: CAKUPAN.kab, duration: 0.4, ease: 'power1.out', onUpdate: () => { if (ckpRefs.current.kab) ckpRefs.current.kab.textContent = fmtID(oKab.v); } }, 0.15);
+          cak.to(oKel, { v: CAKUPAN.keluarga, duration: 0.5, ease: 'power1.out', onUpdate: () => { if (ckpRefs.current.kel) ckpRefs.current.kel.textContent = fmtID(oKel.v); } }, 0.3);
 
           buildIntro();
 
+          // Animate gradient blobs — slow floating yoyo
+          gsap.to(q('.s2-blob-1'), { x: 60, y: 40, duration: 12, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+          gsap.to(q('.s2-blob-2'), { x: -50, y: -30, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+          gsap.to(q('.s2-blob-3'), { x: 30, y: -50, duration: 16, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+
           if (isDesktop) {
-            // Stage di-pin; kartu terisi mengikuti scroll (scrub halus, bisa mundur)
             const tl = gsap.timeline({
-              scrollTrigger: {
-                trigger: stage, start: 'top top', end: '+=170%',
-                pin: true, scrub: 1.5, anticipatePin: 1,
-              },
+              scrollTrigger: { trigger: stage, start: 'top top', end: '+=170%', pin: true, scrub: 1.5, anticipatePin: 1 },
             });
             buildCards(tl);
-            tl.to({}, { duration: 0.35 }); // ruang napas sebelum unpin
+            tl.to({}, { duration: 0.35 });
           } else {
-            // Mobile: tanpa pin — timeline berbasis waktu saat kartu masuk viewport
             const tl = gsap.timeline({
               scrollTrigger: { trigger: q('.s2-cardswrap')[0], start: 'top 80%', once: true },
             });
             buildCards(tl);
           }
 
-          // (Sektor GSAP animation removed as it is now part of Bento Box)
-
-          // ── Peta Choropleth Mapbox: titik kab/kota menyala bertahap + tint provinsi ──
-          // Reveal di-drive imperatif ke layer Mapbox (mulus, tanpa re-render React).
-          // progress di-skala 1.3 agar semua titik menyala sebelum peta beranjak keluar.
+          // Choropleth map reveal
           ScrollTrigger.create({
             trigger: q('.s2-choro')[0],
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1.5,
+            start: 'top top', end: 'bottom bottom', scrub: 1.5,
             onUpdate: (self) => { mapApiRef.current?.reveal(self.progress * 1.3); },
             onRefresh: (self) => { mapApiRef.current?.reveal(self.progress * 1.3); },
           });
-          // Head + legend + hint + caption muncul sekali saat peta masuk viewport
+
           gsap.timeline({
             scrollTrigger: { trigger: q('.s2-choro')[0], start: 'top 72%', once: true },
             defaults: { ease: 'power3.out' },
           })
-            .fromTo(q('.s2c-head'), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7 })
+            .fromTo(q('.s2c-head'), { opacity: 0, y: 18, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7 })
             .fromTo(q('.s2c-legend'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 0.25);
 
-          // ── Penutup: alur data Desa → … → Provinsi dengan sapuan shine kiri→kanan ──
-          gsap.timeline({
-            scrollTrigger: { trigger: q('.s2-flow')[0], start: 'top 82%', once: true },
-            defaults: { ease: 'power3.out' },
-          })
-            .fromTo(q('.s2-flow-step'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 })
-            .fromTo(q('.s2-flow-arrow'), { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.12 }, 0.15)
-            .fromTo(q('.s2-flow-shine'),
-              { xPercent: -130, opacity: 0 },
-              { xPercent: 240, opacity: 1, duration: 1.15, ease: 'power2.inOut' }, 0.35);
         }
       );
     };
 
-    // Double-rAF: setup berjalan setelah seluruh efek commit ini (termasuk
-    // pin parent) selesai dan layout final ter-paint.
     let raf2 = 0;
     const raf1 = requestAnimationFrame(() => { raf2 = requestAnimationFrame(setup); });
-
-    // Jaring pengaman: ukur ulang setelah font & resource berat settle.
     const refresh = () => ScrollTrigger.refresh();
     const tid = setTimeout(refresh, 900);
     const tid2 = setTimeout(refresh, 2600);
@@ -860,10 +700,12 @@ function SkalaDampakScene() {
     };
   }, []);
 
+  const sektorColors = ['#E67E22', '#628141', '#E5D9B6', '#FFFFFF'];
+
   return (
     <div ref={rootRef} style={{ background: '#15173D' }}>
 
-      {/* ── Cakupan Pendataan: seberapa luas kami mendata (48 kab/kota · 115.462 keluarga) ── */}
+      {/* Cakupan Pendataan */}
       <section className="s2-cakupan" style={{
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center', textAlign: 'center',
@@ -876,11 +718,8 @@ function SkalaDampakScene() {
           Dari Catatan Lapangan
         </span>
 
-        <h3
-          aria-label={`Kami menelusuri ${fmtID(CAKUPAN.kab)} kabupaten/kota, mendengar suara ${fmtID(CAKUPAN.keluarga)} keluarga.`}
-          style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3em' }}
-        >
-          <span className="s2-cakupan-line playfair-display" aria-hidden style={{
+        <h3 style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3em' }}>
+          <span className="s2-cakupan-line playfair-display" style={{
             fontStyle: 'italic', fontWeight: 500, lineHeight: 1.3,
             fontSize: 'clamp(1.6rem, 3.4vw, 2.7rem)', color: 'rgba(245,245,245,0.92)',
           }}>
@@ -888,7 +727,7 @@ function SkalaDampakScene() {
             <span ref={(el) => { ckpRefs.current.kab = el; }} style={{ color: '#E5D9B6', fontWeight: 600 }}>0</span>
             {' '}kabupaten/kota,
           </span>
-          <span className="s2-cakupan-line playfair-display" aria-hidden style={{
+          <span className="s2-cakupan-line playfair-display" style={{
             fontStyle: 'italic', fontWeight: 500, lineHeight: 1.3,
             fontSize: 'clamp(1.6rem, 3.4vw, 2.7rem)', color: 'rgba(245,245,245,0.92)',
           }}>
@@ -907,63 +746,48 @@ function SkalaDampakScene() {
         </p>
       </section>
 
-      {/* ── Bridge: pivot dari usaha survei → temuan ── */}
-      <section className="s2-bridge" style={{
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center', textAlign: 'center',
-        padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.25rem, 6vw, 3rem) clamp(3.5rem, 8vh, 6rem)',
-        position: 'relative',
-      }}>
-        <ScrollReveal
-          baseOpacity={0} enableBlur={true} baseRotation={1.5} blurStrength={6}
-          wordAnimationEnd="center center"
-          containerClassName="s2-bridge-wrap" textClassName="s2-bridge-text"
-        >
-          Bencana ini tidak berhenti di satu titik.
-        </ScrollReveal>
-        <div className="s2-bridge-line" style={{
-          width: 1, height: 'clamp(40px, 7vh, 64px)', marginTop: '2.2rem',
-          background: 'linear-gradient(to bottom, rgba(229,217,182,0.45), rgba(229,217,182,0.05))',
-        }} />
-      </section>
-
+      {/* ── Carousel: "Bencana ini tidak berhenti di satu titik" ── */}
       <HuntaraGallery />
 
-      {/* PATTERN SEPARATOR AFTER CAROUSEL */}
-      <div style={{
-        width: '100%',
-        height: '40px',
-        backgroundImage: `url(${patternImg})`,
-        backgroundRepeat: 'repeat-x',
-        backgroundSize: 'auto 100%',
-        backgroundColor: '#15173D',
-        position: 'relative',
-        zIndex: 12
-      }} />
-
-      {/* ── Stage: pill + headline + 4 kartu (pinned di desktop) ── */}
+      {/* Stage: Bento Grid — Asymmetric layout */}
       <section ref={stageRef} className="s2-stage" style={{
         height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden', position: 'relative', zIndex: 2, background: '#15173D',
         padding: '0 clamp(1.25rem, 5vw, 3rem)',
       }}>
-        {/* Ambient Background Blobs */}
-        <div className="s2-ambient-blob" style={{ background: '#EF8722', width: '700px', height: '700px', top: '-10%', left: '-10%' }} />
-        <div className="s2-ambient-blob" style={{ background: '#4FC3F7', width: '600px', height: '600px', bottom: '-5%', right: '-10%', opacity: 0.15 }} />
-
+        {/* Animated Gradient Blobs — Reactbits-style living background */}
+        <div className="s2-blob s2-blob-1" style={{
+          position: 'absolute', width: '700px', height: '700px',
+          borderRadius: '50%', background: '#E67E22', opacity: 0.12,
+          filter: 'blur(140px)', top: '-15%', left: '-10%',
+          pointerEvents: 'none', zIndex: 0,
+        }} />
+        <div className="s2-blob s2-blob-2" style={{
+          position: 'absolute', width: '600px', height: '600px',
+          borderRadius: '50%', background: '#628141', opacity: 0.10,
+          filter: 'blur(140px)', bottom: '-10%', right: '-12%',
+          pointerEvents: 'none', zIndex: 0,
+        }} />
+        <div className="s2-blob s2-blob-3" style={{
+          position: 'absolute', width: '400px', height: '400px',
+          borderRadius: '50%', background: '#E5D9B6', opacity: 0.06,
+          filter: 'blur(120px)', top: '40%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          pointerEvents: 'none', zIndex: 0,
+        }} />
         <div style={{
           width: '100%', maxWidth: 1320, display: 'flex', flexDirection: 'column',
           alignItems: 'center', gap: 'clamp(1.6rem, 4vh, 2.6rem)', position: 'relative', zIndex: 5
         }}>
+          {/* Headline */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
-            <h2 className="s2-headline playfair-display" aria-label="Skala Besar Dampak Nyata" style={{
+            <h2 className="s2-headline playfair-display" style={{
               fontStyle: 'italic', fontWeight: 600, textAlign: 'center', lineHeight: 1.12,
               fontSize: 'clamp(2.2rem, 5.5vw, 4rem)', margin: 0,
               display: 'flex', flexWrap: 'wrap', justifyContent: 'center', columnGap: '0.32em',
             }}>
               {HEADLINE_WORDS.map((w, i) => (
-                <span key={i} className="s2-mask" aria-hidden style={{ display: 'inline-block', overflow: 'hidden', padding: '0.08em 0.05em' }}>
+                <span key={i} className="s2-mask" style={{ display: 'inline-block', overflow: 'hidden', padding: '0.08em 0.05em' }}>
                   <span className="s2-mask-inner" style={{ display: 'inline-block', color: w.color }}>
                     {w.text}
                   </span>
@@ -971,208 +795,111 @@ function SkalaDampakScene() {
               ))}
             </h2>
 
-            <p className="s2-sub lato-light" style={{
-              marginTop: '1.1rem', maxWidth: 560, textAlign: 'center', lineHeight: 1.7,
-              fontSize: 'clamp(0.92rem, 1.3vw, 1.05rem)', color: 'rgba(245,245,245,0.6)', opacity: 0,
-            }}>
-              Empat angka dari lapangan yang merangkum luasnya kehancuran.
-            </p>
           </div>
 
-      {/* ── Cards Grid Masonry ── */}
-      <div className="s2-cardswrap" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-        <div className="s2-cards" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gridAutoRows: '220px',
-          gap: '24px',
-          width: '100%',
-          maxWidth: '1200px',
-          margin: '0 auto',
-          boxSizing: 'border-box',
-        }}>
-          {/* Primary Data Cards */}
-          {STAT_CARDS.map((card, i) => {
-            const isHero = i === 0; // Warga Terdampak is first
-            // Determine grid span based on key
-            let spanStyle = {};
-            if (card.key === 'warga') spanStyle = { gridColumn: 'span 2', gridRow: 'span 2' };
-            else if (card.key === 'wilayah') spanStyle = { gridColumn: 'span 1', gridRow: 'span 2' };
-            else if (card.key === 'rumah') spanStyle = { gridColumn: 'span 1', gridRow: 'span 2' };
-            return (
-              <div
-                key={card.key}
-                className={`s2-card ${isHero ? 's2-card-hero' : ''}`}
-                style={{
-                  '--accent': card.color,
-                  ...spanStyle,
-                  background: "linear-gradient(to bottom, rgba(15,20,25,0.3) 0%, rgba(15,20,25,0.9) 100%), url('/src/assets/images/huntara-01.JPG') center/cover no-repeat",
-                  color: '#fff',
-                }}
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                  e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                }}
-              >
-                {/* Tag */}
-                <div className="s2-tag" style={{
-                  position: 'absolute', top: '24px', left: '24px', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700, color: '#E5D9B6', zIndex: 2,
-                }}>{card.label}</div>
-                {/* Maskot for Hero */}
-                {isHero && (
-                  <img src={maskotImg} alt="Maskot" style={{ position: 'absolute', bottom: 0, right: 0, width: '80px', height: 'auto', zIndex: 2 }} />
-                )}
-                {/* Content */}
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  height: '100%',
-                  padding: '24px',
-                  position: 'relative',
-                  zIndex: 2,
-                }}>
-                  {/* Number */}
-                  <div className="s2-number" style={{
-                    fontFamily: 'Playfair Display, serif',
-                    fontSize: isHero ? 'clamp(3rem,5vw,5rem)' : 'clamp(2rem,4vw,3rem)',
-                    fontStyle: 'italic',
-                    fontWeight: 700,
-                    lineHeight: 1,
-                  }}>
-                    {fmtID(card.value)} <span className="lato-light" style={{ fontSize: '0.6em', fontWeight: 400 }}>{card.unit}</span>
+          {/* Bento Grid — 2-column asymmetric per reference */}
+          <div className="s2-cardswrap" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <div className="s2-bento-grid">
+              {/* Card 1 (Left) — Hero: Warga Terdampak — spans 2 rows */}
+              <div className={`s2-bento-card s2-card-0 s2-bento-hero`} style={{
+                '--accent': STAT_CARDS[1].color,
+                gridColumn: '1 / 2', gridRow: '1 / 3',
+                position: 'relative', minHeight: '380px',
+              }}>
+                <div className="s2-bento-content">
+                  <span className="lato-bold" style={{ fontSize: '0.95rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[1].label}</span>
+                  <div ref={el => numRefs.current[1] = el} className="playfair-display" style={{ fontSize: 'clamp(3.5rem, 7vw, 5.5rem)', fontStyle: 'italic', fontWeight: 700, color: '#E5D9B6', lineHeight: 1, margin: '0.3rem 0' }}>0</div>
+                  <span className="lato-light" style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)' }}>{STAT_CARDS[1].unit}</span>
+                  <p className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.45)', marginTop: '0.8rem', lineHeight: 1.6, maxWidth: 280 }}>{STAT_CARDS[1].microcopy}</p>
+                </div>
+                {/* Maskot peeking — large */}
+                <img src={maskotImg} alt="" style={{
+                  position: 'absolute', bottom: -10, right: 20,
+                  height: '200px', width: 'auto',
+                  opacity: 0.9, zIndex: 2, pointerEvents: 'none',
+                }} />
+              </div>
+
+              {/* Card 2 (Right Top Left) — Wilayah */}
+              <div className={`s2-bento-card s2-card-1`} style={{ '--accent': STAT_CARDS[0].color, gridColumn: '2 / 3', gridRow: '1 / 2' }}>
+                <div className="s2-bento-content">
+                  <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[0].label}</span>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', margin: '0.3rem 0' }}>
+                    <div ref={el => numRefs.current[0] = el} className="playfair-display" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', fontStyle: 'italic', fontWeight: 700, color: '#E67E22', lineHeight: 1 }}>0</div>
+                    <span className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)' }}>{STAT_CARDS[0].unit}</span>
                   </div>
-                  {/* Bottom */}
+                  <p className="lato-light" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{STAT_CARDS[0].microcopy}</p>
+                </div>
+              </div>
+
+              {/* Card 3 (Right Top Right) — Rumah */}
+              <div className={`s2-bento-card s2-card-2`} style={{ '--accent': STAT_CARDS[2].color, gridColumn: '3 / 4', gridRow: '1 / 2' }}>
+                <div className="s2-bento-content">
+                  <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[2].label}</span>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', margin: '0.3rem 0' }}>
+                    <div ref={el => numRefs.current[2] = el} className="playfair-display" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', fontStyle: 'italic', fontWeight: 700, color: '#FFFFFF', lineHeight: 1 }}>0</div>
+                    <span className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)' }}>{STAT_CARDS[2].unit}</span>
+                  </div>
+                  <p className="lato-light" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{STAT_CARDS[2].microcopy}</p>
+                </div>
+              </div>
+
+              {/* Card 4 (Right Bottom) — Fasilitas Umum + Sektor breakdown */}
+              <div className={`s2-bento-card s2-card-3`} style={{ '--accent': STAT_CARDS[3].color, gridColumn: '2 / 4', gridRow: '2 / 3' }}>
+                <div className="s2-bento-content" style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
                   <div>
-                    <div className="s2-title" style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '4px' }}>{card.label}</div>
-                    <div className="s2-pill" style={{
-                      background: 'rgba(255,255,255,0.9)',
-                      backdropFilter: 'blur(6px)',
-                      padding: '4px 8px',
-                      borderRadius: '12px',
-                      fontSize: '0.75rem',
-                      fontWeight: 600,
-                      color: '#333',
-                      display: 'inline-block',
-                      marginTop: '4px',
-                    }}>{card.microcopy}</div>
+                    <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[3].label}</span>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', margin: '0.3rem 0' }}>
+                      <div ref={el => numRefs.current[3] = el} className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontStyle: 'italic', fontWeight: 700, color: '#628141', lineHeight: 1 }}>0</div>
+                      <span className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)' }}>{STAT_CARDS[3].unit}</span>
+                    </div>
+                    <p className="lato-light" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{STAT_CARDS[3].microcopy}</p>
+                  </div>
+                  {/* Sector breakdown — colorful typography */}
+                  <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+                    {SEKTOR_DATA.map((s, idx) => (
+                      <div key={s.key} className={`s2-sektor-${idx}`} style={{ textAlign: 'center' }}>
+                        <div className="playfair-display" style={{ fontSize: '1.4rem', fontStyle: 'italic', fontWeight: 700, color: sektorColors[idx], lineHeight: 1 }}>{fmtID(s.value)}</div>
+                        <div className="lato-light" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)', marginTop: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.label}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            );
-          })}
-          {/* Sector Cards Integrated */}
-          {SEKTOR_DATA.map((s, idx) => {
-            const colors = ['#E74C3C', '#F1C40F', '#3498DB', '#2ECC71'];
-            const color = colors[idx % colors.length];
-            return (
-              <div
-                key={s.key}
-                className="s2-card"
-                style={{
-                  '--accent': color,
-                  background: "linear-gradient(to bottom, rgba(15,20,25,0.3) 0%, rgba(15,20,25,0.9) 100%), url('/src/assets/images/huntara-01.JPG') center/cover no-repeat",
-                  color: '#fff',
-                }}
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                  e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                }}
-              >
-                <div className="s2-tag" style={{
-                  position: 'absolute', top: '24px', left: '24px', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700, color: '#E5D9B6', zIndex: 2,
-                }}>{s.label}</div>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  height: '100%',
-                  padding: '24px',
-                  position: 'relative',
-                  zIndex: 2,
-                }}>
-                  <div className="s2-number" style={{
-                    fontFamily: 'Playfair Display, serif',
-                    fontSize: 'clamp(2rem,4vw,3rem)',
-                    fontStyle: 'italic',
-                    fontWeight: 700,
-                    lineHeight: 1,
-                  }}>
-                    {fmtID(s.value)} <span className="lato-light" style={{ fontSize: '0.6em', fontWeight: 400 }}>unit</span>
-                  </div>
-                  <div>
-                    <div className="s2-title" style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '4px' }}>{s.label}</div>
-                    <div className="s2-pill" style={{
-                      background: 'rgba(255,255,255,0.9)',
-                      backdropFilter: 'blur(6px)',
-                      padding: '4px 8px',
-                      borderRadius: '12px',
-                      fontSize: '0.75rem',
-                      fontWeight: 600,
-                      color: '#333',
-                      display: 'inline-block',
-                      marginTop: '4px',
-                    }}>Sector</div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      {/* End of Masonry Grid */}
-            <div className="s2-baseline" style={{
-              width: '100%', maxWidth: 1020, height: 1, marginTop: 0,
-              background: 'rgba(229,217,182,0.22)', transform: 'scaleX(0)',
-            }} />
+            </div>
           </div>
+        </div>
       </section>
 
-      {/* ── Peta Sebaran Kerusakan (Mapbox satelit muted, FULL-SCREEN) ── */}
-      <section className="s2-choro">
+      {/* SVG Wave Divider — organic transition from Navy to Map */}
+      <div style={{ position: 'relative', zIndex: 3, background: '#15173D', marginBottom: '-2px' }}>
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '80px' }}>
+          <path d="M0,0 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,0 Z" fill="#15173D" />
+        </svg>
+      </div>
+      {/* Pattern border */}
+      <div style={{
+        width: '100%', height: '40px',
+        backgroundImage: `url(${patternImg})`, backgroundRepeat: 'repeat-x',
+        backgroundSize: 'auto 100%', backgroundColor: '#15173D',
+        position: 'relative', zIndex: 4,
+      }} />
+
+      {/* Choropleth Map — dark vector style */}
+      <section className="s2-choro" style={{ marginTop: '-1px' }}>
         <div className="s2c-sticky">
           <ChoroplethMapbox apiRef={mapApiRef} />
-
-          {/* Panel Data Cula.tech — Posisi Kanan Atas (Area Lautan Kosong) */}
-          <div className="s2c-head" style={{
-            position: 'absolute',
-            top: '12%',         // Taruh di atas
-            right: '5%',        // Taruh di kanan (Area Selat Malaka yang kosong)
-            bottom: 'auto',     // WAJIB: Matikan CSS bawaan
-            left: 'auto',       // WAJIB: Matikan CSS bawaan
-            transform: 'none',  // WAJIB: Matikan efek center dari CSS bawaan
-            width: 'auto',      // WAJIB: Cegah elemen melebar 100%
-            zIndex: 20,
-            textAlign: 'left'
-          }}>
-            <CulaDataPanel />
-          </div>
+          {/* Province labels appear as cinematic text during panning — no dashboard panel */}
         </div>
       </section>
 
-      {/* ── Penutup: alur data dari desa ke provinsi (efek shine kiri→kanan) ── */}
-      <section className="s2-flow">
-        <div className="s2-flow-track">
-          {['Desa', 'Kecamatan', 'Kab/Kota', 'Provinsi'].map((label, i) => (
-            <React.Fragment key={label}>
-              <span className="s2-flow-step lato-light">{label}</span>
-              {i < 3 && <span className="s2-flow-arrow">→</span>}
-            </React.Fragment>
-          ))}
-          <div className="s2-flow-shine" />
-        </div>
-        <p className="s2-flow-cap lato-light">
-          Dari titik terkecil di lapangan hingga gambaran utuh tiga provinsi.
-        </p>
-      </section>
+      {/* Flow section removed — clean editorial end */}
     </div>
   );
 }
 
 /* ─────────────────────────────────────────
-   MapboxGlobe Component
+   MapboxGlobe — SMOOTH PANNING (no zoom out/in)
 ───────────────────────────────────────────*/
 function MapboxGlobe({ phase }) {
   const mapContainer = useRef(null);
@@ -1181,7 +908,6 @@ function MapboxGlobe({ phase }) {
   const [mapReady, setMapReady] = useState(false);
   const [mapError, setMapError] = useState(null);
 
-  /* ─── Init Mapbox ─── */
   useEffect(() => {
     if (!mapContainer.current) return;
     if (mapRef.current) return;
@@ -1217,9 +943,7 @@ function MapboxGlobe({ phase }) {
         setMapError(e.error?.message || String(e.error || e));
       });
 
-      ro = new ResizeObserver(() => {
-        if (mapRef.current) mapRef.current.resize();
-      });
+      ro = new ResizeObserver(() => { if (mapRef.current) mapRef.current.resize(); });
       ro.observe(mapContainer.current);
     } catch (err) {
       setMapError('Failed to init mapbox-gl: ' + err.message);
@@ -1228,19 +952,15 @@ function MapboxGlobe({ phase }) {
     return () => {
       if (ro && mapContainer.current) ro.disconnect();
       if (spinRef.current) cancelAnimationFrame(spinRef.current);
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
+      if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
       setMapReady(false);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
-  /* ─── Spin loop (fase 'spin') ─── */
+  /* Spin loop */
   useEffect(() => {
     if (!mapReady) return;
     const map = mapRef.current;
-
     if (phase === 'spin') {
       let spinning = true;
       const tick = () => {
@@ -1251,104 +971,83 @@ function MapboxGlobe({ phase }) {
         spinRef.current = requestAnimationFrame(tick);
       };
       spinRef.current = requestAnimationFrame(tick);
-      return () => {
-        spinning = false;
-        if (spinRef.current) cancelAnimationFrame(spinRef.current);
-      };
+      return () => { spinning = false; if (spinRef.current) cancelAnimationFrame(spinRef.current); };
     } else {
       if (spinRef.current) cancelAnimationFrame(spinRef.current);
     }
   }, [phase, mapReady]);
 
-  /* ─── FlyTo ─── */
+  /* SMOOTH PANNING — Use easeTo instead of flyTo for province transitions */
   useEffect(() => {
     if (!mapReady || !mapRef.current) return;
     const map = mapRef.current;
     const cfg = PHASE_MAP[phase];
     if (!cfg || phase === 'spin') return;
 
-    // WAJIB: Hentikan semua animasi yang sedang berjalan sebelum pindah
     map.stop();
 
-    /* Fly */
-    map.flyTo({
-      center: [cfg.lng, cfg.lat],
-      zoom: cfg.zoom,
-      pitch: cfg.pitch ?? 0,
-      bearing: 0,
-      duration: 2500, // Diperlambat sedikit agar lebih halus
-      essential: true,
-    });
-
-  }, [phase, mapReady]); // eslint-disable-line react-hooks/exhaustive-deps
+    // For province-to-province transitions, use easeTo for smooth linear panning
+    const isProvince = ['aceh', 'sumut', 'sumbar'].includes(phase);
+    
+    if (isProvince) {
+      map.easeTo({
+        center: [cfg.lng, cfg.lat],
+        zoom: cfg.zoom,
+        pitch: cfg.pitch ?? 0,
+        bearing: 0,
+        duration: 2200,
+        easing: (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2, // easeInOutQuad
+        essential: true,
+      });
+    } else {
+      map.flyTo({
+        center: [cfg.lng, cfg.lat],
+        zoom: cfg.zoom,
+        pitch: cfg.pitch ?? 0,
+        bearing: 0,
+        duration: 2500,
+        essential: true,
+      });
+    }
+  }, [phase, mapReady]);
 
   const markerRef = useRef(null);
 
-  /* ─── Hotspot Marker ─── */
+  /* Hotspot Marker — larger red dots */
   useEffect(() => {
     if (!mapReady || !mapRef.current) return;
     const map = mapRef.current;
-
-    if (markerRef.current) {
-      markerRef.current.remove();
-      markerRef.current = null;
-    }
-
+    if (markerRef.current) { markerRef.current.remove(); markerRef.current = null; }
     const cfg = PHASE_MAP[phase];
 
-    // Tampilkan marker khusus untuk phase aceh, sumut, dan sumbar
     if (cfg && (phase === 'aceh' || phase === 'sumut' || phase === 'sumbar')) {
-      // Struktur DOM khusus Inversa Marker
       const el = document.createElement('div');
       el.className = 'custom-inversa-marker';
-      el.innerHTML = `
-        <div class="inversa-pulse"></div>
-        <div class="inversa-dot"></div>
-
-      `;
-
-      markerRef.current = new mapboxgl.Marker({ element: el })
-        .setLngLat([cfg.lng, cfg.lat])
-        .addTo(map);
+      el.innerHTML = `<div class="inversa-pulse"></div><div class="inversa-dot"></div>`;
+      markerRef.current = new mapboxgl.Marker({ element: el }).setLngLat([cfg.lng, cfg.lat]).addTo(map);
     }
 
-    return () => {
-      if (markerRef.current) markerRef.current.remove();
-    };
+    return () => { if (markerRef.current) markerRef.current.remove(); };
   }, [phase, mapReady]);
 
   return (
     <>
       {mapError && (
-        <div style={{
-          position: 'absolute', top: 20, left: 20, zIndex: 100,
-          background: 'red', color: 'white', padding: 20, borderRadius: 8,
-          maxWidth: '80%', wordBreak: 'break-word'
-        }}>
+        <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 100, background: '#E67E22', color: 'white', padding: 20, borderRadius: 8, maxWidth: '80%' }}>
           <b>Mapbox Error:</b> {mapError}
         </div>
       )}
-
-      <div
-        ref={mapContainer}
-        style={{
-          width: '100%', height: '100%',
-          position: 'absolute', inset: 0,
-          zIndex: 1,
-          filter: 'grayscale(15%) contrast(1.1)',
-        }}
-      />
+      <div ref={mapContainer} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, zIndex: 1, filter: 'grayscale(15%) contrast(1.1)' }} />
     </>
   );
 }
 
 /* ─────────────────────────────────────────
-   Label & Progress Components (Unchanged)
+   PhaseLabel — Province labels (no icons)
 ───────────────────────────────────────────*/
 function PhaseLabel({ phase }) {
   if (phase === 'spin' || phase === 'done') return null;
 
-  // --- 1. TAMPILAN FASE AWAL (WORLD & SUMATERA) ---
   if (phase === 'world' || phase === 'sumatera') {
     const introText = phase === 'world'
       ? 'Di penghujung tahun, saat kehidupan berjalan seperti biasa... alam memiliki skenario berbeda.'
@@ -1359,22 +1058,14 @@ function PhaseLabel({ phase }) {
         position: 'absolute', bottom: '25%', left: '10%', zIndex: 20, pointerEvents: 'none',
         width: '700px', animation: 'fadeSlideUp 0.8s ease both'
       }}>
-        <TextType
-          text={introText}
-          typingSpeed={30}
-          showCursor={true}
-          className="lato-regular"
-          style={{
-            fontSize: '1.1rem', color: '#fff',
-            textShadow: '0 2px 10px rgba(0,0,0,0.9)', fontWeight: 300, lineHeight: 1.4
-          }}
+        <TextType text={introText} typingSpeed={30} showCursor={true} className="lato-light"
+          style={{ fontSize: '1.1rem', color: '#fff', textShadow: '0 2px 10px rgba(0,0,0,0.9)', fontWeight: 300, lineHeight: 1.4 }}
           loop={false}
         />
       </div>
     );
   }
 
-  // --- 2. TAMPILAN FASE PROVINSI (ACEH, SUMUT, SUMBAR) ---
   let title = '';
   let narasi = '';
 
@@ -1402,29 +1093,16 @@ function PhaseLabel({ phase }) {
         {title}
       </div>
 
-      <TextType
-        text={narasi}
-        typingSpeed={20}
-        showCursor={true}
-        className="lato-light"
-        style={{
-          fontSize: '1.1rem', color: 'rgba(255, 255, 255, 0.9)',
-          textShadow: '0 2px 10px rgba(0,0,0,0.9)', fontWeight: 300, lineHeight: 1.6
-        }}
+      <TextType text={narasi} typingSpeed={20} showCursor={true} className="lato-light"
+        style={{ fontSize: '1.1rem', color: 'rgba(255, 255, 255, 0.9)', textShadow: '0 2px 10px rgba(0,0,0,0.9)', fontWeight: 300, lineHeight: 1.6 }}
         loop={false}
       />
     </div>
   );
 }
 
-function ProgressDots({ phase }) {
-  // Mengembalikan null agar komponen ini tidak me-render apa-apa,
-  // sehingga progress provinsi di kanan hilang tanpa merusak struktur JSX/animasi.
-  return null;
-}
-
 /* ─────────────────────────────────────────
-   Main Component
+   Main Component: BabakIntro
 ───────────────────────────────────────────*/
 export default function BabakIntro() {
   const [phase, setPhase] = useState('spin');
@@ -1432,11 +1110,10 @@ export default function BabakIntro() {
   const scrollProgressRef = useRef(0);
 
   const wrapperRef = useRef(null);
-
   const openingRef = useRef(null);
-  const closingRef = useRef(null);
   const loadingTextRef = useRef(null);
   const cursorRef = useRef(null);
+  const photoRef = useRef(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -1458,9 +1135,7 @@ export default function BabakIntro() {
   }, []);
 
   useEffect(() => {
-    // Helper to generate a jagged sci-fi polygon
     const getJaggedPolygon = (scale) => {
-      // Base coordinates around center (50, 50)
       const pts = [
         [40, 40], [35, 40], [35, 45], [25, 45], [25, 55], [35, 55], [35, 60],
         [40, 60], [40, 65], [45, 65], [45, 75], [55, 75], [55, 65], [60, 65],
@@ -1473,53 +1148,34 @@ export default function BabakIntro() {
         const y = (p[1] - 50) * scale + 50;
         return `${x}% ${y}%`;
       });
-      // Outer box clockwise, inner hole counter-clockwise
       return `polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, ${scaledPts.join(', ')})`;
     };
 
-    if (openingRef.current) {
-      // Start with hole size 0
-      openingRef.current.style.clipPath = getJaggedPolygon(0);
-    }
-
-    // Fade out LOADING text
+    if (openingRef.current) openingRef.current.style.clipPath = getJaggedPolygon(0);
     gsap.to(loadingTextRef.current, { opacity: 0, duration: 0.8, delay: 0.5 });
 
-    // Animate opening hole
     const obj = { scale: 0 };
     gsap.to(obj, {
-      scale: 15, // Scale hole to cover screen
-      duration: 2.5,
-      delay: 0.8,
-      ease: "power3.inOut",
-      onUpdate: () => {
-        if (openingRef.current) {
-          openingRef.current.style.clipPath = getJaggedPolygon(obj.scale);
-        }
-      },
-      onComplete: () => {
-        if (openingRef.current) openingRef.current.style.display = 'none';
-      }
+      scale: 15, duration: 2.5, delay: 0.8, ease: "power3.inOut",
+      onUpdate: () => { if (openingRef.current) openingRef.current.style.clipPath = getJaggedPolygon(obj.scale); },
+      onComplete: () => { if (openingRef.current) openingRef.current.style.display = 'none'; }
     });
 
-    // Efek Dissolve: Map memudar dan blur perlahan untuk menampakkan foto di baliknya
+    // CROSSFADE: Map blurs + fades, photo fades in simultaneously
     gsap.to(wrapperRef.current, {
       opacity: 0,
-      filter: 'blur(15px) grayscale(100%)', // Efek dramatis saat menghilang
+      filter: 'blur(20px)',
       scrollTrigger: {
         trigger: wrapperRef.current,
-        start: 'bottom 150%', // Mulai memudar di sisa scroll terakhir
-        end: 'bottom 100%',   // Memudar sempurna tepat saat map selesai
+        start: 'bottom 150%',
+        end: 'bottom 100%',
         scrub: 1.5,
       }
     });
   }, []);
 
   useEffect(() => {
-    // Custom cursor setup
-    if (cursorRef.current) {
-      gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
-    }
+    if (cursorRef.current) gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
     const moveCursor = (e) => {
       if (cursorRef.current && scrollProgressRef.current < 0.95) {
         gsap.to(cursorRef.current, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "none" });
@@ -1529,61 +1185,64 @@ export default function BabakIntro() {
     return () => window.removeEventListener('mousemove', moveCursor);
   }, []);
 
+  // Photo crossfade entrance animation
+  useEffect(() => {
+    if (!photoRef.current) return;
+    gsap.fromTo(photoRef.current,
+      { scale: 1.15, opacity: 0, filter: 'blur(10px)' },
+      {
+        scale: 1, opacity: 1, filter: 'blur(0px)',
+        scrollTrigger: {
+          trigger: photoRef.current,
+          start: 'top 80%',
+          end: 'top 30%',
+          scrub: 1.5,
+        }
+      }
+    );
+  }, []);
+
   return (
     <>
       {/* Custom Cursor */}
       <div ref={cursorRef} style={{
         position: 'fixed', top: 0, left: 0, zIndex: 99999, pointerEvents: 'none',
-        width: '70px', height: '70px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.4)',
+        width: '70px', height: '70px', borderRadius: '50%', border: '1px solid rgba(229,217,182,0.4)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         opacity: scrollProgress < 0.95 ? 1 : 0, transition: 'opacity 0.3s'
       }}>
         <span className="lato-bold" style={{ fontSize: '11px', color: '#fff', letterSpacing: '2px', textTransform: 'uppercase' }}>Scroll</span>
       </div>
 
-
-      {/* Opening Jagged Overlay */}
+      {/* Opening Overlay */}
       <div ref={openingRef} style={{
         position: 'fixed', inset: 0, zIndex: 99999, background: '#0a0a0a',
         display: 'flex', alignItems: 'flex-end', padding: '40px'
       }}>
-        <div ref={loadingTextRef} style={{
-          fontFamily: 'monospace', color: '#fff', fontSize: '14px', letterSpacing: '4px', opacity: 1
-        }}>
+        <div ref={loadingTextRef} style={{ fontFamily: 'monospace', color: '#E5D9B6', fontSize: '14px', letterSpacing: '4px', opacity: 1 }}>
           LOADING...
         </div>
       </div>
 
-      {/* Tactical UI Overlay (Fixed Position) */}
+      {/* Tactical UI Overlay */}
       <div style={{
         position: 'fixed', inset: 0, zIndex: 9998, pointerEvents: 'none',
-        fontFamily: 'sans-serif', color: 'rgba(255,255,255,0.7)', fontSize: '11px',
+        fontFamily: 'var(--font-content)', color: 'rgba(229,217,182,0.7)', fontSize: '11px',
         letterSpacing: '2px', textTransform: 'uppercase',
         opacity: scrollProgress < 0.95 ? 1 : 0, transition: 'opacity 0.5s ease'
       }}>
-        {/* Top Left Logo */}
         <div style={{ position: 'absolute', top: '35px', left: '40px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontWeight: 600, color: '#fff' }}> HASIL PENDATAAN R3P </span>
+          <span className="lato-bold" style={{ fontWeight: 600, color: '#E5D9B6' }}>HASIL PENDATAAN R3P</span>
         </div>
-
-        {/* Top Right Menu */}
         <Link to="/" style={{ position: 'absolute', top: '35px', right: '40px', display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }}>
-          <span style={{ fontWeight: 500 }}>BERANDA</span>
-          <div style={{ width: '16px', height: '16px', border: '1px solid rgba(255,255,255,0.4)', borderRadius: '50%', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '3px', height: '3px', background: '#fff', transform: 'translate(-50%, -50%)' }} />
-          </div>
+          <span className="lato-light" style={{ fontWeight: 500 }}>BERANDA</span>
         </Link>
-
-        {/* Right Middle Scroll Progress */}
-        <div style={{ position: 'absolute', top: '50%', right: '40px', transform: 'translateY(-50%)', height: '200px', width: '1px', background: 'rgba(255,255,255,0.15)' }}>
+        <div style={{ position: 'absolute', top: '50%', right: '40px', transform: 'translateY(-50%)', height: '200px', width: '1px', background: 'rgba(229,217,182,0.15)' }}>
           <div style={{ width: '100%', background: '#E67E22', height: `${Math.min((scrollProgress / 0.85) * 100, 100)}%`, transition: 'height 0.1s linear' }} />
-          <div style={{ position: 'absolute', top: '-20px', left: '50%', transform: 'translateX(-50%)' }}>0%</div>
-          <div style={{ position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%)' }}>100%</div>
         </div>
-
       </div>
 
-      {/* Tambahkan zIndex: 10 di sini */}
+      {/* Sticky Map Wrapper */}
       <div ref={wrapperRef} style={{ height: '400vh', position: 'relative', zIndex: 10 }}>
         <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'transparent' }}>
 
@@ -1591,22 +1250,17 @@ export default function BabakIntro() {
             <Particles particleCount={250} particleSpread={12} speed={0.08} particleBaseSize={80} alphaParticles={true} />
           </div>
 
-          {/* Map Container wrapper for cinematic filter */}
           <div style={{ position: 'absolute', inset: 0, zIndex: 1, filter: 'sepia(40%) saturate(60%) contrast(130%) brightness(85%) hue-rotate(-10deg)' }}>
             <MapboxGlobe phase={phase} />
           </div>
 
-          {/* Military Noise & Grid Overlay */}
+          {/* Subtle grid overlay */}
           <div style={{
-            position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none', mixBlendMode: 'overlay', opacity: 0.6,
-            backgroundImage: `
-              linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
-            `,
+            position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none', mixBlendMode: 'overlay', opacity: 0.4,
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
             backgroundSize: '40px 40px'
           }} />
 
-          {/* Darkening overlay for text readability */}
           <div style={{
             position: 'absolute', inset: 0, zIndex: 4, background: 'rgba(0,0,0,0.65)',
             pointerEvents: 'none', opacity: scrollProgress > 0.02 && scrollProgress < 0.35 ? 1 : 0,
@@ -1615,17 +1269,9 @@ export default function BabakIntro() {
 
           <div style={{ position: 'absolute', inset: 0, zIndex: 5, background: 'radial-gradient(ellipse at center, transparent 30%, rgba(21, 23, 61, 0.8) 100%)', pointerEvents: 'none' }} />
           <PhaseLabel phase={phase} />
-          <ProgressDots phase={phase} />
-
-          {/* Scroll Down Indicator
-          <div style={{ position: 'absolute', bottom: '10%', left: '50%', transform: 'translateX(-50%)', zIndex: 15, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', animation: 'bounceDown 1.8s ease-in-out infinite', opacity: scrollProgress < 0.12 ? 1 : 0, transition: 'opacity 0.5s ease' }}>
-            <span className="lato-light" style={{ fontSize: '0.68rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase' }}>Scroll untuk menjelajah</span>
-            <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, rgba(255,255,255,0.3), transparent)' }} />
-            <span style={{ color: 'rgba(255,255,255,0.22)', fontSize: '1rem' }}>↓</span>
-          </div> */}
         </div>
 
-        {/* Title Overlay 1 - Natural scrolling to work with ScrollReveal */}
+        {/* Floating narrative text over sticky map */}
         <div style={{
           position: 'absolute', top: '15vh', left: '10%', right: '10%',
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 15, pointerEvents: 'none'
@@ -1635,7 +1281,6 @@ export default function BabakIntro() {
           </ScrollReveal>
         </div>
 
-        {/* Title Overlay 2 */}
         <div style={{
           position: 'absolute', top: '75vh', left: '10%', right: '10%',
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 15, pointerEvents: 'none'
@@ -1643,20 +1288,19 @@ export default function BabakIntro() {
           <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={2} blurStrength={8} wordAnimationEnd="center center" textClassName="title-text-2">
             Dalam sekejap, realitas ribuan nyawa berganti rupa.
           </ScrollReveal>
-          <p className="lato-regular" style={{ fontSize: '30px', fontWeight: 300, textAlign: 'center', color: '#E5D9B6', maxWidth: '800px', lineHeight: 'normal', textShadow: '0 2px 10px rgba(0,0,0,0.5)', margin: '0 auto' }}>
+          <p className="lato-light" style={{ fontSize: '30px', fontWeight: 300, textAlign: 'center', color: '#E5D9B6', maxWidth: '800px', lineHeight: 'normal', textShadow: '0 2px 10px rgba(0,0,0,0.5)', margin: '0 auto' }}>
             Ini adalah rekam jejak dari mereka yang bertahan di balik puing-puing kehancuran. Mengungkap fakta di lapangan untuk sebuah upaya pemulihan yang tepat sasaran.
           </p>
         </div>
       </div>
 
-      {/* SCENE 2: FOTO & TEKS (Tanpa zoom/pin) */}
-      <div style={{ height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', backgroundColor: '#15173D', zIndex: 11 }}>
+      {/* FOTO CROSSFADE — smooth transition from map */}
+      <div ref={photoRef} style={{ height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', backgroundColor: '#15173D', zIndex: 11 }}>
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
           <img src={imgPendataan} alt="Pendataan Lapangan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(21,23,61,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #15173D 0%, transparent 15%)' }} />
         </div>
-
         <div style={{ position: 'absolute', bottom: '15%', right: '8%', width: '450px', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 10 }}>
           <h2 className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 3vw, 3.5rem)', color: '#E5D9B6', margin: 0, fontStyle: 'italic', lineHeight: 1.1 }}>
             Memetakan yang hilang
@@ -1667,17 +1311,7 @@ export default function BabakIntro() {
         </div>
       </div>
 
-      {/* PATTERN SEPARATOR */}
-      <div style={{
-        width: '100%',
-        height: '40px',
-        backgroundImage: `url(${patternImg})`,
-        backgroundRepeat: 'repeat-x',
-        backgroundSize: 'auto 100%',
-        backgroundColor: '#15173D',
-        position: 'relative',
-        zIndex: 12
-      }} />
+      <div style={{ width: '100%', height: '40px', backgroundImage: `url(${patternImg})`, backgroundRepeat: 'repeat-x', backgroundSize: 'auto 100%', backgroundColor: '#15173D', position: 'relative', zIndex: 12 }} />
 
       <SkalaDampakScene />
     </>

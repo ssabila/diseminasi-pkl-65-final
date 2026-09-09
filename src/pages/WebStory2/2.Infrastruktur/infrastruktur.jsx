@@ -29,10 +29,10 @@ const GLOBAL_CSS = `
     --cream-text:  #EFE6D0;
     --cream-text-soft: rgba(239,230,208,0.62);
     --cream-text-faint: rgba(239,230,208,0.34);
-    --gold:  #B8874A;
-    --rust:  #A8503F;
-    --slate: #45618C;
-    --sage:  #5C7A5E;
+    --gold:  #E67E22;
+    --rust:  #E67E22;
+    --slate: #628141;
+    --sage:  #628141;
     --line-on-cream: rgba(21,23,61,0.09);
     --line-on-navy:  rgba(239,230,208,0.10);
   }
@@ -195,12 +195,13 @@ const GLOBAL_CSS = `
   /* ── Responsive grids (media queries tidak bisa via inline style) ── */
   .infra-grid-photo-chart {
     display: grid;
-    grid-template-columns: 4.5fr 7.5fr;
+    grid-template-columns: 1fr;
     gap: 0;
     align-items: stretch;
-    min-height: 720px;
-    max-width: 1440px;
+    min-height: 100vh;
+    max-width: 100%;
     margin: 0 auto;
+    position: relative;
   }
   .infra-scene2-row { display: flex; flex-wrap: wrap; }
   .infra-scene2-narasi { flex: 1 1 480px; max-width: 620px; min-width: 0; }
@@ -516,9 +517,9 @@ function SceneKelumpuhanKota() {
 
   /* Severity palette — darker = worse */
   const SEV = {
-    berat:  { label: 'Rusak Berat',  color: '#A8503F' },
+    berat:  { label: 'Rusak Berat',  color: '#E67E22' },
     sedang: { label: 'Rusak Sedang', color: '#C08A55' },
-    ringan: { label: 'Rusak Ringan', color: '#B8874A' },
+    ringan: { label: 'Rusak Ringan', color: '#E5D9B6' },
     baik:   { label: 'Baik',         color: 'rgba(239,230,208,0.15)' },
   };
 
@@ -631,88 +632,81 @@ function SceneKelumpuhanKota() {
             </div>
           </div>
 
-          {/* Separator */}
-          <div style={{ height: 1, background: 'rgba(239,230,208,0.08)', marginBottom: 'clamp(1.5rem,2.5vw,2rem)' }} />
-
-          {/* Chart header + legend */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'clamp(1.2rem,2vw,1.6rem)', flexWrap: 'wrap', gap: '0.5rem' }}>
-            <div className="t-eyebrow" style={{ color: 'var(--cream-text-soft)', fontSize: '0.62rem' }}>Kondisi per Sektor</div>
-            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-              {[SEV.berat, SEV.sedang, SEV.ringan, { label: 'Baik', color: 'rgba(239,230,208,0.3)' }].map((s) => (
-                <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  <div style={{ width: 8, height: 8, borderRadius: 2, background: s.color, flexShrink: 0 }} />
-                  <span style={{ fontSize: '0.6rem', color: 'var(--cream-text-faint)', fontFamily: 'Lato, sans-serif', fontWeight: 300 }}>{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Stacked horizontal bars */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1.25rem,2vw,1.75rem)' }}>
+          {/* ── Editorial Sector Cards with full breakdown ── */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '1.25rem',
+          }}>
             {chartDataByKat.map((kat, ki) => {
-              const segments = [
-                { key: 'berat',  val: kat.berat,  ...SEV.berat },
-                { key: 'sedang', val: kat.sedang, ...SEV.sedang },
-                { key: 'ringan', val: kat.ringan, ...SEV.ringan },
-                { key: 'baik',   val: kat.baik,   ...SEV.baik },
+              const sectorColor = ki === 0 ? '#628141' : ki === 1 ? '#E67E22' : '#E5D9B6';
+              const SEV_ITEMS = [
+                { key: 'berat',  label: 'Rusak Berat',  val: kat.berat,  dotColor: '#E67E22' },
+                { key: 'sedang', label: 'Rusak Sedang', val: kat.sedang, dotColor: '#E5D9B6' },
+                { key: 'ringan', label: 'Rusak Ringan', val: kat.ringan, dotColor: '#628141' },
+                { key: 'baik',   label: 'Baik',         val: kat.baik,   dotColor: '#15173D' },
               ];
-              const barScale = kat.total > 0 ? (kat.total / maxSectorTotal) * 100 : 0;
 
               return (
-                <div key={kat.name}>
-                  {/* Label row */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.45rem' }}>
-                    <span className="t-body" style={{ fontSize: '0.88rem', color: 'var(--cream-text)', fontWeight: 400 }}>
-                      {kat.name}
-                    </span>
-                    <span style={{ fontSize: '0.68rem', fontFamily: 'Lato, sans-serif', color: 'var(--cream-text-faint)', fontWeight: 300 }}>
+                <div key={kat.name} style={{
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid rgba(229, 217, 182, 0.1)',
+                  borderRadius: 24,
+                  padding: 'clamp(1.5rem, 2.5vw, 2rem)',
+                  display: 'flex', flexDirection: 'column',
+                  gap: '1rem',
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? 'translateY(0)' : 'translateY(24px)',
+                  transition: `all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) ${ki * 0.15}s`,
+                }}>
+                  {/* Sector name */}
+                  <div className="t-eyebrow" style={{ color: sectorColor, fontSize: '0.72rem' }}>
+                    {kat.name.toUpperCase()}
+                  </div>
+
+                  {/* Total unit — large Playfair */}
+                  <div>
+                    <div className="t-display" style={{
+                      fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+                      fontWeight: 700, color: 'var(--cream-text)',
+                      lineHeight: 1,
+                    }}>
                       {kat.total.toLocaleString('id-ID')}
-                    </span>
+                    </div>
+                    <div className="t-body" style={{ fontSize: '0.72rem', color: 'var(--cream-text-faint)', marginTop: '0.25rem' }}>
+                      unit fasilitas
+                    </div>
                   </div>
 
-                  {/* Bar */}
-                  <div style={{
-                    width: inView ? `${Math.max(barScale, 12)}%` : '0%',
-                    transition: `width 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) ${ki * 0.15}s`,
-                    display: 'flex', height: 24, borderRadius: 3, overflow: 'hidden',
-                  }}>
-                    {segments.map((seg, si) => {
-                      if (seg.val === 0) return null;
-                      const segPct = (seg.val / kat.total) * 100;
-                      const showNum = segPct > 10;
+                  {/* Separator */}
+                  <div style={{ height: 1, background: 'rgba(229,217,182,0.08)' }} />
+
+                  {/* Dot + label + progress line for each severity */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                    {SEV_ITEMS.filter(s => s.val > 0).map((sev) => {
+                      const pct = kat.total > 0 ? (sev.val / kat.total) * 100 : 0;
                       return (
-                        <div key={seg.key} title={`${seg.label}: ${seg.val.toLocaleString('id-ID')}`} style={{
-                          width: `${segPct}%`,
-                          background: seg.color,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          transition: `width 0.8s ease ${ki * 0.15 + si * 0.05}s`,
-                          minWidth: seg.val > 0 ? 2 : 0,
-                        }}>
-                          {showNum && (
-                            <span style={{
-                              fontSize: '0.58rem', fontFamily: 'Lato, sans-serif', fontWeight: 700,
-                              color: seg.key === 'baik' ? 'var(--cream-text-faint)' : 'rgba(255,255,255,0.88)',
-                              whiteSpace: 'nowrap',
-                            }}>
-                              {seg.val.toLocaleString('id-ID')}
+                        <div key={sev.key}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <span style={{ width: 8, height: 8, borderRadius: '50%', background: sev.dotColor, flexShrink: 0 }} />
+                              <span className="lato-light" style={{ fontSize: '0.75rem', color: 'var(--cream-text-soft)' }}>{sev.label}</span>
+                            </div>
+                            <span className="lato-bold" style={{ fontSize: '0.72rem', color: 'var(--cream-text)' }}>
+                              {sev.val.toLocaleString('id-ID')} <span style={{ color: 'var(--cream-text-faint)', fontWeight: 300 }}>({pct.toFixed(1)}%)</span>
                             </span>
-                          )}
+                          </div>
+                          {/* Thin progress line */}
+                          <div style={{ width: '100%', height: 3, background: 'rgba(229,217,182,0.06)', borderRadius: 2, overflow: 'hidden' }}>
+                            <div style={{
+                              height: '100%',
+                              width: inView ? `${pct}%` : '0%',
+                              background: sev.dotColor,
+                              borderRadius: 2,
+                              transition: `width 1.2s cubic-bezier(0.22,1,0.36,1) ${0.3 + ki * 0.1}s`,
+                            }} />
+                          </div>
                         </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Percentage breakdown */}
-                  <div style={{ display: 'flex', gap: '0.7rem', marginTop: '0.35rem', flexWrap: 'wrap' }}>
-                    {segments.filter(s => s.val > 0).map((seg) => {
-                      const pct = kat.total > 0 ? ((seg.val / kat.total) * 100).toFixed(1) : 0;
-                      return (
-                        <span key={seg.key} style={{
-                          fontSize: '0.58rem', fontFamily: 'Lato, sans-serif', fontWeight: 300,
-                          color: 'var(--cream-text-faint)',
-                        }}>
-                          <span style={{ color: seg.key === 'baik' ? 'var(--cream-text-faint)' : seg.color, fontWeight: 600 }}>{pct}%</span> {seg.label}
-                        </span>
                       );
                     })}
                   </div>
@@ -783,19 +777,19 @@ function SceneKelumpuhanDesa() {
     {
       key: 'Aceh', title: 'Aceh',
       tagline: 'Wilayah terisolir — akses jalan putus total.',
-      color: '#B8874A',
+      color: '#E5D9B6',
       lat: 4.6951, lng: 96.7494, zoom: 9,
     },
     {
       key: 'Sumatera Utara', title: 'Sumatera Utara',
       tagline: 'Episenter bencana — korban jiwa terbanyak.',
-      color: '#A8503F',
+      color: '#E67E22',
       lat: 2.1154, lng: 98.9451, zoom: 9,
     },
     {
       key: 'Sumatera Barat', title: 'Sumatera Barat',
       tagline: 'Jalur ekonomi Padang–Bukittinggi lumpuh.',
-      color: '#45618C',
+      color: '#628141',
       lat: -0.7390, lng: 100.8000, zoom: 9,
     },
   ];
@@ -821,7 +815,7 @@ function SceneKelumpuhanDesa() {
   }, []);
 
   return (
-    <section id={SCENE2_ANCHOR_ID} className="infra-section infra-bg-cream-warm infra-grain" style={{ padding: 'clamp(5rem,8vw,7rem) 0' }}>
+    <section id={SCENE2_ANCHOR_ID} className="infra-section infra-bg-cream-warm infra-grain" style={{ padding: 'clamp(5rem,8vw,7rem) 0 0' }}>
 
       {/* ── Header ── */}
       <div ref={ref} style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(1.25rem, 3vw, 2.5rem)' }}>
@@ -837,24 +831,16 @@ function SceneKelumpuhanDesa() {
         </div>
       </div>
 
-      {/* ── Full-width Leaflet Map ── */}
+      {/* ── Full-width Leaflet Map (NO bottom margin — cards will overlap) ── */}
       <div style={{
         position: 'relative',
         width: '100%',
-        overflow: 'hidden',
-        marginBottom: 'clamp(2.5rem, 4vw, 3.5rem)',
-        boxShadow: '0 20px 60px rgba(21,23,61,0.10)',
+        overflow: 'visible',
         opacity: inView ? 1 : 0,
         transform: inView ? 'translateY(0) scale(1)' : 'translateY(24px) scale(0.98)',
         transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s',
       }}>
-        {/* top + bottom soft vignette */}
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 500, pointerEvents: 'none',
-          background: 'linear-gradient(to bottom, rgba(251,245,232,0.5) 0%, transparent 8%, transparent 92%, rgba(251,245,232,0.5) 100%)',
-        }} />
-
-        <div style={{ width: '100%', height: 'clamp(420px, 50vw, 620px)' }}>
+        <div style={{ width: '100%', height: 'clamp(420px, 50vw, 620px)', position: 'relative' }}>
           <MapContainer
             center={DEFAULT_CENTER}
             zoom={DEFAULT_ZOOM}
@@ -868,8 +854,6 @@ function SceneKelumpuhanDesa() {
               maxZoom={19}
             />
             <MapFlyToUpdater center={mapCenter} zoom={mapZoom} />
-
-            {/* Province markers */}
             {PROVINSI.map((prov, i) => (
               <Scene2ProvinceMarker
                 key={prov.key}
@@ -882,69 +866,74 @@ function SceneKelumpuhanDesa() {
               />
             ))}
           </MapContainer>
-        </div>
 
-        {/* Active province label overlay */}
-        <div style={{
-          position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)',
-          zIndex: 600, display: 'flex', alignItems: 'center', gap: '0.6rem',
-          padding: '0.5rem 1.2rem',
-          background: 'rgba(21,23,61,0.88)', backdropFilter: 'blur(12px)',
-          borderRadius: 28,
-          transition: 'all 0.4s ease',
-        }}>
-          <Icons.MapPin size={14} color={activeProv !== null ? PROVINSI[activeProv].color : 'var(--cream-text-soft)'} />
-          <span className="t-eyebrow" style={{
-            color: activeProv !== null ? PROVINSI[activeProv].color : 'var(--cream-text-soft)',
-            fontSize: '0.62rem', transition: 'color 0.3s ease',
+          {/* Navy vignette bottom fade */}
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '120px', background: 'linear-gradient(to top, var(--cream-warm, #FBF5E8) 0%, transparent 100%)', zIndex: 500, pointerEvents: 'none' }} />
+
+          {/* Floating Indeks Prioritas overlay (Glassmorphism) */}
+          {(() => {
+            const jumlahPerProv = insights?.fasilitas_infrastruktur?.jumlah_per_provinsi_per_kategori || {};
+            const totalsArr = Object.entries(jumlahPerProv).map(([prov, kat]) => ({ prov, total: Object.values(kat).reduce((a, v) => a + v, 0) }));
+            const maxTotal = Math.max(...totalsArr.map(x => x.total), 1);
+            const peringkat = totalsArr.map(({ prov, total }) => ({ provinsi: prov, persen: +(total / maxTotal * 100).toFixed(1), totalFasilitas: total })).sort((a, b) => b.persen - a.persen);
+            return (
+              <div style={{
+                position: 'absolute', top: '1rem', right: '1rem',
+                zIndex: 600, width: '260px',
+                background: 'rgba(21,23,61,0.82)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(229,217,182,0.12)',
+                borderRadius: 16, padding: '1rem 1.2rem',
+                display: 'flex', flexDirection: 'column', gap: '0.7rem',
+              }}>
+                <span className="t-eyebrow" style={{ color: '#E5D9B6', fontSize: '0.6rem', letterSpacing: '0.18em' }}>INDEKS PRIORITAS</span>
+                {peringkat.map((item, i) => {
+                  const color = i === 0 ? '#E67E22' : i === 1 ? '#E5D9B6' : '#628141';
+                  return (
+                    <div key={item.provinsi}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.3rem' }}>
+                        <span className="lato-light" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)' }}>
+                          <span style={{ color: 'rgba(255,255,255,0.35)', marginRight: '0.5rem' }}>{String(i+1).padStart(2,'0')}</span>
+                          {item.provinsi}
+                        </span>
+                        <span className="playfair-display" style={{ fontSize: '0.95rem', fontStyle: 'italic', fontWeight: 700, color }}>{item.persen.toFixed(1)}%</span>
+                      </div>
+                      <div style={{ width: '100%', height: 3, background: 'rgba(255,255,255,0.06)', borderRadius: 2, overflow: 'hidden' }}>
+                        <div style={{ height: '100%', width: `${item.persen}%`, background: color, borderRadius: 2, transition: 'width 1.2s ease' }} />
+                      </div>
+                    </div>
+                  );
+                })}
+                <span className="lato-light" style={{ fontSize: '0.58rem', color: 'rgba(255,255,255,0.3)' }}>Berdasarkan total fasilitas terdata</span>
+              </div>
+            );
+          })()}
+
+          {/* Map legend (bottom left) */}
+          <div style={{
+            position: 'absolute', bottom: '1rem', left: '1rem',
+            background: 'rgba(21,23,61,0.90)', backdropFilter: 'blur(8px)',
+            padding: '0.5rem 0.9rem', borderRadius: 16, zIndex: 600,
+            display: 'flex', flexDirection: 'column', gap: '0.3rem',
           }}>
-            {activeProv !== null ? PROVINSI[activeProv].title : 'Klik provinsi untuk zoom'}
-          </span>
-          {activeProv !== null && (
-            <button
-              onClick={() => setActiveProv(null)}
-              style={{
-                background: 'rgba(239,230,208,0.12)',
-                border: 'none', borderRadius: 14,
-                padding: '0.15rem 0.6rem',
-                cursor: 'pointer',
-                fontFamily: 'Lato, sans-serif',
-                fontSize: '0.58rem',
-                fontWeight: 700,
-                color: 'var(--cream-text-soft)',
-                transition: 'all 0.25s ease',
-                letterSpacing: '0.05em',
-              }}
-            >
-              Reset
-            </button>
-          )}
-        </div>
-
-        {/* Map legend */}
-        <div style={{
-          position: 'absolute', bottom: '1rem', left: '1rem',
-          background: 'rgba(21,23,61,0.90)', backdropFilter: 'blur(8px)',
-          padding: '0.5rem 0.9rem', borderRadius: 16, zIndex: 600,
-          display: 'flex', flexDirection: 'column', gap: '0.3rem',
-        }}>
-          {PROVINSI.map((prov) => (
-            <div key={prov.key} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <div style={{ width: 7, height: 7, borderRadius: '50%', background: prov.color, flexShrink: 0 }} />
-              <span style={{ fontFamily: 'Lato, sans-serif', fontSize: '0.6rem', color: 'var(--cream-text-soft)', fontWeight: 300 }}>
-                {prov.title}
-              </span>
-            </div>
-          ))}
+            {PROVINSI.map((prov) => (
+              <div key={prov.key} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <div style={{ width: 7, height: 7, borderRadius: '50%', background: prov.color, flexShrink: 0 }} />
+                <span style={{ fontFamily: 'Lato, sans-serif', fontSize: '0.6rem', color: 'var(--cream-text-soft)', fontWeight: 300 }}>
+                  {prov.title}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* ── Province Cards — three compact stat cards ── */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(1.25rem, 3vw, 2.5rem)' }}>
+      {/* ── Overlapping Province Cards (50% on map, 50% on cream bg) ── */}
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(1.25rem, 3vw, 2.5rem)', position: 'relative', zIndex: 10 }}>
         <div ref={cardsRef} style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: 'clamp(1rem, 2vw, 1.5rem)',
+          transform: 'translateY(-50%)',
         }} className="infra-prov-cards">
           {PROVINSI.map((prov, i) => {
             const jumlahDesa = insights?.cakupan_geografis_infra?.desa_per_provinsi?.[prov.key] || 0;
@@ -963,18 +952,14 @@ function SceneKelumpuhanDesa() {
                 onMouseLeave={() => setHoveredCard(null)}
                 style={{
                   padding: 'clamp(1.4rem, 2.5vw, 2rem)',
-                  borderRadius: 16,
+                  borderRadius: 20,
                   cursor: 'pointer',
-                  background: isActive
-                    ? 'rgba(255,255,255,0.92)'
-                    : isHovered
-                      ? 'rgba(255,255,255,0.65)'
-                      : 'rgba(255,255,255,0.35)',
+                  background: isActive ? '#FFFFFF' : isHovered ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.92)',
                   boxShadow: isActive
-                    ? `0 16px 40px rgba(21,23,61,0.09), inset 0 0 0 2px ${prov.color}44`
-                    : '0 4px 16px rgba(21,23,61,0.03)',
+                    ? `0 20px 50px rgba(21,23,61,0.12), 0 0 0 2px ${prov.color}44`
+                    : '0 8px 30px rgba(21,23,61,0.06)',
                   transition: 'all 0.4s cubic-bezier(0.4,0,0.2,1)',
-                  transform: isActive ? 'translateY(-4px)' : isHovered ? 'translateY(-1px)' : 'translateY(0)',
+                  transform: isActive ? 'translateY(-4px)' : isHovered ? 'translateY(-2px)' : 'translateY(0)',
                   opacity: cardsInView ? 1 : 0,
                   ...(cardsInView ? {} : { transform: 'translateY(20px)' }),
                   transitionDelay: `${i * 0.1}s`,
@@ -999,7 +984,11 @@ function SceneKelumpuhanDesa() {
                   borderRadius: 12,
                   transition: 'all 0.3s ease',
                 }}>
-                  <Icons.MapPin size={10} color={isActive ? prov.color : 'var(--ink-faint)'} />
+                  <span style={{
+                    width: 6, height: 6, borderRadius: '50%',
+                    background: isActive ? prov.color : 'var(--ink-faint)',
+                    flexShrink: 0,
+                  }} />
                   <span style={{
                     fontFamily: 'Lato, sans-serif', fontSize: '0.55rem', fontWeight: 600,
                     color: isActive ? prov.color : 'var(--ink-faint)',
@@ -1104,6 +1093,9 @@ function SceneKelumpuhanDesa() {
           })}
         </div>
       </div>
+
+      {/* Bottom padding for overlapping cards */}
+      <div style={{ paddingBottom: 'clamp(3rem, 5vw, 5rem)' }} />
     </section>
   );
 }
@@ -1168,8 +1160,10 @@ function SceneLayananDasar() {
         }}>
           {STATS_PCT.map((stat, i) => (
             <div key={stat.label} style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(239,230,208,0.08)',
+              background: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
               borderRadius: 16,
               padding: 'clamp(2rem, 3vw, 2.5rem)',
               textAlign: 'left',
@@ -1272,7 +1266,7 @@ function CustomPulsingDot({ lat, lng, score, label }) {
   useEffect(() => {
     if (!lat || !lng || isNaN(lat) || isNaN(lng)) return;
     const size = score > 90 ? 32 : score > 80 ? 24 : 16;
-    const color = score > 90 ? '#A8503F' : score > 80 ? '#B8874A' : '#45618C';
+    const color = score > 90 ? '#E67E22' : score > 80 ? '#E5D9B6' : '#628141';
     const icon = L.divIcon({
       className: '',
       html: `<div style="position:relative;width:${size}px;height:${size}px;border-radius:50%;background:${color};box-shadow:0 0 0 4px ${color}33, 0 4px 12px rgba(21,23,61,0.2);animation:pulseNeon 2.5s ease-out infinite;"></div>`,
@@ -1625,13 +1619,11 @@ export default function BabakInfrastruktur() {
   return (
     <>
       <SceneKelumpuhanKota />
-      <SectionDivider from="#151740" to="#FBF5E8" variant="wave" />
+      <SectionDivider from="#15173D" to="#FBF5E8" height={280} />
       <SceneKelumpuhanDesa />
-      <SectionDivider from="#F7F1E3" to="#10123A" variant="soft" />
+      <SectionDivider from="#F7F1E3" to="#15173D" height={280} />
       <SceneLayananDasar />
       <SectionDivider from="#141648" to="#F5EFE0" variant="steep" />
-      <SceneZonaPrioritas />
-      <SectionDivider from="#F7F1E3" to="#14163E" variant="wave" />
       <SceneSorotanAngka />
       <SectionDivider from="#0F1132" to="#F9F3E5" variant="soft" />
       <TransisiBabak23 />

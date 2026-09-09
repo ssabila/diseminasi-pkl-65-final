@@ -39,7 +39,7 @@ function ScrollProgress() {
     }}>
       <div ref={barRef} style={{
         height: '100%',
-        background: 'linear-gradient(90deg, var(--green), #8aaf5a)',
+        background: 'linear-gradient(90deg, #628141, #E67E22)',
         transformOrigin: 'left',
         transform: 'scaleX(0)',
       }} />
@@ -168,6 +168,7 @@ const WebStory2 = () => {
          Setiap babak dibungkus minHeight 100vh agar memenuhi layar.
          Animasi GSAP ditaruh di DALAM komponen masing-masing, bukan di pembungkus ini. 
       */}
+      {/* SVG Wave transition helper — reusable between sections */}
       <div id="babak-1" className="babak-section" data-color="#15173D" style={{ minHeight: '100vh', position: 'relative' }}>
         <BabakIntro />
       </div>

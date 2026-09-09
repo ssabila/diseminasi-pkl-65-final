@@ -55,24 +55,24 @@
 }
 .inversa-pulse {
   position: absolute;
-  top: -70px;
-  left: -70px;
-  width: 140px;
-  height: 140px;
-  background-color: rgba(255, 77, 77, 0.15); /* Merah transparan */
+  top: -90px;
+  left: -90px;
+  width: 180px;
+  height: 180px;
+  background-color: rgba(230, 126, 34, 0.15);
   border-radius: 50%;
   animation: mapboxPulse 2s ease-out infinite;
   pointer-events: none;
 }
 .inversa-dot {
   position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 8px;
-  height: 8px;
-  background-color: #FF4D4D; /* Merah solid */
+  top: -7px;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  background-color: #E67E22;
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(146, 4, 4, 1);
+  box-shadow: 0 0 18px rgba(230, 126, 34, 0.9);
 }
 
 @keyframes mapboxPulse {
@@ -92,55 +92,59 @@
   margin: 0;
   white-space: nowrap;
 }
-.s2-cards { 
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px !important;
+/* ── Bento Grid — 2-column asymmetric (1 hero left + 2 right) ── */
+.s2-bento-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
 }
+.s2-bento-card {
+  position: relative;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+.s2-bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(229, 217, 182, 0.2);
+}
+.s2-bento-hero {
+  min-height: 380px;
+}
+.s2-bento-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Legacy .s2-card support */
 .s2-card {
   position: relative;
   width: 100% !important;
-  border-radius: 24px;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(229, 217, 182, 0.1);
   overflow: hidden;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: column;
 }
 .s2-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-}
-.s2-card-warga {
-  order: 1;
-  grid-column: span 2;
-  min-height: 380px;
-}
-.s2-card-rumah {
-  order: 2;
-  grid-column: span 1;
-  grid-row: span 2;
-  min-height: 100%;
-}
-.s2-card-wilayah {
-  order: 3;
-  grid-column: span 1;
-  min-height: 280px;
-}
-.s2-card-sektor {
-  order: 4;
-  grid-column: span 2;
-  min-height: 300px;
-}
-.s2-card-fasilitas {
-  order: 5;
-  grid-column: span 1;
-  min-height: 300px;
+  transform: translateY(-4px);
 }
 
 /* Editorial Typography */
@@ -262,7 +266,7 @@
 .s2c-map-shell { position: absolute; inset: 0; z-index: 1; }
 .s2c-map {
   position: absolute; inset: 0;
-  filter: grayscale(40%) brightness(0.72) contrast(1.04) saturate(0.98);
+  /* Dark vector map — no heavy satellite filters needed */
 }
 .s2c-map-grade {
   position: absolute; inset: 0; pointer-events: none;
@@ -354,9 +358,10 @@
   text-shadow: 0 2px 12px rgba(0,0,0,0.8);
 }
 @media (max-width: 767px) {
-  .s2-cards { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  .s2-bento-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  .s2-bento-card { min-height: auto !important; grid-column: 1 / -1 !important; grid-row: auto !important; }
+  .s2-bento-hero { grid-column: 1 / -1 !important; grid-row: auto !important; min-height: 280px !important; }
   .s2-card { height: auto; min-height: 200px; }
-  .s2-card-hero { height: auto; min-height: 260px; }
   .s2-baseline { display: none; }
   .s2-stage { height: auto !important; padding-top: 14vh !important; padding-bottom: 12vh !important; }
   .s2-choro { height: 210vh; }
