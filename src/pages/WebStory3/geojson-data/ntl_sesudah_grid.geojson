@@ -1,0 +1,6499 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              3.7
+            ],
+            [
+              96.62,
+              3.7
+            ],
+            [
+              96.62,
+              3.8200000000000003
+            ],
+            [
+              96.5,
+              3.8200000000000003
+            ],
+            [
+              96.5,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              4.0
+            ],
+            [
+              96.62,
+              4.0
+            ],
+            [
+              96.62,
+              4.12
+            ],
+            [
+              96.5,
+              4.12
+            ],
+            [
+              96.5,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.204,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              4.3
+            ],
+            [
+              96.62,
+              4.3
+            ],
+            [
+              96.62,
+              4.42
+            ],
+            [
+              96.5,
+              4.42
+            ],
+            [
+              96.5,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.124,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              4.6
+            ],
+            [
+              96.62,
+              4.6
+            ],
+            [
+              96.62,
+              4.72
+            ],
+            [
+              96.5,
+              4.72
+            ],
+            [
+              96.5,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              3.4
+            ],
+            [
+              96.92,
+              3.4
+            ],
+            [
+              96.92,
+              3.52
+            ],
+            [
+              96.8,
+              3.52
+            ],
+            [
+              96.8,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              3.7
+            ],
+            [
+              96.92,
+              3.7
+            ],
+            [
+              96.92,
+              3.8200000000000003
+            ],
+            [
+              96.8,
+              3.8200000000000003
+            ],
+            [
+              96.8,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.0
+            ],
+            [
+              96.92,
+              4.0
+            ],
+            [
+              96.92,
+              4.12
+            ],
+            [
+              96.8,
+              4.12
+            ],
+            [
+              96.8,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.3
+            ],
+            [
+              96.92,
+              4.3
+            ],
+            [
+              96.92,
+              4.42
+            ],
+            [
+              96.8,
+              4.42
+            ],
+            [
+              96.8,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.6
+            ],
+            [
+              96.92,
+              4.6
+            ],
+            [
+              96.92,
+              4.72
+            ],
+            [
+              96.8,
+              4.72
+            ],
+            [
+              96.8,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.9
+            ],
+            [
+              96.92,
+              4.9
+            ],
+            [
+              96.92,
+              5.0200000000000005
+            ],
+            [
+              96.8,
+              5.0200000000000005
+            ],
+            [
+              96.8,
+              4.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.083,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              3.4
+            ],
+            [
+              97.22,
+              3.4
+            ],
+            [
+              97.22,
+              3.52
+            ],
+            [
+              97.1,
+              3.52
+            ],
+            [
+              97.1,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              3.7
+            ],
+            [
+              97.22,
+              3.7
+            ],
+            [
+              97.22,
+              3.8200000000000003
+            ],
+            [
+              97.1,
+              3.8200000000000003
+            ],
+            [
+              97.1,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.613,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.0
+            ],
+            [
+              97.22,
+              4.0
+            ],
+            [
+              97.22,
+              4.12
+            ],
+            [
+              97.1,
+              4.12
+            ],
+            [
+              97.1,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.677,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.3
+            ],
+            [
+              97.22,
+              4.3
+            ],
+            [
+              97.22,
+              4.42
+            ],
+            [
+              97.1,
+              4.42
+            ],
+            [
+              97.1,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.411,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.6
+            ],
+            [
+              97.22,
+              4.6
+            ],
+            [
+              97.22,
+              4.72
+            ],
+            [
+              97.1,
+              4.72
+            ],
+            [
+              97.1,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.137,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.9
+            ],
+            [
+              97.22,
+              4.9
+            ],
+            [
+              97.22,
+              5.0200000000000005
+            ],
+            [
+              97.1,
+              5.0200000000000005
+            ],
+            [
+              97.1,
+              4.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              3.4
+            ],
+            [
+              97.52000000000001,
+              3.4
+            ],
+            [
+              97.52000000000001,
+              3.52
+            ],
+            [
+              97.4,
+              3.52
+            ],
+            [
+              97.4,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.229,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              3.7
+            ],
+            [
+              97.52000000000001,
+              3.7
+            ],
+            [
+              97.52000000000001,
+              3.8200000000000003
+            ],
+            [
+              97.4,
+              3.8200000000000003
+            ],
+            [
+              97.4,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.0
+            ],
+            [
+              97.52000000000001,
+              4.0
+            ],
+            [
+              97.52000000000001,
+              4.12
+            ],
+            [
+              97.4,
+              4.12
+            ],
+            [
+              97.4,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.3
+            ],
+            [
+              97.52000000000001,
+              4.3
+            ],
+            [
+              97.52000000000001,
+              4.42
+            ],
+            [
+              97.4,
+              4.42
+            ],
+            [
+              97.4,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.6
+            ],
+            [
+              97.52000000000001,
+              4.6
+            ],
+            [
+              97.52000000000001,
+              4.72
+            ],
+            [
+              97.4,
+              4.72
+            ],
+            [
+              97.4,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.9
+            ],
+            [
+              97.52000000000001,
+              4.9
+            ],
+            [
+              97.52000000000001,
+              5.0200000000000005
+            ],
+            [
+              97.4,
+              5.0200000000000005
+            ],
+            [
+              97.4,
+              4.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              3.4
+            ],
+            [
+              97.82000000000001,
+              3.4
+            ],
+            [
+              97.82000000000001,
+              3.52
+            ],
+            [
+              97.7,
+              3.52
+            ],
+            [
+              97.7,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.126,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              3.7
+            ],
+            [
+              97.82000000000001,
+              3.7
+            ],
+            [
+              97.82000000000001,
+              3.8200000000000003
+            ],
+            [
+              97.7,
+              3.8200000000000003
+            ],
+            [
+              97.7,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              4.0
+            ],
+            [
+              97.82000000000001,
+              4.0
+            ],
+            [
+              97.82000000000001,
+              4.12
+            ],
+            [
+              97.7,
+              4.12
+            ],
+            [
+              97.7,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.211,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              4.3
+            ],
+            [
+              97.82000000000001,
+              4.3
+            ],
+            [
+              97.82000000000001,
+              4.42
+            ],
+            [
+              97.7,
+              4.42
+            ],
+            [
+              97.7,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.125,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              4.6
+            ],
+            [
+              97.82000000000001,
+              4.6
+            ],
+            [
+              97.82000000000001,
+              4.72
+            ],
+            [
+              97.7,
+              4.72
+            ],
+            [
+              97.7,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.086,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              3.1
+            ],
+            [
+              98.12,
+              3.1
+            ],
+            [
+              98.12,
+              3.22
+            ],
+            [
+              98.0,
+              3.22
+            ],
+            [
+              98.0,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.176,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              3.4
+            ],
+            [
+              98.12,
+              3.4
+            ],
+            [
+              98.12,
+              3.52
+            ],
+            [
+              98.0,
+              3.52
+            ],
+            [
+              98.0,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              3.7
+            ],
+            [
+              98.12,
+              3.7
+            ],
+            [
+              98.12,
+              3.8200000000000003
+            ],
+            [
+              98.0,
+              3.8200000000000003
+            ],
+            [
+              98.0,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.156,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              4.0
+            ],
+            [
+              98.12,
+              4.0
+            ],
+            [
+              98.12,
+              4.12
+            ],
+            [
+              98.0,
+              4.12
+            ],
+            [
+              98.0,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.084,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              4.3
+            ],
+            [
+              98.12,
+              4.3
+            ],
+            [
+              98.12,
+              4.42
+            ],
+            [
+              98.0,
+              4.42
+            ],
+            [
+              98.0,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.14,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              3.1
+            ],
+            [
+              98.42,
+              3.1
+            ],
+            [
+              98.42,
+              3.22
+            ],
+            [
+              98.3,
+              3.22
+            ],
+            [
+              98.3,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.283,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              3.4
+            ],
+            [
+              98.42,
+              3.4
+            ],
+            [
+              98.42,
+              3.52
+            ],
+            [
+              98.3,
+              3.52
+            ],
+            [
+              98.3,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.313,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              3.7
+            ],
+            [
+              98.42,
+              3.7
+            ],
+            [
+              98.42,
+              3.8200000000000003
+            ],
+            [
+              98.3,
+              3.8200000000000003
+            ],
+            [
+              98.3,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              4.0
+            ],
+            [
+              98.42,
+              4.0
+            ],
+            [
+              98.42,
+              4.12
+            ],
+            [
+              98.3,
+              4.12
+            ],
+            [
+              98.3,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              4.3
+            ],
+            [
+              98.42,
+              4.3
+            ],
+            [
+              98.42,
+              4.42
+            ],
+            [
+              98.3,
+              4.42
+            ],
+            [
+              98.3,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.063,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              2.8
+            ],
+            [
+              98.72,
+              2.8
+            ],
+            [
+              98.72,
+              2.92
+            ],
+            [
+              98.6,
+              2.92
+            ],
+            [
+              98.6,
+              2.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.231,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              3.1
+            ],
+            [
+              98.72,
+              3.1
+            ],
+            [
+              98.72,
+              3.22
+            ],
+            [
+              98.6,
+              3.22
+            ],
+            [
+              98.6,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.466,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              3.4
+            ],
+            [
+              98.72,
+              3.4
+            ],
+            [
+              98.72,
+              3.52
+            ],
+            [
+              98.6,
+              3.52
+            ],
+            [
+              98.6,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.515,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              3.7
+            ],
+            [
+              98.72,
+              3.7
+            ],
+            [
+              98.72,
+              3.8200000000000003
+            ],
+            [
+              98.6,
+              3.8200000000000003
+            ],
+            [
+              98.6,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.568,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              4.0
+            ],
+            [
+              98.72,
+              4.0
+            ],
+            [
+              98.72,
+              4.12
+            ],
+            [
+              98.6,
+              4.12
+            ],
+            [
+              98.6,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.189,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              4.3
+            ],
+            [
+              98.72,
+              4.3
+            ],
+            [
+              98.72,
+              4.42
+            ],
+            [
+              98.6,
+              4.42
+            ],
+            [
+              98.6,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.0
+            ],
+            [
+              99.02000000000001,
+              1.0
+            ],
+            [
+              99.02000000000001,
+              1.12
+            ],
+            [
+              98.9,
+              1.12
+            ],
+            [
+              98.9,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.117,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.3
+            ],
+            [
+              99.02000000000001,
+              1.3
+            ],
+            [
+              99.02000000000001,
+              1.42
+            ],
+            [
+              98.9,
+              1.42
+            ],
+            [
+              98.9,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.142,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.6
+            ],
+            [
+              99.02000000000001,
+              1.6
+            ],
+            [
+              99.02000000000001,
+              1.7200000000000002
+            ],
+            [
+              98.9,
+              1.7200000000000002
+            ],
+            [
+              98.9,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.095,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.9
+            ],
+            [
+              99.02000000000001,
+              1.9
+            ],
+            [
+              99.02000000000001,
+              2.02
+            ],
+            [
+              98.9,
+              2.02
+            ],
+            [
+              98.9,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.058,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              2.8
+            ],
+            [
+              99.02000000000001,
+              2.8
+            ],
+            [
+              99.02000000000001,
+              2.92
+            ],
+            [
+              98.9,
+              2.92
+            ],
+            [
+              98.9,
+              2.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              3.1
+            ],
+            [
+              99.02000000000001,
+              3.1
+            ],
+            [
+              99.02000000000001,
+              3.22
+            ],
+            [
+              98.9,
+              3.22
+            ],
+            [
+              98.9,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.421,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              3.4
+            ],
+            [
+              99.02000000000001,
+              3.4
+            ],
+            [
+              99.02000000000001,
+              3.52
+            ],
+            [
+              98.9,
+              3.52
+            ],
+            [
+              98.9,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.466,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              3.7
+            ],
+            [
+              99.02000000000001,
+              3.7
+            ],
+            [
+              99.02000000000001,
+              3.8200000000000003
+            ],
+            [
+              98.9,
+              3.8200000000000003
+            ],
+            [
+              98.9,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.513,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              4.0
+            ],
+            [
+              99.02000000000001,
+              4.0
+            ],
+            [
+              99.02000000000001,
+              4.12
+            ],
+            [
+              98.9,
+              4.12
+            ],
+            [
+              98.9,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.171,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              4.3
+            ],
+            [
+              99.02000000000001,
+              4.3
+            ],
+            [
+              99.02000000000001,
+              4.42
+            ],
+            [
+              98.9,
+              4.42
+            ],
+            [
+              98.9,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.109,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.0
+            ],
+            [
+              99.32000000000001,
+              1.0
+            ],
+            [
+              99.32000000000001,
+              1.12
+            ],
+            [
+              99.2,
+              1.12
+            ],
+            [
+              99.2,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.237,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.3
+            ],
+            [
+              99.32000000000001,
+              1.3
+            ],
+            [
+              99.32000000000001,
+              1.42
+            ],
+            [
+              99.2,
+              1.42
+            ],
+            [
+              99.2,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.287,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.6
+            ],
+            [
+              99.32000000000001,
+              1.6
+            ],
+            [
+              99.32000000000001,
+              1.7200000000000002
+            ],
+            [
+              99.2,
+              1.7200000000000002
+            ],
+            [
+              99.2,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.192,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.9
+            ],
+            [
+              99.32000000000001,
+              1.9
+            ],
+            [
+              99.32000000000001,
+              2.02
+            ],
+            [
+              99.2,
+              2.02
+            ],
+            [
+              99.2,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              2.2
+            ],
+            [
+              99.32000000000001,
+              2.2
+            ],
+            [
+              99.32000000000001,
+              2.3200000000000003
+            ],
+            [
+              99.2,
+              2.3200000000000003
+            ],
+            [
+              99.2,
+              2.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.104,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              3.1
+            ],
+            [
+              99.32000000000001,
+              3.1
+            ],
+            [
+              99.32000000000001,
+              3.22
+            ],
+            [
+              99.2,
+              3.22
+            ],
+            [
+              99.2,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              3.4
+            ],
+            [
+              99.32000000000001,
+              3.4
+            ],
+            [
+              99.32000000000001,
+              3.52
+            ],
+            [
+              99.2,
+              3.52
+            ],
+            [
+              99.2,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.231,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              3.7
+            ],
+            [
+              99.32000000000001,
+              3.7
+            ],
+            [
+              99.32000000000001,
+              3.8200000000000003
+            ],
+            [
+              99.2,
+              3.8200000000000003
+            ],
+            [
+              99.2,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.255,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              4.0
+            ],
+            [
+              99.32000000000001,
+              4.0
+            ],
+            [
+              99.32000000000001,
+              4.12
+            ],
+            [
+              99.2,
+              4.12
+            ],
+            [
+              99.2,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.085,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              4.3
+            ],
+            [
+              99.32000000000001,
+              4.3
+            ],
+            [
+              99.32000000000001,
+              4.42
+            ],
+            [
+              99.2,
+              4.42
+            ],
+            [
+              99.2,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              0.7
+            ],
+            [
+              99.62,
+              0.7
+            ],
+            [
+              99.62,
+              0.82
+            ],
+            [
+              99.5,
+              0.82
+            ],
+            [
+              99.5,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.145,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.0
+            ],
+            [
+              99.62,
+              1.0
+            ],
+            [
+              99.62,
+              1.12
+            ],
+            [
+              99.5,
+              1.12
+            ],
+            [
+              99.5,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.277,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.3
+            ],
+            [
+              99.62,
+              1.3
+            ],
+            [
+              99.62,
+              1.42
+            ],
+            [
+              99.5,
+              1.42
+            ],
+            [
+              99.5,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.322,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.6
+            ],
+            [
+              99.62,
+              1.6
+            ],
+            [
+              99.62,
+              1.7200000000000002
+            ],
+            [
+              99.5,
+              1.7200000000000002
+            ],
+            [
+              99.5,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.213,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.9
+            ],
+            [
+              99.62,
+              1.9
+            ],
+            [
+              99.62,
+              2.02
+            ],
+            [
+              99.5,
+              2.02
+            ],
+            [
+              99.5,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.078,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              2.2
+            ],
+            [
+              99.62,
+              2.2
+            ],
+            [
+              99.62,
+              2.3200000000000003
+            ],
+            [
+              99.5,
+              2.3200000000000003
+            ],
+            [
+              99.5,
+              2.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.057,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              3.4
+            ],
+            [
+              99.62,
+              3.4
+            ],
+            [
+              99.62,
+              3.52
+            ],
+            [
+              99.5,
+              3.52
+            ],
+            [
+              99.5,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.063,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              3.7
+            ],
+            [
+              99.62,
+              3.7
+            ],
+            [
+              99.62,
+              3.8200000000000003
+            ],
+            [
+              99.5,
+              3.8200000000000003
+            ],
+            [
+              99.5,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.069,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              4.0
+            ],
+            [
+              99.62,
+              4.0
+            ],
+            [
+              99.62,
+              4.12
+            ],
+            [
+              99.5,
+              4.12
+            ],
+            [
+              99.5,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.05,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -1.7
+            ],
+            [
+              99.92,
+              -1.7
+            ],
+            [
+              99.92,
+              -1.58
+            ],
+            [
+              99.8,
+              -1.58
+            ],
+            [
+              99.8,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -1.4
+            ],
+            [
+              99.92,
+              -1.4
+            ],
+            [
+              99.92,
+              -1.2799999999999998
+            ],
+            [
+              99.8,
+              -1.2799999999999998
+            ],
+            [
+              99.8,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -1.1
+            ],
+            [
+              99.92,
+              -1.1
+            ],
+            [
+              99.92,
+              -0.9800000000000001
+            ],
+            [
+              99.8,
+              -0.9800000000000001
+            ],
+            [
+              99.8,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -0.8
+            ],
+            [
+              99.92,
+              -0.8
+            ],
+            [
+              99.92,
+              -0.68
+            ],
+            [
+              99.8,
+              -0.68
+            ],
+            [
+              99.8,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -0.5
+            ],
+            [
+              99.92,
+              -0.5
+            ],
+            [
+              99.92,
+              -0.38
+            ],
+            [
+              99.8,
+              -0.38
+            ],
+            [
+              99.8,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.06,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              0.4
+            ],
+            [
+              99.92,
+              0.4
+            ],
+            [
+              99.92,
+              0.52
+            ],
+            [
+              99.8,
+              0.52
+            ],
+            [
+              99.8,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.133,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              0.7
+            ],
+            [
+              99.92,
+              0.7
+            ],
+            [
+              99.92,
+              0.82
+            ],
+            [
+              99.8,
+              0.82
+            ],
+            [
+              99.8,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.199,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.0
+            ],
+            [
+              99.92,
+              1.0
+            ],
+            [
+              99.92,
+              1.12
+            ],
+            [
+              99.8,
+              1.12
+            ],
+            [
+              99.8,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.235,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.3
+            ],
+            [
+              99.92,
+              1.3
+            ],
+            [
+              99.92,
+              1.42
+            ],
+            [
+              99.8,
+              1.42
+            ],
+            [
+              99.8,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.218,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.6
+            ],
+            [
+              99.92,
+              1.6
+            ],
+            [
+              99.92,
+              1.7200000000000002
+            ],
+            [
+              99.8,
+              1.7200000000000002
+            ],
+            [
+              99.8,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.133,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.9
+            ],
+            [
+              99.92,
+              1.9
+            ],
+            [
+              99.92,
+              2.02
+            ],
+            [
+              99.8,
+              2.02
+            ],
+            [
+              99.8,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.114,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -1.7
+            ],
+            [
+              100.22,
+              -1.7
+            ],
+            [
+              100.22,
+              -1.58
+            ],
+            [
+              100.1,
+              -1.58
+            ],
+            [
+              100.1,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -1.4
+            ],
+            [
+              100.22,
+              -1.4
+            ],
+            [
+              100.22,
+              -1.2799999999999998
+            ],
+            [
+              100.1,
+              -1.2799999999999998
+            ],
+            [
+              100.1,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -1.1
+            ],
+            [
+              100.22,
+              -1.1
+            ],
+            [
+              100.22,
+              -0.9800000000000001
+            ],
+            [
+              100.1,
+              -0.9800000000000001
+            ],
+            [
+              100.1,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -0.8
+            ],
+            [
+              100.22,
+              -0.8
+            ],
+            [
+              100.22,
+              -0.68
+            ],
+            [
+              100.1,
+              -0.68
+            ],
+            [
+              100.1,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -0.5
+            ],
+            [
+              100.22,
+              -0.5
+            ],
+            [
+              100.22,
+              -0.38
+            ],
+            [
+              100.1,
+              -0.38
+            ],
+            [
+              100.1,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.067,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -0.2
+            ],
+            [
+              100.22,
+              -0.2
+            ],
+            [
+              100.22,
+              -0.08000000000000002
+            ],
+            [
+              100.1,
+              -0.08000000000000002
+            ],
+            [
+              100.1,
+              -0.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.143,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              0.4
+            ],
+            [
+              100.22,
+              0.4
+            ],
+            [
+              100.22,
+              0.52
+            ],
+            [
+              100.1,
+              0.52
+            ],
+            [
+              100.1,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.291,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              0.7
+            ],
+            [
+              100.22,
+              0.7
+            ],
+            [
+              100.22,
+              0.82
+            ],
+            [
+              100.1,
+              0.82
+            ],
+            [
+              100.1,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.339,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.0
+            ],
+            [
+              100.22,
+              1.0
+            ],
+            [
+              100.22,
+              1.12
+            ],
+            [
+              100.1,
+              1.12
+            ],
+            [
+              100.1,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.244,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.3
+            ],
+            [
+              100.22,
+              1.3
+            ],
+            [
+              100.22,
+              1.42
+            ],
+            [
+              100.1,
+              1.42
+            ],
+            [
+              100.1,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.128,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.6
+            ],
+            [
+              100.22,
+              1.6
+            ],
+            [
+              100.22,
+              1.7200000000000002
+            ],
+            [
+              100.1,
+              1.7200000000000002
+            ],
+            [
+              100.1,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.054,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.9
+            ],
+            [
+              100.22,
+              1.9
+            ],
+            [
+              100.22,
+              2.02
+            ],
+            [
+              100.1,
+              2.02
+            ],
+            [
+              100.1,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.158,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -1.7
+            ],
+            [
+              100.52000000000001,
+              -1.7
+            ],
+            [
+              100.52000000000001,
+              -1.58
+            ],
+            [
+              100.4,
+              -1.58
+            ],
+            [
+              100.4,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.256,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -1.4
+            ],
+            [
+              100.52000000000001,
+              -1.4
+            ],
+            [
+              100.52000000000001,
+              -1.2799999999999998
+            ],
+            [
+              100.4,
+              -1.2799999999999998
+            ],
+            [
+              100.4,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.457,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -1.1
+            ],
+            [
+              100.52000000000001,
+              -1.1
+            ],
+            [
+              100.52000000000001,
+              -0.9800000000000001
+            ],
+            [
+              100.4,
+              -0.9800000000000001
+            ],
+            [
+              100.4,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -0.8
+            ],
+            [
+              100.52000000000001,
+              -0.8
+            ],
+            [
+              100.52000000000001,
+              -0.68
+            ],
+            [
+              100.4,
+              -0.68
+            ],
+            [
+              100.4,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.251,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -0.5
+            ],
+            [
+              100.52000000000001,
+              -0.5
+            ],
+            [
+              100.52000000000001,
+              -0.38
+            ],
+            [
+              100.4,
+              -0.38
+            ],
+            [
+              100.4,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.083,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -0.2
+            ],
+            [
+              100.52000000000001,
+              -0.2
+            ],
+            [
+              100.52000000000001,
+              -0.08000000000000002
+            ],
+            [
+              100.4,
+              -0.08000000000000002
+            ],
+            [
+              100.4,
+              -0.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              0.1
+            ],
+            [
+              100.52000000000001,
+              0.1
+            ],
+            [
+              100.52000000000001,
+              0.22
+            ],
+            [
+              100.4,
+              0.22
+            ],
+            [
+              100.4,
+              0.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.192,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              0.4
+            ],
+            [
+              100.52000000000001,
+              0.4
+            ],
+            [
+              100.52000000000001,
+              0.52
+            ],
+            [
+              100.4,
+              0.52
+            ],
+            [
+              100.4,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.386,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              0.7
+            ],
+            [
+              100.52000000000001,
+              0.7
+            ],
+            [
+              100.52000000000001,
+              0.82
+            ],
+            [
+              100.4,
+              0.82
+            ],
+            [
+              100.4,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.43,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              1.0
+            ],
+            [
+              100.52000000000001,
+              1.0
+            ],
+            [
+              100.52000000000001,
+              1.12
+            ],
+            [
+              100.4,
+              1.12
+            ],
+            [
+              100.4,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.268,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              1.3
+            ],
+            [
+              100.52000000000001,
+              1.3
+            ],
+            [
+              100.52000000000001,
+              1.42
+            ],
+            [
+              100.4,
+              1.42
+            ],
+            [
+              100.4,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.098,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              1.6
+            ],
+            [
+              100.52000000000001,
+              1.6
+            ],
+            [
+              100.52000000000001,
+              1.7200000000000002
+            ],
+            [
+              100.4,
+              1.7200000000000002
+            ],
+            [
+              100.4,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.068,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -2.3
+            ],
+            [
+              100.82000000000001,
+              -2.3
+            ],
+            [
+              100.82000000000001,
+              -2.1799999999999997
+            ],
+            [
+              100.7,
+              -2.1799999999999997
+            ],
+            [
+              100.7,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.134,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -2.0
+            ],
+            [
+              100.82000000000001,
+              -2.0
+            ],
+            [
+              100.82000000000001,
+              -1.88
+            ],
+            [
+              100.7,
+              -1.88
+            ],
+            [
+              100.7,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.208,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -1.7
+            ],
+            [
+              100.82000000000001,
+              -1.7
+            ],
+            [
+              100.82000000000001,
+              -1.58
+            ],
+            [
+              100.7,
+              -1.58
+            ],
+            [
+              100.7,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.202,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -1.4
+            ],
+            [
+              100.82000000000001,
+              -1.4
+            ],
+            [
+              100.82000000000001,
+              -1.2799999999999998
+            ],
+            [
+              100.7,
+              -1.2799999999999998
+            ],
+            [
+              100.7,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.315,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -1.1
+            ],
+            [
+              100.82000000000001,
+              -1.1
+            ],
+            [
+              100.82000000000001,
+              -0.9800000000000001
+            ],
+            [
+              100.7,
+              -0.9800000000000001
+            ],
+            [
+              100.7,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.307,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -0.8
+            ],
+            [
+              100.82000000000001,
+              -0.8
+            ],
+            [
+              100.82000000000001,
+              -0.68
+            ],
+            [
+              100.7,
+              -0.68
+            ],
+            [
+              100.7,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -0.5
+            ],
+            [
+              100.82000000000001,
+              -0.5
+            ],
+            [
+              100.82000000000001,
+              -0.38
+            ],
+            [
+              100.7,
+              -0.38
+            ],
+            [
+              100.7,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -0.2
+            ],
+            [
+              100.82000000000001,
+              -0.2
+            ],
+            [
+              100.82000000000001,
+              -0.08000000000000002
+            ],
+            [
+              100.7,
+              -0.08000000000000002
+            ],
+            [
+              100.7,
+              -0.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.142,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              0.4
+            ],
+            [
+              100.82000000000001,
+              0.4
+            ],
+            [
+              100.82000000000001,
+              0.52
+            ],
+            [
+              100.7,
+              0.52
+            ],
+            [
+              100.7,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.285,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              0.7
+            ],
+            [
+              100.82000000000001,
+              0.7
+            ],
+            [
+              100.82000000000001,
+              0.82
+            ],
+            [
+              100.7,
+              0.82
+            ],
+            [
+              100.7,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.316,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              1.0
+            ],
+            [
+              100.82000000000001,
+              1.0
+            ],
+            [
+              100.82000000000001,
+              1.12
+            ],
+            [
+              100.7,
+              1.12
+            ],
+            [
+              100.7,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.192,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              1.3
+            ],
+            [
+              100.82000000000001,
+              1.3
+            ],
+            [
+              100.82000000000001,
+              1.42
+            ],
+            [
+              100.7,
+              1.42
+            ],
+            [
+              100.7,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              1.6
+            ],
+            [
+              100.82000000000001,
+              1.6
+            ],
+            [
+              100.82000000000001,
+              1.7200000000000002
+            ],
+            [
+              100.7,
+              1.7200000000000002
+            ],
+            [
+              100.7,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -2.6
+            ],
+            [
+              101.12,
+              -2.6
+            ],
+            [
+              101.12,
+              -2.48
+            ],
+            [
+              101.0,
+              -2.48
+            ],
+            [
+              101.0,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.201,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -2.3
+            ],
+            [
+              101.12,
+              -2.3
+            ],
+            [
+              101.12,
+              -2.1799999999999997
+            ],
+            [
+              101.0,
+              -2.1799999999999997
+            ],
+            [
+              101.0,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.363,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -2.0
+            ],
+            [
+              101.12,
+              -2.0
+            ],
+            [
+              101.12,
+              -1.88
+            ],
+            [
+              101.0,
+              -1.88
+            ],
+            [
+              101.0,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.384,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -1.7
+            ],
+            [
+              101.12,
+              -1.7
+            ],
+            [
+              101.12,
+              -1.58
+            ],
+            [
+              101.0,
+              -1.58
+            ],
+            [
+              101.0,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.165,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -1.4
+            ],
+            [
+              101.12,
+              -1.4
+            ],
+            [
+              101.12,
+              -1.2799999999999998
+            ],
+            [
+              101.0,
+              -1.2799999999999998
+            ],
+            [
+              101.0,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.143,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -1.1
+            ],
+            [
+              101.12,
+              -1.1
+            ],
+            [
+              101.12,
+              -0.9800000000000001
+            ],
+            [
+              101.0,
+              -0.9800000000000001
+            ],
+            [
+              101.0,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.117,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -0.8
+            ],
+            [
+              101.12,
+              -0.8
+            ],
+            [
+              101.12,
+              -0.68
+            ],
+            [
+              101.0,
+              -0.68
+            ],
+            [
+              101.0,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.062,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -0.5
+            ],
+            [
+              101.12,
+              -0.5
+            ],
+            [
+              101.12,
+              -0.38
+            ],
+            [
+              101.0,
+              -0.38
+            ],
+            [
+              101.0,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.058,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              0.4
+            ],
+            [
+              101.12,
+              0.4
+            ],
+            [
+              101.12,
+              0.52
+            ],
+            [
+              101.0,
+              0.52
+            ],
+            [
+              101.0,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.116,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              0.7
+            ],
+            [
+              101.12,
+              0.7
+            ],
+            [
+              101.12,
+              0.82
+            ],
+            [
+              101.0,
+              0.82
+            ],
+            [
+              101.0,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.128,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              1.0
+            ],
+            [
+              101.12,
+              1.0
+            ],
+            [
+              101.12,
+              1.12
+            ],
+            [
+              101.0,
+              1.12
+            ],
+            [
+              101.0,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.078,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              1.3
+            ],
+            [
+              101.12,
+              1.3
+            ],
+            [
+              101.12,
+              1.42
+            ],
+            [
+              101.0,
+              1.42
+            ],
+            [
+              101.0,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -2.6
+            ],
+            [
+              101.42,
+              -2.6
+            ],
+            [
+              101.42,
+              -2.48
+            ],
+            [
+              101.3,
+              -2.48
+            ],
+            [
+              101.3,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.33,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -2.3
+            ],
+            [
+              101.42,
+              -2.3
+            ],
+            [
+              101.42,
+              -2.1799999999999997
+            ],
+            [
+              101.3,
+              -2.1799999999999997
+            ],
+            [
+              101.3,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.59,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -2.0
+            ],
+            [
+              101.42,
+              -2.0
+            ],
+            [
+              101.42,
+              -1.88
+            ],
+            [
+              101.3,
+              -1.88
+            ],
+            [
+              101.3,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.584,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -1.7
+            ],
+            [
+              101.42,
+              -1.7
+            ],
+            [
+              101.42,
+              -1.58
+            ],
+            [
+              101.3,
+              -1.58
+            ],
+            [
+              101.3,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.183,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -1.4
+            ],
+            [
+              101.42,
+              -1.4
+            ],
+            [
+              101.42,
+              -1.2799999999999998
+            ],
+            [
+              101.3,
+              -1.2799999999999998
+            ],
+            [
+              101.3,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.073,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -1.1
+            ],
+            [
+              101.42,
+              -1.1
+            ],
+            [
+              101.42,
+              -0.9800000000000001
+            ],
+            [
+              101.3,
+              -0.9800000000000001
+            ],
+            [
+              101.3,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -2.6
+            ],
+            [
+              101.72,
+              -2.6
+            ],
+            [
+              101.72,
+              -2.48
+            ],
+            [
+              101.6,
+              -2.48
+            ],
+            [
+              101.6,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.298,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -2.3
+            ],
+            [
+              101.72,
+              -2.3
+            ],
+            [
+              101.72,
+              -2.1799999999999997
+            ],
+            [
+              101.6,
+              -2.1799999999999997
+            ],
+            [
+              101.6,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.533,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -2.0
+            ],
+            [
+              101.72,
+              -2.0
+            ],
+            [
+              101.72,
+              -1.88
+            ],
+            [
+              101.6,
+              -1.88
+            ],
+            [
+              101.6,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.523,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -1.7
+            ],
+            [
+              101.72,
+              -1.7
+            ],
+            [
+              101.72,
+              -1.58
+            ],
+            [
+              101.6,
+              -1.58
+            ],
+            [
+              101.6,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.283,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -1.4
+            ],
+            [
+              101.72,
+              -1.4
+            ],
+            [
+              101.72,
+              -1.2799999999999998
+            ],
+            [
+              101.6,
+              -1.2799999999999998
+            ],
+            [
+              101.6,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.088,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -1.1
+            ],
+            [
+              101.72,
+              -1.1
+            ],
+            [
+              101.72,
+              -0.9800000000000001
+            ],
+            [
+              101.6,
+              -0.9800000000000001
+            ],
+            [
+              101.6,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.148,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -2.3
+            ],
+            [
+              102.02000000000001,
+              -2.3
+            ],
+            [
+              102.02000000000001,
+              -2.1799999999999997
+            ],
+            [
+              101.9,
+              -2.1799999999999997
+            ],
+            [
+              101.9,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.265,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -2.0
+            ],
+            [
+              102.02000000000001,
+              -2.0
+            ],
+            [
+              102.02000000000001,
+              -1.88
+            ],
+            [
+              101.9,
+              -1.88
+            ],
+            [
+              101.9,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -1.7
+            ],
+            [
+              102.02000000000001,
+              -1.7
+            ],
+            [
+              102.02000000000001,
+              -1.58
+            ],
+            [
+              101.9,
+              -1.58
+            ],
+            [
+              101.9,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.14,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -1.4
+            ],
+            [
+              102.02000000000001,
+              -1.4
+            ],
+            [
+              102.02000000000001,
+              -1.2799999999999998
+            ],
+            [
+              101.9,
+              -1.2799999999999998
+            ],
+            [
+              101.9,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.072,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              102.2,
+              -2.0
+            ],
+            [
+              102.32000000000001,
+              -2.0
+            ],
+            [
+              102.32000000000001,
+              -1.88
+            ],
+            [
+              102.2,
+              -1.88
+            ],
+            [
+              102.2,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              102.2,
+              -1.7
+            ],
+            [
+              102.32000000000001,
+              -1.7
+            ],
+            [
+              102.32000000000001,
+              -1.58
+            ],
+            [
+              102.2,
+              -1.58
+            ],
+            [
+              102.2,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.0,
+              -3.2
+            ],
+            [
+              104.12,
+              -3.2
+            ],
+            [
+              104.12,
+              -3.08
+            ],
+            [
+              104.0,
+              -3.08
+            ],
+            [
+              104.0,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.166,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.0,
+              -2.9
+            ],
+            [
+              104.12,
+              -2.9
+            ],
+            [
+              104.12,
+              -2.78
+            ],
+            [
+              104.0,
+              -2.78
+            ],
+            [
+              104.0,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.0,
+              -2.6
+            ],
+            [
+              104.12,
+              -2.6
+            ],
+            [
+              104.12,
+              -2.48
+            ],
+            [
+              104.0,
+              -2.48
+            ],
+            [
+              104.0,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -3.5
+            ],
+            [
+              104.42,
+              -3.5
+            ],
+            [
+              104.42,
+              -3.38
+            ],
+            [
+              104.3,
+              -3.38
+            ],
+            [
+              104.3,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -3.2
+            ],
+            [
+              104.42,
+              -3.2
+            ],
+            [
+              104.42,
+              -3.08
+            ],
+            [
+              104.3,
+              -3.08
+            ],
+            [
+              104.3,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.499,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -2.9
+            ],
+            [
+              104.42,
+              -2.9
+            ],
+            [
+              104.42,
+              -2.78
+            ],
+            [
+              104.3,
+              -2.78
+            ],
+            [
+              104.3,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -2.6
+            ],
+            [
+              104.42,
+              -2.6
+            ],
+            [
+              104.42,
+              -2.48
+            ],
+            [
+              104.3,
+              -2.48
+            ],
+            [
+              104.3,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -2.3
+            ],
+            [
+              104.42,
+              -2.3
+            ],
+            [
+              104.42,
+              -2.1799999999999997
+            ],
+            [
+              104.3,
+              -2.1799999999999997
+            ],
+            [
+              104.3,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -3.8
+            ],
+            [
+              104.72,
+              -3.8
+            ],
+            [
+              104.72,
+              -3.6799999999999997
+            ],
+            [
+              104.6,
+              -3.6799999999999997
+            ],
+            [
+              104.6,
+              -3.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -3.5
+            ],
+            [
+              104.72,
+              -3.5
+            ],
+            [
+              104.72,
+              -3.38
+            ],
+            [
+              104.6,
+              -3.38
+            ],
+            [
+              104.6,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -3.2
+            ],
+            [
+              104.72,
+              -3.2
+            ],
+            [
+              104.72,
+              -3.08
+            ],
+            [
+              104.6,
+              -3.08
+            ],
+            [
+              104.6,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.822,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.9
+            ],
+            [
+              104.72,
+              -2.9
+            ],
+            [
+              104.72,
+              -2.78
+            ],
+            [
+              104.6,
+              -2.78
+            ],
+            [
+              104.6,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.6
+            ],
+            [
+              104.72,
+              -2.6
+            ],
+            [
+              104.72,
+              -2.48
+            ],
+            [
+              104.6,
+              -2.48
+            ],
+            [
+              104.6,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.3
+            ],
+            [
+              104.72,
+              -2.3
+            ],
+            [
+              104.72,
+              -2.1799999999999997
+            ],
+            [
+              104.6,
+              -2.1799999999999997
+            ],
+            [
+              104.6,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.0
+            ],
+            [
+              104.72,
+              -2.0
+            ],
+            [
+              104.72,
+              -1.88
+            ],
+            [
+              104.6,
+              -1.88
+            ],
+            [
+              104.6,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.224,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -3.5
+            ],
+            [
+              105.02000000000001,
+              -3.5
+            ],
+            [
+              105.02000000000001,
+              -3.38
+            ],
+            [
+              104.9,
+              -3.38
+            ],
+            [
+              104.9,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -3.2
+            ],
+            [
+              105.02000000000001,
+              -3.2
+            ],
+            [
+              105.02000000000001,
+              -3.08
+            ],
+            [
+              104.9,
+              -3.08
+            ],
+            [
+              104.9,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.744,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.9
+            ],
+            [
+              105.02000000000001,
+              -2.9
+            ],
+            [
+              105.02000000000001,
+              -2.78
+            ],
+            [
+              104.9,
+              -2.78
+            ],
+            [
+              104.9,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.6
+            ],
+            [
+              105.02000000000001,
+              -2.6
+            ],
+            [
+              105.02000000000001,
+              -2.48
+            ],
+            [
+              104.9,
+              -2.48
+            ],
+            [
+              104.9,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.3
+            ],
+            [
+              105.02000000000001,
+              -2.3
+            ],
+            [
+              105.02000000000001,
+              -2.1799999999999997
+            ],
+            [
+              104.9,
+              -2.1799999999999997
+            ],
+            [
+              104.9,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.0
+            ],
+            [
+              105.02000000000001,
+              -2.0
+            ],
+            [
+              105.02000000000001,
+              -1.88
+            ],
+            [
+              104.9,
+              -1.88
+            ],
+            [
+              104.9,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.111,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -3.5
+            ],
+            [
+              105.32000000000001,
+              -3.5
+            ],
+            [
+              105.32000000000001,
+              -3.38
+            ],
+            [
+              105.2,
+              -3.38
+            ],
+            [
+              105.2,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.274,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -3.2
+            ],
+            [
+              105.32000000000001,
+              -3.2
+            ],
+            [
+              105.32000000000001,
+              -3.08
+            ],
+            [
+              105.2,
+              -3.08
+            ],
+            [
+              105.2,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.37,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.9
+            ],
+            [
+              105.32000000000001,
+              -2.9
+            ],
+            [
+              105.32000000000001,
+              -2.78
+            ],
+            [
+              105.2,
+              -2.78
+            ],
+            [
+              105.2,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.275,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.6
+            ],
+            [
+              105.32000000000001,
+              -2.6
+            ],
+            [
+              105.32000000000001,
+              -2.48
+            ],
+            [
+              105.2,
+              -2.48
+            ],
+            [
+              105.2,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.3
+            ],
+            [
+              105.32000000000001,
+              -2.3
+            ],
+            [
+              105.32000000000001,
+              -2.1799999999999997
+            ],
+            [
+              105.2,
+              -2.1799999999999997
+            ],
+            [
+              105.2,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.0
+            ],
+            [
+              105.32000000000001,
+              -2.0
+            ],
+            [
+              105.32000000000001,
+              -1.88
+            ],
+            [
+              105.2,
+              -1.88
+            ],
+            [
+              105.2,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -3.2
+            ],
+            [
+              105.62,
+              -3.2
+            ],
+            [
+              105.62,
+              -3.08
+            ],
+            [
+              105.5,
+              -3.08
+            ],
+            [
+              105.5,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.9
+            ],
+            [
+              105.62,
+              -2.9
+            ],
+            [
+              105.62,
+              -2.78
+            ],
+            [
+              105.5,
+              -2.78
+            ],
+            [
+              105.5,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.082,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.6
+            ],
+            [
+              105.62,
+              -2.6
+            ],
+            [
+              105.62,
+              -2.48
+            ],
+            [
+              105.5,
+              -2.48
+            ],
+            [
+              105.5,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.3
+            ],
+            [
+              105.62,
+              -2.3
+            ],
+            [
+              105.62,
+              -2.1799999999999997
+            ],
+            [
+              105.5,
+              -2.1799999999999997
+            ],
+            [
+              105.5,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.13,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.0
+            ],
+            [
+              105.62,
+              -2.0
+            ],
+            [
+              105.62,
+              -1.88
+            ],
+            [
+              105.5,
+              -1.88
+            ],
+            [
+              105.5,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -1.7
+            ],
+            [
+              105.62,
+              -1.7
+            ],
+            [
+              105.62,
+              -1.58
+            ],
+            [
+              105.5,
+              -1.58
+            ],
+            [
+              105.5,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -1.4
+            ],
+            [
+              105.62,
+              -1.4
+            ],
+            [
+              105.62,
+              -1.2799999999999998
+            ],
+            [
+              105.5,
+              -1.2799999999999998
+            ],
+            [
+              105.5,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -1.1
+            ],
+            [
+              105.62,
+              -1.1
+            ],
+            [
+              105.62,
+              -0.9800000000000001
+            ],
+            [
+              105.5,
+              -0.9800000000000001
+            ],
+            [
+              105.5,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.106,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -2.3
+            ],
+            [
+              105.92,
+              -2.3
+            ],
+            [
+              105.92,
+              -2.1799999999999997
+            ],
+            [
+              105.8,
+              -2.1799999999999997
+            ],
+            [
+              105.8,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -2.0
+            ],
+            [
+              105.92,
+              -2.0
+            ],
+            [
+              105.92,
+              -1.88
+            ],
+            [
+              105.8,
+              -1.88
+            ],
+            [
+              105.8,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -1.7
+            ],
+            [
+              105.92,
+              -1.7
+            ],
+            [
+              105.92,
+              -1.58
+            ],
+            [
+              105.8,
+              -1.58
+            ],
+            [
+              105.8,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -1.4
+            ],
+            [
+              105.92,
+              -1.4
+            ],
+            [
+              105.92,
+              -1.2799999999999998
+            ],
+            [
+              105.8,
+              -1.2799999999999998
+            ],
+            [
+              105.8,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -1.1
+            ],
+            [
+              105.92,
+              -1.1
+            ],
+            [
+              105.92,
+              -0.9800000000000001
+            ],
+            [
+              105.8,
+              -0.9800000000000001
+            ],
+            [
+              105.8,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -0.8
+            ],
+            [
+              105.92,
+              -0.8
+            ],
+            [
+              105.92,
+              -0.68
+            ],
+            [
+              105.8,
+              -0.68
+            ],
+            [
+              105.8,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

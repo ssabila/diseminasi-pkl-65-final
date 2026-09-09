@@ -1,0 +1,325 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Aceh Tengah",
+        "vuln_score": 0.72,
+        "penduduk_rentan": 45000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.85,
+          4.52
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Aceh Selatan",
+        "vuln_score": 0.65,
+        "penduduk_rentan": 38000,
+        "kategori": "sedang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.57,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Karo",
+        "vuln_score": 0.78,
+        "penduduk_rentan": 52000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.46,
+          3.12
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Medan",
+        "vuln_score": 0.45,
+        "penduduk_rentan": 250000,
+        "kategori": "sedang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.7,
+          3.6
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Dairi",
+        "vuln_score": 0.81,
+        "penduduk_rentan": 41000,
+        "kategori": "sangat tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.32,
+          2.71
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Tapanuli Utara",
+        "vuln_score": 0.77,
+        "penduduk_rentan": 48000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.06,
+          2.15
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Tapanuli Selatan",
+        "vuln_score": 0.69,
+        "penduduk_rentan": 55000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.37,
+          1.48
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Pasaman Barat",
+        "vuln_score": 0.88,
+        "penduduk_rentan": 62000,
+        "kategori": "sangat tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.84,
+          0.09
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Mandailing Natal",
+        "vuln_score": 0.83,
+        "penduduk_rentan": 58000,
+        "kategori": "sangat tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.5,
+          1.8
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Padang Pariaman",
+        "vuln_score": 0.74,
+        "penduduk_rentan": 70000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.12,
+          -0.56
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Agam",
+        "vuln_score": 0.71,
+        "penduduk_rentan": 65000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.36,
+          -0.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Padang",
+        "vuln_score": 0.52,
+        "penduduk_rentan": 180000,
+        "kategori": "sedang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.35,
+          -0.95
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Solok",
+        "vuln_score": 0.68,
+        "penduduk_rentan": 44000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.65,
+          -0.79
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Solok Selatan",
+        "vuln_score": 0.79,
+        "penduduk_rentan": 38000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.55,
+          -1.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Sijunjung",
+        "vuln_score": 0.66,
+        "penduduk_rentan": 42000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.1,
+          -1.5
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Sawahlunto",
+        "vuln_score": 0.61,
+        "penduduk_rentan": 35000,
+        "kategori": "sedang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.39,
+          -1.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Pidie",
+        "vuln_score": 0.7,
+        "penduduk_rentan": 40000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.2,
+          4.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Langkat",
+        "vuln_score": 0.73,
+        "penduduk_rentan": 48000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.1,
+          3.55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Deli Serdang",
+        "vuln_score": 0.58,
+        "penduduk_rentan": 95000,
+        "kategori": "sedang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.0,
+          3.8
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kabupaten": "Simalungun",
+        "vuln_score": 0.75,
+        "penduduk_rentan": 54000,
+        "kategori": "tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.15,
+          2.8
+        ]
+      }
+    }
+  ]
+}

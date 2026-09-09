@@ -1,0 +1,7009 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              3.7
+            ],
+            [
+              96.62,
+              3.7
+            ],
+            [
+              96.62,
+              3.8200000000000003
+            ],
+            [
+              96.5,
+              3.8200000000000003
+            ],
+            [
+              96.5,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              4.0
+            ],
+            [
+              96.62,
+              4.0
+            ],
+            [
+              96.62,
+              4.12
+            ],
+            [
+              96.5,
+              4.12
+            ],
+            [
+              96.5,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.204,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              4.3
+            ],
+            [
+              96.62,
+              4.3
+            ],
+            [
+              96.62,
+              4.42
+            ],
+            [
+              96.5,
+              4.42
+            ],
+            [
+              96.5,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.124,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.5,
+              4.6
+            ],
+            [
+              96.62,
+              4.6
+            ],
+            [
+              96.62,
+              4.72
+            ],
+            [
+              96.5,
+              4.72
+            ],
+            [
+              96.5,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              3.4
+            ],
+            [
+              96.92,
+              3.4
+            ],
+            [
+              96.92,
+              3.52
+            ],
+            [
+              96.8,
+              3.52
+            ],
+            [
+              96.8,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              3.7
+            ],
+            [
+              96.92,
+              3.7
+            ],
+            [
+              96.92,
+              3.8200000000000003
+            ],
+            [
+              96.8,
+              3.8200000000000003
+            ],
+            [
+              96.8,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.0
+            ],
+            [
+              96.92,
+              4.0
+            ],
+            [
+              96.92,
+              4.12
+            ],
+            [
+              96.8,
+              4.12
+            ],
+            [
+              96.8,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.3
+            ],
+            [
+              96.92,
+              4.3
+            ],
+            [
+              96.92,
+              4.42
+            ],
+            [
+              96.8,
+              4.42
+            ],
+            [
+              96.8,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.6
+            ],
+            [
+              96.92,
+              4.6
+            ],
+            [
+              96.92,
+              4.72
+            ],
+            [
+              96.8,
+              4.72
+            ],
+            [
+              96.8,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              96.8,
+              4.9
+            ],
+            [
+              96.92,
+              4.9
+            ],
+            [
+              96.92,
+              5.0200000000000005
+            ],
+            [
+              96.8,
+              5.0200000000000005
+            ],
+            [
+              96.8,
+              4.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.083,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              3.4
+            ],
+            [
+              97.22,
+              3.4
+            ],
+            [
+              97.22,
+              3.52
+            ],
+            [
+              97.1,
+              3.52
+            ],
+            [
+              97.1,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              3.7
+            ],
+            [
+              97.22,
+              3.7
+            ],
+            [
+              97.22,
+              3.8200000000000003
+            ],
+            [
+              97.1,
+              3.8200000000000003
+            ],
+            [
+              97.1,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.613,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.0
+            ],
+            [
+              97.22,
+              4.0
+            ],
+            [
+              97.22,
+              4.12
+            ],
+            [
+              97.1,
+              4.12
+            ],
+            [
+              97.1,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.677,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.3
+            ],
+            [
+              97.22,
+              4.3
+            ],
+            [
+              97.22,
+              4.42
+            ],
+            [
+              97.1,
+              4.42
+            ],
+            [
+              97.1,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.411,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.6
+            ],
+            [
+              97.22,
+              4.6
+            ],
+            [
+              97.22,
+              4.72
+            ],
+            [
+              97.1,
+              4.72
+            ],
+            [
+              97.1,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.137,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.1,
+              4.9
+            ],
+            [
+              97.22,
+              4.9
+            ],
+            [
+              97.22,
+              5.0200000000000005
+            ],
+            [
+              97.1,
+              5.0200000000000005
+            ],
+            [
+              97.1,
+              4.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              3.4
+            ],
+            [
+              97.52000000000001,
+              3.4
+            ],
+            [
+              97.52000000000001,
+              3.52
+            ],
+            [
+              97.4,
+              3.52
+            ],
+            [
+              97.4,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.229,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              3.7
+            ],
+            [
+              97.52000000000001,
+              3.7
+            ],
+            [
+              97.52000000000001,
+              3.8200000000000003
+            ],
+            [
+              97.4,
+              3.8200000000000003
+            ],
+            [
+              97.4,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.0
+            ],
+            [
+              97.52000000000001,
+              4.0
+            ],
+            [
+              97.52000000000001,
+              4.12
+            ],
+            [
+              97.4,
+              4.12
+            ],
+            [
+              97.4,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.3
+            ],
+            [
+              97.52000000000001,
+              4.3
+            ],
+            [
+              97.52000000000001,
+              4.42
+            ],
+            [
+              97.4,
+              4.42
+            ],
+            [
+              97.4,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.6
+            ],
+            [
+              97.52000000000001,
+              4.6
+            ],
+            [
+              97.52000000000001,
+              4.72
+            ],
+            [
+              97.4,
+              4.72
+            ],
+            [
+              97.4,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.4,
+              4.9
+            ],
+            [
+              97.52000000000001,
+              4.9
+            ],
+            [
+              97.52000000000001,
+              5.0200000000000005
+            ],
+            [
+              97.4,
+              5.0200000000000005
+            ],
+            [
+              97.4,
+              4.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              3.4
+            ],
+            [
+              97.82000000000001,
+              3.4
+            ],
+            [
+              97.82000000000001,
+              3.52
+            ],
+            [
+              97.7,
+              3.52
+            ],
+            [
+              97.7,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.126,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              3.7
+            ],
+            [
+              97.82000000000001,
+              3.7
+            ],
+            [
+              97.82000000000001,
+              3.8200000000000003
+            ],
+            [
+              97.7,
+              3.8200000000000003
+            ],
+            [
+              97.7,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              4.0
+            ],
+            [
+              97.82000000000001,
+              4.0
+            ],
+            [
+              97.82000000000001,
+              4.12
+            ],
+            [
+              97.7,
+              4.12
+            ],
+            [
+              97.7,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.211,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              4.3
+            ],
+            [
+              97.82000000000001,
+              4.3
+            ],
+            [
+              97.82000000000001,
+              4.42
+            ],
+            [
+              97.7,
+              4.42
+            ],
+            [
+              97.7,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.125,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              97.7,
+              4.6
+            ],
+            [
+              97.82000000000001,
+              4.6
+            ],
+            [
+              97.82000000000001,
+              4.72
+            ],
+            [
+              97.7,
+              4.72
+            ],
+            [
+              97.7,
+              4.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.086,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              3.1
+            ],
+            [
+              98.12,
+              3.1
+            ],
+            [
+              98.12,
+              3.22
+            ],
+            [
+              98.0,
+              3.22
+            ],
+            [
+              98.0,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.176,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              3.4
+            ],
+            [
+              98.12,
+              3.4
+            ],
+            [
+              98.12,
+              3.52
+            ],
+            [
+              98.0,
+              3.52
+            ],
+            [
+              98.0,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              3.7
+            ],
+            [
+              98.12,
+              3.7
+            ],
+            [
+              98.12,
+              3.8200000000000003
+            ],
+            [
+              98.0,
+              3.8200000000000003
+            ],
+            [
+              98.0,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.156,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              4.0
+            ],
+            [
+              98.12,
+              4.0
+            ],
+            [
+              98.12,
+              4.12
+            ],
+            [
+              98.0,
+              4.12
+            ],
+            [
+              98.0,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.084,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.0,
+              4.3
+            ],
+            [
+              98.12,
+              4.3
+            ],
+            [
+              98.12,
+              4.42
+            ],
+            [
+              98.0,
+              4.42
+            ],
+            [
+              98.0,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.07,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              2.8
+            ],
+            [
+              98.42,
+              2.8
+            ],
+            [
+              98.42,
+              2.92
+            ],
+            [
+              98.3,
+              2.92
+            ],
+            [
+              98.3,
+              2.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.255,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              3.1
+            ],
+            [
+              98.42,
+              3.1
+            ],
+            [
+              98.42,
+              3.22
+            ],
+            [
+              98.3,
+              3.22
+            ],
+            [
+              98.3,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.514,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              3.4
+            ],
+            [
+              98.42,
+              3.4
+            ],
+            [
+              98.42,
+              3.52
+            ],
+            [
+              98.3,
+              3.52
+            ],
+            [
+              98.3,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.57,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              3.7
+            ],
+            [
+              98.42,
+              3.7
+            ],
+            [
+              98.42,
+              3.8200000000000003
+            ],
+            [
+              98.3,
+              3.8200000000000003
+            ],
+            [
+              98.3,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              4.0
+            ],
+            [
+              98.42,
+              4.0
+            ],
+            [
+              98.42,
+              4.12
+            ],
+            [
+              98.3,
+              4.12
+            ],
+            [
+              98.3,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.3,
+              4.3
+            ],
+            [
+              98.42,
+              4.3
+            ],
+            [
+              98.42,
+              4.42
+            ],
+            [
+              98.3,
+              4.42
+            ],
+            [
+              98.3,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.058,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              1.3
+            ],
+            [
+              98.72,
+              1.3
+            ],
+            [
+              98.72,
+              1.42
+            ],
+            [
+              98.6,
+              1.42
+            ],
+            [
+              98.6,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.07,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              1.6
+            ],
+            [
+              98.72,
+              1.6
+            ],
+            [
+              98.72,
+              1.7200000000000002
+            ],
+            [
+              98.6,
+              1.7200000000000002
+            ],
+            [
+              98.6,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.115,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              2.8
+            ],
+            [
+              98.72,
+              2.8
+            ],
+            [
+              98.72,
+              2.92
+            ],
+            [
+              98.6,
+              2.92
+            ],
+            [
+              98.6,
+              2.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.42,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              3.1
+            ],
+            [
+              98.72,
+              3.1
+            ],
+            [
+              98.72,
+              3.22
+            ],
+            [
+              98.6,
+              3.22
+            ],
+            [
+              98.6,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.847,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              3.4
+            ],
+            [
+              98.72,
+              3.4
+            ],
+            [
+              98.72,
+              3.52
+            ],
+            [
+              98.6,
+              3.52
+            ],
+            [
+              98.6,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.936,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              3.7
+            ],
+            [
+              98.72,
+              3.7
+            ],
+            [
+              98.72,
+              3.8200000000000003
+            ],
+            [
+              98.6,
+              3.8200000000000003
+            ],
+            [
+              98.6,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.568,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              4.0
+            ],
+            [
+              98.72,
+              4.0
+            ],
+            [
+              98.72,
+              4.12
+            ],
+            [
+              98.6,
+              4.12
+            ],
+            [
+              98.6,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.189,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.6,
+              4.3
+            ],
+            [
+              98.72,
+              4.3
+            ],
+            [
+              98.72,
+              4.42
+            ],
+            [
+              98.6,
+              4.42
+            ],
+            [
+              98.6,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.096,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.0
+            ],
+            [
+              99.02000000000001,
+              1.0
+            ],
+            [
+              99.02000000000001,
+              1.12
+            ],
+            [
+              98.9,
+              1.12
+            ],
+            [
+              98.9,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.212,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.3
+            ],
+            [
+              99.02000000000001,
+              1.3
+            ],
+            [
+              99.02000000000001,
+              1.42
+            ],
+            [
+              98.9,
+              1.42
+            ],
+            [
+              98.9,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.6
+            ],
+            [
+              99.02000000000001,
+              1.6
+            ],
+            [
+              99.02000000000001,
+              1.7200000000000002
+            ],
+            [
+              98.9,
+              1.7200000000000002
+            ],
+            [
+              98.9,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.173,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              1.9
+            ],
+            [
+              99.02000000000001,
+              1.9
+            ],
+            [
+              99.02000000000001,
+              2.02
+            ],
+            [
+              98.9,
+              2.02
+            ],
+            [
+              98.9,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              2.2
+            ],
+            [
+              99.02000000000001,
+              2.2
+            ],
+            [
+              99.02000000000001,
+              2.3200000000000003
+            ],
+            [
+              98.9,
+              2.3200000000000003
+            ],
+            [
+              98.9,
+              2.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.105,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              2.8
+            ],
+            [
+              99.02000000000001,
+              2.8
+            ],
+            [
+              99.02000000000001,
+              2.92
+            ],
+            [
+              98.9,
+              2.92
+            ],
+            [
+              98.9,
+              2.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.38,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              3.1
+            ],
+            [
+              99.02000000000001,
+              3.1
+            ],
+            [
+              99.02000000000001,
+              3.22
+            ],
+            [
+              98.9,
+              3.22
+            ],
+            [
+              98.9,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.766,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              3.4
+            ],
+            [
+              99.02000000000001,
+              3.4
+            ],
+            [
+              99.02000000000001,
+              3.52
+            ],
+            [
+              98.9,
+              3.52
+            ],
+            [
+              98.9,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.846,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              3.7
+            ],
+            [
+              99.02000000000001,
+              3.7
+            ],
+            [
+              99.02000000000001,
+              3.8200000000000003
+            ],
+            [
+              98.9,
+              3.8200000000000003
+            ],
+            [
+              98.9,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.513,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              4.0
+            ],
+            [
+              99.02000000000001,
+              4.0
+            ],
+            [
+              99.02000000000001,
+              4.12
+            ],
+            [
+              98.9,
+              4.12
+            ],
+            [
+              98.9,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.171,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              98.9,
+              4.3
+            ],
+            [
+              99.02000000000001,
+              4.3
+            ],
+            [
+              99.02000000000001,
+              4.42
+            ],
+            [
+              98.9,
+              4.42
+            ],
+            [
+              98.9,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              0.7
+            ],
+            [
+              99.32000000000001,
+              0.7
+            ],
+            [
+              99.32000000000001,
+              0.82
+            ],
+            [
+              99.2,
+              0.82
+            ],
+            [
+              99.2,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.198,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.0
+            ],
+            [
+              99.32000000000001,
+              1.0
+            ],
+            [
+              99.32000000000001,
+              1.12
+            ],
+            [
+              99.2,
+              1.12
+            ],
+            [
+              99.2,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.43,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.3
+            ],
+            [
+              99.32000000000001,
+              1.3
+            ],
+            [
+              99.32000000000001,
+              1.42
+            ],
+            [
+              99.2,
+              1.42
+            ],
+            [
+              99.2,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.522,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.6
+            ],
+            [
+              99.32000000000001,
+              1.6
+            ],
+            [
+              99.32000000000001,
+              1.7200000000000002
+            ],
+            [
+              99.2,
+              1.7200000000000002
+            ],
+            [
+              99.2,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              1.9
+            ],
+            [
+              99.32000000000001,
+              1.9
+            ],
+            [
+              99.32000000000001,
+              2.02
+            ],
+            [
+              99.2,
+              2.02
+            ],
+            [
+              99.2,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.129,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              2.2
+            ],
+            [
+              99.32000000000001,
+              2.2
+            ],
+            [
+              99.32000000000001,
+              2.3200000000000003
+            ],
+            [
+              99.2,
+              2.3200000000000003
+            ],
+            [
+              99.2,
+              2.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.054,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              2.8
+            ],
+            [
+              99.32000000000001,
+              2.8
+            ],
+            [
+              99.32000000000001,
+              2.92
+            ],
+            [
+              99.2,
+              2.92
+            ],
+            [
+              99.2,
+              2.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.189,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              3.1
+            ],
+            [
+              99.32000000000001,
+              3.1
+            ],
+            [
+              99.32000000000001,
+              3.22
+            ],
+            [
+              99.2,
+              3.22
+            ],
+            [
+              99.2,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.38,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              3.4
+            ],
+            [
+              99.32000000000001,
+              3.4
+            ],
+            [
+              99.32000000000001,
+              3.52
+            ],
+            [
+              99.2,
+              3.52
+            ],
+            [
+              99.2,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.42,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              3.7
+            ],
+            [
+              99.32000000000001,
+              3.7
+            ],
+            [
+              99.32000000000001,
+              3.8200000000000003
+            ],
+            [
+              99.2,
+              3.8200000000000003
+            ],
+            [
+              99.2,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.255,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              4.0
+            ],
+            [
+              99.32000000000001,
+              4.0
+            ],
+            [
+              99.32000000000001,
+              4.12
+            ],
+            [
+              99.2,
+              4.12
+            ],
+            [
+              99.2,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.085,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.2,
+              4.3
+            ],
+            [
+              99.32000000000001,
+              4.3
+            ],
+            [
+              99.32000000000001,
+              4.42
+            ],
+            [
+              99.2,
+              4.42
+            ],
+            [
+              99.2,
+              4.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              -1.1
+            ],
+            [
+              99.62,
+              -1.1
+            ],
+            [
+              99.62,
+              -0.9800000000000001
+            ],
+            [
+              99.5,
+              -0.9800000000000001
+            ],
+            [
+              99.5,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              -0.8
+            ],
+            [
+              99.62,
+              -0.8
+            ],
+            [
+              99.62,
+              -0.68
+            ],
+            [
+              99.5,
+              -0.68
+            ],
+            [
+              99.5,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.099,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              0.7
+            ],
+            [
+              99.62,
+              0.7
+            ],
+            [
+              99.62,
+              0.82
+            ],
+            [
+              99.5,
+              0.82
+            ],
+            [
+              99.5,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.264,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.0
+            ],
+            [
+              99.62,
+              1.0
+            ],
+            [
+              99.62,
+              1.12
+            ],
+            [
+              99.5,
+              1.12
+            ],
+            [
+              99.5,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.503,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.3
+            ],
+            [
+              99.62,
+              1.3
+            ],
+            [
+              99.62,
+              1.42
+            ],
+            [
+              99.5,
+              1.42
+            ],
+            [
+              99.5,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.586,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.6
+            ],
+            [
+              99.62,
+              1.6
+            ],
+            [
+              99.62,
+              1.7200000000000002
+            ],
+            [
+              99.5,
+              1.7200000000000002
+            ],
+            [
+              99.5,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.388,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              1.9
+            ],
+            [
+              99.62,
+              1.9
+            ],
+            [
+              99.62,
+              2.02
+            ],
+            [
+              99.5,
+              2.02
+            ],
+            [
+              99.5,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.142,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              2.2
+            ],
+            [
+              99.62,
+              2.2
+            ],
+            [
+              99.62,
+              2.3200000000000003
+            ],
+            [
+              99.5,
+              2.3200000000000003
+            ],
+            [
+              99.5,
+              2.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              3.1
+            ],
+            [
+              99.62,
+              3.1
+            ],
+            [
+              99.62,
+              3.22
+            ],
+            [
+              99.5,
+              3.22
+            ],
+            [
+              99.5,
+              3.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.104,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              3.4
+            ],
+            [
+              99.62,
+              3.4
+            ],
+            [
+              99.62,
+              3.52
+            ],
+            [
+              99.5,
+              3.52
+            ],
+            [
+              99.5,
+              3.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.115,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              3.7
+            ],
+            [
+              99.62,
+              3.7
+            ],
+            [
+              99.62,
+              3.8200000000000003
+            ],
+            [
+              99.5,
+              3.8200000000000003
+            ],
+            [
+              99.5,
+              3.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.069,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.5,
+              4.0
+            ],
+            [
+              99.62,
+              4.0
+            ],
+            [
+              99.62,
+              4.12
+            ],
+            [
+              99.5,
+              4.12
+            ],
+            [
+              99.5,
+              4.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.05,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -1.7
+            ],
+            [
+              99.92,
+              -1.7
+            ],
+            [
+              99.92,
+              -1.58
+            ],
+            [
+              99.8,
+              -1.58
+            ],
+            [
+              99.8,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.167,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -1.4
+            ],
+            [
+              99.92,
+              -1.4
+            ],
+            [
+              99.92,
+              -1.2799999999999998
+            ],
+            [
+              99.8,
+              -1.2799999999999998
+            ],
+            [
+              99.8,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -1.1
+            ],
+            [
+              99.92,
+              -1.1
+            ],
+            [
+              99.92,
+              -0.9800000000000001
+            ],
+            [
+              99.8,
+              -0.9800000000000001
+            ],
+            [
+              99.8,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -0.8
+            ],
+            [
+              99.92,
+              -0.8
+            ],
+            [
+              99.92,
+              -0.68
+            ],
+            [
+              99.8,
+              -0.68
+            ],
+            [
+              99.8,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -0.5
+            ],
+            [
+              99.92,
+              -0.5
+            ],
+            [
+              99.92,
+              -0.38
+            ],
+            [
+              99.8,
+              -0.38
+            ],
+            [
+              99.8,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              -0.2
+            ],
+            [
+              99.92,
+              -0.2
+            ],
+            [
+              99.92,
+              -0.08000000000000002
+            ],
+            [
+              99.8,
+              -0.08000000000000002
+            ],
+            [
+              99.8,
+              -0.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.11,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              0.4
+            ],
+            [
+              99.92,
+              0.4
+            ],
+            [
+              99.92,
+              0.52
+            ],
+            [
+              99.8,
+              0.52
+            ],
+            [
+              99.8,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.243,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              0.7
+            ],
+            [
+              99.92,
+              0.7
+            ],
+            [
+              99.92,
+              0.82
+            ],
+            [
+              99.8,
+              0.82
+            ],
+            [
+              99.8,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.361,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.0
+            ],
+            [
+              99.92,
+              1.0
+            ],
+            [
+              99.92,
+              1.12
+            ],
+            [
+              99.8,
+              1.12
+            ],
+            [
+              99.8,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.427,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.3
+            ],
+            [
+              99.92,
+              1.3
+            ],
+            [
+              99.92,
+              1.42
+            ],
+            [
+              99.8,
+              1.42
+            ],
+            [
+              99.8,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.396,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.6
+            ],
+            [
+              99.92,
+              1.6
+            ],
+            [
+              99.92,
+              1.7200000000000002
+            ],
+            [
+              99.8,
+              1.7200000000000002
+            ],
+            [
+              99.8,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.243,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              1.9
+            ],
+            [
+              99.92,
+              1.9
+            ],
+            [
+              99.92,
+              2.02
+            ],
+            [
+              99.8,
+              2.02
+            ],
+            [
+              99.8,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.087,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.8,
+              2.2
+            ],
+            [
+              99.92,
+              2.2
+            ],
+            [
+              99.92,
+              2.3200000000000003
+            ],
+            [
+              99.8,
+              2.3200000000000003
+            ],
+            [
+              99.8,
+              2.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.114,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -1.7
+            ],
+            [
+              100.22,
+              -1.7
+            ],
+            [
+              100.22,
+              -1.58
+            ],
+            [
+              100.1,
+              -1.58
+            ],
+            [
+              100.1,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -1.4
+            ],
+            [
+              100.22,
+              -1.4
+            ],
+            [
+              100.22,
+              -1.2799999999999998
+            ],
+            [
+              100.1,
+              -1.2799999999999998
+            ],
+            [
+              100.1,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.678,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -1.1
+            ],
+            [
+              100.22,
+              -1.1
+            ],
+            [
+              100.22,
+              -0.9800000000000001
+            ],
+            [
+              100.1,
+              -0.9800000000000001
+            ],
+            [
+              100.1,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.678,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -0.8
+            ],
+            [
+              100.22,
+              -0.8
+            ],
+            [
+              100.22,
+              -0.68
+            ],
+            [
+              100.1,
+              -0.68
+            ],
+            [
+              100.1,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -0.5
+            ],
+            [
+              100.22,
+              -0.5
+            ],
+            [
+              100.22,
+              -0.38
+            ],
+            [
+              100.1,
+              -0.38
+            ],
+            [
+              100.1,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              -0.2
+            ],
+            [
+              100.22,
+              -0.2
+            ],
+            [
+              100.22,
+              -0.08000000000000002
+            ],
+            [
+              100.1,
+              -0.08000000000000002
+            ],
+            [
+              100.1,
+              -0.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.089,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              0.1
+            ],
+            [
+              100.22,
+              0.1
+            ],
+            [
+              100.22,
+              0.22
+            ],
+            [
+              100.1,
+              0.22
+            ],
+            [
+              100.1,
+              0.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.261,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              0.4
+            ],
+            [
+              100.22,
+              0.4
+            ],
+            [
+              100.22,
+              0.52
+            ],
+            [
+              100.1,
+              0.52
+            ],
+            [
+              100.1,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.529,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              0.7
+            ],
+            [
+              100.22,
+              0.7
+            ],
+            [
+              100.22,
+              0.82
+            ],
+            [
+              100.1,
+              0.82
+            ],
+            [
+              100.1,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.616,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.0
+            ],
+            [
+              100.22,
+              1.0
+            ],
+            [
+              100.22,
+              1.12
+            ],
+            [
+              100.1,
+              1.12
+            ],
+            [
+              100.1,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.443,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.3
+            ],
+            [
+              100.22,
+              1.3
+            ],
+            [
+              100.22,
+              1.42
+            ],
+            [
+              100.1,
+              1.42
+            ],
+            [
+              100.1,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.232,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.6
+            ],
+            [
+              100.22,
+              1.6
+            ],
+            [
+              100.22,
+              1.7200000000000002
+            ],
+            [
+              100.1,
+              1.7200000000000002
+            ],
+            [
+              100.1,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.099,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.1,
+              1.9
+            ],
+            [
+              100.22,
+              1.9
+            ],
+            [
+              100.22,
+              2.02
+            ],
+            [
+              100.1,
+              2.02
+            ],
+            [
+              100.1,
+              1.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.158,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -1.7
+            ],
+            [
+              100.52000000000001,
+              -1.7
+            ],
+            [
+              100.52000000000001,
+              -1.58
+            ],
+            [
+              100.4,
+              -1.58
+            ],
+            [
+              100.4,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.466,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -1.4
+            ],
+            [
+              100.52000000000001,
+              -1.4
+            ],
+            [
+              100.52000000000001,
+              -1.2799999999999998
+            ],
+            [
+              100.4,
+              -1.2799999999999998
+            ],
+            [
+              100.4,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.831,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -1.1
+            ],
+            [
+              100.52000000000001,
+              -1.1
+            ],
+            [
+              100.52000000000001,
+              -0.9800000000000001
+            ],
+            [
+              100.4,
+              -0.9800000000000001
+            ],
+            [
+              100.4,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.829,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -0.8
+            ],
+            [
+              100.52000000000001,
+              -0.8
+            ],
+            [
+              100.52000000000001,
+              -0.68
+            ],
+            [
+              100.4,
+              -0.68
+            ],
+            [
+              100.4,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -0.5
+            ],
+            [
+              100.52000000000001,
+              -0.5
+            ],
+            [
+              100.52000000000001,
+              -0.38
+            ],
+            [
+              100.4,
+              -0.38
+            ],
+            [
+              100.4,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.151,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              -0.2
+            ],
+            [
+              100.52000000000001,
+              -0.2
+            ],
+            [
+              100.52000000000001,
+              -0.08000000000000002
+            ],
+            [
+              100.4,
+              -0.08000000000000002
+            ],
+            [
+              100.4,
+              -0.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.117,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              0.1
+            ],
+            [
+              100.52000000000001,
+              0.1
+            ],
+            [
+              100.52000000000001,
+              0.22
+            ],
+            [
+              100.4,
+              0.22
+            ],
+            [
+              100.4,
+              0.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.35,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              0.4
+            ],
+            [
+              100.52000000000001,
+              0.4
+            ],
+            [
+              100.52000000000001,
+              0.52
+            ],
+            [
+              100.4,
+              0.52
+            ],
+            [
+              100.4,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.702,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              0.7
+            ],
+            [
+              100.52000000000001,
+              0.7
+            ],
+            [
+              100.52000000000001,
+              0.82
+            ],
+            [
+              100.4,
+              0.82
+            ],
+            [
+              100.4,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.782,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              1.0
+            ],
+            [
+              100.52000000000001,
+              1.0
+            ],
+            [
+              100.52000000000001,
+              1.12
+            ],
+            [
+              100.4,
+              1.12
+            ],
+            [
+              100.4,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.487,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              1.3
+            ],
+            [
+              100.52000000000001,
+              1.3
+            ],
+            [
+              100.52000000000001,
+              1.42
+            ],
+            [
+              100.4,
+              1.42
+            ],
+            [
+              100.4,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.177,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.4,
+              1.6
+            ],
+            [
+              100.52000000000001,
+              1.6
+            ],
+            [
+              100.52000000000001,
+              1.7200000000000002
+            ],
+            [
+              100.4,
+              1.7200000000000002
+            ],
+            [
+              100.4,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.068,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -2.3
+            ],
+            [
+              100.82000000000001,
+              -2.3
+            ],
+            [
+              100.82000000000001,
+              -2.1799999999999997
+            ],
+            [
+              100.7,
+              -2.1799999999999997
+            ],
+            [
+              100.7,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.134,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -2.0
+            ],
+            [
+              100.82000000000001,
+              -2.0
+            ],
+            [
+              100.82000000000001,
+              -1.88
+            ],
+            [
+              100.7,
+              -1.88
+            ],
+            [
+              100.7,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.208,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -1.7
+            ],
+            [
+              100.82000000000001,
+              -1.7
+            ],
+            [
+              100.82000000000001,
+              -1.58
+            ],
+            [
+              100.7,
+              -1.58
+            ],
+            [
+              100.7,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.367,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -1.4
+            ],
+            [
+              100.82000000000001,
+              -1.4
+            ],
+            [
+              100.82000000000001,
+              -1.2799999999999998
+            ],
+            [
+              100.7,
+              -1.2799999999999998
+            ],
+            [
+              100.7,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.574,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -1.1
+            ],
+            [
+              100.82000000000001,
+              -1.1
+            ],
+            [
+              100.82000000000001,
+              -0.9800000000000001
+            ],
+            [
+              100.7,
+              -0.9800000000000001
+            ],
+            [
+              100.7,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.558,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -0.8
+            ],
+            [
+              100.82000000000001,
+              -0.8
+            ],
+            [
+              100.82000000000001,
+              -0.68
+            ],
+            [
+              100.7,
+              -0.68
+            ],
+            [
+              100.7,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.306,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -0.5
+            ],
+            [
+              100.82000000000001,
+              -0.5
+            ],
+            [
+              100.82000000000001,
+              -0.38
+            ],
+            [
+              100.7,
+              -0.38
+            ],
+            [
+              100.7,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.102,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              -0.2
+            ],
+            [
+              100.82000000000001,
+              -0.2
+            ],
+            [
+              100.82000000000001,
+              -0.08000000000000002
+            ],
+            [
+              100.7,
+              -0.08000000000000002
+            ],
+            [
+              100.7,
+              -0.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.085,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              0.1
+            ],
+            [
+              100.82000000000001,
+              0.1
+            ],
+            [
+              100.82000000000001,
+              0.22
+            ],
+            [
+              100.7,
+              0.22
+            ],
+            [
+              100.7,
+              0.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              0.4
+            ],
+            [
+              100.82000000000001,
+              0.4
+            ],
+            [
+              100.82000000000001,
+              0.52
+            ],
+            [
+              100.7,
+              0.52
+            ],
+            [
+              100.7,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.519,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              0.7
+            ],
+            [
+              100.82000000000001,
+              0.7
+            ],
+            [
+              100.82000000000001,
+              0.82
+            ],
+            [
+              100.7,
+              0.82
+            ],
+            [
+              100.7,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.574,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              1.0
+            ],
+            [
+              100.82000000000001,
+              1.0
+            ],
+            [
+              100.82000000000001,
+              1.12
+            ],
+            [
+              100.7,
+              1.12
+            ],
+            [
+              100.7,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              1.3
+            ],
+            [
+              100.82000000000001,
+              1.3
+            ],
+            [
+              100.82000000000001,
+              1.42
+            ],
+            [
+              100.7,
+              1.42
+            ],
+            [
+              100.7,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.118,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.7,
+              1.6
+            ],
+            [
+              100.82000000000001,
+              1.6
+            ],
+            [
+              100.82000000000001,
+              1.7200000000000002
+            ],
+            [
+              100.7,
+              1.7200000000000002
+            ],
+            [
+              100.7,
+              1.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -2.6
+            ],
+            [
+              101.12,
+              -2.6
+            ],
+            [
+              101.12,
+              -2.48
+            ],
+            [
+              101.0,
+              -2.48
+            ],
+            [
+              101.0,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.201,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -2.3
+            ],
+            [
+              101.12,
+              -2.3
+            ],
+            [
+              101.12,
+              -2.1799999999999997
+            ],
+            [
+              101.0,
+              -2.1799999999999997
+            ],
+            [
+              101.0,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.363,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -2.0
+            ],
+            [
+              101.12,
+              -2.0
+            ],
+            [
+              101.12,
+              -1.88
+            ],
+            [
+              101.0,
+              -1.88
+            ],
+            [
+              101.0,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.384,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -1.7
+            ],
+            [
+              101.12,
+              -1.7
+            ],
+            [
+              101.12,
+              -1.58
+            ],
+            [
+              101.0,
+              -1.58
+            ],
+            [
+              101.0,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.3,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -1.4
+            ],
+            [
+              101.12,
+              -1.4
+            ],
+            [
+              101.12,
+              -1.2799999999999998
+            ],
+            [
+              101.0,
+              -1.2799999999999998
+            ],
+            [
+              101.0,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.26,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -1.1
+            ],
+            [
+              101.12,
+              -1.1
+            ],
+            [
+              101.12,
+              -0.9800000000000001
+            ],
+            [
+              101.0,
+              -0.9800000000000001
+            ],
+            [
+              101.0,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.213,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -0.8
+            ],
+            [
+              101.12,
+              -0.8
+            ],
+            [
+              101.12,
+              -0.68
+            ],
+            [
+              101.0,
+              -0.68
+            ],
+            [
+              101.0,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.113,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              -0.5
+            ],
+            [
+              101.12,
+              -0.5
+            ],
+            [
+              101.12,
+              -0.38
+            ],
+            [
+              101.0,
+              -0.38
+            ],
+            [
+              101.0,
+              -0.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.105,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              0.4
+            ],
+            [
+              101.12,
+              0.4
+            ],
+            [
+              101.12,
+              0.52
+            ],
+            [
+              101.0,
+              0.52
+            ],
+            [
+              101.0,
+              0.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.211,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              0.7
+            ],
+            [
+              101.12,
+              0.7
+            ],
+            [
+              101.12,
+              0.82
+            ],
+            [
+              101.0,
+              0.82
+            ],
+            [
+              101.0,
+              0.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.233,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              1.0
+            ],
+            [
+              101.12,
+              1.0
+            ],
+            [
+              101.12,
+              1.12
+            ],
+            [
+              101.0,
+              1.12
+            ],
+            [
+              101.0,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.141,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0,
+              1.3
+            ],
+            [
+              101.12,
+              1.3
+            ],
+            [
+              101.12,
+              1.42
+            ],
+            [
+              101.0,
+              1.42
+            ],
+            [
+              101.0,
+              1.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -2.6
+            ],
+            [
+              101.42,
+              -2.6
+            ],
+            [
+              101.42,
+              -2.48
+            ],
+            [
+              101.3,
+              -2.48
+            ],
+            [
+              101.3,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.33,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -2.3
+            ],
+            [
+              101.42,
+              -2.3
+            ],
+            [
+              101.42,
+              -2.1799999999999997
+            ],
+            [
+              101.3,
+              -2.1799999999999997
+            ],
+            [
+              101.3,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.59,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -2.0
+            ],
+            [
+              101.42,
+              -2.0
+            ],
+            [
+              101.42,
+              -1.88
+            ],
+            [
+              101.3,
+              -1.88
+            ],
+            [
+              101.3,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.584,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -1.7
+            ],
+            [
+              101.42,
+              -1.7
+            ],
+            [
+              101.42,
+              -1.58
+            ],
+            [
+              101.3,
+              -1.58
+            ],
+            [
+              101.3,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.333,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -1.4
+            ],
+            [
+              101.42,
+              -1.4
+            ],
+            [
+              101.42,
+              -1.2799999999999998
+            ],
+            [
+              101.3,
+              -1.2799999999999998
+            ],
+            [
+              101.3,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.133,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -1.1
+            ],
+            [
+              101.42,
+              -1.1
+            ],
+            [
+              101.42,
+              -0.9800000000000001
+            ],
+            [
+              101.3,
+              -0.9800000000000001
+            ],
+            [
+              101.3,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              -0.8
+            ],
+            [
+              101.42,
+              -0.8
+            ],
+            [
+              101.42,
+              -0.68
+            ],
+            [
+              101.3,
+              -0.68
+            ],
+            [
+              101.3,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.3,
+              1.0
+            ],
+            [
+              101.42,
+              1.0
+            ],
+            [
+              101.42,
+              1.12
+            ],
+            [
+              101.3,
+              1.12
+            ],
+            [
+              101.3,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -2.6
+            ],
+            [
+              101.72,
+              -2.6
+            ],
+            [
+              101.72,
+              -2.48
+            ],
+            [
+              101.6,
+              -2.48
+            ],
+            [
+              101.6,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.298,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -2.3
+            ],
+            [
+              101.72,
+              -2.3
+            ],
+            [
+              101.72,
+              -2.1799999999999997
+            ],
+            [
+              101.6,
+              -2.1799999999999997
+            ],
+            [
+              101.6,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.533,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -2.0
+            ],
+            [
+              101.72,
+              -2.0
+            ],
+            [
+              101.72,
+              -1.88
+            ],
+            [
+              101.6,
+              -1.88
+            ],
+            [
+              101.6,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.523,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -1.7
+            ],
+            [
+              101.72,
+              -1.7
+            ],
+            [
+              101.72,
+              -1.58
+            ],
+            [
+              101.6,
+              -1.58
+            ],
+            [
+              101.6,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.283,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -1.4
+            ],
+            [
+              101.72,
+              -1.4
+            ],
+            [
+              101.72,
+              -1.2799999999999998
+            ],
+            [
+              101.6,
+              -1.2799999999999998
+            ],
+            [
+              101.6,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.088,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.6,
+              -1.1
+            ],
+            [
+              101.72,
+              -1.1
+            ],
+            [
+              101.72,
+              -0.9800000000000001
+            ],
+            [
+              101.6,
+              -0.9800000000000001
+            ],
+            [
+              101.6,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.148,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -2.3
+            ],
+            [
+              102.02000000000001,
+              -2.3
+            ],
+            [
+              102.02000000000001,
+              -2.1799999999999997
+            ],
+            [
+              101.9,
+              -2.1799999999999997
+            ],
+            [
+              101.9,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.265,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -2.0
+            ],
+            [
+              102.02000000000001,
+              -2.0
+            ],
+            [
+              102.02000000000001,
+              -1.88
+            ],
+            [
+              101.9,
+              -1.88
+            ],
+            [
+              101.9,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -1.7
+            ],
+            [
+              102.02000000000001,
+              -1.7
+            ],
+            [
+              102.02000000000001,
+              -1.58
+            ],
+            [
+              101.9,
+              -1.58
+            ],
+            [
+              101.9,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.14,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9,
+              -1.4
+            ],
+            [
+              102.02000000000001,
+              -1.4
+            ],
+            [
+              102.02000000000001,
+              -1.2799999999999998
+            ],
+            [
+              101.9,
+              -1.2799999999999998
+            ],
+            [
+              101.9,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.072,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              102.2,
+              -2.0
+            ],
+            [
+              102.32000000000001,
+              -2.0
+            ],
+            [
+              102.32000000000001,
+              -1.88
+            ],
+            [
+              102.2,
+              -1.88
+            ],
+            [
+              102.2,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              102.2,
+              -1.7
+            ],
+            [
+              102.32000000000001,
+              -1.7
+            ],
+            [
+              102.32000000000001,
+              -1.58
+            ],
+            [
+              102.2,
+              -1.58
+            ],
+            [
+              102.2,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.0,
+              -3.2
+            ],
+            [
+              104.12,
+              -3.2
+            ],
+            [
+              104.12,
+              -3.08
+            ],
+            [
+              104.0,
+              -3.08
+            ],
+            [
+              104.0,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.166,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.0,
+              -2.9
+            ],
+            [
+              104.12,
+              -2.9
+            ],
+            [
+              104.12,
+              -2.78
+            ],
+            [
+              104.0,
+              -2.78
+            ],
+            [
+              104.0,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.0,
+              -2.6
+            ],
+            [
+              104.12,
+              -2.6
+            ],
+            [
+              104.12,
+              -2.48
+            ],
+            [
+              104.0,
+              -2.48
+            ],
+            [
+              104.0,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -3.5
+            ],
+            [
+              104.42,
+              -3.5
+            ],
+            [
+              104.42,
+              -3.38
+            ],
+            [
+              104.3,
+              -3.38
+            ],
+            [
+              104.3,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -3.2
+            ],
+            [
+              104.42,
+              -3.2
+            ],
+            [
+              104.42,
+              -3.08
+            ],
+            [
+              104.3,
+              -3.08
+            ],
+            [
+              104.3,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.499,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -2.9
+            ],
+            [
+              104.42,
+              -2.9
+            ],
+            [
+              104.42,
+              -2.78
+            ],
+            [
+              104.3,
+              -2.78
+            ],
+            [
+              104.3,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -2.6
+            ],
+            [
+              104.42,
+              -2.6
+            ],
+            [
+              104.42,
+              -2.48
+            ],
+            [
+              104.3,
+              -2.48
+            ],
+            [
+              104.3,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.3,
+              -2.3
+            ],
+            [
+              104.42,
+              -2.3
+            ],
+            [
+              104.42,
+              -2.1799999999999997
+            ],
+            [
+              104.3,
+              -2.1799999999999997
+            ],
+            [
+              104.3,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -3.8
+            ],
+            [
+              104.72,
+              -3.8
+            ],
+            [
+              104.72,
+              -3.6799999999999997
+            ],
+            [
+              104.6,
+              -3.6799999999999997
+            ],
+            [
+              104.6,
+              -3.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -3.5
+            ],
+            [
+              104.72,
+              -3.5
+            ],
+            [
+              104.72,
+              -3.38
+            ],
+            [
+              104.6,
+              -3.38
+            ],
+            [
+              104.6,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -3.2
+            ],
+            [
+              104.72,
+              -3.2
+            ],
+            [
+              104.72,
+              -3.08
+            ],
+            [
+              104.6,
+              -3.08
+            ],
+            [
+              104.6,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.822,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.9
+            ],
+            [
+              104.72,
+              -2.9
+            ],
+            [
+              104.72,
+              -2.78
+            ],
+            [
+              104.6,
+              -2.78
+            ],
+            [
+              104.6,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.6
+            ],
+            [
+              104.72,
+              -2.6
+            ],
+            [
+              104.72,
+              -2.48
+            ],
+            [
+              104.6,
+              -2.48
+            ],
+            [
+              104.6,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.3
+            ],
+            [
+              104.72,
+              -2.3
+            ],
+            [
+              104.72,
+              -2.1799999999999997
+            ],
+            [
+              104.6,
+              -2.1799999999999997
+            ],
+            [
+              104.6,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.6,
+              -2.0
+            ],
+            [
+              104.72,
+              -2.0
+            ],
+            [
+              104.72,
+              -1.88
+            ],
+            [
+              104.6,
+              -1.88
+            ],
+            [
+              104.6,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.224,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -3.5
+            ],
+            [
+              105.02000000000001,
+              -3.5
+            ],
+            [
+              105.02000000000001,
+              -3.38
+            ],
+            [
+              104.9,
+              -3.38
+            ],
+            [
+              104.9,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -3.2
+            ],
+            [
+              105.02000000000001,
+              -3.2
+            ],
+            [
+              105.02000000000001,
+              -3.08
+            ],
+            [
+              104.9,
+              -3.08
+            ],
+            [
+              104.9,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.744,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.9
+            ],
+            [
+              105.02000000000001,
+              -2.9
+            ],
+            [
+              105.02000000000001,
+              -2.78
+            ],
+            [
+              104.9,
+              -2.78
+            ],
+            [
+              104.9,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.6
+            ],
+            [
+              105.02000000000001,
+              -2.6
+            ],
+            [
+              105.02000000000001,
+              -2.48
+            ],
+            [
+              104.9,
+              -2.48
+            ],
+            [
+              104.9,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.3
+            ],
+            [
+              105.02000000000001,
+              -2.3
+            ],
+            [
+              105.02000000000001,
+              -2.1799999999999997
+            ],
+            [
+              104.9,
+              -2.1799999999999997
+            ],
+            [
+              104.9,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.9,
+              -2.0
+            ],
+            [
+              105.02000000000001,
+              -2.0
+            ],
+            [
+              105.02000000000001,
+              -1.88
+            ],
+            [
+              104.9,
+              -1.88
+            ],
+            [
+              104.9,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.111,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -3.5
+            ],
+            [
+              105.32000000000001,
+              -3.5
+            ],
+            [
+              105.32000000000001,
+              -3.38
+            ],
+            [
+              105.2,
+              -3.38
+            ],
+            [
+              105.2,
+              -3.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.274,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -3.2
+            ],
+            [
+              105.32000000000001,
+              -3.2
+            ],
+            [
+              105.32000000000001,
+              -3.08
+            ],
+            [
+              105.2,
+              -3.08
+            ],
+            [
+              105.2,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.37,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.9
+            ],
+            [
+              105.32000000000001,
+              -2.9
+            ],
+            [
+              105.32000000000001,
+              -2.78
+            ],
+            [
+              105.2,
+              -2.78
+            ],
+            [
+              105.2,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.275,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.6
+            ],
+            [
+              105.32000000000001,
+              -2.6
+            ],
+            [
+              105.32000000000001,
+              -2.48
+            ],
+            [
+              105.2,
+              -2.48
+            ],
+            [
+              105.2,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.3
+            ],
+            [
+              105.32000000000001,
+              -2.3
+            ],
+            [
+              105.32000000000001,
+              -2.1799999999999997
+            ],
+            [
+              105.2,
+              -2.1799999999999997
+            ],
+            [
+              105.2,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.2,
+              -2.0
+            ],
+            [
+              105.32000000000001,
+              -2.0
+            ],
+            [
+              105.32000000000001,
+              -1.88
+            ],
+            [
+              105.2,
+              -1.88
+            ],
+            [
+              105.2,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -3.2
+            ],
+            [
+              105.62,
+              -3.2
+            ],
+            [
+              105.62,
+              -3.08
+            ],
+            [
+              105.5,
+              -3.08
+            ],
+            [
+              105.5,
+              -3.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.9
+            ],
+            [
+              105.62,
+              -2.9
+            ],
+            [
+              105.62,
+              -2.78
+            ],
+            [
+              105.5,
+              -2.78
+            ],
+            [
+              105.5,
+              -2.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.082,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.6
+            ],
+            [
+              105.62,
+              -2.6
+            ],
+            [
+              105.62,
+              -2.48
+            ],
+            [
+              105.5,
+              -2.48
+            ],
+            [
+              105.5,
+              -2.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.3
+            ],
+            [
+              105.62,
+              -2.3
+            ],
+            [
+              105.62,
+              -2.1799999999999997
+            ],
+            [
+              105.5,
+              -2.1799999999999997
+            ],
+            [
+              105.5,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.13,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -2.0
+            ],
+            [
+              105.62,
+              -2.0
+            ],
+            [
+              105.62,
+              -1.88
+            ],
+            [
+              105.5,
+              -1.88
+            ],
+            [
+              105.5,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -1.7
+            ],
+            [
+              105.62,
+              -1.7
+            ],
+            [
+              105.62,
+              -1.58
+            ],
+            [
+              105.5,
+              -1.58
+            ],
+            [
+              105.5,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -1.4
+            ],
+            [
+              105.62,
+              -1.4
+            ],
+            [
+              105.62,
+              -1.2799999999999998
+            ],
+            [
+              105.5,
+              -1.2799999999999998
+            ],
+            [
+              105.5,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.5,
+              -1.1
+            ],
+            [
+              105.62,
+              -1.1
+            ],
+            [
+              105.62,
+              -0.9800000000000001
+            ],
+            [
+              105.5,
+              -0.9800000000000001
+            ],
+            [
+              105.5,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.106,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -2.3
+            ],
+            [
+              105.92,
+              -2.3
+            ],
+            [
+              105.92,
+              -2.1799999999999997
+            ],
+            [
+              105.8,
+              -2.1799999999999997
+            ],
+            [
+              105.8,
+              -2.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -2.0
+            ],
+            [
+              105.92,
+              -2.0
+            ],
+            [
+              105.92,
+              -1.88
+            ],
+            [
+              105.8,
+              -1.88
+            ],
+            [
+              105.8,
+              -2.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -1.7
+            ],
+            [
+              105.92,
+              -1.7
+            ],
+            [
+              105.92,
+              -1.58
+            ],
+            [
+              105.8,
+              -1.58
+            ],
+            [
+              105.8,
+              -1.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -1.4
+            ],
+            [
+              105.92,
+              -1.4
+            ],
+            [
+              105.92,
+              -1.2799999999999998
+            ],
+            [
+              105.8,
+              -1.2799999999999998
+            ],
+            [
+              105.8,
+              -1.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -1.1
+            ],
+            [
+              105.92,
+              -1.1
+            ],
+            [
+              105.92,
+              -0.9800000000000001
+            ],
+            [
+              105.8,
+              -0.9800000000000001
+            ],
+            [
+              105.8,
+              -1.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.8,
+              -0.8
+            ],
+            [
+              105.92,
+              -0.8
+            ],
+            [
+              105.92,
+              -0.68
+            ],
+            [
+              105.8,
+              -0.68
+            ],
+            [
+              105.8,
+              -0.8
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,424 @@
+/* ===================== VIEW 6 UTAMA ===================== */
+.ws1-maul-view6 {
+  background: radial-gradient(circle at -20% 50%, rgba(217,119,6,0.15) 0%, transparent 50%),
+              radial-gradient(circle at 120% 50%, rgba(233,30,99,0.1) 0%, transparent 50%),
+              #0d1525;
+  color: var(--beige);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+/* ===================== TIPOGRAFI ===================== */
+.ws1-maul-header h2 {
+  font-size: 4.5rem; 
+  color: var(--beige);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.ws1-maul-text-orange {
+  color: #d97706; 
+  font-style: italic;
+}
+
+.ws1-maul-header p {
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+/* ===================== GRID LAYOUT ===================== */
+.ws1-maul-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 9rem; 
+  column-gap: 2rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.ws1-maul-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; 
+}
+
+/* ===================== LINGKARAN ORANYE (CSS) ===================== */
+.ws1-maul-icon-item {
+  width: 160px; 
+  height: 160px;
+  background-color: #b45f1b; 
+  border-radius: 50%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2; 
+}
+
+.ws1-maul-icon-wrapper:hover .ws1-maul-icon-item {
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(217, 119, 6, 0.5);
+}
+
+.ws1-maul-icon-item img {
+  width: 65%; 
+  height: 65%; 
+  object-fit: contain; 
+}
+
+/* ===================== KOTAK TEKS POP-UP ===================== */
+.ws1-maul-text-container {
+  position: absolute;
+  top: 175px; 
+  width: 320px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10; 
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.ws1-maul-text-container.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* TRIK CSS KHUSUS BARIS BAWAH */
+.ws1-maul-icon-wrapper:nth-child(n+4) .ws1-maul-text-container {
+  top: auto; 
+  bottom: 175px; 
+}
+
+.ws1-maul-pill-title {
+  background-color: var(--off-white, #ffffff);
+  color: var(--navy);
+  padding: 0.4rem 1.5rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.ws1-maul-desc-text {
+  color: #d97706; 
+  font-size: 1.1rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+
+/* =========================================
+   VIEW 8: SEHAT DAN SOLID
+========================================= */
+.ws1-maul-view8 {
+  background: radial-gradient(circle at 50% 120%, #f7d299 0%, #ebdcb2 40%, #d4c194 100%);
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E'),
+                    radial-gradient(circle at 50% 120%, #f7d299 0%, #ebdcb2 40%, #d4c194 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Header & Tombol --- */
+.ws1-maul-v8-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+.ws1-maul-v8-header h2 {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.ws1-maul-text-navy {
+  color: var(--navy);
+  font-style: italic;
+}
+
+.ws1-maul-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.ws1-maul-btn-round, .ws1-maul-btn-pill {
+  background-color: #f7d299;
+  color: #d97706;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.ws1-maul-btn-round {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.ws1-maul-btn-pill {
+  padding: 0.5rem 2rem;
+  border-radius: 30px;
+}
+
+.ws1-maul-btn-round:hover, .ws1-maul-btn-pill:hover, .ws1-maul-btn-pill.active {
+  background-color: #d97706;
+  color: white;
+}
+
+.ws1-maul-btn-round:focus-visible,
+.ws1-maul-btn-pill:focus-visible,
+.ws1-maul-orbit-item:focus-visible {
+  outline: 2px solid #d97706;
+  outline-offset: 4px;
+}
+
+/* --- Area Galeri --- */
+.ws1-maul-gallery-container {
+  position: relative;
+  width: min(700px, 92vw);
+  height: min(700px, 92vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+/* --- Tampilan Pusat (Lingkaran Raksasa) --- */
+.ws1-maul-center-display {
+  position: relative;
+  width: 440px; 
+  height: 440px;
+  border-radius: 50%;
+  background-color: var(--navy);
+  border: 8px solid white; 
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  overflow: hidden; 
+}
+
+/* Foto Full Size */
+.ws1-maul-center-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 1;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Gradient Gelap Tipis di Atas */
+.ws1-maul-center-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Teks Melengkung di Tengah */
+.ws1-maul-curved-text-svg {
+  position: absolute;
+  top: -15px; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  animation: spinIn 0.5s ease;
+}
+
+.ws1-maul-svg-text {
+  font-family: 'Playfair Display', serif; 
+  font-size: 34px;
+  font-weight: bold;
+  fill: #ffffff; 
+  letter-spacing: 2px;
+  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)); 
+}
+
+/* Angka raksasa jika foto belum ada */
+.ws1-maul-placeholder-center-large {
+  font-size: 8rem;
+  color: rgba(255,255,255,0.2);
+  z-index: 1;
+}
+
+/* --- Lingkaran Orbit (Diperbaiki) --- */
+.ws1-maul-orbit-item {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background-color: var(--navy);
+  border: 1px solid rgba(0,0,0,0.05); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  
+  /* PERHATIAN: Memanggil variabel --x dan --y agar diam di tempat */
+  transform: translate(var(--x), var(--y)) scale(1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.ws1-maul-orbit-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ws1-maul-placeholder-orbit {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* EFEK TIMBUL SAAT AKTIF */
+.ws1-maul-orbit-item.active {
+  /* PERHATIAN: Tetap memanggil var(--x) dan var(--y) saat membesar */
+  transform: translate(var(--x), var(--y)) scale(1.4) !important; 
+  border: 4px solid #d97706 !important; 
+  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4); 
+  z-index: 10;
+}
+
+.ws1-maul-orbit-item:hover {
+  transform: translate(var(--x), var(--y)) scale(1.1);
+}
+
+/* --- Animasi --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spinIn {
+  0% { transform: rotate(-5deg); opacity: 0; }
+  100% { transform: rotate(0deg); opacity: 1; }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (MAUL VIEWS)
+========================================= */
+@media (max-width: 1024px) {
+  .ws1-maul-icon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 5rem;
+  }
+
+  .ws1-maul-gallery-container {
+    width: min(620px, 92vw);
+    height: min(620px, 92vw);
+  }
+
+  .ws1-maul-center-display {
+    width: 380px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* View 6 */
+  .ws1-maul-header h2 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  .ws1-maul-header p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  .ws1-maul-icon-grid {
+    grid-template-columns: 1fr;
+    row-gap: 4rem;
+  }
+  .ws1-maul-icon-item {
+    width: 120px;
+    height: 120px;
+  }
+  .ws1-maul-text-container {
+    top: 130px;
+    width: 280px;
+  }
+  
+  /* View 8 */
+  .ws1-maul-view8 {
+    padding: 3.5rem 1rem;
+  }
+  .ws1-maul-v8-header h2 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+  }
+  .ws1-maul-controls {
+    gap: 0.7rem;
+  }
+  .ws1-maul-gallery-container {
+    width: min(380px, 96vw);
+    height: min(380px, 96vw);
+    margin-top: 0.5rem;
+  }
+  .ws1-maul-center-display {
+    width: 280px;
+    height: 280px;
+    border-width: 6px;
+  }
+  .ws1-maul-svg-text {
+    font-size: 24px;
+  }
+  .ws1-maul-orbit-item {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-maul-gallery-container {
+    width: min(330px, 96vw);
+    height: min(330px, 96vw);
+  }
+
+  .ws1-maul-center-display {
+    width: 230px;
+    height: 230px;
+  }
+
+  .ws1-maul-svg-text {
+    font-size: 20px;
+  }
+
+  .ws1-maul-orbit-item {
+    width: 52px;
+    height: 52px;
+  }
+
+  .ws1-maul-orbit-item.active {
+    transform: translate(var(--x), var(--y)) scale(1.25) !important;
+  }
+}

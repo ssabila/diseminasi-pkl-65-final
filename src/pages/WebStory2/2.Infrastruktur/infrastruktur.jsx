@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────────
-   FILE INFRA BARU
+   File Infrastruktur yang Baru (2.0)
 ───────────────────────────────────────────────────────────────── */
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
@@ -1621,10 +1621,6 @@ function TransisiBabak23() {
   );
 }
 
-
-/* ╔═══════════════════════════════════════════════════════════════╗
-   ║  EXPORT                                                       ║
-   ╚═══════════════════════════════════════════════════════════════╝ */
 export default function BabakInfrastruktur() {
   return (
     <>
