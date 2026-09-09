@@ -1,0 +1,315 @@
+SECTION 1: OPENING
+Link desain: https://webstorydesign.lovable.app/  
+Referensi website yang digunakan: https://podium.global/ (landing page awal)
+Design yang digunakan
+color palette
+font style: playfair display italic
+Judul: 
+Menakar Risiko, Memantau Pemulihan: Menjejak Bencana Lewat Lensa Big Data
+Visual judul nya seperti ini
+Tapi untuk jenis font dan warna font nya seperti ini
+Menakar Risiko, Memantau Pemulihan:
+Menjejak Bencana Lewat Lensa Big data
+Alur desainnya:
+warna: Menakar Risiko, Memantau Pemulihan pakai FFFFFF ; Menjejak Bencana Lewat Lensa Big Data pakai E67E22
+Rancangan desain
+begitu webstory dibuka, langsung menampilkan peta Indonesia seperti gambar di atas. dari gambar peta di atas dapat dilihat kalau ada highlight/spot cahaya merah di bagian sumatera karena fokus wilayah webstory berada di sumatera. garis tepi peta dibuat emas bercahaya supaya bisa kontras dengan latarnya yang biru gelap. latar petanya itu menggunakan foto-foto selama PKL, yang dibuat semi transparan. di bagian bawah terdapat tulisan scroll yang akan memandu user kalau web storynya ini bergerak dengan cara di scroll down.
+seiring di scroll down, peta akan zoom in atau membesar ke arah sumatera, dan menampilkan foto-foto selama PKL, yang mana ini juga sudah dijadikan overview di latar peta tadi (yang dibuat semi transparan) seperti gambar di bawah ini.
+tadi kan petanya akan zoom in ke wilayah sumatera, dan saat sebelum fotonya ditampilkan, akan ada spot cahaya putih keemasan gitu sebagai transisi dari peta ke foto (referensinya dari gd riset 2). 
+setelah foto-fotonya ditampilkan, user akan scroll down lagi. nah nanti kan itu fotonya lama kelamaan akan memudar dan menghilang seiring saat scrolling, lalu di situlah judulnya ditampilkan. nanti si judulnya ini muncul dari bawah gitu (slide up).
+SECTION 2: URGENSI BIG DATA
+Tujuan Section
+Section ini berfungsi sebagai jembatan antara halaman judul "Menjejak Bencana Lewat Lensa Big Data" dengan section berikutnya yang membahas berbagai sumber data dan indikator yang digunakan. Tujuannya bukan menjelaskan teori Big Data secara mendalam, melainkan memberikan konteks singkat mengapa Big Data diperlukan dalam kajian kebencanaan.
+Layout Visual
+Bagian kiri berisi:
+Judul Section : Mengapa Big Data?
+Narasi : 
+Saat bencana terjadi, informasi harus tersedia dengan cepat. Data lapangan tetap penting, tetapi membutuhkan waktu dan jangkauan yang terbatas.
+Big Data membantu melengkapi informasi tersebut melalui citra satelit dan berbagai data geospasial yang dapat menggambarkan kondisi suatu wilayah secara lebih luas dan berkelanjutan.
+Di bawah narasi dapat ditampilkan visual pendukung berupa:
+foto kegiatan wawancara lapangan,
+foto kondisi wilayah terdampak bencana,
+foto masyarakat atau anak-anak di lokasi penelitian,
+atau dokumentasi kegiatan pengumpulan data.
+Pada bagian kiri bawah ada teks:
+Lalu, apa yang bisa kita pelajari dari data-data tersebut?
+Di bawah atau di samping teks ditambahkan ikon panah ke bawah (↓), Tujuannya agar pembaca memahami bahwa terdapat eksplorasi lebih lanjut pada section berikutnya dan terdorong untuk melanjutkan scrolling.
+Bagian Kanan (Visual Utama)
+Bagian kanan tidak perlu menggunakan ilustrasi server, data center, ataupun elemen teknologi generik. Visual utama yang diharapkan adalah satu ilustrasi yang merepresentasikan Big Data Geospasial.
+SECTION 2: APA YANG BISA DIJAWAB 
+OLEH BIG DATA
+Interaksi Section "Big Data Bisa Menjawab"
+Saat pengguna melakukan scroll, panel "Big Data Bisa Menjawab" akan menampilkan serangkaian pertanyaan secara bergantian. Setiap pertanyaan yang aktif akan memicu perubahan pada visualisasi layer map di sisi kiri layar, sehingga pengguna dapat melihat bagaimana berbagai sumber data digunakan untuk menjawab permasalahan kebencanaan.
+Tahap 1 — Bagaimana Bencana Terjadi?
+Pertanyaan pertama yang ditampilkan adalah:
+Bagaimana bencana terjadi?
+Pada saat yang sama, layer map menampilkan visualisasi curah hujan sebagai salah satu faktor yang dapat digunakan untuk memahami dan menganalisis penyebab terjadinya bencana.
+Tahap 2 — Seberapa Luas Dampaknya?
+Setelah visualisasi curah hujan selesai ditampilkan, fokus beralih ke pertanyaan:
+Seberapa luas dampaknya?
+Layer map kemudian menampilkan area terdampak bencana, sehingga pengguna dapat melihat cakupan wilayah yang terkena dampak.
+Tahap 3 — Siapa yang Paling Rentan?
+Selanjutnya, pengguna diarahkan pada pertanyaan:
+Siapa yang paling rentan?
+Visualisasi menampilkan kepadatan penduduk pada wilayah terdampak untuk mengidentifikasi kelompok masyarakat yang memiliki tingkat kerentanan lebih tinggi.
+Tahap 4 — Wilayah Mana yang Harus Diprioritaskan?
+Saat pengguna melanjutkan scroll, fokus berpindah ke pertanyaan:
+Wilayah mana yang harus diprioritaskan?
+Layer map menampilkan peta prioritas penanganan, yang menunjukkan wilayah-wilayah yang memerlukan perhatian dan intervensi lebih cepat.
+Tahap 5 — Kapan Wilayah Mulai Pulih?
+Pertanyaan terakhir yang ditampilkan adalah:
+Kapan wilayah mulai pulih?
+Visualisasi berubah menjadi recovery timelapse yang memperlihatkan perkembangan kondisi wilayah pascabencana dari waktu ke waktu.
+Tampilan Akhir
+Pada akhir rangkaian interaksi, seluruh layer ditampilkan secara bersamaan dalam bentuk stacked layer map.
+SECTION 3: TRANSISI MASUK KE INSIGHT 8 MODUL
+Link contoh web: https://s.stis.ac.id/webstorytransisi
+Referensi globe memutar jika menggunakan mapbox : https://webstory-sawit.vercel.app/ 
+Tujuan Section
+Section ini berfungsi sebagai transisi antara bagian "Mengapa Big Data?" dan bagian eksplorasi insight dashboard. Melalui animasi globe dan satelit, pengguna diajak memahami bahwa informasi kebencanaan dapat diperoleh dari berbagai sumber data geospasial yang diamati dari skala global hingga wilayah studi yang lebih spesifik.
+Tahap 1 — Globe dan Satelit Muncul
+Saat pengguna memasuki section ini, ditampilkan sebuah globe berukuran kecil di tengah layar dengan dua satelit yang mengorbit di sekelilingnya.
+Visual
+Globe menggunakan visual peta dunia.
+Satelit bergerak secara kontinu mengelilingi globe.
+Cahaya atau sensor beam dari satelit dibuat cukup kontras agar aktivitas pengamatan terlihat jelas.
+Background tetap konsisten dengan tema webstory (gelap, nuansa luar angkasa, biru keunguan).
+Narasi 1
+Dari Orbit ke Permukaan Bumi
+Saat bencana terjadi, kondisi suatu wilayah dapat berubah dengan cepat. Citra satelit membantu merekam perubahan tersebut secara berkala dan dalam cakupan yang luas.
+Interaksi
+Globe hanya berputar ketika pengguna melakukan scroll.
+Ketika scroll berhenti, rotasi globe juga berhenti.
+Satelit tetap bergerak mengelilingi globe secara kontinu.
+Tahap 2 — Globe Membesar
+Saat pengguna melakukan scroll berikutnya, globe perlahan membesar dan menjadi fokus utama layar.
+Visual
+Kamera melakukan zoom ke arah globe.
+Satelit tetap mengorbit.
+Narasi pertama tetap ditampilkan.
+Narasi 2
+Muncul di sisi kanan layar dengan posisi sedikit lebih rendah dibanding narasi pertama.
+Melihat Wilayah dari Perspektif yang Lebih Luas
+Melalui berbagai sumber data geospasial, kita dapat mengamati kondisi lingkungan, aktivitas manusia, hingga perubahan wilayah tanpa harus berada langsung di lokasi.
+Catatan Layout
+Narasi pertama tidak menghilang ketika narasi kedua muncul. Kedua narasi tetap terlihat sehingga pengguna merasakan alur cerita yang berkesinambungan.
+Tahap 3 — Zoom Menuju Wilayah Studi
+Saat pengguna melanjutkan scroll, kamera mulai melakukan zoom dari skala global menuju Indonesia, kemudian menuju Pulau Sumatera.
+Alur Zoom
+Globe Dunia
+Pergerakan dibuat halus agar pengguna merasa sedang berpindah dari perspektif global menuju wilayah studi.
+Tahap 4 — Fokus pada Sumatera
+Setelah kamera mencapai Pulau Sumatera, wilayah studi menjadi fokus utama layar.
+Visual
+Pulau Sumatera ditampilkan dengan ukuran dominan.
+Aceh, Sumatera Utara, dan Sumatera Barat dapat diberikan highlight ringan sebagai area fokus.
+Visual globe mulai bertransisi menjadi tampilan peta wilayah.
+Ini contoh aja
+Narasi 3
+Bencana Sumatera
+Dengan data yang terus diperbarui dari waktu ke waktu, berbagai pola dan perubahan wilayah dapat ditelusuri. Lalu, apa yang dapat kita pelajari dari Bencana Sumatera?
+Tahap ini menjadi penghubung menuju section berikutnya yang berisi berbagai insight hasil pemanfaatan Big Data. 
+SECTION 4: INSIGHT MODUL 1 DAN 2
+Judul Narasi : Membaca Bahasa Alam
+Section ini memperkenalkan berbagai faktor lingkungan yang berkaitan dengan risiko bencana. Fokus utama section adalah menunjukkan bahwa kondisi fisik wilayah dapat memberikan informasi awal mengenai potensi kerentanan suatu daerah.
+Layout
+Layout tetap menggunakan pola yang akan digunakan pada section-section insight berikutnya:
+sisi kiri: visualisasi peta
+sisi kanan: judul dan narasi
+Visualisasi Peta
+Menampilkan peta Pulau Sumatera dengan fokus pada Aceh, Sumatera Utara, dan Sumatera Barat.
+Peta dibuat lebih ilustratif dan bertekstur, dengan elemen visual yang merepresentasikan faktor-faktor pembentuk risiko bencana, seperti:
+topografi atau ketinggian wilayah
+curah hujan
+badan air
+gunung berapi aktif
+area rawan banjir
+area rawan longsor
+Visual tidak perlu menampilkan data aktual secara detail, namun cukup memberikan kesan bahwa berbagai faktor lingkungan saling berinteraksi membentuk risiko bencana.
+Peta diberikan:
+border berwarna cream mengikuti palette Figma Anak Riset 2
+efek glow tipis pada border
+shadow ringan untuk memberikan kesan sedikit terangkat (3D)
+Animasi
+Judul "Membaca Bahasa Alam" muncul menggunakan fade-in.
+Peta Sumatera muncul melanjutkan dari section sebelumnya
+Narasi muncul setelah jeda singkat.
+Ikon atau simbol indikator (topografi, curah hujan, tutupan lahan, banjir, longsor, gunung api) muncul bertahap menggunakan fade-in ringan.
+SECTION 5: INSIGHT MODUL 3
+Judul
+Narasi
+Bencana meninggalkan jejak yang dapat diamati. Area terdampak banjir dan persebaran longsor dapat diidentifikasi untuk memahami kondisi wilayah secara lebih menyeluruh.
+Visualisasi Peta
+Peta menggunakan Pulau Sumatera sebagai elemen utama visual sama kayk section sebelumnya.
+Fokus visual berada pada dua jenis dampak bencana: Area Terdampak Banjir dan longsor.
+Visualisasi banjir ditampilkan dalam bentuk:
+piksel-piksel raster,
+blok area genangan,
+atau heatmap berbasis grid.
+Warna dapat menggunakan gradasi biru untuk menunjukkan area yang terindikasi terdampak banjir. Tujuannya agar pengguna langsung memahami konsep estimasi luasan genangan yang diperoleh dari analisis citra satelit.
+Longsor divisualisasikan menggunakan:
+titik-titik lokasi,
+marker,
+atau cluster titik.
+Warna dapat menggunakan nuansa oranye atau merah agar kontras dengan layer banjir. Tujuannya menunjukkan lokasi kejadian longsor yang tersebar pada berbagai wilayah.
+Animasi dan Interaksi
+Judul "Seberapa Luas Dampaknya?" muncul menggunakan efek fade-in. Layer section sebelumnya dihilangkan dl, lalu titik longsor  muncul terlebih dahulu baru luasan banjirnya. Narasi dan indikator pendukung pada sisi kanan muncul menggunakan efek fade-in
+Peta
+Menggunakan peta Sumatera bertekstur dan semi-3D seperti modul sebelumnya.
+Tetap menggunakan border cream sesuai palette Figma Anak Riset 2.
+Diberikan efek glow tipis dan shadow ringan agar peta terlihat lebih menonjol dari background.
+SECTION 6: INSIGHT MODUL 4 DAN 5
+Tujuan Section
+Section ini bertujuan menunjukkan bahwa dampak bencana tidak hanya terlihat pada kondisi fisik wilayah, tetapi juga pada aktivitas manusia yang berlangsung di dalamnya.
+Melalui data Nighttime Light (NTL), perubahan intensitas cahaya malam dapat digunakan sebagai indikator tidak langsung untuk melihat gangguan aktivitas sosial dan ekonomi pada suatu wilayah setelah bencana terjadi.
+Section ini memperlihatkan bagaimana Big Data dapat membantu memahami dampak bencana dari perspektif yang berbeda, yaitu melalui perubahan aktivitas yang terekam dari waktu ke waktu.
+Layout
+Layout mengikuti pola yang sama dengan section insight sebelumnya agar pengalaman pengguna tetap konsisten.
+Judul
+Saat Cahaya Meredup
+Narasi
+Tidak semua dampak bencana terlihat secara langsung. Perubahan intensitas cahaya malam dapat memberikan gambaran mengenai terganggunya aktivitas masyarakat pada suatu wilayah setelah bencana terjadi.
+Visualisasi Peta
+Visualisasi tetap menggunakan peta Sumatera sebagai elemen utama. Fokus visual berada pada perubahan intensitas Nighttime Light (NTL) sebelum dan sesudah kejadian bencana. Peta dibuat dalam nuansa gelap sehingga cahaya yang muncul dapat menjadi fokus perhatian pengguna.
+Perubahan Intensitas Cahaya
+Visualisasi menunjukkan perubahan kondisi dari:
+sebelum bencana → sesudah bencana
+Perubahan dapat ditampilkan melalui:
+berkurangnya jumlah titik cahaya,
+menurunnya intensitas glow,
+atau memudarnya area terang pada wilayah tertentu.
+Tujuannya agar pengguna dapat melihat bagaimana aktivitas suatu wilayah berubah setelah terdampak bencana.
+Animasi dan Interaksi
+Judul "Saat Cahaya Meredup" muncul menggunakan efek fade-in. Peta Sumatera muncul dengan tampilan malam hari. Titik-titik cahaya terlihat  Ketika pengguna melakukan scroll, intensitas cahaya mulai berkurang secara perlahan. Animasi dibuat halus sehingga pengguna dapat melihat transisi dari kondisi sebelum bencana menuju kondisi setelah bencana. Beberapa area yang sebelumnya terang menjadi lebih redup. Visualisasi ini menggambarkan potensi terganggunya aktivitas masyarakat pada wilayah terdampak. Narasi pada sisi kanan muncul menggunakan fade-in setelah animasi cahaya mulai berjalan.
+SECTION 7: INSIGHT MODUL 6
+https://www.figma.com/design/OP5kO20U5vhnBfimUIc1ZQ/Modul-3-Riset-3?node-id=0-1&t=pWbgovqqhEvXOYmM-1 
+Liat fixnya yg dari figma aja yakk
+Tujuan Section
+Section ini bertujuan menunjukkan bahwa dampak bencana tidak dirasakan secara merata. Meskipun suatu bencana dapat terjadi pada wilayah yang berdekatan atau memiliki tingkat paparan yang serupa, karakteristik sosial, ekonomi, dan lingkungan menyebabkan tingkat kerentanan setiap wilayah berbeda.
+Konsep Interaksi
+Section terdiri dari 3 tahapan scroll (slider) yang saling terhubung.
+Slider 1 — Dampak Tidak Selalu Sama
+Visual
+Tampilan awal melanjutkan peta dari akhir section sebelumnya.
+Peta Sumatera diperbesar hingga memenuhi sebagian besar layar.
+Belum ada heatmap kerentanan yang ditampilkan.
+Narasi
+Bencana mungkin datang dengan intensitas yang serupa. 
+Animasi
+Textbox muncul menggunakan efek fade-in.
+Peta tetap statis sebagai fokus utama.
+Slider 2 — Kerentanan Mulai Terlihat
+Narasi
+Namun dampaknya tidak selalu dirasakan dengan cara yang sama di setiap wilayah.
+Visual
+Heatmap kerentanan mulai muncul secara bertahap di atas peta Sumatera.
+Layer heatmap muncul perlahan (fade-in) sehingga pengguna dapat melihat perubahan dari peta biasa menjadi peta kerentanan.
+Slider 3 — Fokus pada Wilayah Rentan
+Narasi
+Dengan menggabungkan berbagai Karakteristik sosial, ekonomi, dan lingkungan, wilayah yang memiliki tingkat kerentanan lebih tinggi dapat diidentifikasi dan diprioritaskan dalam upaya mitigasi serta penanganan bencana.
+Visual
+Kamera melakukan zoom-in menuju wilayah dengan nilai kerentanan tertinggi.
+Area terpilih diberikan highlight.
+Muncul panel statistik singkat yang menampilkan informasi wilayah tersebut:
+Animasi
+Zoom dilakukan secara halus.
+Statistik muncul setelah zoom selesai.
+Fokus pengguna diarahkan pada wilayah prioritas yang teridentifikasi.
+Gaya Visual
+Tetap menggunakan peta Sumatera dengan style yang konsisten dengan section sebelumnya.
+Statistik ditampilkan dalam bentuk card atau tooltip modern agar tidak menutupi area peta secara berlebihan.
+SECTION 8: INSIGHT MODUL 7
+Transisi dari Section Sebelumnya
+Posisi akhir section sebelumnya berada pada kondisi zoom-in ke wilayah dengan tingkat kerentanan tertinggi dan menampilkan statistik wilayah tersebut.
+Ketika pengguna melakukan scroll menuju section ini:
+Panel statistik perlahan menghilang (fade out).
+Kamera melakukan zoom out secara perlahan dari wilayah prioritas.
+Area pengamatan diperluas hingga mencakup tiga provinsi studi (Aceh, Sumatera Utara, dan Sumatera Barat).
+Setelah area studi terlihat utuh, layout bergeser sehingga peta berada di sisi kiri layar dan area narasi muncul di sisi kanan (seperti layout section” sebelumnya).
+Judul Section
+Perjalanan Sebuah Bencana
+Narasi
+Bencana tidak terjadi sekaligus dalam satu waktu. Perubahan kondisi wilayah dapat dipantau dari waktu ke waktu melalui data yang diperbarui secara berkala.
+Di bawah narasi terdapat timeline interaktif yang berisi tahapan utama perkembangan bencana.
+Sisi Kanan
+Menampilkan peta wilayah studi yang mencakup:
+Aceh
+Sumatera Utara
+Sumatera Barat
+Peta akan berubah secara dinamis mengikuti milestone yang sedang aktif pada timeline.
+Timeline terdiri dari beberapa tahapan penting:
+Sebelum Bencana
+Kondisi lingkungan dan aktivitas masyarakat masih berada dalam kondisi normal.
+Sinyal Awal
+Perubahan kondisi mulai terdeteksi melalui indikator lingkungan dan faktor pemicu.
+Puncak Bencana
+Genangan dan longsor mencapai kondisi terluas atau paling intens.
+Mulai Surut
+Dampak mulai berkurang dan sebagian akses mulai kembali terbuka.
+Pemulihan
+Aktivitas masyarakat dan kondisi lingkungan mulai menunjukkan tanda-tanda pemulihan.
+Interaksi dan Animasi
+Setelah section muncul:
+Timeline berjalan secara otomatis.
+Titik indikator aktif bergerak ke milestone berikutnya setiap 5–7 detik.
+Milestone aktif ditandai dengan warna highlight.
+Perubahan Peta: Setiap perpindahan milestone akan memicu perubahan visual pada peta.
+(posisi peta sama narasi nya ini kebalik ya, narasinya sesuaiin yang di teks bukan yang digambar ini)
+SECTION 9: INSIGHT MODUL 8
+Transisi dari Section Sebelumnya
+Section sebelumnya berakhir pada milestone terakhir timeline, yaitu fase Pemulihan.
+Saat pengguna melakukan scroll:
+Timeline perlahan menghilang.
+Milestone "Pemulihan" tetap menyala sesaat sebagai penanda transisi.
+Kamera mempertahankan fokus pada wilayah terdampak yang sebelumnya ditampilkan pada timeline.
+Layer kondisi pemulihan tetap terlihat.
+Setelah itu judul section muncul.
+Layout
+Masih sama seperti yg biasanya
+Judul
+Jejak Pemulihan
+Narasi
+Pemulihan tidak selalu terlihat secara langsung. Perubahan kondisi vegetasi dapat menjadi salah satu indikator untuk mengamati bagaimana suatu wilayah berangsur pulih setelah terdampak bencana.
+Konsep Visual
+Visualisasi utama menggunakan data NDVI yang ditampilkan dalam bentuk layer piksel berwarna di atas peta.
+Narasi Tambahan
+Data yang diperbarui secara berkala membantu memantau perkembangan kondisi lingkungan dan menunjukkan wilayah yang mulai pulih setelah bencana.
+Gaya Visual
+Mengikuti grand design webstory sebelumnya.
+Background tetap menggunakan nuansa gelap.
+Layer NDVI menggunakan gradasi warna yang umum digunakan pada visualisasi vegetasi.
+Pola piksel dibuat menyerupai raster citra satelit sehingga pengguna dapat memahami bahwa visualisasi berasal dari data penginderaan jauh.
+SECTION 10: MENU MODUL
+Link desain: https://webstorydesign.lovable.app/ 
+Referensi website yang digunakan: https://oddlymade.webflow.io/ (bagian ‘selected work’)
+Design yang digunakan
+color palette
+font style: playfair display italic
+List modul:
+modul 1: dashboard karakteristik fisik & kondisi lingkungan (deskripsi: Menyediakan konteks medan wilayah sebelum bencana terjadi. Modul ini bersifat statis/semi-statis dan berfungsi sebagai latar belakang analisis, menjelaskan mengapa suatu wilayah lebih rentan secara fisik dibanding wilayah lain.)
+modul 2: dashboard monitoring potensi bahaya (pemicu bencana) (deskripsi: Menangkap pemicu bencana banjir dan longsor secara near real-time.)
+modul 3: dashboard lokasi dan estimasi skala genangan (deskripsi: Menghasilkan peta lokasi dan skala genangan banjir.)
+modul 4: dashboard kerentanan wilayah (deskripsi: Mengidentifikasi siapa yang tinggal di area terdampak dan seberapa rentan mereka.)
+modul 5: webstory analisis dampak dan logistik (deskripsi: Mengkuantifikasi apa yang rusak dan menganalisis bagaimana bantuan bisa mencapai korban.)
+modul 6: dashboard prioritas wilayah penanganan (deskripsi: Menyatukan seluruh informasi dari modul sebelumnya menjadi satu skor prioritas.)
+modul 7: webstory kronologi dan perbandingan lintas kejadian (deskripsi: Menyajikan dimensi waktu dari kejadian bencana, dari sinyal awal, fase aktif, hingga surut, dan memungkinkan perbandingan lintas kejadian historis.)
+modul 8: webstory pemantauan pemulihan pasca-bencana (deskripsi: Memantau sejauh mana wilayah terdampak telah pulih pasca-bencana, dari sisi ekosistem, ekonomi, dan infrastruktur.)
+Judul section: Overview 8 Modul 
+Warna font mengikuti gambar di bawah ini.  
+Karena section slider menu ini masih berkaitan sama section 4.6, nanti transisi section 4.6 ke slider menu ini pakai model slide up secara smooth aja. Berdasarkan rancangan di atas, dapat dilihat kalau ada guideline untuk user melakukan scroll perlahan untuk meninjau setiap modul. Karena kalau dilakukan secara cepat, itu nanti modulnya bisa otomatis terganti gitu (contohnya kayak kita melakukan scroll galeri di hp). 
+Untuk gambar modulnya itu sebenarnya tadinya mau dibuat icon aja kayak contoh di atas, cuma aku baru ada kepikiran kayaknya better kalau icon itu diisi sama foto anggota dari setiap modul (foto bareng-bareng maksudnya, bukan masing-masing), biar sebagai identitas juga kalau yang buat modul ini siapa gitu. Soalnya kalau hanya diisi icon kayak flat dan kosong banget.
+NB: nanti coba buat fotonya gak hanya pure foto tapi juga ada elemen-elemen yang merepresentasikan setiap modul, sehingga user bisa dapat insight tentang modul itu juga dari foto itu. Elemennya ini dibikin kayak elemen yang di lanyard gitu (temanya diseragamkan dari modul 1- modul 8). 
+Jadi seperti yang bisa dilihat, untuk overview modul itu nanti dibagi jadi dua kolom, di kiri itu gambar dan di kanan ada nama serta keterangan modul. Di bawah ada tombol ‘Lihat Modul’ yang dibuat hover dan dikasih efek spot cahaya putih sedikit aja di pinggir-pinggirnya (efeknya berbarengan dengan hover). Jadi saat user menyorot ke ‘Lihat Modul’, tombolnya akan ke-hover dan ada highlight cahaya putih di pinggirnya.
+Untuk animasi atau transisinya, seiring user melakukan scrolling, overview dari satu modul akan bergeser ke kanan dan lama kelamaan overviewnya akan memudar, mengecil, lalu menghilang (memadukan translate x / slide right, fade out, dan scale down).   
+Nanti transisinya begitu terus dari modul 1 sampai modul 8. Nanti untuk tampilan modul selanjutnya akan muncul dari bagian kiri website, jadi polanya from left to the right gitu. 
+SECTION 11: CLOSING
+Link desain: https://webstorydesign.lovable.app/ 
+Referensi website yang digunakan: https://www.hexpens.com/ (kalimat di bagian akhir)
+Design yang digunakan
+color palette
+font style: playfair display italic
+Karena section closing ini masih berkaitan sama section slider menu, begitu modul 8 selesai ditampilkan, closingnya muncul dengan efek transisi scroll reveal. Nanti yang pertama ditampilkan itu adalah layout fotonya kayak gini.
+Nanti tampilan fotonya ini ada efek hover dan berbarengan dengan hover ada highlight atau spot cahaya putih di pinggirnya. 
+Lalu nanti dari layout foto itu, user akan scrolling lagi lalu ditampilkan quotes di bawah ini. 
+Tapi kalimat kecil itu nanti diganti dengan ini: 
+“Koneksi yang aman tak pernah membangun sekat, tetapi menjadi jembatan bagi empati yang lebih dalam. Di sinilah kepedulian kita bergerak: mendekatkan hati yang jauh, mengubah data menjadi cerita, dan memungkinkan kita membantu dengan tulus.” 

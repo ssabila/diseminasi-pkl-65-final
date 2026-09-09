@@ -1,0 +1,8 @@
+/* Section 10 — InsightRecovery */
+/* Gunakan var(--navy), var(--beige), var(--green), var(--off-white) untuk warna */
+
+.section-insightrecovery {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}

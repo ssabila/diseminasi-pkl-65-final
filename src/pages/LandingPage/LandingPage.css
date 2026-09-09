@@ -1,18 +1,318 @@
-.landing-page {
-  padding: 2rem;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap');
+
+/* =========================================
+   BASE STYLES (KODE ORIGINAL)
+   ========================================= */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
-.landing-page nav ul {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
+
+.landing-content {
+  padding: 2rem;
+  max-width: 600px;
 }
-.landing-page nav a {
-  padding: 0.5rem 1rem;
-  background-color: #646cff;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
+
+/* Fallback styles untuk elemen lama */
+.landing h1, .landing p, .date-range {
+  color: var(--dark-green, #1a3c33);
+}
+
+/* =========================================
+  OVERRIDE STYLES 
+   ========================================= */
+
+/* --- LAYOUT UTAMA --- */
+.landing {
+  position: relative;
+  overflow: hidden;
+  /* Paksa konten rata kiri */
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: left !important;
+  padding: 0 5% !important;
+  background: #0f172a; /* Slate 900 */
+}
+
+/* --- BACKGROUND LAYERS --- */
+.intro-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #1a2f26; /* Hijau tua */
+  z-index: 50;
+  pointer-events: none;
+}
+
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bg-dark-tint {
+  position: absolute;
+  inset: 0;
+  /* Gradient supaya teks kiri terbaca jelas */
+  background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 1;
+}
+
+/* --- PESAWAT TERBANG (ANIMASI) --- */
+.plane-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plane-img {
+  width: 110vh; 
+  height: auto;
+  transform: translateX(-100vw) rotate(90deg);
+  filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+/* --- PETA INDONESIA --- */
+.map-layer {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 55vw !important; 
+  height: 100vh !important;
+  overflow: hidden !important;
+  z-index: 5;
+  pointer-events: none;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-layer img {
+  position: absolute !important;
+  height: 65vh !important;
+  width: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  
+  right: -100% !important; 
+  
+  opacity: 0.9 !important;
+  filter: sepia(0.6) hue-rotate(5deg) !important; 
+  mix-blend-mode: screen !important; 
+}
+
+/* Gambar Peta Dasar */
+.base-map {
+  position: absolute !important;
+  height: 80vh !important;
+  width: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: -25% !important; 
+  opacity: 0.9 !important;
+  filter: sepia(0.6) hue-rotate(5deg) !important; 
+  mix-blend-mode: screen !important;
+  z-index: 1;
+}
+
+.routes-svg {
+  position: absolute !important;
+  z-index: 2; 
+
+  height: 80vh !important; 
+  width: auto !important; 
+
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: -25% !important;
+  
+  overflow: visible !important;
+}
+
+.flight-path {
+  fill: none;
+  stroke: #F3EAD2; 
+  stroke-width: 3;
+  stroke-dasharray: 2500, 2500;
+  opacity: 1;
+  stroke-linecap: round;
+}
+
+/* Styling Pin Lokasi */
+.map-pin {
+  fill: #eab308; /* Kuning Emas (Tujuan) */
+  stroke: rgba(255,255,255,0.6);
+  stroke-width: 2;
+}
+
+.map-pin.origin {
+  fill: #ef4444; /* Merah (Jakarta/Asal) */
+}
+
+/* Styling Pesawat Kecil */
+.mini-plane {
+  transform-origin: center center; /* Putar dari tengah */
+  filter: drop-shadow(0 0 8px rgba(243, 234, 210, 0.9)); /* Efek glowing */
+}
+
+.mini-plane path {
+  transform: scale(1.5); 
+}
+
+/* --- KONTEN TEKS & TOMBOL --- */
+.landing-content {
+  position: relative;
+  z-index: 10;
+  max-width: 650px !important;
+  color: #F3EAD2; 
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  
+  padding: 1rem 1rem 5rem 3rem !important;
+}
+
+/* 1. Judul Utama */
+.landing h1.main-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 3.5rem !important;
+  color: #F3EAD2 !important;
+  margin-bottom: 0.5rem !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+/* 2. Subjudul */
+.sub-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  color: #F3EAD2;
+}
+
+/* 3. Detail Info (Lokasi & Tanggal) */
+.details-info {
+  border-left: 3px solid #F3EAD2;
+  padding-left: 1rem;
+}
+
+.detail-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.1rem !important;
+  color: #F3EAD2 !important;
+  margin-bottom: 0.3rem !important;
+  font-weight: 300;
+}
+
+/* 4. Tombol "Start Journey" */
+.landing-content .start-button {
+  /* Positioning */
+  position: relative !important;
+  align-self: flex-start !important; /* Rata kiri */
+  z-index: 100 !important;
+  display: inline-block !important;
+
+  margin-left: 12rem !important; 
+  margin-top: 2rem !important;
+  
+  /* Styling */
+  padding: 0.5rem 1.5rem !important;
+  background-color: #F3EAD2 !important; 
+  color: #1a3c33 !important; /* Teks Hijau Gelap */
+  border: 2px solid #F3EAD2 !important;
+  border-radius: 50px !important; 
+  
+  /* Font & Visibility */
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  
+  /* Shadow */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Hover Effect Tombol */
+.landing-content .start-button:hover {
+  background-color: transparent !important;
+  color: #F3EAD2 !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important;
+  cursor: pointer !important;
+}
+
+/* =========================================
+   RESPONSIVE (ROTATE WARNING)
+   ========================================= */
+.rotate-warning {
+  display: none;
+}
+
+@media screen and (max-width: 900px) and (orientation: portrait) {
+  
+  .rotate-warning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    background-color: #0f172a; 
+    z-index: 9999; 
+    color: #F3EAD2; 
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .rotate-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: spin 2s infinite linear; 
+  }
+  
+  .rotate-warning h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rotate-warning p {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-90deg); } 
+    100% { transform: rotate(-90deg); }
+  }
+
+  /* Sembunyikan konten asli */
+  .landing-content,
+  .map-layer,
+  .bg-layer,
+  .plane-layer,
+  .intro-overlay {
+    display: none !important;
+  }
 }
