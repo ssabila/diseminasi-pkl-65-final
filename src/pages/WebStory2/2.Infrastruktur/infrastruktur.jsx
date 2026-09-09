@@ -272,9 +272,6 @@ if (typeof document !== 'undefined' && !document.getElementById('infra-global-st
   document.head.appendChild(style);
 }
 
-/* ─────────────────────────────────────────────────────────────────
-   SVG ICON LIBRARY  (no emoji)
-───────────────────────────────────────────────────────────────── */
 const Icons = {
   Building: ({ size=20, color='currentColor' }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
