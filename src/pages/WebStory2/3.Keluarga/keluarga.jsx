@@ -216,7 +216,7 @@ function SceneSudutDesa() {
         trigger: "#slide-step",
         start: "top top",
         end: "bottom top",
-        scrub: 1
+        scrub: 1.5
       }
     });
   }, []);
@@ -521,6 +521,8 @@ function AnimatedCounter({ target, duration = 1.5, visible }) {
 ───────────────────────────────────────────*/
 function ScenePotretHunianNarasi() {
   const [ref, visible] = useInView(0.15); // Terpicu saat 15% elemen masuk layar
+  const containerRef = useRef(null);
+  const bgOverlayRef = useRef(null);
 
   // ==========================================
   // 1. EKSTRAKSI DATA DARI INSIGHT.JSON
@@ -530,23 +532,20 @@ function ScenePotretHunianNarasi() {
   const nMasihAda = (kondisiBangunan['1. Bangunan ada dan tidak terdampak']?.n || 0)
                   + (kondisiBangunan['2. Bangunan ada, terdampak, tetapi tidak perlu perbaikan']?.n || 0);
   const nRusak = (kondisiBangunan['3. Bangunan ada, terdampak, dan perlu perbaikan']?.n || 0);
-  const nHilang = (kondisiBangunan['4. Bangunan rusak dan tidak dapat diperbaiki<b> --> Lanjut ke Rincian 10</b>']?.n || 0)
-                + (kondisiBangunan['5. Bangunan hilang<b> --> Lanjut ke Rincian 10</b>']?.n || 0);
+  const nHilang = (kondisiBangunan['4. Bangunan sudah tidak ada/hilang']?.n || 0);
+  const totalEvaluasi = nMasihAda + nRusak + nHilang;
 
-  const totalEvaluasi = nMasihAda + nRusak + nHilang || 1;
-  const pctMasih = (nMasihAda / totalEvaluasi) * 100;
-  const pctRusak = (nRusak / totalEvaluasi) * 100;
-  const pctHilang = (nHilang / totalEvaluasi) * 100;
+  const pctMasih = totalEvaluasi ? (nMasihAda / totalEvaluasi) * 100 : 0;
+  const pctRusak = totalEvaluasi ? (nRusak / totalEvaluasi) * 100 : 0;
+  const pctHilang = totalEvaluasi ? (nHilang / totalEvaluasi) * 100 : 0;
 
-  const sumberAir = insights?.rumah_tangga?.sumber_air || {};
-  const pctTanpaAir = (sumberAir['09. Air permukaan (sungai/danau/waduk/kolam/irigasi)']?.pct || 0) +
-                      (sumberAir['08. Mata air tak terlindung']?.pct || 0) +
-                      (sumberAir['06. Sumur tak terlindung']?.pct || 0);
-
-  const sumberListrik = insights?.rumah_tangga?.sumber_listrik || {};
-  const pctTanpaListrik = sumberListrik['3. Bukan listrik']?.pct || 0;
-
+  const sumberAir = insights?.rumah_tangga?.sumber_air_minum || {};
   const fasilitasMck = insights?.rumah_tangga?.fasilitas_mck || {};
+  const penerangan = insights?.rumah_tangga?.sumber_penerangan_utama || {};
+
+  const pctTanpaAir = (sumberAir['5. Air permukaan (sungai/danau/waduk/kolam/irigasi)']?.pct || 0) + 
+                      (sumberAir['6. Lainnya']?.pct || 0);
+  const pctTanpaListrik = penerangan['3. Bukan listrik']?.pct || 0;
   const pctTanpaSanitasi = fasilitasMck['5. Tidak ada']?.pct || 0;
 
   const pctKRTPerempuan = "N/A"; 
@@ -560,165 +559,183 @@ function ScenePotretHunianNarasi() {
       label: 'Krisis Air Bersih', 
       desc: 'Keluarga bertahan hidup menggunakan air permukaan atau sumber yang sama sekali tidak terlindung.',
       accent: '#4FC3F7', 
-      delay: 0.2 // Delay untuk animasi berurutan
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(79, 195, 247, 0.15) 0%, transparent 60%)'
     },
     { 
       value: `${pctTanpaListrik.toFixed(2)}%`, 
       label: 'Tanpa Listrik', 
       desc: 'Keluarga hidup dalam kegelapan tanpa akses ke jaringan listrik pasca terjadinya bencana.',
       accent: '#FFD36E', 
-      delay: 0.4
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(0, 0, 0, 0.8) 0%, transparent 80%)'
     },
     { 
       value: `${pctTanpaSanitasi.toFixed(1)}%`, 
       label: 'Tanpa Sanitasi', 
       desc: 'Tidak memiliki akses fasilitas MCK sama sekali, membuat kelompok rentan terancam wabah.',
       accent: '#81C784', 
-      delay: 0.6
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(129, 199, 132, 0.15) 0%, transparent 60%)'
     },
     { 
       value: pctKRTPerempuan, 
       label: 'KRT Perempuan', 
       desc: 'Keluarga dengan Kepala Rumah Tangga perempuan (Menunggu agregasi data lapangan).',
       accent: '#CE93D8', 
-      delay: 0.8
+      bgColor: 'radial-gradient(circle at 0% 50%, rgba(206, 147, 216, 0.15) 0%, transparent 60%)'
     }
   ];
 
+  // ==========================================
+  // 3. ANIMASI GSAP SCROLLTRIGGER
+  // ==========================================
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      cardsData.forEach((card, index) => {
+        // Fade in animation for text blocks
+        gsap.fromTo(`.card-narrative-${index}`, 
+          { opacity: 0, y: 50 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: `.card-narrative-${index}`,
+              start: "top center",
+              end: "bottom center",
+              toggleActions: "play reverse play reverse",
+              onEnter: () => {
+                gsap.to(bgOverlayRef.current, { background: card.bgColor, duration: 0.8 });
+              },
+              onEnterBack: () => {
+                gsap.to(bgOverlayRef.current, { background: card.bgColor, duration: 0.8 });
+              }
+            }
+          }
+        );
+      });
+    }, containerRef);
+    return () => ctx.revert();
+  }, [cardsData]);
+
   return (
-    <section style={{
+    <section ref={containerRef} style={{
       position: 'relative',
-      background: 'linear-gradient(180deg, #0A111D 0%, #0d1222 30%, #15173D 100%)',
-      padding: '8rem 2rem 10rem', 
+      background: '#0A111D', // Solid base background
+      padding: '0', 
       minHeight: '100vh',
       display: 'flex',
-      alignItems: 'center',
       zIndex: 10 
     }}>
-
-      {/* SEAM FIXER (KABUT GRADASI) */}
-      <div style={{
-        position: 'absolute', top: '-150px', left: 0, width: '100%', height: '150px',
-        background: 'linear-gradient(to bottom, transparent 0%, #0A111D 100%)',
-        pointerEvents: 'none', zIndex: 1
+      {/* Dynamic Background Overlay */}
+      <div ref={bgOverlayRef} style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
+        transition: 'background 0.8s ease'
       }} />
 
-      <div ref={ref} style={{ maxWidth: 1050, margin: '0 auto', width: '100%', position: 'relative', zIndex: 2 }}>
+      {/* Grid Side-by-Side Layout */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '4rem',
+        maxWidth: 1320,
+        margin: '0 auto',
+        width: '100%',
+        padding: '6rem 2rem 10rem',
+        position: 'relative',
+        zIndex: 2
+      }}>
         
-        {/* ==========================================
-            HEADER SECTION (SLOW FADE-IN)
-            ========================================== */}
-        <div style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(20px)',
-          // Animasi diperlambat menjadi 2 detik agar muncul perlahan sekaligus yang dramatis
-          transition: 'opacity 2s ease, transform 2s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-            fontSize: 'clamp(2.5rem, 4.5vw, 4.2rem)', 
-            lineHeight: 1.15, marginBottom: '1.5rem',
-            textShadow: '0 4px 12px rgba(0,0,0,0.5)'
+        {/* KOLOM KIRI (STICKY) */}
+        <div style={{ position: 'relative' }}>
+          <div ref={ref} style={{
+            position: 'sticky',
+            top: '20vh', // Adjust sticky position
+            height: 'fit-content'
           }}>
-            {/* Pemisahan Warna Headline */}
-            <span style={{ color: '#E5D9B6' }}>Rumah yang Masih Berdiri,</span><br/>
-            <span style={{ color: '#E67E22' }}>Kehidupan yang Belum Pulih</span>
-          </h2>
-          
-          <p style={{
-            fontFamily: "'Lato', sans-serif", fontWeight: 300,
-            fontSize: '1.15rem', lineHeight: 1.8, color: 'rgba(255, 255, 255, 0.75)',
-            maxWidth: 760, marginBottom: '6rem',
-          }}>
-            Tembok yang tersisa bukan berarti penderitaan usai. Ribuan keluarga bertahan di rumah yang menanti runtuh, terputus dari aliran air, tanpa cahaya, dan kehilangan kebutuhan paling mendasar.
-          </p>
-        </div>
-
-        {/* ==========================================
-            VISUAL 1: SPLIT BAR BANGUNAN (FLEX-WIDTH)
-            ========================================== */}
-        <div style={{ marginBottom: '6rem', opacity: visible ? 1 : 0, transition: 'opacity 1.5s ease 0.3s' }}>
-          
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.2rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div style={{
-              fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '0.85rem', color: '#E5D9B6',
-              letterSpacing: '0.15em', textTransform: 'uppercase',
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 1.5s ease, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1)',
             }}>
-              Kondisi Bangunan Terdampak
+              <h2 style={{
+                fontFamily: "'Playfair Display', serif", fontStyle: "italic",
+                fontSize: 'clamp(2.5rem, 4.5vw, 4.2rem)', 
+                lineHeight: 1.15, marginBottom: '1.5rem',
+                textShadow: '0 4px 12px rgba(0,0,0,0.5)'
+              }}>
+                <span style={{ color: '#E5D9B6' }}>Rumah yang Masih Berdiri,</span><br/>
+                <span style={{ color: '#E67E22' }}>Kehidupan yang Belum Pulih</span>
+              </h2>
+              
+              <p style={{
+                fontFamily: "'Lato', sans-serif", fontWeight: 300,
+                fontSize: '1.15rem', lineHeight: 1.8, color: 'rgba(255, 255, 255, 0.75)',
+                maxWidth: 540, marginBottom: '4rem',
+              }}>
+                Dinding yang tersisa bukan berarti penderitaan telah usai. Ribuan keluarga terpaksa bertahan di bangunan yang tak lagi aman, terjebak dalam kegelapan tanpa listrik, dan dihantui krisis air bersih yang mencekik kehidupan sehari-hari.
+              </p>
             </div>
-            <div style={{
-              fontFamily: "'Lato', sans-serif", fontWeight: 300, fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)',
-            }}>
-              Total Dievaluasi: <span style={{ color: '#FFF', fontWeight: 700, fontSize: '1rem', marginLeft: '0.3rem' }}>
-                <AnimatedCounter target={totalEvaluasi} duration={4} visible={visible} /> 
-              </span> Rumah
-            </div>
-          </div>
 
-          {/* Container Split Bar */}
-          <div style={{
-            display: 'flex', width: '100%', height: '24px', borderRadius: '4px', overflow: 'hidden', 
-            background: 'rgba(255,255,255,0.05)', marginBottom: '2rem'
-          }}>
-            <div style={{
-              width: visible ? `${pctMasih}%` : '0%', 
-              background: '#3A4B5C', 
-              transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s',
-            }} />
-            <div style={{
-              width: visible ? `${pctRusak}%` : '0%',
-              background: '#E67E22', 
-              transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s',
-            }} />
-            <div style={{
-              width: visible ? `${pctHilang}%` : '0%',
-              background: '#FF2A2A', 
-              transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s',
-            }} />
-          </div>
-
-          {/* Legenda Data Editorial */}
-          <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
-            {[
-              { pct: pctMasih, color: '#3A4B5C', label: 'Masih Ada (Utuh/Ringan)', n: nMasihAda },
-              { pct: pctRusak, color: '#E67E22', label: 'Rusak (Perlu Perbaikan)', n: nRusak },
-              { pct: pctHilang, color: '#FF2A2A', label: 'Hilang / Rusak Total', n: nHilang },
-            ].map(item => (
-              <div key={item.label} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                <span style={{ width: 12, height: 12, borderRadius: '2px', background: item.color, marginTop: '5px' }} />
-                <div>
-                  <div style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '1rem', color: '#FFF' }}>
-                    {item.pct.toFixed(1)}% <span style={{ fontWeight: 300, color: 'rgba(255,255,255,0.4)', marginLeft: '4px' }}>({item.n.toLocaleString('id-ID')})</span>
-                  </div>
-                  <div style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300, fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
-                    {item.label}
-                  </div>
+            {/* SPLIT BAR BANGUNAN */}
+            <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 1.5s ease 0.3s' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.2rem', flexWrap: 'wrap', gap: '1rem' }}>
+                <div style={{
+                  fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '0.85rem', color: '#E5D9B6',
+                  letterSpacing: '0.15em', textTransform: 'uppercase',
+                }}>
+                  Kondisi Bangunan Terdampak
+                </div>
+                <div style={{
+                  fontFamily: "'Lato', sans-serif", fontWeight: 300, fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)',
+                }}>
+                  Total Dievaluasi: <span style={{ color: '#FFF', fontWeight: 700, fontSize: '1rem', marginLeft: '0.3rem' }}>
+                    <AnimatedCounter target={totalEvaluasi} duration={4} visible={visible} /> 
+                  </span> Rumah
                 </div>
               </div>
-            ))}
+
+              <div style={{
+                display: 'flex', width: '100%', height: '24px', borderRadius: '4px', overflow: 'hidden', 
+                background: 'rgba(255,255,255,0.05)', marginBottom: '2rem'
+              }}>
+                <div style={{ width: visible ? `${pctMasih}%` : '0%', background: '#3A4B5C', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s' }} />
+                <div style={{ width: visible ? `${pctRusak}%` : '0%', background: '#E67E22', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s' }} />
+                <div style={{ width: visible ? `${pctHilang}%` : '0%', background: '#FF2A2A', transition: 'width 2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s' }} />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {[
+                  { pct: pctMasih, color: '#3A4B5C', label: 'Masih Ada (Utuh/Ringan)', n: nMasihAda },
+                  { pct: pctRusak, color: '#E67E22', label: 'Rusak (Perlu Perbaikan)', n: nRusak },
+                  { pct: pctHilang, color: '#FF2A2A', label: 'Hilang / Rusak Total', n: nHilang },
+                ].map(item => (
+                  <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                    <span style={{ width: 12, height: 12, borderRadius: '2px', background: item.color }} />
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
+                      <div style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '1rem', color: '#FFF' }}>
+                        {item.pct.toFixed(1)}% <span style={{ fontWeight: 300, color: 'rgba(255,255,255,0.4)', marginLeft: '4px' }}>({item.n.toLocaleString('id-ID')})</span>
+                      </div>
+                      <div style={{ fontFamily: "'Lato', sans-serif", fontWeight: 300, fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>
+                        {item.label}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* ==========================================
-            VISUAL 2: KARTU DATA (FADE-UP BERURUTAN)
-            ========================================== */}
-        <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem',
-        }}>
+        {/* KOLOM KANAN (SCROLLABLE NARRATIVE BLOCKS) */}
+        <div style={{ paddingTop: '40vh', paddingBottom: '30vh' }}>
           {cardsData.map((card, index) => (
-            <div key={index} style={{
-              background: 'rgba(10, 15, 30, 0.5)', 
-              borderRadius: '8px', 
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              borderLeft: `3px solid ${card.accent}`, 
-              padding: '2rem 1.8rem',
-              opacity: visible ? 1 : 0,
-              transform: visible ? 'translateY(0)' : 'translateY(30px)',
-              transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${card.delay}s`,
+            <div key={index} className={`card-narrative-${index}`} style={{
+              marginBottom: '70vh', // Huge margin to force scrolling
+              maxWidth: '500px'
             }}>
               <div style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: '3.5rem',
+                fontSize: 'clamp(4rem, 8vw, 6rem)',
                 color: card.accent, 
                 fontWeight: 700, 
                 lineHeight: 1, 
@@ -754,11 +771,38 @@ function ScenePotretHunianNarasi() {
 /* ─────────────────────────────────────────
    Scene 3: Potret Hunian Visual
 ───────────────────────────────────────────*/
+const HuntaraIcon = ({ color }) => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+);
+const FasumIcon = ({ color }) => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="1"/>
+    <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+  </svg>
+);
+const PengungsiIcon = ({ color }) => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+    <path d="M16 3.13a4 4 0 010 7.75"/>
+  </svg>
+);
+const TumpanganIcon = ({ color }) => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <path d="M9 21V13h6v8"/>
+  </svg>
+);
+
 const STATUS_HUNIAN_TARGET = [
-  { key: '6. Huntara',        label: 'Huntara',      color: '#e74c3c', icon: '⛺' },
-  { key: '5. Fasilitas Umum', label: 'Fasilitas Umum', color: '#FFB74D', icon: '🏛️' },
-  { key: '3. Pengungsian',    label: 'Pengungsian',  color: '#FF8A65', icon: '👥' },
-  { key: '4. Rumah Tumpangan',label: 'Rumah Tumpangan', color: '#CE93D8', icon: '🏠' },
+  { key: '6. Huntara',         label: 'Huntara',         color: '#e74c3c', Icon: HuntaraIcon },
+  { key: '5. Fasilitas Umum',  label: 'Fasilitas Umum',  color: '#FFB74D', Icon: FasumIcon },
+  { key: '3. Pengungsian',     label: 'Pengungsian',     color: '#FF8A65', Icon: PengungsiIcon },
+  { key: '4. Rumah Tumpangan', label: 'Rumah Tumpangan', color: '#CE93D8', Icon: TumpanganIcon },
 ];
 
 function ScenePotretHunianVisual() {
@@ -768,18 +812,11 @@ function ScenePotretHunianVisual() {
 
   return (
     <section style={{
-      background: 'linear-gradient(180deg, #0d0f28 0%, #070814 100%)',
+      background: 'transparent',
       padding: '7rem 2rem',
     }}>
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-        <span style={{
-          fontFamily: "'Lato', sans-serif", fontWeight: 700,
-          fontSize: '0.78rem', letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: '#FF8A65',
-          display: 'block', marginBottom: '1rem',
-        }}>
-          Babak 3 · Scene 3
-        </span>
+
         <h2 style={{
           fontFamily: "'Playfair Display', serif", fontStyle: "italic",
           fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
@@ -794,9 +831,7 @@ function ScenePotretHunianVisual() {
           color: '#E5D9B6', opacity: 0.85,
           maxWidth: 640, marginBottom: '3.5rem',
         }}>
-          Kehilangan rumah berarti kehilangan martabat dasar.
-          Ribuan keluarga kini hidup di hunian darurat, terputus dari
-          air bersih dan sanitasi layak.
+          Kehilangan rumah bukan sekadar hilangnya tempat bernaung, melainkan tercerabutnya rasa aman dan martabat dasar. Ribuan keluarga kini berdesakan di hunian sementara (huntara), fasilitas umum, dan tenda pengungsian, menanti kepastian untuk kembali menata hidup.
         </p>
 
         <div ref={ref} style={{
@@ -818,7 +853,9 @@ function ScenePotretHunianVisual() {
                 transform: visible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
                 transition: `opacity 0.5s ease ${i * 0.12}s, transform 0.5s ease ${i * 0.12}s`,
               }}>
-                <div style={{ fontSize: '2.2rem', marginBottom: '0.8rem' }}>{status.icon}</div>
+                <div style={{ marginBottom: '0.8rem', color: status.color, display: 'flex', justifyContent: 'center' }}>
+                  <status.Icon color={status.color} />
+                </div>
                 <div style={{
                   fontFamily: "'Playfair Display', serif",
                   fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
@@ -835,10 +872,25 @@ function ScenePotretHunianVisual() {
                 </div>
                 {data.pct > 0 && (
                   <div style={{
-                    fontFamily: "'Lato', sans-serif", fontWeight: 300,
-                    fontSize: '1rem', color: 'rgba(229, 217, 182, 0.6)',
+                    marginTop: '0.8rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.4rem'
                   }}>
-                    {data.pct.toFixed(2)}% dari total KK
+                    <div style={{ display: 'flex', gap: '2px', opacity: 0.8 }}>
+                      {Array.from({ length: 10 }).map((_, idx) => (
+                        <svg key={idx} width="12" height="12" viewBox="0 0 24 24" fill={idx < Math.round(data.pct / 10) ? status.color : "rgba(255,255,255,0.1)"} xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <div style={{
+                      fontFamily: "'Lato', sans-serif", fontWeight: 300,
+                      fontSize: '0.85rem', color: 'rgba(229, 217, 182, 0.6)',
+                    }}>
+                      {data.pct.toFixed(2)}% dari keseluruhan
+                    </div>
                   </div>
                 )}
               </div>
@@ -905,18 +957,11 @@ function SceneIndividu() {
 
   return (
     <section style={{
-      background: '#070814',
+      background: 'transparent',
       padding: '7rem 2rem',
     }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <span style={{
-          fontFamily: "'Lato', sans-serif", fontWeight: 700,
-          fontSize: '0.78rem', letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: '#CE93D8',
-          display: 'block', marginBottom: '1rem',
-        }}>
-          Babak 3 · Scene 4
-        </span>
+
         <h2 style={{
           fontFamily: "'Playfair Display', serif", fontStyle: "italic",
           fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
@@ -931,8 +976,7 @@ function SceneIndividu() {
           color: '#E5D9B6', opacity: 0.85,
           maxWidth: 640, marginBottom: '3rem',
         }}>
-          Profil kesehatan, distribusi individu, dan bantuan yang diterima oleh keluarga terdampak.
-          Setiap angka adalah wajah nyata dari mereka yang bertahan.
+          Setiap angka merepresentasikan nyawa dan cerita. Pemetaan keluhan kesehatan, persebaran kelompok rentan, dan riwayat penerimaan bantuan menjadi kompas utama untuk memastikan tidak ada satu pun pengungsi yang terabaikan.
         </p>
 
         <div style={{
@@ -969,9 +1013,32 @@ function SceneIndividu() {
               Kelompok Rentan
             </div>
             {[
-              { label: 'Ibu Hamil', val: totalBumil, color: '#FF8A65', icon: '🤰' },
-              { label: 'Lansia',    val: totalLansia, color: '#CE93D8', icon: '👴' },
-              { label: 'Balita',    val: totalBalita, color: '#FFD54F', icon: '👶' },
+              { label: 'Ibu Hamil', val: totalBumil, color: '#FF8A65',
+                renderIcon: () => (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8A65" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M5.5 21v-1.5a6.5 6.5 0 0 1 4-6"/>
+                    <ellipse cx="12" cy="17" rx="3.5" ry="4.5"/>
+                  </svg>
+                )
+              },
+              { label: 'Lansia', val: totalLansia, color: '#CE93D8',
+                renderIcon: () => (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CE93D8" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M5.5 21v-2a5.5 5.5 0 0 1 11 0v2"/>
+                    <line x1="9" y1="17" x2="10" y2="21"/>
+                  </svg>
+                )
+              },
+              { label: 'Balita', val: totalBalita, color: '#FFD54F',
+                renderIcon: () => (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD54F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="8" r="3.5"/>
+                    <path d="M8.5 21v-1a4 4 0 0 1 7 0v1"/>
+                  </svg>
+                )
+              },
             ].map(item => (
               <div key={item.label} style={{
                 display: 'flex', alignItems: 'center', gap: '1rem',
@@ -979,7 +1046,9 @@ function SceneIndividu() {
                 borderRadius: 10, marginBottom: '0.6rem',
                 border: `1px solid ${item.color}18`,
               }}>
-                <span style={{ fontSize: '1.4rem' }}>{item.icon}</span>
+                <span style={{ marginRight: '0.5rem', display: 'flex', alignItems: 'center' }}>
+                  {item.renderIcon()}
+                </span>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontFamily: "'Lato', sans-serif", fontWeight: 700, fontSize: '0.85rem', color: '#E5D9B6' }}>{item.label}</div>
                 </div>
@@ -1052,7 +1121,7 @@ function TransisiBabak34() {
     <>
       {/* ── PANEL 1: Emotional Beat ─────────────────── */}
       <section style={{
-        background: '#020208',
+        backgroundColor: 'transparent',
         // minHeight 100vh agar konten tidak terpotong scroll
         minHeight: '100vh',
         display: 'flex',
@@ -1152,7 +1221,7 @@ function TransisiBabak34() {
 
       {/* ── PANEL 2: Bridge ke Babak Kebutuhan ──────── */}
       <section ref={refBridge} style={{
-      background: 'linear-gradient(180deg, #020208 0%, #0d0f2b 40%, #15173D 100%)',
+      backgroundColor: 'transparent',
       // Kurangi dari 60vh → 40vh, hilangkan padding berlebih
       minHeight: '40vh',
       display: 'flex',
@@ -1165,16 +1234,18 @@ function TransisiBabak34() {
       }}>
 
       <h3 className="playfair-display" style={{
-        fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
-        color: 'rgba(255,255,255,0.85)',
-        lineHeight: 1.35,
-        maxWidth: 600,
+        fontSize: 'clamp(1.5rem, 3.2vw, 2.6rem)',
+        color: 'rgba(255,255,255,0.9)',
+        lineHeight: 1.55,
+        maxWidth: 700,
+        textAlign: 'center',
         opacity: visibleBridge ? 1 : 0,
         transform: visibleBridge ? 'translateY(0)' : 'translateY(12px)',
         transition: 'opacity 1.2s ease 0.4s, transform 1.2s ease 0.4s',
       }}>
-        Lalu, apa yang masih<br />
-        <span style={{ color: '#E67E22', fontStyle: 'italic' }}>mereka butuhkan?</span>
+        Infrastruktur dapat direkonstruksi, namun nyawa yang hilang meninggalkan duka yang permanen.
+        Di balik statistik rekonstruksi, ada tangisan yang tak bisa diukur.<br/>
+        <span style={{ color: '#E67E22', fontStyle: 'italic' }}>Di tengah duka yang belum usai ini, lantas apa yang paling mereka butuhkan sekarang?</span>
       </h3>
 
       <p className="lato-regular" style={{

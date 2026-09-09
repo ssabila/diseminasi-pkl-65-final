@@ -50,7 +50,7 @@ const ScrollReveal = ({
             scroller,
             start: 'top bottom',
             end: rotationEnd,
-            scrub: true
+            scrub: 1.5
           }
         }
       );
@@ -69,7 +69,7 @@ const ScrollReveal = ({
             scroller,
             start: 'top bottom-=20%',
             end: wordAnimationEnd,
-            scrub: true
+            scrub: 1.5
           }
         }
       );
@@ -87,7 +87,7 @@ const ScrollReveal = ({
               scroller,
               start: 'top bottom-=20%',
               end: wordAnimationEnd,
-              scrub: true
+              scrub: 1.5
             }
           }
         );

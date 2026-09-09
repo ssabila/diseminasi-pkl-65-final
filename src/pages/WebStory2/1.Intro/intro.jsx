@@ -15,6 +15,11 @@ import Particles from './Particles';
 import ScrollReveal from './ScrollReveal';
 import TextType from './TextType';
 import imgPendataan from './assets/pendataan.jpeg';
+import imgHuntara03 from '../../../assets/images/huntara-03.jpg';
+import imgHuntara14 from '../../../assets/images/huntara-14.jpg';
+import imgHuntara16 from '../../../assets/images/huntara-16.jpg';
+import patternImg from '../../../assets/Grand Design/Pattern.png';
+import maskotImg from '../../../assets/Grand Design/Gundatala_1.png';
 import sumateraGeo from '../../../assets/maps/sumatera_provinsi.json';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -131,10 +136,30 @@ const RUMAH_TERDAMPAK = (_kbTotal ? _kbTotal - _kbTidak : 0) || 35849;
 
 // 4 kartu sesuai mockup referensi (tinggi 'h' menurun untuk irama bar)
 const STAT_CARDS = [
-  { key: 'wilayah', label: 'Jumlah Wilayah Terdampak', value: _ds.total_desa_infra || 928, unit: 'desa', h: 100 },
-  { key: 'warga', label: 'Warga Terdampak', value: _ds.total_art_keluarga || 188902, unit: 'jiwa', h: 92 },
-  { key: 'rumah', label: 'Rumah Terdampak', value: RUMAH_TERDAMPAK, unit: 'bangunan', h: 84 },
-  { key: 'fasilitas', label: 'Fasilitas Umum Terdampak', value: _ds.total_fasilitas_gabungan || 2739, unit: 'unit', h: 76 },
+  { 
+    key: 'wilayah', label: 'Wilayah Terdampak', value: _ds.total_desa_infra || 928, unit: 'desa', h: 100, 
+    color: '#EF8722', // Orange
+    microcopy: 'Tersebar di 3 Provinsi',
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+  },
+  { 
+    key: 'warga', label: 'Warga Terdampak', value: _ds.total_art_keluarga || 188902, unit: 'jiwa', h: 92, 
+    color: '#E74C3C', // Red
+    microcopy: 'Kehilangan akses ke kehidupan normal',
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  },
+  { 
+    key: 'rumah', label: 'Rumah Terdampak', value: RUMAH_TERDAMPAK, unit: 'bangunan', h: 84, 
+    color: '#4FC3F7', // Blue
+    microcopy: 'Berbagai tingkat kerusakan, tak lagi layak huni',
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  },
+  { 
+    key: 'fasilitas', label: 'Fasilitas Umum', value: _ds.total_fasilitas_gabungan || 2739, unit: 'unit', h: 76, 
+    color: '#628141', // Green
+    microcopy: 'Pendidikan, kesehatan, hingga rumah ibadah',
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16"/><path d="M4 18h16"/><path d="M14 2h-4a2 2 0 0 0-2 2v14h8V4a2 2 0 0 0-2-2Z"/><path d="M8 2h8"/><path d="M9 18V6"/><path d="M15 18V6"/><path d="M12 18V6"/></svg>
+  },
 ];
 
 // Cakupan pendataan (materi storyline: total keluarga disurvei + kab/kota ditelusuri)
@@ -145,10 +170,10 @@ const CAKUPAN = {
 
 // Sektor infrastruktur yang didata
 const SEKTOR_DATA = [
-  { key: 'pendidikan', label: 'Pendidikan' },
-  { key: 'kesehatan', label: 'Kesehatan' },
-  { key: 'ekonomi', label: 'Ekonomi' },
-  { key: 'sosial', label: 'Sosial' },
+  { key: 'pendidikan', label: 'Pendidikan', value: _ds.total_fasilitas?.pendidikan || 824, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg> },
+  { key: 'kesehatan', label: 'Kesehatan', value: _ds.total_fasilitas?.kesehatan || 342, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> },
+  { key: 'ekonomi', label: 'Ekonomi', value: _ds.total_fasilitas?.ekonomi || 591, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> },
+  { key: 'sosial', label: 'Sosial', value: _ds.total_fasilitas?.sosial || 982, icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
 ];
 
 /* ─────────────────────────────────────────
@@ -273,7 +298,9 @@ function CulaDataPanel() {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ fontSize: '1rem' }}>📍</span>
+          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
           <span className="lato-regular" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Cakupan Wilayah</span>
         </div>
         <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>{totalDesa} Desa</div>
@@ -281,10 +308,17 @@ function CulaDataPanel() {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ fontSize: '1rem' }}>👨👩👧👦</span>
+          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
           <span className="lato-regular" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Keluarga Disurvei</span>
         </div>
-        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>{totalKK.toLocaleString('id-ID')} KK</div>
+        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          {totalKK.toLocaleString('id-ID')}
+          <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
       </div>
 
       <div style={{ borderLeft: '2px dashed rgba(255,255,255,0.2)', marginLeft: '1.2rem', paddingLeft: '1.2rem', paddingBottom: '0.2rem', paddingTop: '0.2rem' }}>
@@ -494,6 +528,136 @@ function ChoroplethMapbox({ apiRef }) {
   );
 }
 
+const HUNTARA_IMAGES = [
+  { src: imgHuntara03, caption: "Sisa-sisa bangunan yang tersapu oleh derasnya aliran sungai." },
+  { src: imgHuntara14, caption: "Fasilitas umum dan bangunan warga hancur tak bersisa." },
+  { src: imgHuntara16, caption: "Puing-puing berserakan menjadi saksi bisu kekuatan bencana." }
+];
+
+function HuntaraGallery() {
+  const containerRef = useRef(null);
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const track = trackRef.current;
+      
+      const totalWidth = track.scrollWidth;
+      const amountToScroll = totalWidth - window.innerWidth;
+
+      gsap.to(track, {
+        x: -amountToScroll,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: `+=${amountToScroll}`,
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1
+        }
+      });
+
+      // Parallax effect for images
+      gsap.utils.toArray('.huntara-img').forEach((img) => {
+        gsap.fromTo(img, 
+          { x: '-15%' },
+          {
+            x: '15%',
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top top",
+              end: `+=${amountToScroll}`,
+              scrub: 1
+            }
+          }
+        );
+      });
+
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={containerRef} style={{ 
+      height: '100vh', 
+      width: '100%', 
+      background: 'linear-gradient(135deg, #E5D9B6 0%, #D4C59D 100%)', // Beige textured background
+      overflow: 'hidden',
+      position: 'relative',
+      zIndex: 5
+    }}>
+      {/* Texture overlay to break monotony */}
+      <div style={{
+        position: 'absolute', inset: 0, opacity: 0.15, pointerEvents: 'none',
+        backgroundImage: `radial-gradient(#15173D 1px, transparent 1px)`,
+        backgroundSize: '20px 20px'
+      }} />
+
+      <div ref={trackRef} style={{
+        display: 'flex',
+        alignItems: 'center',
+        height: '100%',
+        width: 'fit-content',
+        paddingLeft: '5vw',
+        paddingRight: '15vw',
+        gap: '8vw'
+      }}>
+        <div style={{
+          width: '35vw',
+          paddingLeft: '5vw',
+          color: '#15173D', 
+          flexShrink: 0
+        }}>
+          <h3 className="playfair-display" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.8rem)', fontStyle: 'italic', margin: 0, opacity: 0.9 }}>
+            Bencana ini tidak berhenti di satu titik.
+          </h3>
+          <p className="lato-regular" style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.15rem)', maxWidth: '480px', opacity: 0.8, marginTop: '1.2rem', lineHeight: 1.6 }}>
+            Dari jembatan yang terputus hingga bangunan yang rata dengan tanah. Ini bukan sekadar angka, melainkan realitas hilangnya ruang hidup dalam sekejap mata.
+          </p>
+        </div>
+
+        {HUNTARA_IMAGES.map((item, idx) => (
+          <div key={idx} style={{
+            width: 'min(70vw, 800px)',
+            height: '65vh',
+            position: 'relative',
+            overflow: 'hidden',
+            borderRadius: '12px',
+            boxShadow: '0 30px 60px rgba(21, 23, 61, 0.4)'
+          }}>
+            <img 
+              className="huntara-img"
+              src={item.src} 
+              alt={item.caption}
+              style={{
+                width: '130%', // Make it wider for parallax
+                height: '100%',
+                objectFit: 'cover',
+                position: 'absolute',
+                top: 0
+              }}
+            />
+            {/* Caption overlay */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0, left: 0, right: 0,
+              background: 'linear-gradient(to top, rgba(21, 23, 61, 0.9), transparent)',
+              padding: '3rem 2rem 1.5rem',
+              color: '#E5D9B6',
+            }}>
+              <p className="lato-light" style={{ margin: 0, fontSize: 'clamp(0.95rem, 1.2vw, 1.15rem)', letterSpacing: '0.5px' }}>
+                {item.caption}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function SkalaDampakScene() {
   const rootRef = useRef(null);
   const stageRef = useRef(null);
@@ -512,12 +676,11 @@ function SkalaDampakScene() {
 
     // Keadaan akhir tanpa animasi (prefers-reduced-motion)
     const setFinalState = () => {
-      gsap.set(q('.s2-fill'), { scaleY: 1 });
-      gsap.set(q('.s2-body--solid'), { opacity: 1 });
-      gsap.set(q('.s2-body--ghost'), { opacity: 0 });
       gsap.set(q('.s2-baseline'), { scaleX: 1 });
       gsap.set(q('.s2-mask-inner'), { yPercent: 0 });
       gsap.set(q('.s2-pill, .s2-sub, .s2-sektor-head, .s2-sektor-label'), { opacity: 1, y: 0 });
+      gsap.set(q('.s2-card'), { opacity: 1, y: 0, filter: 'blur(0px)' });
+      gsap.set(q('.s2-card-icon, .s2-card-num, .s2-card-desc'), { opacity: 1, y: 0 });
       gsap.set(q('.s2-sektor-circle'), { strokeDasharray: circ, strokeDashoffset: 0 });
       gsap.set(q('.s2-sektor-fill'), { opacity: 0.92, scale: 1, transformOrigin: '50% 50%' });
       gsap.set(q('.s2-cakupan-eyebrow, .s2-cakupan-line, .s2-cakupan-gloss'), { opacity: 1, y: 0 });
@@ -544,26 +707,32 @@ function SkalaDampakScene() {
 
     // Koreografi kartu: baseline → fill naik → angka & teks menyusul (per kartu)
     const buildCards = (tl) => {
+      // Hilangkan baseline scaleX jika tidak diperlukan lagi di Bento Grid, 
+      // tetapi biarkan jika masih ada elemen visual pemisah.
       tl.fromTo(q('.s2-baseline'),
         { scaleX: 0, transformOrigin: '0% 50%' },
         { scaleX: 1, duration: 0.5, ease: 'power1.inOut' }, 0);
 
       STAT_CARDS.forEach((card, i) => {
-        const at = 0.22 + i * 0.52;
+        const at = 0.22 + i * 0.15; // Lebih rapat jarak stagger antar kartu
         const counter = { v: 0 };
         const numEl = () => numRefs.current[i];
 
-        tl.fromTo(q(`.s2-fill-${i}`),
-          { scaleY: 0, transformOrigin: '50% 100%' },
-          { scaleY: 1, duration: 0.6, ease: 'power1.inOut' }, at);
+        // 1. Entry animasi kartu: Fade In, Slide Up 20px, Blur to Focus
+        tl.fromTo(q(`.s2-card-${i}`),
+          { opacity: 0, y: 40, filter: 'blur(10px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' }, at);
 
-        tl.fromTo(q(`.s2-body-ghost-${i}`), { opacity: 1 }, { opacity: 0, duration: 0.28, ease: 'none' }, at + 0.3);
-        tl.fromTo(q(`.s2-body-solid-${i}`), { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'none' }, at + 0.34);
+        // 2. Konten dalam kartu muncul berurutan perlahan
+        tl.fromTo(q(`.s2-card-icon-${i}`), { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, at + 0.3);
+        tl.fromTo(q(`.s2-card-num-${i}`), { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, at + 0.45);
+        tl.fromTo(q(`.s2-card-desc-${i}`), { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, at + 0.6);
 
+        // Counter updates along with the number slide up
         tl.to(counter, {
-          v: card.value, duration: 0.75, ease: 'power1.out',
+          v: card.value, duration: 0.9, ease: 'power2.out',
           onUpdate: () => { const el = numEl(); if (el) el.textContent = fmtID(counter.v); },
-        }, at + 0.16);
+        }, at + 0.45);
       });
       return tl;
     };
@@ -592,7 +761,7 @@ function SkalaDampakScene() {
             { scaleY: 0, transformOrigin: '50% 0%' },
             {
               scaleY: 1, ease: 'none',
-              scrollTrigger: { trigger: q('.s2-bridge')[0], start: 'center 62%', end: 'bottom 30%', scrub: true },
+              scrollTrigger: { trigger: q('.s2-bridge')[0], start: 'center 62%', end: 'bottom 30%', scrub: 1.5 },
             });
 
           // ── Cakupan Pendataan: 48 kab/kota + 115.462 keluarga (counter sekali jalan) ──
@@ -606,13 +775,13 @@ function SkalaDampakScene() {
           const oKab = { v: 0 };
           const oKel = { v: 0 };
           cak.to(oKab, {
-            v: CAKUPAN.kab, duration: 0.9, ease: 'power1.out',
+            v: CAKUPAN.kab, duration: 0.4, ease: 'power1.out',
             onUpdate: () => { if (ckpRefs.current.kab) ckpRefs.current.kab.textContent = fmtID(oKab.v); },
-          }, 0.25);
+          }, 0.15);
           cak.to(oKel, {
-            v: CAKUPAN.keluarga, duration: 1.5, ease: 'power1.out',
+            v: CAKUPAN.keluarga, duration: 0.5, ease: 'power1.out',
             onUpdate: () => { if (ckpRefs.current.kel) ckpRefs.current.kel.textContent = fmtID(oKel.v); },
-          }, 0.5);
+          }, 0.3);
 
           buildIntro();
 
@@ -621,7 +790,7 @@ function SkalaDampakScene() {
             const tl = gsap.timeline({
               scrollTrigger: {
                 trigger: stage, start: 'top top', end: '+=170%',
-                pin: true, scrub: 0.65, anticipatePin: 1,
+                pin: true, scrub: 1.5, anticipatePin: 1,
               },
             });
             buildCards(tl);
@@ -634,19 +803,7 @@ function SkalaDampakScene() {
             buildCards(tl);
           }
 
-          // Sektor: lingkaran menggambar stroke → terisi oranye → label naik
-          gsap.set(q('.s2-sektor-circle'), { strokeDasharray: circ, strokeDashoffset: circ });
-          gsap.timeline({
-            scrollTrigger: { trigger: q('.s2-sektor')[0], start: 'top 78%', once: true },
-          })
-            .fromTo(q('.s2-sektor-head'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
-            .to(q('.s2-sektor-circle'), { strokeDashoffset: 0, duration: 0.9, stagger: 0.14, ease: 'power2.inOut' }, 0.15)
-            .fromTo(q('.s2-sektor-fill'),
-              { scale: 0.55, opacity: 0, transformOrigin: '50% 50%' },
-              { scale: 1, opacity: 0.92, duration: 0.55, stagger: 0.14, ease: 'power2.out' }, 0.6)
-            .fromTo(q('.s2-sektor-label'),
-              { opacity: 0, y: 8 },
-              { opacity: 1, y: 0, duration: 0.5, stagger: 0.14, ease: 'power2.out' }, 0.75);
+          // (Sektor GSAP animation removed as it is now part of Bento Box)
 
           // ── Peta Choropleth Mapbox: titik kab/kota menyala bertahap + tint provinsi ──
           // Reveal di-drive imperatif ke layer Mapbox (mulus, tanpa re-render React).
@@ -655,7 +812,7 @@ function SkalaDampakScene() {
             trigger: q('.s2-choro')[0],
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 0.6,
+            scrub: 1.5,
             onUpdate: (self) => { mapApiRef.current?.reveal(self.progress * 1.3); },
             onRefresh: (self) => { mapApiRef.current?.reveal(self.progress * 1.3); },
           });
@@ -770,15 +927,33 @@ function SkalaDampakScene() {
         }} />
       </section>
 
+      <HuntaraGallery />
+
+      {/* PATTERN SEPARATOR AFTER CAROUSEL */}
+      <div style={{
+        width: '100%',
+        height: '40px',
+        backgroundImage: `url(${patternImg})`,
+        backgroundRepeat: 'repeat-x',
+        backgroundSize: 'auto 100%',
+        backgroundColor: '#15173D',
+        position: 'relative',
+        zIndex: 12
+      }} />
+
       {/* ── Stage: pill + headline + 4 kartu (pinned di desktop) ── */}
       <section ref={stageRef} className="s2-stage" style={{
         height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden', position: 'relative', zIndex: 2, background: '#15173D',
         padding: '0 clamp(1.25rem, 5vw, 3rem)',
       }}>
+        {/* Ambient Background Blobs */}
+        <div className="s2-ambient-blob" style={{ background: '#EF8722', width: '700px', height: '700px', top: '-10%', left: '-10%' }} />
+        <div className="s2-ambient-blob" style={{ background: '#4FC3F7', width: '600px', height: '600px', bottom: '-5%', right: '-10%', opacity: 0.15 }} />
+
         <div style={{
-          width: '100%', maxWidth: 1080, display: 'flex', flexDirection: 'column',
-          alignItems: 'center', gap: 'clamp(1.6rem, 4vh, 2.6rem)',
+          width: '100%', maxWidth: 1320, display: 'flex', flexDirection: 'column',
+          alignItems: 'center', gap: 'clamp(1.6rem, 4vh, 2.6rem)', position: 'relative', zIndex: 5
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
@@ -804,103 +979,155 @@ function SkalaDampakScene() {
             </p>
           </div>
 
-          <div className="s2-cardswrap" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="s2-cards" style={{
-              display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-              gap: 'clamp(0.9rem, 2.4vw, 1.7rem)', width: '100%',
-            }}>
-              {STAT_CARDS.map((card, i) => (
-                <div key={card.key} className="s2-card" style={{ '--h': card.h / 100 }}>
-                  <div className={`s2-fill s2-fill-${i}`} />
-
-                  {/* Teks keadaan "kosong" (kartu masih kelabu) */}
-                  <div className={`s2-body s2-body--ghost s2-body-ghost-${i}`}>
-                    <span className="playfair-display" style={{
-                      fontStyle: 'italic', fontSize: 'clamp(0.82rem, 1.05vw, 0.98rem)',
-                      lineHeight: 1.3, color: 'rgba(245,245,245,0.38)',
-                    }}>
-                      {card.label}
-                    </span>
+      {/* ── Cards Grid Masonry ── */}
+      <div className="s2-cardswrap" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <div className="s2-cards" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridAutoRows: '220px',
+          gap: '24px',
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          boxSizing: 'border-box',
+        }}>
+          {/* Primary Data Cards */}
+          {STAT_CARDS.map((card, i) => {
+            const isHero = i === 0; // Warga Terdampak is first
+            // Determine grid span based on key
+            let spanStyle = {};
+            if (card.key === 'warga') spanStyle = { gridColumn: 'span 2', gridRow: 'span 2' };
+            else if (card.key === 'wilayah') spanStyle = { gridColumn: 'span 1', gridRow: 'span 2' };
+            else if (card.key === 'rumah') spanStyle = { gridColumn: 'span 1', gridRow: 'span 2' };
+            return (
+              <div
+                key={card.key}
+                className={`s2-card ${isHero ? 's2-card-hero' : ''}`}
+                style={{
+                  '--accent': card.color,
+                  ...spanStyle,
+                  background: "linear-gradient(to bottom, rgba(15,20,25,0.3) 0%, rgba(15,20,25,0.9) 100%), url('/src/assets/images/huntara-01.JPG') center/cover no-repeat",
+                  color: '#fff',
+                }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                }}
+              >
+                {/* Tag */}
+                <div className="s2-tag" style={{
+                  position: 'absolute', top: '24px', left: '24px', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700, color: '#E5D9B6', zIndex: 2,
+                }}>{card.label}</div>
+                {/* Maskot for Hero */}
+                {isHero && (
+                  <img src={maskotImg} alt="Maskot" style={{ position: 'absolute', bottom: 0, right: 0, width: '80px', height: 'auto', zIndex: 2 }} />
+                )}
+                {/* Content */}
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  height: '100%',
+                  padding: '24px',
+                  position: 'relative',
+                  zIndex: 2,
+                }}>
+                  {/* Number */}
+                  <div className="s2-number" style={{
+                    fontFamily: 'Playfair Display, serif',
+                    fontSize: isHero ? 'clamp(3rem,5vw,5rem)' : 'clamp(2rem,4vw,3rem)',
+                    fontStyle: 'italic',
+                    fontWeight: 700,
+                    lineHeight: 1,
+                  }}>
+                    {fmtID(card.value)} <span className="lato-light" style={{ fontSize: '0.6em', fontWeight: 400 }}>{card.unit}</span>
                   </div>
-
-                  {/* Teks keadaan terisi (beige, angka navy) */}
-                  <div className={`s2-body s2-body--solid s2-body-solid-${i}`} style={{ opacity: 0 }}>
-                    <span
-                      ref={(el) => { numRefs.current[i] = el; }}
-                      className="playfair-display"
-                      style={{
-                        fontStyle: 'italic', fontWeight: 600, lineHeight: 1,
-                        fontSize: 'clamp(1.7rem, 3.1vw, 2.7rem)', color: '#15173D',
-                      }}
-                    >
-                      0
-                    </span>
-                    <span className="playfair-display" style={{
-                      fontStyle: 'italic', fontSize: 'clamp(0.82rem, 1.05vw, 0.98rem)',
-                      lineHeight: 1.3, color: 'rgba(21,23,61,0.82)',
-                    }}>
-                      {card.label}
-                    </span>
-                    <span className="lato-light" style={{
-                      fontSize: '0.66rem', letterSpacing: '0.16em', textTransform: 'uppercase',
-                      color: 'rgba(21,23,61,0.55)',
-                    }}>
-                      {card.unit}
-                    </span>
+                  {/* Bottom */}
+                  <div>
+                    <div className="s2-title" style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '4px' }}>{card.label}</div>
+                    <div className="s2-pill" style={{
+                      background: 'rgba(255,255,255,0.9)',
+                      backdropFilter: 'blur(6px)',
+                      padding: '4px 8px',
+                      borderRadius: '12px',
+                      fontSize: '0.75rem',
+                      fontWeight: 600,
+                      color: '#333',
+                      display: 'inline-block',
+                      marginTop: '4px',
+                    }}>{card.microcopy}</div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            );
+          })}
+          {/* Sector Cards Integrated */}
+          {SEKTOR_DATA.map((s, idx) => {
+            const colors = ['#E74C3C', '#F1C40F', '#3498DB', '#2ECC71'];
+            const color = colors[idx % colors.length];
+            return (
+              <div
+                key={s.key}
+                className="s2-card"
+                style={{
+                  '--accent': color,
+                  background: "linear-gradient(to bottom, rgba(15,20,25,0.3) 0%, rgba(15,20,25,0.9) 100%), url('/src/assets/images/huntara-01.JPG') center/cover no-repeat",
+                  color: '#fff',
+                }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                }}
+              >
+                <div className="s2-tag" style={{
+                  position: 'absolute', top: '24px', left: '24px', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700, color: '#E5D9B6', zIndex: 2,
+                }}>{s.label}</div>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  height: '100%',
+                  padding: '24px',
+                  position: 'relative',
+                  zIndex: 2,
+                }}>
+                  <div className="s2-number" style={{
+                    fontFamily: 'Playfair Display, serif',
+                    fontSize: 'clamp(2rem,4vw,3rem)',
+                    fontStyle: 'italic',
+                    fontWeight: 700,
+                    lineHeight: 1,
+                  }}>
+                    {fmtID(s.value)} <span className="lato-light" style={{ fontSize: '0.6em', fontWeight: 400 }}>unit</span>
+                  </div>
+                  <div>
+                    <div className="s2-title" style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '4px' }}>{s.label}</div>
+                    <div className="s2-pill" style={{
+                      background: 'rgba(255,255,255,0.9)',
+                      backdropFilter: 'blur(6px)',
+                      padding: '4px 8px',
+                      borderRadius: '12px',
+                      fontSize: '0.75rem',
+                      fontWeight: 600,
+                      color: '#333',
+                      display: 'inline-block',
+                      marginTop: '4px',
+                    }}>Sector</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* End of Masonry Grid */}
             <div className="s2-baseline" style={{
               width: '100%', maxWidth: 1020, height: 1, marginTop: 0,
               background: 'rgba(229,217,182,0.22)', transform: 'scaleX(0)',
             }} />
           </div>
-        </div>
-      </section>
-
-      {/* ── Sektor Infrastruktur ── */}
-      <section className="s2-sektor" style={{
-        minHeight: '64vh', display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        padding: '14vh clamp(1.25rem, 5vw, 3rem) 11vh',
-      }}>
-        <div className="s2-sektor-head" style={{ textAlign: 'center', marginBottom: '3rem', opacity: 0 }}>
-          <h3 className="playfair-display" style={{
-            fontStyle: 'italic', fontWeight: 600, color: '#E5D9B6',
-            fontSize: 'clamp(1.3rem, 2.5vw, 2rem)', margin: 0,
-          }}>
-            Sektor Infrastruktur
-          </h3>
-          <p className="lato-light" style={{
-            margin: '0.6rem 0 0', fontSize: '0.92rem',
-            color: 'rgba(245,245,245,0.55)', fontStyle: 'italic',
-          }}>
-            Pendidikan, Kesehatan, Ekonomi, dan Sosial
-          </p>
-        </div>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(1.6rem, 5vw, 3.4rem)', justifyContent: 'center' }}>
-          {SEKTOR_DATA.map((s) => (
-            <div key={s.key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.9rem' }}>
-              <svg width="84" height="84" viewBox="0 0 84 84" aria-hidden>
-                <circle className="s2-sektor-fill" cx="42" cy="42" r="25" fill="#EF8722" opacity="0" />
-                <circle
-                  className="s2-sektor-circle"
-                  cx="42" cy="42" r={SEKTOR_R_STROKE}
-                  fill="none" stroke="#EF8722" strokeWidth="1.4" strokeLinecap="round"
-                  transform="rotate(-90 42 42)"
-                />
-              </svg>
-              <span className="s2-sektor-label lato-light" style={{
-                fontSize: '0.82rem', color: 'rgba(245,245,245,0.75)',
-                letterSpacing: '0.05em', opacity: 0,
-              }}>
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* ── Peta Sebaran Kerusakan (Mapbox satelit muted, FULL-SCREEN) ── */}
@@ -1206,11 +1433,6 @@ export default function BabakIntro() {
 
   const wrapperRef = useRef(null);
 
-  const s2WrapperRef = useRef(null);
-  const s2ImageRef = useRef(null);
-  const s2ImageInnerRef = useRef(null); // TAMBAHAN BARU
-  const s2TextRef = useRef(null);
-
   const openingRef = useRef(null);
   const closingRef = useRef(null);
   const loadingTextRef = useRef(null);
@@ -1288,7 +1510,7 @@ export default function BabakIntro() {
         trigger: wrapperRef.current,
         start: 'bottom 150%', // Mulai memudar di sisa scroll terakhir
         end: 'bottom 100%',   // Memudar sempurna tepat saat map selesai
-        scrub: true,
+        scrub: 1.5,
       }
     });
   }, []);
@@ -1305,51 +1527,6 @@ export default function BabakIntro() {
     };
     window.addEventListener('mousemove', moveCursor);
     return () => window.removeEventListener('mousemove', moveCursor);
-  }, []);
-
-
-  useEffect(() => {
-    const wrap = s2WrapperRef.current;
-    if (!wrap) return;
-
-    // KUNCI UTAMA: Gunakan gsap.context() untuk mencegah bug duplikasi di React 18
-    let ctx = gsap.context(() => {
-
-      const tl2 = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrap,
-          start: 'top top',
-          end: '+=150%',
-          scrub: true,
-          pin: true,
-          anticipatePin: 1
-        }
-      });
-
-      // 1. Foto muncul perlahan dari gelap (melanjutkan efek dissolve map)
-      tl2.fromTo(s2ImageRef.current,
-        { opacity: 0, filter: 'brightness(0.2)' },
-        { opacity: 1, filter: 'brightness(1)', duration: 0.5, ease: 'power1.inOut' }
-      );
-
-      // 2. Efek sinematik Parallax/Zoom pada foto (bersamaan dengan fade in)
-      tl2.fromTo(s2ImageInnerRef.current,
-        { scale: 1.3 },
-        { scale: 1, duration: 1, ease: 'power2.inOut' },
-        "<"
-      );
-
-      // 3. Teks narasi di kanan muncul dari bawah (aman karena pakai bottom anchor)
-      tl2.fromTo(s2TextRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        "-=0.5" // Muncul sedikit lebih awal sebelum zoom selesai
-      );
-
-    }, wrap);
-
-    // WAJIB: Membersihkan (revert) seluruh animasi saat komponen di-unmount
-    return () => ctx.revert();
   }, []);
 
   return (
@@ -1408,7 +1585,7 @@ export default function BabakIntro() {
 
       {/* Tambahkan zIndex: 10 di sini */}
       <div ref={wrapperRef} style={{ height: '400vh', position: 'relative', zIndex: 10 }}>
-        <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden', background: '#0a0a11' }}>
+        <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'transparent' }}>
 
           <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: phase === 'spin' ? 1 : 0, transition: 'opacity 1s ease' }}>
             <Particles particleCount={250} particleSpread={12} speed={0.08} particleBaseSize={80} alphaParticles={true} />
@@ -1472,15 +1649,15 @@ export default function BabakIntro() {
         </div>
       </div>
 
-      {/* SCENE TRANSISI: FOTO ZOOM IN & TEKS */}
-      <div ref={s2WrapperRef} style={{ height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', backgroundColor: '#0a0a0a' }}>
-        <div ref={s2ImageRef} style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-          <img ref={s2ImageInnerRef} src={imgPendataan} alt="Pendataan Lapangan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      {/* SCENE 2: FOTO & TEKS (Tanpa zoom/pin) */}
+      <div style={{ height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', backgroundColor: '#15173D', zIndex: 11 }}>
+        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+          <img src={imgPendataan} alt="Pendataan Lapangan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #15173D 0%, transparent 15%)' }} />
         </div>
 
-        {/* Teks diikat mutlak ke kanan bawah */}
-        <div ref={s2TextRef} style={{ position: 'absolute', bottom: '15%', right: '8%', width: '450px', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 10 }}>
+        <div style={{ position: 'absolute', bottom: '15%', right: '8%', width: '450px', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 10 }}>
           <h2 className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 3vw, 3.5rem)', color: '#E5D9B6', margin: 0, fontStyle: 'italic', lineHeight: 1.1 }}>
             Memetakan yang hilang
           </h2>
@@ -1489,6 +1666,18 @@ export default function BabakIntro() {
           </p>
         </div>
       </div>
+
+      {/* PATTERN SEPARATOR */}
+      <div style={{
+        width: '100%',
+        height: '40px',
+        backgroundImage: `url(${patternImg})`,
+        backgroundRepeat: 'repeat-x',
+        backgroundSize: 'auto 100%',
+        backgroundColor: '#15173D',
+        position: 'relative',
+        zIndex: 12
+      }} />
 
       <SkalaDampakScene />
     </>
