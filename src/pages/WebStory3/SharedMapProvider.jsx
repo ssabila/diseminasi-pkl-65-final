@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { createLeafletMapAdapter } from '../../utils/leafletMapAdapter';
 
 const MapContext = createContext();
 
@@ -14,17 +15,44 @@ export const SharedMapProvider = ({ children }) => {
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: 'mapbox://styles/gitraya1400/cmq40zowb006p01s36hi56mpa',
-      center: [99.8, 2.2], // Shared center point for all modules
-      zoom: 6.1,
-      pitch: 30,
-      bearing: -5,
-      interactive: false,
-      attributionControl: false
-    });
+    const token = import.meta.env.VITE_MAPBOX_TOKEN;
+    if (!token) {
+      const adapter = createLeafletMapAdapter(mapContainerRef.current, {
+        center: [99.8, 2.2],
+        zoom: 6
+      });
+      setMapInstance(adapter);
+      setMapReady(true);
+      return () => {
+        if (adapter) adapter.remove();
+      };
+    }
+
+    mapboxgl.accessToken = token;
+    let map;
+    try {
+      map = new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: 'mapbox://styles/gitraya1400/cmq40zowb006p01s36hi56mpa',
+        center: [99.8, 2.2], // Shared center point for all modules
+        zoom: 6.1,
+        pitch: 30,
+        bearing: -5,
+        interactive: false,
+        attributionControl: false
+      });
+    } catch (err) {
+      console.warn("SharedMapProvider fallback to Leaflet:", err);
+      const adapter = createLeafletMapAdapter(mapContainerRef.current, {
+        center: [99.8, 2.2],
+        zoom: 6
+      });
+      setMapInstance(adapter);
+      setMapReady(true);
+      return () => {
+        if (adapter) adapter.remove();
+      };
+    }
 
     map.on('load', () => {
       setMapInstance(map);
@@ -32,13 +60,13 @@ export const SharedMapProvider = ({ children }) => {
     });
 
     const resizeObserver = new ResizeObserver(() => {
-      map.resize();
+      if (map) map.resize();
     });
     resizeObserver.observe(mapContainerRef.current);
 
     return () => {
       resizeObserver.disconnect();
-      map.remove();
+      if (map) map.remove();
     };
   }, []);
 

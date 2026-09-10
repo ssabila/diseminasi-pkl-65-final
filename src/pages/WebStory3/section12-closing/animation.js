@@ -5,23 +5,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
  * Animasi Section 12 — Foto hover + quotes penutup
  * Dipanggil dari animations.js (orchestrator) di root WebStory3
  *
+ * Note: Animation is handled internally by the component's useGSAP hook.
+ * This function is kept for orchestrator compatibility.
+ *
  * @param {React.RefObject} containerRef - ref ke elemen section
  * @returns {gsap.core.Timeline}
  */
 export function animateClosing(containerRef) {
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: containerRef.current,
-      start: 'top top',
-      end: '+=100%',
-      scrub: true,
-      pin: true,
-    },
-  });
-
-  // TODO: tambahkan animasi GSAP di sini
-  // Contoh:
-  // tl.fromTo('.section-closing .judul', { opacity: 0, y: 60 }, { opacity: 1, y: 0 });
-
-  return tl;
+  // The Closing component handles its own scroll-driven animations
+  // via useGSAP. This stub exists for consistency with the orchestrator
+  // pattern used across other sections.
+  return gsap.timeline();
 }

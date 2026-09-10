@@ -122,12 +122,13 @@ export default function InsightNTL() {
         end: '+=200%',
         scrub: 0.8,
         pin: true,
+        refreshPriority: 60,
       },
     });
 
     // Content & title appear (map doesn't fade in here since it's global)
     tl.fromTo(s.querySelector('.insight-subtitle'),
-        { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.15 }, 0.05)
+      { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.15 }, 0.05)
       .fromTo(s.querySelector('.insight-title'),
         { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.2 }, 0.1)
       .fromTo(s.querySelector('.ntl-label-before'),
