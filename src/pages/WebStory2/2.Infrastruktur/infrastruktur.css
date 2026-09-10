@@ -1,0 +1,217 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   BABAK 2 — INFRASTRUKTUR
+
+   Dulu file ini adalah template string GLOBAL_CSS yang disuntikkan ke
+   document.head lewat createElement('style'). Di dalamnya ada blok :root
+   KEDUA yang menimpa --navy dan --gold untuk SELURUH aplikasi selama babak
+   ini ter-mount — termasuk Web Story 1 dan 3. Di situ pula --gold === --rust
+   dan --slate === --sage, sehingga empat token semantik runtuh jadi dua hex
+   dan setiap legend bar bertumpuk menampilkan warna yang salah.
+
+   Sekarang: stylesheet biasa yang dimuat Vite, seluruh selektor diprefiks
+   .ws2, dan semua warna mengambil token dari ws2-tokens.css.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Tipografi ─────────────────────────────────────────────────────────── */
+.ws2 .t-display {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  line-height: 1.16;
+}
+.ws2 .t-body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.ws2 .t-eyebrow {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ── Section ───────────────────────────────────────────────────────────── */
+.ws2 .infra-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.ws2 .infra-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.028;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  z-index: 1;
+}
+
+/* Enam varian gradient (navy-warm/cool/glow, cream-warm/cool/golden) diganti
+   dua kelas transparan. Warna latar kini SEPENUHNYA milik container .ws2 di
+   WebStory2.jsx supaya pergantian navy <-> krem bisa di-tween sebagai satu
+   nilai; kalau section punya latar sendiri, tween itu tidak pernah terlihat. */
+.ws2 .infra-bg-navy,
+.ws2 .infra-bg-cream {
+  background: transparent;
+}
+
+/* ── Peta ──────────────────────────────────────────────────────────────── */
+/* Di-scope ke .infra-section: sebelumnya aturan ini dan aturan serupa di
+   keluarga.jsx sama-sama global dengan !important, sehingga peta Babak 2 dan
+   Babak 3 saling menimpa latar satu sama lain. */
+.ws2 .infra-section .leaflet-container {
+  background: var(--ws2-bg-navy);
+  font-family: 'Lato', sans-serif;
+  /* WAJIB. Leaflet memberi z-index tinggi ke pane internalnya (overlay 400,
+     shadow 500, marker 600, tooltip 650, popup 700), sedangkan
+     .leaflet-container sendiri position:relative TANPA z-index — jadi ia tidak
+     membuat stacking context dan angka-angka itu ikut bersaing di level induk.
+     Akibatnya peta menimpa kartu provinsi yang sengaja dinaikkan menumpang
+     tepi bawahnya. isolation:isolate menyegel seluruh pane di dalam satu
+     konteks, sehingga peta kembali menjadi satu lapisan utuh. */
+  isolation: isolate;
+}
+.ws2 .infra-section .leaflet-control-attribution {
+  background: rgba(21, 23, 61, 0.7);
+  color: var(--ws2-text-4);
+  font-size: 0.58rem;
+  padding: 1px 6px;
+  border-radius: var(--ws2-r-sm) 0 0 0;
+}
+.ws2 .infra-section .leaflet-control-attribution a { color: var(--ws2-text-3); }
+
+/* Tile digelapkan sesuai notula ("gelapkan peta dengan efek muted"). */
+.ws2 .infra-section .leaflet-tile-pane {
+  filter: saturate(0.55) brightness(0.92);
+}
+
+.ws2 .priority-tooltip {
+  background: var(--ws2-scrim);
+  border: none;
+  color: var(--ws2-text-1);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.74rem;
+  border-radius: var(--ws2-r-sm);
+  font-weight: 300;
+  box-shadow: var(--ws2-shadow);
+}
+.ws2 .priority-tooltip::before { display: none; }
+
+/* ── Keyframes ─────────────────────────────────────────────────────────── */
+/* Denyut titik peta. Dulu memakai rgba(168,80,63) — terakota dari palet lama
+   yang tidak ada lagi di guideline. */
+@keyframes pulseNeon {
+  0%   { transform: scale(0.6); opacity: 1; box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.6); }
+  65%  { transform: scale(2.4); opacity: 0; box-shadow: 0 0 0 14px rgba(230, 126, 34, 0); }
+  100% { transform: scale(0.6); opacity: 0; }
+}
+@keyframes glowIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Grid: foto kiri, data kanan ───────────────────────────────────────── */
+/* Ini yang dikeluhkan sebagai "kiri gambar kanan ada kerusakan infrastruktur".
+   Sebelumnya grid-template-columns: 1fr di sini DAN 1fr lagi di media query,
+   tanpa aturan dua kolom di mana pun — jadi split kiri-kanan tidak pernah
+   benar-benar terjadi, selalu bertumpuk vertikal setinggi 100vh. */
+.ws2 .infra-grid-photo-chart {
+  display: grid;
+  grid-template-columns: minmax(340px, 42%) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(3rem, 6vh, 5rem) clamp(1.5rem, 4vw, 3.5rem);
+  position: relative;
+}
+
+/* Rasio 0.78 duduk di antara pkl2 (0,794) dan pkl3 (0,763) sehingga bar
+   samping < 2%. objectFit tetap 'contain' — memakai 'cover' akan memotong
+   caption yang terbakar di dalam foto. */
+.ws2 .infra-photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 0.78;
+  max-height: calc(100vh - 8rem);
+  margin: 0 auto;
+  border-radius: var(--ws2-r-md);
+  overflow: hidden;
+  background: var(--ws2-bg-navy);
+  border: 1px solid var(--ws2-line-1);
+}
+
+.ws2 .infra-sector-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+/* ── Scene 2: peta kiri (sticky), panel data kanan ─────────────────────── */
+
+/* ── Zona prioritas ────────────────────────────────────────────────────── */
+.ws2 .infra-zona-row { display: flex; flex-wrap: wrap; gap: 2rem; }
+.ws2 .infra-zona-map { flex: 1 1 460px; min-width: 0; }
+.ws2 .infra-zona-list {
+  flex: 1 1 360px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* ── Tabel lintas provinsi ─────────────────────────────────────────────── */
+.ws2 .infra-data-table {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--ws2-line-c1);
+}
+.ws2 .infra-data-table:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.ws2 .infra-data-header {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--ws2-line-c2);
+  margin-bottom: 1rem;
+}
+.ws2 .infra-data-metrics { display: contents; }
+.ws2 .infra-mobile-metric-label { display: none; }
+
+/* ── Breakpoint tunggal: 1023 / 767 ────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .ws2 .infra-grid-photo-chart {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 2.5rem;
+  }
+  .ws2 .infra-photo-frame { max-height: 70vh; }
+  .ws2 .infra-sector-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .ws2 .infra-data-table { grid-template-columns: 1fr; gap: 1.5rem; }
+  .ws2 .infra-data-header { display: none; }
+  .ws2 .infra-data-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .ws2 .infra-mobile-metric-label { display: block; }
+  .ws2 .infra-zona-map { position: static !important; height: 420px !important; }
+}
+
+@media (max-width: 767px) {
+  .ws2 .infra-prov-cards { grid-template-columns: 1fr !important; }
+  .ws2 .infra-sector-grid { grid-template-columns: 1fr; }
+}

@@ -11,7 +11,7 @@
  * - Color palette: #15173D, #E5D9B6, #628141, #E67E22, #FFFFFF only
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -28,7 +28,10 @@ import imgHuntara03 from '../../../assets/images/huntara-03.jpg';
 import imgHuntara14 from '../../../assets/images/huntara-14.jpg';
 import imgHuntara16 from '../../../assets/images/huntara-16.jpg';
 import patternImg from '../../../assets/Grand Design/Pattern.png';
+import starsImg from '../../../assets/images/background-star.webp';
 import maskotImg from '../../../assets/Grand Design/Gundatala_1.png';
+import { WS2 } from '../ws2-tokens';
+import BgSeam from '../shared/BgSeam';
 import sumateraGeo from '../../../assets/maps/sumatera_provinsi.json';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -95,11 +98,6 @@ const KAB_POINTS = {
   ],
 };
 
-const PROV_CONFIG = {
-  ACEH: { color: '#ffffffff', label: 'Aceh', lat: 4.5, lng: 96.5, zoom: 6.5, pitch: 30 },
-  SUMUT: { color: '#ffffffff', label: 'Sumatera Utara', lat: 2.5, lng: 98.8, zoom: 6.5, pitch: 30 },
-  SUMBAR: { color: '#ffffffff', label: 'Sumatera Barat', lat: -0.5, lng: 100.4, zoom: 6.5, pitch: 30 },
-};
 
 const PHASE_MAP = {
   spin: { lat: -10, lng: 150, zoom: 1.2, pitch: 0, label: null },
@@ -108,17 +106,24 @@ const PHASE_MAP = {
   aceh: { lat: 4.5, lng: 96.5, zoom: 6.8, pitch: 30, label: 'Aceh' },
   sumut: { lat: 2.5, lng: 98.8, zoom: 6.8, pitch: 30, label: 'Sumatera Utara' },
   sumbar: { lat: -0.5, lng: 100.4, zoom: 6.8, pitch: 30, label: 'Sumatera Barat' },
-  done: { lat: 2.0, lng: 98.5, zoom: 5.5, pitch: 20, label: null },
+  // Sama persis dengan sumbar: fase ini bersamaan dengan crossfade ke foto,
+  // jadi kamera harus DIAM. Dulu zoom 5.5 membuat peta menarik mundur tepat
+  // saat foto masuk — dua gerakan bertabrakan.
+  done: { lat: -0.5, lng: 100.4, zoom: 6.8, pitch: 30, label: null },
 };
 
+/* Basis 460vh (jangkauan scroll 360vh). Nilai lama disusun untuk 300vh, jadi
+   semuanya diskalakan 300/360 agar jarak scroll tiap fase tidak berubah —
+   tambahan 60vh dipakai crossfade ke foto (0,7917-0,9583) dan 15vh terakhir
+   untuk jeda. */
 const SCROLL_PHASES = [
-  { from: 0.00, to: 0.28, key: 'spin' },
-  { from: 0.28, to: 0.38, key: 'world' },
-  { from: 0.38, to: 0.50, key: 'sumatera' },
-  { from: 0.50, to: 0.65, key: 'aceh' },
-  { from: 0.65, to: 0.80, key: 'sumut' },
-  { from: 0.80, to: 0.95, key: 'sumbar' },
-  { from: 0.95, to: 1.00, key: 'done' },
+  { from: 0.0000, to: 0.2333, key: 'spin' },
+  { from: 0.2333, to: 0.3167, key: 'world' },
+  { from: 0.3167, to: 0.4167, key: 'sumatera' },
+  { from: 0.4167, to: 0.5417, key: 'aceh' },
+  { from: 0.5417, to: 0.6667, key: 'sumut' },
+  { from: 0.6667, to: 0.7917, key: 'sumbar' },
+  { from: 0.7917, to: 1.0000, key: 'done' },
 ];
 
 /* ─────────────────────────────────────────
@@ -175,7 +180,6 @@ const CHORO_TARGETS = {
   'SUMATERA BARAT': { label: 'Sumatera Barat', desa: _desaPerProv['Sumatera Barat'] || 80, color: '#628141', tingkat: 'Rusak Ringan' },
 };
 
-const KAB_GLOW = '#E67E22';
 
 const SUMATERA_FC = {
   type: 'FeatureCollection',
@@ -184,7 +188,7 @@ const SUMATERA_FC = {
     properties: {
       name: p.name,
       target: CHORO_TARGETS[p.name] ? 1 : 0,
-      color: CHORO_TARGETS[p.name]?.color || '#3a3f63',
+      color: CHORO_TARGETS[p.name]?.color || 'rgba(229,217,182,0.10)',
     },
     geometry: { type: 'MultiPolygon', coordinates: p.rings.map((r) => [r]) },
   })),
@@ -241,68 +245,6 @@ const HEADLINE_WORDS = [
 
 /* ─────────────────────────────────────────
    CulaDataPanel — Minimalist, no icons
-───────────────────────────────────────────*/
-function CulaDataPanel() {
-  const _ds = insights?.ringkasan_dataset || {};
-  const totalKK = _ds.total_rt_keluarga || 115462;
-  const totalDesa = _ds.total_desa_infra || 928;
-  const totalART = _ds.total_art_keluarga || 188902;
-
-  return (
-    <div style={{
-      width: '100%', maxWidth: '360px', 
-      background: 'rgba(21, 23, 61, 0.75)',
-      backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-      borderRadius: '16px', border: '1px solid rgba(229, 217, 182, 0.1)',
-      padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem',
-      boxShadow: '0 20px 40px rgba(0,0,0,0.5)', color: '#fff',
-      pointerEvents: 'auto'
-    }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div className="playfair-display" style={{ fontSize: '1.05rem', fontWeight: 600, color: '#E5D9B6', fontStyle: 'italic' }}>
-          R3P Data Engine
-        </div>
-        <div style={{ background: 'rgba(98,129,65,0.2)', color: '#628141', padding: '3px 8px', borderRadius: '20px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '1px' }}>
-          LIVE
-        </div>
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-        <span className="lato-light" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Cakupan Wilayah</span>
-        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>{totalDesa} Desa</div>
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.04)', padding: '0.7rem 1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-        <span className="lato-light" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)' }}>Keluarga Disurvei</span>
-        <div className="lato-bold" style={{ fontSize: '0.85rem', color: '#fff' }}>
-          {totalKK.toLocaleString('id-ID')}
-        </div>
-      </div>
-
-      <div style={{ borderLeft: '2px dashed rgba(229,217,182,0.2)', marginLeft: '1.2rem', paddingLeft: '1.2rem', paddingBottom: '0.2rem', paddingTop: '0.2rem' }}>
-        <div className="lato-light" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.2rem' }}>Total Jiwa Terdampak</div>
-        <div className="lato-bold" style={{ fontSize: '1rem', color: '#E5D9B6' }}>+ {totalART.toLocaleString('id-ID')} Jiwa</div>
-      </div>
-
-      <div className="lato-bold" style={{ fontSize: '0.65rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>
-        DATA POINTS COLLECTED
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-        {[
-          { label: 'Sosial/Ibadah', val: '1.106 Unit', color: '#E67E22' },
-          { label: 'Pendidikan', val: '785 Unit', color: '#628141' },
-          { label: 'Kesehatan', val: '607 Unit', color: '#E5D9B6' },
-        ].map((item, i) => (
-          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.05)' : 'none', paddingBottom: i < 2 ? '0.4rem' : 0 }}>
-            <span className="lato-light" style={{ color: 'rgba(255,255,255,0.7)' }}>{item.label}</span>
-            <span className="lato-bold" style={{ background: `${item.color}22`, color: item.color, padding: '2px 6px', borderRadius: '4px', fontSize: '0.65rem' }}>{item.val}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ─────────────────────────────────────────
    ChoroplethMapbox — full-screen satellite map for Scene 2
@@ -362,7 +304,7 @@ function ChoroplethMapbox({ apiRef }) {
           container: el,
           style: 'mapbox://styles/mapbox/dark-v11',
           bounds: CHORO_BOUNDS,
-          fitBoundsOptions: { padding: { top: 64, bottom: 64, left: 48, right: 480 } },
+          fitBoundsOptions: { padding: { top: 96, bottom: 96, left: 96, right: 96 } },
           scrollZoom: false, dragPan: false, dragRotate: false, boxZoom: false,
           doubleClickZoom: false, touchZoomRotate: false, touchPitch: false, keyboard: false,
           attributionControl: false,
@@ -390,21 +332,27 @@ function ChoroplethMapbox({ apiRef }) {
         map.addLayer({
           id: 'prov-line', type: 'line', source: 'sumatera',
           paint: {
-            'line-color': 'rgba(229,217,182,0.55)',
+            'line-color': 'var(--ws2-text-3)',
             'line-width': ['case', ['==', ['get', 'target'], 1], 1.4, 0.5],
           },
         });
-        // Minimalist solid dots — no glow effect
+        /* Radius tetap (5px inti, 10px halo) tidak menskala dengan zoom,
+           sehingga pada zoom bawaan peta tiga provinsi titiknya terbaca
+           seperti debu — paling parah di Sumbar yang titiknya paling rapat.
+           Notula meminta titik lokasi dipertegas dan diberi glow. */
         map.addLayer({
           id: 'kab-glow', type: 'circle', source: 'kab',
-          paint: { 'circle-radius': 10, 'circle-color': '#E67E22', 'circle-blur': 0, 'circle-opacity': 0 },
+          paint: {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 4, 9, 6, 16, 8, 24],
+            'circle-color': WS2.accent, 'circle-blur': 1, 'circle-opacity': 0,
+          },
         });
-        // Core dots — solid minimalist
         map.addLayer({
           id: 'kab-core', type: 'circle', source: 'kab',
           paint: {
-            'circle-radius': 5, 'circle-color': '#E67E22',
-            'circle-stroke-color': 'rgba(229,217,182,0.4)', 'circle-stroke-width': 1.5,
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 4, 3.5, 6, 6, 8, 9],
+            'circle-color': WS2.accent,
+            'circle-stroke-color': 'rgba(229,217,182,0.9)', 'circle-stroke-width': 2,
             'circle-opacity': 0, 'circle-stroke-opacity': 0,
           },
         });
@@ -416,8 +364,8 @@ function ChoroplethMapbox({ apiRef }) {
           el.style.opacity = '0';
           el.innerHTML = `
             <div style="position: relative; display: flex; align-items: center; pointer-events: none;">
-              <div style="width: 14px; height: 14px; background-color: ${t.color}; border-radius: 50%; box-shadow: 0 0 15px ${t.color}, inset 0 0 4px rgba(255,255,255,0.8); z-index: 2; border: 2px solid rgba(255,255,255,0.9);"></div>
-              <div style="width: 40px; height: 2px; background-color: rgba(255,255,255,0.7); z-index: 1; margin-left: -2px;"></div>
+              <div style="width: 10px; height: 10px; background-color: ${t.color}; border-radius: 50%; box-shadow: 0 0 10px ${t.color}; z-index: 2; border: 1.5px solid rgba(255,255,255,0.8);"></div>
+              <div style="width: 32px; height: 1px; background-color: var(--ws2-text-3); z-index: 1; margin-left: -1px;"></div>
               <div style="background: rgba(21, 23, 61, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(229,217,182,0.15); color: #fff; padding: 6px 14px; border-radius: 6px; font-family: 'Lato', sans-serif; font-size: 11px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 4px; white-space: nowrap;">
                 <div style="font-weight: 800; color: ${t.color}; display: flex; align-items: center; gap: 6px;">${t.label.toUpperCase()}</div>
                 <div style="font-weight: 300; font-size: 10px; color: rgba(255,255,255,0.7);">${t.tingkat} · ${Number(t.desa).toLocaleString('id-ID')} Desa</div>
@@ -450,7 +398,10 @@ function ChoroplethMapbox({ apiRef }) {
       io.disconnect();
       if (ro) ro.disconnect();
       if (labelsRef.current) { labelsRef.current.forEach((l) => l.marker?.remove()); labelsRef.current = null; }
-      if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
+      // Sama seperti globe: pakai variabel lokal, karena mapRef baru diisi
+      // setelah event load dan cleanup bisa berjalan lebih dulu.
+      if (map) map.remove();
+      mapRef.current = null;
       apiRef.current = null;
       st.ready = false;
     };
@@ -479,58 +430,83 @@ function HuntaraGallery() {
   const trackRef = useRef(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      const track = trackRef.current;
-      const totalWidth = track.scrollWidth;
-      const amountToScroll = totalWidth - window.innerWidth;
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
 
-      gsap.to(track, {
-        x: -amountToScroll,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: `+=${amountToScroll}`,
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1
-        }
+      // Di bawah 768px carousel horizontal tidak pernah terbaca: track jadi
+      // kolom vertikal biasa (lihat CSS di bawah) dan tidak ada pin sama sekali.
+      mm.add('(min-width: 768px)', () => {
+        const track = trackRef.current;
+        const amountToScroll = track.scrollWidth - window.innerWidth;
+        if (amountToScroll <= 0) return;
+
+        // Jeda di ujung: tanpa ini, foto terakhir baru saja berhenti bergerak
+        // ketika pin langsung dilepas — pergantian ke scene berikutnya terasa
+        // terpotong.
+        const hold = window.innerHeight * 0.35;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: `+=${amountToScroll + hold}`,
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+          },
+        });
+
+        const durasiGeser = amountToScroll / (amountToScroll + hold);
+        tl.to(track, { x: -amountToScroll, ease: 'none', duration: durasiGeser })
+          .to({}, { duration: 1 - durasiGeser });
+
+        /* Gambar selebar 130% container. Agar SELALU menutupi bingkai, tepi
+           kirinya harus tetap di antara -30% dan 0% lebar container. Dengan
+           left:-15%, geseran x (relatif lebar gambar sendiri = 130%) hanya
+           boleh +-11,5%. Versi lama memakai left:0 dan x +-15%, sehingga pada
+           ujung geseran muncul celah kosong 19,5% di sisi kiri. */
+        gsap.utils.toArray('.huntara-img').forEach((img) => {
+          gsap.fromTo(img,
+            { x: '-11.5%' },
+            {
+              x: '11.5%',
+              ease: 'none',
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top top',
+                end: `+=${amountToScroll + hold}`,
+                scrub: 1,
+              },
+            });
+        });
       });
 
-      gsap.utils.toArray('.huntara-img').forEach((img) => {
-        gsap.fromTo(img, 
-          { x: '-15%' },
-          {
-            x: '15%',
-            ease: "none",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top top",
-              end: `+=${amountToScroll}`,
-              scrub: 1
-            }
-          }
-        );
-      });
+      return () => mm.revert();
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
   return (
     <section ref={containerRef} style={{ 
-      height: '100vh', width: '100%', 
-      background: '#15173D',
+      height: '100vh', width: '100%',
+      background: 'transparent',
       overflow: 'hidden', position: 'relative', zIndex: 5
     }}>
+      {/* Grid titik halus: pola lingkaran kecil di atas latar krem. */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+        backgroundImage: 'radial-gradient(circle, rgba(21,23,61,0.16) 1.5px, transparent 1.5px)',
+        backgroundSize: '22px 22px',
+      }} />
       <div ref={trackRef} style={{
         display: 'flex', alignItems: 'center', height: '100%',
         width: 'fit-content', paddingLeft: '5vw', paddingRight: '15vw', gap: '8vw'
       }}>
-        <div style={{ width: '35vw', paddingLeft: '5vw', color: '#E5D9B6', flexShrink: 0 }}>
+        <div style={{ width: '35vw', paddingLeft: '5vw', color: 'var(--ws2-ink-1)', flexShrink: 0, position: 'relative', zIndex: 1 }}>
           <h3 className="playfair-display" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.8rem)', fontStyle: 'italic', margin: 0 }}>
             Bencana ini tidak berhenti di satu titik.
           </h3>
-          <p className="lato-light" style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.15rem)', maxWidth: '480px', opacity: 0.6, marginTop: '1.2rem', lineHeight: 1.6 }}>
+          <p className="lato-light" style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.15rem)', maxWidth: '480px', color: 'var(--ws2-ink-3)', marginTop: '1.2rem', lineHeight: 1.6 }}>
             Dari jembatan yang terputus hingga bangunan yang rata dengan tanah. Ini bukan sekadar angka, melainkan realitas hilangnya ruang hidup dalam sekejap mata.
           </p>
         </div>
@@ -542,7 +518,7 @@ function HuntaraGallery() {
             boxShadow: '0 30px 60px rgba(21, 23, 61, 0.4)'
           }}>
             <img className="huntara-img" src={item.src} alt={item.caption}
-              style={{ width: '130%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0 }}
+              style={{ width: '130%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: '-15%' }}
             />
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0,
@@ -589,6 +565,12 @@ function SkalaDampakScene() {
     };
 
     const buildCards = (tl) => {
+      // Maskot masuk sekali di awal, tanpa gerak berulang. Guideline melarang
+      // animasi playful/memantul untuk topik bencana.
+      tl.fromTo(q('.s2-maskot-col'),
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0);
+
       STAT_CARDS.forEach((card, i) => {
         const at = 0.15 + i * 0.18;
         const counter = { v: 0 };
@@ -646,9 +628,6 @@ function SkalaDampakScene() {
           buildIntro();
 
           // Animate gradient blobs — slow floating yoyo
-          gsap.to(q('.s2-blob-1'), { x: 60, y: 40, duration: 12, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-          gsap.to(q('.s2-blob-2'), { x: -50, y: -30, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-          gsap.to(q('.s2-blob-3'), { x: 30, y: -50, duration: 16, ease: 'sine.inOut', yoyo: true, repeat: -1 });
 
           if (isDesktop) {
             const tl = gsap.timeline({
@@ -670,13 +649,6 @@ function SkalaDampakScene() {
             onUpdate: (self) => { mapApiRef.current?.reveal(self.progress * 1.3); },
             onRefresh: (self) => { mapApiRef.current?.reveal(self.progress * 1.3); },
           });
-
-          gsap.timeline({
-            scrollTrigger: { trigger: q('.s2-choro')[0], start: 'top 72%', once: true },
-            defaults: { ease: 'power3.out' },
-          })
-            .fromTo(q('.s2c-head'), { opacity: 0, y: 18, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7 })
-            .fromTo(q('.s2c-legend'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 0.25);
 
         }
       );
@@ -703,7 +675,7 @@ function SkalaDampakScene() {
   const sektorColors = ['#E67E22', '#628141', '#E5D9B6', '#FFFFFF'];
 
   return (
-    <div ref={rootRef} style={{ background: '#15173D' }}>
+    <div ref={rootRef} style={{ background: 'transparent' }}>
 
       {/* Cakupan Pendataan */}
       <section className="s2-cakupan" style={{
@@ -713,7 +685,7 @@ function SkalaDampakScene() {
       }}>
         <span className="s2-cakupan-eyebrow lato-light" style={{
           fontSize: '0.7rem', letterSpacing: '0.34em', textTransform: 'uppercase',
-          color: 'rgba(229,217,182,0.5)', marginBottom: '1.8rem',
+          color: 'var(--ws2-text-4)', marginBottom: '1.8rem',
         }}>
           Dari Catatan Lapangan
         </span>
@@ -747,34 +719,34 @@ function SkalaDampakScene() {
       </section>
 
       {/* ── Carousel: "Bencana ini tidak berhenti di satu titik" ── */}
+      <BgSeam from="navy" to="cream" />
       <HuntaraGallery />
+      <BgSeam from="cream" to="navy" />
 
       {/* Stage: Bento Grid — Asymmetric layout */}
       <section ref={stageRef} className="s2-stage" style={{
         height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        overflow: 'hidden', position: 'relative', zIndex: 2, background: '#15173D',
+        overflow: 'hidden', position: 'relative', zIndex: 2, background: 'transparent',
         padding: '0 clamp(1.25rem, 5vw, 3rem)',
       }}>
-        {/* Animated Gradient Blobs — Reactbits-style living background */}
-        <div className="s2-blob s2-blob-1" style={{
-          position: 'absolute', width: '700px', height: '700px',
-          borderRadius: '50%', background: '#E67E22', opacity: 0.12,
-          filter: 'blur(140px)', top: '-15%', left: '-10%',
-          pointerEvents: 'none', zIndex: 0,
+        {/* Langit berbintang. Dua lapis: aset foto bintang yang sangat redup,
+            plus satu lapis titik CSS yang berkedip pelan. Kedipannya sengaja
+            lambat (7 detik) supaya terbaca sebagai langit malam, bukan animasi
+            playful — guideline melarang gerak yang ceria. */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+          backgroundImage: `url(${starsImg})`,
+          backgroundSize: 'cover', backgroundPosition: 'center',
+          opacity: 0.28, mixBlendMode: 'screen',
         }} />
-        <div className="s2-blob s2-blob-2" style={{
-          position: 'absolute', width: '600px', height: '600px',
-          borderRadius: '50%', background: '#628141', opacity: 0.10,
-          filter: 'blur(140px)', bottom: '-10%', right: '-12%',
-          pointerEvents: 'none', zIndex: 0,
+        <div aria-hidden="true" className="s2-stars-twinkle" style={{
+          position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
         }} />
-        <div className="s2-blob s2-blob-3" style={{
-          position: 'absolute', width: '400px', height: '400px',
-          borderRadius: '50%', background: '#E5D9B6', opacity: 0.06,
-          filter: 'blur(120px)', top: '40%', left: '50%',
-          transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none', zIndex: 0,
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 50% 45%, transparent 25%, rgba(21,23,61,0.75) 85%)',
         }} />
+
         <div style={{
           width: '100%', maxWidth: 1320, display: 'flex', flexDirection: 'column',
           alignItems: 'center', gap: 'clamp(1.6rem, 4vh, 2.6rem)', position: 'relative', zIndex: 5
@@ -797,50 +769,48 @@ function SkalaDampakScene() {
 
           </div>
 
-          {/* Bento Grid — 2-column asymmetric per reference */}
-          <div className="s2-cardswrap" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          {/* Maskot di kolom kiri, bento di kolom kanan. Kelas .s2-cardswrap
+              dipertahankan karena dipakai sebagai trigger animasi versi mobile. */}
+          <div className="s2-cardswrap s2-stage-body">
+            <div className="s2-maskot-col">
+              <img className="s2-maskot" src={maskotImg} alt="" aria-hidden="true" />
+              <div className="s2-maskot-shadow" aria-hidden="true" />
+            </div>
             <div className="s2-bento-grid">
               {/* Card 1 (Left) — Hero: Warga Terdampak — spans 2 rows */}
               <div className={`s2-bento-card s2-card-0 s2-bento-hero`} style={{
                 '--accent': STAT_CARDS[1].color,
                 gridColumn: '1 / 2', gridRow: '1 / 3',
-                position: 'relative', minHeight: '380px',
               }}>
                 <div className="s2-bento-content">
-                  <span className="lato-bold" style={{ fontSize: '0.95rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[1].label}</span>
+                  <span className="lato-bold" style={{ fontSize: '0.95rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[1].label}</span>
                   <div ref={el => numRefs.current[1] = el} className="playfair-display" style={{ fontSize: 'clamp(3.5rem, 7vw, 5.5rem)', fontStyle: 'italic', fontWeight: 700, color: '#E5D9B6', lineHeight: 1, margin: '0.3rem 0' }}>0</div>
-                  <span className="lato-light" style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)' }}>{STAT_CARDS[1].unit}</span>
-                  <p className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.45)', marginTop: '0.8rem', lineHeight: 1.6, maxWidth: 280 }}>{STAT_CARDS[1].microcopy}</p>
+                  <span className="lato-light" style={{ fontSize: '1rem', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[1].unit}</span>
+                  <p className="lato-light" style={{ fontSize: '0.95rem', color: 'var(--ws2-text-3)', marginTop: '0.8rem', lineHeight: 1.6, maxWidth: 320 }}>{STAT_CARDS[1].microcopy}</p>
                 </div>
-                {/* Maskot peeking — large */}
-                <img src={maskotImg} alt="" style={{
-                  position: 'absolute', bottom: -10, right: 20,
-                  height: '200px', width: 'auto',
-                  opacity: 0.9, zIndex: 2, pointerEvents: 'none',
-                }} />
               </div>
 
               {/* Card 2 (Right Top Left) — Wilayah */}
               <div className={`s2-bento-card s2-card-1`} style={{ '--accent': STAT_CARDS[0].color, gridColumn: '2 / 3', gridRow: '1 / 2' }}>
                 <div className="s2-bento-content">
-                  <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[0].label}</span>
+                  <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[0].label}</span>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', margin: '0.3rem 0' }}>
                     <div ref={el => numRefs.current[0] = el} className="playfair-display" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', fontStyle: 'italic', fontWeight: 700, color: '#E67E22', lineHeight: 1 }}>0</div>
-                    <span className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)' }}>{STAT_CARDS[0].unit}</span>
+                    <span className="lato-light" style={{ fontSize: '0.95rem', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[0].unit}</span>
                   </div>
-                  <p className="lato-light" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{STAT_CARDS[0].microcopy}</p>
+                  <p className="lato-light" style={{ fontSize: '0.9rem', color: 'var(--ws2-text-4)', lineHeight: 1.5 }}>{STAT_CARDS[0].microcopy}</p>
                 </div>
               </div>
 
               {/* Card 3 (Right Top Right) — Rumah */}
               <div className={`s2-bento-card s2-card-2`} style={{ '--accent': STAT_CARDS[2].color, gridColumn: '3 / 4', gridRow: '1 / 2' }}>
                 <div className="s2-bento-content">
-                  <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[2].label}</span>
+                  <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[2].label}</span>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', margin: '0.3rem 0' }}>
                     <div ref={el => numRefs.current[2] = el} className="playfair-display" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', fontStyle: 'italic', fontWeight: 700, color: '#FFFFFF', lineHeight: 1 }}>0</div>
-                    <span className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)' }}>{STAT_CARDS[2].unit}</span>
+                    <span className="lato-light" style={{ fontSize: '0.95rem', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[2].unit}</span>
                   </div>
-                  <p className="lato-light" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{STAT_CARDS[2].microcopy}</p>
+                  <p className="lato-light" style={{ fontSize: '0.9rem', color: 'var(--ws2-text-4)', lineHeight: 1.5 }}>{STAT_CARDS[2].microcopy}</p>
                 </div>
               </div>
 
@@ -848,19 +818,19 @@ function SkalaDampakScene() {
               <div className={`s2-bento-card s2-card-3`} style={{ '--accent': STAT_CARDS[3].color, gridColumn: '2 / 4', gridRow: '2 / 3' }}>
                 <div className="s2-bento-content" style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
                   <div>
-                    <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(229,217,182,0.55)' }}>{STAT_CARDS[3].label}</span>
+                    <span className="lato-bold" style={{ fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[3].label}</span>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', margin: '0.3rem 0' }}>
                       <div ref={el => numRefs.current[3] = el} className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontStyle: 'italic', fontWeight: 700, color: '#628141', lineHeight: 1 }}>0</div>
-                      <span className="lato-light" style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)' }}>{STAT_CARDS[3].unit}</span>
+                      <span className="lato-light" style={{ fontSize: '0.95rem', color: 'var(--ws2-text-3)' }}>{STAT_CARDS[3].unit}</span>
                     </div>
-                    <p className="lato-light" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{STAT_CARDS[3].microcopy}</p>
+                    <p className="lato-light" style={{ fontSize: '0.9rem', color: 'var(--ws2-text-4)', lineHeight: 1.5 }}>{STAT_CARDS[3].microcopy}</p>
                   </div>
                   {/* Sector breakdown — colorful typography */}
                   <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
                     {SEKTOR_DATA.map((s, idx) => (
                       <div key={s.key} className={`s2-sektor-${idx}`} style={{ textAlign: 'center' }}>
                         <div className="playfair-display" style={{ fontSize: '1.4rem', fontStyle: 'italic', fontWeight: 700, color: sektorColors[idx], lineHeight: 1 }}>{fmtID(s.value)}</div>
-                        <div className="lato-light" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)', marginTop: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.label}</div>
+                        <div className="lato-light" style={{ fontSize: '0.7rem', color: 'var(--ws2-text-3)', marginTop: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.label}</div>
                       </div>
                     ))}
                   </div>
@@ -871,17 +841,11 @@ function SkalaDampakScene() {
         </div>
       </section>
 
-      {/* SVG Wave Divider — organic transition from Navy to Map */}
-      <div style={{ position: 'relative', zIndex: 3, background: '#15173D', marginBottom: '-2px' }}>
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '80px' }}>
-          <path d="M0,0 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,0 Z" fill="#15173D" />
-        </svg>
-      </div>
       {/* Pattern border */}
       <div style={{
         width: '100%', height: '40px',
         backgroundImage: `url(${patternImg})`, backgroundRepeat: 'repeat-x',
-        backgroundSize: 'auto 100%', backgroundColor: '#15173D',
+        backgroundSize: 'auto 100%', backgroundColor: 'transparent', opacity: 0.55,
         position: 'relative', zIndex: 4,
       }} />
 
@@ -950,9 +914,15 @@ function MapboxGlobe({ phase }) {
     }
 
     return () => {
-      if (ro && mapContainer.current) ro.disconnect();
+      if (ro) ro.disconnect();
       if (spinRef.current) cancelAnimationFrame(spinRef.current);
-      if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
+      // WAJIB memakai variabel lokal `map`, bukan mapRef.current: ref itu baru
+      // diisi di dalam map.on('load'), sehingga saat StrictMode melakukan
+      // mount-unmount-mount, cleanup pertama masih melihat ref kosong dan peta
+      // pertama tidak pernah dibuang. Akibatnya dua instance Mapbox menumpuk di
+      // container yang sama ("map container element should be empty").
+      if (map) map.remove();
+      mapRef.current = null;
       setMapReady(false);
     };
   }, []);
@@ -986,29 +956,20 @@ function MapboxGlobe({ phase }) {
 
     map.stop();
 
-    // For province-to-province transitions, use easeTo for smooth linear panning
-    const isProvince = ['aceh', 'sumut', 'sumbar'].includes(phase);
-    
-    if (isProvince) {
-      map.easeTo({
-        center: [cfg.lng, cfg.lat],
-        zoom: cfg.zoom,
-        pitch: cfg.pitch ?? 0,
-        bearing: 0,
-        duration: 2200,
-        easing: (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2, // easeInOutQuad
-        essential: true,
-      });
-    } else {
-      map.flyTo({
-        center: [cfg.lng, cfg.lat],
-        zoom: cfg.zoom,
-        pitch: cfg.pitch ?? 0,
-        bearing: 0,
-        duration: 2500,
-        essential: true,
-      });
-    }
+    // easeTo untuk SEMUA fase. flyTo memakai kurva Van Wijk: kamera menjauh
+    // dulu lalu mendekat, sehingga sumatera -> aceh dan sumbar -> done
+    // terbaca "mundur dulu baru maju". easeTo menginterpolasi center dan zoom
+    // secara lurus. Antar provinsi zoom dan pitch sudah identik, jadi
+    // gerakannya murni menggeser.
+    map.easeTo({
+      center: [cfg.lng, cfg.lat],
+      zoom: cfg.zoom,
+      pitch: cfg.pitch ?? 0,
+      bearing: 0,
+      duration: phase === 'world' ? 2600 : 2200,
+      easing: (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2), // easeInOutQuad
+      essential: true,
+    });
   }, [phase, mapReady]);
 
   const markerRef = useRef(null);
@@ -1114,6 +1075,8 @@ export default function BabakIntro() {
   const loadingTextRef = useRef(null);
   const cursorRef = useRef(null);
   const photoRef = useRef(null);
+  const mapStackRef = useRef(null);
+  const photoTextRef = useRef(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -1161,23 +1124,48 @@ export default function BabakIntro() {
       onComplete: () => { if (openingRef.current) openingRef.current.style.display = 'none'; }
     });
 
-    // CROSSFADE: Map blurs + fades, photo fades in simultaneously
-    gsap.to(wrapperRef.current, {
-      opacity: 0,
-      filter: 'blur(20px)',
+  }, []);
+
+  /* Crossfade peta -> foto dalam SATU timeline yang dikunci ke progres
+     wrapper. Durasi total timeline = 1, jadi posisi tween = progres scroll:
+     0,7917 adalah akhir fase Sumbar, crossfade berlangsung 60vh, lalu 15vh
+     terakhir dipakai menahan foto sebelum keluar dari sticky.
+
+     Peta tidak diberi blur: itu mahal untuk kanvas WebGL dan membuat frame
+     drop tepat di momen yang seharusnya paling halus. Cukup diredupkan dan
+     didorong sedikit ke belakang. */
+  useEffect(() => {
+    if (!wrapperRef.current || !photoRef.current || !mapStackRef.current) return undefined;
+
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperRef.current,
-        start: 'bottom 150%',
-        end: 'bottom 100%',
-        scrub: 1.5,
-      }
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.8,
+      },
     });
+
+    tl.fromTo(photoRef.current,
+      { opacity: 0, scale: 1.06 },
+      { opacity: 1, scale: 1, ease: 'none', duration: 0.1667 }, 0.7917)
+      .to(mapStackRef.current,
+        { opacity: 0.55, scale: 1.04, ease: 'none', duration: 0.1667 }, 0.7917)
+      .fromTo(photoTextRef.current,
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, ease: 'none', duration: 0.06 }, 0.87)
+      .to({}, { duration: 0.0417 }, 0.9583);
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
   }, []);
 
   useEffect(() => {
     if (cursorRef.current) gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
     const moveCursor = (e) => {
-      if (cursorRef.current && scrollProgressRef.current < 0.95) {
+      if (cursorRef.current && scrollProgressRef.current < 0.7917) {
         gsap.to(cursorRef.current, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "none" });
       }
     };
@@ -1185,38 +1173,21 @@ export default function BabakIntro() {
     return () => window.removeEventListener('mousemove', moveCursor);
   }, []);
 
-  // Photo crossfade entrance animation
-  useEffect(() => {
-    if (!photoRef.current) return;
-    gsap.fromTo(photoRef.current,
-      { scale: 1.15, opacity: 0, filter: 'blur(10px)' },
-      {
-        scale: 1, opacity: 1, filter: 'blur(0px)',
-        scrollTrigger: {
-          trigger: photoRef.current,
-          start: 'top 80%',
-          end: 'top 30%',
-          scrub: 1.5,
-        }
-      }
-    );
-  }, []);
-
   return (
     <>
       {/* Custom Cursor */}
       <div ref={cursorRef} style={{
         position: 'fixed', top: 0, left: 0, zIndex: 99999, pointerEvents: 'none',
-        width: '70px', height: '70px', borderRadius: '50%', border: '1px solid rgba(229,217,182,0.4)',
+        width: '70px', height: '70px', borderRadius: '50%', border: '1px solid var(--ws2-text-4)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        opacity: scrollProgress < 0.95 ? 1 : 0, transition: 'opacity 0.3s'
+        opacity: scrollProgress < 0.7917 ? 1 : 0, transition: 'opacity 0.3s'
       }}>
         <span className="lato-bold" style={{ fontSize: '11px', color: '#fff', letterSpacing: '2px', textTransform: 'uppercase' }}>Scroll</span>
       </div>
 
       {/* Opening Overlay */}
       <div ref={openingRef} style={{
-        position: 'fixed', inset: 0, zIndex: 99999, background: '#0a0a0a',
+        position: 'fixed', inset: 0, zIndex: 99999, background: '#15173D',
         display: 'flex', alignItems: 'flex-end', padding: '40px'
       }}>
         <div ref={loadingTextRef} style={{ fontFamily: 'monospace', color: '#E5D9B6', fontSize: '14px', letterSpacing: '4px', opacity: 1 }}>
@@ -1227,9 +1198,9 @@ export default function BabakIntro() {
       {/* Tactical UI Overlay */}
       <div style={{
         position: 'fixed', inset: 0, zIndex: 9998, pointerEvents: 'none',
-        fontFamily: 'var(--font-content)', color: 'rgba(229,217,182,0.7)', fontSize: '11px',
+        fontFamily: 'var(--font-content)', color: 'var(--ws2-text-2)', fontSize: '11px',
         letterSpacing: '2px', textTransform: 'uppercase',
-        opacity: scrollProgress < 0.95 ? 1 : 0, transition: 'opacity 0.5s ease'
+        opacity: scrollProgress < 0.7917 ? 1 : 0, transition: 'opacity 0.5s ease'
       }}>
         <div style={{ position: 'absolute', top: '35px', left: '40px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span className="lato-bold" style={{ fontWeight: 600, color: '#E5D9B6' }}>HASIL PENDATAAN R3P</span>
@@ -1238,37 +1209,65 @@ export default function BabakIntro() {
           <span className="lato-light" style={{ fontWeight: 500 }}>BERANDA</span>
         </Link>
         <div style={{ position: 'absolute', top: '50%', right: '40px', transform: 'translateY(-50%)', height: '200px', width: '1px', background: 'rgba(229,217,182,0.15)' }}>
-          <div style={{ width: '100%', background: '#E67E22', height: `${Math.min((scrollProgress / 0.85) * 100, 100)}%`, transition: 'height 0.1s linear' }} />
+          <div style={{ width: '100%', background: '#E67E22', height: `${Math.min((scrollProgress / 0.7083) * 100, 100)}%`, transition: 'height 0.1s linear' }} />
         </div>
       </div>
 
-      {/* Sticky Map Wrapper */}
-      <div ref={wrapperRef} style={{ height: '400vh', position: 'relative', zIndex: 10 }}>
+      {/* Sticky Map Wrapper — 460vh: 360vh perjalanan kamera + 60vh crossfade
+          ke foto + 15vh jeda. Foto sekarang jadi LAPISAN di dalam sticky yang
+          sama, bukan section terpisah di bawahnya. Dulu peta memudar lewat
+          trigger sendiri (`start:'bottom 150%'`, artinya mulai pudar saat masih
+          fase Sumbar) sementara foto masuk lewat trigger lain — dua gerakan
+          yang tidak pernah bertemu, dan itulah "transisi peta ke foto patah". */}
+      <div ref={wrapperRef} style={{ height: '460vh', position: 'relative', zIndex: 10 }}>
         <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden', backgroundColor: 'transparent' }}>
 
-          <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: phase === 'spin' ? 1 : 0, transition: 'opacity 1s ease' }}>
-            <Particles particleCount={250} particleSpread={12} speed={0.08} particleBaseSize={80} alphaParticles={true} />
+          <div ref={mapStackRef} style={{ position: 'absolute', inset: 0 }}>
+            <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: phase === 'spin' ? 1 : 0, transition: 'opacity 1s ease' }}>
+              <Particles particleCount={250} particleSpread={12} speed={0.08} particleBaseSize={80} alphaParticles={true} />
+            </div>
+
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, filter: 'sepia(40%) saturate(60%) contrast(130%) brightness(85%) hue-rotate(-10deg)' }}>
+              <MapboxGlobe phase={phase} />
+            </div>
+
+            {/* Subtle grid overlay */}
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none', mixBlendMode: 'overlay', opacity: 0.4,
+              backgroundImage: 'linear-gradient(var(--ws2-surface-1) 1px, transparent 1px), linear-gradient(90deg, var(--ws2-surface-1) 1px, transparent 1px)',
+              backgroundSize: '40px 40px'
+            }} />
+
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 4, background: 'rgba(0,0,0,0.65)',
+              pointerEvents: 'none', opacity: scrollProgress > 0.0167 && scrollProgress < 0.2917 ? 1 : 0,
+              transition: 'opacity 0.8s ease'
+            }} />
+
+            <div style={{ position: 'absolute', inset: 0, zIndex: 5, background: 'radial-gradient(ellipse at center, transparent 30%, rgba(21, 23, 61, 0.8) 100%)', pointerEvents: 'none' }} />
+            <PhaseLabel phase={phase} />
           </div>
 
-          <div style={{ position: 'absolute', inset: 0, zIndex: 1, filter: 'sepia(40%) saturate(60%) contrast(130%) brightness(85%) hue-rotate(-10deg)' }}>
-            <MapboxGlobe phase={phase} />
+          {/* FOTO — lapisan di atas peta dalam sticky yang sama */}
+          <div ref={photoRef} style={{
+            position: 'absolute', inset: 0, zIndex: 6, opacity: 0,
+            overflow: 'hidden', backgroundColor: 'var(--ws2-bg-navy)',
+            willChange: 'opacity, transform',
+          }}>
+            <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+              <img src={imgPendataan} alt="Pendataan Lapangan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(21,23,61,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #15173D 0%, transparent 15%)' }} />
+            </div>
+            <div ref={photoTextRef} style={{ position: 'absolute', bottom: '15%', right: '8%', width: 'min(450px, 80vw)', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 10 }}>
+              <h2 className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 3vw, 3.5rem)', color: 'var(--ws2-text-1)', margin: 0, fontStyle: 'italic', lineHeight: 1.1 }}>
+                Memetakan yang hilang
+              </h2>
+              <p className="lato-light" style={{ fontSize: '1.05rem', color: 'var(--ws2-text-2)', lineHeight: 1.6, margin: 0 }}>
+                Sebelum bicara pemulihan, kami harus tahu seberapa luas yang hancur. Maka kami turun ke lapangan.
+              </p>
+            </div>
           </div>
-
-          {/* Subtle grid overlay */}
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none', mixBlendMode: 'overlay', opacity: 0.4,
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }} />
-
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 4, background: 'rgba(0,0,0,0.65)',
-            pointerEvents: 'none', opacity: scrollProgress > 0.02 && scrollProgress < 0.35 ? 1 : 0,
-            transition: 'opacity 0.8s ease'
-          }} />
-
-          <div style={{ position: 'absolute', inset: 0, zIndex: 5, background: 'radial-gradient(ellipse at center, transparent 30%, rgba(21, 23, 61, 0.8) 100%)', pointerEvents: 'none' }} />
-          <PhaseLabel phase={phase} />
         </div>
 
         {/* Floating narrative text over sticky map */}
@@ -1288,28 +1287,12 @@ export default function BabakIntro() {
           <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={2} blurStrength={8} wordAnimationEnd="center center" textClassName="title-text-2">
             Dalam sekejap, realitas ribuan nyawa berganti rupa.
           </ScrollReveal>
-          <p className="lato-light" style={{ fontSize: '30px', fontWeight: 300, textAlign: 'center', color: '#E5D9B6', maxWidth: '800px', lineHeight: 'normal', textShadow: '0 2px 10px rgba(0,0,0,0.5)', margin: '0 auto' }}>
+          <p className="lato-light" style={{ fontSize: '30px', fontWeight: 300, textAlign: 'center', color: 'var(--ws2-text-1)', maxWidth: '800px', lineHeight: 'normal', textShadow: '0 2px 10px rgba(0,0,0,0.5)', margin: '0 auto' }}>
             Ini adalah rekam jejak dari mereka yang bertahan di balik puing-puing kehancuran. Mengungkap fakta di lapangan untuk sebuah upaya pemulihan yang tepat sasaran.
           </p>
         </div>
       </div>
 
-      {/* FOTO CROSSFADE — smooth transition from map */}
-      <div ref={photoRef} style={{ height: '100vh', width: '100%', position: 'relative', overflow: 'hidden', backgroundColor: '#15173D', zIndex: 11 }}>
-        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-          <img src={imgPendataan} alt="Pendataan Lapangan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(21,23,61,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #15173D 0%, transparent 15%)' }} />
-        </div>
-        <div style={{ position: 'absolute', bottom: '15%', right: '8%', width: '450px', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 10 }}>
-          <h2 className="playfair-display" style={{ fontSize: 'clamp(2.5rem, 3vw, 3.5rem)', color: '#E5D9B6', margin: 0, fontStyle: 'italic', lineHeight: 1.1 }}>
-            Memetakan yang hilang
-          </h2>
-          <p className="lato-light" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, margin: 0 }}>
-            Sebelum bicara pemulihan, kami harus tahu seberapa luas yang hancur. Maka kami turun ke lapangan.
-          </p>
-        </div>
-      </div>
 
       <div style={{ width: '100%', height: '40px', backgroundImage: `url(${patternImg})`, backgroundRepeat: 'repeat-x', backgroundSize: 'auto 100%', backgroundColor: '#15173D', position: 'relative', zIndex: 12 }} />
 

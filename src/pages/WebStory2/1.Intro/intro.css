@@ -25,24 +25,6 @@
   text-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-.stars-bg {
-  background-image: 
-    radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 50px 160px, #ddd, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 200px 200px;
-  animation: twinkle 4s infinite alternate;
-}
-@keyframes twinkle {
-  0% { opacity: 0.6; }
-  100% { opacity: 1; }
-}
-
-@keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 @keyframes fadeSlideUp { 
   from { opacity: 0; transform: translateY(20px); } 
   to { opacity: 1; transform: translateY(0); } 
@@ -55,73 +37,105 @@
 }
 .inversa-pulse {
   position: absolute;
-  top: -90px;
-  left: -90px;
-  width: 180px;
-  height: 180px;
-  background-color: rgba(230, 126, 34, 0.15);
+  top: -52px;
+  left: -52px;
+  width: 104px;
+  height: 104px;
+  background-color: rgba(230, 126, 34, 0.20);
   border-radius: 50%;
-  animation: mapboxPulse 2s ease-out infinite;
+  animation: mapboxPulse 2.4s ease-out infinite;
   pointer-events: none;
 }
 .inversa-dot {
   position: absolute;
-  top: -7px;
-  left: -7px;
-  width: 14px;
-  height: 14px;
+  top: -11px;
+  left: -11px;
+  width: 22px;
+  height: 22px;
   background-color: #E67E22;
+  border: 2px solid #FFFFFF;
   border-radius: 50%;
-  box-shadow: 0 0 18px rgba(230, 126, 34, 0.9);
+  box-shadow: 0 0 0 5px rgba(230, 126, 34, 0.28), 0 0 26px 8px rgba(230, 126, 34, 0.55);
 }
 
 @keyframes mapboxPulse {
-  0% { transform: scale(0.3); opacity: 1; }
+  0% { transform: scale(0.35); opacity: 0.9; }
   100% { transform: scale(1); opacity: 0; }
 }
 /* ── Scene 2: "Skala Besar, Dampak Nyata" ── */
-.s2-bridge-wrap { margin: 0; max-width: 760px; }
-.s2-bridge-text {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(1.7rem, 3.6vw, 2.7rem);
-  line-height: 1.35;
-  color: #F5F5F5;
-  text-align: center;
-  margin: 0;
-  white-space: nowrap;
-}
+
 /* ── Bento Grid — 2-column asymmetric (1 hero left + 2 right) ── */
 .s2-bento-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: auto auto;
-  gap: 20px;
+  gap: 16px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  margin: 0;
 }
+
+/* backdrop-filter dibuang: kartu ini duduk di atas navy polos, jadi blur
+   tidak memburamkan apa pun — hanya menambah compositing layer. Hover juga
+   dibuang; kartu ini tidak bisa diklik. */
 .s2-bento-card {
   position: relative;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--ws2-r-md);
+  background: var(--ws2-surface-1);
+  border: 1px solid var(--ws2-line-1);
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
-}
-.s2-bento-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(229, 217, 182, 0.2);
+  padding: var(--ws2-card-pad);
 }
 .s2-bento-hero {
-  min-height: 380px;
+  min-height: 360px;
+}
+
+/* ── Maskot: kolom sendiri, bukan lagi diselipkan di dalam kartu ──────────
+   Dulu <img> maskot absolute di bottom:-10 right:20 dan sengaja terpotong
+   oleh overflow:hidden kartu supaya "mengintip" — itulah yang dibaca sebagai
+   "maskot nyempil". Sekarang ia berdiri di kolomnya sendiri, sejajar tepi
+   bawah grid, dengan ruang bernapas di kiri headline. */
+.s2-stage-body {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: end;
+  width: 100%;
+}
+.s2-maskot-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+}
+.s2-maskot {
+  width: 190px;
+  height: 340px;
+  object-fit: cover;
+  object-position: 50% 100%;
+  display: block;
+  pointer-events: none;
+}
+.s2-maskot-shadow {
+  width: 120px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.35), transparent 70%);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .s2-stage-body { grid-template-columns: 160px minmax(0, 1fr); gap: 1.25rem; }
+  .s2-maskot { width: 150px; height: 270px; }
+  .s2-bento-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 767px) {
+  .s2-stage-body { grid-template-columns: 1fr; }
+  .s2-maskot-col { order: -1; justify-content: center; padding-bottom: 0; }
+  .s2-maskot { width: 130px; height: 230px; }
 }
 .s2-bento-content {
   display: flex;
@@ -131,136 +145,11 @@
   z-index: 2;
 }
 
-/* Legacy .s2-card support */
-.s2-card {
-  position: relative;
-  width: 100% !important;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(229, 217, 182, 0.1);
-  overflow: hidden;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  display: flex;
-  flex-direction: column;
-}
-.s2-card:hover {
-  transform: translateY(-4px);
-}
-
-/* Editorial Typography */
-.s2-ed-tag {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-weight: 700;
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  z-index: 5;
-}
-.s2-ed-num {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-.s2-ed-label {
-  font-family: 'Lato', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-}
-.s2-ed-pill {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(8px);
-  padding: 8px 16px;
-  border-radius: 50px;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #333;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.s2-ed-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.s2-card:hover .s2-ed-bg {
-  transform: scale(1.05);
-}
-.s2-ed-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-@keyframes floatMascot {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0); }
-}
-.s2-card-sektor img.s2-floating-icon {
-  animation: floatMascot 4s ease-in-out infinite;
-}
-.s2-card:hover .s2-card-cinematic {
-  filter: grayscale(40%) brightness(0.6) blur(0px) !important;
-  transform: scale(1.05);
-}
-.s2-card-watermark {
-  position: absolute;
-  bottom: -20%;
-  right: -10%;
-  width: 240px;
-  height: 240px;
-  color: var(--accent);
-  opacity: 0.04;
-  pointer-events: none;
-  transform: rotate(-10deg);
-}
-@keyframes float-yoyo {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-.s2-floating-icon {
-  animation: float-yoyo 4s ease-in-out infinite;
-}
-.s2-ambient-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.25;
-}
-@media (hover: hover) {
-  .s2-card:hover { transform: translateY(-4px); border-color: rgba(229,217,182,0.25); }
-}
-.s2-body {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 0.55rem; padding: 1.4rem 0.9rem;
-  text-align: center; pointer-events: none;
-}
-
 /* ── Scene 2: Peta Sebaran Kerusakan (Mapbox satelit, FULL-SCREEN) ── */
 .s2-choro { position: relative; height: 240vh; }
 .s2c-sticky {
   position: sticky; top: 0; height: 100vh; width: 100%;
-  overflow: hidden; background: #0a0b1d;
+  overflow: hidden; background: var(--ws2-bg-navy);
 }
 /* Peta mengisi seluruh viewport */
 .s2c-map-shell { position: absolute; inset: 0; z-index: 1; }
@@ -271,42 +160,16 @@
 .s2c-map-grade {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse at center, transparent 52%, rgba(10,11,29,0.58) 100%),
-    linear-gradient(180deg, rgba(21,23,61,0.16), rgba(10,11,29,0.3));
+    radial-gradient(ellipse at center, transparent 52%, rgba(21,23,61,0.58) 100%),
+    linear-gradient(180deg, rgba(21,23,61,0.16), rgba(21,23,61,0.3));
 }
 .s2c-map-grad-edge {
   position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(10,11,29,0.66) 0%, transparent 26%, transparent 82%, rgba(10,11,29,0.42) 100%);
+  background: linear-gradient(180deg, rgba(21,23,61,0.66) 0%, transparent 26%, transparent 82%, rgba(21,23,61,0.42) 100%);
 }
 /* Judul overlay di atas peta */
-.s2c-head {
-  position: absolute; top: clamp(3.5rem, 8vh, 6rem); left: 50%;
-  transform: translateX(-50%); width: min(680px, 88vw); text-align: center;
-  z-index: 5; opacity: 0; pointer-events: none;
-}
-.s2c-head h3 {
-  font-style: italic; font-weight: 600; color: #E5D9B6;
-  font-size: clamp(1.7rem, 3.4vw, 2.7rem); margin: 0; line-height: 1.14;
-}
+
 /* Legend di pojok bawah */
-.s2c-legend {
-  position: absolute; bottom: clamp(1.5rem, 4vh, 2.5rem); left: clamp(1.25rem, 5vw, 3rem);
-  z-index: 5; background: rgba(10,11,29,0.68); backdrop-filter: blur(8px);
-  padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);
-  display: flex; flex-direction: column; gap: 0.6rem; opacity: 0;
-}
-.s2c-legend-title {
-  font-style: italic; font-size: 0.95rem; color: #E5D9B6; margin-bottom: 0.2rem;
-}
-.s2c-legend-row {
-  display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: rgba(245,245,245,0.7);
-}
-.s2c-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-.s2c-legend-sep { height: 1px; background: rgba(255,255,255,0.1); margin: 0.2rem 0; }
-.s2c-legend-point {
-  width: 6px; height: 6px; border-radius: 50%; background: #FFEAC6;
-  box-shadow: 0 0 0 2px #E67E22, 0 0 8px rgba(230,126,34,0.8); margin: 0 2px;
-}
 
 /* Label Provinsi di dalam Peta */
 .s2c-prov-label {
@@ -329,34 +192,7 @@
 }
 
 /* ── Alur Data ── */
-.s2-flow {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 8vh clamp(1rem, 4vw, 2rem) 16vh; overflow: hidden; position: relative;
-}
-.s2-flow-track {
-  display: flex; align-items: center; gap: clamp(0.5rem, 1.5vw, 1.2rem); position: relative;
-  background: rgba(255,255,255,0.03); padding: 0.8rem 1.6rem; border-radius: 40px; border: 1px solid rgba(255,255,255,0.05);
-}
-.s2-flow-step {
-  font-size: clamp(0.7rem, 1.2vw, 0.88rem); text-transform: uppercase; letter-spacing: 0.1em; color: #E5D9B6;
-}
-.s2-flow-arrow {
-  font-size: 1.2rem; color: rgba(229,217,182,0.3);
-}
-.s2-flow-shine {
-  position: absolute; top: 0; left: 0; width: 40%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(229,217,182,0.15), transparent);
-  transform: skewX(-20deg); pointer-events: none;
-}
-.s2-flow-cap {
-  margin-top: 1.6rem; font-size: 0.95rem; color: rgba(245,245,245,0.5); font-style: italic;
-}
 
-.s2c-head p {
-  margin: 0.7rem 0 0; font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-  color: rgba(245,245,245,0.82); line-height: 1.6;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
-}
 @media (max-width: 767px) {
   .s2-bento-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
   .s2-bento-card { min-height: auto !important; grid-column: 1 / -1 !important; grid-row: auto !important; }
@@ -367,10 +203,39 @@
   .s2-choro { height: 210vh; }
   .s2c-head { top: 2.4rem; width: 92vw; }
   .s2c-legend { top: auto; bottom: 14px; right: 10px; padding: 0.6rem 0.75rem; gap: 0.35rem; }
-  .s2c-legend-title { font-size: 0.85rem; }
-  .s2c-legend-row { font-size: 0.7rem; }
+  
+  
   .s2c-prov-label { padding: 0.4rem 0.65rem; }
   .s2c-prov-name { font-size: 0.95rem; }
   .s2c-prov-row { font-size: 0.72rem; }
   .s2-bridge-text { white-space: normal; }
+}
+
+/* ── Langit berbintang untuk scene "Skala Besar, Dampak Nyata" ──────────
+   Titik-titik digambar sebagai radial-gradient berulang, jadi tidak perlu
+   elemen DOM tambahan. Kedipannya lambat dan hanya menaik-turunkan opacity
+   keseluruhan lapisan — bukan gerak per-bintang. */
+.s2-stars-twinkle {
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(229, 217, 182, 0.9), transparent),
+    radial-gradient(1px 1px at 28% 62%, rgba(229, 217, 182, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 44% 28%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 58% 74%, rgba(229, 217, 182, 0.65), transparent),
+    radial-gradient(2px 2px at 71% 36%, rgba(229, 217, 182, 0.85), transparent),
+    radial-gradient(1px 1px at 84% 66%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 92% 22%, rgba(229, 217, 182, 0.75), transparent),
+    radial-gradient(1px 1px at 8% 82%, rgba(229, 217, 182, 0.6), transparent);
+  background-size: 520px 520px;
+  background-repeat: repeat;
+  opacity: 0.55;
+  animation: s2Twinkle 7s ease-in-out infinite;
+}
+
+@keyframes s2Twinkle {
+  0%, 100% { opacity: 0.38; }
+  50%      { opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s2-stars-twinkle { animation: none; opacity: 0.5; }
 }

@@ -12,13 +12,31 @@
  * Data: insight.json → kebutuhan.ringkasan_global, metadata, status_penugasan
  */
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import insights from '../insight.json';
+import { Link } from 'react-router-dom';
+import { WS2 } from '../ws2-tokens';
+import BgSeam from '../shared/BgSeam';
+import { fmtN, fmtPct } from '../shared/rtStats';
+import tile01 from '../../../assets/images/huntara-01.webp';
+import tile07 from '../../../assets/images/huntara-07.webp';
+import tile09 from '../../../assets/images/huntara-09.webp';
+import tile11 from '../../../assets/images/huntara-11.webp';
+import tile12 from '../../../assets/images/huntara-12.webp';
+import tile14 from '../../../assets/images/huntara-14.webp';
+
+/* Delapan tile diambil dari enam berkas terkecil (total < 2 MB). Memakai
+   seluruh 20 foto akan menambah ~20 MB ke bundle untuk lapisan latar yang
+   opacity-nya hanya 0,12-0,30. */
+const HUNTARA_TILES = [tile09, tile14, tile12, tile01, tile11, tile07];
 
 gsap.registerPlugin(ScrollTrigger);
-ScrollTrigger.defaults({ scrub: 0.8 });
+/* ScrollTrigger.defaults({ scrub: 0.8 }) dihapus dari sini: itu efek samping
+   GLOBAL yang diam-diam men-scrub setiap trigger di seluruh aplikasi,
+   termasuk Web Story 1 dan 3. Tiap trigger di file ini sudah menyetel
+   scrub-nya sendiri. */
 
 /* ─────────────────────────────────────────
    Utility Hooks
@@ -53,28 +71,6 @@ function useCountUp(target, visible, duration = 1400) {
     return () => cancelAnimationFrame(raf);
   }, [visible, target, duration]);
   return value;
-}
-
-function useParallax(speed = 0.15) {
-  const ref = useRef(null);
-  useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    const ctx = gsap.context(() => {
-      gsap.to(el, {
-        yPercent: speed * 100,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: el.parentElement || el,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    });
-    return () => ctx.revert();
-  }, [speed]);
-  return ref;
 }
 
 function useSceneReveal(threshold = 0.14) {
@@ -118,20 +114,25 @@ function GrainOverlay({ opacity = 0.05 }) {
 /* ─────────────────────────────────────────
    Bubble Config
 ───────────────────────────────────────────*/
+/* Enam kategori TIDAK perlu enam warna: labelnya sudah tampil di tiap
+   gelembung dan di tooltip, jadi mewarnai semuanya hanya menambah elemen yang
+   tidak diperlukan (guideline: "memakai elemen hanya jika diperlukan").
+   Monokrom krem, dengan SATU aksen oranye untuk Perbaikan Rumah — kebutuhan
+   yang paling belum terjangkau, sekaligus inti ceritanya. */
 const BUBBLE_CONFIG = {
-  r38a: { color: '#E67E22', label: 'Makanan' },
-  r38b: { color: '#E5D9B6', label: 'Pakaian' },
-  r38c: { color: '#FFFFFF', label: 'Perbaikan Rumah' },
-  r38d: { color: '#628141', label: 'Pengobatan' },
-  r38e: { color: '#E67E22', label: 'Uang Tunai' },
-  r38f: { color: '#628141', label: 'Lainnya' },
+  makanan:         { label: 'Makanan',         color: WS2.cream },
+  pengobatan:      { label: 'Pengobatan',      color: WS2.cream },
+  pakaian:         { label: 'Pakaian',         color: WS2.cream },
+  uang_tunai:      { label: 'Uang Tunai',      color: WS2.cream },
+  lainnya:         { label: 'Lainnya',         color: WS2.cream },
+  perbaikan_rumah: { label: 'Perbaikan Rumah', color: WS2.accent },
 };
+
 
 /* ─────────────────────────────────────────
    Ambient Ticker — teks kebutuhan yang scroll
    horizontal tak henti di background scene 1
-───────────────────────────────────────────*/
-function AmbientTicker({ items }) {
+ {
   const tickerRef = useRef(null);
   const animRef = useRef(null);
 
@@ -172,7 +173,7 @@ function AmbientTicker({ items }) {
             style={{
               fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)',
               fontStyle: 'italic',
-              color: i % 3 === 0 ? 'rgba(230,126,34,0.18)' : i % 3 === 1 ? 'rgba(98,129,65,0.15)' : 'rgba(229,217,182,0.12)',
+              color: i % 3 === 0 ? 'rgba(230,126,34,0.18)' : i % 3 === 1 ? 'rgba(98,129,65,0.15)' : 'var(--ws2-line-1)',
               userSelect: 'none',
               flexShrink: 0,
             }}
@@ -188,213 +189,225 @@ function AmbientTicker({ items }) {
 
 /* ─────────────────────────────────────────
    Bubble Chart — Force simulation
-───────────────────────────────────────────*/
-function BubbleChart({ data }) {
-  const [hovered, setHovered] = useState(null);
-  const [positions, setPositions] = useState({});
-  const [mounted, setMounted] = useState(false);
-  const containerRef = useRef(null);
+/* ── Bubble chart kebutuhan ──────────────────────────────────────────────
+   Sesuai storyline Babak 4 Scene 1. Komponen ini sudah ada di file ini
+   sebelumnya tetapi TIDAK PERNAH dirender, dan mengandung pelanggaran
+   rules-of-hooks (useEffect dipanggil setelah early return) yang akan
+   membuatnya crash begitu diaktifkan.
 
-  if (!data || data.length === 0) {
-    return (
-      <div className="lato-regular" style={{
-        color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem',
-        textAlign: 'center', padding: '3rem',
-        border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14,
-      }}>
-        Data kebutuhan akan muncul setelah insight.json tersedia.
-      </div>
-    );
-  }
+   Yang diukur: jumlah keluarga yang BELUM menerima tiap jenis bantuan
+   (115.462 − penerima). Dengan begitu gelembung terbesar adalah kebutuhan
+   yang paling belum terjangkau — konsisten dengan judul "Kebutuhan Mendesak".
 
-  const sorted = [...data].sort((a, b) => (b.belum || 0) - (a.belum || 0));
-  const maxBelum = sorted[0]?.belum || 1;
+   Tanpa dependensi baru: D3 tidak terpasang dan tidak diperlukan untuk enam
+   lingkaran. Tata letaknya fungsi murni yang deterministik (spiral sudut
+   emas), tanpa Math.random dan tanpa simulasi per-frame. */
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const width = containerRef.current.offsetWidth;
-    const height = containerRef.current.offsetHeight;
-    const centerX = width / 2;
-    const centerY = height / 2;
+const GOLDEN_ANGLE = 137.5;
 
-    const nodes = sorted.slice(0, 6).map((item) => {
-      const fraction = (item.belum || 0) / maxBelum;
-      const size = Math.max(80, Math.round(fraction * 200));
-      return {
-        col: item.col,
-        x: centerX + (Math.random() - 0.5) * 180,
-        y: centerY + (Math.random() - 0.5) * 180,
-        vx: 0, vy: 0,
-        size, radius: size / 2,
-      };
+function packCircles(items, width) {
+  if (!width || !items.length) return [];
+
+  const mobile = width < 480;
+  const H = Math.round(width * (mobile ? 1.05 : 0.82));
+  const GAP = mobile ? 10 : 14;
+  const maxVal = Math.max(...items.map((d) => d.value), 1);
+
+  // Radius sebanding AKAR KUADRAT nilai supaya LUAS gelembung yang
+  // sebanding dengan nilainya — bukan radiusnya.
+  const radiusFor = (v, rMax) => Math.max(18, rMax * Math.sqrt(v / maxVal));
+
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const rMax = Math.round(width * (mobile ? 0.19 : 0.21)) * (0.92 ** attempt);
+    const sorted = [...items].sort((a, b) => b.value - a.value);
+    const placed = [];
+    let gagal = false;
+
+    sorted.forEach((item, i) => {
+      const r = radiusFor(item.value, rMax);
+
+      if (i === 0) {
+        placed.push({ ...item, x: width / 2, y: H / 2, r });
+        return;
+      }
+
+      let taruh = null;
+      const Rmax = Math.max(width, H);
+      for (let R = placed[0].r + r + GAP; R <= Rmax && !taruh; R += 4) {
+        for (let k = 0; k < 24 && !taruh; k += 1) {
+          const theta = ((i * GOLDEN_ANGLE + k * 15) * Math.PI) / 180;
+          const x = width / 2 + R * Math.cos(theta);
+          const y = H / 2 + R * Math.sin(theta);
+
+          if (x - r < 8 || x + r > width - 8 || y - r < 8 || y + r > H - 8) continue;
+          const bentrok = placed.some((p) => Math.hypot(p.x - x, p.y - y) < p.r + r + GAP);
+          if (!bentrok) taruh = { ...item, x, y, r };
+        }
+      }
+
+      if (!taruh) gagal = true;
+      else placed.push(taruh);
     });
 
-    let animId;
-    let iter = 0;
-    const simulate = () => {
-      const damp = 0.92, repulse = 2600, grav = 0.055;
-      nodes.forEach((node, i) => {
-        const dx = centerX - node.x, dy = centerY - node.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist > 80) {
-          node.vx += (dx / dist) * grav;
-          node.vy += (dy / dist) * grav;
-        }
-        nodes.forEach((other, j) => {
-          if (i === j) return;
-          const ox = node.x - other.x, oy = node.y - other.y;
-          const d2 = ox * ox + oy * oy;
-          const d = Math.sqrt(d2);
-          const minD = node.radius + other.radius + 18;
-          if (d < minD && d > 0) {
-            const f = (minD - d) * repulse / d2;
-            node.vx += (ox / d) * f; node.vy += (oy / d) * f;
-          }
-        });
-        node.vx *= damp; node.vy *= damp;
-        node.x += node.vx; node.y += node.vy;
-        const pad = node.radius + 10;
-        if (node.x - node.radius < pad) { node.x = node.radius + pad; node.vx *= -0.5; }
-        if (node.x + node.radius > width - pad) { node.x = width - node.radius - pad; node.vx *= -0.5; }
-        if (node.y - node.radius < pad) { node.y = node.radius + pad; node.vy *= -0.5; }
-        if (node.y + node.radius > height - pad) { node.y = height - node.radius - pad; node.vy *= -0.5; }
-      });
-      setPositions(nodes.reduce((acc, n) => { acc[n.col] = { x: n.x, y: n.y }; return acc; }, {}));
-      iter++;
-      if (iter < 90) animId = requestAnimationFrame(simulate);
+    if (!gagal) {
+      // Geser hasil ke tengah kanvas supaya tidak berat sebelah.
+      const minX = Math.min(...placed.map((p) => p.x - p.r));
+      const maxX = Math.max(...placed.map((p) => p.x + p.r));
+      const minY = Math.min(...placed.map((p) => p.y - p.r));
+      const maxY = Math.max(...placed.map((p) => p.y + p.r));
+      const dx = (width - (maxX + minX)) / 2;
+      const dy = (H - (maxY + minY)) / 2;
+      return { H, nodes: placed.map((p) => ({ ...p, x: p.x + dx, y: p.y + dy })) };
+    }
+  }
+
+  return { H, nodes: [] };
+}
+
+function BubbleChart({ items, total, visible }) {
+  // Semua hook di paling atas. Versi lama memanggil useEffect SETELAH early
+  // return, yang melanggar rules-of-hooks dan akan crash saat dirender.
+  const wrapRef = useRef(null);
+  const [width, setWidth] = useState(0);
+  const [active, setActive] = useState(null);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width));
+    ro.observe(el);
+    setWidth(el.getBoundingClientRect().width);
+    return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (active === null) return undefined;
+    const tutup = (e) => {
+      if (!wrapRef.current?.contains(e.target)) setActive(null);
     };
+    document.addEventListener('pointerdown', tutup);
+    return () => document.removeEventListener('pointerdown', tutup);
+  }, [active]);
 
-    setMounted(true);
-    animId = requestAnimationFrame(simulate);
-    return () => cancelAnimationFrame(animId);
-  }, [data, maxBelum]);
-
-  const FALLBACK_POS = [
-    { x: '50%', y: '50%' }, { x: '22%', y: '26%' }, { x: '78%', y: '24%' },
-    { x: '14%', y: '70%' }, { x: '82%', y: '68%' }, { x: '50%', y: '88%' },
-  ];
+  const layout = useMemo(() => packCircles(items, width), [items, width]);
+  const punyaHover = typeof window !== 'undefined'
+    && window.matchMedia?.('(hover: hover)').matches;
 
   return (
-    <div
-      ref={containerRef}
-      style={{
-        position: 'relative', width: '100%', maxWidth: 580, height: 480,
-        margin: '0 auto', borderRadius: 20, overflow: 'hidden',
-        border: '1px solid rgba(229,217,182,0.07)',
-        background: `
-          radial-gradient(ellipse at 50% 35%, rgba(98,129,65,0.12) 0%, transparent 55%),
-          radial-gradient(ellipse at 80% 85%, rgba(230,126,34,0.09) 0%, transparent 50%),
-          linear-gradient(165deg, #1c1f4d 0%, #11132f 55%, #0a0b1f 100%)
-        `,
-        boxShadow: 'inset 0 0 60px rgba(0,0,0,0.5)',
-      }}
-    >
-      {/* Grid kontur tipis */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', inset: 0, opacity: 0.28,
-        backgroundImage: `
-          repeating-linear-gradient(0deg, rgba(229,217,182,0.04) 0px, rgba(229,217,182,0.04) 1px, transparent 1px, transparent 52px),
-          repeating-linear-gradient(90deg, rgba(229,217,182,0.04) 0px, rgba(229,217,182,0.04) 1px, transparent 1px, transparent 52px)
-        `,
-      }} />
-      {/* Vignette */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse at center, transparent 42%, rgba(6,7,19,0.88) 100%)',
-        pointerEvents: 'none',
-      }} />
+    <div>
+      {/* Kanvas transparan: gelembung mengambang langsung di latar navy.
+          Versi lama membungkusnya dengan gradient + border + vignette — tiga
+          lapis dekorasi untuk enam lingkaran. */}
+      <div
+        ref={wrapRef}
+        className="kb-bubble-wrap"
+        style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: 560,
+          height: layout.H || 400,
+          margin: '0 auto',
+          overflow: 'visible',
+        }}
+      >
+        {layout.nodes?.map((node, i) => {
+          const aktif = active === node.key;
+          const kecil = node.r < 44;
+          return (
+            <div
+              key={node.key}
+              role="button"
+              tabIndex={0}
+              aria-label={`${node.label}: ${fmtN(node.value)} keluarga belum menerima`}
+              onMouseEnter={punyaHover ? () => setActive(node.key) : undefined}
+              onMouseLeave={punyaHover ? () => setActive(null) : undefined}
+              onFocus={() => setActive(node.key)}
+              onBlur={() => setActive(null)}
+              onClick={() => setActive((p) => (p === node.key ? null : node.key))}
+              style={{
+                position: 'absolute',
+                left: node.x,
+                top: node.y,
+                width: node.r * 2,
+                height: node.r * 2,
+                transform: `translate(-50%, -50%) scale(${visible ? (aktif ? 1.06 : 1) : 0.86})`,
+                opacity: visible ? 1 : 0,
+                borderRadius: '50%',
+                background: `${node.color}${aktif ? '4D' : '29'}`,
+                border: `1.5px solid ${node.color}${aktif ? 'FF' : 'BF'}`,
+                boxShadow: `0 0 ${aktif ? 28 : 18}px ${node.color}${aktif ? '59' : '33'}`,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                cursor: 'pointer',
+                // Tanpa overshoot: guideline melarang gerak memantul.
+                transition: `transform 320ms var(--ws2-bar-ease) ${i * 0.07}s, opacity 700ms ease ${i * 0.07}s, background-color 320ms ease, box-shadow 320ms ease`,
+              }}
+            >
+              {!kecil && (
+                <>
+                  <span className="lato-bold" style={{ fontSize: '0.72rem', color: 'var(--ws2-hero)', letterSpacing: '0.04em', padding: '0 6px' }}>
+                    {node.label}
+                  </span>
+                  <span className="lato-light" style={{ fontSize: '0.62rem', color: 'rgba(255,255,255,0.7)', marginTop: 2 }}>
+                    {fmtN(node.value)}
+                  </span>
+                </>
+              )}
 
-      {sorted.slice(0, 6).map((item, i) => {
-        const fraction = (item.belum || 0) / maxBelum;
-        const size = Math.max(80, Math.round(fraction * 200));
-        const cfg = BUBBLE_CONFIG[item.col] || { emoji: '📌', color: '#aaa', label: item.col };
-        const isHov = hovered === item.col;
-        const pos = positions[item.col] || FALLBACK_POS[i] || { x: 290, y: 240 };
-        const intense = Math.min(1, (item.belum / maxBelum) * 1.2);
-        const bgA = isHov ? 0.5 : 0.2 + intense * 0.15;
-        const bdA = isHov ? 1 : 0.3 + intense * 0.4;
+              {kecil && (
+                <span className="lato-light" style={{
+                  position: 'absolute',
+                  top: node.r * 2 + 8,
+                  fontSize: '0.68rem',
+                  color: 'var(--ws2-text-3)',
+                  whiteSpace: 'nowrap',
+                }}>
+                  {node.label}
+                </span>
+              )}
 
-        return (
-          <div
-            key={item.col}
-            onMouseEnter={() => setHovered(item.col)}
-            onMouseLeave={() => setHovered(null)}
-            onTouchStart={() => setHovered(item.col)}
-            onTouchEnd={() => setHovered(null)}
-            style={{
-              position: 'absolute',
-              left: pos.x, top: pos.y,
-              transform: `translate(-50%, -50%) scale(${isHov ? 1.18 : 1}) ${!mounted ? 'scale(0.3)' : ''}`,
-              width: size, height: size, borderRadius: '50%',
-              background: isHov
-                ? `radial-gradient(circle, ${cfg.color}${Math.round(bgA * 255).toString(16).padStart(2, '0')}, ${cfg.color}18)`
-                : `radial-gradient(circle, ${cfg.color}${Math.round(bgA * 130).toString(16).padStart(2, '0')}, ${cfg.color}05)`,
-              backdropFilter: 'blur(2px)',
-              border: `1.5px solid ${cfg.color}${Math.round(bdA * 255).toString(16).padStart(2, '0')}`,
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease',
-              boxShadow: isHov
-                ? `0 0 40px ${cfg.color}99, 0 0 6px ${cfg.color}, inset 0 0 22px ${cfg.color}33`
-                : `0 0 ${10 + intense * 16}px ${cfg.color}55, 0 0 2px ${cfg.color}aa`,
-              opacity: mounted ? 1 : 0,
-              transitionDelay: `${i * 0.08}s`,
-              zIndex: isHov ? 10 : 1,
-            }}
-          >
-            <span style={{ fontSize: size > 130 ? '2.4rem' : '1.5rem' }}>{cfg.emoji}</span>
-            <span className="lato-bold" style={{
-              fontSize: size > 130 ? '0.78rem' : '0.65rem',
-              color: '#fff', textAlign: 'center', padding: '0 4px',
-              lineHeight: 1.2, opacity: isHov ? 0.6 : 1,
-            }}>
-              {cfg.label || item.nama}
-            </span>
-
-            {isHov && (
-              <>
+              {aktif && (
                 <div style={{
                   position: 'absolute',
-                  bottom: size / 2 + 22,
-                  left: '50%', transform: 'translateX(-50%)',
-                  background: cfg.color, color: '#fff',
-                  padding: '0.6rem 1.1rem', borderRadius: 9,
-                  fontSize: '0.75rem', whiteSpace: 'nowrap',
-                  boxShadow: `0 4px 18px ${cfg.color}66`,
-                  zIndex: 20, pointerEvents: 'none',
-                  animation: 'tooltipUp 0.25s ease forwards',
+                  bottom: node.r * 2 + 14,
+                  background: 'var(--ws2-bg-cream)',
+                  color: 'var(--ws2-ink-1)',
+                  borderRadius: 'var(--ws2-r-sm)',
+                  padding: '0.55rem 0.9rem',
+                  whiteSpace: 'nowrap',
+                  zIndex: 20,
+                  pointerEvents: 'none',
                 }}>
-                  <div className="lato-bold" style={{ fontSize: '0.9rem', marginBottom: '0.15rem' }}>
-                    {(item.belum || 0).toLocaleString('id-ID')} KK
+                  <div className="lato-bold" style={{ fontSize: '0.9rem' }}>
+                    {fmtN(node.value)} keluarga
                   </div>
-                  <div className="lato-regular" style={{ fontSize: '0.62rem', opacity: 0.9 }}>Belum menerima bantuan</div>
-                  {item.sudah > 0 && (
-                    <div className="lato-regular" style={{ fontSize: '0.62rem', opacity: 0.8, marginTop: '0.15rem' }}>
-                      {item.sudah.toLocaleString('id-ID')} KK sudah dibantu
-                    </div>
-                  )}
+                  <div className="lato-light" style={{ fontSize: '0.68rem' }}>
+                    {fmtPct(node.pctBelum)}% dari {fmtN(total)} rumah tangga
+                  </div>
                 </div>
-                <div style={{
-                  position: 'absolute', bottom: size / 2 + 8, left: '50%',
-                  transform: 'translateX(-50%)', width: 0, height: 0,
-                  borderLeft: '6px solid transparent', borderRight: '6px solid transparent',
-                  borderTop: `6px solid ${cfg.color}`, zIndex: 19, pointerEvents: 'none',
-                }} />
-              </>
-            )}
-          </div>
-        );
-      })}
+              )}
+            </div>
+          );
+        })}
+      </div>
 
-      <style>{`
-        @keyframes tooltipUp {
-          from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-          to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-      `}</style>
+      <p className="lato-light" style={{
+        fontSize: '0.72rem',
+        color: 'var(--ws2-text-3)',
+        textAlign: 'center',
+        marginTop: '1.2rem',
+        lineHeight: 1.6,
+      }}>
+        Ukuran gelembung sebanding dengan jumlah keluarga yang belum menerima
+        jenis bantuan tersebut. Arahkan kursor atau ketuk untuk melihat angkanya.
+      </p>
     </div>
   );
 }
+
 
 /* ─────────────────────────────────────────
    Scene 1: Kebutuhan Mendesak
@@ -402,68 +415,65 @@ function BubbleChart({ data }) {
    — Progress bar "tachometer" bukan angka bersih
 ───────────────────────────────────────────*/
 function SceneJeritanBantuan() {
-  const global = insights?.kebutuhan?.ringkasan_global || {};
+  /* Dulu blok ini membaca `insights.kebutuhan` — kunci yang TIDAK ADA di
+     insight.json — sehingga selalu jatuh ke DEFAULT_KEBUTUHAN, sekumpulan
+     angka karangan yang tampil di layar seolah data asli. DEFAULT itu dihapus:
+     angka palsu tidak boleh punya jalur ke layar.
 
-  const DEFAULT_KEBUTUHAN = {
-    r38a: { nama: 'Makanan', sudah: 25430, belum: 18950, pct_sudah: 57.3 },
-    r38b: { nama: 'Pakaian', sudah: 18200, belum: 26180, pct_sudah: 41.0 },
-    r38c: { nama: 'Perbaikan Rumah', sudah: 12500, belum: 31650, pct_sudah: 28.3 },
-    r38d: { nama: 'Pengobatan', sudah: 22300, belum: 22130, pct_sudah: 50.2 },
-    r38e: { nama: 'Uang Tunai', sudah: 8900, belum: 35480, pct_sudah: 20.1 },
-    r38f: { nama: 'Lainnya', sudah: 15600, belum: 28800, pct_sudah: 35.1 },
-  };
+     Sumbernya sekarang rumah_tangga.bantuan_diterima, dengan penyebut
+     ringkasan_dataset.total_rt_keluarga (115.462) — sama seperti Babak 1-3,
+     jadi persentase antar babak bisa dibandingkan.
 
-  const globalData = Object.keys(global).length > 0 ? global : DEFAULT_KEBUTUHAN;
-  const bubbleData = Object.entries(globalData).map(([col, v]) => ({
-    col, nama: v.nama, sudah: v.sudah || 0, belum: v.belum || 0, pct_sudah: v.pct_sudah || 0,
-  }));
-  const hasData = bubbleData.some(b => b.sudah + b.belum > 0);
+     Yang divisualkan adalah sisi BELUM (115.462 − penerima), supaya gelembung
+     terbesar adalah kebutuhan yang paling belum terjangkau. */
+  const totalRT = insights?.ringkasan_dataset?.total_rt_keluarga || 0;
+
+  const bubbleData = useMemo(() => {
+    const bantuan = insights?.rumah_tangga?.bantuan_diterima || {};
+    return Object.entries(bantuan).map(([key, v]) => {
+    const cfg = BUBBLE_CONFIG[key] || { label: key, color: WS2.cream };
+    const sudah = v?.n_menerima ?? 0;
+    const belum = Math.max(0, totalRT - sudah);
+    return {
+      key,
+      label: cfg.label,
+      color: cfg.color,
+      value: belum,
+      sudah,
+      pctSudah: v?.pct ?? 0,
+      pctBelum: totalRT ? (belum / totalRT) * 100 : 0,
+    };
+    }).sort((a, b) => b.value - a.value);
+  }, [totalRT]);
+
+  const hasData = bubbleData.length > 0 && totalRT > 0;
   const [sceneRef, sceneVisible] = useSceneReveal();
-
-  const totalSudah = bubbleData.reduce((s, b) => s + b.sudah, 0);
-  const totalBelum = bubbleData.reduce((s, b) => s + b.belum, 0);
-  const totalKeseluruhan = totalSudah + totalBelum;
-  const pctSudahGlobal = totalKeseluruhan > 0 ? (totalSudah / totalKeseluruhan) * 100 : 0;
-
   const [introRef, introVisible] = useInView(0.1);
-  const parallaxBg = useParallax(0.2);
 
-  const nTotalBelum = useCountUp(totalBelum, introVisible, 1800);
-  const nPctSudah   = useCountUp(pctSudahGlobal, introVisible, 1800);
-
-  // Ticker items
-  const tickerItems = bubbleData.map(b => ({
-    ...BUBBLE_CONFIG[b.col] || { emoji: '📌', label: b.col },
-    belum: b.belum,
-  }));
+  // Dua angka pembuka diturunkan dari data yang sama dengan gelembungnya:
+  // yang paling belum terjangkau, dan yang paling sudah.
+  const palingBelum = bubbleData[0];
+  const palingSudah = bubbleData[bubbleData.length - 1];
+  const nPalingBelum = useCountUp(palingBelum?.value ?? 0, introVisible, 1800);
+  const pctPalingSudah = useCountUp(palingSudah?.pctSudah ?? 0, introVisible, 1800);
 
   return (
     <section
       ref={sceneRef}
       style={{
         position: 'relative',
-        background: 'linear-gradient(160deg, #141b38 0%, #0d132a 38%, #0a0d1d 100%)',
+        background: 'transparent',
         padding: '6rem 2rem 6rem',
         minHeight: '100vh',
         display: 'flex', alignItems: 'center',
         overflow: 'hidden',
         opacity: sceneVisible ? 1 : 0,
         transform: sceneVisible ? 'translateY(0)' : 'translateY(26px)',
-        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)',
         willChange: 'opacity, transform',
       }}
     >
       <GrainOverlay opacity={0.045} />
-
-      {/* Latar dekoratif parallax */}
-      <div ref={parallaxBg} aria-hidden="true" style={{
-        position: 'absolute', top: '-15%', right: '-12%',
-        width: '70%', maxWidth: 640, aspectRatio: '1/1',
-        borderRadius: '50%',
-        border: '1px solid rgba(230,126,34,0.06)',
-        boxShadow: 'inset 0 0 0 70px rgba(98,129,65,0.025), inset 0 0 0 140px rgba(230,126,34,0.015)',
-        pointerEvents: 'none', zIndex: 0,
-      }} />
 
       {/* Konten utama */}
       <div style={{
@@ -485,10 +495,9 @@ function SceneJeritanBantuan() {
           transform: introVisible ? 'translateY(0)' : 'translateY(32px)',
           transition: 'opacity 1s ease, transform 1s ease',
         }}>
-          {/* Headline — italic, dramatik */}
           <h2 className="playfair-display" style={{
             fontSize: 'clamp(2.4rem, 5.5vw, 4rem)',
-            color: '#fff', lineHeight: 1.1,
+            color: 'var(--ws2-text-1)', lineHeight: 1.1,
             marginBottom: '0.4rem', fontStyle: 'italic',
             letterSpacing: '-0.01em',
           }}>
@@ -496,174 +505,93 @@ function SceneJeritanBantuan() {
           </h2>
           <h2 className="playfair-display" style={{
             fontSize: 'clamp(2.4rem, 5.5vw, 4rem)',
-            color: '#E67E22', lineHeight: 1.1,
+            color: 'var(--ws2-accent)', lineHeight: 1.1,
             marginBottom: '1.8rem', fontStyle: 'italic',
             letterSpacing: '-0.01em',
           }}>
             Mendesak
           </h2>
 
-          {/* Divider animasi */}
           <div style={{
             width: introVisible ? 72 : 0,
             height: 2,
-            background: 'linear-gradient(90deg, #E67E22, rgba(230,126,34,0.3))',
+            background: 'var(--ws2-accent)',
             marginBottom: '1.8rem',
             transition: 'width 1s ease 0.3s',
           }} />
 
-          <p className="lato-regular" style={{
+          <p className="lato-light" style={{
             fontSize: '1rem', lineHeight: 1.95,
-            color: 'rgba(229,217,182,0.78)',
+            color: 'var(--ws2-text-2)',
             maxWidth: 400, marginBottom: '2.4rem',
           }}>
-            Di balik setiap angka ada keluarga yang menunggu.
-            Ukuran tiap bagian menunjukkan seberapa besar kebutuhan
-            yang <em>belum</em> tertangani.
+            Setiap gelembung adalah satu jenis bantuan. Semakin besar,
+            semakin banyak keluarga yang <em>belum</em> menerimanya.
           </p>
 
-          {/* Angka besar — dua kolom pendek */}
           <div style={{
             paddingTop: '2rem',
-            borderTop: '1px solid rgba(255,255,255,0.07)',
+            borderTop: '1px solid var(--ws2-line-1)',
             display: 'flex', gap: '2.8rem', flexWrap: 'wrap',
-            marginBottom: '1.8rem',
           }}>
             <div>
               <div className="playfair-display" style={{
                 fontSize: 'clamp(2.6rem, 7vw, 4.2rem)',
-                fontWeight: 700, color: '#E67E22',
+                fontWeight: 700, fontStyle: 'italic',
+                color: 'var(--ws2-accent)',
                 lineHeight: 1, letterSpacing: '-0.02em',
                 fontVariantNumeric: 'tabular-nums',
               }}>
-                {Math.round(nTotalBelum).toLocaleString('id-ID')}
+                {fmtN(Math.round(nPalingBelum))}
               </div>
               <div className="lato-bold" style={{
                 fontSize: '0.68rem', letterSpacing: '0.22em',
-                textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)',
-                marginTop: '0.5rem',
+                textTransform: 'uppercase', color: 'var(--ws2-text-4)',
+                marginTop: '0.5rem', maxWidth: 220, lineHeight: 1.6,
               }}>
-                KK belum terbantu
+                keluarga belum menerima {palingBelum?.label?.toLowerCase()}
               </div>
             </div>
             <div>
               <div className="playfair-display" style={{
                 fontSize: 'clamp(2.6rem, 7vw, 4.2rem)',
-                fontWeight: 700, color: '#628141',
+                fontWeight: 700, fontStyle: 'italic',
+                color: 'var(--ws2-text-1)',
                 lineHeight: 1, letterSpacing: '-0.02em',
                 fontVariantNumeric: 'tabular-nums',
               }}>
-                {nPctSudah.toFixed(1)}%
+                {fmtPct(pctPalingSudah)}%
               </div>
               <div className="lato-bold" style={{
                 fontSize: '0.68rem', letterSpacing: '0.22em',
-                textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)',
-                marginTop: '0.5rem',
+                textTransform: 'uppercase', color: 'var(--ws2-text-4)',
+                marginTop: '0.5rem', maxWidth: 220, lineHeight: 1.6,
               }}>
-                Sudah tersalurkan
+                sudah menerima {palingSudah?.label?.toLowerCase()}
               </div>
             </div>
           </div>
-
-          {/* Progress bar — lebih tebal, lebih dramatis */}
-          <div style={{ marginBottom: '2.2rem' }}>
-            <div style={{
-              height: 6, width: '100%', borderRadius: 3,
-              background: 'rgba(255,255,255,0.07)',
-              overflow: 'hidden', position: 'relative',
-            }}>
-              <div style={{
-                position: 'absolute', inset: 0,
-                width: introVisible ? `${pctSudahGlobal}%` : '0%',
-                background: 'linear-gradient(90deg, rgba(127,191,106,0.6), #628141)',
-                borderRadius: 3,
-                transition: 'width 1.8s cubic-bezier(0.34, 1.2, 0.64, 1) 0.3s',
-                boxShadow: '0 0 14px rgba(127,191,106,0.55)',
-              }} />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem' }}>
-              <span className="lato-regular" style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.35)' }}>
-                {totalSudah.toLocaleString('id-ID')} sudah
-              </span>
-              <span className="lato-regular" style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.35)' }}>
-                {totalBelum.toLocaleString('id-ID')} belum
-              </span>
-            </div>
-          </div>
-
+          {/* Progress bar global dihapus: angkanya menjumlahkan pertanyaan
+              multi-jawab, jadi "sudah vs belum" secara keseluruhan tidak
+              punya arti yang sah. */}
         </div>
 
-        {/* ── Kolom kanan: minimalist typography list with thin progress bars ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0', marginTop: '0' }}>
-          <div style={{
-            padding: '0',
+        {/* ── Kolom kanan: bubble chart ── */}
+        <div>
+          <div className="lato-bold" style={{
+            fontSize: '0.68rem', letterSpacing: '0.2em',
+            textTransform: 'uppercase', color: 'var(--ws2-text-3)',
+            marginBottom: '2rem',
           }}>
-            <div className="lato-bold" style={{
-              fontSize: '0.68rem', letterSpacing: '0.2em',
-              textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)',
-              marginBottom: '2rem',
-            }}>
-              Kebutuhan Mendesak
-            </div>
-            {!hasData ? (
-              <div className="lato-light" style={{ color: 'rgba(255,255,255,0.28)', fontSize: '0.85rem' }}>
-                Menunggu data dari insight.json…
-              </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.2rem' }}>
-                {bubbleData.sort((a, b) => (b.belum || 0) - (a.belum || 0)).map((item) => {
-                  const cfg = BUBBLE_CONFIG[item.col] || { color: '#E5D9B6', label: item.col };
-                  const pct = item.pct_sudah || 0;
-                  const total = (item.sudah || 0) + (item.belum || 0);
-
-                  return (
-                    <div key={item.col}>
-                      {/* Label row */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.6rem' }}>
-                        <span className="playfair-display" style={{
-                          fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
-                          fontStyle: 'italic', fontWeight: 700,
-                          color: cfg.color,
-                        }}>
-                          {cfg.label || item.nama}
-                        </span>
-                        <span className="lato-light" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
-                          {(item.belum || 0).toLocaleString('id-ID')} KK belum
-                        </span>
-                      </div>
-
-                      {/* Thin progress bar */}
-                      <div style={{
-                        width: '100%', height: 3, borderRadius: 2,
-                        background: 'rgba(255,255,255,0.06)',
-                        overflow: 'hidden',
-                      }}>
-                        <div style={{
-                          height: '100%',
-                          width: `${Math.min(Math.max(pct, 0), 100)}%`,
-                          background: cfg.color,
-                          borderRadius: 2,
-                          transition: 'width 1.5s cubic-bezier(0.22, 1, 0.36, 1)',
-                        }} />
-                      </div>
-
-                      {/* Stats row */}
-                      <div style={{ display: 'flex', gap: '1.5rem', marginTop: '0.5rem' }}>
-                        <span className="lato-light" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.35)' }}>
-                          {pct.toFixed(1)}% tersalurkan
-                        </span>
-                        {total > 0 && (
-                          <span className="lato-light" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.25)' }}>
-                            {total.toLocaleString('id-ID')} total KK
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            Bantuan yang Belum Terjangkau
           </div>
+          {!hasData ? (
+            <div className="lato-light" style={{ color: 'var(--ws2-text-4)', fontSize: '0.85rem' }}>
+              Menunggu data dari insight.json…
+            </div>
+          ) : (
+            <BubbleChart items={bubbleData} total={totalRT} visible={sceneVisible} />
+          )}
         </div>
       </div>
 
@@ -677,6 +605,7 @@ function SceneJeritanBantuan() {
             position: relative !important;
             top: 0 !important;
           }
+          .kb-bubble-wrap { max-width: 100% !important; }
         }
       `}</style>
     </section>
@@ -721,11 +650,11 @@ function SceneRingkasanNarasi() {
     <section
       ref={sceneRef}
       style={{
-        background: 'linear-gradient(180deg, #f3eadc 0%, #efe8d8 35%, #e6dfcf 100%)',
+        background: 'transparent',
         padding: '7rem 2rem',
         opacity: sceneVisible ? 1 : 0,
         transform: sceneVisible ? 'translateY(0)' : 'translateY(24px)',
-        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)',
         willChange: 'opacity, transform',
       }}
     >
@@ -758,7 +687,7 @@ function SceneRingkasanNarasi() {
               style={{
                 position: 'absolute',
                 top: 0, left: 0, right: 0, bottom: 0,
-                background: 'linear-gradient(180deg, #E67E22, #628141)',
+                background: 'var(--ws2-line-2)',
                 borderRadius: 1,
                 transform: 'scaleY(0)',
                 transformOrigin: 'top center',
@@ -772,7 +701,7 @@ function SceneRingkasanNarasi() {
               fontSize: 'clamp(1.8rem, 4.5vw, 3.2rem)',
               fontStyle: 'italic',
               fontWeight: 700,
-              color: '#1a1a2e',
+              color: 'var(--ws2-ink-1)',
               lineHeight: 1.35,
               margin: 0,
               opacity: visible ? 1 : 0,
@@ -815,7 +744,7 @@ function SceneRingkasanNarasi() {
             <p className="lato-regular" style={{
               fontSize: 'clamp(0.98rem, 1.8vw, 1.15rem)',
               lineHeight: 1.95,
-              color: '#2d2d4e',
+              color: 'var(--ws2-ink-2)',
               margin: 0,
             }}>
               Pendataan R3P telah menjangkau keluarga-keluarga di{' '}
@@ -828,7 +757,7 @@ function SceneRingkasanNarasi() {
           <p className="lato-regular" style={{
             fontSize: 'clamp(0.98rem, 1.8vw, 1.15rem)',
             lineHeight: 1.95,
-            color: '#2d2d4e',
+            color: 'var(--ws2-ink-2)',
             margin: 0,
             paddingLeft: '1.6rem',
             borderLeft: '2px solid rgba(21,23,61,0.1)',
@@ -869,7 +798,7 @@ function SceneRingkasanNarasi() {
             <p className="lato-regular" style={{
               fontSize: 'clamp(0.98rem, 1.8vw, 1.15rem)',
               lineHeight: 1.95,
-              color: '#2d2d4e',
+              color: 'var(--ws2-ink-2)',
               margin: 0,
             }}>
               Mencakup sekolah, puskesmas, masjid, pasar, dan fasilitas ekonomi lainnya. Dari jumlah
@@ -883,7 +812,7 @@ function SceneRingkasanNarasi() {
             fontSize: 'clamp(1.1rem, 2.4vw, 1.5rem)',
             fontStyle: 'italic',
             lineHeight: 1.7,
-            color: '#1a1a2e',
+            color: 'var(--ws2-ink-1)',
             margin: 0,
             paddingLeft: '1.6rem',
             borderLeft: '2px solid #E67E22',
@@ -931,7 +860,10 @@ function SceneDiBalikAngka() {
   const quoteText = "Kami hanya ingin segera kembali normal.";
   const words = quoteText.split(' ');
 
-  const huntaraPhotos = Array.from({ length: 20 }, (_, i) => `huntara-${String(i + 1).padStart(2, '0')}.jpg`);
+  /* url('/src/assets/...') hanya hidup di dev server dan 404 setelah build;
+     nama file juga di-generate .jpg padahal di disk .JPG (aman di Windows,
+     gagal di CI Linux). Sekarang impor statis .webp — semuanya huruf kecil. */
+  const huntaraPhotos = HUNTARA_TILES;
 
   const vulnerableGroups = [
     { label: 'Lansia', desc: 'Perlindungan khusus & akses kesehatan prioritas' },
@@ -979,30 +911,35 @@ function SceneDiBalikAngka() {
   return (
     <section
       ref={sectionRef}
-      style={{ position: 'relative', minHeight: '130vh', overflow: 'hidden', background: '#020208' }}
+      style={{ position: 'relative', minHeight: '130vh', overflow: 'hidden', background: 'transparent' }}
     >
       {/* Foto latar — sangat redup, acak */}
       {isPhotoVisible && (
         <div style={{
           position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-          background: 'rgba(5,5,18,0.8)',
+          background: 'var(--ws2-scrim)',
         }}>
           {visiblePhotos.map((idx) => {
-            const rx = Math.sin(idx * 13.1) * 40 + (Math.random() - 0.5) * 20;
-            const ry = Math.cos(idx * 7.7) * 40 + (Math.random() - 0.5) * 25;
-            const rs = 45 + Math.random() * 70;
-            const rr = (Math.random() - 0.5) * 12;
-            const ro = 0.12 + Math.random() * 0.18;
+            /* Math.random() saat render membuat posisi tiap tile berubah
+               setiap komponen re-render — kolase seolah bergetar. Diganti
+               fungsi deterministik dari indeksnya (React Compiler juga
+               menolak pemanggilan impure di dalam render). */
+            const n = (k) => (Math.sin(idx * 12.9898 + k * 78.233) + 1) / 2;
+            const rx = Math.sin(idx * 13.1) * 40 + (n(1) - 0.5) * 20;
+            const ry = Math.cos(idx * 7.7) * 40 + (n(2) - 0.5) * 25;
+            const rs = 45 + n(3) * 70;
+            const rr = (n(4) - 0.5) * 12;
+            const ro = 0.12 + n(5) * 0.18;
             return (
               <div key={`bg-${idx}`} style={{
                 position: 'absolute',
                 left: `${50 + rx}%`, top: `${50 + ry}%`,
                 width: `${rs}%`, aspectRatio: '4/3',
                 transform: `translate(-50%, -50%) rotate(${rr}deg)`,
-                backgroundImage: `url('/src/assets/images/${huntaraPhotos[idx]}')`,
+                backgroundImage: `url(${huntaraPhotos[idx % huntaraPhotos.length]})`,
                 backgroundSize: 'cover', backgroundPosition: 'center',
                 opacity: ro, borderRadius: 6,
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid var(--ws2-surface-1)',
                 filter: 'grayscale(100%) contrast(0.7)',
                 animation: 'bgFadeIn 1s ease forwards',
               }} />
@@ -1023,7 +960,7 @@ function SceneDiBalikAngka() {
         position: 'absolute', left: 0, top: '50%',
         transform: 'translateY(-50%)',
         width: 3, height: '55%',
-        background: 'linear-gradient(180deg, transparent, #628141, transparent)',
+        background: 'linear-gradient(180deg, transparent, var(--ws2-green), transparent)',
         zIndex: 5,
       }} />
 
@@ -1058,7 +995,7 @@ function SceneDiBalikAngka() {
               <span
                 key={i}
                 ref={el => (quoteWordsRef.current[i] = el)}
-                style={{ color: '#F4E6D1', display: 'inline-block', marginRight: '0.38em', opacity: 0 }}
+                style={{ color: 'var(--ws2-text-1)', display: 'inline-block', marginRight: '0.38em', opacity: 0 }}
               >
                 {word}
               </span>
@@ -1067,7 +1004,7 @@ function SceneDiBalikAngka() {
 
           {/* Kelompok rentan — baris horizontal, tanpa box/card */}
           <div style={{
-            borderTop: '1px solid rgba(255,255,255,0.07)',
+            borderTop: '1px solid var(--ws2-line-1)',
             paddingTop: '2.5rem', marginBottom: '2.5rem',
           }}>
             <div className="lato-bold" style={{
@@ -1086,7 +1023,7 @@ function SceneDiBalikAngka() {
                     {g.label}
                   </div>
                   <div className="lato-regular" style={{
-                    fontSize: '0.7rem', color: 'rgba(255,255,255,0.72)', lineHeight: 1.5, maxWidth: 160,
+                    fontSize: '0.7rem', color: 'var(--ws2-text-2)', lineHeight: 1.5, maxWidth: 160,
                   }}>
                     {g.desc}
                   </div>
@@ -1098,7 +1035,7 @@ function SceneDiBalikAngka() {
           {/* Narasi penutup — teks saja, tanpa border-radius box */}
           <p className="lato-regular" style={{
             fontSize: '1rem', lineHeight: 2,
-            color: 'rgba(255,255,255,0.82)',
+            color: 'var(--ws2-text-2)',
             paddingLeft: '2rem',
             borderLeft: '2px solid rgba(98,129,65,0.25)',
             margin: 0,
@@ -1113,7 +1050,7 @@ function SceneDiBalikAngka() {
           {totalKK > 0 && (
             <div style={{
               marginTop: '3rem', display: 'flex', gap: '2.5rem', flexWrap: 'wrap',
-              borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem',
+              borderTop: '1px solid var(--ws2-surface-1)', paddingTop: '2rem',
             }}>
               {[
                 { val: totalKK.toLocaleString('id-ID'), label: 'Keluarga di Huntara', color: '#628141' },
@@ -1127,7 +1064,7 @@ function SceneDiBalikAngka() {
                     {s.val}
                   </div>
                   <div className="lato-regular" style={{
-                    fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)',
+                    fontSize: '0.68rem', color: 'var(--ws2-text-4)',
                     textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.4rem',
                   }}>
                     {s.label}
@@ -1176,8 +1113,8 @@ function SceneAjakan() {
   const STATS = [
     { val: '401',   label: 'Petugas Lapangan',   color: '#628141', desc: 'turun ke lapangan langsung' },
     { val: '1.039', label: 'Kunjungan Lapangan',  color: '#E67E22', desc: 'titik data terverifikasi' },
-    { val: '3',     label: 'Provinsi Terdampak',  color: '#E5D9B6', desc: 'Aceh · Sumut · Sumbar' },
-    { val: '6',     label: 'Jenis Kebutuhan',     color: '#E5D9B6', desc: 'dipetakan per keluarga' },
+    { val: '3',     label: 'Provinsi Terdampak',  color: 'var(--ws2-ink-1)', desc: 'Aceh · Sumut · Sumbar' },
+    { val: '6',     label: 'Jenis Kebutuhan',     color: 'var(--ws2-ink-1)', desc: 'dipetakan per keluarga' },
   ];
 
   return (
@@ -1185,12 +1122,12 @@ function SceneAjakan() {
       ref={sceneRef}
       style={{
         position: 'relative',
-        background: 'linear-gradient(175deg, #0a0d22 0%, #101d19 42%, #080c1e 100%)',
+        background: 'transparent',
         padding: '9rem 2rem 8rem',
         overflow: 'hidden',
         opacity: sceneVisible ? 1 : 0,
         transform: sceneVisible ? 'translateY(0)' : 'translateY(24px)',
-        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)',
         willChange: 'opacity, transform',
       }}
     >
@@ -1238,13 +1175,13 @@ function SceneAjakan() {
           <div>
             <h2 className="playfair-display" style={{
               fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
-              color: '#fff', lineHeight: 1.15,
+              color: 'var(--ws2-ink-1)', lineHeight: 1.15,
               fontStyle: 'italic', marginBottom: '1.6rem',
               letterSpacing: '-0.01em',
             }}>
               Setiap kesadaran
               <br />
-              <span style={{ color: '#E5D9B6' }}>adalah langkah nyata.</span>
+              <span style={{ color: 'var(--ws2-ink-1)' }}>adalah langkah nyata.</span>
             </h2>
 
             {/* Divider animasi */}
@@ -1259,7 +1196,7 @@ function SceneAjakan() {
 
             <p className="lato-regular" style={{
               fontSize: '1.05rem', lineHeight: 1.9,
-              color: 'rgba(229,217,182,0.7)',
+              color: 'var(--ws2-ink-2)',
               maxWidth: 420, margin: 0,
             }}>
               Data ini ada karena ratusan petugas turun ke lapangan.
@@ -1275,7 +1212,7 @@ function SceneAjakan() {
             <p className="playfair-display" style={{
               fontSize: 'clamp(1.1rem, 2.2vw, 1.55rem)',
               fontStyle: 'italic', lineHeight: 1.75,
-              color: 'rgba(229,217,182,0.55)',
+              color: 'var(--ws2-ink-3)',
               margin: 0,
             }}>
               "Pemulihan bukan sekadar soal fisik —
@@ -1283,7 +1220,7 @@ function SceneAjakan() {
               dan dari tangan yang mau berbagi."
             </p>
             <div className="lato-regular" style={{
-              fontSize: '0.75rem', color: 'rgba(98,129,65,0.65)',
+              fontSize: '0.75rem', color: 'var(--ws2-green)',
               letterSpacing: '0.1em', marginTop: '1.2rem',
               textTransform: 'uppercase',
             }}>
@@ -1299,8 +1236,8 @@ function SceneAjakan() {
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '0',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            borderTop: '1px solid var(--ws2-surface-1)',
+            borderBottom: '1px solid var(--ws2-surface-1)',
             opacity: visStats ? 1 : 0,
             transform: visStats ? 'translateY(0)' : 'translateY(20px)',
             transition: 'opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s',
@@ -1312,7 +1249,7 @@ function SceneAjakan() {
               key={s.label}
               style={{
                 padding: '2.2rem 1.5rem',
-                borderRight: i < STATS.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                borderRight: i < STATS.length - 1 ? '1px solid var(--ws2-surface-1)' : 'none',
                 display: 'flex', flexDirection: 'column', gap: '0.4rem',
               }}
             >
@@ -1325,13 +1262,13 @@ function SceneAjakan() {
               </div>
               <div className="lato-bold" style={{
                 fontSize: '0.72rem', letterSpacing: '0.15em',
-                textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)',
+                textTransform: 'uppercase', color: 'var(--ws2-ink-3)',
                 marginTop: '0.2rem',
               }}>
                 {s.label}
               </div>
               <div className="lato-regular" style={{
-                fontSize: '0.68rem', color: 'rgba(255,255,255,0.28)',
+                fontSize: '0.68rem', color: 'var(--ws2-ink-4)',
                 lineHeight: 1.4,
               }}>
                 {s.desc}
@@ -1356,31 +1293,9 @@ function SceneAjakan() {
         >
           {/* Label kiri */}
           <div>
-            <div style={{
-              width: '2.5rem',
-              height: '2.5rem',
-              borderRadius: '50%',
-              background: 'rgba(98,129,65,0.12)',
-              border: '1px solid rgba(98,129,65,0.25)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1rem',
-              color: '#E5D9B6',
-              marginBottom: '1rem',
-            }}>
-              •
-            </div>
-            <div className="lato-bold" style={{
-              fontSize: '0.68rem', letterSpacing: '0.24em',
-              textTransform: 'uppercase', color: 'rgba(229,217,182,0.4)',
-              marginBottom: '0.8rem',
-            }}>
-              Sebarkan Informasi
-            </div>
             <p className="lato-regular" style={{
               fontSize: '1rem', lineHeight: 1.8,
-              color: 'rgba(229,217,182,0.6)', margin: 0,
+              color: 'var(--ws2-ink-3)', margin: 0,
               maxWidth: 380,
             }}>
               Bagi laporan ini kepada pengambil keputusan,
@@ -1392,8 +1307,8 @@ function SceneAjakan() {
           <div style={{
             display: 'flex', flexDirection: 'column', gap: '1rem',
             padding: '2rem',
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.07)',
+            background: 'var(--ws2-surface-c2)',
+            border: '1px solid var(--ws2-line-c1)',
             borderRadius: 16,
             backdropFilter: 'blur(8px)',
           }}>
@@ -1403,7 +1318,7 @@ function SceneAjakan() {
                 width: '100%',
                 padding: '1rem 1.8rem',
                 background: '#628141',
-                color: '#fff', border: 'none',
+                color: 'var(--ws2-ink-1)', border: 'none',
                 fontSize: '0.95rem', fontFamily: 'var(--font-content)',
                 fontWeight: 700, letterSpacing: '0.04em',
                 cursor: 'pointer', borderRadius: 10,
@@ -1412,7 +1327,7 @@ function SceneAjakan() {
                 textShadow: '0 1px 2px rgba(0,0,0,0.2)',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.background = '#72994e';
+                e.currentTarget.style.background = 'var(--ws2-green)';
                 e.currentTarget.style.boxShadow = '0 10px 32px rgba(98,129,65,0.65)';
                 e.currentTarget.style.transform = 'translateY(-3px)';
               }}
@@ -1425,14 +1340,14 @@ function SceneAjakan() {
               Bagikan Laporan Ini
             </button>
 
-            <a
-              href="/"
+            <Link
+              to="/"
               style={{
                 display: 'block', width: '100%',
                 padding: '0.9rem 1.8rem',
                 background: 'transparent',
-                color: 'rgba(229,217,182,0.65)',
-                border: '1px solid rgba(229,217,182,0.2)',
+                color: 'var(--ws2-ink-3)',
+                border: '1px solid var(--ws2-line-c2)',
                 fontSize: '0.9rem', fontFamily: 'var(--font-content)',
                 fontWeight: 600, letterSpacing: '0.03em',
                 cursor: 'pointer', borderRadius: 10,
@@ -1441,18 +1356,18 @@ function SceneAjakan() {
                 boxSizing: 'border-box',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = 'rgba(229,217,182,0.45)';
+                e.currentTarget.style.borderColor = 'var(--ws2-text-4)';
                 e.currentTarget.style.color = '#E5D9B6';
                 e.currentTarget.style.background = 'rgba(229,217,182,0.06)';
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(229,217,182,0.2)';
-                e.currentTarget.style.color = 'rgba(229,217,182,0.65)';
+                e.currentTarget.style.borderColor = 'var(--ws2-line-2)';
+                e.currentTarget.style.color = 'var(--ws2-text-3)';
                 e.currentTarget.style.background = 'transparent';
               }}
             >
               Kembali ke Beranda
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -1469,7 +1384,7 @@ function SceneAjakan() {
           }
           .kb-s4-stats > div {
             border-right: none !important;
-            border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+            border-bottom: 1px solid var(--ws2-surface-1) !important;
           }
           .kb-s4-cta {
             grid-template-columns: 1fr !important;
@@ -1507,35 +1422,9 @@ const FLOAT_PARTICLES = Array.from({ length: 24 }, (_, i) => ({
   opacity: 0.12 + (i % 5) * 0.05,
 }));
 
-// Kata-kata interaktif — hover highlight
-function InteractiveWord({ word, color, delay = 0, visible }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <span
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        display: 'inline-block',
-        color: hov ? (color || '#E67E22') : (color || '#fff'),
-        textShadow: hov
-          ? `0 0 40px ${color || '#E67E22'}cc, 0 0 80px ${color || '#E67E22'}44`
-          : 'none',
-        transform: hov ? 'scale(1.07) translateY(-3px)' : 'scale(1) translateY(0)',
-        transition: 'color 0.25s ease, text-shadow 0.25s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1)',
-        cursor: 'default',
-        marginRight: '0.28em',
-        opacity: visible ? 1 : 0,
-        transitionDelay: hov ? '0s' : `${delay}s`,
-      }}
-    >
-      {word}
-    </span>
-  );
-}
 
 function SceneDataTerjaga() {
   const sectionRef   = useRef(null);
-  const spotlightRef = useRef(null);
   const wordsRef     = useRef([]);
   const [ref, visible] = useInView(0.1);
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
@@ -1594,7 +1483,6 @@ function SceneDataTerjaga() {
     { w: 'dari', c: '#fff' },
     { w: 'pemulihan.', c: '#E67E22' },
   ];
-  const allWords = [...LINE1, ...LINE2];
 
   return (
     <section
@@ -1608,16 +1496,22 @@ function SceneDataTerjaga() {
         position: 'relative',
         minHeight: '100vh',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'linear-gradient(175deg, #030912 0%, #0a1428 42%, #090d1a 100%)',
+        background: 'transparent',
         overflow: 'hidden',
-        cursor: 'none',
         opacity: sceneVisible ? 1 : 0,
         transform: sceneVisible ? 'translateY(0)' : 'translateY(24px)',
-        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)',
         willChange: 'opacity, transform',
       }}
     >
       <GrainOverlay opacity={0.05} />
+
+      {/* Fajar perlahan naik dari tepi bawah — dua lapis gradien yang bergeser
+          sangat lambat (18 dan 24 detik). Dipilih karena kalimat penutupnya
+          bicara tentang AWAL pemulihan; gerakannya harus terasa seperti langit
+          menjelang terang, bukan animasi dekoratif. */}
+      <div aria-hidden="true" className="kb-fajar kb-fajar-1" />
+      <div aria-hidden="true" className="kb-fajar kb-fajar-2" />
 
       {/* Spotlight layer */}
       <div aria-hidden="true" style={{
@@ -1761,7 +1655,7 @@ function SceneDataTerjaga() {
           style={{
             fontSize: 'clamp(1rem, 2vw, 1.25rem)',
             lineHeight: 1.95,
-            color: 'rgba(229,217,182,0.5)',
+            color: 'var(--ws2-text-4)',
             maxWidth: 540, margin: '0 auto 3.5rem',
             opacity: visible ? 1 : 0,
             transition: 'opacity 1s ease 0.8s',
@@ -1774,7 +1668,7 @@ function SceneDataTerjaga() {
         {/* Footer */}
         <div style={{ opacity: visible ? 0.35 : 0, transition: 'opacity 1s ease 1.2s' }}>
           <span className="lato-regular" style={{
-            fontSize: '0.7rem', color: 'rgba(255,255,255,0.28)',
+            fontSize: '0.7rem', color: 'var(--ws2-text-4)',
             letterSpacing: '0.18em', textTransform: 'uppercase',
           }}>
             Hasil Pendataan R3P · Data Pemulihan Bencana · 2026
@@ -1783,6 +1677,36 @@ function SceneDataTerjaga() {
       </div>
 
       <style>{`
+        .kb-fajar {
+          position: absolute;
+          left: -20%;
+          right: -20%;
+          bottom: -35%;
+          height: 85%;
+          pointer-events: none;
+          z-index: 0;
+          border-radius: 50%;
+          filter: blur(90px);
+        }
+        .kb-fajar-1 {
+          background: radial-gradient(ellipse at 50% 100%, rgba(98,129,65,0.30) 0%, transparent 68%);
+          animation: kbFajar1 18s ease-in-out infinite;
+        }
+        .kb-fajar-2 {
+          background: radial-gradient(ellipse at 38% 100%, rgba(230,126,34,0.20) 0%, transparent 62%);
+          animation: kbFajar2 24s ease-in-out infinite;
+        }
+        @keyframes kbFajar1 {
+          0%, 100% { transform: translate3d(-3%, 4%, 0) scale(1); opacity: 0.55; }
+          50%      { transform: translate3d(3%, -2%, 0) scale(1.1); opacity: 0.9; }
+        }
+        @keyframes kbFajar2 {
+          0%, 100% { transform: translate3d(4%, 2%, 0) scale(1.05); opacity: 0.4; }
+          50%      { transform: translate3d(-4%, -4%, 0) scale(1); opacity: 0.75; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .kb-fajar { animation: none; }
+        }
         @keyframes particleFloat0 {
           0%,100% { transform: translate(0,0) scale(1); }
           50%      { transform: translate(8px,-14px) scale(1.3); }
@@ -1812,8 +1736,15 @@ export default function BabakKebutuhan() {
   return (
     <>
       <SceneJeritanBantuan />
+      <BgSeam from="navy" to="cream" />
       <SceneRingkasanNarasi />
+      <BgSeam from="cream" to="navy" />
       <SceneDiBalikAngka />
+      {/* Ajakan diberi latar krem supaya berbeda dari dua scene gelap yang
+          mengapitnya, sekaligus melanjutkan pola selang-seling warna. */}
+      <BgSeam from="navy" to="cream" />
+      <SceneAjakan />
+      <BgSeam from="cream" to="navy" />
       <SceneDataTerjaga />
     </>
   );
