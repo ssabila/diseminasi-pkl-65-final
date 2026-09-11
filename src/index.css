@@ -7,7 +7,6 @@
   --green: #628141;
   --off-white: #f5f5f5;
   --orange: #E67E22;
-  --gold: #d4a855;
 
   /* Theme Typography */
   --font-title: "Playfair Display", serif;
@@ -20,6 +19,14 @@ body {
   margin: 0;
   padding: 0;
 }
+
+html { overflow-x: hidden; }
+
+/* Lenis smooth scroll (dipasang di WebStory2 & WebStory3) */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 body {
   background-color: var(--off-white);
