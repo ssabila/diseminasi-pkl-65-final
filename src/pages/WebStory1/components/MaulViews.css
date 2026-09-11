@@ -1,134 +1,420 @@
-/* ===================== VIEW 6 UTAMA ===================== */
+/* ===================== VIEW 6: AMUNISI TEMPUR (BESPOKE TACTICAL GEAR GRID) ===================== */
 .ws1-maul-view6 {
-  background: radial-gradient(circle at -20% 50%, rgba(217,119,6,0.15) 0%, transparent 50%),
-              radial-gradient(circle at 120% 50%, rgba(233,30,99,0.1) 0%, transparent 50%),
-              #0d1525;
+  background-color: var(--navy);
   color: var(--beige);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
-  text-align: center;
+  padding: 100px var(--pad-x) 110px;
   position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* ===================== TIPOGRAFI ===================== */
-.ws1-maul-header h2 {
-  font-size: 4.5rem; 
-  color: var(--beige);
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
-}
-
-.ws1-maul-text-orange {
-  color: #d97706; 
-  font-style: italic;
-}
-
-.ws1-maul-header p {
-  font-size: 1.2rem;
-  margin-bottom: 4rem;
-  opacity: 0.9;
-  letter-spacing: 0.5px;
-}
-
-/* ===================== GRID LAYOUT ===================== */
-.ws1-maul-icon-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 9rem; 
-  column-gap: 2rem;
-  max-width: 1000px;
-  width: 100%;
-}
-
-.ws1-maul-icon-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative; 
-}
-
-/* ===================== LINGKARAN ORANYE (CSS) ===================== */
-.ws1-maul-icon-item {
-  width: 160px; 
-  height: 160px;
-  background-color: #b45f1b; 
-  border-radius: 50%; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 2; 
-}
-
-.ws1-maul-icon-wrapper:hover .ws1-maul-icon-item {
-  transform: scale(1.08);
-  box-shadow: 0 12px 25px rgba(217, 119, 6, 0.5);
-}
-
-.ws1-maul-icon-item img {
-  width: 65%; 
-  height: 65%; 
-  object-fit: contain; 
-}
-
-/* ===================== KOTAK TEKS POP-UP ===================== */
-.ws1-maul-text-container {
+/* Cartography Grid Overlay (Identical to WebStory Theme) */
+.ws1-maul-grid-overlay {
   position: absolute;
-  top: 175px; 
-  width: 320px; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 10; 
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center;
+  opacity: 0.8;
+  z-index: 1;
   pointer-events: none;
 }
 
-.ws1-maul-text-container.show {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+.ws1-maul-inner {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* TRIK CSS KHUSUS BARIS BAWAH */
-.ws1-maul-icon-wrapper:nth-child(n+4) .ws1-maul-text-container {
-  top: auto; 
-  bottom: 175px; 
-}
-
-.ws1-maul-pill-title {
-  background-color: var(--off-white, #ffffff);
-  color: var(--navy);
-  padding: 0.4rem 1.5rem;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.ws1-maul-desc-text {
-  color: #d97706; 
-  font-size: 1.1rem;
-  line-height: 1.4;
+/* ── HEADER ── */
+.ws1-maul-header {
   text-align: center;
+  max-width: 760px;
+  margin-bottom: 50px;
 }
 
+.ws1-maul-kicker {
+  display: inline-block;
+  font-family: var(--font-content);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.ws1-maul-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  color: var(--off-white);
+  margin: 0 0 12px 0;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.ws1-maul-text-orange {
+  color: var(--orange);
+  font-style: italic;
+  text-shadow: 0 0 40px rgba(230, 126, 34, 0.35);
+}
+
+.ws1-maul-subtitle {
+  font-family: var(--font-content);
+  font-size: clamp(0.92rem, 1.4vw, 1.08rem);
+  color: rgba(229, 217, 182, 0.75);
+  line-height: 1.65;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* ── AMUNISI TEMPUR: SINGLE MASCOT & ORBITAL CONSTELLATION ── */
+.ws1-amunisi-stage {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.ws1-amunisi-header {
+  margin-bottom: 20px;
+}
+
+.ws1-amunisi-kicker {
+  font-family: var(--font-content);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.ws1-amunisi-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 900;
+  color: var(--off-white);
+  margin: 0 0 10px 0;
+  line-height: 1.15;
+}
+
+.ws1-amunisi-accent {
+  color: var(--orange);
+  font-style: italic;
+  text-shadow: 0 0 35px rgba(230, 126, 34, 0.35);
+}
+
+.ws1-amunisi-subtitle {
+  font-family: var(--font-content);
+  font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+  color: rgba(229, 217, 182, 0.75);
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 300;
+  max-width: 600px;
+}
+
+/* ── CONSTELLATION STAGE (RADIAL ORBIT AROUND SINGLE MASCOT) ── */
+.ws1-amunisi-constellation {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+}
+
+/* Radar Rings */
+.ws1-orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ring-outer {
+  width: 620px;
+  height: 620px;
+  border: 1px dashed rgba(230, 126, 34, 0.18);
+  animation: orbitRotateClockwise 60s linear infinite;
+}
+
+.ring-mid {
+  width: 440px;
+  height: 440px;
+  border: 1px solid rgba(229, 217, 182, 0.08);
+}
+
+@keyframes orbitRotateClockwise {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Center Mascot */
+.ws1-orbit-center-mascot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  margin: 0 auto;
+}
+
+.ws1-mascot-pedestal-glow {
+  position: absolute;
+  bottom: 0px;
+  width: 260px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(230, 126, 34, 0.5) 0%, rgba(212, 168, 85, 0.15) 50%, transparent 75%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.ws1-amunisi-mascot-single {
+  max-height: 380px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 25px rgba(230, 126, 34, 0.25));
+  animation: mascotFloatSingle 4.5s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes mascotFloatSingle {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(-1deg); }
+}
+
+/* Wings (Left & Right Wings with 3 gear items each) */
+.ws1-orbit-wing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 36px;
+  z-index: 5;
+  width: 280px;
+}
+
+.wing-left {
+  align-items: flex-end;
+}
+
+.wing-right {
+  align-items: flex-start;
+}
+
+/* Orbital Node (Individual Gear Item) */
+.ws1-orbit-node {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+  position: relative;
+}
+
+.wing-left .ws1-orbit-node {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.wing-right .ws1-orbit-node {
+  flex-direction: row;
+  text-align: left;
+}
+
+/* Subtle arc curvature on desktop */
+@media (min-width: 961px) {
+  .node-card { transform: translateX(-15px); }
+  .node-fasih { transform: translateX(-40px); }
+  .node-pb { transform: translateX(-15px); }
+
+  .node-jas { transform: translateX(15px); }
+  .node-jaket { transform: translateX(40px); }
+  .node-boots { transform: translateX(15px); }
+
+  .ws1-orbit-node:hover {
+    transform: scale(1.1) !important;
+  }
+}
+
+/* Icon Wrap (Luminous, High-Contrast Circle that makes Line-Art Pop) */
+.ws1-orbit-icon-wrap {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.96) 0%, rgba(248, 245, 235, 0.92) 65%, rgba(229, 217, 182, 0.85) 100%);
+  border: 2.5px solid var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(230, 126, 34, 0.35);
+  transition: all 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.ws1-orbit-node:hover .ws1-orbit-icon-wrap,
+.ws1-orbit-node.is-hovered .ws1-orbit-icon-wrap {
+  border-color: #fff;
+  background: radial-gradient(circle at 50% 35%, #ffffff 0%, rgba(255, 250, 240, 0.98) 70%, rgba(240, 230, 205, 0.95) 100%);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 35px rgba(230, 126, 34, 0.8);
+  transform: scale(1.12);
+}
+
+.ws1-orbit-icon-wrap img {
+  max-width: 65px;
+  max-height: 65px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+  transition: transform 0.35s ease;
+}
+
+.ws1-orbit-node:hover .ws1-orbit-icon-wrap img {
+  transform: scale(1.1);
+}
+
+/* Pill Label */
+.ws1-orbit-label {
+  font-family: var(--font-content);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--off-white);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(13, 17, 45, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(229, 217, 182, 0.25);
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  transition: all 0.35s ease;
+}
+
+.ws1-orbit-node:hover .ws1-orbit-label,
+.ws1-orbit-node.is-hovered .ws1-orbit-label {
+  color: #fff;
+  border-color: var(--orange);
+  background: rgba(230, 126, 34, 0.3);
+  box-shadow: 0 0 18px rgba(230, 126, 34, 0.45);
+}
+
+/* ── Responsive Tablet & Mobile ── */
+@media (max-width: 960px) {
+  .ws1-amunisi-constellation {
+    min-height: auto;
+    gap: 20px;
+  }
+
+  .ring-outer {
+    width: 480px;
+    height: 480px;
+  }
+
+  .ring-mid {
+    width: 340px;
+    height: 340px;
+  }
+
+  .ws1-amunisi-mascot-single {
+    max-height: 300px;
+  }
+
+  .ws1-orbit-wing {
+    width: 230px;
+    gap: 24px;
+  }
+
+  .ws1-orbit-icon-wrap {
+    width: 78px;
+    height: 78px;
+  }
+
+  .ws1-orbit-icon-wrap img {
+    max-width: 52px;
+    max-height: 52px;
+  }
+
+  .ws1-orbit-label {
+    font-size: 0.78rem;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 680px) {
+  .ws1-amunisi-constellation {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .ring-outer, .ring-mid {
+    display: none;
+  }
+
+  .ws1-amunisi-mascot-single {
+    max-height: 250px;
+  }
+
+  .ws1-orbit-center-mascot {
+    order: -1;
+  }
+
+  .ws1-orbit-wing {
+    width: 100%;
+    max-width: 340px;
+    gap: 16px;
+  }
+
+  .wing-left, .wing-right {
+    align-items: center;
+  }
+
+  .wing-left .ws1-orbit-node,
+  .wing-right .ws1-orbit-node {
+    flex-direction: row;
+    text-align: left;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
 
 /* =========================================
    VIEW 8: SEHAT DAN SOLID
 ========================================= */
 .ws1-maul-view8 {
-  background: radial-gradient(circle at 50% 120%, #f7d299 0%, #ebdcb2 40%, #d4c194 100%);
+  background: radial-gradient(circle at 50% 120%, #f7d299 0%, var(--cream-bg) 40%, #d4c194 100%);
   background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E'),
-                    radial-gradient(circle at 50% 120%, #f7d299 0%, #ebdcb2 40%, #d4c194 100%);
+                    radial-gradient(circle at 50% 120%, #f7d299 0%, var(--cream-bg) 40%, #d4c194 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -146,7 +432,8 @@
 }
 
 .ws1-maul-v8-header h2 {
-  font-size: 4rem;
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 8vw, 4rem);
   margin-bottom: 1.5rem;
 }
 
@@ -164,12 +451,13 @@
 
 .ws1-maul-btn-round, .ws1-maul-btn-pill {
   background-color: #f7d299;
-  color: #d97706;
+  color: var(--orange);
   border: none;
   cursor: pointer;
+  font-family: var(--font-content);
   font-size: 1.1rem;
   font-weight: bold;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .ws1-maul-btn-round {
@@ -184,14 +472,14 @@
 }
 
 .ws1-maul-btn-round:hover, .ws1-maul-btn-pill:hover, .ws1-maul-btn-pill.active {
-  background-color: #d97706;
+  background-color: var(--orange);
   color: white;
 }
 
 .ws1-maul-btn-round:focus-visible,
 .ws1-maul-btn-pill:focus-visible,
 .ws1-maul-orbit-item:focus-visible {
-  outline: 2px solid #d97706;
+  outline: 2px solid var(--orange);
   outline-offset: 4px;
 }
 
@@ -209,20 +497,19 @@
 /* --- Tampilan Pusat (Lingkaran Raksasa) --- */
 .ws1-maul-center-display {
   position: relative;
-  width: 440px; 
+  width: 440px;
   height: 440px;
   border-radius: 50%;
   background-color: var(--navy);
-  border: 8px solid white; 
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  border: 8px solid white;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 5;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-/* Foto Full Size */
 .ws1-maul-center-img {
   width: 100%;
   height: 100%;
@@ -230,63 +517,62 @@
   position: absolute;
   top: 0; left: 0;
   z-index: 1;
-  animation: fadeIn 0.4s ease forwards;
+  animation: v8-fadeIn 0.4s ease forwards;
 }
 
-/* Gradient Gelap Tipis di Atas */
 .ws1-maul-center-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 40%);
   z-index: 2;
   pointer-events: none;
 }
 
-/* Teks Melengkung di Tengah */
 .ws1-maul-curved-text-svg {
   position: absolute;
-  top: -15px; 
+  top: -15px;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 3;
   pointer-events: none;
-  animation: spinIn 0.5s ease;
+  animation: v8-spinIn 0.5s ease;
 }
 
 .ws1-maul-svg-text {
-  font-family: 'Playfair Display', serif; 
+  font-family: var(--font-title);
   font-size: 34px;
   font-weight: bold;
-  fill: #ffffff; 
+  fill: #ffffff;
   letter-spacing: 2px;
-  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)); 
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.8));
 }
 
-/* Angka raksasa jika foto belum ada */
 .ws1-maul-placeholder-center-large {
-  font-size: 8rem;
-  color: rgba(255,255,255,0.2);
+  font-family: var(--font-title);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.15);
   z-index: 1;
+  font-style: italic;
 }
 
-/* --- Lingkaran Orbit (Diperbaiki) --- */
+/* --- Lingkaran Orbit --- */
 .ws1-maul-orbit-item {
   position: absolute;
   width: 85px;
   height: 85px;
   border-radius: 50%;
   background-color: var(--navy);
-  border: 1px solid rgba(0,0,0,0.05); 
+  border: 2px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
-  /* PERHATIAN: Memanggil variabel --x dan --y agar diam di tempat */
   transform: translate(var(--x), var(--y)) scale(1);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
   z-index: 2;
   overflow: hidden;
 }
@@ -298,31 +584,31 @@
 }
 
 .ws1-maul-placeholder-orbit {
-  color: white;
+  color: rgba(255, 255, 255, 0.4);
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
+  font-family: var(--font-content);
 }
 
-/* EFEK TIMBUL SAAT AKTIF */
 .ws1-maul-orbit-item.active {
-  /* PERHATIAN: Tetap memanggil var(--x) dan var(--y) saat membesar */
-  transform: translate(var(--x), var(--y)) scale(1.4) !important; 
-  border: 4px solid #d97706 !important; 
-  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4); 
+  transform: translate(var(--x), var(--y)) scale(1.35);
+  border: 3px solid var(--orange);
+  box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
   z-index: 10;
 }
 
-.ws1-maul-orbit-item:hover {
-  transform: translate(var(--x), var(--y)) scale(1.1);
+.ws1-maul-orbit-item:hover:not(.active) {
+  transform: translate(var(--x), var(--y)) scale(1.12);
+  border-color: rgba(230, 126, 34, 0.3);
 }
 
-/* --- Animasi --- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+/* --- Animations --- */
+@keyframes v8-fadeIn {
+  from { opacity: 0; transform: scale(1.05); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-@keyframes spinIn {
+@keyframes v8-spinIn {
   0% { transform: rotate(-5deg); opacity: 0; }
   100% { transform: rotate(0deg); opacity: 1; }
 }
@@ -330,12 +616,51 @@
 /* =========================================
    RESPONSIVE DESIGN (MAUL VIEWS)
 ========================================= */
+
+/* View 6 Responsive */
 @media (max-width: 1024px) {
-  .ws1-maul-icon-grid {
+  .ws1-maul-equip-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ws1-maul-equip-grid {
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 5rem;
+    gap: 14px;
   }
 
+  .ws1-maul-equip-img {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-maul-view6 {
+    padding: 3rem 1rem;
+  }
+
+  .ws1-maul-equip-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .ws1-maul-equip-body {
+    padding: 12px 14px 16px;
+  }
+
+  .ws1-maul-equip-title {
+    font-size: 0.95rem;
+  }
+
+  .ws1-maul-equip-desc {
+    font-size: 0.72rem;
+  }
+}
+
+/* View 8 Responsive */
+@media (max-width: 1024px) {
   .ws1-maul-gallery-container {
     width: min(620px, 92vw);
     height: min(620px, 92vw);
@@ -348,50 +673,30 @@
 }
 
 @media (max-width: 768px) {
-  /* View 6 */
-  .ws1-maul-header h2 {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-  .ws1-maul-header p {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-  .ws1-maul-icon-grid {
-    grid-template-columns: 1fr;
-    row-gap: 4rem;
-  }
-  .ws1-maul-icon-item {
-    width: 120px;
-    height: 120px;
-  }
-  .ws1-maul-text-container {
-    top: 130px;
-    width: 280px;
-  }
-  
-  /* View 8 */
   .ws1-maul-view8 {
     padding: 3.5rem 1rem;
   }
-  .ws1-maul-v8-header h2 {
-    font-size: clamp(2.2rem, 10vw, 3.2rem);
-  }
+
   .ws1-maul-controls {
     gap: 0.7rem;
   }
+
   .ws1-maul-gallery-container {
     width: min(380px, 96vw);
     height: min(380px, 96vw);
     margin-top: 0.5rem;
   }
+
   .ws1-maul-center-display {
     width: 280px;
     height: 280px;
     border-width: 6px;
   }
+
   .ws1-maul-svg-text {
     font-size: 24px;
   }
+
   .ws1-maul-orbit-item {
     width: 60px;
     height: 60px;
@@ -419,6 +724,6 @@
   }
 
   .ws1-maul-orbit-item.active {
-    transform: translate(var(--x), var(--y)) scale(1.25) !important;
+    transform: translate(var(--x), var(--y)) scale(1.25);
   }
 }

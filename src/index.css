@@ -8,9 +8,19 @@
   --off-white: #f5f5f5;
   --orange: #E67E22;
 
+  /* Extended Palette */
+  --cream-bg: #ebdcb2;
+  --navy-light: #1a1c42;
+  --navy-deep: #0d1525;
+
   /* Theme Typography */
   --font-title: "Playfair Display", serif;
+  --font-h: "Playfair Display", serif;
   --font-content: "Lato", sans-serif;
+
+  /* Spacing & Effects */
+  --pad-x: clamp(24px, 5vw, 80px);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 

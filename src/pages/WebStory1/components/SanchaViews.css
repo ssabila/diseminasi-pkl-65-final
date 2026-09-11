@@ -1,177 +1,546 @@
 /* Add specific styles for Sancha's Views here */
 
 /* =========================================
-   VIEW 1: TIMELINE (SANCHA)
+   VIEW 1: TIMELINE PRA-PEMBERANGKATAN (SANCHA)
+   Cardless Museum Infographic Style (Matching View 0)
 ========================================= */
 .ws1-sancha-view1 {
-  background-color: var(--navy); /* Matches other views */
-  min-height: 150vh; /* Tall enough for scrolling */
+  background-color: var(--navy); /* 100% matches View 0 for seamless flow */
+  min-height: 100vh;
   position: relative;
-  padding: 100px 0;
+  padding: 140px 0 120px;
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
-/* Cinematic Glows */
-.ws1-sancha-view1 .j-grain {
+/* Subtle cartography grid overlay (Identical to View 0) */
+.ws1-sancha-v1-grid {
   position: absolute;
   inset: 0;
-  z-index: 9990;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center;
+  opacity: 0.8;
+  z-index: 1;
   pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: overlay;
 }
 
-.ws1-sancha-v1-glow {
+/* Watermark Peta Siluet Sumatera */
+.ws1-sancha-v1-map-watermark {
   position: absolute;
-  width: 40vw;
-  height: 40vw;
-  border-radius: 50%;
-  filter: blur(120px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  width: 580px;
+  max-width: 85vw;
+  opacity: 0.06;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+  user-select: none;
 }
 
-.ws1-sancha-v1-glow.top-left {
-  top: -10vw;
-  left: -10vw;
-  background: rgba(217, 119, 6, 0.15); /* Orange glow */
-}
-
-.ws1-sancha-v1-glow.bottom-right {
-  bottom: 10vw;
-  right: -10vw;
-  background: rgba(233, 30, 99, 0.12); /* Pinkish glow for depth */
-}
-
-.ws1-sancha-tl-container {
-  position: relative;
+.ws1-sancha-v1-map-img {
   width: 100%;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  gap: 150px; /* Space between nodes */
-  padding-top: 50px;
+  height: auto;
+  filter: invert(1) brightness(1.6) sepia(70%) hue-rotate(335deg);
+}
+
+/* Ornamen Sudut Songket Khas Sumatera (Pucuk Rebung) */
+.ws1-sancha-sumatra-corner {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.ws1-sancha-sumatra-corner.corner-tl {
+  top: 24px;
+  left: 24px;
+}
+
+.ws1-sancha-sumatra-corner.corner-tr {
+  top: 24px;
+  right: 24px;
+  transform: scaleX(-1);
+}
+
+.ws1-sancha-v1-inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  position: relative;
   z-index: 5;
 }
 
-.ws1-sancha-tl-svg {
+/* ── Section Header dengan Motif Khas Aceh ── */
+.ws1-sancha-v1-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px;
+}
+
+/* Emblem Motif Khas Aceh (Pinto Aceh / Bungong Jeumpa) */
+.ws1-sancha-aceh-crest {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 12px rgba(230, 126, 34, 0.35));
+}
+
+.ws1-sancha-headline {
+  font-family: var(--font-title);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  color: var(--off-white);
+  margin: 0;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.ws1-sancha-accent-orange {
+  color: var(--orange);
+  font-style: italic;
+}
+
+/* ── Timeline Container ── */
+.ws1-sancha-tl-container {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 20px 0;
+}
+
+/* Central Spine (Poros Vertikal) */
+.ws1-sancha-tl-spine {
+  position: absolute;
+  top: 25px;
+  bottom: 25px;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.ws1-sancha-tl-track {
+  position: absolute;
+  inset: 0;
+  background: rgba(229, 217, 182, 0.18);
+  border-radius: 2px;
+}
+
+.ws1-sancha-tl-progress-bar {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
+  left: 0;
+  width: 100%;
   height: 100%;
-  z-index: 0;
+  background: var(--orange);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(230, 126, 34, 0.8);
 }
 
-.ws1-sancha-tl-path {
-  fill: none;
-  stroke: #d97706; /* Orange timeline */
-  stroke-width: 2.5;
-}
-
-.ws1-sancha-tl-card-wrap {
+/* ── Timeline Entry ── */
+.ws1-sancha-tl-entry {
   position: relative;
-  width: 45%;
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  z-index: 5;
+}
+
+.ws1-sancha-tl-entry.is-left {
+  justify-content: flex-start;
+}
+
+.ws1-sancha-tl-entry.is-right {
+  justify-content: flex-end;
+}
+
+/* Square / Diamond Pin on Center Spine (Matching reference) */
+.ws1-sancha-tl-pin-wrap {
+  position: absolute;
+  left: 50%;
+  top: 22px;
+  transform: translateX(-50%);
   z-index: 10;
 }
 
-.ws1-sancha-tl-card-wrap.left {
-  align-self: flex-start;
+.ws1-sancha-tl-pin {
+  width: 14px;
+  height: 14px;
+  background: var(--orange);
+  border: 2px solid var(--navy);
+  box-shadow: 0 0 14px rgba(230, 126, 34, 0.7);
+  transform: rotate(45deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.ws1-sancha-tl-entry:hover .ws1-sancha-tl-pin {
+  transform: rotate(90deg) scale(1.2);
+  box-shadow: 0 0 22px var(--orange);
+}
+
+/* Branch connector to center */
+.ws1-sancha-tl-branch {
+  position: absolute;
+  top: 28px;
+  height: 1px;
+  width: 7%;
+  z-index: 3;
+}
+
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-branch {
+  left: 43%;
+  background: linear-gradient(to left, var(--orange), rgba(230, 126, 34, 0.2));
+}
+
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-branch {
+  left: 50%;
+  background: linear-gradient(to right, var(--orange), rgba(230, 126, 34, 0.2));
+}
+
+/* ── Pure Typographic Content Block (Zero Cards / No Box) ── */
+.ws1-sancha-tl-block {
+  width: 43%;
+  position: relative;
+  z-index: 6;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-block {
   text-align: right;
-  padding-right: 40px;
+  padding-right: 15px;
 }
 
-.ws1-sancha-tl-card-wrap.right {
-  align-self: flex-end;
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-block {
   text-align: left;
-  padding-left: 40px;
+  padding-left: 15px;
 }
 
-.ws1-sancha-tl-card {
-  background: rgba(255, 255, 255, 0.03); /* Frosted Glass */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 3px solid #d97706; /* Strong accent border */
-  color: #E5D9B6; /* Cream text */
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.02);
-  display: inline-block;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+.ws1-sancha-tl-entry:hover .ws1-sancha-tl-block {
+  transform: translateY(-3px);
 }
 
-.ws1-sancha-tl-card-wrap.left .ws1-sancha-tl-card {
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: 3px solid #d97706; /* Right accent for left cards */
+/* Date Row */
+.ws1-sancha-tl-date-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.ws1-sancha-tl-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(217, 119, 6, 0.05);
-  border-color: rgba(217, 119, 6, 0.4);
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-date-row {
+  align-items: flex-end;
 }
 
-.ws1-sancha-tl-date {
-  color: #d97706; /* Orange date */
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-date-row {
+  align-items: flex-start;
+}
+
+/* Huge Bold Year / Date (Grand Design: Lato Black) */
+.ws1-sancha-tl-huge-date {
+  font-family: var(--font-content);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 900;
+  color: var(--off-white);
+  line-height: 1;
+  letter-spacing: 0.02em;
   display: block;
-  margin-bottom: 5px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.ws1-sancha-tl-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+.ws1-sancha-tl-entry:hover .ws1-sancha-tl-huge-date {
   color: #ffffff;
-  font-family: 'Playfair Display', serif; /* Elegant serif title */
-  letter-spacing: 0.5px;
+  text-shadow: 0 0 25px rgba(230, 126, 34, 0.35);
 }
 
-.ws1-sancha-tl-desc {
-  font-size: 0.95rem;
-  color: rgba(229, 217, 182, 0.75); /* Cream with opacity */
-  line-height: 1.6;
+.ws1-sancha-tl-phase-label {
+  font-family: var(--font-content);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  text-transform: uppercase;
 }
 
-@keyframes dot-pulse {
-  0%, 100% { box-shadow: 0 0 15px #d97706, 0 0 30px rgba(217,119,6,0.6); }
-  50% { box-shadow: 0 0 25px #d97706, 0 0 45px rgba(217,119,6,0.9); }
+/* Crisp Orange Accent Line Underneath dengan Motif Songket Diamond */
+.ws1-sancha-tl-orange-line {
+  width: 100%;
+  max-width: 320px;
+  height: 2px;
+  background: var(--orange);
+  margin: 12px 0 16px;
+  box-shadow: 0 0 10px rgba(230, 126, 34, 0.4);
+  position: relative;
+  transition: max-width 0.4s ease, box-shadow 0.4s ease;
 }
 
-.ws1-sancha-tl-dot {
+.ws1-sancha-tl-diamond {
   position: absolute;
   top: 50%;
-  width: 16px;
-  height: 16px;
-  background-color: #d97706;
-  border-radius: 50%;
-  transform: translateY(-50%);
-  box-shadow: 0 0 15px #d97706, 0 0 30px rgba(217,119,6,0.6); /* Glowing dot */
-  border: 3px solid var(--navy); /* Knockout center effect */
-  animation: dot-pulse 3s infinite ease-in-out;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border: 1px solid var(--orange);
+  transform: translateY(-50%) rotate(45deg);
+  box-shadow: 0 0 6px var(--orange);
 }
 
-.ws1-sancha-tl-card-wrap.left .ws1-sancha-tl-dot {
-  right: -6px; /* Align to center line */
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-orange-line {
+  margin-left: auto;
 }
 
-.ws1-sancha-tl-card-wrap.right .ws1-sancha-tl-dot {
-  left: -6px; /* Align to center line */
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-diamond {
+  right: 0;
+}
+
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-orange-line {
+  margin-right: auto;
+}
+
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-diamond {
+  left: 0;
+}
+
+.ws1-sancha-tl-entry:hover .ws1-sancha-tl-orange-line {
+  max-width: 380px;
+  box-shadow: 0 0 16px rgba(230, 126, 34, 0.8);
+}
+
+/* Title & Narrative Typography (Grand Design) */
+.ws1-sancha-tl-heading {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--off-white);
+  margin: 0 0 10px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.ws1-sancha-tl-narrative {
+  font-family: var(--font-content);
+  font-size: 0.95rem;
+  color: rgba(229, 217, 182, 0.85);
+  line-height: 1.7;
+  margin: 0 0 14px;
+  font-weight: 400;
+  max-width: 380px;
+}
+
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-narrative {
+  margin-left: auto;
+}
+
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-narrative {
+  margin-right: auto;
+}
+
+/* Meta Block: Venue & Geographic Coordinates */
+.ws1-sancha-tl-meta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ws1-sancha-tl-entry.is-left .ws1-sancha-tl-meta-block {
+  align-items: flex-end;
+}
+
+.ws1-sancha-tl-entry.is-right .ws1-sancha-tl-meta-block {
+  align-items: flex-start;
+}
+
+.ws1-sancha-tl-venue {
+  font-family: var(--font-content);
+  font-size: 0.76rem;
+  color: var(--beige);
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+  display: block;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.ws1-sancha-tl-coord {
+  font-family: var(--font-content);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--orange);
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+/* ── Responsive for Tablet & Mobile (All Devices) ── */
+@media (max-width: 768px) {
+  .ws1-sancha-view1 {
+    padding: 80px 0 60px;
+  }
+
+  .ws1-sancha-sumatra-corner {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ws1-sancha-sumatra-corner.corner-tl {
+    top: 14px;
+    left: 14px;
+  }
+
+  .ws1-sancha-sumatra-corner.corner-tr {
+    top: 14px;
+    right: 14px;
+  }
+
+  .ws1-sancha-v1-header {
+    margin-bottom: 50px;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .ws1-sancha-headline {
+    font-size: clamp(1.9rem, 6vw, 2.8rem);
+  }
+
+  .ws1-sancha-tl-container {
+    gap: 48px;
+    padding: 10px 0;
+  }
+
+  .ws1-sancha-tl-spine {
+    left: 20px;
+    transform: none;
+  }
+
+  .ws1-sancha-tl-entry {
+    justify-content: flex-start !important;
+    padding-left: 52px;
+  }
+
+  .ws1-sancha-tl-pin-wrap {
+    left: 20px;
+    transform: translateX(-50%);
+  }
+
+  .ws1-sancha-tl-pin {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ws1-sancha-tl-branch {
+    left: 20px !important;
+    width: 32px !important;
+    background: linear-gradient(to right, var(--orange), rgba(230, 126, 34, 0.3)) !important;
+  }
+
+  .ws1-sancha-tl-block {
+    width: 100% !important;
+    text-align: left !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .ws1-sancha-tl-date-row {
+    align-items: flex-start !important;
+  }
+
+  .ws1-sancha-tl-huge-date {
+    font-size: clamp(1.4rem, 5.5vw, 2rem) !important;
+    line-height: 1.15;
+  }
+
+  .ws1-sancha-tl-phase-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  .ws1-sancha-tl-orange-line {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    max-width: 260px;
+  }
+
+  .ws1-sancha-tl-diamond {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  .ws1-sancha-tl-heading {
+    font-size: 1.2rem;
+  }
+
+  .ws1-sancha-tl-narrative {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    max-width: 100%;
+  }
+
+  .ws1-sancha-tl-meta-block {
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-sancha-view1 {
+    padding: 70px 0 50px;
+  }
+
+  .ws1-sancha-tl-container {
+    gap: 40px;
+  }
+
+  .ws1-sancha-tl-spine {
+    left: 16px;
+  }
+
+  .ws1-sancha-tl-pin-wrap {
+    left: 16px;
+  }
+
+  .ws1-sancha-tl-entry {
+    padding-left: 44px;
+  }
+
+  .ws1-sancha-tl-branch {
+    left: 16px !important;
+    width: 26px !important;
+  }
+
+  .ws1-sancha-tl-huge-date {
+    font-size: 1.35rem !important;
+  }
+
+  .ws1-sancha-tl-heading {
+    font-size: 1.1rem;
+  }
+
+  .ws1-sancha-tl-narrative {
+    font-size: 0.84rem;
+  }
 }
 
 /* =========================================
    VIEW 2: DITEMPA SEBELUM DITERJUNKAN
 ========================================= */
 .ws1-sancha-view2 {
-  background-color: #ebdcb2; /* Cream background from Sehat dan Solid */
+  background-color: var(--cream-bg);
   min-height: 100vh;
   padding: 100px 20px;
   display: flex;
@@ -183,7 +552,7 @@
 
 .ws1-sancha-v2-container {
   width: 100%;
-  max-width: 1300px; /* Reduced from 1400px to perfectly frame 4 cards */
+  max-width: 1240px; /* Reduced from 1400px to perfectly frame 4 cards */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -191,7 +560,7 @@
 
 .ws1-sancha-v2-header {
   padding: 0 20px;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   text-align: center; /* Centered layout */
 }
 
@@ -204,7 +573,7 @@
 }
 
 .ws1-sancha-v2-orange {
-  color: #d97706; 
+  color: var(--orange);
   font-style: italic;
 }
 
@@ -212,68 +581,98 @@
   display: flex;
   flex-wrap: wrap; 
   justify-content: center; 
-  gap: 20px; /* Tighter gap so 4 cards fit easily */
+  gap: 30px; /* Tighter gap so 4 cards fit easily */
   width: 100%;
   padding: 0 20px 40px 20px; /* Cleaned up padding */
   align-items: center;
 }
 
 .ws1-sancha-v2-doc {
-  width: 280px; /* Adjusted size to fit 4 cards nicely without scrolling */
-  height: 380px; 
-  background-color: #f5eedc;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  width: 250px;
+  height: auto;
+  background-color: #ffffff; /* Real paper background */
+  padding: 14px 14px 22px 14px;
+  border-radius: 2px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 2px 5px rgba(0, 0, 0, 0.03);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(0,0,0,0.05);
-  flex-shrink: 0; /* Prevent shrinking */
-  overflow: hidden;
+  justify-content: flex-start;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
   position: relative;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.4s ease;
 }
 
 .ws1-sancha-v2-doc:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+  transform: translateY(-12px) scale(1.03) rotate(0deg) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.16);
+  z-index: 10;
+}
+
+.ws1-sancha-v2-img-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .ws1-sancha-v2-doc img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
-.ws1-sancha-v2-doc.placeholder {
-  background-color: rgba(0,0,0,0.05);
-  border: 2px dashed rgba(0,0,0,0.2);
-}
-
-.ws1-sancha-v2-doc-inner {
+.ws1-sancha-v2-caption {
   width: 100%;
-  height: 100%;
-  border: 1px dashed rgba(0,0,0,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  margin-top: 14px;
+  text-align: center;
 }
 
-.ws1-sancha-v2-doc-inner p {
-  color: #d97706;
-  font-size: 0.9rem;
-  font-weight: bold;
-  opacity: 0.7;
+.ws1-sancha-v2-caption .v2-caption-text {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+.ws1-sancha-v2-caption .v2-caption-date {
+  font-family: var(--font-content);
+  font-size: 0.68rem;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Washi tape detail */
+.ws1-sancha-v2-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 80px;
+  height: 22px;
+  background-color: rgba(229, 217, 182, 0.45);
+  border-left: 1px dashed rgba(0, 0, 0, 0.06);
+  border-right: 1px dashed rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  z-index: 5;
+}
+
+
 
 /* =========================================
    VIEW 3: BRIEFING PIMPINAN QUOTE
 ========================================= */
 .ws1-sancha-view3 {
-  background: linear-gradient(to bottom, #ebdcb2 0%, var(--navy) 100%); /* Transition back to navy */
+  background: linear-gradient(to bottom, var(--cream-bg) 0%, var(--navy) 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -303,7 +702,7 @@
 }
 
 .ws1-sancha-v3-author {
-  color: #d97706;
+  color: var(--orange);
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 2px;

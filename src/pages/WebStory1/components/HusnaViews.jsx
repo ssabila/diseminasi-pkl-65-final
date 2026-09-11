@@ -30,6 +30,11 @@ import sumut21 from '../assets/images/husna-view-5/ws1-husna-view5-sumut21.webp'
 import sumut22 from '../assets/images/husna-view-5/ws1-husna-view5-sumut22.webp';
 import sumut3 from '../assets/images/husna-view-5/ws1-husna-view5-sumut3.webp';
 
+// Import View 7 assets from Husna
+import imgAceh from '../assets/images/husna-view-7/ws1-husna-view7-aceh.webp';
+import imgSumut from '../assets/images/husna-view-7/ws1-husna-view7-sumut.webp';
+import imgSumbar from '../assets/images/husna-view-7/ws1-husna-view7-sumbar.webp';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // ─────────────────────────────────────────────
@@ -77,32 +82,29 @@ const PROVINSI_DATA = [
   {
     id: "v7b1",
     name: "Aceh",
-    img: "https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?q=80&w=1000", 
+    img: imgAceh,
     kicker: "Tantangan",
     heading: "Melawan",
     headingAccent: "Medan",
-    body: "Menjangkau wilayah terdampak bencana menuntut adaptasi terhadap akses jalan darurat dan kendala sinyal. Tim memastikan setiap responden tetap terdata dengan baik.",
-    quote: '"Data pemulihan pascabencana ini krusial untuk perencanaan kebijakan yang tepat sasaran."',
+    body: "Sulitnya mengakses wilayah terdampak akibat rusaknya infrastruktur tidak menghalangi pelaksanaan proses pendataan R3P.",
   },
   {
     id: "v7b2",
     name: "Sumatera Utara",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    img: imgSumut,
     kicker: "Lapangan",
     heading: "Setiap",
     headingAccent: "Langkah",
-    body: "Variasi topografi dari pesisir hingga pegunungan mengharuskan pergerakan tim yang efisien. Minimasi non-sampling error menjadi fokus utama di setiap rute perjalanan.",
-    quote: '"Tantangan fisik di lapangan tidak boleh menurunkan standar objektivitas sebuah data statistik."',
+    body: "Perjalanan panjang menuju lokasi bencana tidak menyurutkan komitmen dan semangat tim pendata.",
   },
   {
     id: "v7b3",
     name: "Sumatera Barat",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+    img: imgSumbar,
     kicker: "Dedikasi",
     heading: "Tetap",
     headingAccent: "Bergerak",
-    body: "Pengumpulan data primer secara masif membutuhkan manajemen waktu dan tenaga yang solid. Konsistensi metodologi dijaga ketat pada setiap tahapan pencacahan.",
-    quote: '"Angka yang kami kumpulkan adalah potret riil kondisi sosial-ekonomi masyarakat saat ini."',
+    body: "Medan geografis yang terjal dan ekstrem harus dilalui demi keakuratan dan kelengkapan data.",
   },
 ];
 
@@ -302,18 +304,18 @@ export const View5 = () => {
 
   // IMPLEMENTASI GSAP ENTRY ANIMATIONS 
   useGSAP(() => {
-    // Basic entrance animations for bento tiles can be added here
+    // Basic entrance animations for bento tiles
     gsap.fromTo(".ws1-husna-bento-tile", 
-      { opacity: 0, y: 40 },
+      { opacity: 0, y: 30 },
       { 
         opacity: 1, 
         y: 0, 
-        stagger: 0.1, 
-        duration: 0.8,
+        stagger: 0.08, 
+        duration: 0.6,
         ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 70%",
+          start: "top 88%",
         }
       }
     );
@@ -462,18 +464,18 @@ export const View7 = () => {
   useGSAP(() => {
     gsap.fromTo('.ws1-husna-accordion-panel', 
       { 
-        y: 80, 
+        y: 40, 
         opacity: 0 
       },
       {
         y: 0, 
         opacity: 1,
-        duration: 1,
-        stagger: 0.15,
+        duration: 0.6,
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%", 
+          start: "top 88%", 
           toggleActions: "play none none reverse",
         }
       }
@@ -483,7 +485,6 @@ export const View7 = () => {
   return (
     <section ref={containerRef} className="ws1-husna-view-7-accordion" id="field">
       <div className="ws1-husna-v7-accordion-header">
-        <span className="ws1-husna-kicker ws1-husna-kicker-green lato-regular">Tahap 7 · Tantangan</span>
         <h2 className="ws1-husna-headline ws1-husna-headline-navy">Melawan
           <em className="ws1-text-orange"> Medan</em> 
         </h2>
