@@ -1,0 +1,246 @@
+/* WebStory1 Global Storytelling Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body.ws1-story-scrollbars-hidden {
+  scrollbar-width: none; /* Firefox */
+}
+
+body.ws1-story-scrollbars-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.webstory1-wrapper {
+  position: relative;
+  overflow: hidden; /* Prevent horizontal scroll from bridges or elements */
+  cursor: default;
+}
+
+/* Global Subtle Image Scale on Hover */
+.webstory1-wrapper img {
+  transition: transform 0.8s ease;
+}
+.webstory1-wrapper img:hover {
+  transform: scale(1.03);
+}
+
+/* =========================================
+   THE GOLDEN THREAD (Global Progress Line)
+========================================= */
+.ws1-golden-thread {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 50;
+  pointer-events: none;
+}
+
+.ws1-golden-thread-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--orange), #e91e63, var(--orange));
+  transform-origin: top;
+  transform: scaleY(0);
+  box-shadow: 0 0 15px rgba(233, 30, 99, 0.8), 0 0 30px rgba(230, 126, 34, 0.6);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .ws1-golden-thread {
+    left: 15px; /* Shift closer to edge */
+  }
+}
+
+@media (max-width: 480px) {
+  .ws1-golden-thread {
+    display: none; /* Hide golden thread on very small screens to avoid clipping text */
+  }
+  .ws1-nb-content {
+    padding: 0 1rem; /* Smaller padding */
+  }
+}
+
+/* =========================================
+   PHASE TRANSITION BRIDGES
+========================================= */
+.ws1-phase-bridge {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ws1-phase-bridge-prep-to-field {
+  background: linear-gradient(180deg, var(--navy) 0%, #0a0c28 40%, var(--navy-deep) 100%);
+}
+
+.ws1-phase-bridge-inner {
+  text-align: center;
+  opacity: 0;
+}
+
+.ws1-phase-bridge-inner p {
+  font-family: var(--font-content);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(229, 217, 182, 0.3);
+}
+
+.ws1-phase-bridge-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--orange), transparent);
+  margin: 16px auto;
+}
+
+/* =========================================
+   CHAPTER TRACKER
+========================================= */
+.ws1-chapter-tracker {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  pointer-events: none; /* Let clicks pass through */
+}
+
+.ws1-chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.ws1-chapter-item.active {
+  opacity: 1;
+}
+
+.ws1-chapter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--beige);
+  transition: all 0.3s ease;
+}
+
+.ws1-chapter-item.active .ws1-chapter-dot {
+  background: var(--orange);
+  box-shadow: 0 0 10px rgba(230, 126, 34, 0.8);
+  transform: scale(1.5);
+}
+
+.ws1-chapter-label {
+  font-family: var(--font-content);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--beige);
+  text-transform: uppercase;
+  font-weight: 700;
+  transform: translateX(-10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.ws1-chapter-item.active .ws1-chapter-label {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .ws1-chapter-tracker {
+    left: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ws1-chapter-tracker {
+    display: none;
+  }
+}
+
+/* =========================================
+   CUSTOM CURSOR & AUDIO
+========================================= */
+.ws1-custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(229, 217, 182, 0.4);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%); /* Start centered on mouse */
+  mix-blend-mode: difference;
+}
+
+@media (max-width: 768px) {
+  .ws1-custom-cursor {
+    display: none;
+  }
+}
+
+.ws1-audio-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(21, 23, 61, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(229, 217, 182, 0.2);
+  color: var(--beige);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.ws1-audio-toggle:hover {
+  background: rgba(230, 126, 34, 0.3);
+  border-color: var(--orange);
+  transform: scale(1.1);
+}
+
+.ws1-audio-toggle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+/* Hide default cursor on devices that support hover (not touch) */
+@media (hover: hover) and (min-width: 769px) {
+  .webstory1-wrapper {
+    cursor: none !important;
+  }
+  .webstory1-wrapper * {
+    cursor: none !important;
+  }
+}
+
+

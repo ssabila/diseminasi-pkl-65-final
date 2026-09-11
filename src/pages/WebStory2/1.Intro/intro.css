@@ -1,0 +1,241 @@
+/* Sembunyikan Logo & Atribusi Mapbox sesuai permintaan */
+.mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib {
+  display: none !important;
+}
+
+.title-text-1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  color: #FFF;
+  line-height: normal;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.title-text-2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  color: #FFF;
+  line-height: normal;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+@keyframes fadeSlideUp { 
+  from { opacity: 0; transform: translateY(20px); } 
+  to { opacity: 1; transform: translateY(0); } 
+}
+
+.custom-inversa-marker {
+  width: 0;
+  height: 0;
+  position: relative;
+}
+.inversa-pulse {
+  position: absolute;
+  top: -52px;
+  left: -52px;
+  width: 104px;
+  height: 104px;
+  background-color: rgba(230, 126, 34, 0.20);
+  border-radius: 50%;
+  animation: mapboxPulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+.inversa-dot {
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  width: 22px;
+  height: 22px;
+  background-color: #E67E22;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(230, 126, 34, 0.28), 0 0 26px 8px rgba(230, 126, 34, 0.55);
+}
+
+@keyframes mapboxPulse {
+  0% { transform: scale(0.35); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0; }
+}
+/* ── Scene 2: "Skala Besar, Dampak Nyata" ── */
+
+/* ── Bento Grid — 2-column asymmetric (1 hero left + 2 right) ── */
+.s2-bento-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+}
+
+/* backdrop-filter dibuang: kartu ini duduk di atas navy polos, jadi blur
+   tidak memburamkan apa pun — hanya menambah compositing layer. Hover juga
+   dibuang; kartu ini tidak bisa diklik. */
+.s2-bento-card {
+  position: relative;
+  border-radius: var(--ws2-r-md);
+  background: var(--ws2-surface-1);
+  border: 1px solid var(--ws2-line-1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--ws2-card-pad);
+}
+.s2-bento-hero {
+  min-height: 360px;
+}
+
+/* ── Maskot: kolom sendiri, bukan lagi diselipkan di dalam kartu ──────────
+   Dulu <img> maskot absolute di bottom:-10 right:20 dan sengaja terpotong
+   oleh overflow:hidden kartu supaya "mengintip" — itulah yang dibaca sebagai
+   "maskot nyempil". Sekarang ia berdiri di kolomnya sendiri, sejajar tepi
+   bawah grid, dengan ruang bernapas di kiri headline. */
+.s2-stage-body {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: end;
+  width: 100%;
+}
+.s2-maskot-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+}
+.s2-maskot {
+  width: 190px;
+  height: 340px;
+  object-fit: cover;
+  object-position: 50% 100%;
+  display: block;
+  pointer-events: none;
+}
+.s2-maskot-shadow {
+  width: 120px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.35), transparent 70%);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .s2-stage-body { grid-template-columns: 160px minmax(0, 1fr); gap: 1.25rem; }
+  .s2-maskot { width: 150px; height: 270px; }
+  .s2-bento-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 767px) {
+  .s2-stage-body { grid-template-columns: 1fr; }
+  .s2-maskot-col { order: -1; justify-content: center; padding-bottom: 0; }
+  .s2-maskot { width: 130px; height: 230px; }
+}
+.s2-bento-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Scene 2: Peta Sebaran Kerusakan (Mapbox satelit, FULL-SCREEN) ── */
+.s2-choro { position: relative; height: 240vh; }
+.s2c-sticky {
+  position: sticky; top: 0; height: 100vh; width: 100%;
+  overflow: hidden; background: var(--ws2-bg-navy);
+}
+/* Peta mengisi seluruh viewport */
+.s2c-map-shell { position: absolute; inset: 0; z-index: 1; }
+.s2c-map {
+  position: absolute; inset: 0;
+  /* Dark vector map — no heavy satellite filters needed */
+}
+.s2c-map-grade {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 52%, rgba(21,23,61,0.58) 100%),
+    linear-gradient(180deg, rgba(21,23,61,0.16), rgba(21,23,61,0.3));
+}
+.s2c-map-grad-edge {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(21,23,61,0.66) 0%, transparent 26%, transparent 82%, rgba(21,23,61,0.42) 100%);
+}
+/* Judul overlay di atas peta */
+
+/* Legend di pojok bawah */
+
+/* Label Provinsi di dalam Peta */
+.s2c-prov-label {
+  pointer-events: none; display: flex; flex-direction: column; gap: 0.3rem;
+  transform: translate(-50%, -50%); transition: opacity 0.5s ease;
+}
+.s2c-prov-name {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 600;
+  font-size: clamp(1.2rem, 2vw, 1.6rem); color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+}
+.s2c-prov-row {
+  display: flex; align-items: center; gap: 0.4rem; font-family: 'Lato', sans-serif;
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #E5D9B6;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.s2c-prov-dot { width: 6px; height: 6px; border-radius: 50%; box-shadow: 0 0 6px rgba(0,0,0,0.5); }
+.s2c-prov-desa {
+  font-family: 'Lato', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+/* ── Alur Data ── */
+
+@media (max-width: 767px) {
+  .s2-bento-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  .s2-bento-card { min-height: auto !important; grid-column: 1 / -1 !important; grid-row: auto !important; }
+  .s2-bento-hero { grid-column: 1 / -1 !important; grid-row: auto !important; min-height: 280px !important; }
+  .s2-card { height: auto; min-height: 200px; }
+  .s2-baseline { display: none; }
+  .s2-stage { height: auto !important; padding-top: 14vh !important; padding-bottom: 12vh !important; }
+  .s2-choro { height: 210vh; }
+  .s2c-head { top: 2.4rem; width: 92vw; }
+  .s2c-legend { top: auto; bottom: 14px; right: 10px; padding: 0.6rem 0.75rem; gap: 0.35rem; }
+  
+  
+  .s2c-prov-label { padding: 0.4rem 0.65rem; }
+  .s2c-prov-name { font-size: 0.95rem; }
+  .s2c-prov-row { font-size: 0.72rem; }
+  .s2-bridge-text { white-space: normal; }
+}
+
+/* ── Langit berbintang untuk scene "Skala Besar, Dampak Nyata" ──────────
+   Titik-titik digambar sebagai radial-gradient berulang, jadi tidak perlu
+   elemen DOM tambahan. Kedipannya lambat dan hanya menaik-turunkan opacity
+   keseluruhan lapisan — bukan gerak per-bintang. */
+.s2-stars-twinkle {
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(229, 217, 182, 0.9), transparent),
+    radial-gradient(1px 1px at 28% 62%, rgba(229, 217, 182, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 44% 28%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 58% 74%, rgba(229, 217, 182, 0.65), transparent),
+    radial-gradient(2px 2px at 71% 36%, rgba(229, 217, 182, 0.85), transparent),
+    radial-gradient(1px 1px at 84% 66%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 92% 22%, rgba(229, 217, 182, 0.75), transparent),
+    radial-gradient(1px 1px at 8% 82%, rgba(229, 217, 182, 0.6), transparent);
+  background-size: 520px 520px;
+  background-repeat: repeat;
+  opacity: 0.55;
+  animation: s2Twinkle 7s ease-in-out infinite;
+}
+
+@keyframes s2Twinkle {
+  0%, 100% { opacity: 0.38; }
+  50%      { opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s2-stars-twinkle { animation: none; opacity: 0.5; }
+}

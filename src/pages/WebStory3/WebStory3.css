@@ -8,6 +8,10 @@
   font-family: var(--font-content);
 }
 
+.webstory3-container {
+  overflow-x: hidden;
+}
+
 .section {
   position: relative;
   width: 100%;

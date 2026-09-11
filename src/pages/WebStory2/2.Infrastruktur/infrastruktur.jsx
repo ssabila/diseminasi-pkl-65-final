@@ -1,273 +1,385 @@
-/**
- * infrastruktur.jsx — Babak 2: Infrastruktur
- *
- * Scene 1: Kelumpuhan Kota — "Jejak Infrastruktur: Ruang Publik yang Lumpuh"
- * Peta Interaktif (Leaflet), Bar chart (Recharts), & Scrollytelling Galeri Gambar
- *
- * Scene 2: Kelumpuhan Desa — "Detail Hingga Sudut Desa"
- * Kartu desa per provinsi (Aceh → Sumut → Sumbar) dengan gradasi warna kerusakan
- *
- * Scene 3: Narasi Layanan Dasar — "Saat Kota Kehilangan Denyutnya"
- * Ikon animasi layanan dasar: listrik, air, sanitasi
- *
- * Scene 4: Zona Prioritas — "Menentukan Zona Prioritas Pemulihan"
- * Top 15 kabupaten terparah (horizontal bar + badge)
- *
- * Transisi 2→3 — "Aceh, Sumatera Utara, Sumatera Barat: Siapa Paling Terdampak?"
- * 3 kartu provinsi dengan angka kunci
- *
- * Data: insight.json → fasilitas_infrastruktur, keluarga, ringkasan_dataset
- */
+/* ─────────────────────────────────────────────────────────────────
+   Infrastruktur yang Baru (2.0)
+───────────────────────────────────────────────────────────────── */
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import insights from '../insight.json';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { MapContainer, TileLayer, CircleMarker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import patternImg from '../../../assets/Grand Design/Pattern.png';
+import useInView from '../shared/useInView';
+import BgSeam from '../shared/BgSeam';
+import BarTrack from '../shared/BarTrack';
+import { WS2 } from '../ws2-tokens';
+import {
+  TARGET_FEATURES, CONTEXT_FEATURES, NAME_TO_INDEX, provBounds, targetBounds,
+} from '../shared/sumateraGeo';
+import {
+  pctRT, fmtPct, fmtN, CAPTION_RT,
+  LISTRIK_NON_PLN, LISTRIK_NON_PLN_BERLISTRIK, LISTRIK_TIDAK_ADA,
+  AIR_TAK_LAYAK, AIR_MATA_AIR_TAK_TERLINDUNG, AIR_PERMUKAAN,
+  MCK_TIDAK_ADA, MCK_UMUM_KOMUNAL, MCK_TANPA_AKSES_SENDIRI,
+} from '../shared/rtStats';
+import './infrastruktur.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─────────────────────────────────────────
-   Warna kondisi fasilitas
-───────────────────────────────────────────*/
-const KONDISI_COLOR = {
-  'Baik':          '#81C784',
-  'Rusak Ringan':  '#FFD54F',
-  'Rusak Sedang':  '#FFB74D',
-  'Rusak Berat':   '#e74c3c',
-};
+/* ─────────────────────────────────────────────────────────────────
+   UTILITY HOOKS
+───────────────────────────────────────────────────────────────── */
 
-const KAT_COLOR = {
-  'Pendidikan':   '#4FC3F7',
-  'Kesehatan':    '#81C784',
-  'Ekonomi':      '#FFB74D',
-  'Sosial/Ibadah':'#CE93D8',
-};
-
-/* ─────────────────────────────────────────
-   Utility: IntersectionObserver hook
-───────────────────────────────────────────*/
-function useInView(threshold = 0.2) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+/* ─────────────────────────────────────────────────────────────────
+   ANIMATED COUNTER
+───────────────────────────────────────────────────────────────── */
+function AnimatedCounter({ value, duration = 2.5, suffix = '' }) {
+  const spanRef = useRef(null);
+  const [containerRef, inView] = useInView();
+  const setRefs = useCallback((el) => {
+    containerRef.current = el;
+    spanRef.current = el;
+  }, [containerRef]);
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return [ref, visible];
+    if (!inView || !spanRef.current) return;
+    const end = parseFloat(String(value).replace(/[^\d.]/g, ''));
+    if (isNaN(end)) return;
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: end, duration, ease: 'power2.out',
+      onUpdate: () => {
+        if (spanRef.current)
+          spanRef.current.innerHTML = Math.round(obj.val).toLocaleString('id-ID') + suffix;
+      },
+    });
+  }, [inView, value, duration, suffix]);
+  return <span ref={setRefs}>0{suffix}</span>;
 }
 
-/* ─────────────────────────────────────────
-   Utility Peta: Menggerakkan Kamera Peta (FlyTo)
-───────────────────────────────────────────*/
-function MapFlyToUpdater({ center, zoom }) {
+/* ─────────────────────────────────────────────────────────────────
+   MAP FLY-TO
+───────────────────────────────────────────────────────────────── */
+/* ── Poligon highlight peta Babak 2 (permintaan notula) ─────────────────
+   Nama provinsi di kartu ("Aceh") berbeda dari nama di GeoJSON ("ACEH"). */
+const PROV_GEO_NAME = {
+  Aceh: 'ACEH',
+  'Sumatera Utara': 'SUMATERA UTARA',
+  'Sumatera Barat': 'SUMATERA BARAT',
+};
+
+const TARGET_FEATURES_FC = { type: 'FeatureCollection', features: TARGET_FEATURES };
+const CONTEXT_FEATURES_FC = { type: 'FeatureCollection', features: CONTEXT_FEATURES };
+
+/* Kepekatan isian mengikuti jumlah desa terdampak: Aceh 556, Sumut 292,
+   Sumbar 80. Rumus 0,14 + 0,36 x (desa / desa terbanyak). */
+const FILL_BY_NAME = (() => {
+  const desa = insights?.cakupan_geografis_infra?.desa_per_provinsi || {};
+  const byGeo = Object.fromEntries(
+    Object.entries(PROV_GEO_NAME).map(([kartu, geo]) => [geo, desa[kartu] || 0]),
+  );
+  const maks = Math.max(...Object.values(byGeo), 1);
+  const out = {};
+  Object.entries(byGeo).forEach(([geo, n]) => { out[geo] = 0.14 + 0.36 * (n / maks); });
+  // Legenda memakai nama kartu, peta memakai nama GeoJSON.
+  Object.entries(PROV_GEO_NAME).forEach(([kartu, geo]) => { out[kartu] = out[geo]; });
+  return out;
+})();
+
+/* Empat kategori fasilitas di permukaan KREM. Empat hue palet yang benar-benar
+   berbeda — dulu keduanya berpasangan menjadi hex yang sama. */
+const KAT_COLOR = {
+  'Sosial/Ibadah': '#15173D',
+  Pendidikan: '#628141',
+  Kesehatan: '#E67E22',
+  Ekonomi: 'rgba(21,23,61,0.35)',
+};
+
+/* Menggeser kamera dengan fitBounds, bukan flyTo. Selisih zoom antar provinsi
+   di sini kecil, jadi Leaflet menganimasikannya lurus tanpa busur
+   zoom-out-lalu-zoom-in. */
+function MapFitUpdater({ bounds }) {
   const map = useMap();
+  const key = bounds ? JSON.stringify(bounds) : '';
   useEffect(() => {
-    if (center) {
-      map.flyTo(center, zoom, { duration: 1.5, easeLinearity: 0.25 });
+    if (!map || !bounds) return;
+    try {
+      map.fitBounds(bounds, { animate: true, duration: 1.2, easeLinearity: 0.3, padding: [32, 32] });
+    } catch {
+      // Container belum terukur; pemanggilan berikutnya akan mengoreksi.
     }
-  }, [center, zoom, map]);
+    // key adalah serialisasi bounds: cukup untuk memicu, dan menghindari
+    // tween ulang ketika array bounds identik tetapi identitasnya baru.
+  }, [map, key, bounds]);
   return null;
 }
 
-/* ─────────────────────────────────────────
-   Scene 1: Kelumpuhan Kota (Interaktif Map + Chart)
-───────────────────────────────────────────*/
-function SceneKelumpuhanKota() {
-  const containerRef = useRef(null);
-  const [activeLocation, setActiveLocation] = useState(0);
+const SCENE2_ANCHOR_ID = 'scene2-kelumpuhan-desa';
 
-  // 1. Ekstrak Data untuk Bar Chart Recharts
-  const kondisiPerKat = insights?.fasilitas_infrastruktur?.kondisi_per_kategori || {};
-  let totalBaik = 0, totalRingan = 0, totalSedang = 0, totalBerat = 0;
+/* ─────────────────────────────────────────────────────────────────
+   RISK LEVELS (dipakai bersama Scene 2 & legenda peta)
+───────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────
+   TYPOGRAPHY OBJECTS
+───────────────────────────────────────────────────────────────── */
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  SCENE 1 — KELUMPUHAN KOTA  (NAVY)                           ║
+   ║  Vertical split: documentary photo left, data right           ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+/* Urutan kategori fasilitas, dari yang terbanyak. Dipakai bersama oleh kartu
+   sektor Scene 1 dan stacked bar per provinsi. */
+const KAT_ORDER = ['Sosial/Ibadah', 'Pendidikan', 'Kesehatan', 'Ekonomi'];
+
+/* Severity itu ORDINAL, bukan kategorikal: satu hue, tangga alpha. Dulu
+   "Baik" diberi #15173D — persis warna latar — sehingga segmen terbesar di
+   tiap kartu (62-80%) sama sekali tidak terlihat. */
+const SEV_ITEMS = [
+  { key: 'berat',  label: 'Rusak Berat',  tone: 'accent' },
+  { key: 'sedang', label: 'Rusak Sedang', tone: 'accent-2' },
+  { key: 'ringan', label: 'Rusak Ringan', tone: 'accent-3' },
+  { key: 'baik',   label: 'Baik',         tone: 'neutral' },
+];
+const SEV_SWATCH = {
+  accent: 'var(--ws2-sev-4)',
+  'accent-2': 'var(--ws2-sev-3)',
+  'accent-3': 'var(--ws2-sev-2)',
+  neutral: 'var(--ws2-sev-1)',
+};
+
+function SceneKelumpuhanKota() {
+  const [ref, inView] = useInView();
   
-  Object.values(kondisiPerKat).forEach(kat => {
-    totalBaik += kat['Baik']?.n || 0;
-    totalRingan += kat['Rusak Ringan']?.n || 0;
-    totalSedang += kat['Rusak Sedang']?.n || 0;
-    totalBerat += kat['Rusak Berat']?.n || 0;
+  const [activeSlide, setActiveSlide] = useState(0);
+  const autoRef = useRef(null);
+
+  const SLIDES = [
+    { id: '1', img: '/assets/pkl1.webp' },
+    { id: '2', img: '/assets/pkl2_1.webp' },
+    { id: '3', img: '/assets/pkl3_1.webp' },
+  ];
+
+  const startAuto = useCallback(() => {
+    clearInterval(autoRef.current);
+    autoRef.current = setInterval(() => setActiveSlide((p) => (p + 1) % SLIDES.length), 5500);
+  }, [SLIDES.length]);
+
+  useEffect(() => { startAuto(); return () => clearInterval(autoRef.current); }, [startAuto]);
+
+  const kondisiPerKat = insights?.fasilitas_infrastruktur?.kondisi_per_kategori || {};
+
+  /* Dulu hanya tiga kategori yang di-hardcode di sini, sementara loop totals
+     di bawahnya menghitung SEMUA kategori. Akibatnya counter "Total Fasilitas
+     Terdata" menulis 2.548 sedangkan tiga kartu di bawahnya hanya menjelaskan
+     1.442 — 1.106 unit Sosial/Ibadah, kelompok TERBESAR, menguap. */
+  const chartDataByKat = KAT_ORDER.map((key) => {
+    const kat = kondisiPerKat[key] || {};
+    const baik   = kat['Baik']?.n        || 0;
+    const ringan = kat['Rusak Ringan']?.n || 0;
+    const sedang = kat['Rusak Sedang']?.n || 0;
+    const berat  = kat['Rusak Berat']?.n  || 0;
+    const total  = baik + ringan + sedang + berat;
+    return { name: key, baik, ringan, sedang, berat, total };
   });
 
-  const chartData = [
-    { name: 'Baik', jumlah: totalBaik, fill: '#81C784' },
-    { name: 'Ringan', jumlah: totalRingan, fill: '#FFD54F' },
-    { name: 'Sedang', jumlah: totalSedang, fill: '#FFB74D' },
-    { name: 'Berat', jumlah: totalBerat, fill: '#e74c3c' },
-  ];
+  let totals = { Baik: 0, Ringan: 0, Sedang: 0, Berat: 0 };
+  Object.values(kondisiPerKat).forEach((kat) => {
+    totals.Baik   += kat['Baik']?.n         || 0;
+    totals.Ringan += kat['Rusak Ringan']?.n  || 0;
+    totals.Sedang += kat['Rusak Sedang']?.n  || 0;
+    totals.Berat  += kat['Rusak Berat']?.n   || 0;
+  });
+  const totalFas = totals.Baik + totals.Ringan + totals.Sedang + totals.Berat;
+  const pctBerat = totalFas > 0 ? ((totals.Berat / totalFas) * 100).toFixed(1) : 0;
 
-  // 2. Data Koordinat Peta (Berurutan sesuai foto)
-  const MAP_LOCATIONS = [
-    { name: 'Padang Panjang', coords: [-0.4607, 100.4022], zoom: 12, color: '#81C784' }, // Baik
-    { name: 'Pidie Jaya', coords: [5.0760, 96.2238], zoom: 12, color: '#FFD54F' },       // Ringan
-    { name: 'Sibolga', coords: [1.7348, 98.7845], zoom: 13, color: '#FFB74D' },          // Sedang
-    { name: 'Agam', coords: [-0.2646, 100.0210], zoom: 13, color: '#e74c3c' }            // Berat
-  ];
 
-  // 3. Pemicu GSAP ScrollTrigger
-  useGSAP(() => {
-    const steps = gsap.utils.toArray('.scroll-step');
-    steps.forEach((step, i) => {
-      ScrollTrigger.create({
-        trigger: step,
-        start: 'top 50%',
-        end: 'bottom 50%',
-        onEnter: () => setActiveLocation(i),
-        onEnterBack: () => setActiveLocation(i),
-      });
-    });
-  }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} style={{ background: '#15173D', position: 'relative', padding: '4rem 0' }}>
-      
-      <div style={{ display: 'flex', flexDirection: 'row', padding: '0 2rem', gap: '4rem', maxWidth: '1200px', margin: '0 auto' }}>
-        
-        {/* --- SISI KIRI: STICKY (Map & Chart) --- */}
-        <div style={{
-          flex: '1',
-          position: 'sticky',
-          top: '5vh',
-          height: '90vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}>
-          <span className="lato-bold" style={{
-            fontSize: '0.78rem', letterSpacing: '0.22em',
-            textTransform: 'uppercase', color: 'var(--green)',
-            display: 'block', marginBottom: '1rem',
-          }}>
-            Babak 2 · Scene 1
-          </span>
-          <h2 className="playfair-display" style={{ fontSize: '2.5rem', color: '#E5D9B6', marginBottom: '1rem', lineHeight: 1.2 }}>
-            Jejak Infrastruktur:<br/>Ruang Publik yang Lumpuh
-          </h2>
-          <p className="lato-regular" style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-            Di balik angka besar itu tampak jejak kerusakan yang langsung memukul kehidupan sehari-hari. Gulir layar untuk memantau titik kerusakan dari yang teringan hingga terberat di lapangan.
-          </p>
+    <section className="infra-section infra-bg-navy infra-grain" style={{ padding: 0, overflow: 'hidden' }}>
 
-          {/* Peta Interaktif Leaflet */}
-          <div style={{ position: 'relative', width: '100%', height: '320px', marginBottom: '1.5rem', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(229, 217, 182, 0.2)', zIndex: 1 }}>
-            <MapContainer 
-              center={MAP_LOCATIONS[0].coords} 
-              zoom={10} 
-              zoomControl={false} 
-              scrollWheelZoom={false} 
-              style={{ width: '100%', height: '100%' }}
-            >
-              <TileLayer
-                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                attribution="Tiles &copy; Esri"
-                className="grayscale-map"
-              />
-              <MapFlyToUpdater center={MAP_LOCATIONS[activeLocation].coords} zoom={MAP_LOCATIONS[activeLocation].zoom} />
-              
-              {MAP_LOCATIONS.map((loc, index) => (
-                <CircleMarker 
-                  key={index}
-                  center={loc.coords}
-                  radius={index === activeLocation ? 12 : 6}
-                  pathOptions={{ 
-                    color: loc.color, 
-                    fillColor: loc.color, 
-                    fillOpacity: index === activeLocation ? 0.8 : 0.4,
-                    weight: index === activeLocation ? 3 : 1
-                  }}
-                />
-              ))}
-            </MapContainer>
+      <div ref={ref} className="infra-grid-photo-chart">
+
+        {/* ═══════ LEFT: Framed Documentary Photo ═══════ */}
+        <div style={{
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          padding: 0,
+          opacity: inView ? 1 : 0,
+          transform: inView ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'opacity 0.8s var(--ws2-reveal-ease), transform 0.8s var(--ws2-reveal-ease)',
+        }}>
+          {/* Bingkai memakai aspect-ratio 0,78 (di antara rasio pkl2 dan pkl3)
+              supaya objectFit 'contain' hampir tidak menyisakan bar samping.
+              JANGAN diganti 'cover': caption yang terbakar di dalam foto
+              akan terpotong — itulah "jangan dibuat cut". */}
+          <div className="infra-photo-frame">
+            {SLIDES.map((slide, idx) => {
+              const isActive = idx === activeSlide;
+              return (
+                <div key={slide.id} style={{
+                  position: 'absolute', inset: 0,
+                  opacity: isActive ? 1 : 0,
+                  transition: 'opacity 1s ease-in-out',
+                  zIndex: isActive ? 1 : 0,
+                }}>
+                  <img
+                    src={slide.img}
+                    alt=""
+                    style={{
+                      width: '100%', height: '100%',
+                      objectFit: 'contain', objectPosition: 'center',
+                      display: 'block',
+                      filter: 'grayscale(0.35) brightness(0.8) saturate(0.7)',
+                    }}
+                  />
+                </div>
+              );
+            })}
             
-            <style>{`
-              .grayscale-map {
-                filter: grayscale(100%) contrast(125%) brightness(50%) !important;
-              }
-            `}</style>
           </div>
 
-          {/* Bar Chart menggunakan Recharts */}
-          <div style={{ width: '100%', height: '200px', background: 'rgba(0,0,0,0.3)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(229, 217, 182, 0.1)' }}>
-            <h4 className="lato-bold" style={{ color: '#E5D9B6', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '1px' }}>
-              Agregat Fasilitas Terdampak
-            </h4>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 30, left: 0, bottom: 0 }}>
-                <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 12, fontFamily: 'Lato' }} width={60} />
-                <Tooltip 
-                  cursor={{ fill: 'rgba(255,255,255,0.05)' }} 
-                  contentStyle={{ background: '#1C1F4A', border: '1px solid rgba(229, 217, 182, 0.2)', borderRadius: '8px', color: '#fff' }} 
-                  itemStyle={{ color: '#fff', fontFamily: 'Lato', fontWeight: 'bold' }}
+          {/* Indikator dikeluarkan dari bingkai: menumpuk di atas foto membuat
+              sudut kanan-atas gambar selalu tertutup. */}
+          <div style={{
+            display: 'flex', justifyContent: 'center', gap: '0.4rem', marginTop: '0.9rem',
+          }}>
+              {SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActiveSlide(i); startAuto(); }}
+                  style={{
+                    width: activeSlide === i ? 18 : 6, height: 6,
+                    borderRadius: 'var(--ws2-r-pill)',
+                    background: activeSlide === i ? 'var(--ws2-text-1)' : 'var(--ws2-text-4)',
+                    border: 'none', cursor: 'pointer', padding: 0,
+                    transition: 'width 0.4s var(--ws2-reveal-ease), background 0.4s ease',
+                  }}
+                  aria-label={`Slide ${i + 1}`}
                 />
-                <Bar dataKey="jumlah" radius={[0, 6, 6, 0]} barSize={16} animationDuration={1500}>
-                  {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            ))}
           </div>
         </div>
 
-        {/* --- SISI KANAN: SCROLL STEPS (Foto Before-After) --- */}
-        <div style={{ flex: '1', paddingBottom: '10vh' }}>
-          
-          {/* STEP 1: BAIK */}
-          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(129, 199, 132, 0.3)', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
-              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(129, 199, 132, 0.2)' }}>
-                <h4 className="playfair-display" style={{ color: '#81C784', fontSize: '1.8rem', margin: 0 }}>Fasilitas Kategori Baik</h4>
-                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Padang Panjang, Sumatera Barat. Struktur utama selamat, namun akses sekitar terhambat material longsor.</p>
+        {/* ═══════ RIGHT: Data & Visualization ═══════ */}
+        <div style={{
+          padding: 'clamp(1.5rem,3vh,2.5rem) 0',
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          position: 'relative',
+          opacity: inView ? 1 : 0,
+          transform: inView ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s',
+        }}>
+
+          {/* Section header */}
+          <div style={{ marginBottom: 'clamp(2rem,3.5vw,3rem)' }}>
+            <h2 className="t-display" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.01em', margin: 0, color: 'var(--ws2-text-1)' }}>
+              Kerusakan Infrastruktur Publik
+            </h2>
+          </div>
+
+          {/* Key figures */}
+          <div style={{ display: 'flex', gap: 'clamp(2rem,4vw,3.5rem)', marginBottom: 'clamp(2.5rem,4vw,3.5rem)', flexWrap: 'wrap' }}>
+            <div>
+              <div className="t-display" style={{ fontSize: 'clamp(2.4rem,4vw,3.4rem)', fontWeight: 700, color: 'var(--ws2-text-1)', lineHeight: 1 }}>
+                <AnimatedCounter value={totalFas} duration={2.5} />
               </div>
-              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
-                <img src="/assets/pkl2_1.webp" alt="Baik" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              <div className="t-eyebrow" style={{ color: 'var(--ws2-text-4)', fontSize: '0.62rem', marginTop: '0.55rem', letterSpacing: '0.16em' }}>
+                Total Fasilitas Terdata
+              </div>
+              <div className="t-body" style={{ fontSize: '0.68rem', color: 'var(--ws2-text-4)', marginTop: '0.4rem', maxWidth: 260, lineHeight: 1.5 }}>
+                dari {fmtN(insights?.ringkasan_dataset?.total_fasilitas_gabungan || 0)} fasilitas terdata,
+                {' '}{fmtN(totalFas)} di antaranya memiliki catatan kondisi
+              </div>
+            </div>
+            <div style={{ width: 1, background: 'var(--ws2-line-1)', alignSelf: 'stretch', flexShrink: 0 }} />
+            <div>
+              <div className="t-display" style={{ fontSize: 'clamp(2.4rem,4vw,3.4rem)', fontWeight: 700, color: 'var(--ws2-accent)', lineHeight: 1 }}>
+                {pctBerat}<span style={{ fontSize: '0.55em' }}>%</span>
+              </div>
+              <div className="t-eyebrow" style={{ color: 'var(--ws2-text-4)', fontSize: '0.62rem', marginTop: '0.55rem', letterSpacing: '0.16em' }}>
+                Rusak Berat
               </div>
             </div>
           </div>
 
-          {/* STEP 2: RUSAK RINGAN */}
-          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 213, 79, 0.3)', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
-              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(255, 213, 79, 0.2)' }}>
-                <h4 className="playfair-display" style={{ color: '#FFD54F', fontSize: '1.8rem', margin: 0 }}>Rusak Ringan</h4>
-                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Kabupaten Pidie Jaya, Aceh. Jembatan vital penghubung desa terputus, mengganggu laju logistik.</p>
-              </div>
-              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
-                <img src="/assets/pkl4_1.webp" alt="Rusak Ringan" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-              </div>
+          {/* ── Unified Bar Chart: semua sektor dalam satu kontainer ── */}
+          <div className="ws2-card" style={{
+            display: 'flex', flexDirection: 'column', gap: '1.5rem',
+            opacity: inView ? 1 : 0,
+            transform: inView ? 'translateY(0)' : 'translateY(16px)',
+            transition: 'opacity 0.8s var(--ws2-reveal-ease) 0.1s, transform 0.8s var(--ws2-reveal-ease) 0.1s',
+          }}>
+            {/* Legend */}
+            <div style={{ display: 'flex', gap: '1.2rem', flexWrap: 'wrap', marginBottom: '0.5rem' }}>
+              {SEV_ITEMS.map((sev) => (
+                <div key={sev.key} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span className="ws2-swatch" style={{
+                    background: SEV_SWATCH[sev.tone],
+                    boxShadow: sev.tone === 'neutral' ? 'inset 0 0 0 1px var(--ws2-sev-1-line)' : 'none',
+                  }} />
+                  <span className="lato-light" style={{ fontSize: '0.72rem', color: 'var(--ws2-text-3)' }}>{sev.label}</span>
+                </div>
+              ))}
             </div>
-          </div>
 
-          {/* STEP 3: RUSAK SEDANG */}
-          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 183, 77, 0.3)', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
-              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(255, 183, 77, 0.2)' }}>
-                <h4 className="playfair-display" style={{ color: '#FFB74D', fontSize: '1.8rem', margin: 0 }}>Rusak Sedang</h4>
-                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Kota Sibolga, Sumatera Utara. Longsor mulai menyentuh dan merusak sebagian rumah-rumah warga di perbukitan.</p>
-              </div>
-              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
-                <img src="/assets/pkl3_1.webp" alt="Rusak Sedang" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-              </div>
-            </div>
-          </div>
+            {/* Rows — one per sector */}
+            {chartDataByKat.map((kat, ki) => {
+              const items = SEV_ITEMS.map((sev) => ({ ...sev, val: kat[sev.key] }));
+              return (
+                <div key={kat.name} style={{
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? 'translateY(0)' : 'translateY(12px)',
+                  transition: `opacity 0.8s var(--ws2-reveal-ease) ${0.15 + ki * 0.1}s, transform 0.8s var(--ws2-reveal-ease) ${0.15 + ki * 0.1}s`,
+                }}>
+                  {/* Sector header row */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.8rem' }}>
+                      <span className="t-eyebrow" style={{ color: 'var(--ws2-text-3)', fontSize: '0.7rem' }}>
+                        {kat.name.toUpperCase()}
+                      </span>
+                      <span className="t-display" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', fontWeight: 700, color: 'var(--ws2-text-1)', lineHeight: 1 }}>
+                        {kat.total.toLocaleString('id-ID')}
+                      </span>
+                      <span className="lato-light" style={{ fontSize: '0.7rem', color: 'var(--ws2-text-4)' }}>unit</span>
+                    </div>
+                  </div>
 
-          {/* STEP 4: RUSAK BERAT */}
-          <div className="scroll-step" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ background: '#1C1F4A', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(231, 76, 60, 0.5)', boxShadow: '0 0 25px rgba(231,76,60,0.3)' }}>
-              <div style={{ padding: '1.5rem', borderBottom: '1px solid rgba(231, 76, 60, 0.2)' }}>
-                <h4 className="playfair-display" style={{ color: '#e74c3c', fontSize: '1.8rem', margin: 0, fontWeight: 'bold' }}>Rusak Berat</h4>
-                <p className="lato-regular" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', lineHeight: 1.5 }}>Palembayan, Agam, Sumatera Barat. Kehancuran total; fasilitas sosial dan pemukiman rata dengan tanah tersapu banjir bandang.</p>
-              </div>
-              <div style={{ position: 'relative', width: '100%', height: '450px', background: '#000' }}>
-                <img src="/assets/pkl1.webp" alt="Rusak Berat" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-              </div>
-            </div>
+                  {/* Stacked horizontal bar for this sector */}
+                  <div style={{ display: 'flex', height: 22, borderRadius: 'var(--ws2-r-xs)', overflow: 'hidden', background: 'rgba(229,217,182,0.04)', marginBottom: '0.4rem' }}>
+                    {items.filter(s => s.val > 0).map((sev) => {
+                      const pct = kat.total > 0 ? (sev.val / kat.total) * 100 : 0;
+                      return (
+                        <div key={sev.key} title={`${sev.label}: ${sev.val.toLocaleString('id-ID')} (${pct.toFixed(1)}%)`} style={{
+                          width: inView ? `${pct}%` : '0%',
+                          height: '100%',
+                          background: SEV_SWATCH[sev.tone],
+                          transition: `width 1.2s var(--ws2-bar-ease) ${0.3 + ki * 0.12}s`,
+                          minWidth: sev.val > 0 ? 2 : 0,
+                        }} />
+                      );
+                    })}
+                  </div>
+
+                  {/* Inline severity counts */}
+                  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                    {items.filter(s => s.val > 0).map((sev) => {
+                      const pct = kat.total > 0 ? (sev.val / kat.total) * 100 : 0;
+                      return (
+                        <span key={sev.key} className="lato-light" style={{ fontSize: '0.68rem', color: 'var(--ws2-text-4)' }}>
+                          {sev.label}: <strong style={{ color: 'var(--ws2-text-2)', fontWeight: 700 }}>{sev.val.toLocaleString('id-ID')}</strong>
+                          <span style={{ marginLeft: '0.2rem' }}>({pct.toFixed(1)}%)</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+
+                  {/* Separator between sectors */}
+                  {ki < chartDataByKat.length - 1 && (
+                    <div style={{ height: 1, background: 'rgba(229,217,182,0.06)', marginTop: '1.2rem' }} />
+                  )}
+                </div>
+              );
+            })}
           </div>
 
         </div>
@@ -276,645 +388,872 @@ function SceneKelumpuhanKota() {
   );
 }
 
-/* ─────────────────────────────────────────
-   Scene 2: Kelumpuhan Desa — per provinsi
-───────────────────────────────────────────*/
-const PROVINSI_TARGET = [
-  { key: 'Aceh',          label: 'Aceh: Dampak Bencana Hingga Tingkat Desa', color: '#e74c3c' },
-  { key: 'Sumatera Utara', label: 'Sumatera Utara: Dampak Bencana Hingga Tingkat Desa', color: '#f39c12' },
-  { key: 'Sumatera Barat', label: 'Sumatera Barat: Dampak Bencana Hingga Tingkat Desa', color: '#2ecc71' },
-];
 
-function DesaCard({ desa, pct, kecamatan, color, delay, show }) {
-  const [visible, setVisible] = useState(false);
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  SCENE 2 — KELUMPUHAN DESA  (CREAM)                          ║
+   ║  Interactive Leaflet map + click-to-zoom province cards       ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+
+/* Province marker component for Scene 2 map */
+/* Titik lokasi provinsi.
+
+   Dulu 14px (22px saat aktif) dan diwarnai per provinsi — Aceh krem di atas
+   tile terang, praktis tak terlihat. Kini semuanya oranye + border putih +
+   glow, karena ini menandai LOKASI (bukan kategori); pembeda provinsi sudah
+   dibawa poligon di bawahnya. Notula: "perjelas dan tegaskan titik lokasi". */
+function Scene2ProvinceMarker({ lat, lng, label, isActive, onClick }) {
+  const map = useMap();
   useEffect(() => {
-    if (show) {
-      const t = setTimeout(() => setVisible(true), delay);
-      return () => clearTimeout(t);
-    }
-  }, [show, delay]);
-
-  return (
-    <div style={{
-      padding: '1rem 1.2rem',
-      background: 'rgba(255,255,255,0.03)',
-      border: `1px solid ${color}2a`,
-      borderLeft: `3px solid ${color}`,
-      borderRadius: 10,
-      opacity: visible ? 1 : 0,
-      transform: visible ? 'translateY(0)' : 'translateY(16px)',
-      transition: `opacity 0.4s ease, transform 0.4s ease`,
-    }}>
-      <div className="lato-bold" style={{ fontSize: '0.84rem', color: '#fff', marginBottom: '0.2rem' }}>
-        {desa}
-      </div>
-      <div className="lato-regular" style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', marginBottom: '0.7rem' }}>
-        {kecamatan}
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <div style={{ flex: 1, height: 5, background: 'rgba(255,255,255,0.08)', borderRadius: 3, overflow: 'hidden' }}>
-          <div style={{
-            height: '100%',
-            width: visible ? `${Math.min(pct, 100)}%` : '0%',
-            background: color,
-            borderRadius: 3,
-            transition: 'width 0.8s ease 0.2s',
-          }} />
-        </div>
-        <span className="lato-bold" style={{ fontSize: '0.78rem', color, whiteSpace: 'nowrap' }}>
-          {pct.toFixed(0)}%
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function ProvinsiSection({ prov, data }) {
-  const [ref, visible] = useInView(0.1);
-  const desaList = (data || [])
-    .sort((a, b) => (b.pct_bangunan_rusak || 0) - (a.pct_bangunan_rusak || 0))
-    .slice(0, 9);
-
-  return (
-    <div ref={ref} style={{ marginBottom: '4rem' }}>
-      {/* Header provinsi */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: '1rem',
-        marginBottom: '0.75rem',
-      }}>
-        <div style={{
-          width: 4, height: 32,
-          background: prov.color,
-          borderRadius: 2,
-          boxShadow: `0 0 8px ${prov.color}88`,
-        }} />
-        <h3 className="playfair-display" style={{
-          fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)',
-          color: '#fff',
-          margin: 0,
-        }}>
-          {prov.label}
-        </h3>
-      </div>
-
-      {desaList.length === 0 ? (
-        <div className="lato-regular" style={{
-          fontSize: '0.88rem',
-          color: 'rgba(255,255,255,0.3)',
-          padding: '1rem 1.5rem',
-          border: '1px solid rgba(255,255,255,0.06)',
-          borderRadius: 10,
-        }}>
-          Data desa akan tersedia setelah insight.json dihasilkan.
-        </div>
-      ) : (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-          gap: '0.75rem',
-        }}>
-          {desaList.map((d, i) => {
-            const pct = d.pct_bangunan_rusak || 0;
-            const color = pct > 60 ? '#e74c3c' : pct > 30 ? '#FFB74D' : '#81C784';
-            return (
-              <DesaCard
-                key={`${d.kecamatan}-${d.desa}`}
-                desa={d.desa}
-                kecamatan={d.kecamatan}
-                pct={pct}
-                color={color}
-                delay={i * 80}
-                show={visible}
-              />
-            );
-          })}
-        </div>
-      )}
-
-      {/* Teks jembatan */}
-      <div className="lato-regular-italic" style={{
-        marginTop: '1.5rem',
-        fontSize: '0.9rem',
-        color: 'rgba(255,255,255,0.35)',
-        textAlign: 'right',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
-        paddingTop: '1rem',
-      }}>
-        "Cerita serupa juga terjadi di provinsi lain."
-      </div>
-    </div>
-  );
+    if (!lat || !lng || isNaN(lat) || isNaN(lng)) return;
+    const size = isActive ? 24 : 18;
+    const icon = L.divIcon({
+      className: '',
+      html: `
+        <div style="
+          position:relative;width:${size}px;height:${size}px;
+          border-radius:50%;
+          background:${WS2.accent};
+          border:2px solid ${WS2.white};
+          box-shadow:0 0 0 5px rgba(230,126,34,0.25), 0 0 16px 4px rgba(230,126,34,0.55);
+          transition: all 0.4s ease;
+          ${isActive ? 'animation:pulseNeon 2.2s ease-out infinite;' : ''}
+        "></div>
+      `,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+    });
+    const marker = L.marker([lat, lng], { icon }).addTo(map);
+    marker.on('click', onClick);
+    if (label) marker.bindTooltip(label, {
+      permanent: isActive,
+      direction: 'top',
+      className: 'priority-tooltip',
+      offset: [0, -size / 2 - 6],
+    });
+    return () => { map.removeLayer(marker); };
+  }, [map, lat, lng, label, isActive, onClick]);
+  return null;
 }
 
 function SceneKelumpuhanDesa() {
-  const perDesa = insights?.keluarga?.per_desa || [];
+  const [ref, inView] = useInView();
+  const [activeProv, setActiveProv] = useState(null);
+  const [cardsInView, setCardsInView] = useState(false);
+  const cardsRef = useRef(null);
+  const patternStripRef = useRef(null);
+  const sectionRef = useRef(null);
 
-  // Group by provinsi
-  const desaByProv = {};
-  PROVINSI_TARGET.forEach(p => {
-    desaByProv[p.key] = perDesa.filter(d =>
-      d.provinsi?.toLowerCase().includes(p.key.toLowerCase())
-    );
-  });
+  /* Tampilan awal: gabungan bounds ketiga provinsi target, bukan
+     center+zoom tebakan. */
+  const DEFAULT_CENTER = [2.0, 98.5];
+  const DEFAULT_ZOOM = 6;
 
-  return (
-    <section style={{
-      background: 'linear-gradient(180deg, #15173d 0%, #0a0b1f 100%)',
-      padding: '7rem 2rem',
-    }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-        <span className="lato-bold" style={{
-          fontSize: '0.78rem', letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: '#FFB74D',
-          display: 'block', marginBottom: '1rem',
-        }}>
-          Babak 2 · Scene 2
-        </span>
-        <h2 className="playfair-display" style={{
-          fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-          color: '#fff', lineHeight: 1.2, marginBottom: '1rem',
-        }}>
-          Detail Hingga{' '}
-          <span style={{ color: '#FFB74D' }}>Sudut Desa</span>
-        </h2>
-        <p className="lato-regular" style={{
-          fontSize: '1.05rem', lineHeight: 1.85,
-          color: 'var(--beige)', opacity: 0.85,
-          maxWidth: 640, marginBottom: '3.5rem',
-        }}>
-          Kerusakan tidak merata. Setiap desa menanggung luka yang berbeda-beda —
-          dari yang sedikit tergores hingga yang rata dengan tanah.
-        </p>
+  const PROVINSI = [
+    {
+      key: 'Aceh', title: 'Aceh',
+      tagline: 'Wilayah terisolir — akses jalan putus total.',
+      lat: 4.6951, lng: 96.7494,
+    },
+    {
+      key: 'Sumatera Utara', title: 'Sumatera Utara',
+      tagline: 'Episenter bencana — korban jiwa terbanyak.',
+      lat: 2.1154, lng: 98.9451,
+    },
+    {
+      key: 'Sumatera Barat', title: 'Sumatera Barat',
+      tagline: 'Jalur ekonomi Padang–Bukittinggi lumpuh.',
+      lat: -0.7390, lng: 100.8000,
+    },
+  ];
 
-        {PROVINSI_TARGET.map(prov => (
-          <ProvinsiSection
-            key={prov.key}
-            prov={prov}
-            data={desaByProv[prov.key]}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
+  const mapBounds = activeProv !== null
+    ? provBounds(PROV_GEO_NAME[PROVINSI[activeProv].key])
+    : targetBounds();
 
-/* ─────────────────────────────────────────
-   Scene 3: Narasi Layanan Dasar
-───────────────────────────────────────────*/
-const LAYANAN_ITEMS = [
-  {
-    icon: '⚡',
-    judul: 'Listrik Padam',
-    narasi: 'Jaringan listrik rusak parah. Ratusan desa kehilangan penerangan — aktivitas ekonomi dan pendidikan terhenti dalam gelap.',
-    color: '#FFD54F',
-    animClass: 'icon-power',
-  },
-  {
-    icon: '💧',
-    judul: 'Air Mengering',
-    narasi: 'Pipa distribusi dan sumber air terdampak. Warga harus berjalan jauh untuk mendapatkan air bersih yang layak konsumsi.',
-    color: '#4FC3F7',
-    animClass: 'icon-water',
-  },
-  {
-    icon: '🚽',
-    judul: 'Sanitasi Terganggu',
-    narasi: 'Fasilitas sanitasi rusak atau tidak dapat diakses. Risiko penyakit menular meningkat di kawasan hunian sementara.',
-    color: '#81C784',
-    animClass: 'icon-toilet',
-  },
-];
+  /* Sebaran fasilitas: porsi dari total tiga provinsi (share), bukan
+     normalisasi ke provinsi terbesar. */
+  const jumlahPerProv = insights?.fasilitas_infrastruktur?.jumlah_per_provinsi_per_kategori || {};
+  const totalsArr = Object.entries(jumlahPerProv).map(([prov, kat]) => ({
+    prov,
+    total: Object.values(kat).reduce((a, v) => a + v, 0),
+  }));
+  const totalSebaran = totalsArr.reduce((a, x) => a + x.total, 0) || 1;
+  const sebaran = totalsArr
+    .map(({ prov, total }) => ({ provinsi: prov, total, persen: (total / totalSebaran) * 100 }))
+    .sort((a, b) => b.total - a.total);
 
-function LayananCard({ item, delay, show }) {
-  const [visible, setVisible] = useState(false);
   useEffect(() => {
-    if (show) {
-      const t = setTimeout(() => setVisible(true), delay);
-      return () => clearTimeout(t);
-    }
-  }, [show, delay]);
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setCardsInView(true); },
+      { threshold: 0.15 },
+    );
+    if (cardsRef.current) obs.observe(cardsRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  /* GSAP: hide pattern strip when section background transitions to cream */
+  useEffect(() => {
+    const strip = sectionRef.current?.querySelector('.cakupan-pattern-strip');
+    if (!strip) return;
+    const st = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top 80%',
+      end: 'top 20%',
+      scrub: 0.5,
+      onUpdate: (self) => {
+        gsap.set(strip, { opacity: Math.max(0, 0.55 * (1 - self.progress)) });
+      },
+    });
+    return () => st.kill();
+  }, []);
+
+  const handleCardClick = useCallback((index) => {
+    setActiveProv((prev) => (prev === index ? null : index));
+  }, []);
 
   return (
-    <div style={{
-      display: 'flex',
-      gap: '1.5rem',
-      alignItems: 'flex-start',
-      padding: '2rem',
-      background: 'rgba(0,0,0,0.35)',
-      borderRadius: 16,
-      border: `1px solid ${item.color}22`,
-      opacity: visible ? 1 : 0,
-      transform: visible ? 'translateX(0)' : 'translateX(-24px)',
-      transition: 'opacity 0.5s ease, transform 0.5s ease',
-    }}>
-      <div style={{
-        width: 64, height: 64,
-        flexShrink: 0,
-        borderRadius: '50%',
-        background: `${item.color}18`,
-        border: `2px solid ${item.color}44`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '2rem',
-        animation: visible ? `${item.animClass} 2s ease-in-out infinite` : 'none',
-      }}>
-        {item.icon}
-      </div>
-      <div>
-        <h3 className="lato-bold" style={{
-          fontSize: '1.05rem',
-          color: item.color,
-          marginBottom: '0.5rem',
+    <section id={SCENE2_ANCHOR_ID} ref={sectionRef} className="infra-section infra-bg-cream infra-grain" style={{ padding: 'clamp(5rem,8vw,7rem) 0 0' }}>
+      {/* ── Header (rata kiri, satu container dengan sisanya) ── */}
+      {/* Pattern di atas judul — hilang saat background sudah krem */}
+      <div className="cakupan-pattern-strip" style={{
+        width: '100%', height: '40px',
+        backgroundImage: `url(${patternImg})`, backgroundRepeat: 'repeat-x',
+        backgroundSize: 'auto 100%', opacity: 0.55,
+        marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+        transition: 'opacity 0.6s ease',
+      }} />
+      <div ref={ref} style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(1.25rem, 3vw, 2.5rem)' }}>
+        <div style={{
+          marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+          opacity: inView ? 1 : 0,
+          transform: inView ? 'translateY(0)' : 'translateY(16px)',
+          transition: 'opacity 0.8s var(--ws2-reveal-ease), transform 0.8s var(--ws2-reveal-ease)',
+          textAlign: 'center',
         }}>
-          {item.judul}
-        </h3>
-        <p className="lato-regular" style={{
-          fontSize: '0.92rem',
-          lineHeight: 1.75,
-          color: 'var(--beige)',
-          opacity: 0.8,
-          margin: 0,
-        }}>
-          {item.narasi}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function SceneLayananDasar() {
-  const [ref, visible] = useInView(0.15);
-
-  // Data dari insight.json - status pengungsian & kondisi
-  const statusHunian = insights?.rumah_tangga?.status_hunian || {};
-  const pengungsian = statusHunian['3. Pengungsian']?.n || 0;
-  const huntara     = statusHunian['6. Huntara']?.n || 0;
-
-  return (
-    <section style={{
-      background: '#0a0b1f',
-      padding: '7rem 2rem',
-    }}>
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
-        <span className="lato-bold" style={{
-          fontSize: '0.78rem', letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: '#4FC3F7',
-          display: 'block', marginBottom: '1rem',
-        }}>
-          Babak 2 · Scene 3
-        </span>
-        <h2 className="playfair-display" style={{
-          fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-          color: '#fff', lineHeight: 1.2, marginBottom: '1rem',
-        }}>
-          Saat Kota{' '}
-          <span style={{ color: '#4FC3F7' }}>Kehilangan Denyutnya</span>
-        </h2>
-        <p className="lato-regular" style={{
-          fontSize: '1.05rem', lineHeight: 1.85,
-          color: 'var(--beige)', opacity: 0.85,
-          maxWidth: 640, marginBottom: '3.5rem',
-        }}>
-          Dampak bencana tidak hanya dirasakan oleh rumah tangga.
-          Lingkungan yang menopang kehidupan masyarakat pun ikut lumpuh.
-        </p>
-
-        <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '3rem' }}>
-          {LAYANAN_ITEMS.map((item, i) => (
-            <LayananCard key={item.judul} item={item} delay={i * 200} show={visible} />
-          ))}
+          <h2 className="t-display" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.01em', margin: 0, color: 'var(--ws2-ink-1)' }}>
+            Cakupan Wilayah Terdampak
+          </h2>
         </div>
+      </div>
 
-        {/* Stat hunian sementara */}
-        {(pengungsian > 0 || huntara > 0) && (
+      {/* ── Peta full-bleed; indeks keparahan melayang DI ATAS peta ────────
+          Kartu provinsi duduk PENUH di bawah peta, tidak menumpang. */}
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        opacity: inView ? 1 : 0,
+        transition: 'opacity 0.8s var(--ws2-reveal-ease) 0.15s',
+      }}>
+        <div style={{ width: '100%', height: 'clamp(460px, 56vw, 680px)', position: 'relative' }}>
+          <MapContainer
+            center={DEFAULT_CENTER}
+            zoom={DEFAULT_ZOOM}
+            zoomSnap={0.25}
+            zoomControl={false}
+            scrollWheelZoom={false}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+              maxZoom={19}
+            />
+
+            {/* Poligon highlight (permintaan notula). Provinsi non-target
+                hanya garis konteks; tiga provinsi target diberi isian yang
+                kepekatannya mengikuti jumlah desa terdampak. */}
+            <GeoJSON
+              key={`ctx-${activeProv}`}
+              data={CONTEXT_FEATURES_FC}
+              interactive={false}
+              style={{ color: 'rgba(229,217,182,0.16)', weight: 0.7, fill: false }}
+            />
+            <GeoJSON
+              key={`hl-${activeProv}`}
+              data={TARGET_FEATURES_FC}
+              style={(f) => {
+                const idx = NAME_TO_INDEX[f.properties.name];
+                const aktif = activeProv === idx;
+                const lain = activeProv !== null && !aktif;
+                return {
+                  fillColor: WS2.accent,
+                  fillOpacity: aktif ? 0.62 : lain ? 0.1 : FILL_BY_NAME[f.properties.name],
+                  color: aktif ? WS2.white : WS2.cream,
+                  weight: aktif ? 2.2 : 1.4,
+                  opacity: 0.8,
+                  lineJoin: 'round',
+                };
+              }}
+              onEachFeature={(f, layer) => {
+                const idx = NAME_TO_INDEX[f.properties.name];
+                if (idx === undefined) return;
+                layer.on('click', () => handleCardClick(idx));
+              }}
+            />
+
+            <MapFitUpdater bounds={mapBounds} />
+            {PROVINSI.map((prov, i) => (
+              <Scene2ProvinceMarker
+                key={prov.key}
+                lat={prov.lat}
+                lng={prov.lng}
+                label={prov.title}
+                isActive={activeProv === i}
+                onClick={() => handleCardClick(i)}
+              />
+            ))}
+          </MapContainer>
+
+          {/* Indeks keparahan + Prioritas Wilayah — glassmorphism overlay.
+              Gabungan: sebaran fasilitas + peringkat prioritas (dipindahkan dari
+              SceneZonaPrioritas agar mengurangi jumlah peta). */}
           <div style={{
-            display: 'flex',
-            gap: '1.5rem',
-            flexWrap: 'wrap',
-            padding: '1.5rem 2rem',
-            background: 'rgba(231,76,60,0.06)',
-            borderRadius: 14,
-            border: '1px solid rgba(231,76,60,0.2)',
+            position: 'absolute', top: '1.25rem', right: '1.25rem',
+            zIndex: 600, width: 'min(340px, 44vw)',
+            display: 'flex', flexDirection: 'column', gap: '0rem',
           }}>
-            <div style={{ textAlign: 'center', flex: '1 1 120px' }}>
-              <div className="playfair-display" style={{ fontSize: '2rem', color: '#e74c3c', fontWeight: 700 }}>
-                {huntara.toLocaleString('id-ID')}
+            {/* Card 1: Sebaran Fasilitas */}
+            <div className="ws2-card ws2-card--overlay" style={{
+              display: 'flex', flexDirection: 'column', gap: '0.9rem',
+              borderRadius: 'var(--ws2-r-md) var(--ws2-r-md) 0 0',
+              borderBottom: 'none',
+            }}>
+              <span className="t-eyebrow" style={{ color: 'var(--ws2-text-3)', fontSize: '0.6rem', letterSpacing: '0.18em' }}>
+                SEBARAN FASILITAS TERDATA
+              </span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {sebaran.map((item, i) => (
+                  <div key={item.provinsi}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.3rem', gap: '0.5rem' }}>
+                      <span className="lato-light" style={{ fontSize: '0.76rem', color: 'var(--ws2-text-2)' }}>
+                        {item.provinsi}
+                      </span>
+                      <span className="lato-bold" style={{ fontSize: '0.76rem', color: 'var(--ws2-text-1)', whiteSpace: 'nowrap' }}>
+                        {fmtN(item.total)}
+                        <span style={{ fontWeight: 300, color: 'var(--ws2-text-4)', marginLeft: '0.35rem' }}>
+                          {fmtPct(item.persen)}%
+                        </span>
+                      </span>
+                    </div>
+                    <BarTrack
+                      mode="share"
+                      value={item.persen}
+                      surface="navy"
+                      tone={activeProv !== null && NAME_TO_INDEX[item.provinsi] === activeProv ? 'accent' : 'cream'}
+                      visible={inView}
+                      delay={i * 0.1}
+                    />
+                  </div>
+                ))}
               </div>
-              <div className="lato-regular" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                KK di Huntara
+              <div style={{ height: 1, background: 'var(--ws2-line-1)' }} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                {PROVINSI.map((prov) => (
+                  <div key={prov.key} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span className="ws2-swatch" style={{
+                      width: 14, height: 10,
+                      background: WS2.accent,
+                      opacity: FILL_BY_NAME[prov.key] * 1.6,
+                    }} />
+                    <span className="lato-light" style={{ fontSize: '0.6rem', color: 'var(--ws2-text-3)' }}>
+                      {prov.title}
+                    </span>
+                  </div>
+                ))}
               </div>
+              <p className="lato-light" style={{ fontSize: '0.58rem', color: 'var(--ws2-text-4)', lineHeight: 1.5, margin: 0 }}>
+                Kepekatan warna mengikuti jumlah desa terdampak.
+                Klik provinsi atau kartu untuk memperbesar.
+              </p>
             </div>
-            <div style={{ textAlign: 'center', flex: '1 1 120px' }}>
-              <div className="playfair-display" style={{ fontSize: '2rem', color: '#FFB74D', fontWeight: 700 }}>
-                {pengungsian.toLocaleString('id-ID')}
-              </div>
-              <div className="lato-regular" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                KK di Pengungsian
+
+            {/* Card 2: Indeks Prioritas Wilayah (glassmorphism, overlay) */}
+            <div className="ws2-card ws2-card--overlay" style={{
+              display: 'flex', flexDirection: 'column', gap: '0.9rem',
+              borderRadius: '0 0 var(--ws2-r-md) var(--ws2-r-md)',
+              borderTop: '1px solid var(--ws2-line-1)',
+            }}>
+              <span className="t-eyebrow" style={{ color: 'var(--ws2-text-3)', fontSize: '0.6rem', letterSpacing: '0.18em' }}>
+                INDEKS PRIORITAS WILAYAH
+              </span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                {sebaran.map((item, i) => {
+                  const isTop = i === 0;
+                  const color = isTop ? 'var(--ws2-accent)' : i === 1 ? 'var(--ws2-accent)' : 'var(--ws2-green)';
+                  return (
+                    <div key={`pri-${item.provinsi}`} style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
+                      <span className="t-eyebrow" style={{ color: 'var(--ws2-text-4)', fontSize: '0.72rem', width: '20px', flexShrink: 0, textAlign: 'right' }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.2rem' }}>
+                          <span className="lato-bold" style={{ fontSize: '0.76rem', color: 'var(--ws2-text-1)' }}>
+                            {item.provinsi}
+                          </span>
+                          <span className="t-display" style={{ fontSize: '1.1rem', color, fontWeight: 700, lineHeight: 1 }}>
+                            {fmtPct(item.persen)}%
+                          </span>
+                        </div>
+                        <BarTrack
+                          mode="share"
+                          value={item.persen}
+                          surface="navy"
+                          tone={isTop ? 'accent' : 'neutral'}
+                          visible={inView}
+                          delay={0.3 + i * 0.12}
+                        />
+                        <span className="lato-light" style={{ fontSize: '0.6rem', color: 'var(--ws2-text-4)', marginTop: '0.15rem', display: 'block' }}>
+                          {fmtN(item.total)} Fasilitas
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
-        )}
+
+          {/* Peredam tipis supaya tepi bawah peta tidak berakhir sebagai
+              garis tajam di atas latar krem. */}
+          <div aria-hidden="true" style={{
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: 90,
+            background: 'linear-gradient(to top, var(--ws2-bg-cream) 0%, transparent 100%)',
+            zIndex: 500, pointerEvents: 'none',
+          }} />
+        </div>
       </div>
 
-      {/* CSS animations layanan ikon */}
-      <style>{`
-        @keyframes icon-power {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; filter: grayscale(0.8); }
-        }
-        @keyframes icon-water {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(0.85); }
-        }
-        @keyframes icon-toilet {
-          0%, 100% { transform: rotate(0deg); }
-          50% { transform: rotate(-10deg); }
-        }
-      `}</style>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────
-   Scene 4: Zona Prioritas — Top 15 kabupaten
-───────────────────────────────────────────*/
-function SceneZonaPrioritas() {
-  const [ref, started] = useInView(0.15);
-
-  const peringkat = insights?.infrastruktur?.peringkat_kabupaten_terparah || [];
-
-  // Fallback: build ranking dari fasilitas per kategori jika peringkat kosong
-  const jumlahPerProv = insights?.fasilitas_infrastruktur?.jumlah_per_provinsi_per_kategori || {};
-  const hasRanking = peringkat.length > 0;
-
-  return (
-    <section style={{
-      background: 'linear-gradient(180deg, #0a0b1f 0%, #0d1a10 100%)',
-      padding: '7rem 2rem',
-    }}>
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
-        <span className="lato-bold" style={{
-          fontSize: '0.78rem', letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: '#e74c3c',
-          display: 'block', marginBottom: '1rem',
+      {/* ── Kartu provinsi — seluruhnya di bawah peta ── */}
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(1.25rem, 3vw, 2.5rem)', position: 'relative', zIndex: 10 }}>
+        <div ref={cardsRef} className="infra-prov-cards" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 'clamp(1rem, 2vw, 1.5rem)',
+          marginTop: 'clamp(1.5rem, 3vw, 2.5rem)',
         }}>
-          Babak 2 · Scene 4
-        </span>
-        <h2 className="playfair-display" style={{
-          fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-          color: '#fff', lineHeight: 1.2,
-          marginBottom: '1rem',
-        }}>
-          Menentukan{' '}
-          <span style={{ color: '#e74c3c' }}>Zona Prioritas</span>{' '}
-          Pemulihan
-        </h2>
-        <p className="lato-regular" style={{
-          fontSize: '1.05rem', lineHeight: 1.85,
-          color: 'var(--beige)', opacity: 0.85,
-          maxWidth: 660, marginBottom: '3.5rem',
-        }}>
-          Tidak semua wilayah menanggung luka yang sama. Melalui pemetaan titik kerusakan,
-          kami merumuskan Zona Prioritas Pemulihan — di sinilah denyut nadi bantuan
-          harus dipompa paling kencang.
-        </p>
+          {PROVINSI.map((prov, i) => {
+            const jumlahDesa = insights?.cakupan_geografis_infra?.desa_per_provinsi?.[prov.key] || 0;
+            const fasPerProv = insights?.fasilitas_infrastruktur?.jumlah_per_provinsi_per_kategori?.[prov.key] || {};
+            const totalFasProv = Object.values(fasPerProv).reduce((a, v) => a + v, 0);
+            const korban = insights?.anggota_keluarga?.korban_kritis_per_provinsi?.[prov.key] || {};
+            const isActive = activeProv === i;
+            const meninggal = korban.meninggal_bencana ?? '—';
 
-        {/* Ranking list */}
-        <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-          {!hasRanking && (
-            <div className="lato-regular" style={{
-              padding: '1.5rem',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 12,
-              color: 'rgba(255,255,255,0.35)',
-              fontSize: '0.9rem',
-            }}>
-              💡 Data peringkat kabupaten akan muncul setelah insight.json dihasilkan dengan field{' '}
-              <code style={{ color: 'var(--green)' }}>infrastruktur.peringkat_kabupaten_terparah</code>.
-            </div>
-          )}
-
-          {peringkat.map((item, i) => {
-            const barWidth = started
-              ? `${Math.min((item.total_hilang / (peringkat[0]?.total_hilang || 1)) * 100, 100)}%`
-              : '0%';
-            const isTop3 = i < 3;
             return (
-              <div key={item.kabupaten} style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1rem 1.5rem',
-                background: isTop3
-                  ? 'rgba(231,76,60,0.08)'
-                  : 'rgba(255,255,255,0.02)',
-                borderRadius: 12,
-                border: isTop3
-                  ? '1px solid rgba(231,76,60,0.25)'
-                  : '1px solid rgba(255,255,255,0.05)',
-              }}>
-                <div className="lato-black" style={{
-                  width: 36, height: 36, flexShrink: 0,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  borderRadius: '50%',
-                  background: isTop3 ? '#e74c3c' : 'rgba(255,255,255,0.08)',
-                  fontSize: '0.85rem',
-                  color: '#fff',
+              <div
+                key={prov.key}
+                onClick={() => handleCardClick(i)}
+                className="ws2-card ws2-card--cream ws2-card--clickable"
+                style={{
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderColor: isActive ? WS2.accent : undefined,
+                  boxShadow: isActive ? 'var(--ws2-shadow-c-active)' : undefined,
+                  opacity: cardsInView ? 1 : 0,
+                  transform: cardsInView ? 'translateY(0)' : 'translateY(16px)',
+                  transition: `border-color .4s ease, box-shadow .4s ease, opacity 0.8s var(--ws2-reveal-ease) ${i * 0.12}s, transform 0.8s var(--ws2-reveal-ease) ${i * 0.12}s`,
+                }}
+              >
+                {/* Stripe aktif dan badge "Zoom/Viewing" dihapus: status aktif
+                    sudah ditandai border oranye + shadow, dan stripe radius 16
+                    tidak pernah cocok dengan radius kartunya. */}
+
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <h3 className="t-display" style={{
+                    fontSize: 'clamp(1.15rem, 1.8vw, 1.4rem)',
+                    color: 'var(--ws2-ink-1)',
+                    fontWeight: 700,
+                    marginBottom: '0.35rem',
+                    lineHeight: 1.2,
+                  }}>
+                    {prov.title}
+                  </h3>
+                  <p className="t-body" style={{ fontSize: '0.78rem', color: 'var(--ws2-ink-3)', margin: 0, lineHeight: 1.5 }}>
+                    {prov.tagline}
+                  </p>
+                </div>
+
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '0.75rem 1rem',
+                  marginBottom: Object.keys(fasPerProv).length > 0 ? '1.1rem' : 0,
                 }}>
-                  {item.rank}
-                </div>
-                <div style={{ flex: '0 0 220px', minWidth: 0 }}>
-                  <div className="lato-bold" style={{ fontSize: '0.9rem', color: '#fff' }}>
-                    {item.kabupaten}
+                  <div>
+                    <div className="t-display" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.75rem)', color: 'var(--ws2-ink-1)', fontWeight: 700, lineHeight: 1 }}>
+                      {fmtN(jumlahDesa)}
+                    </div>
+                    <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.52rem', marginTop: '0.28rem' }}>Desa</div>
                   </div>
-                  <div className="lato-regular" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
-                    {item.provinsi}
+                  <div>
+                    <div className="t-display" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.75rem)', color: 'var(--ws2-ink-1)', fontWeight: 700, lineHeight: 1 }}>
+                      {fmtN(totalFasProv)}
+                    </div>
+                    <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.52rem', marginTop: '0.28rem' }}>Fasilitas</div>
                   </div>
+                  <div>
+                    <div className="t-display" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.75rem)', color: 'var(--ws2-accent)', fontWeight: 700, lineHeight: 1 }}>
+                      {meninggal}
+                    </div>
+                    <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.52rem', marginTop: '0.28rem' }}>Korban Jiwa</div>
+                  </div>
+                  {(() => {
+                    const kabPerProv = insights?.cakupan_geografis_infra?.kab_kota_per_provinsi?.[prov.key];
+                    return kabPerProv ? (
+                      <div>
+                        <div className="t-display" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.75rem)', color: 'var(--ws2-ink-1)', fontWeight: 700, lineHeight: 1 }}>
+                          {kabPerProv}
+                        </div>
+                        <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.52rem', marginTop: '0.28rem' }}>Kab/Kota</div>
+                      </div>
+                    ) : null;
+                  })()}
                 </div>
-                <div style={{ flex: 1, height: 8, background: 'rgba(255,255,255,0.07)', borderRadius: 4, overflow: 'hidden' }}>
-                  <div style={{
-                    height: '100%',
-                    width: barWidth,
-                    background: isTop3
-                      ? 'linear-gradient(90deg, #e74c3c, #ff6b6b)'
-                      : 'linear-gradient(90deg, #628141, #8aaf5a)',
-                    borderRadius: 4,
-                    transition: `width 1s ${i * 0.06}s ease`,
-                  }} />
-                </div>
-                <div className="lato-bold" style={{
-                  fontSize: '0.85rem',
-                  color: isTop3 ? '#e74c3c' : 'var(--green)',
-                  flexShrink: 0,
-                  minWidth: 52,
-                  textAlign: 'right',
-                }}>
-                  {item.persen_kelumpuhan?.toFixed(1)}%
-                </div>
+
+                {/* Stacked bar sektor. Dulu keempat segmen memetakan ke
+                    --sage/--slate/--gold/--rust, padahal di :root lama
+                    --slate === --sage dan --gold === --rust: empat kategori
+                    tampil sebagai dua warna dan legendanya ikut berbohong. */}
+                {Object.keys(fasPerProv).length > 0 && (
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <div style={{
+                      display: 'flex', height: 10, borderRadius: 'var(--ws2-r-xs)', overflow: 'hidden', marginBottom: '0.65rem',
+                      background: 'var(--ws2-track-c)',
+                    }}>
+                      {KAT_ORDER.filter((k) => fasPerProv[k]).map((kat) => (
+                        <div
+                          key={kat}
+                          style={{
+                            width: cardsInView ? `${(fasPerProv[kat] / totalFasProv) * 100}%` : '0%',
+                            minWidth: fasPerProv[kat] > 0 ? 2 : 0,
+                            height: '100%',
+                            background: KAT_COLOR[kat],
+                            transition: `width 1.2s var(--ws2-bar-ease) ${0.4 + i * 0.12}s`,
+                          }}
+                          title={`${kat}: ${fasPerProv[kat]}`}
+                        />
+                      ))}
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      {KAT_ORDER.filter((k) => fasPerProv[k]).map((kat) => (
+                        <span key={kat} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.65rem', fontFamily: 'Lato, sans-serif', fontWeight: 300, color: 'var(--ws2-ink-3)' }}>
+                          <span className="ws2-swatch" style={{ background: KAT_COLOR[kat] }} />
+                          {kat} <strong style={{ fontWeight: 700, color: 'var(--ws2-ink-1)' }}>{fasPerProv[kat]}</strong>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
       </div>
+
+      <div style={{ paddingBottom: 'clamp(3rem, 5vw, 5rem)' }} />
     </section>
   );
 }
 
-/* ─────────────────────────────────────────
-   Transisi Babak 2→3: Siapa Paling Terdampak?
-───────────────────────────────────────────*/
-const PROVINSI_CARDS = [
-  {
-    nama: 'Sumatera Utara',
-    peran: 'Episenter',
-    deskripsi: 'Korban meninggal terbanyak. Pusat gempa berada di wilayah ini.',
-    color: '#e74c3c',
-    icon: '💔',
-  },
-  {
-    nama: 'Aceh',
-    peran: 'Isolasi Wilayah',
-    deskripsi: 'Sejumlah wilayah mengalami isolasi akibat putusnya akses jalan dan jembatan.',
-    color: '#f39c12',
-    icon: '🔒',
-  },
-  {
-    nama: 'Sumatera Barat',
-    peran: 'Infrastruktur Terputus',
-    deskripsi: 'Fokus kerusakan infrastruktur — jalur Padang–Bukittinggi terputus.',
-    color: '#2ecc71',
-    icon: '🛣️',
-  },
-];
 
-function TransisiBabak23() {
-  const [ref, visible] = useInView(0.15);
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  SCENE 3 — NARASI LAYANAN DASAR  (NAVY)                      ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+function SceneLayananDasar() {
+  const [ref, inView] = useInView();
 
-  const kabPerProv = insights?.cakupan_geografis_infra?.kab_kota_per_provinsi || {};
-  const desaPerProv = insights?.cakupan_geografis_infra?.desa_per_provinsi || {};
+  const statusHunian = insights?.rumah_tangga?.status_hunian || {};
+  const pengungsian  = statusHunian['3. Pengungsian']?.n || 0;
+  const huntara      = statusHunian['6. Huntara']?.n     || 0;
+
+  /* Dulu angka-angka ini dihitung `100 - pct`, padahal `pct` di insight.json
+     adalah porsi dari 115.462 RT TERDAFTAR sementara yang benar-benar
+     diwawancarai hanya 50.887 (44,07%). Hasilnya menggelembung jauh:
+     "Listrik Padam 56,6%" dan "Krisis Air 62,3%". Sementara "Sanitasi" justru
+     dijumlahkan langsung — skala yang sama sekali berbeda dalam satu baris
+     kartu yang sama.
+
+     Sekarang ketiganya memakai pctRT() dengan denominator yang sama, dan
+     sub-barisnya dibaca dari data — bukan enam literal hasil karangan. */
+  const STATS_PCT = [
+    {
+      label: 'Tanpa Listrik PLN',
+      val: pctRT(LISTRIK_NON_PLN),
+      n: LISTRIK_NON_PLN,
+      rows: [
+        { label: 'Listrik non-PLN', n: LISTRIK_NON_PLN_BERLISTRIK },
+        { label: 'Bukan listrik', n: LISTRIK_TIDAK_ADA },
+      ],
+    },
+    {
+      label: 'Sumber Air Tak Layak',
+      val: pctRT(AIR_TAK_LAYAK),
+      n: AIR_TAK_LAYAK,
+      rows: [
+        { label: 'Mata air tak terlindung', n: AIR_MATA_AIR_TAK_TERLINDUNG },
+        { label: 'Air permukaan', n: AIR_PERMUKAAN },
+      ],
+    },
+    {
+      label: 'Bergantung MCK Umum atau Tidak Punya',
+      val: pctRT(MCK_TANPA_AKSES_SENDIRI),
+      n: MCK_TANPA_AKSES_SENDIRI,
+      rows: [
+        { label: 'Tidak ada sama sekali', n: MCK_TIDAK_ADA },
+        { label: 'MCK umum / komunal', n: MCK_UMUM_KOMUNAL },
+      ],
+    },
+  ];
 
   return (
-    <section style={{
-      background: '#050510',
-      padding: '7rem 2rem',
+    <section className="infra-section infra-bg-navy infra-grain" style={{ padding:'clamp(6rem, 10vw, 9rem) 1.5rem' }}>
+      <div style={{ maxWidth: 1080, margin: '0 auto', textAlign: 'center' }} ref={ref}>
+        <div style={{ 
+          marginBottom: '4.5rem',
+          opacity: inView ? 1 : 0,
+          transform: inView ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
+        }}>
+          <h2 className="t-display" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.01em', margin: 0, color: 'var(--ws2-text-1)' }}>
+            Krisis Layanan Dasar
+          </h2>
+        </div>
+
+        {/* Kartu persentase layanan dasar.
+
+            Glassmorphism dibuang: backdrop-filter blur(16px) di sini duduk di
+            atas latar polos tanpa gambar apa pun di belakangnya, jadi efek
+            kacanya nol — hanya menambah satu compositing layer. Kartu rata di
+            atas navy justru lebih tegas: angka 4-5rem jadi satu-satunya yang
+            bercahaya. */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '2rem',
+          marginBottom: '1.2rem',
+        }}>
+          {STATS_PCT.map((stat, i) => (
+            <div key={stat.label} className="ws2-card" style={{
+              textAlign: 'left',
+              opacity: inView ? 1 : 0,
+              transform: inView ? 'translateY(0)' : 'translateY(16px)',
+              transition: `opacity 0.8s var(--ws2-reveal-ease) ${i * 0.12}s, transform 0.8s var(--ws2-reveal-ease) ${i * 0.12}s`,
+            }}>
+              <div className="t-eyebrow" style={{ color: 'var(--ws2-text-3)', fontSize: '0.75rem', marginBottom: '1.5rem' }}>
+                {stat.label}
+              </div>
+              <div className="t-display" style={{ fontSize: 'clamp(4rem, 6vw, 5rem)', fontWeight: 700, color: 'var(--ws2-text-1)', lineHeight: 1, marginBottom: '0.4rem' }}>
+                {fmtPct(stat.val)}<span style={{ fontSize: '0.5em', color: 'var(--ws2-text-4)' }}>%</span>
+              </div>
+              <div className="t-body" style={{ fontSize: '0.8rem', color: 'var(--ws2-text-4)', marginBottom: '1.6rem' }}>
+                {fmtN(stat.n)} rumah tangga
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', paddingTop: '1.5rem', borderTop: '1px solid var(--ws2-line-1)' }}>
+                {stat.rows.map((row) => (
+                  <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.6rem' }}>
+                    <span className="t-body" style={{ fontSize: '0.8rem', color: 'var(--ws2-text-3)' }}>{row.label}</span>
+                    <span className="t-body" style={{ fontSize: '0.85rem', color: 'var(--ws2-text-1)', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                      {fmtPct(pctRT(row.n))}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="t-body" style={{ fontSize: '0.72rem', color: 'var(--ws2-text-4)', marginBottom: '5.5rem', textAlign: 'left' }}>
+          {CAPTION_RT}
+        </p>
+
+
+        {/* Absolute Numbers */}
+        {(pengungsian > 0 || huntara > 0) && (
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: 'clamp(3.5rem, 8vw, 8rem)', 
+            flexWrap: 'wrap',
+            opacity: inView ? 1 : 0,
+            transform: inView ? 'translateY(0)' : 'translateY(24px)',
+            transition: 'opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s',
+          }}>
+            {huntara > 0 && (
+              <div>
+                <div className="t-display" style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', fontWeight: 700, color: 'var(--ws2-accent)', lineHeight: 1, marginBottom: '1rem' }}>
+                  <AnimatedCounter value={huntara} />
+                </div>
+                <div className="t-eyebrow" style={{ color: 'var(--ws2-text-3)', fontSize: '0.8rem' }}>KK di Huntara</div>
+              </div>
+            )}
+            {pengungsian > 0 && (
+              <div>
+                <div className="t-display" style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', fontWeight: 700, color: 'var(--ws2-accent)', lineHeight: 1, marginBottom: '1rem' }}>
+                  <AnimatedCounter value={pengungsian} />
+                </div>
+                <div className="t-eyebrow" style={{ color: 'var(--ws2-text-3)', fontSize: '0.8rem' }}>KK di Pengungsian</div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  SCENE 4 — ZONA PRIORITAS  (CREAM)                           ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  SCENE 4 — ZONA PRIORITAS  (CREAM)                           ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+/* SceneZonaPrioritas dihapus — peta dan peringkat prioritas sudah
+   dipindahkan sebagai floating overlay di SceneKelumpuhanDesa (Change 3). */
+
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  SCENE 5 — SOROTAN ANGKA  (NAVY)                             ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+function SceneSorotanAngka() {
+  const [ref, inView] = useInView();
+
+  const stats = insights?.fasilitas_infrastruktur?.statistik_per_desa || {};
+  const sosMax = stats.sosial?.max || 0;
+  const sosDesa = stats.sosial?.desa_max_fasilitas || '';
+  const pendMax = stats.pendidikan?.max || 0;
+  const pendDesa = stats.pendidikan?.desa_max_fasilitas || '';
+  const kesMax = stats.kesehatan?.max || 0;
+  const kesDesa = stats.kesehatan?.desa_max_fasilitas || '';
+
+  return (
+    <section ref={ref} className="infra-section infra-bg-navy infra-grain" style={{ padding:'clamp(6rem, 10vw, 9rem) 1.5rem' }}>
+      <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+        
+        <div style={{ 
+          textAlign: 'center', marginBottom: '5rem',
+          opacity: inView ? 1 : 0,
+          transform: inView ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
+        }}>
+          <h2 className="t-display" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.01em', margin: 0, color: 'var(--ws2-text-1)' }}>
+            Titik Kerusakan Terparah
+          </h2>
+          <p className="t-body" style={{ color: 'var(--ws2-text-3)', marginTop: '1rem', maxWidth: 600, margin: '1rem auto 0' }}>
+            Data di tingkat desa menunjukkan anomali kerusakan yang sangat terpusat pada beberapa wilayah tertentu.
+          </p>
+        </div>
+
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+          gap: '2rem', 
+        }}>
+          
+          <div style={{
+            background: 'var(--ws2-surface-1)', border: '1px solid var(--ws2-line-1)', borderRadius: 16, padding: '2.5rem',
+            opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(24px)', transition: 'all 0.7s ease 0.1s'
+          }}>
+            <div className="t-eyebrow" style={{ color: 'var(--ws2-accent)', fontSize: '0.8rem', marginBottom: '1rem' }}>Fasilitas Sosial Terbanyak</div>
+            <div className="t-display" style={{ fontSize: '4.5rem', fontWeight: 700, color: 'var(--ws2-text-1)', lineHeight: 1, marginBottom: '0.5rem' }}>
+              {sosMax} <span style={{ fontSize: '1rem', fontFamily: 'Lato', color: 'var(--ws2-text-3)', fontWeight: 400 }}>Unit</span>
+            </div>
+            <div className="t-body" style={{ color: 'var(--ws2-text-4)', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              Hancur di <strong>Desa {sosDesa}</strong>. Mayoritas adalah tempat ibadah dan balai warga.
+            </div>
+          </div>
+
+          <div style={{
+            background: 'var(--ws2-surface-1)', border: '1px solid var(--ws2-line-1)', borderRadius: 16, padding: '2.5rem',
+            opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(24px)', transition: 'all 0.7s ease 0.2s'
+          }}>
+            <div className="t-eyebrow" style={{ color: 'var(--ws2-green)', fontSize: '0.8rem', marginBottom: '1rem' }}>Fasilitas Pendidikan</div>
+            <div className="t-display" style={{ fontSize: '4.5rem', fontWeight: 700, color: 'var(--ws2-text-1)', lineHeight: 1, marginBottom: '0.5rem' }}>
+              {pendMax} <span style={{ fontSize: '1rem', fontFamily: 'Lato', color: 'var(--ws2-text-3)', fontWeight: 400 }}>Unit</span>
+            </div>
+            <div className="t-body" style={{ color: 'var(--ws2-text-4)', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              Hancur di <strong>Desa {pendDesa}</strong>, melumpuhkan total aktivitas belajar mengajar.
+            </div>
+          </div>
+
+          <div style={{
+            background: 'var(--ws2-surface-1)', border: '1px solid var(--ws2-line-1)', borderRadius: 16, padding: '2.5rem',
+            opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(24px)', transition: 'all 0.7s ease 0.3s'
+          }}>
+            <div className="t-eyebrow" style={{ color: 'var(--ws2-green)', fontSize: '0.8rem', marginBottom: '1rem' }}>Fasilitas Kesehatan</div>
+            <div className="t-display" style={{ fontSize: '4.5rem', fontWeight: 700, color: 'var(--ws2-text-1)', lineHeight: 1, marginBottom: '0.5rem' }}>
+              {kesMax} <span style={{ fontSize: '1rem', fontFamily: 'Lato', color: 'var(--ws2-text-3)', fontWeight: 400 }}>Unit</span>
+            </div>
+            <div className="t-body" style={{ color: 'var(--ws2-text-4)', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              Terdampak di <strong>Desa {kesDesa}</strong>, termasuk puskesmas pembantu dan posyandu.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  TRANSISI BABAK 2 → 3  (CREAM)                               ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+function TransisiBabak23() {
+  const [ref, visible] = useInView();
+
+  const fasPerProv = insights?.fasilitas_infrastruktur?.jumlah_per_provinsi_per_kategori || {};
+  const desaPerProv = insights?.cakupan_geografis_infra?.desa_per_provinsi || {};
+  const kabPerProv = insights?.cakupan_geografis_infra?.kab_kota_per_provinsi || {};
+  const korbanPerProv = insights?.anggota_keluarga?.korban_kritis_per_provinsi || {};
+
+  /* Dulu korban jiwa (54/44/4), desa (292/556/80), dan kab/kota (19/18/11)
+     ditulis sebagai literal. Angkanya kebetulan cocok dengan insight.json
+     saat itu, tetapi akan diam-diam melenceng begitu JSON diregenerasi.
+     Sekarang semuanya dibaca, dan `max` per metrik dihitung — bukan ditebak. */
+  const PROV_META = [
+    { key: 'Sumatera Utara', title: 'Sumatera Utara' },
+    { key: 'Aceh', title: 'Aceh' },
+    { key: 'Sumatera Barat', title: 'Sumatera Barat' },
+  ];
+
+  const nilai = PROV_META.map(({ key, title }) => ({
+    key,
+    title,
+    korban: korbanPerProv[key]?.meninggal_bencana ?? 0,
+    fasilitas: Object.values(fasPerProv[key] || {}).reduce((a, b) => a + b, 0),
+    desa: desaPerProv[key] ?? 0,
+    kab: kabPerProv[key] ?? 0,
+  }));
+
+  const maks = {
+    korban: Math.max(...nilai.map((n) => n.korban), 1),
+    fasilitas: Math.max(...nilai.map((n) => n.fasilitas), 1),
+    desa: Math.max(...nilai.map((n) => n.desa), 1),
+    kab: Math.max(...nilai.map((n) => n.kab), 1),
+  };
+
+  const LABEL = { korban: 'Korban Jiwa', fasilitas: 'Fasilitas Publik', desa: 'Desa Terdampak', kab: 'Kab / Kota' };
+
+  const PROV_DATA = nilai.map((n) => ({
+    key: n.key,
+    title: n.title,
+    color: 'var(--ws2-accent)',
+    metrics: ['korban', 'fasilitas', 'desa', 'kab'].map((m) => ({
+      label: LABEL[m],
+      val: n[m],
+      max: maks[m],
+      emph: n[m] === maks[m],
+    })),
+  }));
+
+  return (
+    <section className="infra-section infra-bg-cream infra-grain" style={{
+      padding: 'clamp(5rem,9vw,8rem) 1.5rem',
       minHeight: '80vh',
       display: 'flex',
       alignItems: 'center',
     }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto', width: '100%' }}>
-        <div className="lato-bold" style={{
-          fontSize: '0.78rem', letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)',
-          marginBottom: '1.5rem', textAlign: 'center',
-        }}>
-          Transisi
-        </div>
-        <h2 className="playfair-display" style={{
-          fontSize: 'clamp(1.6rem, 4vw, 3rem)',
-          color: '#fff',
-          textAlign: 'center',
-          lineHeight: 1.3,
-          marginBottom: '1rem',
-          maxWidth: 780,
-          margin: '0 auto 1rem',
-        }}>
-          Aceh, Sumatera Utara, Sumatera Barat:<br />
-          <span style={{ color: 'rgba(255,255,255,0.6)' }}>Siapa Paling Terdampak?</span>
-        </h2>
-        <p className="lato-regular" style={{
-          fontSize: '1rem',
-          color: 'rgba(255,255,255,0.5)',
-          textAlign: 'center',
-          maxWidth: 560,
-          margin: '0 auto 4rem',
-          lineHeight: 1.8,
-        }}>
-          Sumut menjadi episenter dengan korban meninggal terbanyak.
-          Aceh mengalami isolasi wilayah. Sumbar fokus kerusakan infrastruktur.
-        </p>
+      <div style={{ position:'absolute', top:'0', left:'50%', transform:'translateX(-50%)', width:'80vw', height:'50vw', borderRadius:'50%', background:'radial-gradient(circle, var(--ws2-glow-cream) 0%, transparent 60%)', pointerEvents:'none', filter:'blur(80px)', zIndex:0 }} />
+      <div ref={ref} style={{ maxWidth: 1240, margin: '0 auto', width: '100%', position: 'relative', zIndex: 1 }}>
 
-        <div ref={ref} style={{
-          display: 'flex',
-          gap: '1.5rem',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
+        <div style={{ 
+          textAlign:'center', marginBottom:'4.5rem',
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
         }}>
-          {PROVINSI_CARDS.map((prov, i) => (
-            <div key={prov.nama} style={{
-              flex: '1 1 260px',
-              maxWidth: 300,
-              padding: '2rem',
-              background: `${prov.color}0a`,
-              border: `1px solid ${prov.color}33`,
-              borderTop: `3px solid ${prov.color}`,
-              borderRadius: 16,
+          <h2 className="t-display" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.01em', margin: '0 auto', maxWidth: 720, color: 'var(--ws2-ink-1)' }}>
+            Perbandingan Lintas Provinsi
+          </h2>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          
+          {/* Header Row (Desktop Only) */}
+          <div className="infra-data-header">
+            <div />
+            <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.65rem' }}>Korban Jiwa</div>
+            <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.65rem' }}>Fasilitas Publik</div>
+            <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.65rem' }}>Desa Terdampak</div>
+            <div className="t-eyebrow" style={{ color: 'var(--ws2-ink-4)', fontSize: '0.65rem' }}>Kab/Kota Terdampak</div>
+          </div>
+
+          {/* Data Rows */}
+          {PROV_DATA.map((prov, idx) => (
+            <div key={prov.key} className="infra-data-table" style={{
               opacity: visible ? 1 : 0,
-              transform: visible ? 'translateY(0)' : 'translateY(24px)',
-              transition: `opacity 0.5s ease ${i * 0.15}s, transform 0.5s ease ${i * 0.15}s`,
+              transform: visible ? 'translateY(0)' : 'translateY(20px)',
+              transition: `all 0.6s ease ${idx * 0.15}s`
             }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{prov.icon}</div>
-              <div className="lato-bold" style={{
-                fontSize: '0.72rem', letterSpacing: '0.18em',
-                textTransform: 'uppercase', color: prov.color,
-                marginBottom: '0.4rem',
-              }}>
-                {prov.peran}
+              {/* Narrative Column */}
+              <div>
+                <h3 className="t-display" style={{ fontSize: '1.6rem', color: 'var(--ws2-ink-1)', fontWeight: 700, margin: 0 }}>{prov.title}</h3>
               </div>
-              <div className="playfair-display" style={{
-                fontSize: '1.3rem', color: '#fff', marginBottom: '0.75rem',
-              }}>
-                {prov.nama}
-              </div>
-              <p className="lato-regular" style={{
-                fontSize: '0.88rem', color: 'rgba(255,255,255,0.65)',
-                lineHeight: 1.7, margin: 0,
-              }}>
-                {prov.deskripsi}
-              </p>
-              {/* Angka kunci */}
-              <div style={{ marginTop: '1.2rem', paddingTop: '1rem', borderTop: `1px solid ${prov.color}22` }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-                  {desaPerProv[prov.nama] && (
-                    <div>
-                      <div className="lato-bold" style={{ fontSize: '1.1rem', color: prov.color }}>
-                        {desaPerProv[prov.nama].toLocaleString('id-ID')}
-                      </div>
-                      <div className="lato-regular" style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>
-                        Desa Terdata
-                      </div>
+
+              {/* Metrics Columns */}
+              <div className="infra-data-metrics">
+                {prov.metrics.map((m, mIdx) => (
+                  <div key={m.label} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <div className="infra-mobile-metric-label t-eyebrow" style={{ color: 'var(--ws2-ink-4)', marginBottom: '0.4rem', fontSize: '0.6rem' }}>{m.label}</div>
+                    <div className="t-display" style={{ 
+                      fontSize: m.emph ? '2.4rem' : '1.4rem', 
+                      color: m.emph ? prov.color : 'var(--ws2-ink-3)', 
+                      fontWeight: 700, 
+                      lineHeight: 1,
+                      marginBottom: '0.6rem',
+                      transition: 'color 0.4s ease'
+                    }}>
+                      <AnimatedCounter value={m.val} duration={2 + mIdx * 0.2} />
                     </div>
-                  )}
-                  {kabPerProv[prov.nama] && (
-                    <div>
-                      <div className="lato-bold" style={{ fontSize: '1.1rem', color: prov.color }}>
-                        {kabPerProv[prov.nama]}
-                      </div>
-                      <div className="lato-regular" style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>
-                        Kab/Kota
-                      </div>
+                    <div style={{ width: '100%', maxWidth: '140px', height: m.emph ? 6 : 2, background: 'rgba(21,23,61,0.06)', borderRadius: 3, overflow: 'hidden' }}>
+                      <div style={{ 
+                        width: visible ? `${(m.val / m.max) * 100}%` : '0%', 
+                        height: '100%', 
+                        background: m.emph ? prov.color : 'rgba(21,23,61,0.15)',
+                        borderRadius: 3,
+                        transition: `width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) ${0.4 + idx * 0.1}s`
+                      }} />
                     </div>
-                  )}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
         </div>
+
+        {/* Elegant Transition to Chapter 3 */}
+        <div style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '7rem',
+          opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'all 0.8s ease 0.6s'
+        }}>
+        </div>
+
       </div>
     </section>
   );
 }
 
-/* ─────────────────────────────────────────
-   Komponen Utama: BabakInfrastruktur
-───────────────────────────────────────────*/
 export default function BabakInfrastruktur() {
+  /* Urutan mengikuti storyline: Kelumpuhan Kota -> Kelumpuhan Desa ->
+     Narasi Layanan Dasar -> Zona Prioritas -> Sorotan Angka -> Transisi.
+
+     Tiap batas warna kini lewat <BgSeam>. Sebelumnya memakai <SectionDivider
+     from to>, yang nilainya harus dicocokkan manual dengan warna section di
+     atas dan di bawahnya — dan salah satunya memudar navy -> krem padahal
+     section berikutnya navy. */
   return (
     <>
       <SceneKelumpuhanKota />
+      <BgSeam from="navy" to="cream" />
       <SceneKelumpuhanDesa />
+      <BgSeam from="cream" to="navy" />
       <SceneLayananDasar />
-      <SceneZonaPrioritas />
+      {/* SceneZonaPrioritas dihapus — peringkat dipindah ke overlay peta SceneKelumpuhanDesa */}
+      <SceneSorotanAngka />
+      <BgSeam from="navy" to="cream" />
       <TransisiBabak23 />
     </>
   );

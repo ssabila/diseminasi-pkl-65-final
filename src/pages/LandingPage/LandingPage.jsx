@@ -1,21 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './LandingPage.css';
+import HeroSection from "./sections/HeroSection";
+import StatsSection from "./sections/StatsSection";
+import MandateSection from "./sections/MandateSection";
+import QuoteSection from "./sections/QuoteSection";
+import PortalsSection from "./sections/PortalSection";
+import CloudLoadingOverlay from "./components/CloudLoadingOverlay"
+import gsap from '../../utils/gsapConfig';
+import PlaneSeparator from "./components/PlaneSeparator";
+import ScrollCue from "./components/ScrollCue";
 
-const LandingPage = () => {
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+export const masterTL = gsap.timeline();
+export default function LandingPage() {
   return (
-    <div className="landing-page">
-      <h1>Halaman Utama (Landing Page)</h1>
-      <p>Pilih Web Story di bawah ini:</p>
-      <nav>
-        <ul>
-          <li><Link to="/web-story-1">Web Story 1</Link></li>
-          <li><Link to="/web-story-2">Web Story 2</Link></li>
-          <li><Link to="/web-story-3">Web Story 3</Link></li>
-        </ul>
-      </nav>
+    <div className="bg-[#0f172a] z-0 text-[var(--beige)] font-[family-name:var(--font-content)] selection:bg-[var(--gold)] selection:text-[var(--navy)]">
+      <CloudLoadingOverlay />
+      <HeroSection />
+      <PlaneSeparator />
+      <MandateSection />
+      <StatsSection />
+      <ScrollCue />
+      <QuoteSection />
+      <PortalsSection />
     </div>
   );
-};
-
-export default LandingPage;
+}
