@@ -77,6 +77,26 @@ function useParallax(speed = 0.15) {
   return ref;
 }
 
+function useSceneReveal(threshold = 0.14) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return [ref, visible];
+}
+
 /* ─────────────────────────────────────────
    Grain Overlay — tekstur sinematik
 ───────────────────────────────────────────*/
@@ -99,12 +119,12 @@ function GrainOverlay({ opacity = 0.05 }) {
    Bubble Config
 ───────────────────────────────────────────*/
 const BUBBLE_CONFIG = {
-  r38a: { emoji: '🍚', color: '#E67E22', label: 'Makanan' },
-  r38b: { emoji: '👕', color: '#5FB0E0', label: 'Pakaian' },
-  r38c: { emoji: '🏠', color: '#E5D9B6', label: 'Perbaikan Rumah' },
-  r38d: { emoji: '💊', color: '#7FBF6A', label: 'Pengobatan' },
-  r38e: { emoji: '💵', color: '#628141', label: 'Uang Tunai' },
-  r38f: { emoji: '📦', color: '#C98A4B', label: 'Lainnya' },
+  r38a: { color: '#E67E22', label: 'Makanan' },
+  r38b: { color: '#5FB0E0', label: 'Pakaian' },
+  r38c: { color: '#E5D9B6', label: 'Perbaikan Rumah' },
+  r38d: { color: '#7FBF6A', label: 'Pengobatan' },
+  r38e: { color: '#628141', label: 'Uang Tunai' },
+  r38f: { color: '#C98A4B', label: 'Lainnya' },
 };
 
 /* ─────────────────────────────────────────
@@ -157,7 +177,7 @@ function AmbientTicker({ items }) {
               flexShrink: 0,
             }}
           >
-            {item.emoji} {item.label} — {item.belum.toLocaleString('id-ID')} KK
+            {item.label} {item.belum.toLocaleString('id-ID')} KK
             <span style={{ margin: '0 2rem', opacity: 0.3 }}>·</span>
           </span>
         ))}
@@ -398,6 +418,7 @@ function SceneJeritanBantuan() {
     col, nama: v.nama, sudah: v.sudah || 0, belum: v.belum || 0, pct_sudah: v.pct_sudah || 0,
   }));
   const hasData = bubbleData.some(b => b.sudah + b.belum > 0);
+  const [sceneRef, sceneVisible] = useSceneReveal();
 
   const totalSudah = bubbleData.reduce((s, b) => s + b.sudah, 0);
   const totalBelum = bubbleData.reduce((s, b) => s + b.belum, 0);
@@ -417,14 +438,21 @@ function SceneJeritanBantuan() {
   }));
 
   return (
-    <section style={{
-      position: 'relative',
-      background: 'linear-gradient(160deg, #15173d 0%, #0d0f2b 55%, #08091c 100%)',
-      padding: '8rem 2rem 6rem',
-      minHeight: '100vh',
-      display: 'flex', alignItems: 'center',
-      overflow: 'hidden',
-    }}>
+    <section
+      ref={sceneRef}
+      style={{
+        position: 'relative',
+        background: 'linear-gradient(160deg, #141b38 0%, #0d132a 38%, #0a0d1d 100%)',
+        padding: '6rem 2rem 6rem',
+        minHeight: '100vh',
+        display: 'flex', alignItems: 'center',
+        overflow: 'hidden',
+        opacity: sceneVisible ? 1 : 0,
+        transform: sceneVisible ? 'translateY(0)' : 'translateY(26px)',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        willChange: 'opacity, transform',
+      }}
+    >
       <GrainOverlay opacity={0.045} />
 
       {/* Latar dekoratif parallax */}
@@ -436,20 +464,6 @@ function SceneJeritanBantuan() {
         boxShadow: 'inset 0 0 0 70px rgba(98,129,65,0.025), inset 0 0 0 140px rgba(230,126,34,0.015)',
         pointerEvents: 'none', zIndex: 0,
       }} />
-
-      {/* Ambient ticker — sangat redup di background */}
-      <div style={{
-        position: 'absolute', bottom: '1.5rem', left: 0, right: 0,
-        zIndex: 1, pointerEvents: 'none',
-      }}>
-        <AmbientTicker items={tickerItems} />
-      </div>
-      <div style={{
-        position: 'absolute', bottom: '4.5rem', left: 0, right: 0,
-        zIndex: 1, pointerEvents: 'none', transform: 'scaleX(-1)',
-      }}>
-        <AmbientTicker items={[...tickerItems].reverse()} />
-      </div>
 
       {/* Konten utama */}
       <div style={{
@@ -463,28 +477,14 @@ function SceneJeritanBantuan() {
 
         {/* ── Kolom kiri: narasi editorial + angka ── */}
         <div ref={introRef} style={{
-          position: 'sticky', top: '5rem',
+          position: 'sticky', top: '3.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
           opacity: introVisible ? 1 : 0,
           transform: introVisible ? 'translateY(0)' : 'translateY(32px)',
           transition: 'opacity 1s ease, transform 1s ease',
         }}>
-          {/* Eyebrow — kecil, tipografi brand */}
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '0.7rem',
-            marginBottom: '1.6rem',
-          }}>
-            <div style={{
-              width: 28, height: 2,
-              background: 'linear-gradient(90deg, #E67E22, transparent)',
-            }} />
-            <span className="lato-bold" style={{
-              fontSize: '0.72rem', letterSpacing: '0.3em',
-              textTransform: 'uppercase', color: '#E67E22',
-            }}>
-              Babak 4 · Scene 1
-            </span>
-          </div>
-
           {/* Headline — italic, dramatik */}
           <h2 className="playfair-display" style={{
             fontSize: 'clamp(2.4rem, 5.5vw, 4rem)',
@@ -517,9 +517,9 @@ function SceneJeritanBantuan() {
             color: 'rgba(229,217,182,0.78)',
             maxWidth: 400, marginBottom: '2.4rem',
           }}>
-            Di balik setiap data adalah warga yang menunggu.
-            Besar gelembung menunjukkan seberapa banyak keluarga
-            yang <em>belum</em> menerima bantuan jenis tersebut.
+            Di balik setiap angka ada keluarga yang menunggu.
+            Ukuran tiap bagian menunjukkan seberapa besar kebutuhan
+            yang <em>belum</em> tertangani.
           </p>
 
           {/* Angka besar — dua kolom pendek */}
@@ -583,54 +583,25 @@ function SceneJeritanBantuan() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem' }}>
               <span className="lato-regular" style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.35)' }}>
-                ✅ {totalSudah.toLocaleString('id-ID')} sudah
+                {totalSudah.toLocaleString('id-ID')} sudah
               </span>
               <span className="lato-regular" style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.35)' }}>
-                ⏳ {totalBelum.toLocaleString('id-ID')} belum
+                {totalBelum.toLocaleString('id-ID')} belum
               </span>
             </div>
           </div>
 
-          {/* Legenda interaksi — sangat ringan */}
-          <div style={{
-            paddingTop: '1.4rem',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-            display: 'flex', flexDirection: 'column', gap: '0.65rem',
-          }}>
-            <span className="lato-bold" style={{
-              fontSize: '0.65rem', letterSpacing: '0.2em',
-              textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)',
-            }}>
-              Cara Membaca
-            </span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
-              <span style={{
-                width: 16, height: 16, borderRadius: '50%', flexShrink: 0,
-                background: 'linear-gradient(135deg, #E67E22, #628141)', opacity: 0.8,
-              }} />
-              <span className="lato-regular" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)' }}>
-                Ukuran lingkaran = frekuensi kebutuhan
-              </span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
-              <span style={{
-                width: 16, height: 16, borderRadius: '50%', flexShrink: 0,
-                background: 'rgba(255,255,255,0.08)',
-                border: '2px solid rgba(255,255,255,0.18)',
-              }} />
-              <span className="lato-regular" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)' }}>
-                Sentuh / hover untuk melihat rincian
-              </span>
-            </div>
-          </div>
         </div>
 
-        {/* ── Kolom kanan: bubble chart + status panel ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.2rem' }}>
-          <BubbleChart data={hasData ? bubbleData : []} />
-
-          {/* Status panel — strip per kebutuhan, bukan kartu tebal */}
-          <div>
+        {/* ── Kolom kanan: ringkasan kebutuhan tanpa ilustrasi bubble ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.2rem', marginTop: '0' }}>
+          <div style={{
+            padding: '1.5rem 1.25rem',
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(229,217,182,0.08)',
+            borderRadius: 18,
+            boxShadow: 'inset 0 0 30px rgba(0,0,0,0.2)',
+          }}>
             <div className="lato-bold" style={{
               fontSize: '0.68rem', letterSpacing: '0.2em',
               textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)',
@@ -643,62 +614,36 @@ function SceneJeritanBantuan() {
                 Menunggu data dari insight.json…
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                 {bubbleData.map((item) => {
-                  const cfg = BUBBLE_CONFIG[item.col] || { color: '#aaa', emoji: '📌', label: item.col };
+                  const cfg = BUBBLE_CONFIG[item.col] || { color: '#aaa', icon: '•', label: item.col };
                   const pct = item.pct_sudah || 0;
-                  const total = item.sudah + item.belum;
-                  const pctBelum = total > 0 ? (item.belum / total) * 100 : 0;
 
                   return (
-                    <div
-                      key={item.col}
-                      style={{
-                        padding: '0.85rem 1.1rem',
-                        background: `${cfg.color}06`,
-                        border: `1px solid ${cfg.color}18`,
-                        borderRadius: 10,
-                        transition: 'all 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.background = `${cfg.color}0f`;
-                        e.currentTarget.style.borderColor = `${cfg.color}38`;
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.background = `${cfg.color}06`;
-                        e.currentTarget.style.borderColor = `${cfg.color}18`;
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-                        <span className="lato-regular" style={{ fontSize: '0.82rem', color: '#fff' }}>
-                          {cfg.emoji} {cfg.label || item.nama}
-                        </span>
-                        <span className="lato-bold" style={{ fontSize: '0.75rem', color: cfg.color }}>
-                          {pct.toFixed(1)}% sudah
-                        </span>
-                      </div>
-                      <div style={{ height: 5, background: 'rgba(255,255,255,0.07)', borderRadius: 3, overflow: 'hidden', position: 'relative' }}>
+                    <div key={item.col} style={{
+                      display: 'grid',
+                      gridTemplateColumns: '1fr auto',
+                      gap: '0.5rem 1rem',
+                      alignItems: 'center',
+                      padding: '0.7rem 0.8rem',
+                      borderRadius: 10,
+                      background: `${cfg.color}12`,
+                      border: `1px solid ${cfg.color}20`,
+                    }}>
+                      <span className="lato-regular" style={{ fontSize: '0.82rem', color: '#fff' }}>
+                        <span style={{ opacity: 0.8, marginRight: '0.6rem' }}>{cfg.icon}</span>
+                        {cfg.label || item.nama}
+                      </span>
+                      <span className="lato-bold" style={{ fontSize: '0.72rem', color: cfg.color }}>
+                        {pct.toFixed(1)}% sudah
+                      </span>
+                      <div style={{ gridColumn: '1 / -1', height: 6, borderRadius: 999, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
                         <div style={{
-                          position: 'absolute', inset: 0,
-                          width: `${Math.min(pctBelum, 100)}%`,
-                          background: `linear-gradient(90deg, ${cfg.color}38, ${cfg.color}18)`,
-                          borderRadius: 3,
-                        }} />
-                        <div style={{
-                          position: 'absolute', top: 0, left: 0, height: '100%',
-                          width: `${Math.min(pct, 100)}%`,
+                          height: '100%',
+                          width: `${Math.min(Math.max(pct, 0), 100)}%`,
                           background: `linear-gradient(90deg, ${cfg.color}88, ${cfg.color})`,
-                          borderRadius: 3,
-                          boxShadow: `inset 0 0 8px ${cfg.color}44`,
+                          borderRadius: 999,
                         }} />
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.35rem', fontSize: '0.63rem' }}>
-                        <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.4)' }}>
-                          ✅ {item.sudah.toLocaleString('id-ID')} sudah
-                        </span>
-                        <span className="lato-regular" style={{ color: 'rgba(255,255,255,0.4)' }}>
-                          ⏳ {item.belum.toLocaleString('id-ID')} belum
-                        </span>
                       </div>
                     </div>
                   );
@@ -738,6 +683,7 @@ function SceneRingkasanNarasi() {
   const totalKK   = insights?.ringkasan_dataset?.total_rt_keluarga || 0;
   const totalDesa = insights?.ringkasan_dataset?.total_desa_infra || 0;
   const totalFas  = insights?.ringkasan_dataset?.total_fasilitas_gabungan || 0;
+  const [sceneRef, sceneVisible] = useSceneReveal();
 
   // Rail progres — terisi mengikuti posisi scroll di sepanjang kolom kanan
   useEffect(() => {
@@ -759,10 +705,17 @@ function SceneRingkasanNarasi() {
   }, []);
 
   return (
-    <section style={{
-      background: '#f5f0e8',
-      padding: '7rem 2rem',
-    }}>
+    <section
+      ref={sceneRef}
+      style={{
+        background: 'linear-gradient(180deg, #f3eadc 0%, #efe8d8 35%, #e6dfcf 100%)',
+        padding: '7rem 2rem',
+        opacity: sceneVisible ? 1 : 0,
+        transform: sceneVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        willChange: 'opacity, transform',
+      }}
+    >
       <div
         ref={containerRef}
         className="kebutuhan-scene2-grid"
@@ -801,15 +754,6 @@ function SceneRingkasanNarasi() {
           </div>
 
           <div>
-            <span className="lato-bold" style={{
-              fontSize: '0.75rem', letterSpacing: '0.26em',
-              textTransform: 'uppercase', color: '#628141',
-              display: 'block', marginBottom: '1.4rem',
-              opacity: visible ? 1 : 0,
-              transition: 'opacity 0.6s ease',
-            }}>
-              Babak 4 · Scene 2
-            </span>
             <blockquote style={{
               fontFamily: 'var(--font-title)',
               fontSize: 'clamp(1.8rem, 4.5vw, 3.2rem)',
@@ -822,7 +766,7 @@ function SceneRingkasanNarasi() {
               transform: visible ? 'translateY(0)' : 'translateY(24px)',
               transition: 'opacity 0.9s ease, transform 0.9s ease',
             }}>
-              "Data ini bukan sekadar statistik — ini adalah peta jalan menuju pemulihan."
+              "Data ini bukan sekadar statistik, ini adalah peta jalan menuju pemulihan."
             </blockquote>
           </div>
         </div>
@@ -861,9 +805,9 @@ function SceneRingkasanNarasi() {
               color: '#2d2d4e',
               margin: 0,
             }}>
-              Pendataan R3P telah menjangkau keluarga-keluarga ini di{' '}
+              Pendataan R3P telah menjangkau keluarga-keluarga di{' '}
               <strong style={{ color: '#628141' }}>{totalDesa.toLocaleString('id-ID')} desa dan kelurahan</strong>{' '}
-              yang tersebar di tiga provinsi terdampak bencana — Aceh, Sumatera Utara, dan Sumatera Barat.
+              yang tersebar di tiga provinsi terdampak bencana yakni, Aceh, Sumatera Utara, dan Sumatera Barat.
             </p>
           </div>
 
@@ -977,9 +921,9 @@ function SceneDiBalikAngka() {
   const huntaraPhotos = Array.from({ length: 20 }, (_, i) => `huntara-${String(i + 1).padStart(2, '0')}.jpg`);
 
   const vulnerableGroups = [
-    { emoji: '👵', label: 'Lansia', desc: 'Perlindungan khusus & akses kesehatan prioritas' },
-    { emoji: '🤰', label: 'Ibu Hamil', desc: 'Nutrisi & pemeriksaan kesehatan teratur' },
-    { emoji: '👶', label: 'Balita', desc: 'Imunisasi & gizi terpantau di huntara' },
+    { label: 'Lansia', desc: 'Perlindungan khusus & akses kesehatan prioritas' },
+    { label: 'Ibu Hamil', desc: 'Nutrisi & pemeriksaan kesehatan teratur' },
+    { label: 'Balita', desc: 'Imunisasi & gizi terpantau di huntara' },
   ];
 
   useEffect(() => {
@@ -1079,19 +1023,10 @@ function SceneDiBalikAngka() {
       }}>
         <div style={{ maxWidth: 700, margin: '0 auto', width: '100%' }}>
 
-          {/* Eyebrow */}
-          <div className="lato-bold" style={{
-            fontSize: '0.7rem', letterSpacing: '0.26em',
-            textTransform: 'uppercase', color: 'rgba(98,129,65,0.7)',
-            marginBottom: '3rem',
-          }}>
-            Babak 4 · Scene 3
-          </div>
-
           {/* Heading mini */}
           <h2 className="playfair-display" style={{
             fontSize: 'clamp(1.5rem, 3.5vw, 2.4rem)',
-            color: 'rgba(255,255,255,0.6)',
+            color: '#E67E22',
             lineHeight: 1.2, marginBottom: '3rem', fontWeight: 700,
           }}>
             Di Balik Angka
@@ -1104,26 +1039,18 @@ function SceneDiBalikAngka() {
             fontStyle: 'italic', fontWeight: 700,
             lineHeight: 1.45, margin: '0 0 1.5rem',
             padding: '0 0 0 2rem',
-            borderLeft: '3px solid #628141',
+            borderLeft: '3px solid #E67E22',
           }}>
             {words.map((word, i) => (
               <span
                 key={i}
                 ref={el => (quoteWordsRef.current[i] = el)}
-                style={{ color: '#fff', display: 'inline-block', marginRight: '0.38em', opacity: 0 }}
+                style={{ color: '#F4E6D1', display: 'inline-block', marginRight: '0.38em', opacity: 0 }}
               >
                 {word}
               </span>
             ))}
           </blockquote>
-
-          <cite className="lato-regular" style={{
-            fontSize: '1rem', color: '#628141',
-            display: 'block', marginBottom: '4rem', paddingLeft: '2rem',
-            fontStyle: 'italic',
-          }}>
-            — Suara dari Hunian Sementara (Huntara)
-          </cite>
 
           {/* Kelompok rentan — baris horizontal, tanpa box/card */}
           <div style={{
@@ -1132,22 +1059,21 @@ function SceneDiBalikAngka() {
           }}>
             <div className="lato-bold" style={{
               fontSize: '0.65rem', letterSpacing: '0.2em',
-              textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)',
+              textTransform: 'uppercase', color: '#E67E22',
               marginBottom: '2rem',
             }}>
-              🛡️ Kelompok Rentan dalam Huntara
+              Kelompok Rentan dalam Huntara
             </div>
             <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
               {vulnerableGroups.map(g => (
-                <div key={g.label}>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{g.emoji}</div>
+                <div key={g.label} style={{ minWidth: 150 }}>
                   <div className="lato-bold" style={{
-                    fontSize: '0.85rem', color: '#628141', marginBottom: '0.3rem',
+                    fontSize: '0.85rem', color: '#E5D9B6', marginBottom: '0.5rem',
                   }}>
                     {g.label}
                   </div>
                   <div className="lato-regular" style={{
-                    fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5, maxWidth: 160,
+                    fontSize: '0.7rem', color: 'rgba(255,255,255,0.72)', lineHeight: 1.5, maxWidth: 160,
                   }}>
                     {g.desc}
                   </div>
@@ -1159,13 +1085,13 @@ function SceneDiBalikAngka() {
           {/* Narasi penutup — teks saja, tanpa border-radius box */}
           <p className="lato-regular" style={{
             fontSize: '1rem', lineHeight: 2,
-            color: 'rgba(255,255,255,0.6)',
+            color: 'rgba(255,255,255,0.82)',
             paddingLeft: '2rem',
             borderLeft: '2px solid rgba(98,129,65,0.25)',
             margin: 0,
           }}>
-            Setiap variabel data — kebutuhan air bersih, akses kesehatan,
-            tingkat kerusakan rumah — adalah representasi nyata keluarga dan
+            Setiap variabel data, kebutuhan air bersih, akses kesehatan,
+            tingkat kerusakan rumah adalah representasi nyata keluarga dan
             kelompok rentan yang bertahan di huntara dengan keterbatasan
             fasilitas dasar, nutrisi, dan layanan kesehatan.
           </p>
@@ -1218,6 +1144,7 @@ function SceneAjakan() {
   const [refHero,  visHero]  = useInView(0.15);
   const [refStats, visStats] = useInView(0.2);
   const [refCTA,   visCTA]   = useInView(0.2);
+  const [sceneRef, sceneVisible] = useSceneReveal();
 
   const handleShare = () => {
     if (navigator.share) {
@@ -1241,12 +1168,19 @@ function SceneAjakan() {
   ];
 
   return (
-    <section style={{
-      position: 'relative',
-      background: 'linear-gradient(175deg, #0a0d22 0%, #0d1a10 50%, #080c1e 100%)',
-      padding: '9rem 2rem 8rem',
-      overflow: 'hidden',
-    }}>
+    <section
+      ref={sceneRef}
+      style={{
+        position: 'relative',
+        background: 'linear-gradient(175deg, #0a0d22 0%, #101d19 42%, #080c1e 100%)',
+        padding: '9rem 2rem 8rem',
+        overflow: 'hidden',
+        opacity: sceneVisible ? 1 : 0,
+        transform: sceneVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        willChange: 'opacity, transform',
+      }}
+    >
       <GrainOverlay opacity={0.04} />
 
       {/* Dekoratif: lingkaran besar redup kanan */}
@@ -1289,22 +1223,6 @@ function SceneAjakan() {
         >
           {/* Kiri: teks utama */}
           <div>
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '0.8rem',
-              marginBottom: '1.8rem',
-            }}>
-              <div style={{
-                width: 24, height: 2,
-                background: 'linear-gradient(90deg, #628141, transparent)',
-              }} />
-              <span className="lato-bold" style={{
-                fontSize: '0.7rem', letterSpacing: '0.3em',
-                textTransform: 'uppercase', color: '#628141',
-              }}>
-                Babak 4 · Scene 4
-              </span>
-            </div>
-
             <h2 className="playfair-display" style={{
               fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
               color: '#fff', lineHeight: 1.15,
@@ -1425,7 +1343,21 @@ function SceneAjakan() {
         >
           {/* Label kiri */}
           <div>
-            <div style={{ fontSize: '2.2rem', marginBottom: '1rem' }}>🌱</div>
+            <div style={{
+              width: '2.5rem',
+              height: '2.5rem',
+              borderRadius: '50%',
+              background: 'rgba(98,129,65,0.12)',
+              border: '1px solid rgba(98,129,65,0.25)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1rem',
+              color: '#E5D9B6',
+              marginBottom: '1rem',
+            }}>
+              •
+            </div>
             <div className="lato-bold" style={{
               fontSize: '0.68rem', letterSpacing: '0.24em',
               textTransform: 'uppercase', color: 'rgba(229,217,182,0.4)',
@@ -1477,7 +1409,7 @@ function SceneAjakan() {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              🔗 Bagikan Laporan Ini
+              Bagikan Laporan Ini
             </button>
 
             <a
@@ -1506,7 +1438,7 @@ function SceneAjakan() {
                 e.currentTarget.style.background = 'transparent';
               }}
             >
-              ← Kembali ke Beranda
+              Kembali ke Beranda
             </a>
           </div>
         </div>
@@ -1595,6 +1527,7 @@ function SceneDataTerjaga() {
   const [ref, visible] = useInView(0.1);
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [entered, setEntered] = useState(false);
+  const [sceneRef, sceneVisible] = useSceneReveal();
 
   // Mouse-tracking spotlight
   const handleMouseMove = useCallback((e) => {
@@ -1652,16 +1585,23 @@ function SceneDataTerjaga() {
 
   return (
     <section
-      ref={sectionRef}
+      ref={(node) => {
+        sectionRef.current = node;
+        sceneRef.current = node;
+      }}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setEntered(false)}
       style={{
         position: 'relative',
         minHeight: '100vh',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'linear-gradient(175deg, #020208 0%, #08091c 55%, #050510 100%)',
+        background: 'linear-gradient(175deg, #030912 0%, #0a1428 42%, #090d1a 100%)',
         overflow: 'hidden',
         cursor: 'none',
+        opacity: sceneVisible ? 1 : 0,
+        transform: sceneVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: 'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), background 1.2s ease',
+        willChange: 'opacity, transform',
       }}
     >
       <GrainOverlay opacity={0.05} />
@@ -1722,23 +1662,6 @@ function SceneDataTerjaga() {
           maxWidth: 900,
         }}
       >
-        {/* Eyebrow */}
-        <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          gap: '0.8rem', marginBottom: '3.5rem',
-          opacity: visible ? 1 : 0,
-          transition: 'opacity 0.8s ease',
-        }}>
-          <div style={{ width: 32, height: 1, background: 'rgba(98,129,65,0.5)' }} />
-          <span className="lato-bold" style={{
-            fontSize: '0.68rem', letterSpacing: '0.3em',
-            textTransform: 'uppercase', color: 'rgba(98,129,65,0.65)',
-          }}>
-            Babak 4 · Scene 5
-          </span>
-          <div style={{ width: 32, height: 1, background: 'rgba(98,129,65,0.5)' }} />
-        </div>
-
         {/* Headline — kata per kata, GSAP scrub + hover */}
         <h2
           className="playfair-display"
@@ -1878,7 +1801,6 @@ export default function BabakKebutuhan() {
       <SceneJeritanBantuan />
       <SceneRingkasanNarasi />
       <SceneDiBalikAngka />
-      <SceneAjakan />
       <SceneDataTerjaga />
     </>
   );
