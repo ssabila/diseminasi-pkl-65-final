@@ -40,6 +40,7 @@ import imgAset from '../../../assets/images/huntara-14.webp';
 import imgTekstur from '../../../assets/images/huntara-05.webp';
 import maskotAktif from '../../../assets/Grand Design/Gundatala_1.png';
 import maskotDiam from '../../../assets/Grand Design/Gundatala_2.png';
+import patternWhite from '../../../assets/Grand Design/Pattern_2.png';
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -159,6 +160,124 @@ function DonutChart({ segments, size = 180, thickness = 36, title }) {
 }
 
 /* ─────────────────────────────────────────
+   Utility Component: Animated Gundatala Mascot on Map
+   Moves between provinces with dashed trail
+───────────────────────────────────────────*/
+function GundatalaTrail({ provinsiStory, activeProvIndex, stepIndex, stepsData }) {
+  const map = useMap();
+  const markerRef = useRef(null);
+  const trailRef = useRef(null);
+  const trailCoordsRef = useRef([]);
+
+  useEffect(() => {
+    if (!map) return;
+
+    // Create mascot marker
+    const icon = L.divIcon({
+      className: 'transparent-div-icon',
+      html: `
+        <div class="gundatala-traveler">
+          <img src="${maskotAktif}" alt="" style="width:48px;height:60px;object-fit:contain;display:block;filter:drop-shadow(0 4px 12px rgba(10,12,30,0.7));" />
+          <div style="width:30px;height:5px;border-radius:50%;background:radial-gradient(ellipse,rgba(230,126,34,0.6),transparent 70%);margin:-2px auto 0;"></div>
+        </div>
+      `,
+      iconSize: [48, 65],
+      iconAnchor: [24, 65],
+    });
+
+    const startPos = provinsiStory[0]
+      ? [provinsiStory[0].lat, provinsiStory[0].lng]
+      : [-0.5, 102.5];
+
+    const marker = L.marker(startPos, { icon, zIndexOffset: 2000, interactive: false }).addTo(map);
+    markerRef.current = marker;
+
+    // Create dashed trail polyline
+    const trail = L.polyline([], {
+      color: '#E67E22',
+      weight: 2.5,
+      dashArray: '8, 8',
+      opacity: 0.7,
+      lineCap: 'round',
+      interactive: false,
+    }).addTo(map);
+    trailRef.current = trail;
+    trailCoordsRef.current = [startPos];
+
+    return () => {
+      map.removeLayer(marker);
+      map.removeLayer(trail);
+      markerRef.current = null;
+      trailRef.current = null;
+    };
+  }, [map, provinsiStory]);
+
+  // Animate mascot position when step changes
+  useEffect(() => {
+    if (!markerRef.current || !trailRef.current || !map) return;
+
+    const step = stepsData[stepIndex];
+    if (!step) return;
+
+    let targetPos;
+    if (step.type === 'desa' && provinsiStory[step.provIndex]) {
+      const d = provinsiStory[step.provIndex];
+      targetPos = [d.lat, d.lng];
+    } else if (step.type === 'bridge') {
+      targetPos = step.target;
+    } else {
+      return; // intro step — don't move
+    }
+
+    const currentPos = markerRef.current.getLatLng();
+    const startLat = currentPos.lat;
+    const startLng = currentPos.lng;
+    const endLat = targetPos[0];
+    const endLng = targetPos[1];
+
+    // Only animate if position actually changed
+    if (Math.abs(startLat - endLat) < 0.01 && Math.abs(startLng - endLng) < 0.01) return;
+
+    // GSAP animation for smooth mascot movement
+    const obj = { t: 0 };
+    gsap.killTweensOf(obj);
+    gsap.to(obj, {
+      t: 1,
+      duration: 2.2,
+      ease: 'power2.inOut',
+      onUpdate: () => {
+        const lat = startLat + (endLat - startLat) * obj.t;
+        const lng = startLng + (endLng - startLng) * obj.t;
+        if (markerRef.current) {
+          markerRef.current.setLatLng([lat, lng]);
+        }
+        // Extend trail
+        if (trailRef.current) {
+          const coords = trailCoordsRef.current;
+          const lastCoord = coords[coords.length - 1];
+          // Only add point if it moved enough to avoid dense clustering
+          if (!lastCoord || Math.abs(lat - lastCoord[0]) > 0.02 || Math.abs(lng - lastCoord[1]) > 0.02) {
+            coords.push([lat, lng]);
+            trailRef.current.setLatLngs(coords);
+          }
+        }
+      },
+      onComplete: () => {
+        // Ensure final position is exact
+        if (markerRef.current) {
+          markerRef.current.setLatLng(targetPos);
+        }
+        const coords = trailCoordsRef.current;
+        coords.push([...targetPos]);
+        if (trailRef.current) trailRef.current.setLatLngs(coords);
+      },
+    });
+  }, [stepIndex, map, provinsiStory, stepsData]);
+
+  return null;
+}
+
+/* ─────────────────────────────────────────
    Utility Component: Map Instance Collector
 ───────────────────────────────────────────*/
 function MapController({ setMap }) {
@@ -235,8 +354,8 @@ function SceneSudutDesa() {
       { id: "#aceh-step", target: desa(0), zoom: CAM_ZOOM, type: "desa", provIndex: 0, duration: 2.4 },
       { id: "#bridge-1-step", target: desa(1), zoom: CAM_ZOOM, type: "bridge", duration: 3.2 },
       { id: "#sumut-step", target: desa(1), zoom: CAM_ZOOM, type: "desa", provIndex: 1, duration: 0.6 },
-      { id: "#bridge-2-step", target: desa(2), zoom: CAM_ZOOM, type: "bridge", duration: 3.6 },
-      { id: "#sumbar-step", target: desa(2), zoom: CAM_ZOOM, type: "desa", provIndex: 2, duration: 0.6 },
+      /* bridge-2 dihapus — kamera langsung bergeser dari Sumut ke Sumbar */
+      { id: "#sumbar-step", target: desa(2), zoom: CAM_ZOOM, type: "desa", provIndex: 2, duration: 2.8 },
     ];
   }, [provinsiStory]);
 
@@ -370,7 +489,7 @@ function SceneSudutDesa() {
 
   return (
     <>
-      <section className="sudut-desa" style={{ position: "relative", background: "transparent", minHeight: "700vh" }}>
+      <section className="sudut-desa" style={{ position: "relative", background: "transparent", minHeight: "600vh" }}>
         
         <div style={{ position: "sticky", top: 0, height: "100vh", width: "100vw", overflow: "hidden" }}>
           
@@ -426,6 +545,19 @@ function SceneSudutDesa() {
               from { opacity: 0; transform: translateY(20px); }
               to { opacity: 1; transform: translateY(0); }
             }
+            /* Gundatala traveler mascot overlay */
+            .gundatala-traveler {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              animation: gundatalaBob 2.5s ease-in-out infinite;
+              filter: drop-shadow(0 6px 16px rgba(10,12,30,0.7));
+              pointer-events: none;
+            }
+            @keyframes gundatalaBob {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-4px); }
+            }
             
             /* Animasi Mengetik Teks Bridge Menggunakan Clip-Path */
             @keyframes typingBridge {
@@ -473,6 +605,12 @@ function SceneSudutDesa() {
               >
                 <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
                 <MapController setMap={setMap} />
+                <GundatalaTrail
+                  provinsiStory={provinsiStory}
+                  activeProvIndex={activeProvIndex}
+                  stepIndex={stepIndex}
+                  stepsData={stepsData}
+                />
                 
                 {/* Poligon provinsi. Tiga provinsi target diberi isian oranye
                     sangat tipis supaya areanya terbaca tanpa mendominasi;
@@ -591,7 +729,6 @@ function SceneSudutDesa() {
           <div id="aceh-step" style={{ height: "100vh" }} />
           <div id="bridge-1-step" style={{ height: "100vh" }} />
           <div id="sumut-step" style={{ height: "100vh" }} />
-          <div id="bridge-2-step" style={{ height: "100vh" }} />
           <div id="sumbar-step" style={{ height: "100vh" }} />
         </div>
         
@@ -755,8 +892,19 @@ function ScenePotretHunianNarasi() {
       background: 'transparent',
       minHeight: '100vh',
       display: 'flex',
+      flexDirection: 'column',
       zIndex: 10,
     }}>
+      {/* Pattern pembatas putih transparan antara peta dan section ini */}
+      <div aria-hidden="true" style={{
+        width: '100%', height: '40px',
+        backgroundImage: `url(${patternWhite})`, backgroundRepeat: 'repeat-x',
+        backgroundSize: 'auto 100%', opacity: 0.35,
+        marginBottom: 0,
+      }} />
+
+      <div style={{ paddingTop: 'clamp(4rem, 8vh, 7rem)' }} />
+
       <div className="hunian-grid">
 
         {/* KOLOM KIRI (STICKY) */}
@@ -984,8 +1132,8 @@ function ScenePotretHunianNarasi() {
           inset: 0;
           pointer-events: none;
           background:
-            linear-gradient(to top, rgba(21,23,61,0.94) 0%, rgba(21,23,61,0.55) 38%, rgba(21,23,61,0.12) 72%),
-            linear-gradient(to right, rgba(21,23,61,0.75) 0%, transparent 45%);
+            linear-gradient(to top, rgba(21,23,61,0.97) 0%, rgba(21,23,61,0.72) 35%, rgba(21,23,61,0.18) 65%),
+            linear-gradient(to right, rgba(21,23,61,0.82) 0%, transparent 50%);
         }
 
         .hunian-text {
@@ -994,11 +1142,11 @@ function ScenePotretHunianNarasi() {
           margin: 0 clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 3.5rem);
           max-width: 460px;
           padding: clamp(1.25rem, 2vw, 1.75rem);
-          border-radius: var(--ws2-r-md);
-          background: rgba(21, 23, 61, 0.42);
-          border: 1px solid var(--ws2-line-1);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
+          border-radius: 0;
+          background: none;
+          border: none;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
         }
 
         @media (max-width: 860px) {
@@ -1058,8 +1206,62 @@ function ScenePotretHunianVisual() {
     <section style={{
       background: 'transparent',
       padding: '7rem 2rem',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+      {/* Ambient mesh gradient blobs — navy + subtle green/orange accents */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+      }}>
+        <div style={{
+          position: 'absolute', top: '-15%', left: '-10%',
+          width: '55%', height: '55%', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(98,129,65,0.08) 0%, transparent 65%)',
+          filter: 'blur(80px)',
+          animation: 'ambientBlob1 16s ease-in-out infinite',
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-10%', right: '-8%',
+          width: '50%', height: '50%', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(230,126,34,0.06) 0%, transparent 60%)',
+          filter: 'blur(90px)',
+          animation: 'ambientBlob2 20s ease-in-out infinite',
+        }} />
+        <div style={{
+          position: 'absolute', top: '30%', right: '20%',
+          width: '35%', height: '35%', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(21,23,61,0.15) 0%, transparent 55%)',
+          filter: 'blur(60px)',
+          animation: 'ambientBlob3 14s ease-in-out infinite',
+        }} />
+        {/* Subtle geometric pattern */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: 'radial-gradient(circle, rgba(229,217,182,0.04) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+          opacity: 0.5,
+        }} />
+      </div>
+
+      <style>{`
+        @keyframes ambientBlob1 {
+          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+          50% { transform: translate(4%, -3%) scale(1.1); opacity: 1; }
+        }
+        @keyframes ambientBlob2 {
+          0%, 100% { transform: translate(0, 0) scale(1.05); opacity: 0.6; }
+          50% { transform: translate(-3%, 2%) scale(0.95); opacity: 0.9; }
+        }
+        @keyframes ambientBlob3 {
+          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+          50% { transform: translate(2%, 4%) scale(1.15); opacity: 0.8; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [style*="ambientBlob"] { animation: none !important; }
+        }
+      `}</style>
+
+      <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
         <h2 style={{
           fontFamily: "'Playfair Display', serif",
@@ -1186,6 +1388,7 @@ function SceneIndividu() {
     value: val.n,
     color: i === 0 ? WS2.green : WS2.cream,
   }));
+  const genderTotal = genderSegments.reduce((s, seg) => s + (seg.value || 0), 0);
 
   /* Bantuan dulu digambar sebagai donut. Itu tidak sah secara statistik:
      `bantuan_diterima` adalah pertanyaan multi-jawab — satu rumah tangga bisa
@@ -1277,36 +1480,77 @@ function SceneIndividu() {
           gap: '1.5rem',
         }}>
 
-          {/* Donut gender */}
-          <div className="ws2-card">
-            <DonutChart segments={genderSegments} title="Distribusi Gender" size={160} thickness={30} />
+          {/* Gender — Tipografi besar berdampingan (bukan donut) */}
+          <div className="ws2-card" style={{ gridColumn: '1 / -1' }}>
+            <div style={eyebrow}>Distribusi Gender</div>
+            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+              {genderSegments.map((seg, i) => {
+                const pct = genderTotal > 0 ? ((seg.value / genderTotal) * 100).toFixed(1) : '0.0';
+                return (
+                  <div key={seg.label} style={{ textAlign: 'center', flex: '1 1 180px', maxWidth: 260 }}>
+                    <div className="playfair-display" style={{
+                      fontSize: 'clamp(3.5rem, 8vw, 5.5rem)',
+                      fontWeight: 700, fontStyle: 'italic',
+                      color: seg.color, lineHeight: 1,
+                    }}>
+                      {pct}<span style={{ fontSize: '0.35em' }}>%</span>
+                    </div>
+                    <div className="lato-bold" style={{
+                      fontSize: '0.85rem', color: 'var(--ws2-text-2)',
+                      marginTop: '0.6rem', letterSpacing: '0.08em',
+                    }}>
+                      {seg.label}
+                    </div>
+                    <div className="lato-light" style={{ fontSize: '0.75rem', color: 'var(--ws2-text-4)', marginTop: '0.25rem' }}>
+                      {fmtN(seg.value)} jiwa
+                    </div>
+                    {i < genderSegments.length - 1 ? null : null}
+                  </div>
+                );
+              })}
+            </div>
+            {/* Visual separator line between the two */}
+            <div style={{
+              width: '100%', height: 3, marginTop: '1.5rem',
+              background: 'var(--ws2-line-1)', borderRadius: 2, position: 'relative', overflow: 'hidden',
+            }}>
+              {genderSegments.map((seg, i) => (
+                <div key={seg.label} style={{
+                  position: i === 0 ? 'relative' : 'absolute',
+                  top: 0, left: i === 0 ? 0 : 'auto', right: i === 0 ? 'auto' : 0,
+                  width: genderTotal > 0 ? `${(seg.value / genderTotal) * 100}%` : '50%',
+                  height: '100%', background: seg.color, borderRadius: 2,
+                  display: 'inline-block',
+                }} />
+              ))}
+            </div>
           </div>
 
-          {/* Disabilitas */}
-          <div className="ws2-card">
+          {/* Disabilitas — Big Number layout */}
+          <div className="ws2-card" style={{ gridColumn: '1 / -1' }}>
             <div style={eyebrow}>Penyandang Disabilitas</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', gap: 'clamp(2rem, 4vw, 4rem)', flexWrap: 'wrap' }}>
               {topDisabilitas.map((item, i) => (
-                <div key={item.label}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.4rem', gap: '0.6rem' }}>
-                    <span className="lato-light" style={{ fontSize: '0.85rem', color: 'var(--ws2-text-2)', textTransform: 'capitalize' }}>
-                      {item.label}
-                    </span>
-                    <span className="lato-bold" style={{ fontSize: '0.8rem', color: 'var(--ws2-text-1)', whiteSpace: 'nowrap' }}>
-                      {fmtN(item.n)}
-                      <span style={{ fontWeight: 300, color: 'var(--ws2-text-4)', marginLeft: '0.35rem' }}>
-                        {fmtPct(item.pct)}%
-                      </span>
-                    </span>
+                <div key={item.label} style={{ flex: '1 1 180px' }}>
+                  <div className="playfair-display" style={{
+                    fontSize: 'clamp(2.8rem, 6vw, 4.2rem)',
+                    fontWeight: 700, fontStyle: 'italic',
+                    color: i === 0 ? 'var(--ws2-accent)' : i === 1 ? 'var(--ws2-green)' : 'var(--ws2-text-1)',
+                    lineHeight: 1,
+                  }}>
+                    {fmtN(item.n)}
                   </div>
-                  <BarTrack
-                    mode="rank"
-                    value={(item.n / maxDisabilitas) * 100}
-                    surface="navy"
-                    tone="positive"
-                    visible={visible}
-                    delay={i * 0.1}
-                  />
+                  <div className="lato-bold" style={{
+                    fontSize: '0.8rem', color: 'var(--ws2-text-2)',
+                    marginTop: '0.5rem', textTransform: 'capitalize',
+                  }}>
+                    {item.label}
+                  </div>
+                  <div className="lato-light" style={{
+                    fontSize: '0.72rem', color: 'var(--ws2-text-4)', marginTop: '0.2rem',
+                  }}>
+                    {fmtPct(item.pct)}% dari jiwa terdata
+                  </div>
                 </div>
               ))}
             </div>
@@ -1351,37 +1595,45 @@ function SceneIndividu() {
             </p>
           </div>
 
-          {/* Keluhan kesehatan */}
+          {/* Keluhan kesehatan — List tipografi bersih dengan garis 1px */}
           <div className="ws2-card" style={{ gridColumn: '1 / -1' }}>
             <div style={eyebrow}>Keluhan Kesehatan Terbanyak</div>
             {topKeluhan.length === 0 ? (
               <span className="lato-light" style={{ fontSize: '0.85rem', color: 'var(--ws2-text-4)' }}>Menunggu data…</span>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
                 {topKeluhan.map((item, i) => (
-                  <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                    <span className="lato-bold" style={{ color: 'var(--ws2-text-4)', fontSize: '0.8rem', width: 20, textAlign: 'right' }}>
-                      {i + 1}
-                    </span>
-                    <span className="lato-light" style={{ flex: '0 0 160px', fontSize: '0.85rem', color: 'var(--ws2-text-2)', textTransform: 'capitalize' }}>
-                      {item.label}
-                    </span>
-                    <div style={{ flex: 1 }}>
-                      <BarTrack
-                        mode="rank"
-                        value={(item.n / maxKeluhan) * 100}
-                        surface="navy"
-                        tone="accent"
-                        visible={visible}
-                        delay={i * 0.1}
-                      />
-                    </div>
-                    <span className="lato-bold" style={{ fontSize: '0.8rem', color: 'var(--ws2-text-1)', width: 120, textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      {fmtN(item.n)}
-                      <span style={{ fontWeight: 300, color: 'var(--ws2-text-4)', marginLeft: '0.35rem' }}>
-                        {fmtPct(item.pct)}%
+                  <div key={item.label}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1rem', marginBottom: '0.35rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem' }}>
+                        <span className="playfair-display" style={{
+                          fontSize: '1.1rem', fontStyle: 'italic', fontWeight: 700,
+                          color: i === 0 ? 'var(--ws2-accent)' : 'var(--ws2-text-3)',
+                          width: 22, textAlign: 'right', flexShrink: 0,
+                        }}>
+                          {i + 1}
+                        </span>
+                        <span className="lato-light" style={{ fontSize: '0.9rem', color: 'var(--ws2-text-1)', textTransform: 'capitalize' }}>
+                          {item.label}
+                        </span>
+                      </div>
+                      <span className="lato-bold" style={{ fontSize: '0.82rem', color: 'var(--ws2-text-1)', whiteSpace: 'nowrap' }}>
+                        {fmtN(item.n)}
+                        <span style={{ fontWeight: 300, color: 'var(--ws2-text-4)', marginLeft: '0.35rem' }}>
+                          {fmtPct(item.pct)}%
+                        </span>
                       </span>
-                    </span>
+                    </div>
+                    {/* Thin 1px progress line */}
+                    <div style={{ width: '100%', height: 1, background: 'rgba(229,217,182,0.08)', borderRadius: 1, overflow: 'hidden' }}>
+                      <div style={{
+                        width: visible ? `${(item.n / maxKeluhan) * 100}%` : '0%',
+                        height: '100%',
+                        background: i === 0 ? 'var(--ws2-accent)' : 'var(--ws2-text-3)',
+                        borderRadius: 1,
+                        transition: `width 1.2s var(--ws2-bar-ease) ${0.2 + i * 0.08}s`,
+                      }} />
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1452,10 +1704,9 @@ function TransisiBabak34() {
               fontSize: 'clamp(5rem, 13vw, 10rem)',
               fontWeight: 700,
               fontStyle: 'italic',
-              color: 'var(--ws2-ink-1)',
+              color: '#E67E22',
               lineHeight: 1,
               marginBottom: '0.5rem',
-              // Gunakan opacity bukan color transparent — lebih smooth & tidak terpotong
               opacity: visibleAngka ? 1 : 0,
               transform: visibleAngka ? 'translateY(0)' : 'translateY(20px)',
               transition: 'opacity 1.5s ease, transform 1.5s ease',
@@ -1468,7 +1719,7 @@ function TransisiBabak34() {
           <div className="lato-bold" style={{
             fontSize: '0.78rem', letterSpacing: '0.28em',
             textTransform: 'uppercase',
-            color: 'var(--ws2-ink-3)',
+            color: '#E5D9B6',
             marginBottom: '3rem',
             opacity: visibleAngka ? 1 : 0,
             transition: 'opacity 1.5s ease 0.4s',
@@ -1478,16 +1729,14 @@ function TransisiBabak34() {
 
           <h2 ref={refJudul} className="playfair-display" style={{
             fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-            color: 'var(--ws2-ink-1)',
             lineHeight: 1.3,
             marginBottom: '1.5rem',
-            // Pakai opacity + translateY, bukan color transparent
             opacity: visibleJudul ? 1 : 0,
             transform: visibleJudul ? 'translateY(0)' : 'translateY(16px)',
             transition: 'opacity 1.2s ease, transform 1.2s ease',
           }}>
-            Ada Kehilangan yang Tak Bisa<br />
-            <span style={{ color: 'var(--ws2-ink-1)', fontStyle: 'italic' }}>Dibangun Kembali</span>
+            <span style={{ color: '#FFFFFF' }}>Ada Kehilangan yang Tak Bisa</span><br />
+            <span style={{ color: '#628141', fontStyle: 'italic' }}>Dibangun Kembali</span>
           </h2>
 
           <p className="lato-regular" style={{

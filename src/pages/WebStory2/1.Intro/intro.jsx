@@ -719,7 +719,7 @@ function SkalaDampakScene() {
       </section>
 
       {/* ── Carousel: "Bencana ini tidak berhenti di satu titik" ── */}
-      <BgSeam from="navy" to="cream" />
+      <BgSeam from="navy" to="cream" pattern={false} />
       <HuntaraGallery />
       <BgSeam from="cream" to="navy" />
 

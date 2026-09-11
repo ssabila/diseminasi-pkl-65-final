@@ -497,19 +497,11 @@ function SceneJeritanBantuan() {
         }}>
           <h2 className="playfair-display" style={{
             fontSize: 'clamp(2.4rem, 5.5vw, 4rem)',
-            color: 'var(--ws2-text-1)', lineHeight: 1.1,
-            marginBottom: '0.4rem', fontStyle: 'italic',
-            letterSpacing: '-0.01em',
-          }}>
-            Kebutuhan
-          </h2>
-          <h2 className="playfair-display" style={{
-            fontSize: 'clamp(2.4rem, 5.5vw, 4rem)',
-            color: 'var(--ws2-accent)', lineHeight: 1.1,
+            color: 'var(--ws2-text-1)', lineHeight: 1.05,
             marginBottom: '1.8rem', fontStyle: 'italic',
             letterSpacing: '-0.01em',
           }}>
-            Mendesak
+            Kebutuhan <span style={{ color: 'var(--ws2-accent)' }}>Mendesak</span>
           </h2>
 
           <div style={{
@@ -532,7 +524,8 @@ function SceneJeritanBantuan() {
           <div style={{
             paddingTop: '2rem',
             borderTop: '1px solid var(--ws2-line-1)',
-            display: 'flex', gap: '2.8rem', flexWrap: 'wrap',
+            display: 'grid', gridTemplateColumns: '1fr 1fr',
+            gap: '1.5rem',
           }}>
             <div>
               <div className="playfair-display" style={{
@@ -1096,20 +1089,6 @@ function SceneAjakan() {
   const [refCTA,   visCTA]   = useInView(0.2);
   const [sceneRef, sceneVisible] = useSceneReveal();
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: 'Hasil Pendataan R3P — Laporan Bencana',
-        text: 'Data pendataan bencana di Aceh, Sumatera Utara, dan Sumatera Barat.',
-        url: window.location.href,
-      }).catch(() => {});
-    } else {
-      navigator.clipboard?.writeText(window.location.href)
-        .then(() => alert('Link berhasil disalin!'))
-        .catch(() => {});
-    }
-  };
-
   const STATS = [
     { val: '401',   label: 'Petugas Lapangan',   color: '#628141', desc: 'turun ke lapangan langsung' },
     { val: '1.039', label: 'Kunjungan Lapangan',  color: '#E67E22', desc: 'titik data terverifikasi' },
@@ -1277,98 +1256,44 @@ function SceneAjakan() {
           ))}
         </div>
 
-        {/* ── CTA Panel: dua tombol side-by-side dalam container transparan ── */}
+        {/* ── CTA Panel: hanya tombol Beranda (Share dihapus) ── */}
         <div
           ref={refCTA}
           style={{
             opacity: visCTA ? 1 : 0,
             transform: visCTA ? 'translateY(0)' : 'translateY(20px)',
             transition: 'opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s',
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 0.8fr)',
-            gap: '2rem',
-            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'center',
           }}
-          className="kb-s4-cta"
         >
-          {/* Label kiri */}
-          <div>
-            <p className="lato-regular" style={{
-              fontSize: '1rem', lineHeight: 1.8,
-              color: 'var(--ws2-ink-3)', margin: 0,
-              maxWidth: 380,
-            }}>
-              Bagi laporan ini kepada pengambil keputusan,
-              relawan, dan siapa pun yang peduli.
-            </p>
-          </div>
-
-          {/* Tombol kanan */}
-          <div style={{
-            display: 'flex', flexDirection: 'column', gap: '1rem',
-            padding: '2rem',
-            background: 'var(--ws2-surface-c2)',
-            border: '1px solid var(--ws2-line-c1)',
-            borderRadius: 16,
-            backdropFilter: 'blur(8px)',
-          }}>
-            <button
-              onClick={handleShare}
-              style={{
-                width: '100%',
-                padding: '1rem 1.8rem',
-                background: '#628141',
-                color: 'var(--ws2-ink-1)', border: 'none',
-                fontSize: '0.95rem', fontFamily: 'var(--font-content)',
-                fontWeight: 700, letterSpacing: '0.04em',
-                cursor: 'pointer', borderRadius: 10,
-                boxShadow: '0 6px 24px rgba(98,129,65,0.45)',
-                transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                textShadow: '0 1px 2px rgba(0,0,0,0.2)',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = 'var(--ws2-green)';
-                e.currentTarget.style.boxShadow = '0 10px 32px rgba(98,129,65,0.65)';
-                e.currentTarget.style.transform = 'translateY(-3px)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = '#628141';
-                e.currentTarget.style.boxShadow = '0 6px 24px rgba(98,129,65,0.45)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              Bagikan Laporan Ini
-            </button>
-
-            <Link
-              to="/"
-              style={{
-                display: 'block', width: '100%',
-                padding: '0.9rem 1.8rem',
-                background: 'transparent',
-                color: 'var(--ws2-ink-3)',
-                border: '1px solid var(--ws2-line-c2)',
-                fontSize: '0.9rem', fontFamily: 'var(--font-content)',
-                fontWeight: 600, letterSpacing: '0.03em',
-                cursor: 'pointer', borderRadius: 10,
-                textDecoration: 'none', textAlign: 'center',
-                transition: 'all 0.3s ease',
-                boxSizing: 'border-box',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = 'var(--ws2-text-4)';
-                e.currentTarget.style.color = '#E5D9B6';
-                e.currentTarget.style.background = 'rgba(229,217,182,0.06)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'var(--ws2-line-2)';
-                e.currentTarget.style.color = 'var(--ws2-text-3)';
-                e.currentTarget.style.background = 'transparent';
-              }}
-            >
-              Kembali ke Beranda
-            </Link>
-          </div>
+          <Link
+            to="/"
+            style={{
+              display: 'inline-block',
+              padding: '1rem 2.5rem',
+              background: 'transparent',
+              color: 'var(--ws2-ink-3)',
+              border: '1px solid var(--ws2-line-c2)',
+              fontSize: '0.9rem', fontFamily: 'var(--font-content)',
+              fontWeight: 600, letterSpacing: '0.03em',
+              cursor: 'pointer', borderRadius: 10,
+              textDecoration: 'none', textAlign: 'center',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'var(--ws2-text-4)';
+              e.currentTarget.style.color = '#E5D9B6';
+              e.currentTarget.style.background = 'rgba(229,217,182,0.06)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--ws2-line-2)';
+              e.currentTarget.style.color = 'var(--ws2-text-3)';
+              e.currentTarget.style.background = 'transparent';
+            }}
+          >
+            Kembali ke Beranda
+          </Link>
         </div>
 
       </div>
@@ -1466,21 +1391,22 @@ function SceneDataTerjaga() {
   // Spotlight mengikuti mouse — smooth via CSS transition
   const spotlightStyle = {
     background: entered
-      ? `radial-gradient(circle 420px at ${mouse.x}% ${mouse.y}%, rgba(98,129,65,0.13) 0%, rgba(230,126,34,0.05) 35%, transparent 65%)`
-      : 'radial-gradient(circle 420px at 50% 50%, rgba(98,129,65,0.06) 0%, transparent 65%)',
+      ? `radial-gradient(circle 420px at ${mouse.x}% ${mouse.y}%, rgba(21,23,61,0.06) 0%, rgba(98,129,65,0.04) 35%, transparent 65%)`
+      : 'radial-gradient(circle 420px at 50% 50%, rgba(21,23,61,0.03) 0%, transparent 65%)',
     transition: 'background 0.08s linear',
   };
 
   // Baris kalimat — setiap kata bisa hover
+  // Baris kalimat — setiap kata bisa hover. Warna disesuaikan untuk latar krem.
   const LINE1 = [
-    { w: 'Data', c: '#fff' },
-    { w: 'yang', c: '#fff' },
-    { w: 'jujur', c: '#E5D9B6' },
-    { w: 'adalah', c: '#fff' },
+    { w: 'Data', c: '#15173D' },
+    { w: 'yang', c: '#15173D' },
+    { w: 'jujur', c: '#E67E22' },
+    { w: 'adalah', c: '#15173D' },
   ];
   const LINE2 = [
     { w: 'awal', c: '#628141' },
-    { w: 'dari', c: '#fff' },
+    { w: 'dari', c: '#15173D' },
     { w: 'pemulihan.', c: '#E67E22' },
   ];
 
@@ -1496,7 +1422,7 @@ function SceneDataTerjaga() {
         position: 'relative',
         minHeight: '100vh',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'transparent',
+        background: '#E5D9B6',
         overflow: 'hidden',
         opacity: sceneVisible ? 1 : 0,
         transform: sceneVisible ? 'translateY(0)' : 'translateY(24px)',
@@ -1504,14 +1430,17 @@ function SceneDataTerjaga() {
         willChange: 'opacity, transform',
       }}
     >
-      <GrainOverlay opacity={0.05} />
+      <GrainOverlay opacity={0.03} />
 
-      {/* Fajar perlahan naik dari tepi bawah — dua lapis gradien yang bergeser
-          sangat lambat (18 dan 24 detik). Dipilih karena kalimat penutupnya
-          bicara tentang AWAL pemulihan; gerakannya harus terasa seperti langit
-          menjelang terang, bukan animasi dekoratif. */}
-      <div aria-hidden="true" className="kb-fajar kb-fajar-1" />
-      <div aria-hidden="true" className="kb-fajar kb-fajar-2" />
+      {/* Radial glow di belakang teks utama */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', top: '50%', left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '70vw', height: '70vw', maxWidth: 900, maxHeight: 900,
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(230,126,34,0.15) 0%, rgba(230,126,34,0.05) 35%, transparent 60%)',
+        pointerEvents: 'none', zIndex: 0,
+      }} />
 
       {/* Spotlight layer */}
       <div aria-hidden="true" style={{
@@ -1548,13 +1477,12 @@ function SceneDataTerjaga() {
             top: `${mouse.y}%`,
             width: 36, height: 36,
             borderRadius: '50%',
-            border: '1.5px solid rgba(98,129,65,0.7)',
-            boxShadow: '0 0 18px rgba(98,129,65,0.4)',
+            border: '1.5px solid rgba(21,23,61,0.3)',
+            boxShadow: '0 0 18px rgba(21,23,61,0.15)',
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
             zIndex: 999,
             transition: 'left 0.06s linear, top 0.06s linear',
-            mixBlendMode: 'screen',
           }}
         />
       )}
@@ -1586,8 +1514,8 @@ function SceneDataTerjaga() {
                 key={i}
                 ref={el => (wordsRef.current[i] = el)}
                 onMouseEnter={e => {
-                  e.currentTarget.style.color = w.c === '#fff' ? '#E5D9B6' : w.c;
-                  e.currentTarget.style.textShadow = `0 0 40px ${w.c === '#fff' ? '#E5D9B6' : w.c}aa`;
+                  e.currentTarget.style.color = w.c === '#15173D' ? '#E67E22' : w.c;
+                  e.currentTarget.style.textShadow = `0 0 40px ${w.c === '#15173D' ? 'rgba(230,126,34,0.4)' : w.c + '66'}`;
                   e.currentTarget.style.transform = 'scale(1.08) translateY(-4px)';
                 }}
                 onMouseLeave={e => {
@@ -1616,7 +1544,7 @@ function SceneDataTerjaga() {
                 ref={el => (wordsRef.current[LINE1.length + i] = el)}
                 onMouseEnter={e => {
                   e.currentTarget.style.color = w.c;
-                  e.currentTarget.style.textShadow = `0 0 50px ${w.c}bb, 0 0 100px ${w.c}44`;
+                  e.currentTarget.style.textShadow = `0 0 50px ${w.c}66, 0 0 100px ${w.c}22`;
                   e.currentTarget.style.transform = 'scale(1.1) translateY(-5px)';
                 }}
                 onMouseLeave={e => {
@@ -1655,20 +1583,21 @@ function SceneDataTerjaga() {
           style={{
             fontSize: 'clamp(1rem, 2vw, 1.25rem)',
             lineHeight: 1.95,
-            color: 'var(--ws2-text-4)',
+            color: 'rgba(21,23,61,0.55)',
             maxWidth: 540, margin: '0 auto 3.5rem',
             opacity: visible ? 1 : 0,
             transition: 'opacity 1s ease 0.8s',
           }}
         >
-          Setiap baris data adalah satu keluarga yang ditemui,
-          satu cerita yang dicatat, satu langkah menuju keputusan yang lebih baik.
+          Setiap baris data adalah satu keluarga yang ditemui,<br/>
+          satu cerita yang dicatat, satu langkah menuju<br/>
+          keputusan yang lebih baik.
         </p>
 
         {/* Footer */}
         <div style={{ opacity: visible ? 0.35 : 0, transition: 'opacity 1s ease 1.2s' }}>
           <span className="lato-regular" style={{
-            fontSize: '0.7rem', color: 'var(--ws2-text-4)',
+            fontSize: '0.7rem', color: 'rgba(21,23,61,0.4)',
             letterSpacing: '0.18em', textTransform: 'uppercase',
           }}>
             Hasil Pendataan R3P · Data Pemulihan Bencana · 2026
@@ -1744,7 +1673,6 @@ export default function BabakKebutuhan() {
           mengapitnya, sekaligus melanjutkan pola selang-seling warna. */}
       <BgSeam from="navy" to="cream" />
       <SceneAjakan />
-      <BgSeam from="cream" to="navy" />
       <SceneDataTerjaga />
     </>
   );
