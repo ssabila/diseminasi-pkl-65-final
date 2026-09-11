@@ -17,7 +17,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function WebStory1() {
   const containerRef = useRef(null);
-  const [activeChapter, setActiveChapter] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
   const isNavigatingRef = useRef(false);
@@ -99,44 +98,11 @@ export default function WebStory1() {
   }, [navigate]);
 
   useGSAP(() => {
-    // 1. Golden Thread Animation
-    // Garis bercahaya yang tumbuh memanjang ke bawah mengikuti scroll keseluruhan
-    gsap.to('.ws1-golden-thread-progress', {
-      scaleY: 1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true
-      }
-    });
-
     // Phase Bridge fade-in
     gsap.utils.toArray('.ws1-phase-bridge-inner').forEach((el) => {
       gsap.fromTo(el, { opacity: 0, y: 20 }, {
         opacity: 1, y: 0, duration: 1, ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none reverse' },
-      });
-    });
-
-    // Chapter Triggers for Storytelling Navigation
-    const chapters = [
-      { selector: '.ws1-nadia-view0', id: 0 },
-      { selector: '.ws1-sancha-view1', id: 1 },
-      { selector: '.ws1-nadia-view4', id: 2 },
-      { selector: '.ws1-maul-view6', id: 3 },
-      { selector: '.ws1-nadia-view9', id: 4 }
-    ];
-
-    chapters.forEach((ch) => {
-      ScrollTrigger.create({
-        trigger: ch.selector,
-        start: 'top center',
-        end: 'bottom center',
-        onToggle: (self) => {
-          if (self.isActive) setActiveChapter(ch.id);
-        }
       });
     });
 
@@ -226,35 +192,6 @@ export default function WebStory1() {
           </svg>
         )}
       </button>
-
-      {/* ── THE GOLDEN THREAD ── */}
-      <div className="ws1-golden-thread">
-        <div className="ws1-golden-thread-progress"></div>
-      </div>
-
-      {/* ── CHAPTER TRACKER ── */}
-      <div className="ws1-chapter-tracker">
-        <div className={`ws1-chapter-item ${activeChapter === 0 ? 'active' : ''}`}>
-          <div className="ws1-chapter-dot" />
-          <span className="ws1-chapter-label">Misi</span>
-        </div>
-        <div className={`ws1-chapter-item ${activeChapter === 1 ? 'active' : ''}`}>
-          <div className="ws1-chapter-dot" />
-          <span className="ws1-chapter-label">Persiapan</span>
-        </div>
-        <div className={`ws1-chapter-item ${activeChapter === 2 ? 'active' : ''}`}>
-          <div className="ws1-chapter-dot" />
-          <span className="ws1-chapter-label">Lapangan</span>
-        </div>
-        <div className={`ws1-chapter-item ${activeChapter === 3 ? 'active' : ''}`}>
-          <div className="ws1-chapter-dot" />
-          <span className="ws1-chapter-label">Alat & Tim</span>
-        </div>
-        <div className={`ws1-chapter-item ${activeChapter === 4 ? 'active' : ''}`}>
-          <div className="ws1-chapter-dot" />
-          <span className="ws1-chapter-label">Penutup</span>
-        </div>
-      </div>
 
       {/* View 0: Cover (Nadia) */}
       <View0 />

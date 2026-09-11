@@ -158,7 +158,7 @@
   z-index: 10;
   padding: 0 clamp(24px, 6vw, 96px);
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 10vh; /* Moved upwards by adding margin-bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,8 +179,8 @@
   font-family: var(--font-title);
   font-style: normal;
   font-weight: 900;
-  font-size: clamp(3rem, 9vw, 6.8rem);
-  color: var(--beige);
+  font-size: clamp(4rem, 11vw, 8.5rem); /* Enlarged font */
+  color: var(--off-white); /* Matched with other views */
   line-height: 1.0;
   letter-spacing: -0.01em;
   margin: 0 0 16px 0;
@@ -189,15 +189,12 @@
 }
 
 .ws1-nadia-view0 .j-cover-hl-accent {
-  color: var(--orange);
+  color: var(--orange); /* Matched with other views */
   font-style: italic;
   font-family: var(--font-title);
   text-transform: uppercase;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 10px rgba(230,126,34,0.15));
+  text-shadow: 0 0 40px rgba(230, 126, 34, 0.35); /* Added glow instead of gradient */
 }
 
 .ws1-nadia-view0 .j-cover-subline {
@@ -387,9 +384,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px clamp(20px, 5vw, 60px);
+  padding: 120px clamp(20px, 5vw, 60px); /* Increased padding to accommodate dividers */
   box-sizing: border-box;
   overflow: hidden;
+  position: relative; /* For absolutely positioned dividers */
+}
+
+/* ── PATTERN DIVIDER ── */
+.ws1-nadia-view4 .v4-map-pattern-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px; /* High enough to double-stack the pattern horizontally if it is small */
+  background-repeat: repeat; /* Double-double tiling */
+  background-size: auto; /* Jangan di zoom */
+  opacity: 0.9;
+  z-index: 10;
+  pointer-events: none;
+}
+.ws1-nadia-view4 .v4-map-pattern-divider.top {
+  top: 0;
+  border-bottom: 2px solid rgba(230, 126, 34, 0.6);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.ws1-nadia-view4 .v4-map-pattern-divider.bottom {
+  bottom: 0;
+  border-top: 2px solid rgba(230, 126, 34, 0.6);
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+  transform: rotate(180deg);
 }
 
 .ws1-nadia-view4 .v4-map-heading {
@@ -452,23 +474,53 @@
   filter: drop-shadow(0 8px 16px var(--orange)) drop-shadow(0 0 20px rgba(230, 126, 34, 0.6));
 }
 
-/* Interactive details dashboard */
+/* HUD details dashboard */
 .ws1-nadia-view4 .v4-map-dashboard {
   flex: 0.8;
   width: 100%;
   max-width: 380px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
+  background: transparent; /* Removed basic blur card */
   padding: 30px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
   box-sizing: border-box;
   text-align: left;
-  border-left: 3px solid var(--orange);
   transition: all 0.3s ease;
   z-index: 10;
+  position: relative;
+}
+
+/* HUD Glass Panel Base */
+.ws1-nadia-view4 .v4-hud-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(21, 23, 61, 0.85) 0%, rgba(21, 23, 61, 0.4) 100%);
+  border: 1px solid rgba(230, 126, 34, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: -1;
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  box-shadow: inset 0 0 20px rgba(230, 126, 34, 0.1);
+}
+
+/* HUD Targeting Corners */
+.ws1-nadia-view4 .v4-hud-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--orange);
+  z-index: 2;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(230, 126, 34, 0.4);
+}
+.ws1-nadia-view4 .v4-hud-corner.tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.ws1-nadia-view4 .v4-hud-corner.tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+.ws1-nadia-view4 .v4-hud-corner.bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+.ws1-nadia-view4 .v4-hud-corner.br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+.ws1-nadia-view4 .v4-map-dashboard:hover .v4-hud-corner {
+  box-shadow: 0 0 15px var(--orange);
+  width: 22px;
+  height: 22px;
 }
 
 .ws1-nadia-view4 .v4-dashboard-inner {
@@ -491,16 +543,9 @@
   font-size: clamp(1.8rem, 2.5vw, 2.4rem);
   font-weight: 700;
   color: var(--beige);
-  margin: 0 0 16px 0;
+  margin: 0 0 24px 0; /* Increased margin since divider was removed */
   line-height: 1.1;
   transition: color 0.3s ease;
-}
-
-.ws1-nadia-view4 .v4-db-divider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to right, rgba(230, 126, 34, 0.3), transparent);
-  margin-bottom: 24px;
 }
 
 .ws1-nadia-view4 .v4-db-stats-grid {
@@ -512,11 +557,25 @@
 
 .ws1-nadia-view4 .v4-db-stat-box {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  padding: 16px;
-  border-radius: 8px;
+  border: none;
+  border-left: 3px solid var(--orange);
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.ws1-nadia-view4 .v4-db-stat-box::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(230,126,34,0.15) 0%, transparent 100%);
+  z-index: -1;
+}
+
+@keyframes flip-in {
+  0% { transform: rotateX(-90deg); opacity: 0; }
+  100% { transform: rotateX(0deg); opacity: 1; }
 }
 
 .ws1-nadia-view4 .v4-db-stat-num {
@@ -526,6 +585,10 @@
   color: #ffffff;
   line-height: 1;
   margin-bottom: 4px;
+  display: inline-block;
+  animation: flip-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
 }
 
 .ws1-nadia-view4 .v4-db-stat-label {
@@ -556,6 +619,36 @@
   justify-content: center;
   padding: 100px clamp(24px, 5vw, 60px) 110px;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Spinning Decorative Patterns */
+.ws1-nadia-view4 .v4-spinning-pattern {
+  position: absolute;
+  top: 50%;
+  width: clamp(100px, 15vw, 200px); /* Smaller size */
+  height: auto;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 1;
+  animation: spin-slow 40s linear infinite;
+  /* HD rendering trick */
+  image-rendering: high-quality;
+  transform-origin: center center;
+}
+.ws1-nadia-view4 .v4-spinning-pattern.left {
+  left: -5%;
+  animation-direction: normal;
+}
+.ws1-nadia-view4 .v4-spinning-pattern.right {
+  right: -5%;
+  animation-direction: reverse;
+}
+
+@keyframes spin-slow {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
 }
 
 /* Header */
@@ -592,6 +685,7 @@
   max-width: 920px;
   height: 420px;
   margin: 0 auto;
+  z-index: 10;
 }
 
 /* Card */
