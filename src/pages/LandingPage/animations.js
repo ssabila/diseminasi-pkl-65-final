@@ -1,5 +1,5 @@
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import gsap from '../../utils/gsapConfig';
+import gsap from '../utils/gsapConfig';
 
 function revealOnScroll(root) {
     const items = Array.from(root.querySelectorAll('[data-reveal]'));

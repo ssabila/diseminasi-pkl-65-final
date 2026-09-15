@@ -33,7 +33,7 @@ export default function StatsSection() {
             }`}
         >
           <div className="flex items-baseline gap-2">
-            <span className="font-[family-name:var(--font-title)] text-[clamp(44px,5.5vw,72px)] font-black text-[var(--gold)] leading-none tracking-[-0.04em]">
+            <span className="font-[family-name:var(--font-title)] text-[clamp(44px,5.5vw,72px)] font-black text-[var(--cream-bg)] leading-none tracking-[-0.04em]">
               <CountUp target={s.n} trigger={startCountUp} />
             </span>
           </div>

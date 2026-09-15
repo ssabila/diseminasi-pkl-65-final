@@ -28,7 +28,7 @@ export default function MandateSection() {
         <Kicker>Mandat Institusional</Kicker>
         <h2 className="font-[family-name:var(--font-title)] italic text-[clamp(28px,3.5vw,50px)] leading-[1.15] !text-[var(--beige)] mb-[clamp(20px,3vh,32px)]">
           Dipercaya Negara.<br />
-          <span className="not-italic text-[var(--gold)]">Harapan Masyarakat.</span>
+          <span className="not-italic text-[var(--cream-bg)]">Harapan Masyarakat.</span>
         </h2>
         <p className="text-[clamp(14px,1.3vw,17px)] leading-[1.85] font-light text-[var(--beige)]/70 mb-[18px] max-w-[520px]">
           Bukan sekadar tugas akademik. BPS Republik Indonesia — lembaga

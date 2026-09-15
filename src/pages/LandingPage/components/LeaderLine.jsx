@@ -158,7 +158,7 @@ const PROVINCE_CONFIGS = {
         targetConfig: { points: "465,40 400,100 200,100", cx: 465, cy: 40 }
     },
     sumut: {
-        color: "var(--gold)",
+        color: "var(--cream-bg)",
         targetConfig: { points: "414,-35 310,100 200,100", cx: 414, cy: -35 }
     },
     sumbar: {
