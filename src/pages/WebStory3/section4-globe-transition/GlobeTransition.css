@@ -4,13 +4,13 @@
 .section-globetransition {
   position: relative;
   width: 100%;
-  height: 300vh;
+  height: 400vh;
   pointer-events: none;
 }
 
 .globetransition-content-area {
   width: 100%;
-  height: 300vh;
+  height: 400vh;
   position: relative;
   pointer-events: auto;
 }
@@ -72,6 +72,12 @@
 .globe-card-2 {
   bottom: 10vh;
   right: 5%;
+}
+
+/* Kartu 3 — kiri bawah */
+.globe-card-3 {
+  bottom: 10vh;
+  left: 5%;
 }
 
 .globe-title {

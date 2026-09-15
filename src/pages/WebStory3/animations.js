@@ -106,8 +106,9 @@ export const animateWebStory3 = (container, map) => {
   // Zoom into Sumatra
   bigDataTransitionTl.to(mapProxy, {
     zoom: 5.5,
-    lng: 102,
-    lat: -0.5,
+    lng: 100.5,
+    lat: 1.5,
+    pitch: 45,
     duration: 1,
     ease: 'power2.inOut',
     onUpdate: () => {
@@ -192,7 +193,7 @@ export const animateWebStory3 = (container, map) => {
   const panelPinned4 = container.querySelector('.globetransition-panel-pinned');
   const globeCards = container.querySelectorAll('.globe-card');
 
-  if (section4 && panelPinned4 && globeCards.length === 2) {
+  if (section4 && panelPinned4 && globeCards.length > 0) {
     gsap.set(globeCards, { opacity: 0 });
 
     ScrollTrigger.create({
@@ -220,34 +221,71 @@ export const animateWebStory3 = (container, map) => {
             mapProxy.bearing = map.getBearing() || 0;
             sec4Tl.invalidate();
           }
+        },
+        onUpdate: () => {
+          if (map && map.jumpTo) {
+            map.jumpTo({
+              zoom: mapProxy.zoom,
+              center: [mapProxy.lng, mapProxy.lat],
+              pitch: mapProxy.pitch,
+              bearing: mapProxy.bearing
+            });
+          }
         }
       }
     });
 
-    // Animate map to target coordinates
+    // Animate map to target coordinates (finishes before Narasi 2)
     sec4Tl.to(mapProxy, {
       zoom: 6.1,
       lng: 99.8,
       lat: 2.2,
       pitch: 30,
       bearing: -5,
-      duration: 1,
-      ease: 'power1.inOut',
-      onUpdate: () => {
-        if (map && map.jumpTo) {
-          map.jumpTo({
-            zoom: mapProxy.zoom,
-            center: [mapProxy.lng, mapProxy.lat],
-            pitch: mapProxy.pitch,
-            bearing: mapProxy.bearing
-          });
-        }
-      }
+      duration: 0.7,
+      ease: 'power1.inOut'
     }, 0);
 
-    // Cards fade in at different scroll progress points
-    sec4Tl.to(globeCards[0], { opacity: 1, duration: 0.2 }, 0.15)
-      .to(globeCards[1], { opacity: 1, duration: 0.2 }, 0.55);
+    // Function to animate card content in
+    const animateCardIn = (card, startTime) => {
+      const badge = card.querySelector('.globe-badge');
+      const title = card.querySelector('.globe-title');
+      const narrative = card.querySelector('.globe-narrative');
+
+      // Make card container visible
+      sec4Tl.fromTo(card, { opacity: 0 }, { opacity: 1, duration: 0.05 }, startTime);
+
+      // Stagger internal elements in
+      if (badge) sec4Tl.fromTo(badge, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, startTime);
+      if (title) sec4Tl.fromTo(title, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25 }, startTime + 0.05);
+      if (narrative) sec4Tl.fromTo(narrative, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, startTime + 0.1);
+    };
+
+    // Function to animate card out (sliding up like it's scrolling away)
+    const animateCardOut = (card, startTime) => {
+      sec4Tl.to(card, { opacity: 0, y: -150, duration: 0.3 }, startTime);
+    };
+
+    // Sequence the cards based on the new flow
+    if (globeCards[0]) {
+      animateCardIn(globeCards[0], 0.1);
+      // Selesai fill di 1.1, narasi 1 naik
+      animateCardOut(globeCards[0], 1.1); 
+    }
+    
+    if (globeCards[1]) {
+      // Muncul narasi 2, tapi narasi 1 masih ada
+      animateCardIn(globeCards[1], 0.6);
+      // Scroll sedikit, narasi 2 naik jadi sisa narasi 3
+      animateCardOut(globeCards[1], 1.5);
+    }
+    
+    if (globeCards[2]) {
+      // Muncul narasi 3, narasi 2 masih ada
+      animateCardIn(globeCards[2], 1.3);
+      // Animasi akhir section 4
+      animateCardOut(globeCards[2], 1.7);
+    }
   }
 
   // 2. DELEGATE SECTION ANIMATIONS

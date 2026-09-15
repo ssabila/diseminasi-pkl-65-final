@@ -1,0 +1,2702 @@
+[
+  {
+    "id_kab": "1101",
+    "kd_prov": "11",
+    "kd_kab": "01",
+    "nm_kabupaten": "Aceh Selatan",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 16.4128,
+      "skor_longsor": 45.9666,
+      "indeks_hazard_raw": 31.1897,
+      "indeks_hazard": 1.0,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 1.0,
+      "norm_penduduk": 0.2189,
+      "norm_ndbi": 0.0128,
+      "indeks_exposure_raw": 0.4812,
+      "indeks_exposure": 0.909,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.625,
+      "indeks_sensitivitas": 0.1604,
+      "indeks_adaptasi": 0.6283,
+      "indeks_kerentanan_raw": 0.1571,
+      "indeks_kerentanan": 0.7597,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 1.6686,
+      "norm_crs": 1.0,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1102",
+    "kd_prov": "11",
+    "kd_kab": "02",
+    "nm_kabupaten": "Aceh Tenggara",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 9.2696,
+      "skor_longsor": 44.2405,
+      "indeks_hazard_raw": 26.7551,
+      "indeks_hazard": 0.6616,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3528,
+      "norm_penduduk": 0.1133,
+      "norm_ndbi": 0.097,
+      "indeks_exposure_raw": 0.211,
+      "indeks_exposure": 0.3204,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.126,
+      "indeks_adaptasi": 0.6427,
+      "indeks_kerentanan_raw": -0.4542,
+      "indeks_kerentanan": 0.26,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.384,
+      "norm_crs": 0.2301,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1103",
+    "kd_prov": "11",
+    "kd_kab": "03",
+    "nm_kabupaten": "Aceh Timur",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.2374,
+      "skor_longsor": 28.5672,
+      "indeks_hazard_raw": 25.4023,
+      "indeks_hazard": 0.5584,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.4097,
+      "norm_penduduk": 0.2942,
+      "norm_ndbi": 0.0916,
+      "indeks_exposure_raw": 0.2697,
+      "indeks_exposure": 0.4483,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.375,
+      "indeks_sensitivitas": 0.2181,
+      "indeks_adaptasi": 0.6181,
+      "indeks_kerentanan_raw": -0.0249,
+      "indeks_kerentanan": 0.6109,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.5914,
+      "norm_crs": 0.3544,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1104",
+    "kd_prov": "11",
+    "kd_kab": "04",
+    "nm_kabupaten": "Aceh Tengah",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 9.9461,
+      "skor_longsor": 44.1815,
+      "indeks_hazard_raw": 27.0638,
+      "indeks_hazard": 0.6851,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3872,
+      "norm_penduduk": 0.1484,
+      "norm_ndbi": 0.0781,
+      "indeks_exposure_raw": 0.2259,
+      "indeks_exposure": 0.3529,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1713,
+      "indeks_adaptasi": 0.6123,
+      "indeks_kerentanan_raw": -0.3785,
+      "indeks_kerentanan": 0.3219,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.4623,
+      "norm_crs": 0.2771,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1105",
+    "kd_prov": "11",
+    "kd_kab": "05",
+    "nm_kabupaten": "Aceh Barat",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 23.2155,
+      "skor_longsor": 28.946,
+      "indeks_hazard_raw": 26.0808,
+      "indeks_hazard": 0.6101,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.2815,
+      "norm_penduduk": 0.2487,
+      "norm_ndbi": 0.1507,
+      "indeks_exposure_raw": 0.2268,
+      "indeks_exposure": 0.3549,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.75,
+      "indeks_sensitivitas": 0.1928,
+      "indeks_adaptasi": 0.5741,
+      "indeks_kerentanan_raw": 0.3687,
+      "indeks_kerentanan": 0.9326,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.7856,
+      "norm_crs": 0.4708,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1106",
+    "kd_prov": "11",
+    "kd_kab": "06",
+    "nm_kabupaten": "Aceh Besar",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.3845,
+      "skor_longsor": 25.8737,
+      "indeks_hazard_raw": 23.1291,
+      "indeks_hazard": 0.3849,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.343,
+      "norm_penduduk": 0.2927,
+      "norm_ndbi": 0.185,
+      "indeks_exposure_raw": 0.2749,
+      "indeks_exposure": 0.4596,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.25,
+      "indeks_sensitivitas": 0.1797,
+      "indeks_adaptasi": 0.7325,
+      "indeks_kerentanan_raw": -0.3028,
+      "indeks_kerentanan": 0.3837,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.3246,
+      "norm_crs": 0.1945,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1107",
+    "kd_prov": "11",
+    "kd_kab": "07",
+    "nm_kabupaten": "Pidie",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 15.1217,
+      "skor_longsor": 30.0279,
+      "indeks_hazard_raw": 22.5748,
+      "indeks_hazard": 0.3426,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.4093,
+      "norm_penduduk": 0.053,
+      "norm_ndbi": 0.1238,
+      "indeks_exposure_raw": 0.2333,
+      "indeks_exposure": 0.369,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.2699,
+      "indeks_adaptasi": 0.711,
+      "indeks_kerentanan_raw": -0.3161,
+      "indeks_kerentanan": 0.3728,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2541,
+      "norm_crs": 0.1523,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1108",
+    "kd_prov": "11",
+    "kd_kab": "08",
+    "nm_kabupaten": "Aceh Utara",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 25.9621,
+      "skor_longsor": 14.158,
+      "indeks_hazard_raw": 20.0601,
+      "indeks_hazard": 0.1507,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.3434,
+      "norm_penduduk": 0.0944,
+      "norm_ndbi": 0.1755,
+      "indeks_exposure_raw": 0.232,
+      "indeks_exposure": 0.3661,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.2306,
+      "indeks_adaptasi": 0.6302,
+      "indeks_kerentanan_raw": -0.3371,
+      "indeks_kerentanan": 0.3557,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.1088,
+      "norm_crs": 0.0652,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1109",
+    "kd_prov": "11",
+    "kd_kab": "09",
+    "nm_kabupaten": "Simeulue",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.69,
+      "skor_longsor": 26.9217,
+      "indeks_hazard_raw": 25.8058,
+      "indeks_hazard": 0.5891,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.0817,
+      "norm_penduduk": 0.0788,
+      "norm_ndbi": 0.0347,
+      "indeks_exposure_raw": 0.0638,
+      "indeks_exposure": 0.0,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.2445,
+      "indeks_adaptasi": 0.5937,
+      "indeks_kerentanan_raw": -0.3493,
+      "indeks_kerentanan": 0.3457,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2037,
+      "norm_crs": 0.1221,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1110",
+    "kd_prov": "11",
+    "kd_kab": "10",
+    "nm_kabupaten": "Aceh Singkil",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 26.9613,
+      "skor_longsor": 18.4824,
+      "indeks_hazard_raw": 22.7219,
+      "indeks_hazard": 0.3538,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 1.0,
+      "norm_penduduk": 0.1665,
+      "norm_ndbi": 0.1354,
+      "indeks_exposure_raw": 0.5159,
+      "indeks_exposure": 0.9843,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.2876,
+      "indeks_adaptasi": 0.4748,
+      "indeks_kerentanan_raw": -0.1247,
+      "indeks_kerentanan": 0.5293,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.5355,
+      "norm_crs": 0.3209,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1111",
+    "kd_prov": "11",
+    "kd_kab": "11",
+    "nm_kabupaten": "Bireuen",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 21.8446,
+      "skor_longsor": 29.2881,
+      "indeks_hazard_raw": 25.5664,
+      "indeks_hazard": 0.5709,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.2959,
+      "norm_penduduk": 0.1267,
+      "norm_ndbi": 0.2148,
+      "indeks_exposure_raw": 0.2324,
+      "indeks_exposure": 0.367,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.1912,
+      "indeks_adaptasi": 0.6588,
+      "indeks_kerentanan_raw": -0.3426,
+      "indeks_kerentanan": 0.3512,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.41,
+      "norm_crs": 0.2457,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1112",
+    "kd_prov": "11",
+    "kd_kab": "12",
+    "nm_kabupaten": "Aceh Barat Daya",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 13.9329,
+      "skor_longsor": 42.3543,
+      "indeks_hazard_raw": 28.1436,
+      "indeks_hazard": 0.7675,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.4009,
+      "norm_penduduk": 0.0746,
+      "norm_ndbi": 0.0387,
+      "indeks_exposure_raw": 0.2027,
+      "indeks_exposure": 0.3023,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.1791,
+      "indeks_adaptasi": 0.6626,
+      "indeks_kerentanan_raw": -0.296,
+      "indeks_kerentanan": 0.3893,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.5308,
+      "norm_crs": 0.3181,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1113",
+    "kd_prov": "11",
+    "kd_kab": "13",
+    "nm_kabupaten": "Gayo Lues",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 6.8626,
+      "skor_longsor": 45.9995,
+      "indeks_hazard_raw": 26.4311,
+      "indeks_hazard": 0.6369,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3452,
+      "norm_penduduk": 0.083,
+      "norm_ndbi": 0.0438,
+      "indeks_exposure_raw": 0.1821,
+      "indeks_exposure": 0.2575,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.2599,
+      "indeks_adaptasi": 0.5859,
+      "indeks_kerentanan_raw": -0.1385,
+      "indeks_kerentanan": 0.518,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.4939,
+      "norm_crs": 0.296,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1114",
+    "kd_prov": "11",
+    "kd_kab": "14",
+    "nm_kabupaten": "Aceh Jaya",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 19.466,
+      "skor_longsor": 32.5024,
+      "indeks_hazard_raw": 25.9842,
+      "indeks_hazard": 0.6028,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3408,
+      "norm_penduduk": 0.299,
+      "norm_ndbi": 0.0861,
+      "indeks_exposure_raw": 0.2388,
+      "indeks_exposure": 0.381,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.4375,
+      "indeks_sensitivitas": 0.1416,
+      "indeks_adaptasi": 0.5498,
+      "indeks_kerentanan_raw": 0.0293,
+      "indeks_kerentanan": 0.6552,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.6246,
+      "norm_crs": 0.3743,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1115",
+    "kd_prov": "11",
+    "kd_kab": "15",
+    "nm_kabupaten": "Nagan Raya",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.0512,
+      "skor_longsor": 28.3199,
+      "indeks_hazard_raw": 24.1856,
+      "indeks_hazard": 0.4655,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.4021,
+      "norm_penduduk": 0.2301,
+      "norm_ndbi": 0.1254,
+      "indeks_exposure_raw": 0.2661,
+      "indeks_exposure": 0.4404,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.2141,
+      "indeks_adaptasi": 0.5851,
+      "indeks_kerentanan_raw": -0.246,
+      "indeks_kerentanan": 0.4301,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.4052,
+      "norm_crs": 0.2428,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1116",
+    "kd_prov": "11",
+    "kd_kab": "16",
+    "nm_kabupaten": "Aceh Tamiang",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.5093,
+      "skor_longsor": 29.0,
+      "indeks_hazard_raw": 26.7546,
+      "indeks_hazard": 0.6616,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.4105,
+      "norm_penduduk": 0.1913,
+      "norm_ndbi": 0.1719,
+      "indeks_exposure_raw": 0.2791,
+      "indeks_exposure": 0.4687,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.1954,
+      "indeks_adaptasi": 0.638,
+      "indeks_kerentanan_raw": -0.2551,
+      "indeks_kerentanan": 0.4227,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.5897,
+      "norm_crs": 0.3534,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1117",
+    "kd_prov": "11",
+    "kd_kab": "17",
+    "nm_kabupaten": "Bener Meriah",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 13.5398,
+      "skor_longsor": 37.0707,
+      "indeks_hazard_raw": 25.3053,
+      "indeks_hazard": 0.5509,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.4032,
+      "norm_penduduk": 0.083,
+      "norm_ndbi": 0.1094,
+      "indeks_exposure_raw": 0.2313,
+      "indeks_exposure": 0.3647,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.5625,
+      "indeks_sensitivitas": 0.2448,
+      "indeks_adaptasi": 0.622,
+      "indeks_kerentanan_raw": 0.1853,
+      "indeks_kerentanan": 0.7827,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.6322,
+      "norm_crs": 0.3789,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1118",
+    "kd_prov": "11",
+    "kd_kab": "18",
+    "nm_kabupaten": "Pidie Jaya",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 21.5891,
+      "skor_longsor": 21.4799,
+      "indeks_hazard_raw": 21.5345,
+      "indeks_hazard": 0.2632,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.393,
+      "norm_penduduk": 0.053,
+      "norm_ndbi": 0.1238,
+      "indeks_exposure_raw": 0.2262,
+      "indeks_exposure": 0.3536,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.2402,
+      "indeks_adaptasi": 0.6129,
+      "indeks_kerentanan_raw": -0.2478,
+      "indeks_kerentanan": 0.4287,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2059,
+      "norm_crs": 0.1234,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1171",
+    "kd_prov": "11",
+    "kd_kab": "71",
+    "nm_kabupaten": "Kota Banda Aceh",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 30.4833,
+      "skor_longsor": 12.6772,
+      "indeks_hazard_raw": 21.5802,
+      "indeks_hazard": 0.2667,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.1032,
+      "norm_penduduk": 0.0999,
+      "norm_ndbi": 0.6742,
+      "indeks_exposure_raw": 0.3125,
+      "indeks_exposure": 0.5414,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.1901,
+      "indeks_adaptasi": 0.8158,
+      "indeks_kerentanan_raw": -0.6257,
+      "indeks_kerentanan": 0.1198,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.1763,
+      "norm_crs": 0.1057,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1172",
+    "kd_prov": "11",
+    "kd_kab": "72",
+    "nm_kabupaten": "Kota Sabang",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 19.7709,
+      "skor_longsor": 30.4662,
+      "indeks_hazard_raw": 25.1185,
+      "indeks_hazard": 0.5367,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.2606,
+      "norm_penduduk": 0.0176,
+      "norm_ndbi": 0.0989,
+      "indeks_exposure_raw": 0.1526,
+      "indeks_exposure": 0.1934,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.163,
+      "indeks_adaptasi": 0.6323,
+      "indeks_kerentanan_raw": -0.4692,
+      "indeks_kerentanan": 0.2477,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2367,
+      "norm_crs": 0.1419,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1173",
+    "kd_prov": "11",
+    "kd_kab": "73",
+    "nm_kabupaten": "Kota Lhokseumawe",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 28.4553,
+      "skor_longsor": 12.8349,
+      "indeks_hazard_raw": 20.6451,
+      "indeks_hazard": 0.1953,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.361,
+      "norm_penduduk": 0.0528,
+      "norm_ndbi": 0.2657,
+      "indeks_exposure_raw": 0.2645,
+      "indeks_exposure": 0.437,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1497,
+      "indeks_adaptasi": 0.7215,
+      "indeks_kerentanan_raw": -0.5093,
+      "indeks_kerentanan": 0.2149,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.1273,
+      "norm_crs": 0.0763,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1174",
+    "kd_prov": "11",
+    "kd_kab": "74",
+    "nm_kabupaten": "Kota Langsa",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 27.268,
+      "skor_longsor": 19.7282,
+      "indeks_hazard_raw": 23.4981,
+      "indeks_hazard": 0.413,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3739,
+      "norm_penduduk": 0.085,
+      "norm_ndbi": 0.1974,
+      "indeks_exposure_raw": 0.2514,
+      "indeks_exposure": 0.4085,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1274,
+      "indeks_adaptasi": 0.7052,
+      "indeks_kerentanan_raw": -0.5153,
+      "indeks_kerentanan": 0.21,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.2555,
+      "norm_crs": 0.1531,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1175",
+    "kd_prov": "11",
+    "kd_kab": "75",
+    "nm_kabupaten": "Kota Subulussalam",
+    "provinsi": "Aceh",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 21.5396,
+      "skor_longsor": 29.5864,
+      "indeks_hazard_raw": 25.563,
+      "indeks_hazard": 0.5706,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3093,
+      "norm_penduduk": 0.1665,
+      "norm_ndbi": 0.1354,
+      "indeks_exposure_raw": 0.2168,
+      "indeks_exposure": 0.3332,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.3184,
+      "indeks_adaptasi": 0.5587,
+      "indeks_kerentanan_raw": -0.1778,
+      "indeks_kerentanan": 0.4859,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.4674,
+      "norm_crs": 0.2801,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1201",
+    "kd_prov": "12",
+    "kd_kab": "01",
+    "nm_kabupaten": "Tapanuli Tengah",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 23.5432,
+      "skor_longsor": 20.5673,
+      "indeks_hazard_raw": 22.0552,
+      "indeks_hazard": 0.3029,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.6207,
+      "norm_penduduk": 0.2821,
+      "norm_ndbi": 0.1212,
+      "indeks_exposure_raw": 0.3695,
+      "indeks_exposure": 0.6656,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.25,
+      "indeks_sensitivitas": 0.2108,
+      "indeks_adaptasi": 0.5745,
+      "indeks_kerentanan_raw": -0.1137,
+      "indeks_kerentanan": 0.5383,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.3647,
+      "norm_crs": 0.2186,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1202",
+    "kd_prov": "12",
+    "kd_kab": "02",
+    "nm_kabupaten": "Tapanuli Utara",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 16.656,
+      "skor_longsor": 28.48,
+      "indeks_hazard_raw": 22.568,
+      "indeks_hazard": 0.3421,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.62,
+      "norm_penduduk": 0.464,
+      "norm_ndbi": 0.1501,
+      "indeks_exposure_raw": 0.4161,
+      "indeks_exposure": 0.7671,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1461,
+      "indeks_adaptasi": 0.6363,
+      "indeks_kerentanan_raw": -0.4278,
+      "indeks_kerentanan": 0.2816,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.3587,
+      "norm_crs": 0.215,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1203",
+    "kd_prov": "12",
+    "kd_kab": "03",
+    "nm_kabupaten": "Tapanuli Selatan",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.2489,
+      "skor_longsor": 26.578,
+      "indeks_hazard_raw": 24.4135,
+      "indeks_hazard": 0.4829,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.1913,
+      "norm_penduduk": 0.3225,
+      "norm_ndbi": 0.1864,
+      "indeks_exposure_raw": 0.2156,
+      "indeks_exposure": 0.3306,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.625,
+      "indeks_sensitivitas": 0.2014,
+      "indeks_adaptasi": 0.5093,
+      "indeks_kerentanan_raw": 0.3171,
+      "indeks_kerentanan": 0.8904,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.5896,
+      "norm_crs": 0.3534,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1204",
+    "kd_prov": "12",
+    "kd_kab": "04",
+    "nm_kabupaten": "Nias",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 25.6457,
+      "skor_longsor": 17.2234,
+      "indeks_hazard_raw": 21.4345,
+      "indeks_hazard": 0.2556,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3828,
+      "norm_penduduk": 0.0637,
+      "norm_ndbi": 0.0978,
+      "indeks_exposure_raw": 0.2144,
+      "indeks_exposure": 0.3278,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.4121,
+      "indeks_adaptasi": 0.3808,
+      "indeks_kerentanan_raw": 0.1563,
+      "indeks_kerentanan": 0.759,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.2778,
+      "norm_crs": 0.1665,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1205",
+    "kd_prov": "12",
+    "kd_kab": "05",
+    "nm_kabupaten": "Langkat",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 23.5287,
+      "skor_longsor": 26.2913,
+      "indeks_hazard_raw": 24.91,
+      "indeks_hazard": 0.5208,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3105,
+      "norm_penduduk": 0.4165,
+      "norm_ndbi": 0.1588,
+      "indeks_exposure_raw": 0.2759,
+      "indeks_exposure": 0.4618,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.2092,
+      "indeks_adaptasi": 0.6408,
+      "indeks_kerentanan_raw": -0.2441,
+      "indeks_kerentanan": 0.4317,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.4653,
+      "norm_crs": 0.2789,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1206",
+    "kd_prov": "12",
+    "kd_kab": "06",
+    "nm_kabupaten": "Karo",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 15.3346,
+      "skor_longsor": 26.2602,
+      "indeks_hazard_raw": 20.7974,
+      "indeks_hazard": 0.2069,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3975,
+      "norm_penduduk": 0.3911,
+      "norm_ndbi": 0.3533,
+      "indeks_exposure_raw": 0.38,
+      "indeks_exposure": 0.6885,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.1068,
+      "indeks_adaptasi": 0.6301,
+      "indeks_kerentanan_raw": -0.5232,
+      "indeks_kerentanan": 0.2035,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.1846,
+      "norm_crs": 0.1106,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1207",
+    "kd_prov": "12",
+    "kd_kab": "07",
+    "nm_kabupaten": "Deli Serdang",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 27.5406,
+      "skor_longsor": 17.6828,
+      "indeks_hazard_raw": 22.6117,
+      "indeks_hazard": 0.3454,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3547,
+      "norm_penduduk": 0.5131,
+      "norm_ndbi": 0.301,
+      "indeks_exposure_raw": 0.3665,
+      "indeks_exposure": 0.6592,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.4375,
+      "indeks_sensitivitas": 0.2271,
+      "indeks_adaptasi": 0.6202,
+      "indeks_kerentanan_raw": 0.0444,
+      "indeks_kerentanan": 0.6675,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.4582,
+      "norm_crs": 0.2746,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1208",
+    "kd_prov": "12",
+    "kd_kab": "08",
+    "nm_kabupaten": "Simalungun",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.1548,
+      "skor_longsor": 12.2374,
+      "indeks_hazard_raw": 18.1961,
+      "indeks_hazard": 0.0084,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.1222,
+      "norm_penduduk": 0.5044,
+      "norm_ndbi": 0.2745,
+      "indeks_exposure_raw": 0.2544,
+      "indeks_exposure": 0.415,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.3125,
+      "indeks_sensitivitas": 0.1598,
+      "indeks_adaptasi": 0.6706,
+      "indeks_kerentanan_raw": -0.1983,
+      "indeks_kerentanan": 0.4692,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.0075,
+      "norm_crs": 0.0045,
+      "status": "Rendah"
+    }
+  },
+  {
+    "id_kab": "1209",
+    "kd_prov": "12",
+    "kd_kab": "09",
+    "nm_kabupaten": "Asahan",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 28.1884,
+      "skor_longsor": 15.2572,
+      "indeks_hazard_raw": 21.7228,
+      "indeks_hazard": 0.2776,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.071,
+      "norm_penduduk": 0.1252,
+      "norm_ndbi": 0.1677,
+      "indeks_exposure_raw": 0.1174,
+      "indeks_exposure": 0.1166,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.75,
+      "indeks_sensitivitas": 0.1585,
+      "indeks_adaptasi": 0.6915,
+      "indeks_kerentanan_raw": 0.217,
+      "indeks_kerentanan": 0.8086,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.2568,
+      "norm_crs": 0.1539,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1210",
+    "kd_prov": "12",
+    "kd_kab": "10",
+    "nm_kabupaten": "Labuhanbatu",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 28.5393,
+      "skor_longsor": 17.3618,
+      "indeks_hazard_raw": 22.9506,
+      "indeks_hazard": 0.3713,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.6207,
+      "norm_penduduk": 0.2275,
+      "norm_ndbi": 0.2173,
+      "indeks_exposure_raw": 0.3939,
+      "indeks_exposure": 0.7188,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1447,
+      "indeks_adaptasi": 0.6671,
+      "indeks_kerentanan_raw": -0.4599,
+      "indeks_kerentanan": 0.2553,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.3616,
+      "norm_crs": 0.2167,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1211",
+    "kd_prov": "12",
+    "kd_kab": "11",
+    "nm_kabupaten": "Dairi",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 15.3124,
+      "skor_longsor": 27.9407,
+      "indeks_hazard_raw": 21.6266,
+      "indeks_hazard": 0.2702,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3759,
+      "norm_penduduk": 0.1837,
+      "norm_ndbi": 0.2505,
+      "indeks_exposure_raw": 0.2915,
+      "indeks_exposure": 0.4957,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1019,
+      "indeks_adaptasi": 0.6266,
+      "indeks_kerentanan_raw": -0.4622,
+      "indeks_kerentanan": 0.2534,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2024,
+      "norm_crs": 0.1213,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1212",
+    "kd_prov": "12",
+    "kd_kab": "12",
+    "nm_kabupaten": "Toba",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 19.2955,
+      "skor_longsor": 20.3023,
+      "indeks_hazard_raw": 19.7989,
+      "indeks_hazard": 0.1307,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.3976,
+      "norm_penduduk": 0.9057,
+      "norm_ndbi": 0.3868,
+      "indeks_exposure_raw": 0.4949,
+      "indeks_exposure": 0.9387,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.5,
+      "indeks_sensitivitas": 0.0992,
+      "indeks_adaptasi": 0.5569,
+      "indeks_kerentanan_raw": 0.0423,
+      "indeks_kerentanan": 0.6658,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.2098,
+      "norm_crs": 0.1257,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1213",
+    "kd_prov": "12",
+    "kd_kab": "13",
+    "nm_kabupaten": "Mandailing Natal",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 19.9265,
+      "skor_longsor": 28.851,
+      "indeks_hazard_raw": 24.3888,
+      "indeks_hazard": 0.481,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.1056,
+      "norm_penduduk": 0.1934,
+      "norm_ndbi": 0.086,
+      "indeks_exposure_raw": 0.1159,
+      "indeks_exposure": 0.1134,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.6875,
+      "indeks_sensitivitas": 0.2098,
+      "indeks_adaptasi": 0.576,
+      "indeks_kerentanan_raw": 0.3213,
+      "indeks_kerentanan": 0.8939,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.4845,
+      "norm_crs": 0.2904,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1214",
+    "kd_prov": "12",
+    "kd_kab": "14",
+    "nm_kabupaten": "Nias Selatan",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.5426,
+      "skor_longsor": 25.3457,
+      "indeks_hazard_raw": 23.9442,
+      "indeks_hazard": 0.4471,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.2979,
+      "norm_penduduk": 0.398,
+      "norm_ndbi": 0.0627,
+      "indeks_exposure_raw": 0.2314,
+      "indeks_exposure": 0.3648,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.3371,
+      "indeks_adaptasi": 0.5131,
+      "indeks_kerentanan_raw": 0.0115,
+      "indeks_kerentanan": 0.6406,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.4495,
+      "norm_crs": 0.2694,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1215",
+    "kd_prov": "12",
+    "kd_kab": "15",
+    "nm_kabupaten": "Pakpak Bharat",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 15.1458,
+      "skor_longsor": 28.2491,
+      "indeks_hazard_raw": 21.6975,
+      "indeks_hazard": 0.2756,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.0763,
+      "norm_penduduk": 0.0303,
+      "norm_ndbi": 0.109,
+      "indeks_exposure_raw": 0.0791,
+      "indeks_exposure": 0.0333,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.223,
+      "indeks_adaptasi": 0.561,
+      "indeks_kerentanan_raw": -0.2755,
+      "indeks_kerentanan": 0.406,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.1211,
+      "norm_crs": 0.0726,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1216",
+    "kd_prov": "12",
+    "kd_kab": "16",
+    "nm_kabupaten": "Humbang Hasundutan",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 15.0058,
+      "skor_longsor": 23.7828,
+      "indeks_hazard_raw": 19.3943,
+      "indeks_hazard": 0.0999,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.0,
+      "norm_penduduk": 0.3029,
+      "norm_ndbi": 0.201,
+      "indeks_exposure_raw": 0.1343,
+      "indeks_exposure": 0.1534,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.625,
+      "indeks_sensitivitas": 0.102,
+      "indeks_adaptasi": 0.5682,
+      "indeks_kerentanan_raw": 0.1588,
+      "indeks_kerentanan": 0.761,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.0913,
+      "norm_crs": 0.0547,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1217",
+    "kd_prov": "12",
+    "kd_kab": "17",
+    "nm_kabupaten": "Samosir",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 14.0526,
+      "skor_longsor": 22.9203,
+      "indeks_hazard_raw": 18.4865,
+      "indeks_hazard": 0.0306,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.2637,
+      "norm_penduduk": 0.3929,
+      "norm_ndbi": 0.4411,
+      "indeks_exposure_raw": 0.3547,
+      "indeks_exposure": 0.6333,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.2042,
+      "indeks_adaptasi": 0.6733,
+      "indeks_kerentanan_raw": -0.4691,
+      "indeks_kerentanan": 0.2478,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.027,
+      "norm_crs": 0.0162,
+      "status": "Rendah"
+    }
+  },
+  {
+    "id_kab": "1218",
+    "kd_prov": "12",
+    "kd_kab": "18",
+    "nm_kabupaten": "Serdang Bedagai",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 27.7443,
+      "skor_longsor": 12.1314,
+      "indeks_hazard_raw": 19.9379,
+      "indeks_hazard": 0.1414,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.0033,
+      "norm_penduduk": 0.1034,
+      "norm_ndbi": 0.2083,
+      "indeks_exposure_raw": 0.0987,
+      "indeks_exposure": 0.0758,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.5,
+      "indeks_sensitivitas": 0.121,
+      "indeks_adaptasi": 0.6592,
+      "indeks_kerentanan_raw": -0.0382,
+      "indeks_kerentanan": 0.6,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.0955,
+      "norm_crs": 0.0573,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1219",
+    "kd_prov": "12",
+    "kd_kab": "19",
+    "nm_kabupaten": "Batu Bara",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.7556,
+      "skor_longsor": 23.6039,
+      "indeks_hazard_raw": 22.1798,
+      "indeks_hazard": 0.3124,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3917,
+      "norm_penduduk": 0.1252,
+      "norm_ndbi": 0.1677,
+      "indeks_exposure_raw": 0.2562,
+      "indeks_exposure": 0.4189,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.375,
+      "indeks_sensitivitas": 0.1603,
+      "indeks_adaptasi": 0.6781,
+      "indeks_kerentanan_raw": -0.1428,
+      "indeks_kerentanan": 0.5145,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.2916,
+      "norm_crs": 0.1748,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1220",
+    "kd_prov": "12",
+    "kd_kab": "20",
+    "nm_kabupaten": "Padang Lawas Utara",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.6403,
+      "skor_longsor": 23.5407,
+      "indeks_hazard_raw": 22.0905,
+      "indeks_hazard": 0.3056,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.62,
+      "norm_penduduk": 0.3225,
+      "norm_ndbi": 0.1864,
+      "indeks_exposure_raw": 0.4012,
+      "indeks_exposure": 0.7347,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1674,
+      "indeks_adaptasi": 0.3846,
+      "indeks_kerentanan_raw": -0.1548,
+      "indeks_kerentanan": 0.5047,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.3788,
+      "norm_crs": 0.227,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1221",
+    "kd_prov": "12",
+    "kd_kab": "21",
+    "nm_kabupaten": "Padang Lawas",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.6743,
+      "skor_longsor": 23.5595,
+      "indeks_hazard_raw": 22.1169,
+      "indeks_hazard": 0.3076,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.043,
+      "norm_penduduk": 0.3225,
+      "norm_ndbi": 0.1864,
+      "indeks_exposure_raw": 0.1514,
+      "indeks_exposure": 0.1908,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.3125,
+      "indeks_sensitivitas": 0.1446,
+      "indeks_adaptasi": 0.5928,
+      "indeks_kerentanan_raw": -0.1358,
+      "indeks_kerentanan": 0.5202,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.2187,
+      "norm_crs": 0.1311,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1222",
+    "kd_prov": "12",
+    "kd_kab": "22",
+    "nm_kabupaten": "Labuhanbatu Selatan",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.3165,
+      "skor_longsor": 27.5945,
+      "indeks_hazard_raw": 24.9555,
+      "indeks_hazard": 0.5243,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.0614,
+      "norm_penduduk": 0.2275,
+      "norm_ndbi": 0.2173,
+      "indeks_exposure_raw": 0.1518,
+      "indeks_exposure": 0.1916,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.1303,
+      "indeks_adaptasi": 0.6213,
+      "indeks_kerentanan_raw": -0.3659,
+      "indeks_kerentanan": 0.3321,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2746,
+      "norm_crs": 0.1645,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1223",
+    "kd_prov": "12",
+    "kd_kab": "23",
+    "nm_kabupaten": "Labuhanbatu Utara",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.4487,
+      "skor_longsor": 29.7003,
+      "indeks_hazard_raw": 26.0745,
+      "indeks_hazard": 0.6096,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.0688,
+      "norm_penduduk": 0.2275,
+      "norm_ndbi": 0.2173,
+      "indeks_exposure_raw": 0.155,
+      "indeks_exposure": 0.1985,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.1397,
+      "indeks_adaptasi": 0.5891,
+      "indeks_kerentanan_raw": -0.3244,
+      "indeks_kerentanan": 0.366,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.3442,
+      "norm_crs": 0.2063,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1224",
+    "kd_prov": "12",
+    "kd_kab": "24",
+    "nm_kabupaten": "Nias Utara",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 21.0882,
+      "skor_longsor": 23.7857,
+      "indeks_hazard_raw": 22.4369,
+      "indeks_hazard": 0.3321,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.1322,
+      "norm_penduduk": 0.0637,
+      "norm_ndbi": 0.0978,
+      "indeks_exposure_raw": 0.1059,
+      "indeks_exposure": 0.0916,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.3125,
+      "indeks_sensitivitas": 0.3735,
+      "indeks_adaptasi": 0.3949,
+      "indeks_kerentanan_raw": 0.2911,
+      "indeks_kerentanan": 0.8692,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.319,
+      "norm_crs": 0.1912,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1225",
+    "kd_prov": "12",
+    "kd_kab": "25",
+    "nm_kabupaten": "Nias Barat",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.7387,
+      "skor_longsor": 20.8265,
+      "indeks_hazard_raw": 22.7826,
+      "indeks_hazard": 0.3584,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.2364,
+      "norm_penduduk": 0.0637,
+      "norm_ndbi": 0.0978,
+      "indeks_exposure_raw": 0.151,
+      "indeks_exposure": 0.1898,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.3896,
+      "indeks_adaptasi": 0.3183,
+      "indeks_kerentanan_raw": 0.2588,
+      "indeks_kerentanan": 0.8428,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.3701,
+      "norm_crs": 0.2218,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1271",
+    "kd_prov": "12",
+    "kd_kab": "71",
+    "nm_kabupaten": "Kota Medan",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 32.7043,
+      "skor_longsor": 10.8068,
+      "indeks_hazard_raw": 21.7555,
+      "indeks_hazard": 0.2801,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.2381,
+      "norm_penduduk": 0.5645,
+      "norm_ndbi": 0.836,
+      "indeks_exposure_raw": 0.5231,
+      "indeks_exposure": 1.0,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.25,
+      "indeks_sensitivitas": 0.561,
+      "indeks_adaptasi": 0.8073,
+      "indeks_kerentanan_raw": 0.0037,
+      "indeks_kerentanan": 0.6343,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.4577,
+      "norm_crs": 0.2743,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1272",
+    "kd_prov": "12",
+    "kd_kab": "72",
+    "nm_kabupaten": "Kota Pematangsiantar",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 29.3002,
+      "skor_longsor": 10.035,
+      "indeks_hazard_raw": 19.6676,
+      "indeks_hazard": 0.1207,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.1244,
+      "norm_penduduk": 0.0232,
+      "norm_ndbi": 1.0,
+      "indeks_exposure_raw": 0.4262,
+      "indeks_exposure": 0.7891,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.1755,
+      "indeks_adaptasi": 0.6962,
+      "indeks_kerentanan_raw": -0.5207,
+      "indeks_kerentanan": 0.2056,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.1201,
+      "norm_crs": 0.072,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1273",
+    "kd_prov": "12",
+    "kd_kab": "73",
+    "nm_kabupaten": "Kota Sibolga",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.0877,
+      "skor_longsor": 23.5535,
+      "indeks_hazard_raw": 22.8206,
+      "indeks_hazard": 0.3613,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.0752,
+      "norm_penduduk": 0.0103,
+      "norm_ndbi": 0.1867,
+      "indeks_exposure_raw": 0.1033,
+      "indeks_exposure": 0.0858,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.3305,
+      "indeks_adaptasi": 0.6667,
+      "indeks_kerentanan_raw": -0.2737,
+      "indeks_kerentanan": 0.4075,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.1783,
+      "norm_crs": 0.1068,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1274",
+    "kd_prov": "12",
+    "kd_kab": "74",
+    "nm_kabupaten": "Kota Tanjung Balai",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 31.3684,
+      "skor_longsor": 9.1288,
+      "indeks_hazard_raw": 20.2486,
+      "indeks_hazard": 0.1651,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.1959,
+      "norm_penduduk": 0.0098,
+      "norm_ndbi": 0.2758,
+      "indeks_exposure_raw": 0.1882,
+      "indeks_exposure": 0.2708,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.2804,
+      "indeks_adaptasi": 0.6656,
+      "indeks_kerentanan_raw": -0.2602,
+      "indeks_kerentanan": 0.4185,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.1138,
+      "norm_crs": 0.0682,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1275",
+    "kd_prov": "12",
+    "kd_kab": "75",
+    "nm_kabupaten": "Kota Binjai",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 32.0003,
+      "skor_longsor": 7.2166,
+      "indeks_hazard_raw": 19.6084,
+      "indeks_hazard": 0.1162,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.371,
+      "norm_penduduk": 0.0075,
+      "norm_ndbi": 0.6834,
+      "indeks_exposure_raw": 0.4134,
+      "indeks_exposure": 0.7612,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.25,
+      "indeks_sensitivitas": 0.1494,
+      "indeks_adaptasi": 0.6807,
+      "indeks_kerentanan_raw": -0.2813,
+      "indeks_kerentanan": 0.4013,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.1351,
+      "norm_crs": 0.081,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1276",
+    "kd_prov": "12",
+    "kd_kab": "76",
+    "nm_kabupaten": "Kota Tebing Tinggi",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 30.1588,
+      "skor_longsor": 6.0123,
+      "indeks_hazard_raw": 18.0855,
+      "indeks_hazard": 0.0,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.2149,
+      "norm_penduduk": 0.0397,
+      "norm_ndbi": 0.2832,
+      "indeks_exposure_raw": 0.2051,
+      "indeks_exposure": 0.3076,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.375,
+      "indeks_sensitivitas": 0.2253,
+      "indeks_adaptasi": 0.6763,
+      "indeks_kerentanan_raw": -0.076,
+      "indeks_kerentanan": 0.5691,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.0,
+      "norm_crs": 0.0,
+      "status": "Rendah"
+    }
+  },
+  {
+    "id_kab": "1277",
+    "kd_prov": "12",
+    "kd_kab": "77",
+    "nm_kabupaten": "Kota Padang Sidempuan",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.7569,
+      "skor_longsor": 32.209,
+      "indeks_hazard_raw": 26.4829,
+      "indeks_hazard": 0.6408,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3891,
+      "norm_penduduk": 0.0878,
+      "norm_ndbi": 0.1625,
+      "indeks_exposure_raw": 0.2457,
+      "indeks_exposure": 0.396,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.3125,
+      "indeks_sensitivitas": 0.2835,
+      "indeks_adaptasi": 0.6687,
+      "indeks_kerentanan_raw": -0.0727,
+      "indeks_kerentanan": 0.5718,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.6202,
+      "norm_crs": 0.3717,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1278",
+    "kd_prov": "12",
+    "kd_kab": "78",
+    "nm_kabupaten": "Kota Gunungsitoli",
+    "provinsi": "Sumatera Utara",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.8765,
+      "skor_longsor": 19.7671,
+      "indeks_hazard_raw": 21.3218,
+      "indeks_hazard": 0.247,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.0928,
+      "norm_penduduk": 0.0637,
+      "norm_ndbi": 0.0978,
+      "indeks_exposure_raw": 0.0888,
+      "indeks_exposure": 0.0545,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.75,
+      "indeks_sensitivitas": 0.2617,
+      "indeks_adaptasi": 0.5606,
+      "indeks_kerentanan_raw": 0.4511,
+      "indeks_kerentanan": 1.0,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.2604,
+      "norm_crs": 0.1561,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1301",
+    "kd_prov": "13",
+    "kd_kab": "01",
+    "nm_kabupaten": "Pesisir Selatan",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 19.8782,
+      "skor_longsor": 26.6666,
+      "indeks_hazard_raw": 23.2724,
+      "indeks_hazard": 0.3958,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.6388,
+      "norm_penduduk": 0.9939,
+      "norm_ndbi": 0.113,
+      "indeks_exposure_raw": 0.5162,
+      "indeks_exposure": 0.9852,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.25,
+      "indeks_sensitivitas": 0.151,
+      "indeks_adaptasi": 0.786,
+      "indeks_kerentanan_raw": -0.385,
+      "indeks_kerentanan": 0.3166,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.5153,
+      "norm_crs": 0.3088,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1302",
+    "kd_prov": "13",
+    "kd_kab": "02",
+    "nm_kabupaten": "Solok",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 14.3047,
+      "skor_longsor": 35.2205,
+      "indeks_hazard_raw": 24.7626,
+      "indeks_hazard": 0.5095,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.1528,
+      "norm_penduduk": 0.0962,
+      "norm_ndbi": 0.0936,
+      "indeks_exposure_raw": 0.1198,
+      "indeks_exposure": 0.1218,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.163,
+      "indeks_adaptasi": 0.6689,
+      "indeks_kerentanan_raw": -0.3809,
+      "indeks_kerentanan": 0.3198,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.225,
+      "norm_crs": 0.1349,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1303",
+    "kd_prov": "13",
+    "kd_kab": "03",
+    "nm_kabupaten": "Sijunjung",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 18.3254,
+      "skor_longsor": 29.6749,
+      "indeks_hazard_raw": 24.0002,
+      "indeks_hazard": 0.4514,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.1053,
+      "norm_penduduk": 0.1434,
+      "norm_ndbi": 0.2532,
+      "indeks_exposure_raw": 0.1673,
+      "indeks_exposure": 0.2253,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1758,
+      "indeks_adaptasi": 0.6859,
+      "indeks_kerentanan_raw": -0.4476,
+      "indeks_kerentanan": 0.2654,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2215,
+      "norm_crs": 0.1327,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1304",
+    "kd_prov": "13",
+    "kd_kab": "04",
+    "nm_kabupaten": "Tanah Datar",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 16.7993,
+      "skor_longsor": 27.3827,
+      "indeks_hazard_raw": 22.091,
+      "indeks_hazard": 0.3057,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3488,
+      "norm_penduduk": 0.2279,
+      "norm_ndbi": 0.1938,
+      "indeks_exposure_raw": 0.2677,
+      "indeks_exposure": 0.4439,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1106,
+      "indeks_adaptasi": 0.7842,
+      "indeks_kerentanan_raw": -0.6111,
+      "indeks_kerentanan": 0.1317,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.1759,
+      "norm_crs": 0.1054,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1305",
+    "kd_prov": "13",
+    "kd_kab": "05",
+    "nm_kabupaten": "Padang Pariaman",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.2222,
+      "skor_longsor": 20.5419,
+      "indeks_hazard_raw": 22.382,
+      "indeks_hazard": 0.3279,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3759,
+      "norm_penduduk": 0.2413,
+      "norm_ndbi": 0.2135,
+      "indeks_exposure_raw": 0.2893,
+      "indeks_exposure": 0.491,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.5625,
+      "indeks_sensitivitas": 0.1288,
+      "indeks_adaptasi": 0.7356,
+      "indeks_kerentanan_raw": -0.0443,
+      "indeks_kerentanan": 0.595,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.3561,
+      "norm_crs": 0.2134,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1306",
+    "kd_prov": "13",
+    "kd_kab": "06",
+    "nm_kabupaten": "Agam",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.751,
+      "skor_longsor": 30.4974,
+      "indeks_hazard_raw": 25.6242,
+      "indeks_hazard": 0.5753,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3591,
+      "norm_penduduk": 0.2001,
+      "norm_ndbi": 0.1948,
+      "indeks_exposure_raw": 0.267,
+      "indeks_exposure": 0.4425,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.1461,
+      "indeks_adaptasi": 0.916,
+      "indeks_kerentanan_raw": -0.5824,
+      "indeks_kerentanan": 0.1552,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.3438,
+      "norm_crs": 0.2061,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1307",
+    "kd_prov": "13",
+    "kd_kab": "07",
+    "nm_kabupaten": "Lima Puluh Kota",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 17.641,
+      "skor_longsor": 37.2528,
+      "indeks_hazard_raw": 27.4469,
+      "indeks_hazard": 0.7144,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.33,
+      "norm_penduduk": 0.0873,
+      "norm_ndbi": 0.1025,
+      "indeks_exposure_raw": 0.1979,
+      "indeks_exposure": 0.292,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.2379,
+      "indeks_adaptasi": 0.7506,
+      "indeks_kerentanan_raw": -0.3252,
+      "indeks_kerentanan": 0.3654,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.4696,
+      "norm_crs": 0.2815,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1308",
+    "kd_prov": "13",
+    "kd_kab": "08",
+    "nm_kabupaten": "Pasaman",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 15.7763,
+      "skor_longsor": 35.3216,
+      "indeks_hazard_raw": 25.549,
+      "indeks_hazard": 0.5695,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.1784,
+      "norm_penduduk": 1.0,
+      "norm_ndbi": 0.0,
+      "indeks_exposure_raw": 0.2766,
+      "indeks_exposure": 0.4634,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.6875,
+      "indeks_sensitivitas": 0.1461,
+      "indeks_adaptasi": 0.628,
+      "indeks_kerentanan_raw": 0.2056,
+      "indeks_kerentanan": 0.7993,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.7191,
+      "norm_crs": 0.431,
+      "status": "Sangat Tinggi"
+    }
+  },
+  {
+    "id_kab": "1309",
+    "kd_prov": "13",
+    "kd_kab": "09",
+    "nm_kabupaten": "Kepulauan Mentawai",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.6055,
+      "skor_longsor": 22.7602,
+      "indeks_hazard_raw": 23.6829,
+      "indeks_hazard": 0.4271,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.2658,
+      "norm_penduduk": 0.0984,
+      "norm_ndbi": 0.2596,
+      "indeks_exposure_raw": 0.2301,
+      "indeks_exposure": 0.3621,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.1875,
+      "indeks_sensitivitas": 0.2596,
+      "indeks_adaptasi": 0.1432,
+      "indeks_kerentanan_raw": 0.3039,
+      "indeks_kerentanan": 0.8796,
+      "status": "Sangat Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.5304,
+      "norm_crs": 0.3179,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1310",
+    "kd_prov": "13",
+    "kd_kab": "10",
+    "nm_kabupaten": "Dharmasraya",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.6687,
+      "skor_longsor": 17.6516,
+      "indeks_hazard_raw": 21.1602,
+      "indeks_hazard": 0.2346,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.6388,
+      "norm_penduduk": 0.0506,
+      "norm_ndbi": 0.0567,
+      "indeks_exposure_raw": 0.3075,
+      "indeks_exposure": 0.5305,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.25,
+      "indeks_sensitivitas": 0.2034,
+      "indeks_adaptasi": 0.6796,
+      "indeks_kerentanan_raw": -0.2262,
+      "indeks_kerentanan": 0.4463,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.2292,
+      "norm_crs": 0.1374,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1311",
+    "kd_prov": "13",
+    "kd_kab": "11",
+    "nm_kabupaten": "Solok Selatan",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 17.979,
+      "skor_longsor": 32.869,
+      "indeks_hazard_raw": 25.424,
+      "indeks_hazard": 0.56,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.3269,
+      "norm_penduduk": 0.3787,
+      "norm_ndbi": 0.2534,
+      "indeks_exposure_raw": 0.3102,
+      "indeks_exposure": 0.5365,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.25,
+      "indeks_sensitivitas": 0.1498,
+      "indeks_adaptasi": 0.581,
+      "indeks_kerentanan_raw": -0.1812,
+      "indeks_kerentanan": 0.4831,
+      "status": "Tinggi"
+    },
+    "crs": {
+      "indeks_crs": 0.571,
+      "norm_crs": 0.3422,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1312",
+    "kd_prov": "13",
+    "kd_kab": "12",
+    "nm_kabupaten": "Pasaman Barat",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 22.8718,
+      "skor_longsor": 15.746,
+      "indeks_hazard_raw": 19.3089,
+      "indeks_hazard": 0.0934,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.3686,
+      "norm_penduduk": 0.2846,
+      "norm_ndbi": 0.2497,
+      "indeks_exposure_raw": 0.3081,
+      "indeks_exposure": 0.532,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1817,
+      "indeks_adaptasi": 0.7566,
+      "indeks_kerentanan_raw": -0.5124,
+      "indeks_kerentanan": 0.2124,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.0695,
+      "norm_crs": 0.0416,
+      "status": "Rendah"
+    }
+  },
+  {
+    "id_kab": "1371",
+    "kd_prov": "13",
+    "kd_kab": "71",
+    "nm_kabupaten": "Kota Padang",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 19.8868,
+      "skor_longsor": 36.1599,
+      "indeks_hazard_raw": 28.0234,
+      "indeks_hazard": 0.7584,
+      "status": "Sangat Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.248,
+      "norm_penduduk": 0.007,
+      "norm_ndbi": 0.4785,
+      "indeks_exposure_raw": 0.2847,
+      "indeks_exposure": 0.481,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1647,
+      "indeks_adaptasi": 0.9994,
+      "indeks_kerentanan_raw": -0.7722,
+      "indeks_kerentanan": 0.0,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.3648,
+      "norm_crs": 0.2186,
+      "status": "Tinggi"
+    }
+  },
+  {
+    "id_kab": "1372",
+    "kd_prov": "13",
+    "kd_kab": "72",
+    "nm_kabupaten": "Kota Solok",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 24.0202,
+      "skor_longsor": 19.2595,
+      "indeks_hazard_raw": 21.6398,
+      "indeks_hazard": 0.2712,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.0251,
+      "norm_penduduk": 0.0047,
+      "norm_ndbi": 0.2867,
+      "indeks_exposure_raw": 0.1172,
+      "indeks_exposure": 0.1162,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.0676,
+      "indeks_adaptasi": 0.705,
+      "indeks_kerentanan_raw": -0.5124,
+      "indeks_kerentanan": 0.2124,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.0891,
+      "norm_crs": 0.0534,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1373",
+    "kd_prov": "13",
+    "kd_kab": "73",
+    "nm_kabupaten": "Kota Sawahlunto",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 20.3627,
+      "skor_longsor": 25.9398,
+      "indeks_hazard_raw": 23.1513,
+      "indeks_hazard": 0.3866,
+      "status": "Tinggi"
+    },
+    "exposure": {
+      "norm_landuse": 0.0852,
+      "norm_penduduk": 0.0047,
+      "norm_ndbi": 0.1253,
+      "indeks_exposure_raw": 0.0839,
+      "indeks_exposure": 0.0436,
+      "status": "Rendah"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.0621,
+      "indeks_adaptasi": 0.6962,
+      "indeks_kerentanan_raw": -0.634,
+      "indeks_kerentanan": 0.113,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.0605,
+      "norm_crs": 0.0363,
+      "status": "Rendah"
+    }
+  },
+  {
+    "id_kab": "1374",
+    "kd_prov": "13",
+    "kd_kab": "74",
+    "nm_kabupaten": "Kota Padang Panjang",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 17.351,
+      "skor_longsor": 20.552,
+      "indeks_hazard_raw": 18.9515,
+      "indeks_hazard": 0.0661,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.1201,
+      "norm_penduduk": 0.0,
+      "norm_ndbi": 0.3047,
+      "indeks_exposure_raw": 0.164,
+      "indeks_exposure": 0.2182,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.1044,
+      "indeks_adaptasi": 0.6976,
+      "indeks_kerentanan_raw": -0.5307,
+      "indeks_kerentanan": 0.1974,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.0275,
+      "norm_crs": 0.0165,
+      "status": "Rendah"
+    }
+  },
+  {
+    "id_kab": "1375",
+    "kd_prov": "13",
+    "kd_kab": "75",
+    "nm_kabupaten": "Kota Bukittinggi",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 19.6447,
+      "skor_longsor": 17.4937,
+      "indeks_hazard_raw": 18.5692,
+      "indeks_hazard": 0.0369,
+      "status": "Rendah"
+    },
+    "exposure": {
+      "norm_landuse": 0.3381,
+      "norm_penduduk": 0.0166,
+      "norm_ndbi": 0.6608,
+      "indeks_exposure_raw": 0.3926,
+      "indeks_exposure": 0.716,
+      "status": "Sangat Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.125,
+      "indeks_sensitivitas": 0.1676,
+      "indeks_adaptasi": 0.7201,
+      "indeks_kerentanan_raw": -0.4275,
+      "indeks_kerentanan": 0.2818,
+      "status": "Sedang"
+    },
+    "crs": {
+      "indeks_crs": 0.0368,
+      "norm_crs": 0.0221,
+      "status": "Rendah"
+    }
+  },
+  {
+    "id_kab": "1376",
+    "kd_prov": "13",
+    "kd_kab": "76",
+    "nm_kabupaten": "Kota Payakumbuh",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 25.2501,
+      "skor_longsor": 17.6776,
+      "indeks_hazard_raw": 21.4638,
+      "indeks_hazard": 0.2578,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.0778,
+      "norm_penduduk": 0.017,
+      "norm_ndbi": 0.5047,
+      "indeks_exposure_raw": 0.2227,
+      "indeks_exposure": 0.3459,
+      "status": "Sedang"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0,
+      "indeks_sensitivitas": 0.1048,
+      "indeks_adaptasi": 0.7398,
+      "indeks_kerentanan_raw": -0.635,
+      "indeks_kerentanan": 0.1121,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.1181,
+      "norm_crs": 0.0708,
+      "status": "Sedang"
+    }
+  },
+  {
+    "id_kab": "1377",
+    "kd_prov": "13",
+    "kd_kab": "77",
+    "nm_kabupaten": "Kota Pariaman",
+    "provinsi": "Sumatera Barat",
+    "tahun": 2025,
+    "hazard": {
+      "skor_banjir": 30.041,
+      "skor_longsor": 13.9674,
+      "indeks_hazard_raw": 22.0042,
+      "indeks_hazard": 0.299,
+      "status": "Sedang"
+    },
+    "exposure": {
+      "norm_landuse": 0.3593,
+      "norm_penduduk": 0.0297,
+      "norm_ndbi": 0.4627,
+      "indeks_exposure_raw": 0.3316,
+      "indeks_exposure": 0.5831,
+      "status": "Tinggi"
+    },
+    "vulnerability": {
+      "indeks_keterpaparan": 0.0625,
+      "indeks_sensitivitas": 0.0808,
+      "indeks_adaptasi": 0.6962,
+      "indeks_kerentanan_raw": -0.5529,
+      "indeks_kerentanan": 0.1793,
+      "status": "Rendah"
+    },
+    "crs": {
+      "indeks_crs": 0.228,
+      "norm_crs": 0.1366,
+      "status": "Sedang"
+    }
+  }
+]
