@@ -28,7 +28,7 @@ export default function QuoteSection() {
                     </p>
                 </blockquote>
                 <div className="flex items-center gap-4">
-                    <div className="w-8 h-[1px] bg-[var(--gold)]" />
+                    <div className="w-8 h-[1px] bg-[var(--cream-bg)]" />
                     <span className="text-[11px] tracking-[0.14em] uppercase text-[var(--beige)]/[0.38] font-light">
                         Angkatan 65 · Polstat STIS · 2026
                     </span>
