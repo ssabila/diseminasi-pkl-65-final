@@ -69,7 +69,7 @@ const BackGround = () => {
 const Content = () => {
     return (
         <div className="w-full flex h-full flex-col p-4 gap-3 md:p-20 z-30">
-            
+
             <div
                 className="z-40 pt-12 lg:pt-0"
                 data-reveal
@@ -83,7 +83,7 @@ const Content = () => {
                         style={{ textShadow: "0 2px 24px rgba(0,0,0,0.5)" }}
                     >
                         Tiga Destinasi.<br />
-                        <span className="not-italic text-[var(--gold)]">Satu Misi.</span>
+                        <span className="not-italic text-[var(--cream-bg)]">Satu Misi.</span>
                     </h2>
                     <p className="text-[clamp(13px,1.2vw,16px)] text-[rgba(243,234,210,0.6)] font-light max-w-[460px] leading-[1.7] m-0">
                         Pilih riset untuk menelusuri data yang dikumpulkan selama R3P sekaligus cerita yang terkandung di dalamnya.
@@ -93,7 +93,8 @@ const Content = () => {
 
             {/* Three destination cards (Grid 1 kolom di mobile, 3 kolom di desktop) */}
             <div
-                className="relative w-full h-full z-20 flex flex-col md:flex-row gap-4 md:gap-24 justify-between"
+                style={{ gridTemplateColumns: `repeat(${DESTINATION_ITEMS.length}, minmax(0, 1fr))` }}
+                className={`relative grid w-full h-full max-lg:!grid-cols-1 !max-lg:!grid-rows-3 z-20 gap-4 md:gap-24 justify-between`}
             >
                 {DESTINATION_ITEMS.map((r) => (
                     <div
@@ -118,19 +119,19 @@ const Content = () => {
 const DESTINATION_ITEMS = [
     {
         num: 1,
-        region: "Aceh & Sumatera Utara",
+        region: "Aceh",
         tag: "Rehabilitasi Perumahan",
         copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        accent: "var(--gold)",
-        href: "#",
+        accent: "var(--cream-bg)",
+        href: "web-story-1",
         delay: 0.05,
     },
     {
         num: 2,
-        region: "Lintas Provinsi",
+        region: "Sumatera Utara",
         tag: "Komparasi Regional",
         copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        accent: "var(--gold)",
+        accent: "var(--cream-bg)",
         href: "#",
         delay: 0.18,
     },
@@ -139,7 +140,7 @@ const DESTINATION_ITEMS = [
         region: "Sumatera Barat",
         tag: "Rekonstruksi Infrastruktur",
         copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        accent: "var(--gold)",
+        accent: "var(--cream-bg)",
         href: "#",
         delay: 0.30,
         id: "riset-3",

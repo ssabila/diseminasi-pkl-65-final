@@ -38,7 +38,7 @@ export default function HeroSection() {
       {/* ── Top bar ── */}
       <div className="hero-topbar absolute md:top-5 top-0 left-0 right-0 py-[clamp(18px,3.5vh,32px)] px-[5%] flex items-center justify-between border-b border-[var(--beige)]/[0.07] z-20">
         <div className="flex flex-col gap-[3px]">
-          <span className="font-[family-name:var(--font-title)] text-[clamp(12px,1.4vw,14px)] tracking-[0.05em] text-[var(--gold)]">
+          <span className="font-[family-name:var(--font-title)] text-[clamp(12px,1.4vw,14px)] tracking-[0.05em] text-[var(--cream-bg)]">
             Politeknik Statistika STIS
           </span>
           <span className="text-[10px] tracking-[0.16em] uppercase text-[var(--beige)]/[0.35] font-light">
@@ -51,8 +51,8 @@ export default function HeroSection() {
       <div className="hero-content-left relative z-20 max-w-[620px] flex flex-col items-start py-[clamp(80px,12vh,120px)]">
         {/* Kicker */}
         <div className="hero-kicker opacity-0 flex items-center gap-3 mb-[clamp(16px,2.5vh,24px)]">
-          <div className="w-7 h-[1px] bg-[var(--gold)]" />
-          <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--gold)] font-normal">
+          <div className="w-7 h-[1px] bg-[var(--cream-bg)]" />
+          <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--cream-bg)] font-normal">
             Diseminasi Hasil Pendataan Pascabencana
           </span>
         </div>
@@ -103,7 +103,7 @@ export default function HeroSection() {
       <div className="hero-map opacity-0 absolute bg-[#0d0e28] top-0 right-0 w-[55%] h-full overflow-hidden max-lg:relative max-lg:w-full max-lg:h-[40vh] max-lg:opacity-25 z-30">        <div className="hero-map-title m-5 absolute top-0 z-40 w-full hidden">
         <h2 className="font-[family-name:var(--font-title)] text-center italic text-[clamp(28px,3.5vw,50px)] leading-[1.15] !text-[var(--beige)] mb-[clamp(20px,3vh,32px)]">
           510 Total Mahasiswa<br />
-          <span className="not-italic text-[var(--gold)]">Mengemban Tugas Penting</span>
+          <span className="not-italic text-[var(--cream-bg)]">Mengemban Tugas Penting</span>
         </h2>
       </div>
         <div className="hero-map-gradient absolute inset-0 bg-gradient-to-r from-[#0f172a] via-transparent to-transparent z-10 max-lg:hidden pointer-events-none" />
