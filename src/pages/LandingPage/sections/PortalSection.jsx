@@ -82,8 +82,7 @@ const Content = () => {
                         className="italic font-[family-name:var(--font-title)] text-[clamp(28px,4vw,58px)] leading-[1.1] !text-[var(--cream)] max-w-[600px] mb-[clamp(10px,1.5vh,16px)]"
                         style={{ textShadow: "0 2px 24px rgba(0,0,0,0.5)" }}
                     >
-                        Tiga Destinasi.<br />
-                        <span className="not-italic text-[var(--cream-bg)]">Satu Misi.</span>
+                        Pilih Destinasi.<br />
                     </h2>
                     <p className="text-[clamp(13px,1.2vw,16px)] text-[rgba(243,234,210,0.6)] font-light max-w-[460px] leading-[1.7] m-0">
                         Pilih riset untuk menelusuri data yang dikumpulkan selama R3P sekaligus cerita yang terkandung di dalamnya.
@@ -118,30 +117,21 @@ const Content = () => {
 
 const DESTINATION_ITEMS = [
     {
-        num: 1,
-        region: "Aceh",
-        tag: "Rehabilitasi Perumahan",
-        copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        accent: "var(--cream-bg)",
-        href: "web-story-1",
-        delay: 0.05,
-    },
-    {
         num: 2,
-        region: "Sumatera Utara",
-        tag: "Komparasi Regional",
+        region: "Aceh",
+        tag: "Rekonstruksi Infrastruktur",
         copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         accent: "var(--cream-bg)",
-        href: "#",
+        href: "/web-story-1",
         delay: 0.18,
     },
     {
         num: 3,
-        region: "Sumatera Barat",
-        tag: "Rekonstruksi Infrastruktur",
+        region: "Sumatera Utara",
+        tag: "Komparasi Regional",
         copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         accent: "var(--cream-bg)",
-        href: "#",
+        href: "https://pkl-65-dashboard.vercel.app",
         delay: 0.30,
         id: "riset-3",
     },

@@ -127,7 +127,7 @@ export default function PlaneSeparator() {
     return (
         <div
             ref={con}
-            className="fixed inset-0 w-screen translate-x-20 max-lg:translate-0 h-screen z-40 pointer-events-none flex items-center justify-center"
+            className="fixed inset-0 w-screen max-lg:translate-0 h-screen z-40 pointer-events-none flex items-center justify-center"
         >
 
             <div

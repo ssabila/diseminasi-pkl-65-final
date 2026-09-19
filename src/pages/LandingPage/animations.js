@@ -306,7 +306,8 @@ export const cloudLoadingAnimation = (element, tl = gsap.timeline()) => {
             .to('.cloudLoader2', { translateX: '30vw', duration: 3, ease: 'power1.inOut' }, 0)
             .to('.cloudLoader1', { translateX: '-50vw', translateY: '50vh', duration: 2, ease: 'power1.inOut' }, '>')
             .to('.cloudLoader2', { translateX: '50vw', translateY: '-50vh', duration: 2, ease: 'power1.inOut' }, '<')
-            .to(['.cloudLoader1', '.cloudLoader2', '.cloudLoaderBG'], { opacity: 0, duration: 1, ease: 'power1.out', display: 'none' }, '<');
+            .to(['.cloudLoader1', '.cloudLoader2', '.cloudLoaderBG'], { opacity: 0, duration: 1, ease: 'power1.out', display: 'none' }, '<')
+            .to(element, { autoAlpha: 0, duration: 0.5, ease: 'power1.out' }, '>')
     }, element)
     return () => ctx.revert();
 
