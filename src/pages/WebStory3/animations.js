@@ -143,6 +143,7 @@ export const animateWebStory3 = (container, map) => {
       end: 'bottom bottom',
       pin: true,
       pinSpacing: false,
+      refreshPriority: 95,
     });
 
     // Scrubbed timeline: each card gets 1 unit, transition at 0.7
@@ -152,6 +153,7 @@ export const animateWebStory3 = (container, map) => {
         start: 'top top',
         end: 'bottom bottom',
         scrub: 0.5,
+        refreshPriority: 95,
       }
     });
 
@@ -203,6 +205,7 @@ export const animateWebStory3 = (container, map) => {
       end: 'bottom bottom',
       pin: true,
       pinSpacing: false,
+      refreshPriority: 85,
     });
 
     const sec4Tl = gsap.timeline({
@@ -211,6 +214,7 @@ export const animateWebStory3 = (container, map) => {
         start: 'top top',
         end: 'bottom bottom',
         scrub: 0.5,
+        refreshPriority: 85,
         onEnter: () => {
           if (map) {
             const currentCenter = map.getCenter();

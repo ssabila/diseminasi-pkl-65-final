@@ -123,6 +123,17 @@ export default function InsightEnv() {
       }, 0.9);
     });
 
+    // Fade out insight-content when leaving Section 5 so it never overlaps Section 6
+    const content = s.querySelector('.insight-content');
+    if (content) {
+      tl.to(content, {
+        opacity: 0,
+        y: -40,
+        duration: 0.12,
+        ease: 'power2.in',
+      }, 0.88);
+    }
+
     // Also ease camera back to default for InsightDamage
     tl.to(camera, {
       lng: 99.8,
