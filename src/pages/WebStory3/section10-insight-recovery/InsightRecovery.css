@@ -135,46 +135,6 @@
   letter-spacing: 0.5px;
 }
 
-/* ─── NDVI Pixel Grid Overlay (left side, over Mapbox) ─── */
-.ndvi-grid-overlay {
-  position: absolute;
-  left: 8vw;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-  pointer-events: none;
-}
-
-.ndvi-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 28px);
-  grid-template-rows: repeat(12, 28px);
-  gap: 3px;
-  padding: 16px;
-  background: rgba(10, 11, 31, 0.3);
-  border: 1px solid rgba(229, 217, 182, 0.15);
-  border-radius: 12px;
-  backdrop-filter: blur(4px);
-}
-
-.ndvi-pixel {
-  width: 28px;
-  height: 28px;
-  border-radius: 3px;
-  opacity: 0;
-  transition: box-shadow 0.3s ease;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-}
-
-.ndvi-grid-label {
-  text-align: center;
-  margin-top: 10px;
-  font-family: var(--font-content);
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(229, 217, 182, 0.5);
-}
 
 /* ─── Starfield ─── */
 .section-insightrecovery .starfield {
@@ -214,25 +174,5 @@
     padding: 1.5rem;
     background: rgba(10, 11, 31, 0.85);
     border-radius: 16px;
-  }
-
-  .ndvi-grid-overlay {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
-    margin: 0 auto 2rem;
-  }
-
-  .ndvi-grid {
-    grid-template-columns: repeat(10, 22px);
-    grid-template-rows: repeat(12, 22px);
-    gap: 2px;
-    padding: 12px;
-  }
-
-  .ndvi-pixel {
-    width: 22px;
-    height: 22px;
   }
 }
