@@ -74,7 +74,7 @@ export default function InsightTimeline() {
         end: '+=400%', // Long pin for 5 stages
         scrub: 0.5,
         pin: true,
-        refreshPriority: 40,
+        refreshPriority: 30,
       },
     });
 
@@ -143,6 +143,17 @@ export default function InsightTimeline() {
         }
       }
     });
+
+    // Fade OUT insight-content when exiting Section 9 so it never overlaps Section 10
+    const content = s.querySelector('.insight-content');
+    if (content) {
+      tl.to(content, {
+        opacity: 0,
+        y: -40,
+        duration: 0.12,
+        ease: 'power2.in',
+      }, '>');
+    }
 
   }, [layersAdded, map]);
 

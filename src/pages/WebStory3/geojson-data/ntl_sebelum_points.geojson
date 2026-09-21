@@ -1,0 +1,2890 @@
+{
+  "type": "FeatureCollection",
+  "name": "src/pages/WebStory3/geojson-data/ntl_sebelum_points.geojson",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.204,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.124,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.083,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.613,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.677,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.411,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.137,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.229,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.126,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.211,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.125,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.086,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.176,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.156,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.084,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.07,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          2.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.255,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.514,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.57,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.058,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.07,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.115,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          2.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.42,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.847,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.936,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.568,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.189,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.096,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.212,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.173,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          2.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.105,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          2.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.38,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.766,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.846,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.513,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.171,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.198,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.43,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.522,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.129,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          2.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.054,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          2.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.189,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.38,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.42,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.255,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.085,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.099,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.264,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.503,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.586,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.388,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.142,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          2.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.104,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.115,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.069,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.05,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.167,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -0.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.11,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.243,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.361,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.427,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.396,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.243,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.087,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          2.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.114,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.678,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.678,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -0.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.089,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          0.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.261,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.529,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.616,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.443,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.232,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.099,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.158,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.466,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.831,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.829,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.151,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -0.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.117,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          0.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.35,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.702,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.782,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.487,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.177,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.068,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.134,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.208,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.367,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.574,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.558,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.306,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.102,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -0.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.085,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          0.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.519,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.574,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.118,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.201,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.363,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.384,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.3,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.26,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.213,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.113,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.105,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.211,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.233,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.141,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.33,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.59,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.584,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.333,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.133,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.298,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.533,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.523,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.283,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.088,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.148,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.265,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.14,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.072,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.26,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.26,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.06,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.166,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.06,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.06,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.499,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -3.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.822,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.224,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.744,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.111,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.274,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.37,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.275,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.082,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.13,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.106,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sebelum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -0.74
+        ]
+      }
+    }
+  ]
+}

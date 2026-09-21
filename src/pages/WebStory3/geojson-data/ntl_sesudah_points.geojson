@@ -1,0 +1,2680 @@
+{
+  "type": "FeatureCollection",
+  "name": "src/pages/WebStory3/geojson-data/ntl_sesudah_points.geojson",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.204,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.124,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.56,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.86,
+          4.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.083,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.613,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.677,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.411,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.137,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.16,
+          4.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.229,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.304,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.46,
+          4.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.126,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.211,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.125,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.76,
+          4.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.086,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.176,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.156,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.084,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.06,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.14,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.283,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.313,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.349,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.36,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.063,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          2.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.231,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.466,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.515,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.568,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.189,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.66,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.117,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.142,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.095,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.058,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          2.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.421,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.466,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.513,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.171,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.96,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.109,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.237,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.287,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.192,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          2.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.104,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          3.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.209,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.231,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.255,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.085,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.26,
+          4.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.145,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.277,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.322,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.213,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.078,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          2.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.057,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          3.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.063,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          3.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.069,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.56,
+          4.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.05,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.06,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.133,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.199,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.235,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.218,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.133,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.86,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.114,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.373,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.067,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          -0.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.143,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.291,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.339,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.244,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.128,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.054,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.16,
+          1.96
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.158,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.256,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.457,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.456,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.251,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.083,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          -0.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          0.16
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.192,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.386,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.43,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.268,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.098,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.46,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.068,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.134,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.208,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.202,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.315,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.307,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.168,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.056,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          -0.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.142,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.285,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.316,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.192,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.065,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.76,
+          1.66
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.201,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.363,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.384,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.165,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.143,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.117,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -0.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.062,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          -0.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.058,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.116,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          0.76
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.128,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          1.06
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.078,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.06,
+          1.36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.33,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.59,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.584,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.183,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.073,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.36,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.298,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.533,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.523,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.283,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.088,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.66,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.148,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.265,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.259,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.14,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.96,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.072,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.26,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.26,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.06,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.166,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.06,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.123,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.06,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.499,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.369,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.15,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.36,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -3.74
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.822,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.609,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.248,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.055,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.66,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.224,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.744,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.551,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.053,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.96,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.111,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -3.44
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.274,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.37,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.275,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.12,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.052,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.26,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.075,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -3.14
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.101,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -2.84
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.082,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -2.54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.071,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.13,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.205,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.185,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.092,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.56,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.106,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -2.24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.305,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.94
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.502,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.64
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.454,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.225,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -1.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ntl_value": 0.061,
+        "label": "sesudah"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.86,
+          -0.74
+        ]
+      }
+    }
+  ]
+}
