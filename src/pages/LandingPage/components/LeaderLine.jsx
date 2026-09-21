@@ -145,8 +145,8 @@ export default function LeaderLine({
 export function LeafletLeaderLinesWrapper({ show }) {
     return (
         <div className="absolute inset-0 pointer-events-none z-40 overflow-visible left-0">
-            <LeaderLine show={show} label="Aceh" targetNumber={280} position={{ top: "20%", left: "5%" }} region="aceh" delay={0} />
-            <LeaderLine show={show} label="Sumatera Utara" targetNumber={190} position={{ top: "40%", left: "15%" }} region="sumut" delay={0.4} />
+            <LeaderLine show={show} label="Aceh" targetNumber={270} position={{ top: "20%", left: "5%" }} region="aceh" delay={0} />
+            <LeaderLine show={show} label="Sumatera Utara" targetNumber={210} position={{ top: "40%", left: "15%" }} region="sumut" delay={0.4} />
             <LeaderLine show={show} label="Sumatera Barat" targetNumber={30} position={{ top: "60%", left: "25%" }} region="sumbar" delay={0.8} />
         </div>
     );

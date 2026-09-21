@@ -13,7 +13,11 @@ export function DestinationCard({
             setTorn(true);
 
             setTimeout(() => {
-                router(href);
+                if (href.startsWith("http")) {
+                    window.location.href = href;
+                } else {
+                    router(href);
+                }
             }, 1200);
 
             setTimeout(() => {
@@ -106,10 +110,10 @@ export function DestinationCard({
                                 style={{ fontFamily: "var(--font-content)" }}
                                 className="text-[clamp(15px,1.8vw,20px)] font-bold text-[var(--cream,#f3ead2)] tracking-[0.05em]"
                             >
-                                {num === 1 ? "HLP" : num === 2 ? "CGK" : "CGK"}
+                                {num === 2 ? "HLP" : num === 3 ? "CGK" : "CGK"}
                             </span>
                             <span className="text-[9px] text-[rgba(243,234,210,0.4)] font-light">
-                                Jakarta
+                                {num === 2 ? "Halim Perdana Kusuma" : num === 3 ? "Soekarno-Hatta" : "Soekarno-Hatta"}
                             </span>
                         </div>
 
@@ -131,10 +135,10 @@ export function DestinationCard({
                                 style={{ fontFamily: "var(--font-content)" }}
                                 className="text-[clamp(15px,1.8vw,20px)] font-bold text-[var(--cream,#f3ead2)] tracking-[0.05em]"
                             >
-                                {num === 1 ? "BTJ" : num === 2 ? "DTB" : "BIM"}
+                                {num === 2 ? "BTJ" : num === 3 ? "DTB" : "BIM"}
                             </span>
                             <span className="text-[9px] text-[rgba(243,234,210,0.4)] font-light text-right">
-                                {num === 1 ? "Aceh" : num === 2 ? "Sumatera Utara" : "Sumatera Barat"}
+                                {num === 2 ? "Sultan Iskandar Muda" : num === 3 ? "Silangit" : ""}
                             </span>
                         </div>
                     </div>
