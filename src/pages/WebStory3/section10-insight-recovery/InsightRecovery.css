@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-/* ─── Layout override: push card to right ─── */
+/* ─── Layout: wrapper full-height, card di kanan (desktop) ─── */
 .section-insightrecovery .recovery-layout {
   display: flex;
   align-items: center;
@@ -21,6 +21,7 @@
   box-sizing: border-box;
   position: relative;
   z-index: 2;
+  pointer-events: none; /* tembus ke peta */
 }
 
 /* ─── Glass Card ─── */
@@ -35,6 +36,7 @@
   max-width: 460px;
   width: 100%;
   box-sizing: border-box;
+  pointer-events: auto; /* card bisa diklik */
 }
 
 .section-insightrecovery .recovery-card:hover {
@@ -135,7 +137,6 @@
   letter-spacing: 0.5px;
 }
 
-
 /* ─── Starfield ─── */
 .section-insightrecovery .starfield {
   position: absolute;
@@ -155,24 +156,111 @@
 }
 
 @keyframes recoveryTwinkle {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 0.8; }
+
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
 }
 
-/* ─── Responsive ─── */
+/* ─── Responsive — Tablet (≤ 900px) ─── */
 @media (max-width: 900px) {
+  /* Card bergeser ke bawah, melebar penuh */
   .section-insightrecovery .recovery-layout {
-    flex-direction: column;
     justify-content: center;
-    padding: 12vh 4vw 4vh 4vw;
+    align-items: flex-end;
+    padding: 0 3vw 4vh;
+    height: 100vh;
   }
 
   .section-insightrecovery .recovery-card {
-    position: relative;
     max-width: 100%;
     width: 100%;
-    padding: 1.5rem;
-    background: rgba(10, 11, 31, 0.85);
+    padding: 1.4rem 1.6rem;
+    background: rgba(10, 11, 31, 0.88);
     border-radius: 16px;
   }
+
+  .section-insightrecovery .recovery-title {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-insightrecovery .recovery-narrative {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .section-insightrecovery .recovery-indicators {
+    gap: 7px;
+    margin-top: 1rem;
+  }
+
+  .section-insightrecovery .recovery-indicator {
+    padding: 7px 12px;
+  }
+
+  .section-insightrecovery .recovery-narrative-extra {
+    font-size: 0.82rem;
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+  }
 }
+
+/* ─── Responsive — Mobile (≤ 576px) ─── */
+@media (max-width: 576px) {
+  .section-insightrecovery .recovery-layout {
+    padding: 0 4vw 3vh;
+  }
+
+  .section-insightrecovery .recovery-card {
+    padding: 1.1rem 1.2rem;
+    border-radius: 14px;
+  }
+
+  .section-insightrecovery .recovery-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-insightrecovery .recovery-narrative {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  /* Tampilkan indicators secara horizontal di layar kecil */
+  .section-insightrecovery .recovery-indicators {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.8rem;
+  }
+
+  .section-insightrecovery .recovery-indicator {
+    flex: 1 1 calc(50% - 6px);
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+
+  .section-insightrecovery .recovery-indicator-label {
+    font-size: 0.75rem;
+  }
+
+  .section-insightrecovery .recovery-indicator-desc {
+    font-size: 0.65rem;
+  }
+
+  .section-insightrecovery .recovery-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Sembunyikan teks tambahan di mobile untuk ruang lebih lega */
+  .section-insightrecovery .recovery-narrative-extra {
+    display: none;
+  }
+}

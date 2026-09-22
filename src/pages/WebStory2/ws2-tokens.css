@@ -1,0 +1,155 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   WEB STORY 2 — DESIGN TOKENS
+   Scope: .ws2 (BUKAN :root). Token global di src/index.css milik WS1/WS3
+   dan tidak boleh tertimpa dari sini.
+
+   Palet resmi (GUIDELINE DESIGN WEB STORY DISEMINASI):
+     #15173D navy · #628141 hijau · #E67E22 oranye · #E5D9B6 krem · #FFFFFF
+   Tidak ada hex di luar lima warna itu. Variasi = alpha, bukan hue baru.
+
+   ATURAN: file .jsx hanya boleh menulis var(--ws2-*). Hex literal hanya
+   boleh muncul di file ini dan di ws2-tokens.js (untuk properti paint
+   Mapbox/Leaflet dan konkatenasi hex-alpha yang tidak menerima var()).
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.ws2 {
+  /* ── LATAR — hanya dua ─────────────────────────────────────────────── */
+  --ws2-bg-navy: #15173D;
+  --ws2-bg-cream: #E5D9B6;
+  --ws2-scrim: rgba(21, 23, 61, 0.72);
+
+  /* Satu glow lembut per section, tidak lebih */
+  --ws2-glow-green: rgba(98, 129, 65, 0.10);
+  --ws2-glow-orange: rgba(230, 126, 34, 0.08);
+  --ws2-glow-cream: rgba(229, 217, 182, 0.06);
+
+  /* ── TEKS DI ATAS NAVY — basis krem, bukan putih ───────────────────── */
+  --ws2-text-1: #E5D9B6;
+  --ws2-text-2: rgba(229, 217, 182, 0.80);
+  --ws2-text-3: rgba(229, 217, 182, 0.56);
+  --ws2-text-4: rgba(229, 217, 182, 0.34);
+  --ws2-hero: #FFFFFF;
+
+  /* ── TEKS DI ATAS KREM ─────────────────────────────────────────────── */
+  --ws2-ink-1: #15173D;
+  --ws2-ink-2: rgba(21, 23, 61, 0.80);
+  --ws2-ink-3: rgba(21, 23, 61, 0.56);
+  --ws2-ink-4: rgba(21, 23, 61, 0.34);
+
+  /* ── PERMUKAAN & GARIS DI ATAS NAVY ────────────────────────────────── */
+  --ws2-surface-1: rgba(229, 217, 182, 0.045);
+  --ws2-surface-2: rgba(229, 217, 182, 0.09);
+  --ws2-line-1: rgba(229, 217, 182, 0.12);
+  --ws2-line-2: rgba(229, 217, 182, 0.26);
+  --ws2-track: rgba(229, 217, 182, 0.10);
+  --ws2-shadow: 0 12px 32px rgba(8, 9, 30, 0.35);
+
+  /* ── PERMUKAAN & GARIS DI ATAS KREM ────────────────────────────────── */
+  --ws2-surface-c1: rgba(255, 255, 255, 0.42);
+  --ws2-surface-c2: rgba(255, 255, 255, 0.68);
+  --ws2-line-c1: rgba(21, 23, 61, 0.10);
+  --ws2-line-c2: rgba(21, 23, 61, 0.22);
+  --ws2-track-c: rgba(21, 23, 61, 0.08);
+  --ws2-shadow-c: 0 12px 32px rgba(21, 23, 61, 0.10);
+  --ws2-shadow-c-active: 0 16px 40px rgba(21, 23, 61, 0.14);
+
+  /* ── AKSEN ─────────────────────────────────────────────────────────────
+     --ws2-accent dipakai HANYA untuk: severity tertinggi, titik data peta,
+     dan satu kata pada heading Playfair >= 1.5rem (maks satu per scene). */
+  --ws2-accent: #E67E22;
+  --ws2-accent-glow: rgba(230, 126, 34, 0.45);
+  --ws2-green: #628141;
+  --ws2-green-soft: rgba(98, 129, 65, 0.45);
+  --ws2-green-tint: rgba(98, 129, 65, 0.14);
+
+  /* ── SEVERITY (ordinal, 4 = terparah) ────────────────────────────────
+     Satu hue, tangga alpha. Hijau TIDAK boleh masuk skala severity.
+     sev-1 wajib diberi outline agar segmen "Baik" tetap terbaca. */
+  --ws2-sev-4: #E67E22;
+  --ws2-sev-3: rgba(230, 126, 34, 0.55);
+  --ws2-sev-2: rgba(230, 126, 34, 0.28);
+  --ws2-sev-1: rgba(229, 217, 182, 0.18);
+  --ws2-sev-1-line: rgba(229, 217, 182, 0.35);
+
+  --ws2-sevc-4: #E67E22;
+  --ws2-sevc-3: rgba(230, 126, 34, 0.55);
+  --ws2-sevc-2: rgba(230, 126, 34, 0.28);
+  --ws2-sevc-1: rgba(21, 23, 61, 0.12);
+  --ws2-sevc-1-line: rgba(21, 23, 61, 0.30);
+
+  /* ── KATEGORIKAL — maksimal 4, urutan pemakaian wajib 1..4 ───────────
+     Lebih dari 4 kategori: pakai SATU hue + tangga alpha, dan biarkan
+     label yang membedakan (lihat bubble chart Babak 4). */
+  --ws2-cat-1: #628141;
+  --ws2-cat-2: #E5D9B6;
+  --ws2-cat-3: #E67E22;
+  --ws2-cat-4: #FFFFFF;
+
+  --ws2-catc-1: #628141;
+  --ws2-catc-2: #15173D;
+  --ws2-catc-3: #E67E22;
+  --ws2-catc-4: rgba(21, 23, 61, 0.35);
+
+  /* ── RADIUS ────────────────────────────────────────────────────────── */
+  --ws2-r-xs: 2px;
+  --ws2-r-sm: 6px;
+  --ws2-r-md: 12px;
+  --ws2-r-lg: 20px;
+  --ws2-r-pill: 999px;
+
+  /* ── KARTU ─────────────────────────────────────────────────────────── */
+  --ws2-card-pad: clamp(1.5rem, 2.5vw, 2.25rem);
+  --ws2-reveal-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ws2-bar-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SATU BAHASA KARTU
+   Hover HANYA untuk kartu yang bisa diklik, dan hanya border-color.
+   Tidak ada translateY/scale — guideline melarang gerak playful.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.ws2 .ws2-card {
+  background: var(--ws2-surface-1);
+  border: 1px solid var(--ws2-line-1);
+  border-radius: var(--ws2-r-md);
+  padding: var(--ws2-card-pad);
+  box-shadow: none;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.ws2 .ws2-card--cream {
+  background: var(--ws2-surface-c2);
+  border-color: var(--ws2-line-c1);
+  box-shadow: var(--ws2-shadow-c);
+}
+
+/* Satu-satunya kaca yang diizinkan: hanya di atas peta/foto hidup. */
+.ws2 .ws2-card--overlay {
+  background: var(--ws2-scrim);
+  border-color: var(--ws2-line-1);
+  border-radius: var(--ws2-r-md);
+  padding: 1rem 1.25rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.ws2 .ws2-card--clickable { cursor: pointer; }
+.ws2 .ws2-card--clickable:hover { border-color: var(--ws2-line-2); }
+.ws2 .ws2-card--cream.ws2-card--clickable:hover { border-color: var(--ws2-line-c2); }
+
+/* Swatch legend selalu PERSEGI. Lingkaran dicadangkan untuk titik peta. */
+.ws2 .ws2-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--ws2-r-xs);
+  flex-shrink: 0;
+}
+
+.ws2 .ws2-quote {
+  background: none;
+  border: 0;
+  border-left: 2px solid var(--ws2-accent);
+  border-radius: 0;
+  padding: 0 0 0 1.6rem;
+}
