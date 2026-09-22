@@ -4,13 +4,13 @@
 .section-globetransition {
   position: relative;
   width: 100%;
-  height: 400vh;
+  height: 250vh;
   pointer-events: none;
 }
 
 .globetransition-content-area {
   width: 100%;
-  height: 400vh;
+  height: 250vh;
   position: relative;
   pointer-events: auto;
 }
@@ -21,79 +21,173 @@
   position: relative;
 }
 
-/* Badge label kecil di atas setiap kartu */
-.globe-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-content);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--orange);
-  background: rgba(229, 115, 20, 0.1);
-  border: 1px solid rgba(229, 115, 20, 0.3);
-  border-radius: 999px;
-  padding: 4px 12px;
-  margin-bottom: 1.2rem;
-}
-
 .globe-card {
-  background: rgba(10, 11, 30, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(229, 217, 182, 0.15);
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 50px rgba(229, 217, 182, 0.03);
+  background: rgba(13, 17, 38, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(229, 217, 182, 0.22);
+  border-radius: 20px;
+  padding: 2.2rem 2.4rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 40px rgba(229, 217, 182, 0.05);
   color: var(--off-white);
-  width: 30%;
-  min-width: 280px;
-  max-width: 420px;
+  width: 32%;
+  min-width: 320px;
+  max-width: 440px;
   position: absolute;
   opacity: 0;
+  overflow: hidden;
   will-change: opacity, transform;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .globe-card:hover {
-  border-color: rgba(229, 217, 182, 0.35);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7), 0 0 60px rgba(229, 217, 182, 0.08);
+  border-color: rgba(229, 217, 182, 0.45);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 50px rgba(229, 217, 182, 0.1);
 }
 
-/* Kartu 1 — kiri atas */
+/* Watermark subtle pattern */
+.globe-card-watermark {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 180px;
+  height: 180px;
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+  object-fit: contain;
+  filter: invert(1);
+}
+
+/* Card Placements */
+/* Kartu 1 — Kiri Atas */
 .globe-card-1 {
-  top: 8vh;
-  left: 5%;
+  top: 9vh;
+  left: 6%;
 }
 
-/* Kartu 2 — kanan bawah */
+/* Kartu 2 — Kanan Bawah */
 .globe-card-2 {
-  bottom: 10vh;
-  right: 5%;
+  bottom: 8vh;
+  right: 6%;
 }
 
-/* Kartu 3 — kiri bawah */
+/* Kartu 3 — Kiri Bawah */
 .globe-card-3 {
-  bottom: 10vh;
-  left: 5%;
+  bottom: 8vh;
+  left: 6%;
 }
 
 .globe-title {
   font-family: var(--font-title);
   font-style: italic;
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
   font-weight: 700;
   color: var(--off-white);
-  line-height: 1.2;
-  margin: 0 0 1.2rem 0;
+  line-height: 1.25;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .globe-narrative {
   font-family: var(--font-content);
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: rgba(245, 245, 245, 0.8);
-  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(245, 245, 245, 0.85);
+  margin: 0 0 1.4rem 0;
+}
+
+.globe-mascot-wrap {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: rgba(229, 217, 182, 0.08);
+  border: 1px solid rgba(229, 217, 182, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.globe-mascot-img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.globe-card:hover .globe-mascot-img {
+  transform: scale(1.08) translateY(-2px);
+}
+
+.globe-hud-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-end;
+}
+
+.hud-tag {
+  font-family: var(--font-content);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(229, 217, 182, 0.85);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(229, 217, 182, 0.1);
+  letter-spacing: 0.02em;
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+/* Responsiveness (Mobile & Tablet) */
+@media (max-width: 992px) {
+  .globe-card {
+    width: min(92vw, 420px);
+    max-width: min(92vw, 420px);
+    min-width: unset;
+    padding: 1.3rem 1.4rem;
+    border-radius: 16px;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto;
+    bottom: 1.5rem !important;
+    top: auto !important;
+  }
+
+  .globe-title {
+    font-size: clamp(1.2rem, 4.2vw, 1.5rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .globe-narrative {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    margin-bottom: 0.9rem;
+  }
+
+  .globe-mascot-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  .hud-tag {
+    font-size: 0.66rem;
+  }
 }

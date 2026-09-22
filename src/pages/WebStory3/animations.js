@@ -103,14 +103,16 @@ export const animateWebStory3 = (container, map) => {
     }
   });
 
-  // Zoom into Sumatra
+  // Zoom into Sumatra (Di Desktop geser sedikit ke kiri untuk Card 1, di Mobile dinaikkan ke area atas)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 992;
+  const initialSection3Camera = isMobile
+    ? { zoom: 4.65, lng: 98.8, lat: 0.0, pitch: 28, bearing: 0 }
+    : { zoom: 5.4, lng: 99.8, lat: 1.8, pitch: 38, bearing: 0 };
+
   bigDataTransitionTl.to(mapProxy, {
-    zoom: 5.5,
-    lng: 100.5,
-    lat: 1.5,
-    pitch: 45,
+    ...initialSection3Camera,
     duration: 1,
-    ease: 'power2.inOut',
+    ease: 'sine.inOut',
     onUpdate: () => {
       if (map && map.jumpTo) {
         map.jumpTo({
@@ -123,19 +125,25 @@ export const animateWebStory3 = (container, map) => {
     }
   }, 0);
 
-  // ----------------------------------------------------
-  // SECTION 3: 5 Pertanyaan Scroll (Cards) + Transisi C
-  // ----------------------------------------------------
+  // Fade-in kartu pertama secara mulus saat masuk Section 3
   const cards = container.querySelectorAll('.bigdata-card');
   const section3 = container.querySelector('#section3-bigdataanswers');
   const panelPinned = container.querySelector('.bigdata-panel-pinned');
 
   if (cards.length === 5 && section3 && panelPinned) {
-    // Set initial state via GSAP
-    gsap.set(Array.from(cards), { opacity: 0, y: 40, zIndex: 0 });
-    gsap.set(cards[0], { opacity: 1, y: 0, zIndex: 1 });
+    // Awalnya semua kartu (termasuk kartu 0) tersembunyi
+    gsap.set(Array.from(cards), { opacity: 0, y: 35, zIndex: 0 });
 
-    // Pin the right panel so it stays on screen during the 500vh scroll
+    // Kartu 0 fade-in saat mendekati posisi pin Section 3 (dari 0.6 ke 1.0 transisi masuk)
+    bigDataTransitionTl.to(cards[0], {
+      opacity: 1,
+      y: 0,
+      zIndex: 1,
+      duration: 0.4,
+      ease: 'power1.out',
+    }, 0.6);
+
+    // Pin panel selama scroll Section 3
     ScrollTrigger.create({
       trigger: panelPinned,
       start: 'top top',
@@ -146,50 +154,82 @@ export const animateWebStory3 = (container, map) => {
       refreshPriority: 95,
     });
 
-    // Scrubbed timeline: each card gets 1 unit, transition at 0.7
+    // Scrubbed timeline: scrub 0.8 memberikan inersia halus & elegan
     const cardTl = gsap.timeline({
       scrollTrigger: {
         trigger: section3,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: 0.8,
         refreshPriority: 95,
       }
     });
 
     for (let i = 0; i < 4; i++) {
-      const transStart = i + 0.7;
+      // transStart di 0.60 memberikan jeda membaca yang nyaman sebelum berganti
+      const transStart = i + 0.60;
+      const nextIsRight = (i + 1) % 2 === 0;
 
+      // Hanya geser lateral kamera di Desktop; di Mobile kamera tetap stabil di tengah
+      if (!isMobile) {
+        const targetLng = nextIsRight ? 99.8 : 97.6;
+        cardTl.to(mapProxy, {
+          lng: targetLng,
+          lat: 1.8,
+          zoom: 5.4,
+          pitch: 38,
+          bearing: 0,
+          duration: 0.38,
+          ease: 'sine.inOut',
+          onUpdate: () => {
+            if (map && map.jumpTo) {
+              map.jumpTo({
+                zoom: mapProxy.zoom,
+                center: [mapProxy.lng, mapProxy.lat],
+                pitch: mapProxy.pitch,
+                bearing: mapProxy.bearing
+              });
+            }
+          }
+        }, transStart);
+      }
+
+      // Card i fade out halus ke atas dengan pergeseran kecil
       cardTl.to(cards[i], {
         opacity: 0,
-        y: -40,
+        y: -30,
         zIndex: 0,
-        duration: 0.3,
-        ease: 'power2.in',
+        duration: 0.26,
+        ease: 'power1.in',
       }, transStart);
 
+      // Card i+1 fade in anggun di posisinya (kanan/kiri di desktop, bawah di mobile)
       cardTl.fromTo(cards[i + 1],
-        { opacity: 0, y: 40, zIndex: 0 },
+        { opacity: 0, y: 30, zIndex: 0 },
         {
-          opacity: 1, y: 0, zIndex: 1,
-          duration: 0.3,
-          ease: 'power2.out',
+          opacity: 1,
+          y: 0,
+          zIndex: 1,
+          duration: 0.28,
+          ease: 'power1.out',
           immediateRender: false,
         },
-        transStart
+        transStart + 0.08
       );
     }
 
-    // Hold last card until end
-    cardTl.to({}, { duration: 1 });
-
+    // Slide out kartu terakhir menjelang akhir Section 3 agar bersih saat masuk Section 4
+    cardTl.to(cards[4], {
+      opacity: 0,
+      y: -30,
+      duration: 0.25,
+      ease: 'power1.in',
+    }, 4.75);
   }
 
   // ----------------------------------------------------
   // SECTION 4: Globe Transition
   // Animates map to match Section 5 (SharedMapProvider)
-  // center: [99.8, 2.2], zoom: 6.1, pitch: 30, bearing: -5
-  // and fades in the narrative cards.
   // ----------------------------------------------------
   const section4 = container.querySelector('#section4-globetransition');
   const panelPinned4 = container.querySelector('.globetransition-panel-pinned');
@@ -239,15 +279,15 @@ export const animateWebStory3 = (container, map) => {
       }
     });
 
-    // Animate map to target coordinates (finishes before Narasi 2)
+    // Transisi kamera map yang proporsional di desktop & mobile
+    const sec4TargetCamera = isMobile
+      ? { zoom: 4.8, lng: 98.6, lat: 1.2, pitch: 25, bearing: 0 }
+      : { zoom: 6.0, lng: 99.4, lat: 2.0, pitch: 35, bearing: -14 };
+
     sec4Tl.to(mapProxy, {
-      zoom: 6.1,
-      lng: 99.8,
-      lat: 2.2,
-      pitch: 30,
-      bearing: -5,
-      duration: 0.7,
-      ease: 'power1.inOut'
+      ...sec4TargetCamera,
+      duration: 1.0,
+      ease: 'sine.inOut'
     }, 0);
 
     // Function to animate card content in
@@ -255,40 +295,37 @@ export const animateWebStory3 = (container, map) => {
       const badge = card.querySelector('.globe-badge');
       const title = card.querySelector('.globe-title');
       const narrative = card.querySelector('.globe-narrative');
+      const footer = card.querySelector('.globe-card-footer');
 
       // Make card container visible
-      sec4Tl.fromTo(card, { opacity: 0 }, { opacity: 1, duration: 0.05 }, startTime);
+      sec4Tl.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25, ease: 'power1.out' }, startTime);
 
       // Stagger internal elements in
-      if (badge) sec4Tl.fromTo(badge, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, startTime);
-      if (title) sec4Tl.fromTo(title, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25 }, startTime + 0.05);
-      if (narrative) sec4Tl.fromTo(narrative, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, startTime + 0.1);
+      if (badge) sec4Tl.fromTo(badge, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.2 }, startTime + 0.05);
+      if (title) sec4Tl.fromTo(title, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.22 }, startTime + 0.1);
+      if (narrative) sec4Tl.fromTo(narrative, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.2 }, startTime + 0.15);
+      if (footer) sec4Tl.fromTo(footer, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.2 }, startTime + 0.2);
     };
 
     // Function to animate card out (sliding up like it's scrolling away)
     const animateCardOut = (card, startTime) => {
-      sec4Tl.to(card, { opacity: 0, y: -150, duration: 0.3 }, startTime);
+      sec4Tl.to(card, { opacity: 0, y: -40, duration: 0.25, ease: 'power1.in' }, startTime);
     };
 
-    // Sequence the cards based on the new flow
+    // Sequence the cards seamlessly across the 250vh height
     if (globeCards[0]) {
-      animateCardIn(globeCards[0], 0.1);
-      // Selesai fill di 1.1, narasi 1 naik
-      animateCardOut(globeCards[0], 1.1); 
+      animateCardIn(globeCards[0], 0.05);
+      animateCardOut(globeCards[0], 0.85);
     }
-    
+
     if (globeCards[1]) {
-      // Muncul narasi 2, tapi narasi 1 masih ada
-      animateCardIn(globeCards[1], 0.6);
-      // Scroll sedikit, narasi 2 naik jadi sisa narasi 3
-      animateCardOut(globeCards[1], 1.5);
+      animateCardIn(globeCards[1], 0.7);
+      animateCardOut(globeCards[1], 1.55);
     }
-    
+
     if (globeCards[2]) {
-      // Muncul narasi 3, narasi 2 masih ada
-      animateCardIn(globeCards[2], 1.3);
-      // Animasi akhir section 4
-      animateCardOut(globeCards[2], 1.7);
+      animateCardIn(globeCards[2], 1.4);
+      animateCardOut(globeCards[2], 2.3);
     }
   }
 

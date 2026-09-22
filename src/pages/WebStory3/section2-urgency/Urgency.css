@@ -29,6 +29,13 @@
   /* Use margin-top if needed, but flex align-items handles it */
 }
 
+/* Photo stack card wrapper inside text container */
+.urgency-photo-stack-wrapper {
+  width: 320px;
+  height: 230px;
+  margin-top: 2rem;
+}
+
 .urgency-title {
   font-family: var(--font-title);
   font-size: 5rem;
@@ -38,8 +45,6 @@
   /* Sama seperti judul section 1 */
   line-height: 1.1;
   margin-bottom: 2rem;
-  white-space: nowrap;
-  /* Memaksa teks agar selalu 1 baris */
 }
 
 /* Scroll Prompt & Arrow Wrapper */
@@ -53,13 +58,39 @@
   z-index: 20;
 }
 
+.urgency-capsule-container {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.urgency-mascot {
+  position: absolute;
+  bottom: calc(100% - 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.urgency-capsule-container:hover .urgency-mascot {
+  transform: translateX(-50%) translateY(-10px);
+}
+
 .urgency-scroll {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   gap: 1.5rem;
   padding: 0rem 2.5rem;
-  background: rgba(10, 11, 30, 0.7);
+  background: rgba(10, 11, 30, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(229, 217, 182, 0.15);
@@ -171,20 +202,171 @@
   left: 44%;
 }
 
-/* Responsiveness */
+/* Responsiveness — Tablet */
 @media (max-width: 992px) {
+  .section-urgency {
+    margin-top: 10vh;
+  }
+
   .urgency-content {
     flex-direction: column;
-    padding-top: 15vh;
+    padding-top: 10vh;
+    gap: 2rem;
+  }
+
+  .urgency-title {
+    font-size: 3rem;
+    white-space: normal;
   }
 
   .urgency-text-container {
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .urgency-text-container p {
+    font-size: 0.95rem;
+  }
+
+  .urgency-photo-stack-wrapper {
+    width: 280px;
+    height: 200px;
+    margin: 1.5rem auto 0;
   }
 
   .urgency-stack-container {
     width: 100%;
-    height: 50vh;
+    height: 55vh;
+  }
+
+  /* Recenter the stacked layers for narrower screen */
+  .layer-base {
+    top: 58%;
+    left: 18%;
+  }
+
+  .layer-ndvi {
+    top: 42%;
+    left: 19%;
+  }
+
+  .layer-ndbi {
+    top: 35%;
+    left: 20%;
+  }
+
+  .layer-ndwi {
+    top: 25%;
+    left: 22%;
+  }
+
+  .layer-lst {
+    top: 20%;
+    left: 23%;
+  }
+
+  .layer-co {
+    top: 10%;
+    left: 25%;
+  }
+
+  .layer-so2 {
+    top: 1%;
+    left: 26%;
+  }
+
+  .stack-layer {
+    width: 75%;
+  }
+
+  .urgency-mascot {
+    width: 100px;
+  }
+
+  .urgency-scroll p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsiveness — Mobile */
+@media (max-width: 576px) {
+  .urgency-title {
+    font-size: 2.2rem;
+  }
+
+  .urgency-content {
+    padding: 8vh 4% 0;
+    gap: 1.5rem;
+  }
+
+  .urgency-text-container p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .urgency-photo-stack-wrapper {
+    width: 240px;
+    height: 170px;
+    margin: 1rem auto 0;
+  }
+
+  .urgency-stack-container {
+    height: 45vh;
+  }
+
+  .stack-layer {
+    width: 90%;
+  }
+
+  /* Reposition layers to fit small screens */
+  .layer-base {
+    top: 58%;
+    left: 5%;
+  }
+
+  .layer-ndvi {
+    top: 42%;
+    left: 6%;
+  }
+
+  .layer-ndbi {
+    top: 35%;
+    left: 7%;
+  }
+
+  .layer-ndwi {
+    top: 25%;
+    left: 9%;
+  }
+
+  .layer-lst {
+    top: 20%;
+    left: 10%;
+  }
+
+  .layer-co {
+    top: 10%;
+    left: 12%;
+  }
+
+  .layer-so2 {
+    top: 1%;
+    left: 13%;
+  }
+
+  .urgency-scroll {
+    padding: 0 1.5rem;
+  }
+
+  .urgency-scroll p {
+    font-size: 0.82rem;
+  }
+
+  .urgency-mascot {
+    width: 85px;
+  }
+
+  .urgency-scroll-wrapper {
+    bottom: -15vh;
   }
 }

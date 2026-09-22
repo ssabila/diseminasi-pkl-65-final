@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import './Closing.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -98,6 +99,7 @@ export default function Closing() {
   const photosContainerRef = useRef(null);
   const quoteContainerRef = useRef(null);
   const photoCardsRef = useRef([]);
+  const backBtnRef = useRef(null);
 
   /**
    * Hover handler: moves the radial highlight to follow the cursor
@@ -143,6 +145,16 @@ export default function Closing() {
         scrub: 0.8,
         pin: true,
         anticipatePin: 1,
+        // When the user scrolls past the pin, collapse the section so it
+        // doesn't reappear in normal document flow (which would look like
+        // a duplicate closing section).
+        onLeave: () => {
+          gsap.set(s, { height: 0, minHeight: 0, overflow: 'hidden', padding: 0, margin: 0 });
+        },
+        // Restore when scrolling back up
+        onEnterBack: () => {
+          gsap.set(s, { clearProps: 'height,minHeight,overflow,padding,margin' });
+        },
       },
     });
 
@@ -217,7 +229,16 @@ export default function Closing() {
       }, '-=0.04');
     }
 
-    // Hold quote on screen
+    // Back button fade in
+    const backBtn = backBtnRef.current;
+    if (backBtn) {
+      gsap.set(backBtn, { opacity: 0, y: 15 });
+      tl.to(backBtn, {
+        opacity: 1, y: 0, duration: 0.08, ease: 'power2.out',
+      }, '-=0.02');
+    }
+
+    // Hold quote + button on screen
     tl.to({}, { duration: 0.20 });
 
   }, []);
@@ -321,6 +342,28 @@ export default function Closing() {
         <p className="closing-attribution">
           Webstory R3P · PKL 65 · Aceh, Sumut, Sumbar
         </p>
+
+        {/* Tombol Kembali ke Landing Page */}
+        <Link
+          ref={backBtnRef}
+          to="/"
+          className="closing-back-btn"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16" height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M19 12H5" />
+            <path d="m12 19-7-7 7-7" />
+          </svg>
+          <span>Kembali ke Landing Page</span>
+        </Link>
       </div>
     </section>
   );

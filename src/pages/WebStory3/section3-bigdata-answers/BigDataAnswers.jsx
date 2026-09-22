@@ -8,6 +8,13 @@ import './BigDataAnswers.css';
 // Import optimized geojson (Vite ?url query to get file path)
 import bigDataGeoJson from '../geojson-data/bigdata_kabupaten_combined.geojson?url';
 
+// Import Gundatala Mascots for each step
+import gundatala9 from '../../../assets/Grand Design/Gundatala_9.png';
+import gundatala6 from '../../../assets/Grand Design/Gundatala_6.png';
+import gundatala10 from '../../../assets/Grand Design/Gundatala_10.png';
+import gundatala8 from '../../../assets/Grand Design/Gundatala_8.png';
+import gundatala4 from '../../../assets/Grand Design/Gundatala_4.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 /**
@@ -27,27 +34,87 @@ export default function BigDataAnswers() {
     {
       id: 'step-1',
       question: 'Bagaimana bencana terjadi?',
-      description: 'Visualisasi curah hujan sebagai salah satu faktor yang dapat digunakan untuk memahami dan menganalisis penyebab terjadinya bencana.'
+      description: 'Visualisasi curah hujan sebagai salah satu faktor yang dapat digunakan untuk memahami dan menganalisis pemicu terjadinya bencana.',
+      badge: 'Satelit Presipitasi (GPM)',
+      mascot: gundatala9,
+      mascotAlt: 'Gundatala Explorer',
+      flipMascot: true,
+      legend: {
+        title: 'Curah Hujan (mm/hari)',
+        min: '0 mm',
+        max: '>100 mm',
+        gradient: 'linear-gradient(90deg, #bfdbfe, #93c5fd, #3b82f6, #1d4ed8)',
+        labels: ['Ringan', 'Sedang', 'Ekstrem']
+      },
+      insight: 'Akumulasi curah hujan ekstrem terpusat di wilayah hulu memicu luapan air ke hilir.'
     },
     {
       id: 'step-2',
       question: 'Seberapa luas dampaknya?',
-      description: 'Area terdampak bencana, sehingga pengguna dapat melihat cakupan wilayah yang terkena dampak.'
+      description: 'Area terdampak bencana, sehingga pengguna dapat melihat cakupan wilayah yang terkena dampak genangan secara presisi.',
+      badge: 'Radar SAR Sentinel-1',
+      mascot: gundatala6,
+      mascotAlt: 'Gundatala Cemas',
+      flipMascot: false,
+      legend: {
+        title: 'Estimasi Area Terdampak (Ha)',
+        min: '0 Ha',
+        max: '>20.000 Ha',
+        gradient: 'linear-gradient(90deg, #fecaca, #fca5a5, #ef4444, #b91c1c)',
+        labels: ['Rendah', 'Sedang', 'Tinggi']
+      },
+      insight: 'Citra radar SAR mampu menembus awan tebal untuk memetakan genangan aktual.'
     },
     {
       id: 'step-3',
       question: 'Siapa yang paling rentan?',
-      description: 'Kepadatan penduduk pada wilayah terdampak untuk mengidentifikasi kelompok masyarakat yang memiliki tingkat kerentanan lebih tinggi.'
+      description: 'Kepadatan penduduk pada wilayah terdampak untuk mengidentifikasi kelompok masyarakat yang memiliki tingkat kerentanan lebih tinggi.',
+      badge: 'Gridded Population',
+      mascot: gundatala10,
+      mascotAlt: 'Gundatala Menunjuk Rentan',
+      flipMascot: true,
+      legend: {
+        title: 'Kepadatan Penduduk (jiwa/km²)',
+        min: '0',
+        max: '>1.000',
+        gradient: 'linear-gradient(90deg, #fed7aa, #fdba74, #f97316, #c2410c)',
+        labels: ['Jarang', 'Sedang', 'Padat']
+      },
+      insight: 'Overlay spasial membantu mengenali kantong populasi padat di zona berisiko.'
     },
     {
       id: 'step-4',
       question: 'Wilayah mana yang harus diprioritaskan?',
-      description: 'Peta prioritas penanganan, yang menunjukkan wilayah-wilayah yang memerlukan perhatian dan intervensi lebih cepat.'
+      description: 'Peta prioritas penanganan, yang menunjukkan wilayah-wilayah yang memerlukan perhatian dan intervensi darurat lebih cepat.',
+      badge: 'Multi-Criteria Spatial Index',
+      mascot: gundatala8,
+      mascotAlt: 'Gundatala Prioritas',
+      flipMascot: true,
+      legend: {
+        title: 'Tingkat Prioritas Intervensi',
+        min: 'Rendah',
+        max: 'Sangat Mendesak',
+        gradient: 'linear-gradient(90deg, #e9d5ff, #d8b4fe, #a855f7, #7e22ce)',
+        labels: ['Normal', 'Siaga', 'Prioritas 1']
+      },
+      insight: 'Mengarahkan tim evakuasi dan logistik secara terukur pada 48 jam pertama.'
     },
     {
       id: 'step-5',
       question: 'Kapan wilayah mulai pulih?',
-      description: 'Recovery timelapse yang memperlihatkan perkembangan kondisi wilayah pascabencana dari waktu ke waktu.'
+      description: 'Recovery timelapse yang memperlihatkan perkembangan kondisi vegetasi dan wilayah pascabencana dari waktu ke waktu.',
+      badge: 'Optik Satelit Sentinel-2 (NDVI)',
+      mascot: gundatala4,
+      mascotAlt: 'Gundatala Pemulihan',
+      flipMascot: true,
+      legend: {
+        title: 'Indeks Kehijauan Vegetasi (NDVI)',
+        min: '0.6',
+        max: '0.9+',
+        gradient: 'linear-gradient(90deg, #bbf7d0, #86efac, #22c55e)',
+        labels: ['Mulai Pulih', 'Stabil', 'Optimal']
+      },
+      insight: 'Pemantauan berkala memastikan ekosistem dan sosial-ekonomi berangsur normal.'
     }
   ];
 
@@ -118,8 +185,8 @@ export default function BigDataAnswers() {
     tl.to(proxy, { l3_z: 0, l3_op: 0, duration: 0.5, ease: 'power1.in', onUpdate: () => updateLayer(3, proxy.l3_z, proxy.l3_op) }, 3.5);
     tl.to(proxy, { l4_z: stackZ, l4_op: 1, duration: 0.5, ease: 'power1.out', onUpdate: () => updateLayer(4, proxy.l4_z, proxy.l4_op) }, 4.0);
 
-    // End: Layer 5 goes down (4.5 to 5.0) to clean up before leaving section
-    tl.to(proxy, { l4_z: 0, l4_op: 0, duration: 0.5, ease: 'power1.in', onUpdate: () => updateLayer(4, proxy.l4_z, proxy.l4_op) }, 4.5);
+    // End: Layer 5 goes down right as we transition to Section 4 (4.8 to 5.0)
+    tl.to(proxy, { l4_z: 0, l4_op: 0, duration: 0.2, ease: 'power1.in', onUpdate: () => updateLayer(4, proxy.l4_z, proxy.l4_op) }, 4.8);
 
   }, { dependencies: [mapReady, map, layersAdded], scope: sectionRef });
 
@@ -252,22 +319,59 @@ export default function BigDataAnswers() {
 
   return (
     <section ref={sectionRef} id="section3-bigdataanswers" className="section section-bigdataanswers">
+      {/* Panel Pinned dengan Kartu Zig-Zag (Kanan - Kiri Bergantian) */}
+      <div className="bigdata-panel-pinned" id="bigdata-panel">
+        <div className="bigdata-cards-container">
+          {steps.map((step, index) => {
+            const isRight = index % 2 === 0;
+            return (
+              <div
+                key={step.id}
+                className={`bigdata-card ${isRight ? 'pos-right' : 'pos-left'}`}
+                id={`bigdata-card-${index + 1}`}
+              >
+                {/* Top Meta: Tech Badge */}
+                <div className="card-meta-top">
+                  <div className="card-tech-badge">{step.badge}</div>
+                </div>
 
-      {/* Kiri: Area Kosong untuk Mapbox */}
-      <div className="bigdata-map-area"></div>
-
-      {/* Kanan: Panel Pertanyaan yang di-Pin */}
-      <div className="bigdata-content-area">
-        <div className="bigdata-panel-pinned" id="bigdata-panel">
-          <div className="bigdata-cards-container">
-            {steps.map((step, index) => (
-              <div key={step.id} className="bigdata-card" id={`bigdata-card-${index + 1}`}>
-                <div className="step-indicator">Tahap {index + 1}</div>
+                {/* Question & Description */}
                 <h2 className="bigdata-question">{step.question}</h2>
                 <p className="bigdata-description">{step.description}</p>
+
+                {/* Color Legend Bar */}
+                <div className="card-legend-box">
+                  <div className="card-legend-title">{step.legend.title}</div>
+                  <div
+                    className="card-legend-bar"
+                    style={{ background: step.legend.gradient }}
+                  ></div>
+                  <div className="card-legend-labels">
+                    <span>{step.legend.min} ({step.legend.labels[0]})</span>
+                    <span>{step.legend.labels[1]}</span>
+                    <span>{step.legend.max} ({step.legend.labels[2]})</span>
+                  </div>
+                </div>
+
+                {/* Actionable Insight Box dengan Maskot Berbicara & Tanda Tanya */}
+                <div className="card-insight-container">
+                  <div className="insight-mascot-wrapper">
+                    <span className="mascot-question-mark mark-left" aria-hidden="true">?</span>
+                    <span className="mascot-question-mark mark-right" aria-hidden="true">?</span>
+                    <img
+                      src={step.mascot}
+                      alt={step.mascotAlt}
+                      className={`insight-mascot-img ${step.flipMascot ? 'flip-mascot' : ''}`}
+                    />
+                  </div>
+                  <div className="card-insight-speech-bubble">
+                    {step.insight}
+                  </div>
+                </div>
+
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -68,6 +68,7 @@ const STORY_STAGES = [
     badge: '🛰️ Modul 3 · Citra Satelit',
     activeProv: '',
     camera: { lng: 98.2, lat: 1.8, zoom: 6.2, pitch: 30, bearing: -5 },
+    mobileCamera: { lng: 98.6, lat: 1.5, zoom: 5.0, pitch: 25, bearing: 0 },
   },
   {
     step: 2,
@@ -81,6 +82,7 @@ const STORY_STAGES = [
     badge: '📡 Sentinel-1 & Landsat-8',
     activeProv: '',
     camera: { lng: 98.0, lat: 2.3, zoom: 6.5, pitch: 35, bearing: -8 },
+    mobileCamera: { lng: 98.2, lat: 2.0, zoom: 5.3, pitch: 25, bearing: -5 },
   },
   {
     step: 3,
@@ -94,6 +96,7 @@ const STORY_STAGES = [
     badge: '📍 Aceh Tengah & Selatan',
     activeProv: 'ACEH',
     camera: { lng: 96.6, lat: 4.5, zoom: 7.7, pitch: 42, bearing: -10 },
+    mobileCamera: { lng: 96.6, lat: 4.5, zoom: 6.5, pitch: 30, bearing: -5 },
   },
   {
     step: 4,
@@ -107,6 +110,7 @@ const STORY_STAGES = [
     badge: '📍 Tapanuli Utara & Karo',
     activeProv: 'SUMATERA UTARA',
     camera: { lng: 98.4, lat: 2.8, zoom: 7.7, pitch: 44, bearing: -10 },
+    mobileCamera: { lng: 98.4, lat: 2.8, zoom: 6.5, pitch: 30, bearing: -5 },
   },
   {
     step: 5,
@@ -120,6 +124,7 @@ const STORY_STAGES = [
     badge: '📍 Agam & Lembah Anai',
     activeProv: 'SUMATERA BARAT',
     camera: { lng: 100.2, lat: -0.6, zoom: 7.8, pitch: 45, bearing: 6 },
+    mobileCamera: { lng: 100.2, lat: -0.6, zoom: 6.5, pitch: 30, bearing: 0 },
   },
 ];
 
@@ -396,10 +401,13 @@ export default function InsightDamage() {
 
       setCurrentStageIndex(stageIndex);
 
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 992;
+      const getCam = (stg) => (isMobile && stg.mobileCamera ? stg.mobileCamera : stg.camera);
+
       // Smooth camera interpolation between current and next stage
       const nextStage = STORY_STAGES[Math.min(stageIndex + 1, STORY_STAGES.length - 1)];
-      const cam = stage.camera;
-      const nextCam = nextStage.camera;
+      const cam = getCam(stage);
+      const nextCam = getCam(nextStage);
 
       const interpLng = lerp(cam.lng, nextCam.lng, stageProgress);
       const interpLat = lerp(cam.lat, nextCam.lat, stageProgress);

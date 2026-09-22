@@ -34,11 +34,11 @@ export default function InsightNTL() {
     }
 
     // Bersihkan layer lama agar selalu ter-render bersih
-    ['ntl-sebelum-heatmap', 'ntl-sesudah-heatmap', 
-     'ntl-sebelum-layer', 'ntl-sebelum-outline', 
-     'ntl-sesudah-layer', 'ntl-sesudah-outline'].forEach(id => {
-      if (map.getLayer(id)) map.removeLayer(id);
-    });
+    ['ntl-sebelum-heatmap', 'ntl-sesudah-heatmap',
+      'ntl-sebelum-layer', 'ntl-sebelum-outline',
+      'ntl-sesudah-layer', 'ntl-sesudah-outline'].forEach(id => {
+        if (map.getLayer(id)) map.removeLayer(id);
+      });
 
     // ── A. RASTER GRID SEBELUM BENCANA (Cahaya Terang & Hangat Menutupi Seluruh Wilayah Fokus) ──
     map.addLayer({
@@ -257,7 +257,6 @@ export default function InsightNTL() {
         <span className="ntl-phase-label ntl-label-after">Pascabencana • Intensitas Cahaya Meredup (Blackout)</span>
 
         <div className="insight-content glass-card">
-          <span className="insight-subtitle">Section 6: Modul 4 &amp; 5</span>
           <h2 className="insight-title">Saat Cahaya<br />Meredup</h2>
           <p className="insight-narrative">
             Tidak semua dampak bencana terlihat secara langsung. Perubahan intensitas
