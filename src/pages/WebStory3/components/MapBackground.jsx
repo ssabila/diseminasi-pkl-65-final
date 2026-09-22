@@ -31,7 +31,7 @@ export default function MapBackground({ onMapLoad }) {
     try {
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: 'mapbox://styles/gitraya1400/cmq40zowb006p01s36hi56mpa',
+        style: 'mapbox://styles/mapbox/dark-v11',
         projection: 'globe',
         zoom: 1.5,
         center: [100, -2],

@@ -33,7 +33,7 @@ export const SharedMapProvider = ({ children }) => {
     try {
       map = new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: 'mapbox://styles/gitraya1400/cmq40zowb006p01s36hi56mpa',
+        style: 'mapbox://styles/mapbox/dark-v11',
         center: [99.8, 2.2], // Shared center point for all modules
         zoom: 6.1,
         pitch: 30,
