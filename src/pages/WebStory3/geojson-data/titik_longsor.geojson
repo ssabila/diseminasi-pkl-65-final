@@ -6,15 +6,17 @@
       "properties": {
         "nama": "Longsor Aceh Tengah",
         "kabupaten": "Aceh Tengah",
+        "prov": "ACEH",
         "korban": 5,
         "tanggal": "2024-03-12",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Sangat Tinggi"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
           96.85,
-          4.52
+          4.62
         ]
       }
     },
@@ -23,15 +25,36 @@
       "properties": {
         "nama": "Longsor Aceh Selatan",
         "kabupaten": "Aceh Selatan",
+        "prov": "ACEH",
         "korban": 2,
         "tanggal": "2024-04-01",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Tinggi"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          97.57,
-          3.16
+          97.35,
+          3.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Longsor Pidie",
+        "kabupaten": "Pidie",
+        "prov": "ACEH",
+        "korban": 3,
+        "tanggal": "2024-02-14",
+        "tipe": "longsor",
+        "severity": "Tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          95.95,
+          5.15
         ]
       }
     },
@@ -40,15 +63,17 @@
       "properties": {
         "nama": "Longsor Tapanuli Utara",
         "kabupaten": "Tapanuli Utara",
+        "prov": "SUMATERA UTARA",
         "korban": 8,
         "tanggal": "2024-02-20",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Sangat Tinggi"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          99.06,
-          2.15
+          98.98,
+          2.02
         ]
       }
     },
@@ -57,66 +82,17 @@
       "properties": {
         "nama": "Longsor Tapanuli Selatan",
         "kabupaten": "Tapanuli Selatan",
+        "prov": "SUMATERA UTARA",
         "korban": 3,
         "tanggal": "2024-01-15",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Sedang"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          99.37,
+          99.25,
           1.48
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "nama": "Longsor Padang Pariaman",
-        "kabupaten": "Padang Pariaman",
-        "korban": 12,
-        "tanggal": "2024-03-28",
-        "tipe": "longsor"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.12,
-          -0.56
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "nama": "Longsor Agam",
-        "kabupaten": "Agam",
-        "korban": 6,
-        "tanggal": "2024-05-02",
-        "tipe": "longsor"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.36,
-          -0.24
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "nama": "Longsor Solok",
-        "kabupaten": "Solok",
-        "korban": 4,
-        "tanggal": "2024-05-08",
-        "tipe": "longsor"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.65,
-          -0.79
         ]
       }
     },
@@ -125,14 +101,16 @@
       "properties": {
         "nama": "Longsor Karo",
         "kabupaten": "Karo",
+        "prov": "SUMATERA UTARA",
         "korban": 1,
         "tanggal": "2024-04-17",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Sedang"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          98.46,
+          98.5,
           3.12
         ]
       }
@@ -142,49 +120,17 @@
       "properties": {
         "nama": "Longsor Dairi",
         "kabupaten": "Dairi",
+        "prov": "SUMATERA UTARA",
         "korban": 7,
         "tanggal": "2024-03-05",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Tinggi"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          98.32,
-          2.71
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "nama": "Longsor Pasaman Barat",
-        "kabupaten": "Pasaman Barat",
-        "korban": 15,
-        "tanggal": "2024-01-30",
-        "tipe": "longsor"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.84,
-          0.09
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "nama": "Longsor Pidie",
-        "kabupaten": "Pidie",
-        "korban": 3,
-        "tanggal": "2024-02-14",
-        "tipe": "longsor"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.2,
-          4.1
+          98.3,
+          2.75
         ]
       }
     },
@@ -193,49 +139,17 @@
       "properties": {
         "nama": "Longsor Langkat",
         "kabupaten": "Langkat",
+        "prov": "SUMATERA UTARA",
         "korban": 9,
         "tanggal": "2024-03-22",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Sangat Tinggi"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          98.1,
-          3.55
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "nama": "Longsor Sijunjung",
-        "kabupaten": "Sijunjung",
-        "korban": 2,
-        "tanggal": "2024-04-08",
-        "tipe": "longsor"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          101.1,
-          -1.5
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "nama": "Longsor Solok Selatan",
-        "kabupaten": "Solok Selatan",
-        "korban": 6,
-        "tanggal": "2024-02-28",
-        "tipe": "longsor"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.55,
-          -1.1
+          98.35,
+          3.75
         ]
       }
     },
@@ -244,15 +158,131 @@
       "properties": {
         "nama": "Longsor Mandailing Natal",
         "kabupaten": "Mandailing Natal",
+        "prov": "SUMATERA UTARA",
         "korban": 11,
         "tanggal": "2024-01-20",
-        "tipe": "longsor"
+        "tipe": "longsor",
+        "severity": "Sangat Tinggi"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          99.5,
-          1.8
+          99.56,
+          0.86
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Longsor Padang Pariaman",
+        "kabupaten": "Padang Pariaman",
+        "prov": "SUMATERA BARAT",
+        "korban": 12,
+        "tanggal": "2024-03-28",
+        "tipe": "longsor",
+        "severity": "Sangat Tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.2,
+          -0.58
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Longsor Agam",
+        "kabupaten": "Agam",
+        "prov": "SUMATERA BARAT",
+        "korban": 6,
+        "tanggal": "2024-05-02",
+        "tipe": "longsor",
+        "severity": "Galodo Marapi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.3,
+          -0.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Longsor Solok",
+        "kabupaten": "Solok",
+        "prov": "SUMATERA BARAT",
+        "korban": 4,
+        "tanggal": "2024-05-08",
+        "tipe": "longsor",
+        "severity": "Tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.65,
+          -0.8
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Longsor Pasaman Barat",
+        "kabupaten": "Pasaman Barat",
+        "prov": "SUMATERA BARAT",
+        "korban": 15,
+        "tanggal": "2024-01-30",
+        "tipe": "longsor",
+        "severity": "Sangat Kritis"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.85,
+          0.15
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Longsor Sijunjung",
+        "kabupaten": "Sijunjung",
+        "prov": "SUMATERA BARAT",
+        "korban": 2,
+        "tanggal": "2024-04-08",
+        "tipe": "longsor",
+        "severity": "Sedang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.95,
+          -0.7
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "Longsor Solok Selatan",
+        "kabupaten": "Solok Selatan",
+        "prov": "SUMATERA BARAT",
+        "korban": 6,
+        "tanggal": "2024-02-28",
+        "tipe": "longsor",
+        "severity": "Tinggi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.25,
+          -1.45
         ]
       }
     }

@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 .env
+src/pages/WebStory3/geojson-data/Assets/modul2_skor-resiko.json

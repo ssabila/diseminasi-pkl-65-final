@@ -18,6 +18,8 @@ import h2 from '../../../assets/images/huntara-16.webp';
 import h3 from '../../../assets/images/huntara-18.webp';
 import h4 from '../../../assets/images/huntara-13.webp';
 
+import gundatalaImg from '../../../assets/Grand Design/Gundatala_3.png';
+
 /**
  * Section 2 — Mengapa Big Data?
  */
@@ -48,7 +50,7 @@ export default function Urgency() {
           <p>Saat bencana terjadi, informasi harus tersedia dengan cepat. Data lapangan tetap penting, tetapi membutuhkan waktu dan jangkauan yang terbatas.</p>
           <p><span style={{ fontWeight: '600', color: '#e67e22' }}><b>Big Data</b></span> membantu melengkapi informasi tersebut melalui citra satelit dan berbagai data geospasial yang dapat menggambarkan kondisi suatu wilayah secara lebih luas dan berkelanjutan.</p>
 
-          <div style={{ width: '220px', height: '220px', margin: '0rem auto 0rem auto', zIndex: 10 }}>
+          <div className="urgency-photo-stack-wrapper">
             <Stack
               randomRotation={true}
               sensitivity={180}
@@ -82,9 +84,16 @@ export default function Urgency() {
 
       {/* Scroll Prompt ditaruh di luar agar bisa persis di tengah halaman bawah */}
       <div className="urgency-scroll-wrapper">
-        <div className="urgency-scroll">
-          <p>Lalu, <span style={{ fontWeight: '600', color: '#e67e22' }}><b>apa yang bisa kita pelajari</b></span> dari data-data tersebut?</p>
-          <div className="scroll-arrow">↓</div>
+        <div className="urgency-capsule-container">
+          <img
+            src={gundatalaImg}
+            alt="Mascot Gundatala"
+            className="urgency-mascot"
+          />
+          <div className="urgency-scroll">
+            <p>Lalu, <span style={{ fontWeight: '600', color: '#e67e22' }}><b>apa yang bisa kita pelajari</b></span> dari data-data tersebut?</p>
+            <div className="scroll-arrow">↓</div>
+          </div>
         </div>
       </div>
     </section>
