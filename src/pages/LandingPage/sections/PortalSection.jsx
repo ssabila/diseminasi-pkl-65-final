@@ -113,8 +113,6 @@ const Content = () => {
     )
 }
 
-
-
 const DESTINATION_ITEMS = [
     {
         num: 1,
@@ -131,7 +129,7 @@ const DESTINATION_ITEMS = [
         tag: "Komparasi Regional",
         copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         accent: "var(--gold)",
-        href: "#",
+        href: "/web-story-1",
         delay: 0.18,
     },
     {
@@ -140,7 +138,7 @@ const DESTINATION_ITEMS = [
         tag: "Rekonstruksi Infrastruktur",
         copy: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         accent: "var(--gold)",
-        href: "#",
+        href: "https://pkl-65-dashboard.vercel.app/",
         delay: 0.30,
         id: "riset-3",
     },

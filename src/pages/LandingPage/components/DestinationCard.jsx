@@ -10,10 +10,8 @@ export function DestinationCard({
         if (!torn) {
             e.preventDefault();
             setTorn(true);
-            
-            setTimeout(() => {
-                window.location.href = href;
-            }, 1200);
+
+            window.open(href, "_blank", "noopener,noreferrer");
 
             setTimeout(() => {
                 setTorn(false);
@@ -202,23 +200,25 @@ export function DestinationCard({
 
                 <a
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
-                        background: hov ? accent : "rgba(255, 255, 255, 0.03)",
-                        borderColor: hov ? accent : accent + "55",
-                        boxShadow: hov ? `0 8px 20px ${accent}40` : "none",
+                        background: hov ? "#7dd3fc" : "rgba(255, 255, 255, 0.03)",
+                        borderColor: hov ? "#7dd3fc" : accent + "55",
+                        boxShadow: hov ? "0 8px 20px rgba(125, 211, 252, 0.35)" : "none",
                     }}
                     className="relative flex items-stretch rounded-[10px] border border-solid no-underline overflow-hidden transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 >
                     <div
                         style={{
-                            background: hov ? "rgba(0,0,0,0.12)" : accent + "18",
-                            borderRight: `1px dashed ${hov ? "rgba(0,0,0,0.2)" : accent + "44"}`,
+                            background: hov ? "rgba(255,255,255,0.16)" : accent + "18",
+                            borderRight: `1px dashed ${hov ? "rgba(255,255,255,0.55)" : accent + "44"}`,
                         }}
                         className="py-[10px] px-3 flex flex-col justify-center items-center min-w-[75px] transition-colors duration-300"
                     >
                         <span
                             style={{
-                                color: hov ? "var(--navy-deep, #0f172a)" : accent,
+                                color: hov ? "#ffffff" : accent,
                             }}
                             className="text-[7px] tracking-[0.15em] uppercase font-bold"
                         >
@@ -226,7 +226,7 @@ export function DestinationCard({
                         </span>
                         <span
                             style={{
-                                color: hov ? "var(--navy-deep, #0f172a)" : "rgba(243,234,210,0.6)",
+                                color: hov ? "#ffffff" : "rgba(243,234,210,0.6)",
                             }}
                             className="text-[9px] tracking-[0.1em] font-medium"
                         >
@@ -238,7 +238,7 @@ export function DestinationCard({
                         <span
                             style={{
                                 fontFamily: "var(--font-title)",
-                                color: hov ? "var(--navy-deep, #0f172a)" : "var(--cream, #f3ead2)",
+                                color: hov ? "#ffffff" : "var(--cream, #f3ead2)",
                             }}
                             className="italic text-[clamp(11px,1.05vw,13px)] font-bold tracking-[0.02em] transition-colors duration-300"
                         >
@@ -247,7 +247,7 @@ export function DestinationCard({
 
                         <div
                             style={{
-                                color: hov ? "var(--navy-deep, #0f172a)" : accent,
+                                color: hov ? "#ffffff" : accent,
                                 transform: hov ? "translateX(4px)" : "translateX(0)",
                             }}
                             className="flex items-center gap-1.5 transition-[transform,color] duration-300"
