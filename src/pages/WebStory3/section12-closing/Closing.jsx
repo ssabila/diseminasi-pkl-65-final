@@ -5,83 +5,86 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import './Closing.css';
 
+// 6 asset foto dokumentasi huntara untuk penutup
+import huntara05 from '../../../assets/images/huntara-05.webp';
+import huntara06 from '../../../assets/images/huntara-06.webp';
+import huntara09 from '../../../assets/images/huntara-09.webp';
+import huntara18 from '../../../assets/images/huntara-18.webp';
+import huntara19 from '../../../assets/images/huntara-19.webp';
+import huntara20 from '../../../assets/images/huntara-20.webp';
+
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Scattered photo layout — positioned to match reference design (6 photos).
- * Each slot has: position (left, top), width, rotation, z-index, and aspect ratio.
- *
- * The user will supply actual images. Until then we render placeholder boxes
- * with a label describing what photo goes where.
- *
- * PHOTO FILES NEEDED (place in ./assets/):
- *   1. photo1.jpg — "Tim riset lapangan / foto bersama" (left-bottom area)
- *   2. photo2.jpg — "Foto bersama besar / grup PKL" (top-center area)
- *   3. photo3.jpg — "Wawancara warga / pendataan" (right-top area)
- *   4. photo4.jpg — "Kondisi lapangan / reruntuhan bencana" (left-bottom row)
- *   5. photo5.jpg — "Mahasiswa survei / pendataan lapangan" (center-bottom row)
- *   6. photo6.jpg — "Wawancara di teras / interaksi warga" (right-bottom row)
+ * Scattered photo layout (6 photos).
+ * Each slot has: position (left, top), width, aspect ratio, rotation, z-index, and source image.
  */
 const PHOTOS = [
   {
     id: 1,
-    src: null, // will be replaced with: new URL('./assets/photo1.jpg', import.meta.url).href
+    src: huntara05,
     left: '3%',
-    top: '8%',
-    width: 220,
+    top: '5%',
+    width: 250,
+    aspectRatio: '16 / 10',
     z: 2,
-    rotate: -8,
-    label: 'Tim Riset Lapangan',
+    rotate: -6,
+    label: 'Dokumentasi Huntara 05',
   },
   {
     id: 2,
-    src: null,
-    left: '28%',
+    src: huntara06,
+    left: '34%',
     top: '-2%',
-    width: 260,
+    width: 285,
+    aspectRatio: '4 / 3',
     z: 4,
-    rotate: 4,
-    label: 'Foto Bersama Grup',
+    rotate: 3,
+    label: 'Dokumentasi Huntara 06',
   },
   {
     id: 3,
-    src: null,
-    left: '56%',
-    top: '5%',
-    width: 250,
+    src: huntara09,
+    left: '68%',
+    top: '4%',
+    width: 255,
+    aspectRatio: '16 / 10',
     z: 3,
-    rotate: -3,
-    label: 'Wawancara Warga',
+    rotate: -4,
+    label: 'Dokumentasi Huntara 09',
   },
   {
     id: 4,
-    src: null,
-    left: '8%',
-    top: '50%',
-    width: 210,
+    src: huntara18,
+    left: '5%',
+    top: '49%',
+    width: 250,
+    aspectRatio: '4 / 3',
     z: 2,
     rotate: 5,
-    label: 'Kondisi Bencana',
+    label: 'Dokumentasi Huntara 18',
   },
   {
     id: 5,
-    src: null,
-    left: '32%',
-    top: '52%',
-    width: 230,
+    src: huntara19,
+    left: '36%',
+    top: '48%',
+    width: 275,
+    aspectRatio: '4 / 3',
     z: 3,
-    rotate: -2,
-    label: 'Pendataan Lapangan',
+    rotate: -3,
+    label: 'Dokumentasi Huntara 19',
   },
   {
     id: 6,
-    src: null,
-    left: '56%',
-    top: '48%',
-    width: 240,
+    src: huntara20,
+    left: '69%',
+    top: '43%',
+    width: 230,
+    aspectRatio: '3 / 4',
     z: 2,
     rotate: 6,
-    label: 'Interaksi Warga',
+    label: 'Dokumentasi Huntara 20',
   },
 ];
 
@@ -129,10 +132,12 @@ export default function Closing() {
 
     // Stagger each photo card's initial state
     cards.forEach((card, i) => {
+      const rot = PHOTOS[i]?.rotate || 0;
       gsap.set(card, {
         opacity: 0,
         y: 40 + i * 10,
         scale: 0.9,
+        rotation: rot,
       });
     });
 
@@ -172,10 +177,12 @@ export default function Closing() {
 
     // Stagger individual cards
     cards.forEach((card, i) => {
+      const rot = PHOTOS[i]?.rotate || 0;
       tl.to(card, {
         opacity: 1,
         y: 0,
         scale: 1,
+        rotation: rot,
         duration: 0.08,
         ease: 'power2.out',
       }, 0.04 + i * 0.015);
@@ -283,6 +290,7 @@ export default function Closing() {
                 left: photo.left,
                 top: photo.top,
                 width: `${photo.width}px`,
+                aspectRatio: photo.aspectRatio,
                 zIndex: photo.z,
                 '--card-rotate': `${photo.rotate}deg`,
               }}

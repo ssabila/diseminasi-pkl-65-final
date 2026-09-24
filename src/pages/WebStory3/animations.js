@@ -282,7 +282,7 @@ export const animateWebStory3 = (container, map) => {
     // Transisi kamera map yang proporsional di desktop & mobile
     const sec4TargetCamera = isMobile
       ? { zoom: 4.8, lng: 98.6, lat: 1.2, pitch: 25, bearing: 0 }
-      : { zoom: 6.0, lng: 99.4, lat: 2.0, pitch: 35, bearing: -14 };
+      : { zoom: 6.0, lng: 98.2, lat: 2.0, pitch: 35, bearing: -14 };
 
     sec4Tl.to(mapProxy, {
       ...sec4TargetCamera,

@@ -264,6 +264,7 @@
   font-family: var(--font-title);
   font-style: italic;
   font-size: 0.88rem;
+  text-decoration: none;
   cursor: pointer;
   transition:
     background 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -273,6 +274,15 @@
   align-self: flex-start;
   position: relative;
   overflow: hidden;
+  user-select: none;
+}
+
+.module-card-btn:visited,
+.module-card-btn:focus,
+.module-card-btn:active {
+  color: rgba(229, 217, 182, 0.85);
+  text-decoration: none;
+  outline: none;
 }
 
 /* Subtle inner light on default state */
@@ -295,6 +305,7 @@
   background: rgba(229, 217, 182, 0.92);
   color: var(--navy);
   border-color: rgba(229, 217, 182, 0.6);
+  text-decoration: none;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.4),
     0 0 20px 3px rgba(255, 255, 255, 0.3),
