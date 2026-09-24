@@ -29,48 +29,56 @@ const MODULES = [
     title: 'Karakteristik Fisik & Kondisi Lingkungan',
     type: 'Dashboard',
     desc: 'Menyediakan konteks medan wilayah sebelum bencana terjadi. Modul ini bersifat statis/semi-statis dan berfungsi sebagai latar belakang analisis, menjelaskan mengapa suatu wilayah lebih rentan secara fisik dibanding wilayah lain.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-1',
   },
   {
     id: 2,
     title: 'Monitoring Potensi Bahaya (Pemicu Bencana)',
     type: 'Dashboard',
     desc: 'Menangkap pemicu bencana banjir dan longsor secara near real-time.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-2',
   },
   {
     id: 3,
     title: 'Lokasi & Estimasi Skala Genangan',
     type: 'Dashboard',
     desc: 'Menghasilkan peta lokasi dan skala genangan banjir.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-3',
   },
   {
     id: 4,
     title: 'Kerentanan Wilayah',
     type: 'Dashboard',
     desc: 'Mengidentifikasi siapa yang tinggal di area terdampak dan seberapa rentan mereka.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-4',
   },
   {
     id: 5,
     title: 'Analisis Dampak & Logistik',
     type: 'Webstory',
     desc: 'Mengkuantifikasi apa yang rusak dan menganalisis bagaimana bantuan bisa mencapai korban.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-5',
   },
   {
     id: 6,
     title: 'Prioritas Wilayah Penanganan',
     type: 'Dashboard',
     desc: 'Menyatukan seluruh informasi dari modul sebelumnya menjadi satu skor prioritas.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-6',
   },
   {
     id: 7,
     title: 'Kronologi & Perbandingan Lintas Kejadian',
     type: 'Webstory',
     desc: 'Menyajikan dimensi waktu dari kejadian bencana, dari sinyal awal, fase aktif, hingga surut, dan memungkinkan perbandingan lintas kejadian historis.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-7',
   },
   {
     id: 8,
     title: 'Pemantauan Pemulihan Pasca-Bencana',
     type: 'Webstory',
     desc: 'Memantau sejauh mana wilayah terdampak telah pulih pasca-bencana, dari sisi ekosistem, ekonomi, dan infrastruktur.',
+    url: 'https://pkl-65-dashboard.vercel.app/modules/module-8',
   },
 ];
 
@@ -101,8 +109,10 @@ export default function ModuleMenu() {
     // All cards: off-screen left, invisible, scaled down
     gsap.set(cards, {
       xPercent: -20,
-      opacity: 0,
+      autoAlpha: 0,
       scale: 0.88,
+      pointerEvents: 'none',
+      zIndex: 1,
     });
 
     // Header: hidden initially
@@ -146,8 +156,10 @@ export default function ModuleMenu() {
       // Enter from left → center
       tl.to(card, {
         xPercent: 0,
-        opacity: 1,
+        autoAlpha: 1,
         scale: 1,
+        pointerEvents: 'auto',
+        zIndex: 5,
         duration: cardDuration * 0.30,
         ease: 'power2.out',
       }, startTime);
@@ -158,8 +170,10 @@ export default function ModuleMenu() {
       if (i < cards.length - 1) {
         tl.to(card, {
           xPercent: 20,
-          opacity: 0,
+          autoAlpha: 0,
           scale: 0.85,
+          pointerEvents: 'none',
+          zIndex: 1,
           duration: cardDuration * 0.30,
           ease: 'power2.in',
         }, startTime + cardDuration * 0.70);
@@ -169,9 +183,11 @@ export default function ModuleMenu() {
     /* ── Phase 9: Last card fade out ── */
     const lastStart = cardStartOffset + (cards.length - 1) * cardDuration;
     tl.to(cards[cards.length - 1], {
-      opacity: 0,
+      autoAlpha: 0,
       scale: 0.85,
       xPercent: 10,
+      pointerEvents: 'none',
+      zIndex: 1,
       duration: 0.04,
       ease: 'power2.in',
     }, lastStart + cardDuration * 0.85);
@@ -276,7 +292,12 @@ export default function ModuleMenu() {
                   {mod.type} {mod.title}
                 </h3>
                 <p className="module-card-desc">{mod.desc}</p>
-                <button className="module-card-btn">
+                <a
+                  href={mod.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="module-card-btn"
+                >
                   <span>Lihat Modul</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -291,7 +312,7 @@ export default function ModuleMenu() {
                     <path d="M7 7h10v10" />
                     <path d="M7 17 17 7" />
                   </svg>
-                </button>
+                </a>
               </div>
             </div>
           </div>
