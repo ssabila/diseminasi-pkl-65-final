@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import gsap from "../../../utils/gsapConfig";
+import gsap from "../../utils/gsapConfig";
 
 export default function PlaneSeparator() {
     const containerRef = useRef(null);
@@ -59,7 +59,7 @@ export default function PlaneSeparator() {
                             scrollTrigger: {
                                 trigger: '.plane-transition-trigger',
                                 start: 'top+2vh 90%',
-                                end: '+=150%',
+                                end: 'bottom top',
                                 scrub: 2,
                             },
                         })
@@ -127,7 +127,7 @@ export default function PlaneSeparator() {
     return (
         <div
             ref={con}
-            className="fixed inset-0 w-screen h-screen z-40 pointer-events-none flex items-center justify-center"
+            className="fixed inset-0 w-screen max-lg:translate-0 h-screen z-40 pointer-events-none flex items-center justify-center"
         >
 
             <div

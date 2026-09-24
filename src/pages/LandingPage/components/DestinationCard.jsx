@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export function DestinationCard({
     num, region, tag, copy, accent, href, delay = 0, id,
 }) {
     const [hov, setHov] = useState(false);
     const [torn, setTorn] = useState(false);
-
+    const router = useNavigate();
     const handleCardClick = (e) => {
         if (!torn) {
             e.preventDefault();
             setTorn(true);
 
-            window.open(href, "_blank", "noopener,noreferrer");
+            setTimeout(() => {
+                if (href.startsWith("http")) {
+                    window.location.href = href;
+                } else {
+                    router(href);
+                }
+            }, 1200);
 
             setTimeout(() => {
                 setTorn(false);
@@ -19,12 +26,13 @@ export function DestinationCard({
         }
     };
 
+
     return (
         <div
             onMouseEnter={() => setHov(true)}
             onMouseLeave={() => setHov(false)}
             onClick={handleCardClick}
-            className="relative flex flex-col bg-transparent overflow-visible cursor-pointer"
+            className="relative flex flex-col bg-transparent overflow-visible cursor-pointer select-none"
         >
             {/* ── BAGIAN ATAS ── */}
             <div
@@ -51,7 +59,7 @@ export function DestinationCard({
 
                 {/* Ticket header row */}
                 <div className="flex items-center justify-between px-5 pt-[14px] pb-[10px] border-b border-[rgba(243,234,210,0.06)]">
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                         <div
                             style={{
                                 background: accent + "22",
@@ -70,6 +78,14 @@ export function DestinationCard({
                             </div>
                             
                         </div>
+                    </div> */}
+                    <div style={{
+                        fontFamily: "var(--font-title)",
+                        color: accent,
+                        opacity: hov ? 1 : 0.45,
+                    }} className="text-[clamp(28px,3vw,40px)] font-black leading-none tracking-[-0.04em] transition-opacity duration-350"
+                    >
+                        Riset
                     </div>
                     <span
                         style={{
@@ -88,16 +104,16 @@ export function DestinationCard({
                     <div className="flex items-center gap-2.5">
                         <div className="flex flex-col gap-0.5">
                             <span className="text-[8px] tracking-[0.18em] uppercase text-[rgba(243,234,210,0.35)] font-light">
-                                Dari
+                                From
                             </span>
                             <span
                                 style={{ fontFamily: "var(--font-content)" }}
                                 className="text-[clamp(15px,1.8vw,20px)] font-bold text-[var(--cream,#f3ead2)] tracking-[0.05em]"
                             >
-                                JKT
+                                {num === 2 ? "HLP" : num === 3 ? "CGK" : "CGK"}
                             </span>
                             <span className="text-[9px] text-[rgba(243,234,210,0.4)] font-light">
-                                Jakarta / BPS
+                                {num === 2 ? "Halim Perdana Kusuma" : num === 3 ? "Soekarno-Hatta" : "Soekarno-Hatta"}
                             </span>
                         </div>
 
@@ -113,16 +129,16 @@ export function DestinationCard({
 
                         <div className="flex flex-col gap-0.5 items-end">
                             <span className="text-[8px] tracking-[0.18em] uppercase text-[rgba(243,234,210,0.35)] font-light">
-                                Tujuan
+                                Destination
                             </span>
                             <span
                                 style={{ fontFamily: "var(--font-content)" }}
                                 className="text-[clamp(15px,1.8vw,20px)] font-bold text-[var(--cream,#f3ead2)] tracking-[0.05em]"
                             >
-                                {num === 1 ? "ACE" : num === 2 ? "MES" : "PDG"}
+                                {num === 2 ? "BTJ" : num === 3 ? "DTB" : "BIM"}
                             </span>
                             <span className="text-[9px] text-[rgba(243,234,210,0.4)] font-light text-right">
-                                {num === 1 ? "Aceh / Sumut" : num === 2 ? "Lintas Provinsi" : "Sumatera Barat"}
+                                {num === 2 ? "Sultan Iskandar Muda" : num === 3 ? "Silangit" : ""}
                             </span>
                         </div>
                     </div>
@@ -165,11 +181,10 @@ export function DestinationCard({
                         : "transform 0.3s ease, opacity 0.3s ease, background 0.4s, border-color 0.4s",
                     boxShadow: hov ? `0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px ${accent}33` : "0 8px 24px rgba(0,0,0,0.3)",
                 }}
-                className="px-5 pt-[14px] pb-[18px] flex flex-col gap-3 backdrop-blur-[20px] [-webkit-backdrop-filter:blur(20px)] border-b border-x border-solid relative z-20"
+                className="px-5 pb-[18px] flex flex-col gap-3 backdrop-blur-[20px] [-webkit-backdrop-filter:blur(20px)] border-b border-x border-solid relative z-20"
             >
                 <div className="grid grid-cols-3 gap-2">
-                    {[
-                        { label: "Riset", val: num },
+                    {/* {[
                         { label: "Periode", val: "Jan–Feb" },
                         { label: "Tahun", val: "2026" },
                     ].map((f, i) => (
@@ -181,27 +196,35 @@ export function DestinationCard({
                                 {i === 0 ? `#${f.val}` : f.val}
                             </span>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
 
-                <p className="text-[clamp(10px,0.9vw,12px)] leading-[1.65] text-[rgba(243,234,210,0.45)] font-light m-0">
+                {/* <p className="text-[clamp(10px,0.9vw,12px)] leading-[1.65] text-[rgba(243,234,210,0.45)] font-light m-0">
                     {copy}
-                </p>
+                </p> */}
+                <div className="flex flex-row justify-between">
 
-                <div className="flex gap-0.5 items-end opacity-[0.18]">
-                    {[3, 5, 2, 7, 4, 6, 2, 5, 3, 6, 4, 7, 3, 5, 2, 6, 4, 3, 7, 5, 2, 4, 6, 3].map((h, i) => (
-                        <div
-                            key={i}
-                            style={{ height: `${h * 3}px` }}
-                            className="w-0.5 bg-[var(--cream,#f3ead2)] shrink-0"
-                        />
-                    ))}
+                    <div className="flex gap-0.5 items-end">
+                        {[3, 5, 2, 7, 4, 16, 2, 5, 13, 6, 4, 17, 3, 5, 2, 6, 4, 3, 7, 5, 2, 4, 6, 3, 30, 2, 13, 7, 5].map((h, i) => (
+                            <div
+                                key={i}
+                                style={{ height: `${30}px`, width: `${h / 3}px`, backgroundColor: 'var(--cream-bg)', opacity: hov ? 1 : 0.38 }}
+                                className="w-0.5 shrink-0"
+
+                            />
+                        ))}
+
+                    </div>
+                    <div className="text-center font-[var(--font-title)] text-[clamp(10px,1vw,12px)] font-bold tracking-[0.05em] text-[var(--cream-bg)]">
+                        <span>Gate</span><br />
+                        <span>{num === 1 ? "A17" : num === 2 ? "B2" : "A5"}</span>
+                    </div>
                 </div>
 
-                <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+
+                <Link
+                    to={href}
+                    rel='prefetch'
                     style={{
                         background: hov ? "#7dd3fc" : "rgba(255, 255, 255, 0.03)",
                         borderColor: hov ? "#7dd3fc" : accent + "55",
@@ -242,7 +265,7 @@ export function DestinationCard({
                             }}
                             className="italic text-[clamp(11px,1.05vw,13px)] font-bold tracking-[0.02em] transition-colors duration-300"
                         >
-                            Buka Riset {num}
+                            Search for Riset {num}
                         </span>
 
                         <div
@@ -256,7 +279,7 @@ export function DestinationCard({
                             <span className="text-[13px] font-bold">→</span>
                         </div>
                     </div>
-                </a>
+                </Link>
             </div>
         </div>
     );

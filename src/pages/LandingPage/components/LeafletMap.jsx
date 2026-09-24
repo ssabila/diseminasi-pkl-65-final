@@ -7,10 +7,11 @@ import { LeafletLeaderLinesWrapper } from "./LeaderLine";
 const JAKARTA = [-6.2088, 106.8456];
 
 const REGIONS = [
-  { id: "aceh", match: ["aceh"], label: "Aceh", color: "var(--green)", to: [5.5483, 95.3238], delay: 0 },
-  { id: "sumut", match: ["sumatera utara", "sumut"], label: "Sumatera Utara", color: "var(--gold)", to: [3.5952, 98.6722], delay: 0.4 },
-  { id: "sumbar", match: ["sumatera barat", "sumbar"], label: "Sumatera Barat", color: "#c2703d", to: [-0.9471, 100.4172], delay: 0.8 },
+  { id: "aceh", match: ["aceh"], label: "Aceh", color: "#628141", to: [5.5483, 95.3238], delay: 0 },
+  { id: "sumut", match: ["sumatera utara", "sumut"], label: "Sumatera Utara", color: "#ebd28a", to: [3.5952, 98.6722], delay: 0.4 },
+  { id: "sumbar", match: ["sumatera barat", "sumbar"], label: "Sumatera Barat", color: "#E67E22", to: [-0.9471, 100.4172], delay: 0.8 },
 ];
+
 
 const normalize = (str) => (str || "").toString().toLowerCase().trim();
 
@@ -22,11 +23,12 @@ const getRegionColor = (feature) => {
 
 const getGeoJsonStyle = (feature) => {
   const color = getRegionColor(feature);
+  console.log("Feature:", feature?.properties?.nmprov, "Color:", color);
   return {
     color: "var(--beige)",
     weight: color ? 1.4 : 1,
     fillColor: color || "var(--green)",
-    fillOpacity: color ? 0.55 : 0.12,
+    fillOpacity: color ? 0.8 : 0.12,
     opacity: 1,
     dashArray: color ? null : "2 4",
   };

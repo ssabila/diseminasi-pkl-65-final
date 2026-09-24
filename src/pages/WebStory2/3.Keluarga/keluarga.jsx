@@ -142,7 +142,8 @@ function DonutChart({ segments, size = 180, thickness = 36, title }) {
           />
         ))}
       </svg>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', width: '100%' }}>
+                    ? `Rumah tangga yang memiliki lahan turun dari ${fmtPct(lahanSebelum)}% sebelum bencana menjadi ${fmtPct(lahanSesudah)}% sesudahnya.`
+                    : card.desc
         {paths.map((p, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{ width: 10, height: 10, borderRadius: 2, background: p.color, flexShrink: 0 }} />
@@ -155,7 +156,7 @@ function DonutChart({ segments, size = 180, thickness = 36, title }) {
           </div>
         ))}
       </div>
-    </div>
+    // </div>
   );
 }
 
@@ -1057,7 +1058,9 @@ function ScenePotretHunianNarasi() {
                   </div>
                 )}
                 <div className="lato-light" style={{ fontSize: '0.95rem', color: 'var(--ws2-text-2)', lineHeight: 1.6 }}>
-                  {card.desc}
+                  {card.key === 'aset'
+                    ? `Rumah tangga yang memiliki lahan turun dari ${fmtPct(lahanSebelum)}% sebelum bencana menjadi ${fmtPct(lahanSesudah)}% sesudahnya.`
+                    : card.desc}
                 </div>
               </div>
             </article>

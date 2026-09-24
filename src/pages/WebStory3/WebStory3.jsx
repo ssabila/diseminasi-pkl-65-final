@@ -288,13 +288,6 @@ const WebStory3 = () => {
             <InsightRecovery />
             <ModuleMenu />
             <Closing />
-
-            {/* Tombol kembali sementara untuk navigasi */}
-            <div style={{ position: 'relative', zIndex: 99, padding: '2rem', textAlign: 'center', height: '50vh' }}>
-              <Link to="/" style={{ color: 'var(--off-white)', textDecoration: 'underline' }}>
-                Kembali ke Landing Page
-              </Link>
-            </div>
           </div>
         </MapContext.Provider>
       </div>

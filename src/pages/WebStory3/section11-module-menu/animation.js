@@ -5,6 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
  * Animasi Section 11 — Slider Overview 8 Modul
  * Dipanggil dari animations.js (orchestrator) di root WebStory3
  *
+ * NOTE: Animation is handled internally by the ModuleMenu component's
+ * useGSAP hook. This function exists for orchestrator compatibility
+ * and to provide the correct scroll length hint.
+ *
  * @param {React.RefObject} containerRef - ref ke elemen section
  * @returns {gsap.core.Timeline}
  */
@@ -13,15 +17,14 @@ export function animateModuleMenu(containerRef) {
     scrollTrigger: {
       trigger: containerRef.current,
       start: 'top top',
-      end: '+=100%',
+      end: '+=1000%',
       scrub: true,
       pin: true,
     },
   });
 
-  // TODO: tambahkan animasi GSAP di sini
-  // Contoh:
-  // tl.fromTo('.section-modulemenu .judul', { opacity: 0, y: 60 }, { opacity: 1, y: 0 });
+  // Animation is handled internally by the component's useGSAP hook
+  // This function is kept for orchestrator compatibility
 
   return tl;
 }

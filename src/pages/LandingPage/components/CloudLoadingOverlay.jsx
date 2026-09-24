@@ -10,7 +10,7 @@ function CloudLoadingOverlay() {
   }, [])
 
   return (
-    <div ref={container} className='w-screen h-screen fixed z-50 pointer-events-none overflow-hidden'>
+    <div ref={container} className='w-full h-full fixed z-50 pointer-events-none overflow-hidden bg-black'>
       <img className='cloudLoader1 absolute scale-200 top-0 left-0 w-full object-cover h-full z-20' src='assets/cloud1.png'></img>
       <img className='cloudLoader2 absolute scale-200 top-0 left-0 w-full object-cover h-full z-20' src='assets/cloud2.png'></img>
       <div className='cloudLoaderBG absolute top-0 left-0 w-full h-full bg-[var(--navy)] z-10'></div>

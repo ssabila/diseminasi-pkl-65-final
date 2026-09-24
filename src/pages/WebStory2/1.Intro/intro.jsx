@@ -460,16 +460,13 @@ function HuntaraGallery() {
         tl.to(track, { x: -amountToScroll, ease: 'none', duration: durasiGeser })
           .to({}, { duration: 1 - durasiGeser });
 
-        /* Gambar selebar 130% container. Agar SELALU menutupi bingkai, tepi
-           kirinya harus tetap di antara -30% dan 0% lebar container. Dengan
-           left:-15%, geseran x (relatif lebar gambar sendiri = 130%) hanya
-           boleh +-11,5%. Versi lama memakai left:0 dan x +-15%, sehingga pada
-           ujung geseran muncul celah kosong 19,5% di sisi kiri. */
+        /* Foto tetap berada di dalam bingkai; tidak perlu digeser melewati
+           lebar kartu karena object-fit: cover sudah mengisi seluruh area. */
         gsap.utils.toArray('.huntara-img').forEach((img) => {
           gsap.fromTo(img,
-            { x: '-11.5%' },
+            { x: '0%' },
             {
-              x: '11.5%',
+              x: '0%',
               ease: 'none',
               scrollTrigger: {
                 trigger: containerRef.current,
@@ -518,7 +515,7 @@ function HuntaraGallery() {
             boxShadow: '0 30px 60px rgba(21, 23, 61, 0.4)'
           }}>
             <img className="huntara-img" src={item.src} alt={item.caption}
-              style={{ width: '130%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: '-15%' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', position: 'absolute', inset: 0, display: 'block' }}
             />
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0,
